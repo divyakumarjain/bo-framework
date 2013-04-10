@@ -63,8 +63,8 @@ public class MockBOServiceTest extends AbstractBOServiceTest {
 	}
 
 	@Override
-	protected MockEntity doDeleteEntity(MockEntity businessObject) {
-		return getEntityPath().delete(MockEntity.class, businessObject);
+	protected void doDeleteEntity(MockEntity businessObject) {
+		getEntityKeyPath(businessObject.getUuid()).delete();
 	}
 
 	@Override

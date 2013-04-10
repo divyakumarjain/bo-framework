@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.divy.common.bo.database.mock.MockEntity;
+import org.junit.After;
 import org.junit.Test;
 
 import com.sun.jersey.test.framework.AppDescriptor;
@@ -101,11 +102,6 @@ public abstract class AbstractBOServiceTest extends JerseyTest {
 	@Test
 	public void testDelete() {
 	
-	
-		List<MockEntity> boList = doGetAllEntity();
-	
-		delete(boList);
-	
 		MockEntity businessObject = new MockEntity();
 	
 		MockEntity childBusinessObject = new MockEntity();
@@ -118,24 +114,31 @@ public abstract class AbstractBOServiceTest extends JerseyTest {
 	
 		doDeleteEntity(businessObject);
 		
-		boList = doGetAllEntity();
+		List<MockEntity> boList = doGetAllEntity();
 	
 		assertThat(boList.size(), equalTo(0));
 	}
 	
-	protected void delete(List<MockEntity> entityList) {
-
-		for (Iterator<MockEntity> iterator = entityList.iterator(); iterator.hasNext();) {
+	@After
+	public void cleanup()
+	{
+		List<MockEntity> boList = doGetAllEntity();
+		
+		for (Iterator<MockEntity> iterator = boList.iterator(); iterator.hasNext();) {
 
 			MockEntity mockEntity = iterator.next();
 
-			doDeleteEntity(mockEntity);
+			try{
+				doDeleteEntity(mockEntity);
+			}
+			catch(Exception ex)
+			{}
 		}
 	}
 
 	protected abstract MockEntity doCreateEntity(MockEntity businessObject);
 
-	protected abstract MockEntity doDeleteEntity(MockEntity businessObject);
+	protected abstract void doDeleteEntity(MockEntity businessObject);
 
 	protected abstract List<MockEntity> doGetAllEntity();
 

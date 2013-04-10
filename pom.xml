@@ -12,6 +12,7 @@
 		<module>bo-framework-database</module>
 		<module>bo-framework-database-mock</module>
 		<module>bo-framework-service</module>
+		<module>bo-framework-service-mock</module>
 	</modules>
 
 	<properties>

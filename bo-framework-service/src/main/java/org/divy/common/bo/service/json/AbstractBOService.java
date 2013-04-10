@@ -81,7 +81,7 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID> 
 	public Response delete(ENTITY businessObject) {
 		ENTITY deletedBo = manager.delete(businessObject);
 
-		return Response.ok().entity(deletedBo).build();
+		return Response.noContent().build();
 	}
 
 	@DELETE
@@ -91,8 +91,11 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID> 
 	public Response delete(@PathParam("id") ID id) {
 
 		ENTITY deletedBo = manager.deleteById(id);
-
-		return Response.status(Status.ACCEPTED).entity(deletedBo).build();
+		
+		if(deletedBo==null)
+			return Response.status(404).build();
+		
+		return Response.noContent().build();
 	}
 
 	// @GET
