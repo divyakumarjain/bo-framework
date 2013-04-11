@@ -19,7 +19,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -79,7 +78,8 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID> 
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response delete(ENTITY businessObject) {
-		ENTITY deletedBo = manager.delete(businessObject);
+		
+		manager.delete(businessObject);
 
 		return Response.noContent().build();
 	}
@@ -111,23 +111,17 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID> 
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response list() {
-		try {
-			List<ENTITY> boList = manager.list();
+		List<ENTITY> boList = manager.list();
 
-			List<ENTITY> resultList = new ArrayList<ENTITY>();
+		List<ENTITY> resultList = new ArrayList<ENTITY>();
 
-			resultList.addAll(boList);
+		resultList.addAll(boList);
 
-			GenericEntity<List<ENTITY>> entity = new GenericEntity<List<ENTITY>>(
-					resultList) {
-			};
+		GenericEntity<List<ENTITY>> entity = new GenericEntity<List<ENTITY>>(
+				resultList) {
+		};
 
-			return Response.ok().entity(entity).build();
-
-		} catch (Throwable th) {
-			th.printStackTrace();
-			throw new RuntimeException(th);
-		}
+		return Response.ok().entity(entity).build();
 	}
 
 
