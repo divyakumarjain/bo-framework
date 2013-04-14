@@ -7,7 +7,7 @@ public class AbstractBODatabaseManager<ENTITY extends IBusinessObject<ID>, ID>
 		implements IBOManager<ENTITY, ID>
 {
 
-	ICommandProvider<ENTITY, ID> commandProvider;
+	private ICommandProvider<ENTITY, ID> commandProvider;
 	
 	protected void setCommandProvider(ICommandProvider<ENTITY, ID> commandProvider)
 	{

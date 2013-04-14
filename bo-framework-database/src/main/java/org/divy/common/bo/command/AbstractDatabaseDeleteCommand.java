@@ -30,8 +30,9 @@ public abstract class AbstractDatabaseDeleteCommand<ENTITY extends IBusinessObje
 		
 		ENTITY entity = find(id);
 		
-		if(entity!=null)
+		if (entity != null) {
 			getEntityManager().remove(entity);
+		}
 		
 		transactionCommit();
 		

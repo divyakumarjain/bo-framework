@@ -38,22 +38,23 @@ public class DefaultDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 			Class<ENTITY> entityClass) {
 		super(persistantUnitName);
 
-		setGetCommandType((Class<? extends IGetCommand<ENTITY, ID>>) (Object)DefaultDatabaseGetCommand.class);
-		setCreateCommandType((Class<? extends ICreateCommand<ENTITY, ID>>) (Object)DefaultDatabaseCreateCommand.class);
-		setDeleteCommandType((Class<? extends IDeleteCommand<ENTITY, ID>>) (Object)DefaultDatabaseDeleteCommand.class);
-		setSearchCommandType((Class<? extends ISearchCommand<ENTITY, ID>>) (Object)DefaultDatabaseSearchCommand.class);
-		setUpdateCommandType((Class<? extends IUpdateCommand<ENTITY, ID>>) (Object)DefaultDatabaseUpdateCommand.class);
+		setGetCommandType((Class<? extends IGetCommand<ENTITY, ID>>) DefaultDatabaseGetCommand.class);
+		setCreateCommandType((Class<? extends ICreateCommand<ENTITY, ID>>) DefaultDatabaseCreateCommand.class);
+		setDeleteCommandType((Class<? extends IDeleteCommand<ENTITY, ID>>) DefaultDatabaseDeleteCommand.class);
+		setSearchCommandType((Class<? extends ISearchCommand<ENTITY, ID>>) DefaultDatabaseSearchCommand.class);
+		setUpdateCommandType((Class<? extends IUpdateCommand<ENTITY, ID>>) DefaultDatabaseUpdateCommand.class);
 
 		this.entityClass = entityClass;
 	}
 
-	Class<? extends ENTITY> entityClass;
+	private final Class<? extends ENTITY> entityClass;
 
 	@Override
 	protected Object createCommand(Class<?> type, IDBCommandContext context) {
 		try {
-			if (type == null)
+			if (type == null) {
 				throw new IllegalArgumentException("Command type not provided");
+			}
 
 			final Object returnInstance = type.getConstructor(Class.class,
 					IDBCommandContext.class).newInstance(entityClass, context);

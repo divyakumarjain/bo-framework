@@ -9,11 +9,11 @@ import org.divy.common.bo.command.IDBCommandContext;
 public class DatabaseContext implements IDBCommandContext
 {
 
-	String persistanceUnitName;
+	private String persistanceUnitName;
 	
-	ICommandContext parentContext;
+	private ICommandContext parentContext;
 	
-	EntityTransaction transaction;
+	private EntityTransaction transaction;
 	
 	private EntityManager entityManager;
 
