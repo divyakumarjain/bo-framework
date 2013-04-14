@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.divy.common.bo.impl;
+package org.divy.common.bo.test;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertFalse;
@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.IQuery;
-import org.divy.common.bo.command.IDBCommandContext;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
@@ -23,31 +22,33 @@ import org.junit.Test;
  */
 public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 
-	protected IDBCommandContext context;
+	protected ITestDataProvider<ENTITY, ID> testDataProvider;
 
 	/**
 	 * 
 	 */
-	public TestBaseManager() {
+	public TestBaseManager(ITestDataProvider<ENTITY, ID> testDataProvider) {
 		super();
+		this.testDataProvider = testDataProvider;
 	}
 
 	@Test
 	public void testCreate() {
-		ENTITY entity = getEntityInstance();
+		ENTITY entity = testDataProvider.getEntityInstance();
 	
-		ID id = doCreateEntity(entity);
+		entity = doCreateEntity(entity);
+
+		assertThat("Entity should be returned after creation", entity,
+				notNullValue());
 	
-		assertThat("Id for Entity should be generate after creation", id,
+		assertThat("Id for Entity should be generate after creation",
+				entity.identity(),
 				notNullValue());
 		//assertThat("Id for Entity not be empty", id,not(isEmptyString()));
 		
-		entity = doGetById(getId(entity));
+		entity = doGetByKey(entity.identity());
 
-		id = getId(entity);
-	
 		assertThat("Entity should be readable after creation", entity,notNullValue());
-		assertThat("Entity should be readable after creation", id,notNullValue());
 		
 		extendedTestCreatedEntity(entity);
 	
@@ -55,42 +56,38 @@ public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 
 	@Test
 	public void testUpdate() {
-		ENTITY entity = getEntityInstance();
+		ENTITY entity = testDataProvider.getEntityInstance();
 	
-		ID id = doCreateEntity(entity);
+		entity = doCreateEntity(entity);
 		
-		entity = doGetById(id);
+		entity = doGetByKey(entity.identity());
 		
-		doModifyEntity(entity);
+		testDataProvider.modifyEntityWithTestData(entity);
+
+		doUpdateEntity(entity);
 		
-		id = getId(entity);
+		ID id = entity.identity();
 		
-		entity = doGetById(id);
+		entity = doGetByKey(id);
 		
 		extendedTestUpdatedEntity(entity);
 	}
 
 	@Test
 	public void testDelete() {
-		ENTITY entity1 = getEntityInstance();
-		ENTITY entity2 = getEntityInstance();
+		ENTITY entity1 = testDataProvider.getEntityInstance();
+		ENTITY entity2 = testDataProvider.getEntityInstance();
 	
-		fillTestDataSet1(entity1);
-		fillTestDataSet2(entity2);
-		
+		testDataProvider.fillTestDataSet1(entity1);
+		testDataProvider.fillTestDataSet2(entity2);
 	
-	
-		ID id1 = doCreateEntity(entity1);
-		ID id2 = doCreateEntity(entity2);
-	
-		entity1 = doGetById(id1);
-		entity2 = doGetById(id2);
-	
+		entity1 = doCreateEntity(entity1);
+		entity2 = doCreateEntity(entity2);
 	
 		doDeleteEntity(entity1);
 	
-		entity1 = doGetById(id1);
-		entity2 = doGetById(id2);
+		entity1 = doGetByKey(entity1.identity());
+		entity2 = doGetByKey(entity2.identity());
 	
 		assertThat("Entity should not be Found", entity1, IsNull.nullValue());
 		assertThat("Entity should be Found", entity2, notNullValue());
@@ -98,9 +95,9 @@ public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 
 	@Test
 	public void testSearch() {
-		ENTITY entity1 = getEntityInstance();
+		ENTITY entity1 = testDataProvider.getEntityInstance();
 	
-		fillTestDataSet1(entity1);
+		testDataProvider.fillTestDataSet1(entity1);
 
 		doCreateEntity(entity1);
 	
@@ -115,25 +112,16 @@ public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 	}
 
 	/* CRUD Operation */
-	protected abstract ID doCreateEntity(ENTITY entity);
-	protected abstract void doModifyEntity(ENTITY entity);
-	protected abstract ENTITY doGetById(ID id);
+	protected abstract ENTITY doCreateEntity(ENTITY entity);
+	protected abstract void doUpdateEntity(ENTITY entity);
+	protected abstract ENTITY doGetByKey(ID id);
 	protected abstract void doDeleteEntity(ENTITY entity);
 	protected abstract List<ENTITY> doSearchEntities(IQuery<ENTITY> searchQuery);
-
-
-	/* Methods for Test Data generation */
-	protected abstract void modifyEntityWithTestData(ENTITY entity);
-	protected abstract void fillTestDataSet1(ENTITY entity);
-	protected abstract void fillTestDataSet2(ENTITY entity);
 
 	/* Extended Tests */
 	protected abstract void extendedTestCreatedEntity(ENTITY entity);
 	protected abstract void extendedTestUpdatedEntity(ENTITY entity);
 
-	/* Test Utility */
-	protected abstract ID getId(ENTITY entity);
 	protected abstract IQuery<ENTITY> createSearchQuery();
-	protected abstract ENTITY getEntityInstance();
 
 }

@@ -3,147 +3,197 @@
  */
 package org.divy.common.bo.service.json.test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
-
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.divy.common.bo.database.mock.MockEntity;
-import org.junit.After;
-import org.junit.Test;
+import javax.ws.rs.core.Response.Status;
 
+import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.IQuery;
+import org.divy.common.bo.test.ITestDataProvider;
+import org.divy.common.bo.test.TestBaseManager;
+import org.junit.After;
+import org.junit.Before;
+
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.UniformInterfaceException;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.WebResource.Builder;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.client.filter.LoggingFilter;
+import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
-import com.sun.jersey.test.framework.spi.container.TestContainerException;
-import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
+import com.sun.jersey.test.framework.WebAppDescriptor;
+import com.sun.jersey.test.framework.spi.container.TestContainer;
 
 /**
  * @author divyakumar.a.jain@hp.com
  *
  */
-public abstract class AbstractBOServiceTest extends JerseyTest {
+public abstract class AbstractBOServiceTest<ENTITY extends IBusinessObject<ID>, ID>
+		extends TestBaseManager<ENTITY, ID> {
 
 	/**
-	 * @throws TestContainerException
+	 * @param testDataProvider
 	 */
-	public AbstractBOServiceTest() throws TestContainerException {
-		super();
+	public AbstractBOServiceTest(ITestDataProvider<ENTITY, ID> testDataProvider) {
+		super(testDataProvider);
+		jerseyTest = new JerseyTestProxy();
 	}
 
-	/**
-	 * @param testContainerFactory
+	/* (non-Javadoc)
+	 * @see org.divy.common.bo.test.TestBaseManager#doCreateEntity(org.divy.common.bo.IBusinessObject)
 	 */
-	public AbstractBOServiceTest(TestContainerFactory testContainerFactory) {
-		super(testContainerFactory);
+	@Override
+	protected ENTITY doCreateEntity(ENTITY entity) {
+		return getEntityPath().post(getEntityClass(), entity);
 	}
 
-	/**
-	 * @param ad
-	 * @throws TestContainerException
+	/* (non-Javadoc)
+	 * @see org.divy.common.bo.test.TestBaseManager#doModifyEntity(org.divy.common.bo.IBusinessObject)
 	 */
-	public AbstractBOServiceTest(AppDescriptor ad) throws TestContainerException {
-		super(ad);
+	@Override
+	protected void doUpdateEntity(ENTITY entity) {
+		getEntityPath().put(getEntityClass(), entity);
 	}
 
-	/**
-	 * @param packages
-	 * @throws TestContainerException
+	/* (non-Javadoc)
+	 * @see org.divy.common.bo.test.TestBaseManager#doGetById(java.lang.Object)
 	 */
-	public AbstractBOServiceTest(String... packages) throws TestContainerException {
-		super(packages);
-	}
-
-	@Test
-	public void testCreate() {
-	
-		MockEntity businessObject = new MockEntity();
-		MockEntity childBusinessObject = new MockEntity();
-	
-		childBusinessObject.setParentEntity(businessObject);
-	
-		List<MockEntity> childLists = new ArrayList<MockEntity>();
-	
-		childLists.add(childBusinessObject);
-	
-		businessObject.setChildEntities(childLists);
-		
-		MockEntity response = doCreateEntity(businessObject);
-		
-		assertThat("Response should not be null", response, not(nullValue()));
-	}
-
-	@Test
-	public void testUpdate() {
-	
-		MockEntity businessObject = new MockEntity();
-		
-		List<MockEntity> childLists = new ArrayList<MockEntity>();
-	
-		MockEntity childBusinessObject = new MockEntity();
-	
-		childBusinessObject.setParentEntity(businessObject);
-	
-		childLists.add(childBusinessObject);
-	
-		businessObject.setChildEntities(childLists);
-	
-		businessObject = doCreateEntity(businessObject);
-	
-		businessObject = doGetByKey(businessObject.getUuid());
-	
-		businessObject = doUpdateEntity(businessObject);
-	
-	}
-
-	@Test
-	public void testDelete() {
-	
-		MockEntity businessObject = new MockEntity();
-	
-		MockEntity childBusinessObject = new MockEntity();
-		childBusinessObject.setParentEntity(businessObject);
-		List<MockEntity> childLists = new ArrayList<MockEntity>();
-		childLists.add(childBusinessObject);
-		businessObject.setChildEntities(childLists);
-	
-		businessObject = doCreateEntity(businessObject);
-	
-		doDeleteEntity(businessObject);
-		
-		List<MockEntity> boList = doGetAllEntity();
-	
-		assertThat(boList.size(), equalTo(0));
-	}
-	
-	@After
-	public void cleanup()
-	{
-		List<MockEntity> boList = doGetAllEntity();
-		
-		for (Iterator<MockEntity> iterator = boList.iterator(); iterator.hasNext();) {
-
-			MockEntity mockEntity = iterator.next();
-
-			try{
-				doDeleteEntity(mockEntity);
-			}
-			catch(Exception ex)
-			{}
+	@Override
+	protected ENTITY doGetByKey(ID id) {
+		try{
+			return getEntityKeyPath(id).get(getEntityClass());
+		}catch(UniformInterfaceException ex){
+			if(ex.getResponse().getStatus() == Status.NOT_FOUND.getStatusCode())
+				return null;
+			throw ex;
 		}
 	}
 
-	protected abstract MockEntity doCreateEntity(MockEntity businessObject);
+	/* (non-Javadoc)
+	 * @see org.divy.common.bo.test.TestBaseManager#doDeleteEntity(org.divy.common.bo.IBusinessObject)
+	 */
+	@Override
+	protected void doDeleteEntity(ENTITY entity) {
+		getEntityKeyPath(entity.identity()).delete();
+	}
 
-	protected abstract void doDeleteEntity(MockEntity businessObject);
+	/* (non-Javadoc)
+	 * @see org.divy.common.bo.test.TestBaseManager#doSearchEntities(org.divy.common.bo.IQuery)
+	 */
+	@Override
+	protected List<ENTITY> doSearchEntities(IQuery<ENTITY> searchQuery) {
+		return getEntityPath().get(getEntityListClass());
+	}
 
-	protected abstract List<MockEntity> doGetAllEntity();
 
-	protected abstract MockEntity doGetByKey(String key);
+	/* (non-Javadoc)
+	 * @see org.divy.common.bo.test.TestBaseManager#createSearchQuery()
+	 */
+	@Override
+	protected IQuery<ENTITY> createSearchQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+    
+	private void cleanup() {
+		List<ENTITY> boList = doSearchEntities(null);
 
-	protected abstract MockEntity doUpdateEntity(MockEntity businessObject);
+		for (Iterator<ENTITY> iterator = boList.iterator(); iterator.hasNext();) {
 
+			ENTITY mockEntity = iterator.next();
+
+			try {
+				doDeleteEntity(mockEntity);
+			} catch (Exception ex) {
+			}
+		}
+	}
+
+    /**
+     * Create a web resource whose URI refers to the base URI the Web
+     * application is deployed at.
+     *
+     * @return the created web resource
+     */
+    protected WebResource resource() {
+        return jerseyTest.resource();
+    }
+
+	protected abstract Builder getEntityKeyPath(ID uuid);
+
+	protected abstract Builder getEntityPath();
+
+	protected abstract GenericType<ENTITY> getEntityClass();
+
+	protected abstract GenericType<List<ENTITY>> getEntityListClass();
+	
+	protected abstract String getTestClassPackage();
+
+	JerseyTest jerseyTest;
+	
+	class JerseyTestProxy extends JerseyTest{
+
+		@Override
+		protected Client getClient(TestContainer tc, AppDescriptor ad) {
+			Client client = super.getClient(tc, ad);
+			client.addFilter(new LoggingFilter());
+			return client;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see com.sun.jersey.test.framework.JerseyTest#configure()
+		 */
+		@Override
+		protected AppDescriptor configure() {
+
+			ClientConfig clientConfig = new DefaultClientConfig();
+
+			clientConfig.getFeatures().put(
+					JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+			clientConfig.getClasses().add(JacksonJaxbJsonProvider.class);
+			clientConfig.getClasses().add(JacksonJsonProvider.class);
+			clientConfig.getClasses().add(JacksonJsonProvider.class);
+
+			WebAppDescriptor ad = new WebAppDescriptor.Builder(
+					"com.fasterxml.jackson.jaxrs.json;org.divy.common.bo.service.json;"
+							+ getTestClassPackage())
+					.clientConfig(clientConfig).build();
+
+			return ad;
+		}
+	}
+	
+	/**
+     * Set up the test by invoking {@link TestContainer#start() } on
+     * the test container obtained from the test container factory.
+     *
+     * @throws Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+    	jerseyTest.setUp();
+    }
+
+    /**
+     * Tear down the test by invoking {@link TestContainer#stop() } on
+     * the test container obtained from the test container factory.
+     *
+     * @throws Exception
+     */
+    @After
+    public void tearDown() throws Exception {
+		cleanup();
+    	jerseyTest.tearDown();
+    }
 }

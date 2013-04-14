@@ -19,6 +19,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -132,9 +133,14 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID> 
 	public Response get(@PathParam("id") ID id) {
 		ENTITY entity = manager.get(id);
 
-		URI foundlocation = createURI(entity);
+		if (entity != null) {
 
-		return Response.ok(foundlocation).entity(entity).build();
+			URI foundlocation = createURI(entity);
+			return Response.ok(foundlocation).entity(entity).build();
+
+		} else {
+			return Response.status(Status.NOT_FOUND).build();
+		}
 	}
 
 	/**

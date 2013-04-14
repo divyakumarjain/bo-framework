@@ -7,14 +7,25 @@ import java.util.List;
 import org.divy.common.bo.IBOManager;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.IQuery;
+import org.divy.common.bo.command.IDBCommandContext;
 import org.divy.common.bo.context.DatabaseContext;
+import org.divy.common.bo.test.ITestDataProvider;
+import org.divy.common.bo.test.TestBaseManager;
 import org.junit.Before;
 
 
 public abstract class TestBaseDBManager<ENTITY extends IBusinessObject<ID>, ID> extends TestBaseManager<ENTITY, ID>
 {
 
+	/**
+	 * @param testDataProvider
+	 */
+	public TestBaseDBManager(ITestDataProvider<ENTITY, ID> testDataProvider) {
+		super(testDataProvider);
+	}
+
 	protected IBOManager<ENTITY,ID> boManager;
+	protected IDBCommandContext context;
 
 	@Before
 	public void before() {
@@ -24,33 +35,24 @@ public abstract class TestBaseDBManager<ENTITY extends IBusinessObject<ID>, ID> 
 	
 	}
 
-	/**
-	 * @param entity
-	 * @return
-	 */
 	@Override
-	protected ID doCreateEntity(ENTITY entity) {
-		fillTestDataSet1(entity);
+	protected ENTITY doCreateEntity(ENTITY entity) {
+		testDataProvider.fillTestDataSet1(entity);
 	
-		boManager.create(entity);
+		ENTITY createdEntity = boManager.create(entity);
 		
-		ID id = getId(entity);
-		return id;
+		return createdEntity;
 	}
 
-	protected abstract String getPersistantUnitName();
-
-	protected abstract IBOManager<ENTITY, ID> createManager();
-
 	@Override
-	protected ENTITY doGetById(ID id) {
+	protected ENTITY doGetByKey(ID id) {
 		ENTITY entity = boManager.get(id);
 		return entity;
 	}
 
 	@Override
-	protected void doModifyEntity(ENTITY entity) {
-		modifyEntityWithTestData(entity);
+	protected void doUpdateEntity(ENTITY entity) {
+		testDataProvider.modifyEntityWithTestData(entity);
 
 		boManager.update(entity);
 	}
@@ -65,5 +67,7 @@ public abstract class TestBaseDBManager<ENTITY extends IBusinessObject<ID>, ID> 
 		return boManager.search(searchQuery);
 	}
 
-	
+	protected abstract String getPersistantUnitName();
+
+	protected abstract IBOManager<ENTITY, ID> createManager();
 }

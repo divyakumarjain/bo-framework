@@ -41,6 +41,8 @@ public class MockEntity implements IBusinessObject<String> {
 
 	private String uuid;
 
+	private String name;
+
 	private MockEntity parentEntity;
 
 
@@ -85,6 +87,20 @@ public class MockEntity implements IBusinessObject<String> {
 	 */
 	public void setParentEntity(MockEntity parentEntity) {
 		this.parentEntity = parentEntity;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
