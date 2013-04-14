@@ -18,8 +18,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.dynamicAnalysis>false</sonar.dynamicAnalysis>
-		<sonar.scm.url>scm:git:http://divyakumar.dyndns.org/git/git/org.divy.task.git</sonar.scm.url>
+		<sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
+		<sonar.scm.url>scm:git:http://divyakumar.dyndns.org/git/git/org.divy.bo.git</sonar.scm.url>
 		<VERSION_NUMBER>0.0.1-SNAPSHOT</VERSION_NUMBER>
 		<releaseRepoUrl>http://divyakumar.dyndns.org/nexus/content/repositories/releases/</releaseRepoUrl>
 		<snapshotRepoUrl>http://divyakumar.dyndns.org/nexus/content/repositories/snapshots/</snapshotRepoUrl>
