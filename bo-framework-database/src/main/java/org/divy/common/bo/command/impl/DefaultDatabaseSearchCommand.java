@@ -44,9 +44,9 @@ public class DefaultDatabaseSearchCommand<ENTITY extends IBusinessObject<ID>, ID
 		CriteriaBuilder criteriaBuilder = getEntityManager()
 				.getCriteriaBuilder();
 
-		criteriaQuery = criteriaBuilder.createQuery(entityClass);
+		criteriaQuery = criteriaBuilder.createQuery(getEntityType());
 
-		criteriaQuery.from(entityClass);
+		criteriaQuery.from(getEntityType());
 
 		return criteriaQuery;
 	}

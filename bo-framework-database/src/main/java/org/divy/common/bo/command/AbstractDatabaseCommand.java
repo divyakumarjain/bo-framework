@@ -9,9 +9,16 @@ public abstract class AbstractDatabaseCommand<ENTITY extends IBusinessObject<ID>
 
 	private IDBCommandContext context;
 	
-	protected final Class<? extends ENTITY> entityClass;
+	private final Class<? extends ENTITY> entityType;
 	
 	
+	/**
+	 * @return the entityType
+	 */
+	public Class<? extends ENTITY> getEntityType() {
+		return entityType;
+	}
+
 	protected void setContext(IDBCommandContext context)
 	{
 		this.context = context;
@@ -19,7 +26,7 @@ public abstract class AbstractDatabaseCommand<ENTITY extends IBusinessObject<ID>
 	
 	protected AbstractDatabaseCommand(Class<? extends ENTITY> typeParameterClass)
 	{
-		this.entityClass = typeParameterClass;
+		this.entityType = typeParameterClass;
 	}
 
 	protected final EntityManager getEntityManager()
@@ -41,14 +48,14 @@ public abstract class AbstractDatabaseCommand<ENTITY extends IBusinessObject<ID>
 	protected ENTITY getReference(Object identity)
 	{
 		
-		ENTITY entity = getEntityManager().find(entityClass, identity);
+		ENTITY entity = getEntityManager().find(entityType, identity);
 		
 		return entity;
 	}
 	
 	protected ENTITY find(Object identity)
 	{
-		ENTITY entity = getEntityManager().find(entityClass, identity);
+		ENTITY entity = getEntityManager().find(entityType, identity);
 		
 		return entity;
 	}

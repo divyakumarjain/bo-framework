@@ -14,6 +14,11 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 		implements ICommandProvider<ENTITY, ID>
 {
 	
+	/**
+	 * 
+	 */
+	private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
+
 	private IDBCommandContext context;
 
 	private Class<? extends IGetCommand<ENTITY, ID>> getCommandType;
@@ -80,8 +85,9 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 	{
 		try
 		{
-			if(type==null)
+			if (type == null) {
 				throw new IllegalArgumentException("Command type not provided");
+			}
 		
 			final Object returnInstance = type.getConstructor(
 					IDBCommandContext.class).newInstance(context);
@@ -90,22 +96,22 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 			
 		} catch (InstantiationException e)
 		{
-			throw new IllegalArgumentException("Could not Create Command",e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
 		} catch (IllegalAccessException e)
 		{
-			throw new IllegalArgumentException("Could not Create Command",e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
 		} catch (IllegalArgumentException e)
 		{
-			throw new IllegalArgumentException("Could not Create Command",e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
 		} catch (SecurityException e)
 		{
-			throw new IllegalArgumentException("Could not Create Command",e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
 		} catch (InvocationTargetException e)
 		{
-			throw new IllegalArgumentException("Could not Create Command",e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
 		} catch (NoSuchMethodException e)
 		{
-			throw new IllegalArgumentException("Could not Create Command",e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
 		}
 	}
 
@@ -118,11 +124,11 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public IGetCommand<ENTITY, ID> getGetCommand()
 	{
-		final IDBCommandContext context = createContext();
+		final IDBCommandContext newContext = createContext();
 		
 		IGetCommand<ENTITY, ID> returnGetCommand;
 		
-		returnGetCommand = (IGetCommand) createCommand(getCommandType,context);
+		returnGetCommand = (IGetCommand) createCommand(getCommandType,newContext);
 		
 		return  returnGetCommand;
 	}
@@ -131,11 +137,11 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 	@SuppressWarnings("unchecked")
 	public ICreateCommand<ENTITY, ID> getCreateCommand()
 	{
-		final IDBCommandContext context = createContext();
+		final IDBCommandContext newContext = createContext();
 		
 		ICreateCommand<ENTITY, ID> returnCreateCommand;
 		
-		returnCreateCommand =  (ICreateCommand<ENTITY,ID>)createCommand(createCommandType,context);
+		returnCreateCommand =  (ICreateCommand<ENTITY,ID>)createCommand(createCommandType,newContext);
 		
 		return returnCreateCommand;
 	}
@@ -144,11 +150,11 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 	@SuppressWarnings("unchecked")
 	public IDeleteCommand<ENTITY, ID> getDeleteCommand()
 	{
-		final IDBCommandContext context = createContext();
+		final IDBCommandContext newContext = createContext();
 		
 		IDeleteCommand<ENTITY, ID> returnDeleteCommand;
 		
-		returnDeleteCommand = (IDeleteCommand<ENTITY, ID>)createCommand(deleteCommandType,context);
+		returnDeleteCommand = (IDeleteCommand<ENTITY, ID>)createCommand(deleteCommandType,newContext);
 		
 		return returnDeleteCommand;
 	}
@@ -157,11 +163,11 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 	@SuppressWarnings("unchecked")
 	public IUpdateCommand<ENTITY, ID> getUpdateCommand()
 	{
-		final IDBCommandContext context = createContext();
+		final IDBCommandContext newContext = createContext();
 		
 		IUpdateCommand<ENTITY, ID> returnUpdateCommand;
 		
-		returnUpdateCommand = (IUpdateCommand<ENTITY, ID>)createCommand(updateCommandType,context);
+		returnUpdateCommand = (IUpdateCommand<ENTITY, ID>)createCommand(updateCommandType,newContext);
 		
 		return returnUpdateCommand;
 	}
@@ -175,12 +181,12 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 	@Override
 	public ISearchCommand<ENTITY, ID> getSearchCommand() {
 
-		final IDBCommandContext context = createContext();
+		final IDBCommandContext newContext = createContext();
 
 		ISearchCommand<ENTITY, ID> returnSearchCommand;
 
 		returnSearchCommand = (ISearchCommand<ENTITY, ID>) createCommand(
-				searchCommandType, context);
+				searchCommandType, newContext);
 
 		return returnSearchCommand;
 	}

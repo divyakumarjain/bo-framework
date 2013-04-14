@@ -42,9 +42,9 @@ public class MockSearchCommand extends
 				.getCriteriaBuilder();
 
 		taskQuery = (CriteriaQuery<MockEntity>) criteriaBuilder
-				.createQuery(entityClass);
+				.createQuery(getEntityType());
 
-		taskQuery.from(entityClass);
+		taskQuery.from(getEntityType());
 
 		return taskQuery;
 	}

@@ -32,9 +32,9 @@ public abstract class AbstractDatabaseSearchCommand<ENTITY extends IBusinessObje
 					.getCriteriaBuilder();
 
 			criteriaQuery = (CriteriaQuery<ENTITY>) criteriaBuilder
-					.createQuery(entityClass);
+					.createQuery(getEntityType());
 
-			criteriaQuery.from(entityClass);
+			criteriaQuery.from(getEntityType());
 		}
 
 		criteriaQuery = (CriteriaQuery<ENTITY>) createCriteriaQuery(query);

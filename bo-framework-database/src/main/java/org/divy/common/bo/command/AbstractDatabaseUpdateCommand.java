@@ -32,7 +32,7 @@ public abstract class AbstractDatabaseUpdateCommand<ENTITY extends IBusinessObje
 		transactionBegin();
 
 		ENTITY fromPersistance = getEntityManager().getReference(
-				entityClass, entity.identity());
+				getEntityType(), entity.identity());
 		
 		copyFields(entity, fromPersistance);
 		

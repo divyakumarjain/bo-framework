@@ -18,7 +18,7 @@ public abstract class AbstractDatabaseGetCommand<ENTITY extends IBusinessObject<
 	{
 		transactionBegin();
 		
-		ENTITY entity = getEntityManager().find(entityClass, id);
+		ENTITY entity = getEntityManager().find(getEntityType(), id);
 		
 		transactionCommit();
 		

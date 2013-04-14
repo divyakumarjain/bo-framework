@@ -9,7 +9,6 @@ import javax.ws.rs.ext.Provider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
-//import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 
 /**
  * @author divyakumar.a.jain@hp.com

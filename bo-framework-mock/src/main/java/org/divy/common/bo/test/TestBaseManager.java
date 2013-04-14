@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 
-	protected ITestDataProvider<ENTITY, ID> testDataProvider;
+	final protected ITestDataProvider<ENTITY, ID> testDataProvider;
 
 	/**
 	 * 
@@ -44,7 +44,6 @@ public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 		assertThat("Id for Entity should be generate after creation",
 				entity.identity(),
 				notNullValue());
-		//assertThat("Id for Entity not be empty", id,not(isEmptyString()));
 		
 		entity = doGetByKey(entity.identity());
 

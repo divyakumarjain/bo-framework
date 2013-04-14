@@ -12,7 +12,6 @@ public class MockUpdateCommand extends AbstractDatabaseUpdateCommand<MockEntity,
 
 	@Override
 	protected void copyFields(MockEntity source, MockEntity target) {
-		// target.getChildEntities().addAll(source.getChildEntities());
 	}
 
 }

@@ -42,8 +42,9 @@ public class DatabaseContext implements IDBCommandContext
 				DatabaseContext dbParentContext = (DatabaseContext) parentContext;
 				entityManager = dbParentContext.getEntityManager();
 				
-				if(entityManager != null)
+				if (entityManager != null) {
 					return entityManager; 
+				}
 			}
 			
 			entityManager = Persistence.createEntityManagerFactory(persistanceUnitName).createEntityManager();

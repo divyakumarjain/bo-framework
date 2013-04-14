@@ -46,8 +46,7 @@ public abstract class TestBaseDBManager<ENTITY extends IBusinessObject<ID>, ID> 
 
 	@Override
 	protected ENTITY doGetByKey(ID id) {
-		ENTITY entity = boManager.get(id);
-		return entity;
+		return boManager.get(id);
 	}
 
 	@Override

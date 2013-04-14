@@ -59,9 +59,10 @@ public class DefaultDatabaseUpdateCommand<ENTITY extends IBusinessObject<ID>, ID
 				if (pd.getDisplayName().equals(propertyDescriptor.getDisplayName())
 						&& !pd.getDisplayName().equals("class")) {
 
-					if (propertyDescriptor.getWriteMethod() != null)
+					if (propertyDescriptor.getWriteMethod() != null) {
 						propertyDescriptor.getWriteMethod().invoke(target,
 								pd.getReadMethod().invoke(source, new Object[]{}));
+					}
 				}
 
 			}
