@@ -43,7 +43,7 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID> 
 	}
 
 	@Context
-	UriInfo uriInfo;
+	private UriInfo uriInfo;
 
 	public AbstractBOService(IBOManager<ENTITY, ID> manager) {
 		this.manager = manager;
@@ -93,20 +93,12 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID> 
 
 		ENTITY deletedBo = manager.deleteById(id);
 		
-		if(deletedBo==null)
-			return Response.status(404).build();
+		if (deletedBo == null) {
+			return Response.status(Status.NO_CONTENT).build();
+		}
 		
 		return Response.noContent().build();
 	}
-
-	// @GET
-	// @Produces(MediaType.APPLICATION_JSON)
-	// @Consumes(MediaType.APPLICATION_JSON)
-	// public Response search(IQuery<ENTITY> businessObjectQuery) {
-	// List<ENTITY> boList = manager.search(businessObjectQuery);
-	//
-	// return Response.ok().entity(boList).build();
-	// }
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })

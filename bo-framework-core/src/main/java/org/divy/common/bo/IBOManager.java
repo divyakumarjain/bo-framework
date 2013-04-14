@@ -5,15 +5,18 @@ import java.util.List;
 
 public interface IBOManager<ENTITY extends IBusinessObject<ID>, ID>
 {
-	public ENTITY create(ENTITY businessObject);
-	public ENTITY update(ENTITY businessObject);
-	public ENTITY delete(ENTITY businessObject);
+	ENTITY create(ENTITY businessObject);
 
-	public List<ENTITY> list();
+	ENTITY update(ENTITY businessObject);
 
-	public List<ENTITY> search(IQuery<ENTITY> businessObjectQuery);
+	ENTITY delete(ENTITY businessObject);
 
-	public ENTITY deleteById(ID id);
-	public ENTITY get(ID identity);
+	List<ENTITY> list();
+
+	List<ENTITY> search(IQuery<ENTITY> businessObjectQuery);
+
+	ENTITY deleteById(ID id);
+
+	ENTITY get(ID identity);
 	
 }

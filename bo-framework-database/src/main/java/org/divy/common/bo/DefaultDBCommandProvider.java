@@ -26,6 +26,11 @@ public class DefaultDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 		TypeBaseDBCommandProvider<ENTITY, ID> {
 
 	/**
+	 * 
+	 */
+	private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
+
+	/**
 	 * @param persistantUnitName
 	 */
 	@SuppressWarnings("unchecked")
@@ -56,17 +61,17 @@ public class DefaultDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 			return returnInstance;
 
 		} catch (InstantiationException e) {
-			throw new IllegalArgumentException("Could not Create Command", e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
 		} catch (IllegalAccessException e) {
-			throw new IllegalArgumentException("Could not Create Command", e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("Could not Create Command", e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
 		} catch (SecurityException e) {
-			throw new IllegalArgumentException("Could not Create Command", e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
 		} catch (InvocationTargetException e) {
-			throw new IllegalArgumentException("Could not Create Command", e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
 		} catch (NoSuchMethodException e) {
-			throw new IllegalArgumentException("Could not Create Command", e);
+			throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
 		}
 	}
 

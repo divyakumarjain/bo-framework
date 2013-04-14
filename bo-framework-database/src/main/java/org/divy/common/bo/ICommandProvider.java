@@ -9,13 +9,13 @@ import org.divy.common.bo.command.IUpdateCommand;
 public interface ICommandProvider<ENTITY, ID>
 {
 
-	public IGetCommand<ENTITY, ID> getGetCommand();
+	IGetCommand<ENTITY, ID> getGetCommand();
 
-	public ICreateCommand<ENTITY, ID> getCreateCommand();
+	ICreateCommand<ENTITY, ID> getCreateCommand();
 
-	public IDeleteCommand<ENTITY, ID> getDeleteCommand();
+	IDeleteCommand<ENTITY, ID> getDeleteCommand();
 	
-	public IUpdateCommand<ENTITY, ID> getUpdateCommand();
+	IUpdateCommand<ENTITY, ID> getUpdateCommand();
 	
-	public ISearchCommand<ENTITY, ID> getSearchCommand();
+	ISearchCommand<ENTITY, ID> getSearchCommand();
 }

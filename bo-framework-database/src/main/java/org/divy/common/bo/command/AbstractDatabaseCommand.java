@@ -7,7 +7,7 @@ import org.divy.common.bo.IBusinessObject;
 public abstract class AbstractDatabaseCommand<ENTITY extends IBusinessObject<ID>, ID>
 {
 
-	IDBCommandContext context;
+	private IDBCommandContext context;
 	
 	protected final Class<? extends ENTITY> entityClass;
 	

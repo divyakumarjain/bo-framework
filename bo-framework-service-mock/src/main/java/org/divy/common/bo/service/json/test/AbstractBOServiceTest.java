@@ -70,8 +70,9 @@ public abstract class AbstractBOServiceTest<ENTITY extends IBusinessObject<ID>, 
 		try{
 			return getEntityKeyPath(id).get(getEntityClass());
 		}catch(UniformInterfaceException ex){
-			if(ex.getResponse().getStatus() == Status.NOT_FOUND.getStatusCode())
+			if(ex.getResponse().getStatus() == Status.NOT_FOUND.getStatusCode()){
 				return null;
+			}
 			throw ex;
 		}
 	}
@@ -138,7 +139,7 @@ public abstract class AbstractBOServiceTest<ENTITY extends IBusinessObject<ID>, 
 	
 	protected abstract String getTestClassPackage();
 
-	JerseyTest jerseyTest;
+	private JerseyTest jerseyTest;
 	
 	class JerseyTestProxy extends JerseyTest{
 
