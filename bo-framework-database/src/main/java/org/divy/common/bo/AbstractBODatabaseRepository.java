@@ -3,8 +3,8 @@ package org.divy.common.bo;
 import java.util.List;
 
 
-public class AbstractBODatabaseManager<ENTITY extends IBusinessObject<ID>, ID>
-		implements IBOManager<ENTITY, ID>
+public class AbstractBODatabaseRepository<ENTITY extends IBusinessObject<ID>, ID>
+		implements IBORepository<ENTITY, ID>
 {
 
 	private ICommandProvider<ENTITY, ID> commandProvider;

@@ -12,7 +12,7 @@ import org.divy.common.bo.command.AbstractDatabaseSearchCommand;
 import org.divy.common.bo.command.IDBCommandContext;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
 public class DefaultDatabaseSearchCommand<ENTITY extends IBusinessObject<ID>, ID>

@@ -3,20 +3,20 @@
  */
 package org.divy.common.bo.database.mock;
 
-import org.divy.common.bo.AbstractBODatabaseManager;
+import org.divy.common.bo.AbstractBODatabaseRepository;
 import org.divy.common.bo.TypeBaseDBCommandProvider;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
-public class MockBODBManager extends
-		AbstractBODatabaseManager<MockEntity, String> {
+public class MockBODBRepository extends
+		AbstractBODatabaseRepository<MockEntity, String> {
 
 	/**
 	 * 
 	 */
-	public MockBODBManager() {
+	public MockBODBRepository() {
 		TypeBaseDBCommandProvider<MockEntity, String> commandProvider = new TypeBaseDBCommandProvider<MockEntity, String>(
 				"org.divy.mock");
 

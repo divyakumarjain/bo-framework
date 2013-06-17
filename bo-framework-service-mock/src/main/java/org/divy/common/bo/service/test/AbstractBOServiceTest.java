@@ -1,22 +1,23 @@
 /**
  * 
  */
-package org.divy.common.bo.service.json.test;
+package org.divy.common.bo.service.test;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.core.Response.Status;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.IQuery;
+import org.divy.common.bo.service.HibernateBOMapperProvider;
 import org.divy.common.bo.test.ITestDataProvider;
-import org.divy.common.bo.test.TestBaseManager;
+import org.divy.common.bo.test.TestBOCRUDBase;
 import org.junit.After;
 import org.junit.Before;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import com.google.inject.servlet.GuiceFilter;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.UniformInterfaceException;
@@ -32,11 +33,11 @@ import com.sun.jersey.test.framework.WebAppDescriptor;
 import com.sun.jersey.test.framework.spi.container.TestContainer;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
-public abstract class AbstractBOServiceTest<ENTITY extends IBusinessObject<ID>, ID>
-		extends TestBaseManager<ENTITY, ID> {
+public abstract class AbstractBOServiceTest<ENTITY, ID>
+		extends TestBOCRUDBase<ENTITY, ID> {
 
 	/**
 	 * @param testDataProvider
@@ -82,7 +83,7 @@ public abstract class AbstractBOServiceTest<ENTITY extends IBusinessObject<ID>, 
 	 */
 	@Override
 	protected void doDeleteEntity(ENTITY entity) {
-		getEntityKeyPath(entity.identity()).delete();
+		getEntityKeyPath(getIdentifier(entity)).delete();
 	}
 
 	/* (non-Javadoc)
@@ -141,6 +142,7 @@ public abstract class AbstractBOServiceTest<ENTITY extends IBusinessObject<ID>, 
 
 	private JerseyTest jerseyTest;
 	
+	
 	class JerseyTestProxy extends JerseyTest{
 
 		@Override
@@ -160,15 +162,15 @@ public abstract class AbstractBOServiceTest<ENTITY extends IBusinessObject<ID>, 
 
 			ClientConfig clientConfig = new DefaultClientConfig();
 
-			clientConfig.getFeatures().put(
-					JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+			clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 			clientConfig.getClasses().add(JacksonJaxbJsonProvider.class);
 			clientConfig.getClasses().add(JacksonJsonProvider.class);
-			clientConfig.getClasses().add(JacksonJsonProvider.class);
+			clientConfig.getClasses().add(HibernateBOMapperProvider.class);
 
 			WebAppDescriptor ad = new WebAppDescriptor.Builder(
-					"com.fasterxml.jackson.jaxrs.json;org.divy.common.bo.service.json;"
-							+ getTestClassPackage())
+					"com.fasterxml.jackson.jaxrs.json" + getTestClassPackage())
+					.contextListenerClass(getGuiceServletConfig())
+					.filterClass(GuiceFilter.class)
 					.clientConfig(clientConfig).build();
 
 			return ad;
@@ -197,4 +199,7 @@ public abstract class AbstractBOServiceTest<ENTITY extends IBusinessObject<ID>, 
 		cleanup();
     	jerseyTest.tearDown();
     }
+
+	protected abstract Class<? extends AbstractGuiceServletConfig> getGuiceServletConfig();
+
 }

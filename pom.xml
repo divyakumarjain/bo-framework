@@ -14,6 +14,9 @@
 		<module>bo-framework-service</module>
 		<module>bo-framework-service-mock</module>
 		<module>bo-framework-mock</module>
+		<module>bo-framework-mapper</module>
+		<module>bo-framework-presentation</module>
+		<module>bo-framework-businessapi</module>
 	</modules>
 
 	<properties>
@@ -24,7 +27,7 @@
 		<releaseRepoUrl>http://divyakumar.dyndns.org/nexus/content/repositories/releases/</releaseRepoUrl>
 		<snapshotRepoUrl>http://divyakumar.dyndns.org/nexus/content/repositories/snapshots/</snapshotRepoUrl>
 		<deployRepoUrl>${releaseRepoUrl}</deployRepoUrl>
-		<isRelease>true</isRelease>
+		<isRelease>false</isRelease>
 	</properties>
 
 	<build>

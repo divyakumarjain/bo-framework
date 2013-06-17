@@ -4,27 +4,27 @@ package org.divy.common.bo.impl;
 
 import java.util.List;
 
-import org.divy.common.bo.IBOManager;
+import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.IQuery;
 import org.divy.common.bo.command.IDBCommandContext;
 import org.divy.common.bo.context.DatabaseContext;
 import org.divy.common.bo.test.ITestDataProvider;
-import org.divy.common.bo.test.TestBaseManager;
+import org.divy.common.bo.test.TestBOCRUDBase;
 import org.junit.Before;
 
 
-public abstract class TestBaseDBManager<ENTITY extends IBusinessObject<ID>, ID> extends TestBaseManager<ENTITY, ID>
+public abstract class TestBaseDBRepository<ENTITY extends IBusinessObject<ID>, ID> extends TestBOCRUDBase<ENTITY, ID>
 {
 
 	/**
 	 * @param testDataProvider
 	 */
-	public TestBaseDBManager(ITestDataProvider<ENTITY, ID> testDataProvider) {
+	public TestBaseDBRepository(ITestDataProvider<ENTITY, ID> testDataProvider) {
 		super(testDataProvider);
 	}
 
-	protected IBOManager<ENTITY,ID> boManager;
+	protected IBORepository<ENTITY,ID> boManager;
 	protected IDBCommandContext context;
 
 	@Before
@@ -68,5 +68,5 @@ public abstract class TestBaseDBManager<ENTITY extends IBusinessObject<ID>, ID> 
 
 	protected abstract String getPersistantUnitName();
 
-	protected abstract IBOManager<ENTITY, ID> createManager();
+	protected abstract IBORepository<ENTITY, ID> createManager();
 }

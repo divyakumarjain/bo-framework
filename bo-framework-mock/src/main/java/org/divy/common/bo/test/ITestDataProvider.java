@@ -4,7 +4,7 @@ package org.divy.common.bo.test;
  */
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
 public interface ITestDataProvider<ENTITY, ID> {
@@ -17,4 +17,6 @@ public interface ITestDataProvider<ENTITY, ID> {
 	void fillTestDataSet2(ENTITY entity);
 
 	ENTITY getEntityInstance();
+	
+	void initialize();
 }

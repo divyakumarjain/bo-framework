@@ -62,8 +62,12 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
 			<version>1.17</version>
-			<!--<exclusions> <exclusion>com.sun.xml.bind</exclusion> <exclusion>jaxb-impl</exclusion> 
-				</exclusions> -->
+			<exclusions>
+				<exclusion>
+          			<groupId>com.sun.xml.bind</groupId>
+		        	<artifactId>jaxb-impl</artifactId>
+		        </exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey.jersey-test-framework</groupId>
@@ -136,6 +140,28 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.2.0.CR1</version>
 			<scope>test</scope>
+		</dependency>
+		<!-- <dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-guice</artifactId>
+			<version>1.17.1</version>
+			<scope>compile</scope>
+		</dependency>  -->
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-guice</artifactId>
+			<version>1.17.1</version>
 		</dependency>
 	</dependencies>
 </project>

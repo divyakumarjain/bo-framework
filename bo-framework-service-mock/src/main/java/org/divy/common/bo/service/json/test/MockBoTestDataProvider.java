@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.divy.common.bo.service.json;
+package org.divy.common.bo.service.json.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.test.ITestDataProvider;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
 public class MockBoTestDataProvider implements
@@ -22,6 +22,14 @@ public class MockBoTestDataProvider implements
 	@Override
 	public void modifyEntityWithTestData(MockEntity businessObject) {
 		businessObject.setName("updatedData1");
+		
+		MockEntity childBusinessObject = getEntityInstance();
+		
+		childBusinessObject.setName("child1");
+
+		childBusinessObject.setParentEntity(businessObject);
+		
+		businessObject.getChildEntities().add(childBusinessObject);
 	}
 
 	/* (non-Javadoc)
@@ -72,6 +80,12 @@ public class MockBoTestDataProvider implements
 	@Override
 	public MockEntity getEntityInstance() {
 		return new MockEntity();
+	}
+
+	@Override
+	public void initialize() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,10 +1,12 @@
-package org.divy.common.bo;
+package org.divy.common.bo.business;
 
 import java.util.List;
 
+import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.IQuery;
 
-public interface IBOManager<ENTITY extends IBusinessObject<ID>, ID>
-{
+public interface IBOManager<ENTITY extends IBusinessObject<ID>, ID> {
+
 	ENTITY create(ENTITY businessObject);
 
 	ENTITY update(ENTITY businessObject);
@@ -18,5 +20,4 @@ public interface IBOManager<ENTITY extends IBusinessObject<ID>, ID>
 	ENTITY deleteById(ID id);
 
 	ENTITY get(ID identity);
-	
 }

@@ -16,7 +16,7 @@ import org.divy.common.bo.command.AbstractDatabaseUpdateCommand;
 import org.divy.common.bo.command.IDBCommandContext;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
 public class DefaultDatabaseUpdateCommand<ENTITY extends IBusinessObject<ID>, ID>

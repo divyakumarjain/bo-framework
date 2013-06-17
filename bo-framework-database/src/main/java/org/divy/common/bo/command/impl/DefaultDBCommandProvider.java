@@ -1,24 +1,21 @@
 /**
  * 
  */
-package org.divy.common.bo;
+package org.divy.common.bo.command.impl;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.TypeBaseDBCommandProvider;
 import org.divy.common.bo.command.ICreateCommand;
 import org.divy.common.bo.command.IDBCommandContext;
 import org.divy.common.bo.command.IDeleteCommand;
 import org.divy.common.bo.command.IGetCommand;
 import org.divy.common.bo.command.ISearchCommand;
 import org.divy.common.bo.command.IUpdateCommand;
-import org.divy.common.bo.command.impl.DefaultDatabaseCreateCommand;
-import org.divy.common.bo.command.impl.DefaultDatabaseDeleteCommand;
-import org.divy.common.bo.command.impl.DefaultDatabaseGetCommand;
-import org.divy.common.bo.command.impl.DefaultDatabaseSearchCommand;
-import org.divy.common.bo.command.impl.DefaultDatabaseUpdateCommand;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
 public class DefaultDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>

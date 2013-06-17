@@ -1,5 +1,6 @@
 package org.divy.common.bo.database.mock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,13 +16,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.divy.common.bo.IBusinessObject;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @XmlRootElement
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonAutoDetect(fieldVisibility=Visibility.NONE,getterVisibility=Visibility.NONE)
 public class MockEntity implements IBusinessObject<String> {
 
 	public MockEntity() {
@@ -49,7 +54,11 @@ public class MockEntity implements IBusinessObject<String> {
 
 	@PrimaryKeyJoinColumn
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, targetEntity = MockEntity.class)
+	@JsonProperty
 	public List<MockEntity> getChildEntities() {
+		
+		if(childEntities==null)
+			childEntities = new ArrayList<MockEntity>();
 		return childEntities;
 	}
 
@@ -60,6 +69,7 @@ public class MockEntity implements IBusinessObject<String> {
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
+	@JsonProperty
 	public String getUuid() {
 		return uuid;
 	}
@@ -75,6 +85,7 @@ public class MockEntity implements IBusinessObject<String> {
 	@PrimaryKeyJoinColumn
 	// @JsonBackReference
 	@JsonIdentityReference
+	@JsonProperty
 	public MockEntity getParentEntity() {
 		return parentEntity;
 	}

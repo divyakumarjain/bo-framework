@@ -9,25 +9,24 @@ import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.IQuery;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  * @param <ENTITY>
  * @param <ID>
  */
-public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
+public abstract class TestBOCRUDBase<ENTITY, ID> {
 
 	final protected ITestDataProvider<ENTITY, ID> testDataProvider;
 
 	/**
 	 * 
 	 */
-	public TestBaseManager(ITestDataProvider<ENTITY, ID> testDataProvider) {
+	public TestBOCRUDBase(ITestDataProvider<ENTITY, ID> testDataProvider) {
 		super();
 		this.testDataProvider = testDataProvider;
 	}
@@ -35,6 +34,8 @@ public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 	@Test
 	public void testCreate() {
 		ENTITY entity = testDataProvider.getEntityInstance();
+		
+		testDataProvider.fillTestDataSet1(entity);
 	
 		entity = doCreateEntity(entity);
 
@@ -42,10 +43,10 @@ public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 				notNullValue());
 	
 		assertThat("Id for Entity should be generate after creation",
-				entity.identity(),
+				getIdentifier(entity),
 				notNullValue());
 		
-		entity = doGetByKey(entity.identity());
+		entity = doGetByKey(getIdentifier(entity));
 
 		assertThat("Entity should be readable after creation", entity,notNullValue());
 		
@@ -53,19 +54,23 @@ public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 	
 	}
 
+	abstract protected ID getIdentifier(ENTITY entity);
+
 	@Test
 	public void testUpdate() {
 		ENTITY entity = testDataProvider.getEntityInstance();
+		
+		testDataProvider.fillTestDataSet2(entity);
 	
 		entity = doCreateEntity(entity);
 		
-		entity = doGetByKey(entity.identity());
+		entity = doGetByKey(getIdentifier(entity));
 		
 		testDataProvider.modifyEntityWithTestData(entity);
 
 		doUpdateEntity(entity);
 		
-		ID id = entity.identity();
+		ID id = getIdentifier(entity);
 		
 		entity = doGetByKey(id);
 		
@@ -85,8 +90,8 @@ public abstract class TestBaseManager<ENTITY extends IBusinessObject<ID>, ID> {
 	
 		doDeleteEntity(entity1);
 	
-		entity1 = doGetByKey(entity1.identity());
-		entity2 = doGetByKey(entity2.identity());
+		entity1 = doGetByKey(getIdentifier(entity1));
+		entity2 = doGetByKey(getIdentifier(entity2));
 	
 		assertThat("Entity should not be Found", entity1, IsNull.nullValue());
 		assertThat("Entity should be Found", entity2, notNullValue());

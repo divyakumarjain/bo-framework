@@ -8,7 +8,7 @@ import java.util.List;
 import org.divy.common.bo.IQuery;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
 public interface ISearchCommand<ENTITY, ID> {

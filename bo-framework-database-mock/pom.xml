@@ -24,11 +24,11 @@
   		<artifactId>hibernate-jpa-2.0-api</artifactId>
   		<version>1.0.1.Final</version>
   	</dependency>
-  	<dependency>
-  		<groupId>org.divy</groupId>
-  		<artifactId>bo-framework-database</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
+    <dependency>
+          <groupId>org.divy</groupId>
+          <artifactId>bo-framework-core</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+    </dependency>
   	<dependency>
   		<groupId>org.hibernate</groupId>
   		<artifactId>hibernate-core</artifactId>
@@ -42,6 +42,11 @@
   	<dependency>
   		<groupId>org.divy</groupId>
   		<artifactId>bo-framework-mock</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.divy</groupId>
+  		<artifactId>bo-framework-database</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>

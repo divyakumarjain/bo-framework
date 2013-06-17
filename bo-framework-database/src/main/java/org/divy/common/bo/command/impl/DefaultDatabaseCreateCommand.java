@@ -8,7 +8,7 @@ import org.divy.common.bo.command.AbstractDatabaseCreateCommand;
 import org.divy.common.bo.command.IDBCommandContext;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ * @author Divyakumar
  *
  */
 public class DefaultDatabaseCreateCommand<ENTITY extends IBusinessObject<ID>, ID>
