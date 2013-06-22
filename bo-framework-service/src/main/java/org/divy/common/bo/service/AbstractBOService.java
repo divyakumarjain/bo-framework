@@ -7,8 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.business.IBOManager;
 
 /**
  * 
@@ -17,49 +17,49 @@ import org.divy.common.bo.IBusinessObject;
  */
 public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID extends Serializable> extends AbstractCRUDService<ENTITY, ID> {
 
-	private IBORepository<ENTITY, ID> repository;
+	private IBOManager<ENTITY, ID> manager;
 
-	public IBORepository<ENTITY, ID> getManager() {
-		return repository;
+	public IBOManager<ENTITY, ID> getManager() {
+		return manager;
 	}
 
-	public void setManager(IBORepository<ENTITY, ID> repository) {
-		this.repository = repository;
+	public void setManager(IBOManager<ENTITY, ID> manager) {
+		this.manager = manager;
 	}
 
-	public AbstractBOService(IBORepository<ENTITY, ID> repository) {
-		this.repository = repository;
+	public AbstractBOService(IBOManager<ENTITY, ID> manager) {
+		this.manager = manager;
 	}
 
 	public AbstractBOService() {
 	}
 
 	protected ENTITY doCreate(ENTITY businessObject) {
-		return repository.create(businessObject);
+		return manager.create(businessObject);
 	}
 
 	protected ENTITY doUpdate(ENTITY businessObject) {
 		
-		ENTITY updatedBo = repository.update(businessObject);
+		ENTITY updatedBo = manager.update(businessObject);
 		
 		return updatedBo;
 	}
 
 	protected void doDelete(ENTITY businessObject) {
 
-		repository.delete(businessObject);
+		manager.delete(businessObject);
 
 	}
 
 	protected ENTITY doDelete(ID id) {
 		
-		return repository.deleteById(id);
+		return manager.deleteById(id);
 		
 	}
 
 	protected List<ENTITY> doList() {
 		
-		List<ENTITY> boList = repository.list();
+		List<ENTITY> boList = manager.list();
 
 		List<ENTITY> resultList = new ArrayList<ENTITY>();
 
@@ -74,7 +74,7 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID e
 	}
 
 	protected ENTITY doGet(ID id) {
-		return repository.get(id);
+		return manager.get(id);
 
 
 	}

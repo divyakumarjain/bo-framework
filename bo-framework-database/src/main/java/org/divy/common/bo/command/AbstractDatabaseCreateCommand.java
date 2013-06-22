@@ -28,4 +28,10 @@ public abstract class AbstractDatabaseCreateCommand<ENTITY extends IBusinessObje
 		
 		transactionCommit();
 	}
+	
+	public ENTITY create(ENTITY object)
+	{
+		persist(object);
+		return object;
+	}
 }

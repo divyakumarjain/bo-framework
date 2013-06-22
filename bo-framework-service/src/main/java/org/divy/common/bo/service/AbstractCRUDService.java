@@ -64,7 +64,6 @@ public abstract class AbstractCRUDService<ENTITY, ID extends Serializable> {
 
 	@DELETE
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/{id}")
 	public final Response delete(@PathParam("id") ID id) {
 	
