@@ -2,6 +2,8 @@ package org.divy.common.bo;
 
 import java.util.List;
 
+import org.divy.common.bo.query.IQuery;
+
 
 public class AbstractBODatabaseRepository<ENTITY extends IBusinessObject<ID>, ID>
 		implements IBORepository<ENTITY, ID>
@@ -28,7 +30,7 @@ public class AbstractBODatabaseRepository<ENTITY extends IBusinessObject<ID>, ID
 
 
 	@Override
-	public List<ENTITY> search(IQuery<ENTITY> query)
+	public List<ENTITY> search(IQuery query)
 	{
 		return commandProvider.getSearchCommand().search(query);
 	}

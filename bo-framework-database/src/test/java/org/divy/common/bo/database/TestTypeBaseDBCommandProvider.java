@@ -2,7 +2,7 @@ package org.divy.common.bo.database;
 
 import org.divy.common.bo.ICommandProvider;
 import org.divy.common.bo.TypeBaseDBCommandProvider;
-import org.divy.common.bo.command.IDBCommandContext;
+import org.divy.common.bo.command.db.IDBCommandContext;
 import org.divy.common.bo.context.DatabaseContext;
 import org.divy.common.bo.database.mock.MockCreateCommand;
 import org.divy.common.bo.database.mock.MockDeleteCommand;

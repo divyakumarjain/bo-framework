@@ -3,16 +3,16 @@
  */
 package org.divy.common.bo.service.test;
 
-import java.util.Iterator;
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.List;
 
 import javax.ws.rs.core.Response.Status;
 
-import org.divy.common.bo.IQuery;
-import org.divy.common.bo.service.HibernateBOMapperProvider;
+import org.divy.common.bo.query.IQuery;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.divy.common.bo.test.TestBOCRUDBase;
-import org.junit.After;
+import org.divy.common.json.SearchQueryMapperProvider;
 import org.junit.Before;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
@@ -38,13 +38,41 @@ import com.sun.jersey.test.framework.spi.container.TestContainer;
  */
 public abstract class AbstractBOServiceTest<ENTITY, ID>
 		extends TestBOCRUDBase<ENTITY, ID> {
+	
+	final int emptyPortRetryCount = 10;
 
 	/**
 	 * @param testDataProvider
 	 */
 	public AbstractBOServiceTest(ITestDataProvider<ENTITY, ID> testDataProvider) {
 		super(testDataProvider);
-		jerseyTest = new JerseyTestProxy();
+		jerseyTest = new JerseyTestProxy(){
+
+			@Override
+			protected int getPort(int defaultPort) {
+				
+				ServerSocket server = null;
+			    int port = -1;
+			    try {
+			        server = new ServerSocket(defaultPort);
+			        port = server.getLocalPort();
+			    } catch (IOException e) {
+			        // ignore
+			    } finally {
+			        if (server != null) {
+			            try {
+			                server.close();
+			            } catch (IOException e) {
+			                // ignore
+			            }
+			        }
+			    }
+			    if ((port != -1) || (defaultPort == 0)) {
+			        return port;
+			    }
+			    return getPort(0);
+			}
+		};
 	}
 
 	/* (non-Javadoc)
@@ -86,39 +114,11 @@ public abstract class AbstractBOServiceTest<ENTITY, ID>
 		getEntityKeyPath(getIdentifier(entity)).delete();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.divy.common.bo.test.TestBaseManager#doSearchEntities(org.divy.common.bo.IQuery)
-	 */
 	@Override
-	protected List<ENTITY> doSearchEntities(IQuery<ENTITY> searchQuery) {
-		return getEntityPath().get(getEntityListClass());
+	protected List<ENTITY> doSearchEntities(IQuery searchQuery) {
+		return getEntitySearchPath().post(getEntityListClass(), searchQuery);
 	}
-
-
-	/* (non-Javadoc)
-	 * @see org.divy.common.bo.test.TestBaseManager#createSearchQuery()
-	 */
-	@Override
-	protected IQuery<ENTITY> createSearchQuery() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
     
-	private void cleanup() {
-		List<ENTITY> boList = doSearchEntities(null);
-
-		for (Iterator<ENTITY> iterator = boList.iterator(); iterator.hasNext();) {
-
-			ENTITY mockEntity = iterator.next();
-
-			try {
-				doDeleteEntity(mockEntity);
-			} catch (Exception ex) {
-			}
-		}
-	}
 
     /**
      * Create a web resource whose URI refers to the base URI the Web
@@ -133,13 +133,13 @@ public abstract class AbstractBOServiceTest<ENTITY, ID>
 	protected abstract Builder getEntityKeyPath(ID uuid);
 
 	protected abstract Builder getEntityPath();
+	
+	protected abstract Builder getEntitySearchPath();
 
 	protected abstract GenericType<ENTITY> getEntityClass();
 
 	protected abstract GenericType<List<ENTITY>> getEntityListClass();
 	
-	protected abstract String getTestClassPackage();
-
 	private JerseyTest jerseyTest;
 	
 	
@@ -165,7 +165,7 @@ public abstract class AbstractBOServiceTest<ENTITY, ID>
 			clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 			clientConfig.getClasses().add(JacksonJaxbJsonProvider.class);
 			clientConfig.getClasses().add(JacksonJsonProvider.class);
-			clientConfig.getClasses().add(HibernateBOMapperProvider.class);
+			clientConfig.getClasses().add(SearchQueryMapperProvider.class);
 
 			WebAppDescriptor ad = new WebAppDescriptor.Builder(
 					"com.fasterxml.jackson.jaxrs.json" + getTestClassPackage())
@@ -187,19 +187,18 @@ public abstract class AbstractBOServiceTest<ENTITY, ID>
     public void setUp() throws Exception {
     	jerseyTest.setUp();
     }
-
-    /**
-     * Tear down the test by invoking {@link TestContainer#stop() } on
-     * the test container obtained from the test container factory.
-     *
-     * @throws Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-		cleanup();
-    	jerseyTest.tearDown();
-    }
-
+    
+    @Override
+	public void cleanup() throws Exception {
+		super.cleanup();
+		jerseyTest.tearDown();
+	}
+    
+	
+	protected String getTestClassPackage() {
+		return "org.divy.common.bo.service.json.test";
+	}
+    
 	protected abstract Class<? extends AbstractGuiceServletConfig> getGuiceServletConfig();
 
 }

@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import org.divy.common.bo.command.IDBCommandContext;
+import org.divy.common.bo.command.db.IDBCommandContext;
 
 public class DatabaseContext implements IDBCommandContext
 {

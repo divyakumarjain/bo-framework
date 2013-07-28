@@ -1,7 +1,7 @@
 package org.divy.common.bo.database.mock;
 
-import org.divy.common.bo.command.AbstractDatabaseDeleteCommand;
-import org.divy.common.bo.command.IDBCommandContext;
+import org.divy.common.bo.command.db.AbstractDatabaseDeleteCommand;
+import org.divy.common.bo.command.db.IDBCommandContext;
 
 public class MockDeleteCommand extends AbstractDatabaseDeleteCommand<MockEntity, String> {
 

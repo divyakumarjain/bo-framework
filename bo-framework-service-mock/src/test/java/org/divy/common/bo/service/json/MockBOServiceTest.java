@@ -24,7 +24,7 @@ public class MockBOServiceTest extends
 	public MockBOServiceTest() throws Exception {
 		super(new MockBoTestDataProvider());
 	}
-
+	
 	@Override
 	protected Builder getEntityKeyPath(String key) {
 		return resource().path("mock")
@@ -37,6 +37,15 @@ public class MockBOServiceTest extends
 	public Builder getEntityPath() {
 		return resource()
 				.path("mock")
+				.accept(MediaType.APPLICATION_JSON_TYPE)
+				.type(MediaType.APPLICATION_JSON_TYPE);
+	}
+	
+	@Override
+	public Builder getEntitySearchPath() {
+		return resource()
+				.path("mock")
+				.path("search")
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.type(MediaType.APPLICATION_JSON_TYPE);
 	}
@@ -79,21 +88,15 @@ public class MockBOServiceTest extends
 	@Override
 	protected void extendedTestUpdatedEntity(MockEntity entity) {
 		assertThat("Child Mock objects list should not be null",entity.getChildEntities(), not(nullValue()));
-		assertThat("Child Mock object list should be one",entity.getChildEntities().size(), equalTo(1));
+		assertThat("Child Mock object list should be one",entity.getChildEntities().size(), equalTo(2));
 		assertThat("Child Mock object should not be null",entity.getChildEntities().get(0), not(nullValue()));
-	}
-	
-	@Override
-	protected String getTestClassPackage() {
-		return "org.divy.common.bo.service.json.test";
 	}
 
 	@Override
 	protected Class<? extends AbstractGuiceServletConfig> getGuiceServletConfig() {
-		// TODO Auto-generated method stub
 		return MockBOGuiceServletConfig.class;
 	}
-
+	
 	@Override
 	protected String getIdentifier(MockEntity entity) {
 		return entity.identity();

@@ -18,7 +18,7 @@ public class MockBODBRepository extends
 	 */
 	public MockBODBRepository() {
 		TypeBaseDBCommandProvider<MockEntity, String> commandProvider = new TypeBaseDBCommandProvider<MockEntity, String>(
-				"org.divy.mock");
+				"org.divy.task");
 
 		commandProvider.setGetCommandType(MockGetCommand.class);
 		commandProvider.setUpdateCommandType(MockUpdateCommand.class);
