@@ -2,6 +2,8 @@ package org.divy.common.bo;
 
 import java.util.List;
 
+import org.divy.common.bo.query.IQuery;
+
 
 public interface IBORepository<ENTITY extends IBusinessObject<ID>, ID>
 {
@@ -13,7 +15,7 @@ public interface IBORepository<ENTITY extends IBusinessObject<ID>, ID>
 
 	List<ENTITY> list();
 
-	List<ENTITY> search(IQuery<ENTITY> businessObjectQuery);
+	List<ENTITY> search(IQuery businessObjectQuery);
 
 	ENTITY deleteById(ID id);
 

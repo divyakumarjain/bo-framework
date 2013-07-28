@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.divy.common.bo.database.mock.MockEntity;
+import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.defaults.EqualTo;
+import org.divy.common.bo.query.defaults.Query;
 import org.divy.common.bo.test.ITestDataProvider;
 
 /**
@@ -25,7 +28,7 @@ public class MockBoTestDataProvider implements
 		
 		MockEntity childBusinessObject = getEntityInstance();
 		
-		childBusinessObject.setName("child1");
+		childBusinessObject.setName("NewChildAddedDuringUpdate");
 
 		childBusinessObject.setParentEntity(businessObject);
 		
@@ -84,8 +87,16 @@ public class MockBoTestDataProvider implements
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
-		
+	}
+	
+	
+	@Override
+	public IQuery createSearchQuery() {
+		IQuery userQuery = new Query();
+
+		userQuery.put("name",new EqualTo<String>("data1"));
+
+		return userQuery;
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.query.IQuery;
 
 /**
  * 
@@ -33,7 +34,11 @@ public abstract class AbstractBOService<ENTITY extends IBusinessObject<ID>, ID e
 
 	public AbstractBOService() {
 	}
-
+	
+	protected List<ENTITY> doSearch(IQuery query){
+		return manager.search(query);
+	}
+	
 	protected ENTITY doCreate(ENTITY businessObject) {
 		return manager.create(businessObject);
 	}

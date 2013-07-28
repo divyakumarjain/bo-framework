@@ -1,6 +1,6 @@
 package org.divy.common.bo;
 
-import org.divy.common.bo.command.IDBCommandContext;
+import org.divy.common.bo.command.db.IDBCommandContext;
 import org.divy.common.bo.context.DatabaseContext;
 import org.divy.common.bo.database.mock.MockCreateCommand;
 import org.divy.common.bo.database.mock.MockDeleteCommand;

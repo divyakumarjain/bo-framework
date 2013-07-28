@@ -3,20 +3,17 @@ package org.divy.common.bo;
 import java.lang.reflect.InvocationTargetException;
 
 import org.divy.common.bo.command.ICreateCommand;
-import org.divy.common.bo.command.IDBCommandContext;
 import org.divy.common.bo.command.IDeleteCommand;
 import org.divy.common.bo.command.IGetCommand;
 import org.divy.common.bo.command.ISearchCommand;
 import org.divy.common.bo.command.IUpdateCommand;
+import org.divy.common.bo.command.db.IDBCommandContext;
 import org.divy.common.bo.context.DatabaseContext;
 
 public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 		implements ICommandProvider<ENTITY, ID>
 {
 	
-	/**
-	 * 
-	 */
 	private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
 
 	private IDBCommandContext context;

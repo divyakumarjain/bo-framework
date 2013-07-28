@@ -1,7 +1,7 @@
 package org.divy.common.bo.database.mock;
 
-import org.divy.common.bo.command.AbstractDatabaseCreateCommand;
-import org.divy.common.bo.command.IDBCommandContext;
+import org.divy.common.bo.command.db.AbstractDatabaseCreateCommand;
+import org.divy.common.bo.command.db.IDBCommandContext;
 
 public class MockCreateCommand extends AbstractDatabaseCreateCommand<MockEntity, String> {
 

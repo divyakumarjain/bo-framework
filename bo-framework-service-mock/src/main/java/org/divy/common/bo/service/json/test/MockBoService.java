@@ -5,7 +5,7 @@ package org.divy.common.bo.service.json.test;
 
 import javax.ws.rs.Path;
 
-import org.divy.common.bo.business.impl.DefaultBOManager;
+import org.divy.common.bo.business.defaults.DefaultBOManager;
 import org.divy.common.bo.database.mock.MockBODBRepository;
 import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.service.AbstractBOService;
@@ -21,5 +21,4 @@ public class MockBoService extends AbstractBOService<MockEntity, String> {
 
 		super(new DefaultBOManager<MockEntity,String>(new MockBODBRepository()));
 	}
-
 }

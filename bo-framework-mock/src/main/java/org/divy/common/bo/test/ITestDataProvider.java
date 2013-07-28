@@ -1,4 +1,6 @@
 package org.divy.common.bo.test;
+
+import org.divy.common.bo.query.IQuery;
 /**
  * 
  */
@@ -19,4 +21,6 @@ public interface ITestDataProvider<ENTITY, ID> {
 	ENTITY getEntityInstance();
 	
 	void initialize();
+	
+	IQuery createSearchQuery();
 }

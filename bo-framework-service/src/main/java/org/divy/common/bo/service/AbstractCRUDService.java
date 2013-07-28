@@ -20,6 +20,9 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
+import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.defaults.Query;
+
 public abstract class AbstractCRUDService<ENTITY, ID extends Serializable> {
 	
 	@Context UriInfo uriInfo;
@@ -90,7 +93,21 @@ public abstract class AbstractCRUDService<ENTITY, ID extends Serializable> {
 	
 		return Response.ok().entity(entity).build();
 	}
-
+	
+	@POST
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Path("/search")
+	public final Response search(Query query) {
+		
+		 List<ENTITY> resultList = doSearch(query);
+		
+		GenericEntity<List<ENTITY>> entity = new GenericEntity<List<ENTITY>>(
+				resultList) {
+		};
+	
+		return Response.ok().entity(entity).build();
+	}
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -128,5 +145,6 @@ public abstract class AbstractCRUDService<ENTITY, ID extends Serializable> {
 	protected abstract void doDelete(ENTITY businessObject);
 	protected abstract ENTITY doDelete(ID id);
 	protected abstract List<ENTITY> doList();
+	protected abstract List<ENTITY> doSearch(IQuery query);
 
 }

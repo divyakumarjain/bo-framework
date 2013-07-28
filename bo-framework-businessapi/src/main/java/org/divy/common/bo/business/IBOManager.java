@@ -3,7 +3,7 @@ package org.divy.common.bo.business;
 import java.util.List;
 
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.IQuery;
+import org.divy.common.bo.query.IQuery;
 
 public interface IBOManager<ENTITY extends IBusinessObject<ID>, ID> {
 
@@ -15,7 +15,7 @@ public interface IBOManager<ENTITY extends IBusinessObject<ID>, ID> {
 
 	List<ENTITY> list();
 
-	List<ENTITY> search(IQuery<ENTITY> businessObjectQuery);
+	List<ENTITY> search(IQuery businessObjectQuery);
 
 	ENTITY deleteById(ID id);
 
