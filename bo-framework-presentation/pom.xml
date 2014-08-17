@@ -12,27 +12,22 @@
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-mapper</artifactId>
-			<version>${bo-framework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-core</artifactId>
-			<version>${bo-framework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-businessapi</artifactId>
-			<version>${bo-framework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-service</artifactId>
-			<version>${bo-framework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-test-template</artifactId>
-			<version>${bo-framework-version}</version>
 			<type>pom</type>
 			<scope>test</scope>
 		</dependency>

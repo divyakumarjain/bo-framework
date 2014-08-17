@@ -13,39 +13,50 @@
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-core</artifactId>
-			<version>${bo-framework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-mock</artifactId>
-			<version>${bo-framework-version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-database</artifactId>
-			<version>${bo-framework-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-database-template</artifactId>
-			<version>${bo-framework-version}</version>
 			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>org.divy</groupId>
 			<artifactId>bo-framework-test-template</artifactId>
-			<version>${bo-framework-version}</version>
 			<type>pom</type>
 		</dependency>
-		<dependency>
-			<groupId>hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>1.8.0.10</version>
-		</dependency>
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>
 			<artifactId>jackson-module-jaxb-annotations</artifactId>
-			<version>2.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
