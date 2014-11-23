@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.divy.common.bo.service.json.test;
+package org.divy.common.bo.endpoint.json.test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class MockBoTestDataProvider implements
 
         childBusinessObject.setParentEntity(businessObject);
 
-        List<MockEntity> childLists = new ArrayList<MockEntity>();
+        List<MockEntity> childLists = new ArrayList<>();
 
         childLists.add(childBusinessObject);
 
@@ -70,7 +70,7 @@ public class MockBoTestDataProvider implements
 
         childBusinessObject.setParentEntity(businessObject);
 
-        List<MockEntity> childLists = new ArrayList<MockEntity>();
+        List<MockEntity> childLists = new ArrayList<>();
 
         childLists.add(childBusinessObject);
 
@@ -94,7 +94,7 @@ public class MockBoTestDataProvider implements
     public IQuery createSearchQuery() {
         IQuery userQuery = new Query();
 
-        userQuery.put("name",new EqualTo<String>("data1"));
+        userQuery.put("name",new EqualTo<>("data1"));
 
         return userQuery;
     }

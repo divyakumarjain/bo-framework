@@ -5,8 +5,10 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.rest.RESTEntityURLBuilder;
 
 class ListEntityResponseBuilder<T extends IBusinessObject> extends ResponseEntityBuilder<List<T>> {
+
     public ListEntityResponseBuilder(List<T> list) {
         setEntity(list);
     }

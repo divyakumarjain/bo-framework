@@ -24,4 +24,5 @@ public class EqualTo<ATTRIBUTE> implements IEqualTo<ATTRIBUTE> {
     public ATTRIBUTE getValue() {
         return value;
     }
+
 }

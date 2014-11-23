@@ -12,13 +12,12 @@
     <dependencies>
         <dependency>
             <groupId>org.divy</groupId>
+            <artifactId>bo-framework-database</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
             <artifactId>bo-framework-database-template</artifactId>
             <type>pom</type>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
         </dependency>
 
         <dependency>

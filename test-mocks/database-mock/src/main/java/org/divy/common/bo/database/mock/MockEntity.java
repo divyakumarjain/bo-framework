@@ -30,6 +30,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonAutoDetect(fieldVisibility=Visibility.NONE,getterVisibility=Visibility.NONE)
 public class MockEntity implements IBusinessObject<String> {
 
+
+
     public MockEntity() {
     }
 

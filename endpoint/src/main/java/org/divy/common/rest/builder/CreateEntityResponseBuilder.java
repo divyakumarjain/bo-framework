@@ -1,19 +1,39 @@
 package org.divy.common.rest.builder;
 
 
+import java.net.URI;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.rest.RESTEntityURLBuilder;
 
 
 public class CreateEntityResponseBuilder<T extends IBusinessObject> extends ResponseEntityBuilder<T> {
-    public CreateEntityResponseBuilder(T entity) {
-        setEntity(entity);
+
+    RESTEntityURLBuilder<T> entityURLBuilder;
+
+    public CreateEntityResponseBuilder(RESTEntityURLBuilder entityURLBuilder) {
+        super();
+        entity(entity);
+        setEntityURLBuilder(entityURLBuilder);
     }
 
-    public Response build() {
+    public Response build(UriInfo uriInfo) {
         setStatusCode(Response.Status.CREATED);
-        final Response response = Response.created(entityURLBuilder.buildEntityUri(getEntity())).build();
+        final Response response = Response.created(createLocation(uriInfo)).build();
         return response;
+    }
+
+    private URI createLocation(UriInfo uriInfo) {
+        return getEntityURLBuilder().buildEntityUri(getEntity(),uriInfo);
+    }
+
+    public RESTEntityURLBuilder<T> getEntityURLBuilder() {
+        return entityURLBuilder;
+    }
+
+    public void setEntityURLBuilder(RESTEntityURLBuilder<T> entityURLBuilder) {
+        this.entityURLBuilder = entityURLBuilder;
     }
 }

@@ -1,28 +1,26 @@
 package org.divy.common.rest.builder;
 
-import javax.inject.Inject;
+
+import org.divy.common.bo.IBusinessObject;
+import org.divy.common.rest.RESTEntityURLBuilder;
+
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import org.divy.common.rest.RESTEntityURLBuilder;
 
 public class ResponseEntityBuilder<T> {
     T entity;
     private Status statusCode;
 
-    @Inject
-    RESTEntityURLBuilder entityURLBuilder;
+    public ResponseEntityBuilder(T entity) {
+        setEntity(entity);
+    }
+
+    public ResponseEntityBuilder() {
+    }
 
     public Response build(){
-        setStatusCode(Status.OK);
-
-        if (getStatusCode() == null) {
-            setStatusCode(getEntity()==null ? Status.NO_CONTENT : Status.OK);
-        }
-
-        final Response response = javax.ws.rs.core.Response.status(getStatusCode()).entity(getEntity()).build();
-
-        return response;
+        return build(null);
     }
 
     /* Builder methods*/
@@ -55,4 +53,16 @@ public class ResponseEntityBuilder<T> {
     public void setStatusCode(Status statusCode) {
         this.statusCode = statusCode;
     }
+
+    public Response build(UriInfo uriInfo) {
+
+        if (getStatusCode() == null) {
+            setStatusCode(getEntity()==null ? Status.NO_CONTENT : Status.OK);
+        }
+
+        final Response response = javax.ws.rs.core.Response.status(getStatusCode()).entity(getEntity()).build();
+
+        return response;
+    }
+
 }

@@ -8,9 +8,9 @@ import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.defaults.DefaultBOMapper;
 import org.divy.common.bo.query.IQuery;
-import org.divy.common.bo.service.AbstractCRUDEndpoint;
+import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 
-public abstract class AbstractEntityPresentationService<ENTITY extends IBusinessObject<ID>,VO, ID extends Serializable> extends AbstractCRUDEndpoint<VO,ID> {
+public abstract class AbstractEntityPresentationService<ENTITY extends IBusinessObject<ID>,VO, ID extends Serializable> extends AbstractCRUDEndpoint<ENTITY,ID> {
 
     IBOMapper<ENTITY, VO> mapper;
 
@@ -37,44 +37,80 @@ public abstract class AbstractEntityPresentationService<ENTITY extends IBusiness
     }
 
     @Override
-    protected VO doGet(ID id) {
+    protected ENTITY doGet(ID id) {
         ENTITY boEntity = manager.get(id);
 
+        return boEntity;
+    }
+
+    @Override
+    protected ENTITY doCreate(ENTITY entity) {
+        ENTITY createdBusinessObject = manager.create(entity);
+        return createdBusinessObject;
+    }
+
+    @Override
+    protected ENTITY doUpdate(ENTITY entity) {
+        ENTITY updatedBusinessObject = manager.update(entity);
+        return updatedBusinessObject;
+    }
+
+    @Override
+    protected void doDelete(ENTITY entity) {
+        manager.delete(entity);
+    }
+
+    @Override
+    protected ENTITY doDelete(ID id) {
+        ENTITY deletedBusinessObject = manager.deleteById(id);
+        return deletedBusinessObject;
+    }
+
+    @Override
+    protected List<ENTITY> doList() {
+        List<ENTITY> boList = manager.list();
+        return boList;
+    }
+
+    @Override
+    protected List<ENTITY> doSearch(IQuery query) {
+        List<ENTITY> boList = manager.search(query);
+        return boList;
+    }
+
+    protected VO doGetPresenter(ID id) {
+        ENTITY boEntity = doGet(id);
         return mapper.createFromBO(boEntity);
     }
 
-    @Override
-    protected VO doCreate(VO presentationObject) {
-        ENTITY createdBusinessObject = manager.create(mapper.createBO(presentationObject));
+    protected VO doCreatePresenter(VO presentationObject) {
+        ENTITY entityToBeCreated= mapper.createBO(presentationObject);
+        ENTITY createdBusinessObject = doCreate(entityToBeCreated);
         return mapper.createFromBO(createdBusinessObject);
     }
 
-    @Override
-    protected VO doUpdate(VO presentationObject) {
-        ENTITY updatedBusinessObject = manager.update(mapper.createBO(presentationObject));
+    protected VO doUpdatePresenter(VO presentationObject) {
+        ENTITY entityToBeUpdated = mapper.createBO(presentationObject);
+        ENTITY updatedBusinessObject = doUpdate(entityToBeUpdated);
         return mapper.createFromBO(updatedBusinessObject);
     }
 
-    @Override
-    protected void doDelete(VO presentationObject) {
+    protected void doDeletePresenter(VO presentationObject) {
         manager.delete(mapper.createBO(presentationObject));
     }
 
-    @Override
-    protected VO doDelete(ID id) {
-        ENTITY deletedBusinessObject = manager.deleteById(id);
+    protected VO doDeletePresenter(ID id) {
+        ENTITY deletedBusinessObject = doDelete(id);
         return mapper.createFromBO(deletedBusinessObject);
     }
 
-    @Override
-    protected List<VO> doList() {
-        List<ENTITY> boList = manager.list();
+    protected List<VO> doListPresenter() {
+        List<ENTITY> boList = doList();
         return mapper.createFromBO(boList);
     }
 
-    @Override
-    protected List<VO> doSearch(IQuery query) {
-        List<ENTITY> boList = manager.search(query);
+    protected List<VO> doSearchPresenter(IQuery query) {
+        List<ENTITY> boList = doSearch(query);
         return mapper.createFromBO(boList);
     }
 }

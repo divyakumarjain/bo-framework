@@ -1,10 +1,10 @@
 package org.divy.common.bo.query.defaults;
 
-import java.util.HashMap;
-import java.util.Set;
-
 import org.divy.common.bo.query.IOperator;
 import org.divy.common.bo.query.IQuery;
+
+import java.util.HashMap;
+import java.util.Set;
 
 public class Query extends HashMap<String, IOperator> implements IQuery
 {
@@ -29,5 +29,4 @@ public class Query extends HashMap<String, IOperator> implements IQuery
         Set<java.util.Map.Entry<String, IOperator>> entrySet = super.entrySet();
         return entrySet;
     }
-
 }

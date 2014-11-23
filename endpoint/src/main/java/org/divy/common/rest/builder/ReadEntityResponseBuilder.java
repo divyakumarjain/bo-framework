@@ -4,8 +4,11 @@ import java.util.Collection;
 import javax.ws.rs.core.Response;
 
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.rest.RESTEntityURLBuilder;
 
 public class ReadEntityResponseBuilder<T extends IBusinessObject> extends ResponseEntityBuilder<T> {
+    RESTEntityURLBuilder<T> entityURLBuilder;
+
     public ReadEntityResponseBuilder(T entity) {
         setEntity(entity);
     }
@@ -21,5 +24,13 @@ public class ReadEntityResponseBuilder<T extends IBusinessObject> extends Respon
             }
         }
         return super.build();
+    }
+
+    public RESTEntityURLBuilder<T> getEntityURLBuilder() {
+        return entityURLBuilder;
+    }
+
+    public void setEntityURLBuilder(RESTEntityURLBuilder<T> entityURLBuilder) {
+        this.entityURLBuilder = entityURLBuilder;
     }
 }

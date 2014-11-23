@@ -1,14 +1,16 @@
 /**
  * 
  */
-package org.divy.common.bo.service.json.test;
+package org.divy.common.bo.endpoint.json.test;
 
 import javax.ws.rs.Path;
 
 import org.divy.common.bo.business.defaults.DefaultBOManager;
 import org.divy.common.bo.database.mock.MockBODBRepository;
 import org.divy.common.bo.database.mock.MockEntity;
-import org.divy.common.bo.service.AbstractBOEndpoint;
+import org.divy.common.bo.endpoint.AbstractBOEndpoint;
+import org.divy.common.rest.RESTEntityURLBuilder;
+import org.mockito.Mock;
 
 /**
  * @author Divyakumar
@@ -17,8 +19,12 @@ import org.divy.common.bo.service.AbstractBOEndpoint;
 @Path("/mock")
 public class MockBoEndpoint extends AbstractBOEndpoint<MockEntity, String> {
 
-    public MockBoEndpoint() {
+    static {
+        RESTEntityURLBuilder.addEntityEndPointMap(MockEntity.class,MockBoEndpoint.class);
+    }
 
-        super(new DefaultBOManager<MockEntity,String>(new MockBODBRepository()));
+
+    public MockBoEndpoint() {
+        super();
     }
 }

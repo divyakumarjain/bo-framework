@@ -2,32 +2,54 @@ package org.divy.common.rest.builder;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.rest.RESTEntityURLBuilder;
 
 
-public class ResponseEntityBuilderFactory<T> {
+public class ResponseEntityBuilderFactory<T extends IBusinessObject> {
 
-        /* Builder static methods*/
+    @Inject
+    RESTEntityURLBuilder entityURLBuilder;
 
-    public static <T extends IBusinessObject> CreateEntityResponseBuilder<T> create(T entity){
-        return new CreateEntityResponseBuilder(entity);
+    /* Builder static methods*/
+
+    public CreateEntityResponseBuilder<T> create(T entity){
+        final CreateEntityResponseBuilder<T> createEntityResponseBuilder = new CreateEntityResponseBuilder<>(entityURLBuilder);
+        createEntityResponseBuilder.setEntityURLBuilder(entityURLBuilder);
+        createEntityResponseBuilder.entity(entity);
+        return createEntityResponseBuilder;
     }
 
-    public static <T extends IBusinessObject> UpdateEntityResponseBuilder<T> update(){
-        return new UpdateEntityResponseBuilder();
+    public UpdateEntityResponseBuilder<T> update(T entity){
+        UpdateEntityResponseBuilder<T> updateEntityResponseBuilder = new UpdateEntityResponseBuilder<>(entity);
+        updateEntityResponseBuilder.setEntityURLBuilder(entityURLBuilder);
+        return updateEntityResponseBuilder;
     }
 
-    public static <T extends IBusinessObject> DeleteEntityResponseBuilder<T> delete(){
-        return new DeleteEntityResponseBuilder();
+    public DeleteEntityResponseBuilder<T> delete(T entity){
+        DeleteEntityResponseBuilder<T> deleteEntityResponseBuilder = new DeleteEntityResponseBuilder<>(entity);
+        deleteEntityResponseBuilder.setEntityURLBuilder(entityURLBuilder);
+        return deleteEntityResponseBuilder;
     }
 
-    public static <T extends IBusinessObject> ReadEntityResponseBuilder<T> read(T entity){
-        return new ReadEntityResponseBuilder<T>(entity);
+    public ReadEntityResponseBuilder<T> read(T entity){
+        ReadEntityResponseBuilder<T> readEntityResponseBuilder = new ReadEntityResponseBuilder<>(entity);
+        readEntityResponseBuilder.setEntityURLBuilder(entityURLBuilder);
+        return readEntityResponseBuilder;
     }
 
+    public ResponseEntityBuilder<List<T>> list(List<T> list) {
+        ListEntityResponseBuilder<T> listEntityResponseBuilder = new ListEntityResponseBuilder<T>(list);
+        return listEntityResponseBuilder;
+    }
 
+    public RESTEntityURLBuilder getEntityURLBuilder() {
+        return entityURLBuilder;
+    }
 
-    public static <T extends IBusinessObject> ResponseEntityBuilder<List<T>> list(List<T> list) {
-        return new ListEntityResponseBuilder<T>(list);
+    public void setEntityURLBuilder(RESTEntityURLBuilder entityURLBuilder) {
+        this.entityURLBuilder = entityURLBuilder;
     }
 }

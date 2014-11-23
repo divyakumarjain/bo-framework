@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.divy.common.bo.service;
+package org.divy.common.bo.endpoint;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +14,8 @@ import org.divy.common.bo.business.defaults.DefaultBOManager;
 import org.divy.common.bo.command.db.defaults.DefaultDatabaseRepository;
 import org.divy.common.bo.query.IQuery;
 
+import javax.inject.Inject;
+
 /**
  * 
  * @author Divyakumar
@@ -21,7 +23,23 @@ import org.divy.common.bo.query.IQuery;
  */
 public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID extends Serializable> extends AbstractCRUDEndpoint<ENTITY, ID> {
 
+    @Inject
     private IBOManager<ENTITY, ID> manager;
+
+    public AbstractBOEndpoint(IBOManager<ENTITY, ID> manager) {
+        this.manager = manager;
+    }
+
+    public AbstractBOEndpoint(IBORepository<ENTITY,ID> repository) {
+        this(new DefaultBOManager<>( repository));
+    }
+
+    public AbstractBOEndpoint(String persistentUnitName,Class<ENTITY> entityClass) {
+        this(new DefaultDatabaseRepository<>(persistentUnitName, entityClass));
+    }
+
+    public AbstractBOEndpoint() {
+    }
 
     public IBOManager<ENTITY, ID> getManager() {
         return manager;
@@ -29,18 +47,6 @@ public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID 
 
     public void setManager(IBOManager<ENTITY, ID> manager) {
         this.manager = manager;
-    }
-
-    public AbstractBOEndpoint(IBOManager<ENTITY, ID> manager) {
-        this.manager = manager;
-    }
-
-    public AbstractBOEndpoint(IBORepository repository) {
-        this(new DefaultBOManager<>( repository));
-    }
-
-    public AbstractBOEndpoint(String persistentUnitName,Class<ENTITY> entityClass) {
-        this(new DefaultDatabaseRepository(persistentUnitName, entityClass));
     }
 
     protected List<ENTITY> doSearch(IQuery query){
@@ -74,7 +80,7 @@ public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID 
 
         List<ENTITY> boList = manager.list();
 
-        List<ENTITY> resultList = new ArrayList<ENTITY>();
+        List<ENTITY> resultList = new ArrayList<>();
 
         resultList.addAll(boList);
 
