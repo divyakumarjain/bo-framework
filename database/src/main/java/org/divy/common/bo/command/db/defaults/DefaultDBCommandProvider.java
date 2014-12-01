@@ -25,9 +25,9 @@ public class DefaultDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
     private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
 
     @SuppressWarnings("unchecked")
-    public DefaultDBCommandProvider(String persistantUnitName,
+    public DefaultDBCommandProvider(String persistentUnitName,
             Class<ENTITY> entityClass) {
-        super(persistantUnitName);
+        super(persistentUnitName);
 
         setGetCommandType((Class<? extends IGetCommand<ENTITY, ID>>)(Object) DefaultDatabaseGetCommand.class);
         setCreateCommandType((Class<? extends ICreateCommand<ENTITY, ID>>)(Object) DefaultDatabaseCreateCommand.class);

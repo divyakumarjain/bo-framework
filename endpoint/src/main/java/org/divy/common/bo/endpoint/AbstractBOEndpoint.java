@@ -21,7 +21,8 @@ import javax.inject.Inject;
  * @author Divyakumar
  *
  */
-public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID extends Serializable> extends AbstractCRUDEndpoint<ENTITY, ID> {
+public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID extends Serializable>
+        extends AbstractCRUDEndpoint<ENTITY, ID> {
 
     @Inject
     private IBOManager<ENTITY, ID> manager;
@@ -94,7 +95,5 @@ public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID 
 
     protected ENTITY doGet(ID id) {
         return manager.get(id);
-
-
     }
 }

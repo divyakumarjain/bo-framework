@@ -6,9 +6,9 @@ import org.divy.common.bo.IBusinessObject;
 public class DefaultDatabaseRepository<ENTITY extends IBusinessObject<ID>,ID> extends
         AbstractBODatabaseRepository<ENTITY, ID> {
 
-    public DefaultDatabaseRepository(String persistantUnitName,
+    public DefaultDatabaseRepository(String persistentUnitName,
             Class<ENTITY> entityClass){
-        setCommandProvider(new DefaultDBCommandProvider<ENTITY, ID>(persistantUnitName, entityClass));
+        setCommandProvider(new DefaultDBCommandProvider<ENTITY, ID>(persistentUnitName, entityClass));
     }
 
 }

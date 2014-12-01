@@ -21,12 +21,20 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <jersey-version>2.13</jersey-version>
         <jackson-version>2.3.2</jackson-version>
+
         <hibernate-version>4.3.7.Final</hibernate-version>
-        <hibernate-validator-annotation-processor-version>4.3.2.Final</hibernate-validator-annotation-processor-version>
+        <hibernate-validator-version>4.3.2.Final</hibernate-validator-version>
+
         <bo-framework-version>0.0.3-SNAPSHOT</bo-framework-version>
+
+        <spring-boot-version>1.1.9.RELEASE</spring-boot-version>
+        <springframework-verion>4.1.2.RELEASE</springframework-verion>
+
         <mockito-version>1.8.4</mockito-version>
+
         <releaseRepoUrl>http://192.168.0.107:8081/nexus/content/repositories/releases/</releaseRepoUrl>
         <snapshotRepoUrl>http://192.168.0.107:8081/nexus/content/repositories/snapshots/</snapshotRepoUrl>
         <deployRepoUrl>${releaseRepoUrl}</deployRepoUrl>
@@ -163,7 +171,7 @@
                         <instructions>
                             <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                             <Bundle-Name>${project.artifactId}</Bundle-Name>
-                            <Bundle-Version>${bo-framework-version}</Bundle-Version>
+                            <Bundle-Version>${project.version}</Bundle-Version>
                             <Embed-Dependency>*;scope=compile|runtime;inline=false;type=!pom</Embed-Dependency>
                             <Embed-Directory>dependency</Embed-Directory>
                             <Embed-StripGroup>true</Embed-StripGroup>
@@ -186,6 +194,10 @@
                             <manifestFile>${basedir}/target/META-INF/MANIFEST.MF</manifestFile>
                         </archive>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -250,33 +262,14 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet</artifactId>
-                <version>3.0.0.v201103241009</version>
-            </dependency>
-            <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-repository</artifactId>
                 <version>${bo-framework-version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-mapper</artifactId>
                 <version>${bo-framework-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
-                <artifactId>bo-framework-database-template</artifactId>
-                <version>${bo-framework-version}</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
-                <artifactId>bo-framework-test-template</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
@@ -293,18 +286,10 @@
                 <artifactId>bo-framework-endpoint</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-database-mock</artifactId>
                 <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
-                <artifactId>bo-framework-test-template</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
@@ -323,13 +308,39 @@
                 <artifactId>bo-framework-businessapi</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
-                <artifactId>bo-framework-repository</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <!-- External Third Party libarary -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${springframework-verion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${springframework-verion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jersey</artifactId>
+                <version>${spring-boot-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot-version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jetty</artifactId>
+                <version>${spring-boot-version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.google.inject.extensions</groupId>
                 <artifactId>guice-servlet</artifactId>
@@ -347,11 +358,40 @@
                 <version>2.6</version>
             </dependency>
 
-
+            <!--Jersey Dependencies-->
             <dependency>
                 <groupId>org.glassfish.jersey.containers</groupId>
                 <artifactId>jersey-container-servlet</artifactId>
                 <version>${jersey-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet-core</artifactId>
+                <version>${jersey-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>${jersey-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.ext</groupId>
+                <artifactId>jersey-spring3</artifactId>
+                <version>2.13</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-web</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-beans</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -408,30 +448,26 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-hibernate4</artifactId>
-                <version>${jackson-version}</version>
-            </dependency>
-            <dependency>
                 <groupId>javax.ws.rs</groupId>
                 <artifactId>jsr311-api</artifactId>
                 <version>1.1.1</version>
             </dependency>
-
+            <!--Hibernate Validation-->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator-annotation-processor</artifactId>
+                <version>${hibernate-validator-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator-version}</version>
+            </dependency>
+            <!--Hibernate/JPA-->
             <dependency>
                 <groupId>org.hibernate.javax.persistence</groupId>
                 <artifactId>hibernate-jpa-2.1-api</artifactId>
                 <version>1.0.0.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernate-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator-annotation-processor</artifactId>
-                <version>${hibernate-validator-annotation-processor-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>

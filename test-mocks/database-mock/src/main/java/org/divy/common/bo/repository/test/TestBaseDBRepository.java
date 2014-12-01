@@ -29,7 +29,7 @@ public abstract class TestBaseDBRepository<ENTITY extends IBusinessObject<ID>, I
 
     @Before
     public void before() {
-        context = new DatabaseContext(getPersistantUnitName());
+        context = new DatabaseContext(getpersistentUnitName());
 
         boRepository = createRepository();
 
@@ -63,7 +63,7 @@ public abstract class TestBaseDBRepository<ENTITY extends IBusinessObject<ID>, I
         return boRepository.search(searchQuery);
     }
 
-    protected abstract String getPersistantUnitName();
+    protected abstract String getpersistentUnitName();
 
     protected abstract IBORepository<ENTITY, ID> createRepository();
 }

@@ -42,9 +42,10 @@ public abstract class AbstractCRUDEndpoint<ENTITY extends IBusinessObject<ID>, I
     }
 
     @PUT
+    @Path("/{entityId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    public final Response update(ENTITY businessObject,
+    public final Response update(@PathParam("entityId")ID key, ENTITY businessObject,
                                  @Context UriInfo uriInfo) {
 
         ENTITY updatedBo =  doUpdate(businessObject);
@@ -53,9 +54,11 @@ public abstract class AbstractCRUDEndpoint<ENTITY extends IBusinessObject<ID>, I
     }
 
     @DELETE
+    @Path("/{entityId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    public final Response delete(ENTITY businessObject,
+    public final Response delete(@PathParam("entityId")ID key,
+                                 ENTITY businessObject,
                                  @Context UriInfo uriInfo) {
 
         doDelete(businessObject);

@@ -15,7 +15,7 @@ public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,String> 
     }
 
     @Override
-    protected String getPersistantUnitName() {
+    protected String getpersistentUnitName() {
         return "org.divy.task";
     }
 
