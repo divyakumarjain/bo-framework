@@ -1,19 +1,19 @@
 /**
  * 
  */
-package org.divy.common.bo.command.db.defaults;
+package org.divy.common.bo.defaults;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.command.db.AbstractDatabaseCreateCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
+import org.divy.common.bo.AbstractBusinessObject;
+import org.divy.common.bo.AbstractDatabaseCreateCommand;
+import org.divy.common.bo.IDBCommandContext;
 
 /**
  * @author Divyakumar
  *
  */
-public class DefaultDatabaseCreateCommand<ENTITY extends IBusinessObject<ID>, ID>
+public class DefaultDatabaseCreateCommand<ENTITY extends AbstractBusinessObject>
         extends
-        AbstractDatabaseCreateCommand<ENTITY, ID> {
+        AbstractDatabaseCreateCommand<ENTITY> {
 
     /**
      * @param entityClass

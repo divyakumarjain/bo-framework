@@ -3,6 +3,7 @@
  */
 package org.divy.common.bo.database.mock;
 
+import java.util.UUID;
 import org.divy.common.bo.AbstractBODatabaseRepository;
 import org.divy.common.bo.TypeBaseDBCommandProvider;
 
@@ -11,13 +12,13 @@ import org.divy.common.bo.TypeBaseDBCommandProvider;
  *
  */
 public class MockBODBRepository extends
-        AbstractBODatabaseRepository<MockEntity, String> {
+        AbstractBODatabaseRepository<MockEntity, UUID> {
 
     /**
      *
      */
     public MockBODBRepository() {
-        TypeBaseDBCommandProvider<MockEntity, String> commandProvider = new TypeBaseDBCommandProvider<MockEntity, String>(
+        TypeBaseDBCommandProvider<MockEntity, UUID> commandProvider = new TypeBaseDBCommandProvider<>(
                 "org.divy.task");
 
         commandProvider.setGetCommandType(MockGetCommand.class);

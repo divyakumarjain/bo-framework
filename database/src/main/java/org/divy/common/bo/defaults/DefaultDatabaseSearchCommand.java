@@ -1,11 +1,11 @@
 /**
  * 
  */
-package org.divy.common.bo.command.db.defaults;
+package org.divy.common.bo.defaults;
 
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.command.db.AbstractDatabaseSearchCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
+import org.divy.common.bo.AbstractDatabaseSearchCommand;
+import org.divy.common.bo.IDBCommandContext;
 
 /**
  * @author Divyakumar

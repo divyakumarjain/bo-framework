@@ -1,12 +1,13 @@
-package org.divy.common.bo.command.db;
+package org.divy.common.bo;
 
-import org.divy.common.bo.IBusinessObject;
+import java.util.Calendar;
+import java.util.UUID;
 import org.divy.common.bo.command.IUpdateCommand;
 
 
-public abstract class AbstractDatabaseUpdateCommand<ENTITY extends IBusinessObject<ID>, ID>
-        extends AbstractDatabaseCommand<ENTITY, ID> implements
-        IUpdateCommand<ENTITY, ID>
+public abstract class AbstractDatabaseUpdateCommand<ENTITY extends AbstractBusinessObject>
+        extends AbstractDatabaseCommand<ENTITY, UUID> implements
+        IUpdateCommand<ENTITY, UUID>
 {
     protected AbstractDatabaseUpdateCommand(
             Class<? extends ENTITY> typeParameterClass,IDBCommandContext context)
@@ -20,7 +21,6 @@ public abstract class AbstractDatabaseUpdateCommand<ENTITY extends IBusinessObje
     @Override
     public ENTITY update(ENTITY entity)
     {
-
         return doUpdate(entity);
     }
 
@@ -32,15 +32,17 @@ public abstract class AbstractDatabaseUpdateCommand<ENTITY extends IBusinessObje
 
         transactionBegin();
 
-        ENTITY fromPersistance = getEntityManager().getReference(
+        ENTITY fromPersistence = getEntityManager().getReference(
                 getEntityType(), entity.identity());
 
-        merge(entity, fromPersistance);
+        merge(entity, fromPersistence);
 
-        getEntityManager().merge(fromPersistance);
+        getEntityManager().merge(fromPersistence);
+
+        fromPersistence.setLastUpdateTimestamp(Calendar.getInstance());
 
         transactionCommit();
 
-        return fromPersistance;
+        return fromPersistence;
     }
 }

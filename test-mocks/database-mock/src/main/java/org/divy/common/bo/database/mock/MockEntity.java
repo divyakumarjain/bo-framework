@@ -3,19 +3,18 @@ package org.divy.common.bo.database.mock;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.IBusinessObject;
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -28,7 +27,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @XmlRootElement
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @JsonAutoDetect(fieldVisibility=Visibility.NONE,getterVisibility=Visibility.NONE)
-public class MockEntity implements IBusinessObject<String> {
+public class MockEntity extends AbstractBusinessObject {
 
 
 
@@ -41,7 +40,7 @@ public class MockEntity implements IBusinessObject<String> {
      * @param entity
      */
     @Override
-    public void update(IBusinessObject<String> entity) {
+    public void update(IBusinessObject<UUID> entity) {
         if(entity instanceof MockEntity) {
             this.setName(((MockEntity) entity).getName());
             this.setParentEntity(((MockEntity) entity).getParentEntity());
@@ -57,11 +56,10 @@ public class MockEntity implements IBusinessObject<String> {
      * @see org.divy.common.bo.IBusinessObject#identity()
      */
     @Override
-    public String identity() {
+    public UUID identity() {
         return getUuid();
     }
 
-    private String uuid;
 
     private String name;
 
@@ -83,18 +81,6 @@ public class MockEntity implements IBusinessObject<String> {
 
     public void setChildEntities(List<MockEntity> childEntities) {
         this.childEntities = childEntities;
-    }
-
-    @Id
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @GeneratedValue(generator = "system-uuid")
-    @JsonProperty
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     /**
@@ -140,7 +126,7 @@ public class MockEntity implements IBusinessObject<String> {
         result = prime * result
                 + ((childEntities == null) ? 0 : childEntities.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+        result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
         return result;
     }
 
@@ -164,17 +150,17 @@ public class MockEntity implements IBusinessObject<String> {
                 return false;
         } else if (!parentEntity.equals(other.parentEntity))
             return false;
-        if (uuid == null) {
-            if (other.uuid != null)
+        if (getUuid() == null) {
+            if (other.getUuid() != null)
                 return false;
-        } else if (!uuid.equals(other.uuid))
+        } else if (!getUuid().equals(other.getUuid()))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "MockEntity [uuid=" + uuid + ", name=" + name
+        return "MockEntity [uuid=" + getUuid() + ", name=" + name
                 + ", childEntities=" + childEntities + "]";
     }
 

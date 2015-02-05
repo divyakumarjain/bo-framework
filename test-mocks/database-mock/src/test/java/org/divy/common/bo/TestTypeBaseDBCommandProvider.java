@@ -1,6 +1,10 @@
 package org.divy.common.bo;
 
-import org.divy.common.bo.command.db.IDBCommandContext;
+import java.util.UUID;
+import org.divy.common.bo.command.ICreateCommand;
+import org.divy.common.bo.command.IDeleteCommand;
+import org.divy.common.bo.command.IGetCommand;
+import org.divy.common.bo.command.IUpdateCommand;
 import org.divy.common.bo.context.DatabaseContext;
 import org.divy.common.bo.database.mock.MockCreateCommand;
 import org.divy.common.bo.database.mock.MockDeleteCommand;
@@ -9,10 +13,12 @@ import org.divy.common.bo.database.mock.MockGetCommand;
 import org.divy.common.bo.database.mock.MockUpdateCommand;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
 
 public class TestTypeBaseDBCommandProvider {
 
-    ICommandProvider<MockEntity, String> commandProvider;
+    ICommandProvider<MockEntity, UUID> commandProvider;
     IDBCommandContext commandContext;
 
     @Before
@@ -20,7 +26,7 @@ public class TestTypeBaseDBCommandProvider {
     {
         commandContext = new DatabaseContext("");
 
-        TypeBaseDBCommandProvider<MockEntity, String> commandProvider = new TypeBaseDBCommandProvider<MockEntity, String>("");
+        TypeBaseDBCommandProvider<MockEntity, UUID> commandProvider = new TypeBaseDBCommandProvider<>("");
 
         commandProvider.setGetCommandType(MockGetCommand.class);
         commandProvider.setUpdateCommandType(MockUpdateCommand.class);
@@ -33,23 +39,27 @@ public class TestTypeBaseDBCommandProvider {
     }
 
     @Test
-    public void testGetGetCommand() {
-        commandProvider.getGetCommand();
+    public void testGetReadCommand() {
+        IGetCommand<MockEntity, UUID> readCommand = commandProvider.getGetCommand();
+        assertThat(readCommand,notNullValue());
     }
 
     @Test
     public void testGetCreateCommand() {
-        commandProvider.getCreateCommand();
+        ICreateCommand<MockEntity, UUID> createCommand = commandProvider.getCreateCommand();
+        assertThat(createCommand,notNullValue());
     }
 
     @Test
     public void testGetDeleteCommand() {
-        commandProvider.getDeleteCommand();
+        IDeleteCommand<MockEntity, UUID> deleteCommand = commandProvider.getDeleteCommand();
+        assertThat(deleteCommand,notNullValue());
     }
 
     @Test
     public void testGetUpdateCommand() {
-        commandProvider.getUpdateCommand();
+        IUpdateCommand<MockEntity, UUID> updateCommand = commandProvider.getUpdateCommand();
+        assertThat(updateCommand,notNullValue());
     }
 
 }

@@ -11,7 +11,7 @@ import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.business.defaults.DefaultBOManager;
-import org.divy.common.bo.command.db.defaults.DefaultDatabaseRepository;
+import org.divy.common.bo.defaults.DefaultDatabaseRepository;
 import org.divy.common.bo.query.IQuery;
 
 import javax.inject.Inject;
@@ -89,11 +89,11 @@ public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID 
 
     }
 
-    protected String getIdentity(ENTITY createdBo) {
+    protected String identity(ENTITY createdBo) {
         return createdBo.identity().toString();
     }
 
-    protected ENTITY doGet(ID id) {
+    protected ENTITY doRead(ID id) {
         return manager.get(id);
     }
 }

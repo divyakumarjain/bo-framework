@@ -1,6 +1,6 @@
-package org.divy.common.bo.command.db;
+package org.divy.common.bo;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -8,9 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.command.ISearchCommand;
 import org.divy.common.bo.query.IEqualTo;
 import org.divy.common.bo.query.IOperator;
@@ -62,26 +60,19 @@ public abstract class AbstractDatabaseSearchCommand<ENTITY extends IBusinessObje
 
         Root<? extends ENTITY> entityRoot = criteriaQuery.from(getEntityType());
 
-        EntityType<? extends ENTITY> entityMetadata = entityRoot.getModel();
+        if(query!=null && !query.isEmpty()){
+            List<Predicate> predicates = new ArrayList<>();
 
-        if(query!=null){
-            Collection<Entry<String, IOperator>> queryOperatorCollection = query.getAll();
-
-            Entry<String, IOperator>[] queryOperators = new Entry[queryOperatorCollection.size()];
-
-            queryOperators = queryOperatorCollection.toArray(queryOperators);
-
-            Predicate[] predicates = new Predicate[queryOperatorCollection.size()];
-
-            for (int i = 0; i < queryOperators.length; i++) {
-                predicates[i] = createPredicate(queryOperators[i],criteriaBuilder,entityRoot);
+            for (Entry<String, IOperator> entry : query.entrySet()) {
+            	predicates.add(createPredicate(entry,criteriaBuilder,entityRoot));
             }
-            criteriaQuery.where(predicates);
+            criteriaQuery.where((Predicate[])predicates.toArray());
         }
 
         return criteriaQuery;
     }
 
+    @SuppressWarnings("unchecked")
     private Predicate createPredicate(Entry<String, IOperator> iOperatorEntry,
             CriteriaBuilder cb,Root<? extends ENTITY> root ) {
 

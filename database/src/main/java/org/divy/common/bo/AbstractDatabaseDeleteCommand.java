@@ -1,6 +1,5 @@
-package org.divy.common.bo.command.db;
+package org.divy.common.bo;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.command.IDeleteCommand;
 
 public abstract class AbstractDatabaseDeleteCommand<ENTITY extends IBusinessObject<ID>, ID>

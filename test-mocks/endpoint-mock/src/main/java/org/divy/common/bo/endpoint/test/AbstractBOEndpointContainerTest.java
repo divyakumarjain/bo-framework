@@ -4,12 +4,10 @@
 package org.divy.common.bo.endpoint.test;
 
 import com.google.inject.servlet.GuiceFilter;
+
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.endpoint.AbstractBOEndpoint;
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.bo.test.ITestDataProvider;
-import org.divy.common.bo.test.TestBOCRUDBase;
-import org.glassfish.jersey.client.ClientResponse;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -27,14 +25,15 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
-import java.net.URI;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Divyakumar
  *
  */
-public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessObject<ID>, ID>
+public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessObject<ID>, ID extends Serializable>
     extends AbstractBOEndpointTest<ENTITY, ID> {
 
     protected JerseyTest jerseyTestProxy;
@@ -83,10 +82,6 @@ public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessOb
         return jerseyTestProxy.target(UriBuilder.fromMethod(getEndPointClass(), method).build().toString());
     }
 
-    private WebTarget getEndPointTarget() {
-        return jerseyTestProxy.target(UriBuilder.fromResource(getEndPointClass()).build().toString());
-    }
-
     private WebTarget getEntityTarget(String idenity) {
         return jerseyTestProxy.target(UriBuilder.fromResource(getEndPointClass()).path(idenity).build().toString());
     }
@@ -96,8 +91,9 @@ public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessOb
         getEntityTarget((String) entity.identity()).request(MediaType.APPLICATION_JSON_TYPE).put(Entity.entity(entity,MediaType.APPLICATION_JSON_TYPE));
     }
 
+
     @Override
-    protected ENTITY doGetByKey(ID id) {
+    protected ENTITY doAssertExists(ID id) {
         return getEntityTarget((String) id).request(MediaType.APPLICATION_JSON_TYPE).get(getEntityClass());
     }
 
@@ -110,6 +106,7 @@ public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessOb
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected List<ENTITY> doSearchEntities(IQuery searchQuery) {
         return (List<ENTITY>) getEndPointTargetMethod("search").request(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.entity(getEntityListClass(),MediaType.APPLICATION_JSON_TYPE))

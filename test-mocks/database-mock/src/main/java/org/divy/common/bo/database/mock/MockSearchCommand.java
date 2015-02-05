@@ -3,15 +3,16 @@
  */
 package org.divy.common.bo.database.mock;
 
-import org.divy.common.bo.command.db.AbstractDatabaseSearchCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
+import java.util.UUID;
+import org.divy.common.bo.AbstractDatabaseSearchCommand;
+import org.divy.common.bo.IDBCommandContext;
 
 /**
  * @author divyakumar.a.jain@hp.com
  *
  */
 public class MockSearchCommand extends
-        AbstractDatabaseSearchCommand<MockEntity, String> {
+        AbstractDatabaseSearchCommand<MockEntity, UUID> {
 
     /**
      * @param entityClass

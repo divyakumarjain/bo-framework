@@ -1,9 +1,5 @@
 package org.divy.common.rest.builder;
 
-
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.rest.RESTEntityURLBuilder;
-
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;

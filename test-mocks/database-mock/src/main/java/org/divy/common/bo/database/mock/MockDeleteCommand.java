@@ -1,9 +1,10 @@
 package org.divy.common.bo.database.mock;
 
-import org.divy.common.bo.command.db.AbstractDatabaseDeleteCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
+import java.util.UUID;
+import org.divy.common.bo.AbstractDatabaseDeleteCommand;
+import org.divy.common.bo.IDBCommandContext;
 
-public class MockDeleteCommand extends AbstractDatabaseDeleteCommand<MockEntity, String> {
+public class MockDeleteCommand extends AbstractDatabaseDeleteCommand<MockEntity, UUID> {
 
     public MockDeleteCommand(IDBCommandContext context) {
         super(MockEntity.class, context);

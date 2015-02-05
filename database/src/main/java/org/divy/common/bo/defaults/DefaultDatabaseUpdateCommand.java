@@ -1,11 +1,11 @@
 /**
  * 
  */
-package org.divy.common.bo.command.db.defaults;
+package org.divy.common.bo.defaults;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.command.db.AbstractDatabaseUpdateCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
+import org.divy.common.bo.AbstractBusinessObject;
+import org.divy.common.bo.AbstractDatabaseUpdateCommand;
+import org.divy.common.bo.IDBCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.defaults.DefaultBOMapper;
 
@@ -13,20 +13,20 @@ import org.divy.common.bo.mapper.defaults.DefaultBOMapper;
  * @author Divyakumar
  *
  */
-public class DefaultDatabaseUpdateCommand<ENTITY extends IBusinessObject<ID>, ID>
+public class DefaultDatabaseUpdateCommand<ENTITY extends AbstractBusinessObject>
         extends
-        AbstractDatabaseUpdateCommand<ENTITY, ID> {
+        AbstractDatabaseUpdateCommand<ENTITY> {
 
     /**
      * @param typeParameterClass
      * @param context
      */
     public DefaultDatabaseUpdateCommand(
-            Class<? extends ENTITY> typeParameterClass,
+            Class<ENTITY> typeParameterClass,
             IDBCommandContext context) {
         super(typeParameterClass, context);
 
-        mapper = new DefaultBOMapper(typeParameterClass,typeParameterClass);
+        mapper = new DefaultBOMapper<>(typeParameterClass,typeParameterClass);
     }
 
     IBOMapper<ENTITY,ENTITY> mapper;

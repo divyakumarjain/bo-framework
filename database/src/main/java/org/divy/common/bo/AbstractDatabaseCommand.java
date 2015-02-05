@@ -1,8 +1,6 @@
-package org.divy.common.bo.command.db;
+package org.divy.common.bo;
 
 import javax.persistence.EntityManager;
-
-import org.divy.common.bo.IBusinessObject;
 
 public abstract class AbstractDatabaseCommand<ENTITY extends IBusinessObject<ID>, ID>
 {

@@ -14,7 +14,7 @@ public class AdvanceBOMapper<BO, OTHER> extends AbstractBOMapper<BO, OTHER> {
 
     private List<String> excludedLists;
 
-    public AdvanceBOMapper(Class<? extends BO> businessObjectType,
+    public AdvanceBOMapper(Class<BO> businessObjectType,
             Class<OTHER> otherObjectType) {
         super(businessObjectType, otherObjectType);
 
@@ -26,7 +26,7 @@ public class AdvanceBOMapper<BO, OTHER> extends AbstractBOMapper<BO, OTHER> {
     }
 
 
-    private List<String> getExcludedList() {
+    public List<String> getExcludedList() {
         return new ArrayList<String>();
     }
 

@@ -3,11 +3,12 @@
  */
 package org.divy.common.bo.database.mock;
 
+import java.util.UUID;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-import org.divy.common.bo.command.db.AbstractDatabaseSearchCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
+import org.divy.common.bo.AbstractDatabaseSearchCommand;
+import org.divy.common.bo.IDBCommandContext;
 import org.divy.common.bo.query.IQuery;
 
 /**
@@ -15,10 +16,9 @@ import org.divy.common.bo.query.IQuery;
  *
  */
 public class MockSearchCommand extends
-        AbstractDatabaseSearchCommand<MockEntity, String> {
+        AbstractDatabaseSearchCommand<MockEntity, UUID> {
 
     /**
-     * @param entityClass
      * @param context
      */
     public MockSearchCommand(IDBCommandContext context) {

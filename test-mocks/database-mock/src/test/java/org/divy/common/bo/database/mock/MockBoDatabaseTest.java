@@ -1,5 +1,6 @@
 package org.divy.common.bo.database.mock;
 
+import java.util.UUID;
 import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.repository.test.TestBaseDBRepository;
 
@@ -8,7 +9,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,String> {
+public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,UUID> {
 
     public MockBoDatabaseTest() {
         super(new MockBoTestDataProvider());
@@ -20,12 +21,12 @@ public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,String> 
     }
 
     @Override
-    protected IBORepository<MockEntity, String> createRepository() {
+    protected IBORepository<MockEntity, UUID> createRepository() {
         return new MockBODBRepository();
     }
 
     @Override
-    protected String getIdentifier(MockEntity entity) {
+    protected UUID getIdentifier(MockEntity entity) {
         return entity.identity();
     }
 

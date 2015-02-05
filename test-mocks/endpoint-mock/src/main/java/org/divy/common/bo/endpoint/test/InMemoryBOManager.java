@@ -4,8 +4,6 @@ import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.json.test.KeyGenerator;
 import org.divy.common.bo.query.IQuery;
-import org.divy.common.bo.query.defaults.EqualTo;
-import org.divy.common.bo.query.defaults.Query;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,10 +14,13 @@ import java.util.Map;
 public class InMemoryBOManager<ENTITY extends IBusinessObject<ID>, ID extends Serializable> implements IBOManager<ENTITY,ID> {
 
     private KeyGenerator<ENTITY,ID> keyGenerator;
-    private Map<ID,ENTITY> inMemoryMap = new HashMap();
+    private Map<ID,ENTITY> inMemoryMap = new HashMap<>();
 
     public InMemoryBOManager(KeyGenerator<ENTITY,ID> keyGenerator) {
         this.keyGenerator = keyGenerator;
+    }
+    
+    public InMemoryBOManager() {
     }
 
     @Override
@@ -44,14 +45,14 @@ public class InMemoryBOManager<ENTITY extends IBusinessObject<ID>, ID extends Se
 
     @Override
     public List<ENTITY> list() {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<ENTITY> arrayList = new ArrayList<>();
         arrayList.addAll(inMemoryMap.values());
         return arrayList;
     }
 
     @Override
     public List<ENTITY> search(IQuery businessObjectQuery) {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<ENTITY> arrayList = new ArrayList<>();
         arrayList.addAll(inMemoryMap.values());
         return arrayList;
     }

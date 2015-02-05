@@ -1,4 +1,4 @@
-package org.divy.common.bo.command.db;
+package org.divy.common.bo;
 
 import javax.persistence.EntityManager;
 

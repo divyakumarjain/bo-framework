@@ -2,6 +2,7 @@ package org.divy.common.bo.database.mock;
 
 import java.util.List;
 
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,19 +11,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.IBusinessObject;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @XmlRootElement
-public class MockEntity implements IBusinessObject<String> {
+public class MockEntity extends AbstractBusinessObject {
 
     /*
      * (non-Javadoc)
      *
      * @see org.divy.common.bo.IBusinessObject#getIdentity()
      */
-    public String identity() {
+    public UUID identity() {
         return getUuid();
     }
 
@@ -32,7 +34,7 @@ public class MockEntity implements IBusinessObject<String> {
      * @param entity
      */
     @Override
-    public void update(IBusinessObject<String> entity) {
+    public void update(IBusinessObject<UUID> entity) {
         if(entity instanceof MockEntity) {
             this.setName(((MockEntity) entity).getName());
             this.setParentEntity(((MockEntity) entity).getParentEntity());
@@ -47,7 +49,7 @@ public class MockEntity implements IBusinessObject<String> {
     @Id
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @GeneratedValue(generator = "system-uuid")
-    private String uuid;
+    private UUID uuid;
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, targetEntity = MockEntity.class)
     @PrimaryKeyJoinColumn
@@ -81,15 +83,7 @@ public class MockEntity implements IBusinessObject<String> {
         this.childEntities = childEntities;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public void setIdentity(String identity) {
+    public void setIdentity(UUID identity) {
         setUuid(identity);
     }
 

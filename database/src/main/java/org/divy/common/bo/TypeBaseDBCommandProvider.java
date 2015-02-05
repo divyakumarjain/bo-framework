@@ -7,7 +7,6 @@ import org.divy.common.bo.command.IDeleteCommand;
 import org.divy.common.bo.command.IGetCommand;
 import org.divy.common.bo.command.ISearchCommand;
 import org.divy.common.bo.command.IUpdateCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
 import org.divy.common.bo.context.DatabaseContext;
 
 public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>

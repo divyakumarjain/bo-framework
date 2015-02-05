@@ -6,13 +6,13 @@ import org.dozer.Mapper;
 
 public class DefaultBOMapper<BO, OTHER> extends AbstractBOMapper<BO, OTHER>{
 
-    public DefaultBOMapper(Class<? extends BO> businessObjectType, Class<OTHER> otherObjectType,Mapper mapper){
+    public DefaultBOMapper(Class<BO> businessObjectType, Class<OTHER> otherObjectType,Mapper mapper){
         super(businessObjectType,otherObjectType);
 
         this.mapper = mapper;
     }
 
-    public DefaultBOMapper(Class<? extends BO> businessObjectType, Class<OTHER> otherObjectType){
+    public DefaultBOMapper(Class<BO> businessObjectType, Class<OTHER> otherObjectType){
         super(businessObjectType,otherObjectType);
 
         this.mapper = new DozerBeanMapper();

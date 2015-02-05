@@ -14,7 +14,6 @@ import java.util.List;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.bo.query.defaults.Query;
-import org.hamcrest.core.IsNull;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -43,18 +42,9 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
         testDataProvider.fillTestDataSet1(entity);
 
-        entity = doCreateEntity(entity);
+        doCreateEntity(entity);
 
-        assertThat("Entity should be returned after creation", entity,
-                notNullValue());
-
-        assertThat("Id for Entity should be generate after creation",
-                getIdentifier(entity),
-                notNullValue());
-
-        entity = doGetByKey(getIdentifier(entity));
-
-        assertThat("Entity should be readable after creation", entity,notNullValue());
+        doAssertExists(getIdentifier(entity));
 
         extendedTestCreatedEntity(entity);
 
@@ -68,9 +58,9 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
         testDataProvider.fillTestDataSet2(entity);
 
-        entity = doCreateEntity(entity);
+        doCreateEntity(entity);
 
-        entity = doGetByKey(getIdentifier(entity));
+        entity = doAssertExists(getIdentifier(entity));
 
         testDataProvider.modifyEntityWithTestData(entity);
 
@@ -78,7 +68,7 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
         ID id = getIdentifier(entity);
 
-        ENTITY updatedEntity = doGetByKey(id);
+        ENTITY updatedEntity = doAssertExists(id);
 
         assertThat("Updated Entity should be same",updatedEntity,equalTo(entity));
 
@@ -98,11 +88,9 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
         doDeleteEntity(entity1);
 
-        entity1 = doGetByKey(getIdentifier(entity1));
-        entity2 = doGetByKey(getIdentifier(entity2));
+        doAssertNotExists(getIdentifier(entity1));
+        entity2 = doAssertExists(getIdentifier(entity2));
 
-        assertThat("Entity should not be Found", entity1, IsNull.nullValue());
-        assertThat("Entity should be Found", entity2, notNullValue());
     }
 
     @Test
@@ -160,6 +148,8 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
     protected abstract ENTITY doCreateEntity(ENTITY entity);
     protected abstract void doUpdateEntity(ENTITY entity);
     protected abstract ENTITY doGetByKey(ID id);
+    protected abstract ENTITY doAssertExists(ID id);
+    protected abstract void doAssertNotExists(ID id);
     protected abstract void doDeleteEntity(ENTITY entity);
     protected abstract List<ENTITY> doSearchEntities(IQuery searchQuery);
 

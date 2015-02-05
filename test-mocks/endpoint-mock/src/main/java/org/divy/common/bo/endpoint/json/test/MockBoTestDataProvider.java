@@ -6,6 +6,7 @@ package org.divy.common.bo.endpoint.json.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.UUID;
 import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.bo.query.defaults.EqualTo;
@@ -17,7 +18,7 @@ import org.divy.common.bo.test.ITestDataProvider;
  *
  */
 public class MockBoTestDataProvider implements
-        ITestDataProvider<MockEntity, String> {
+        ITestDataProvider<MockEntity, UUID> {
 
     /* (non-Javadoc)
      * @see org.divy.common.bo.test.ITestDataProvider#modifyEntityWithTestData(java.lang.Object)

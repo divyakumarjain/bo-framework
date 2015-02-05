@@ -37,7 +37,7 @@ public abstract class AbstractEntityPresentationService<ENTITY extends IBusiness
     }
 
     @Override
-    protected ENTITY doGet(ID id) {
+    protected ENTITY doRead(ID id) {
         ENTITY boEntity = manager.get(id);
 
         return boEntity;
@@ -79,7 +79,7 @@ public abstract class AbstractEntityPresentationService<ENTITY extends IBusiness
     }
 
     protected VO doGetPresenter(ID id) {
-        ENTITY boEntity = doGet(id);
+        ENTITY boEntity = doRead(id);
         return mapper.createFromBO(boEntity);
     }
 

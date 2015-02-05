@@ -1,15 +1,12 @@
 package org.divy.common.bo.query;
 
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.Map;
 
-public interface IQuery
+public interface IQuery extends Map<String, IOperator>
 {
-    Object get(String attributeName);
+	IOperator get(String attributeName);
 
-    Object put(String attributeName, IOperator operator);
+	IOperator put(String attributeName, IOperator operator);
 
-    Object remove(String attributeName);
-
-    Set<Entry<String,IOperator>> getAll();
+	IOperator remove(String attributeName);
 }

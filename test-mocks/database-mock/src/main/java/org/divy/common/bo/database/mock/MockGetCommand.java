@@ -1,9 +1,10 @@
 package org.divy.common.bo.database.mock;
 
-import org.divy.common.bo.command.db.AbstractDatabaseGetCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
+import java.util.UUID;
+import org.divy.common.bo.AbstractDatabaseGetCommand;
+import org.divy.common.bo.IDBCommandContext;
 
-public class MockGetCommand extends AbstractDatabaseGetCommand<MockEntity, String> {
+public class MockGetCommand extends AbstractDatabaseGetCommand<MockEntity, UUID> {
 
     public MockGetCommand(IDBCommandContext context) {
         super(MockEntity.class, context);

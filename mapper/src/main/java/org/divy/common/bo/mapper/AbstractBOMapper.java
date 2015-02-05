@@ -16,9 +16,9 @@ public class AbstractBOMapper<BO, OTHER> implements IBOMapper<BO, OTHER>{
         super();
     }
 
-    public AbstractBOMapper(Class<? extends BO> businessObjectType,
+    public AbstractBOMapper(Class<BO> businessObjectType,
             Class<OTHER> otherObjectType) {
-        this.businessObjectType = (Class<BO>) businessObjectType;
+        this.businessObjectType = businessObjectType;
         this.otherObjectType = otherObjectType;
     }
 

@@ -1,4 +1,4 @@
-package org.divy.common.bo.command.db.defaults;
+package org.divy.common.bo.defaults;
 
 import org.divy.common.bo.AbstractBODatabaseRepository;
 import org.divy.common.bo.IBusinessObject;

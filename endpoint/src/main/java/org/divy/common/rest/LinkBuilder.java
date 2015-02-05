@@ -1,10 +1,12 @@
 package org.divy.common.rest;
 
 import java.net.URI;
+import javax.ws.rs.core.Link;
 import javax.ws.rs.core.UriBuilder;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.glassfish.jersey.message.internal.JerseyLink;
 
 
 public class LinkBuilder {
@@ -154,5 +156,9 @@ public class LinkBuilder {
      */
     public URI buildUri(Object... values) {
         return uriBuilder.build(values);
+    }
+
+    public Link buildLink(String rel, Object... values) {
+        return JerseyLink.fromUri(buildUri(values)).rel(rel).build();
     }
 }

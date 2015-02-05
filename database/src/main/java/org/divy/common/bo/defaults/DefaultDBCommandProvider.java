@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.divy.common.bo.command.db.defaults;
+package org.divy.common.bo.defaults;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -12,7 +12,7 @@ import org.divy.common.bo.command.IDeleteCommand;
 import org.divy.common.bo.command.IGetCommand;
 import org.divy.common.bo.command.ISearchCommand;
 import org.divy.common.bo.command.IUpdateCommand;
-import org.divy.common.bo.command.db.IDBCommandContext;
+import org.divy.common.bo.IDBCommandContext;
 
 /**
  * @author Divyakumar
