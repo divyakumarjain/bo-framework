@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.bo.query.defaults.Query;
 import org.divy.common.rest.LinkBuilder;

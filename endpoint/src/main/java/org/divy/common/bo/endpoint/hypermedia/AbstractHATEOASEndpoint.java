@@ -17,7 +17,6 @@ import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilder;
-import org.divy.common.rest.builder.ReadEntityResponseBuilder;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

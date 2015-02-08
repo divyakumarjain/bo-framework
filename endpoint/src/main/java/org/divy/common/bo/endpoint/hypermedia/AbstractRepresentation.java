@@ -1,7 +1,6 @@
 package org.divy.common.bo.endpoint.hypermedia;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

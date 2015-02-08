@@ -5,10 +5,8 @@ import javax.inject.Inject;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.AbstractRepresentation;
 import org.divy.common.bo.mapper.AbstractBOMapper;
-import org.divy.common.bo.mapper.defaults.AdvanceBOMapper;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilderFactory;
-import org.dozer.DozerBeanMapper;
 
 public abstract class AbstractHATEOASMapper<ENTITY extends IBusinessObject<ID>,
 		REPRESENTATION extends AbstractRepresentation
