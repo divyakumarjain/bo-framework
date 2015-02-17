@@ -1,6 +1,7 @@
 package org.divy.common.bo.mapper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class AbstractBOMapper<BO, OTHER> implements IBOMapper<BO, OTHER>{
     }
 
     @Override
-    public final List<BO> createBO(List<OTHER> sourceData) {
+    public final Collection<BO> createBO(Collection<OTHER> sourceData) {
 
         List<BO> businessObjectList = new ArrayList<>(sourceData.size());
 
@@ -88,7 +89,7 @@ public class AbstractBOMapper<BO, OTHER> implements IBOMapper<BO, OTHER>{
     }
 
     @Override
-    public final List<OTHER> createFromBO(List<BO> businessObjectList) {
+    public final Collection<OTHER> createFromBO(Collection<BO> businessObjectList) {
 
         List<OTHER> targetList = new ArrayList<>(businessObjectList.size());
 

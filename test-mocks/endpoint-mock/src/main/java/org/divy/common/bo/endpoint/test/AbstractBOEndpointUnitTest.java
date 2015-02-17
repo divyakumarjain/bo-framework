@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -67,7 +68,6 @@ public abstract class AbstractBOEndpointUnitTest<ENTITY extends IBusinessObject<
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     protected ENTITY doCreateEntity(ENTITY entity) {
 
         Response response = endpointInstance.create(entity, mock(UriInfo.class));
@@ -146,6 +146,7 @@ public abstract class AbstractBOEndpointUnitTest<ENTITY extends IBusinessObject<
 
                 bind(getEndpointTypeLiteral()).to(endPointClass);
                 bind(getManagerTypeLiteral()).toInstance(getMockManagerInstance());
+                bind(HttpServletRequest.class).toInstance(mock(HttpServletRequest.class));
             }
         });
     }

@@ -16,16 +16,15 @@ Requirements
 
 1. Navigable Links in Representation
 2. Support for HAL
-
-Enhancements
-------------
-1. Link Creation using Java Dynamic proxy.
-
+3. Support creation and modification of relationship objects.
 
 
 TODO
 ----
-1. Complete implementation and Unit test of REST API layer
+1. In Progress - Complete implementation and Unit test of REST API layer
+	a. Done - Relationship navigation using read method on entity
+	b. Relationship navigation using read method from another endpoint.
+2. Support PUT and POST method on the relationship endpoint.
 2. DAL Layer
 
 Handling Search Request

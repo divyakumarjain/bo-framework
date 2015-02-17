@@ -2,7 +2,7 @@ package org.divy.common.bo.endpoint;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.util.List;
+import java.util.Collection;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -22,7 +22,7 @@ public abstract class AbstractCRUDEndpoint<ENTITY, ID extends Serializable> {
 	@Inject
 	protected LinkBuilderFactory linkBuilderFactory;
 
-    public AbstractCRUDEndpoint() {
+	public AbstractCRUDEndpoint() {
     }
 
     @POST
@@ -76,7 +76,7 @@ public abstract class AbstractCRUDEndpoint<ENTITY, ID extends Serializable> {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     public final Response list(@Context UriInfo uriInfo) {
-        List<ENTITY> resultList = doList();
+        Collection<ENTITY> resultList = doList();
         return buildListResponse(resultList);
 
     }
@@ -87,13 +87,12 @@ public abstract class AbstractCRUDEndpoint<ENTITY, ID extends Serializable> {
     @Path("/search")
     public final Response search(@NotNull Query query,
                                  @Context UriInfo uriInfo) {
-        List<ENTITY> resultList = doSearch(query);
+        Collection<ENTITY> resultList = doSearch(query);
         return buildListResponse(resultList);
     }
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @Consumes({ MediaType.APPLICATION_JSON })
     @Path("/{id}")
     public final Response read(@NotNull @PathParam("id") ID id,
                               @Context UriInfo uriInfo) {
@@ -102,7 +101,7 @@ public abstract class AbstractCRUDEndpoint<ENTITY, ID extends Serializable> {
         return buildReadResponse(entity);
     }
     
-    protected Response buildListResponse(List<ENTITY> resultList) {
+    protected Response buildListResponse(Collection<ENTITY> resultList) {
         if(resultList==null || resultList.size()<1) {
             return Response.noContent().build();
         } else {
@@ -118,6 +117,14 @@ public abstract class AbstractCRUDEndpoint<ENTITY, ID extends Serializable> {
         	return Response.status(Response.Status.NOT_FOUND).build();
         }
 	}
+	
+    public LinkBuilderFactory getLinkBuilderFactory() {
+		return linkBuilderFactory;
+	}
+
+	public void setLinkBuilderFactory(LinkBuilderFactory linkBuilderFactory) {
+		this.linkBuilderFactory = linkBuilderFactory;
+	}
 
     protected abstract String identity(ENTITY createdBo);
     protected abstract ENTITY doRead(ID id);
@@ -125,7 +132,7 @@ public abstract class AbstractCRUDEndpoint<ENTITY, ID extends Serializable> {
     protected abstract ENTITY doUpdate(ENTITY businessObject);
     protected abstract void doDelete(ENTITY businessObject);
     protected abstract ENTITY doDelete(ID id);
-    protected abstract List<ENTITY> doList();
-    protected abstract List<ENTITY> doSearch(IQuery query);
+    protected abstract Collection<ENTITY> doList();
+    protected abstract Collection<ENTITY> doSearch(IQuery query);
 
 }

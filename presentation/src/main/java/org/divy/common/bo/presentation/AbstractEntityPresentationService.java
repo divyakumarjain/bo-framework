@@ -1,6 +1,7 @@
 package org.divy.common.bo.presentation;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import org.divy.common.bo.IBusinessObject;
@@ -67,13 +68,13 @@ public abstract class AbstractEntityPresentationService<ENTITY extends IBusiness
     }
 
     @Override
-    protected List<ENTITY> doList() {
+    protected Collection<ENTITY> doList() {
         List<ENTITY> boList = manager.list();
         return boList;
     }
 
     @Override
-    protected List<ENTITY> doSearch(IQuery query) {
+    protected Collection<ENTITY> doSearch(IQuery query) {
         List<ENTITY> boList = manager.search(query);
         return boList;
     }
@@ -104,13 +105,13 @@ public abstract class AbstractEntityPresentationService<ENTITY extends IBusiness
         return mapper.createFromBO(deletedBusinessObject);
     }
 
-    protected List<VO> doListPresenter() {
-        List<ENTITY> boList = doList();
+    protected Collection<VO> doListPresenter() {
+        Collection<ENTITY> boList = doList();
         return mapper.createFromBO(boList);
     }
 
-    protected List<VO> doSearchPresenter(IQuery query) {
-        List<ENTITY> boList = doSearch(query);
+    protected Collection<VO> doSearchPresenter(IQuery query) {
+        Collection<ENTITY> boList = doSearch(query);
         return mapper.createFromBO(boList);
     }
 }

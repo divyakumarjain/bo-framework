@@ -1,6 +1,6 @@
 package org.divy.common.bo.mapper;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface IBOMapper<BO,OTHER> {
 
@@ -10,7 +10,7 @@ public interface IBOMapper<BO,OTHER> {
     OTHER createFromBO(BO businessObject);
     OTHER mapFromBO(BO businessObject, OTHER targetData);
 
-    List<BO> createBO(List<OTHER> sourceData);
+    Collection<BO> createBO(Collection<OTHER> sourceData);
 
-    List<OTHER> createFromBO(List<BO> businessObject);
+    Collection<OTHER> createFromBO(Collection<BO> businessObject);
 }

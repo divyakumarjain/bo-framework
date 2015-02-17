@@ -2,25 +2,25 @@ package org.divy.common.rest.impl;
 
 
 import javax.inject.Inject;
+
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.AbstractRepresentation;
-import org.divy.common.bo.mapper.AbstractBOMapper;
+import org.divy.common.bo.mapper.defaults.AdvanceBOMapper;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilderFactory;
 
 public abstract class AbstractHATEOASMapper<ENTITY extends IBusinessObject<ID>,
 		REPRESENTATION extends AbstractRepresentation
 		,ID>
-	extends AbstractBOMapper<ENTITY, REPRESENTATION>
+	extends AdvanceBOMapper<ENTITY, REPRESENTATION>
 	implements HATEOASMapper<ENTITY, REPRESENTATION> {
 
 	@Inject
-	protected LinkBuilderFactory linkBuilderFactory;
+	private LinkBuilderFactory linkBuilderFactory;
 
 	public AbstractHATEOASMapper(Class<ENTITY> businessObjectType, Class<REPRESENTATION> otherObjectType) {
 		super(businessObjectType, otherObjectType);
 	}
-
 
 	@Override
 	protected ENTITY doMapToBO(REPRESENTATION sourceData,
@@ -38,6 +38,16 @@ public abstract class AbstractHATEOASMapper<ENTITY extends IBusinessObject<ID>,
 		doFillLinks(representation, businessObject);
 		doFillAssociations(representation, businessObject);
 		return representation;
+	}
+
+
+	public LinkBuilderFactory getLinkBuilderFactory() {
+		return linkBuilderFactory;
+	}
+
+
+	public void setLinkBuilderFactory(LinkBuilderFactory linkBuilderFactory) {
+		this.linkBuilderFactory = linkBuilderFactory;
 	}
 
 	abstract protected void doFillLinks(REPRESENTATION representation, ENTITY businessObject);

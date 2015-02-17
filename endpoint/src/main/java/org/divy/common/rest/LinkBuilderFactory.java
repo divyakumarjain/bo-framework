@@ -1,5 +1,6 @@
 package org.divy.common.rest;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.UriInfo;
 
@@ -7,6 +8,10 @@ import org.apache.commons.lang.StringUtils;
 import org.divy.common.http.HttpRequestContext;
 
 public class LinkBuilderFactory {
+
+    @Inject
+    private HttpServletRequest request;
+
     static final String HEADER_HOST = "Host";
     static final String HEADER_X_ORIGINAL_PROTO = "X-Orig-Proto";
     static final String HEADER_X_ORIGINAL_HOST = "X-Orig-Host";
@@ -18,10 +23,9 @@ public class LinkBuilderFactory {
         String scheme = DEFAULT_SCHEME;
         String originalPath = StringUtils.EMPTY;
 
-        final HttpServletRequest request = HttpRequestContext.request();
         if (request != null) {
-            scheme = StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),
-                    request.getScheme());
+            scheme = StringUtils.defaultIfBlank(StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),
+                    request.getScheme()),DEFAULT_SCHEME);
             originalPath = StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_BASE),
                     request.getContextPath());
         }

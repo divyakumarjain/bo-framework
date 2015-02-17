@@ -1,6 +1,7 @@
 package org.divy.common.bo.endpoint.hypermedia;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -15,7 +16,9 @@ public abstract class AbstractRepresentation {
 	private UUID uuid;
 
 	private Set<Link> links;
-	private Map<String,Link> associations = new HashMap<>();
+	private Map<String,Object> associations = new HashMap<>();
+	
+	public AbstractRepresentation() {}
 
 	public java.util.UUID identity() {
 		return uuid;
@@ -48,12 +51,15 @@ public abstract class AbstractRepresentation {
 	}
 
 
-	public Map<String, Link> getAssociations() {
+	public Map<String, Object> getAssociations() {
 		return associations;
 	}
 
-	public void setAssociations(Map<String, Link> associations) {
+	public void setAssociations(Map<String, Object> associations) {
 		this.associations = associations;
 	}
 
+    public void addAssociation(String rel, Object association) {
+        getAssociations().put(rel, association);
+    }
 }

@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 import java.util.Calendar;
 import java.util.UUID;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@uuid")
-@Entity
+@MappedSuperclass
 public abstract class AbstractBusinessObject implements IBusinessObject<UUID>{
 
     private UUID uuid;
@@ -26,6 +27,10 @@ public abstract class AbstractBusinessObject implements IBusinessObject<UUID>{
     public AbstractBusinessObject(AbstractBusinessObject entity) {
         this.setUuid(entity.getUuid());
         this.update(entity);
+    }
+
+    public AbstractBusinessObject(UUID uuid) {
+        this.setUuid(uuid);
     }
 
     @Override

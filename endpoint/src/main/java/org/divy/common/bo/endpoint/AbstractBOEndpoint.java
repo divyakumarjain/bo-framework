@@ -5,6 +5,7 @@ package org.divy.common.bo.endpoint;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.divy.common.bo.IBORepository;
@@ -50,7 +51,7 @@ public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID 
         this.manager = manager;
     }
 
-    protected List<ENTITY> doSearch(IQuery query){
+    protected Collection<ENTITY> doSearch(IQuery query){
         return manager.search(query);
     }
 
@@ -77,7 +78,7 @@ public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID 
 
     }
 
-    protected List<ENTITY> doList() {
+    protected Collection<ENTITY> doList() {
 
         List<ENTITY> boList = manager.list();
 

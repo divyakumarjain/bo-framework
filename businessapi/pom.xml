@@ -12,6 +12,10 @@
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-repository</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
