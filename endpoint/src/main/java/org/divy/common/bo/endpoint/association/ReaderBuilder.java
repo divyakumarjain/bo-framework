@@ -3,6 +3,7 @@ package org.divy.common.bo.endpoint.association;
 import org.divy.common.rest.impl.AbstractHATEOASMapper;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 
 
 public class ReaderBuilder implements Reader {
@@ -26,7 +27,16 @@ public class ReaderBuilder implements Reader {
 
     @Override
     public Object read(Object source, Object... argv) throws InvocationTargetException, IllegalAccessException {
-        return getReader().read(source,argv);
+        Object result = getReader().read(source, argv);
+
+        if(mapper != null) {
+            if(result instanceof Collection) {
+                return mapper.createFromBO((Collection)result);
+            }
+            return mapper.createFromBO(result);
+        } else {
+            return result;
+        }
     }
 
     public Reader getReader() {

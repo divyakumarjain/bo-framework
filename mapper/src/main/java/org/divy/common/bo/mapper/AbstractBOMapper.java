@@ -1,9 +1,6 @@
 package org.divy.common.bo.mapper;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.dozer.Mapper;
 
@@ -77,7 +74,7 @@ public class AbstractBOMapper<BO, OTHER> implements IBOMapper<BO, OTHER>{
     @Override
     public final Collection<BO> createBO(Collection<OTHER> sourceData) {
 
-        List<BO> businessObjectList = new ArrayList<>(sourceData.size());
+        Collection<BO> businessObjectList = sourceData instanceof List? new ArrayList<BO>(sourceData.size()): new HashSet<BO>(sourceData.size());
 
         for (Iterator<OTHER> iterator = sourceData.iterator(); iterator.hasNext();) {
 
@@ -91,7 +88,7 @@ public class AbstractBOMapper<BO, OTHER> implements IBOMapper<BO, OTHER>{
     @Override
     public final Collection<OTHER> createFromBO(Collection<BO> businessObjectList) {
 
-        List<OTHER> targetList = new ArrayList<>(businessObjectList.size());
+        Collection<OTHER> targetList = businessObjectList instanceof List? new ArrayList<OTHER>(businessObjectList.size()): new HashSet<OTHER>(businessObjectList.size());
 
         for (Iterator<BO> iterator = businessObjectList.iterator(); iterator.hasNext();) {
 

@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-class DynamicReader extends ReaderBuilder {
+class DynamicReader implements Reader {
     private List<Method> methods;
 
 	protected void addMethod(Method method) {
@@ -22,11 +22,7 @@ class DynamicReader extends ReaderBuilder {
     	for (Method method : methods) {
     		result = method.invoke(source,argv);
 		}
-        if(mapper != null) {
-            return mapper.createFromBO(result);
-        } else {
-            return result;
-        }
+        return result;
     }
 
     public <S> S withMethodOn(Class<S> sourceClass) {
