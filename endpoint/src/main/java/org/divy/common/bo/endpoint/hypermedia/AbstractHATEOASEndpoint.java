@@ -120,11 +120,9 @@ public abstract class AbstractHATEOASEndpoint <ENTITY extends IBusinessObject<UU
         try {
 			entityRelation = this.getAssociations().getAssociation(relation).getReader().read(entity);
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new InternalServerErrorException(e);
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            throw new InternalServerErrorException(e);
 		}
 
         if(entityRelation!=null) {
