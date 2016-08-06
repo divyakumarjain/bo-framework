@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryBOManager<ENTITY extends IBusinessObject<ID>, ID extends Serializable> implements IBOManager<ENTITY,ID> {
+public class InMemoryBOManager<E extends IBusinessObject<I>, I extends Serializable> implements IBOManager<E, I> {
 
-    private KeyGenerator<ENTITY,ID> keyGenerator;
-    private Map<ID,ENTITY> inMemoryMap = new HashMap<>();
+    private KeyGenerator<E, I> keyGenerator;
+    private Map<I, E> inMemoryMap = new HashMap<>();
 
-    public InMemoryBOManager(KeyGenerator<ENTITY,ID> keyGenerator) {
+    public InMemoryBOManager(KeyGenerator<E, I> keyGenerator) {
         this.keyGenerator = keyGenerator;
     }
     
@@ -24,7 +24,7 @@ public class InMemoryBOManager<ENTITY extends IBusinessObject<ID>, ID extends Se
     }
 
     @Override
-    public ENTITY create(ENTITY businessObject) {
+    public E create(E businessObject) {
         if(keyGenerator !=null) {
             keyGenerator.initializeKey(businessObject);
         }
@@ -33,37 +33,37 @@ public class InMemoryBOManager<ENTITY extends IBusinessObject<ID>, ID extends Se
     }
 
     @Override
-    public ENTITY update(ENTITY businessObject) {
+    public E update(E businessObject) {
         inMemoryMap.put(businessObject.identity(),businessObject);
         return businessObject;
     }
 
     @Override
-    public ENTITY delete(ENTITY businessObject) {
+    public E delete(E businessObject) {
         return inMemoryMap.remove(businessObject.identity());
     }
 
     @Override
-    public List<ENTITY> list() {
-        ArrayList<ENTITY> arrayList = new ArrayList<>();
+    public List<E> list() {
+        ArrayList<E> arrayList = new ArrayList<>();
         arrayList.addAll(inMemoryMap.values());
         return arrayList;
     }
 
     @Override
-    public List<ENTITY> search(IQuery businessObjectQuery) {
-        ArrayList<ENTITY> arrayList = new ArrayList<>();
+    public List<E> search(IQuery businessObjectQuery) {
+        ArrayList<E> arrayList = new ArrayList<>();
         arrayList.addAll(inMemoryMap.values());
         return arrayList;
     }
 
     @Override
-    public ENTITY deleteById(ID id) {
+    public E deleteById(I id) {
         return inMemoryMap.remove(id);
     }
 
     @Override
-    public ENTITY get(ID identity) {
+    public E get(I identity) {
         return inMemoryMap.get(identity);
     }
 }

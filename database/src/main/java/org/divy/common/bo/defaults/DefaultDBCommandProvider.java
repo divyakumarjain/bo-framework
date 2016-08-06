@@ -3,42 +3,40 @@
  */
 package org.divy.common.bo.defaults;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.TypeBaseDBCommandProvider;
-import org.divy.common.bo.command.ICreateCommand;
-import org.divy.common.bo.command.IDeleteCommand;
-import org.divy.common.bo.command.IGetCommand;
-import org.divy.common.bo.command.ISearchCommand;
-import org.divy.common.bo.command.IUpdateCommand;
 import org.divy.common.bo.IDBCommandContext;
+import org.divy.common.bo.TypeBaseDBCommandProvider;
+import org.divy.common.bo.command.*;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author Divyakumar
  *
  */
-public class DefaultDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
+public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
         extends
-        TypeBaseDBCommandProvider<ENTITY, ID> {
+        TypeBaseDBCommandProvider<E, I> {
 
     private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
+    private final Class<? extends E> entityClass;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public DefaultDBCommandProvider(String persistentUnitName,
-            Class<ENTITY> entityClass) {
+                                    Class<E> entityClass) {
         super(persistentUnitName);
 
-        setGetCommandType((Class<? extends IGetCommand<ENTITY, ID>>)(Object) DefaultDatabaseGetCommand.class);
-        setCreateCommandType((Class<? extends ICreateCommand<ENTITY, ID>>)(Object) DefaultDatabaseCreateCommand.class);
-        setDeleteCommandType((Class<? extends IDeleteCommand<ENTITY, ID>>)(Object) DefaultDatabaseDeleteCommand.class);
-        setSearchCommandType((Class<? extends ISearchCommand<ENTITY, ID>>)(Object) DefaultDatabaseSearchCommand.class);
-        setUpdateCommandType((Class<? extends IUpdateCommand<ENTITY, ID>>)(Object) DefaultDatabaseUpdateCommand.class);
+        //See below link for explaination of typecasing.
+        //http://stackoverflow.com/questions/30090242/java-lang-class-generics-and-wildcards
+        //http://stackoverflow.com/questions/26766704/cannot-convert-from-listlist-to-listlist
+        setGetCommandType((Class<? extends IGetCommand<E, I>>) DefaultDatabaseGetCommand.class);
+        setCreateCommandType((Class<? extends ICreateCommand<E, I>>) DefaultDatabaseCreateCommand.class);
+        setDeleteCommandType((Class<? extends IDeleteCommand<E, I>>) DefaultDatabaseDeleteCommand.class);
+        setSearchCommandType((Class<? extends ISearchCommand<E, I>>) DefaultDatabaseSearchCommand.class);
+        setUpdateCommandType((Class<? extends IUpdateCommand<E, I>>) DefaultDatabaseUpdateCommand.class);
 
         this.entityClass = entityClass;
     }
-
-    private final Class<? extends ENTITY> entityClass;
 
     @Override
     protected Object createCommand(Class<?> type, IDBCommandContext context) {
@@ -46,23 +44,10 @@ public class DefaultDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
             if (type == null) {
                 throw new IllegalArgumentException("Command type not provided");
             }
-
-            final Object returnInstance = type.getConstructor(Class.class,
+            return type.getConstructor(Class.class,
                     IDBCommandContext.class).newInstance(entityClass, context);
 
-            return returnInstance;
-
-        } catch (InstantiationException e) {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
-        } catch (IllegalAccessException e) {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
-        } catch (SecurityException e) {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
-        } catch (InvocationTargetException e) {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
-        } catch (NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | SecurityException | InvocationTargetException | NoSuchMethodException e) {
             throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND, e);
         }
     }

@@ -1,8 +1,9 @@
 package org.divy.common.bo.command;
 
 
-public interface IDeleteCommand <ENTITY,ID> extends ICommand
+public interface IDeleteCommand<E, I> extends ICommand
 {
-    ENTITY deleteById(ID id);
-    ENTITY delete(ENTITY entity);
+    E deleteById(I id);
+
+    E delete(E entity);
 }

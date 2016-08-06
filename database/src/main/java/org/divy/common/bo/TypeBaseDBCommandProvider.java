@@ -1,27 +1,23 @@
 package org.divy.common.bo;
 
-import java.lang.reflect.InvocationTargetException;
-
-import org.divy.common.bo.command.ICreateCommand;
-import org.divy.common.bo.command.IDeleteCommand;
-import org.divy.common.bo.command.IGetCommand;
-import org.divy.common.bo.command.ISearchCommand;
-import org.divy.common.bo.command.IUpdateCommand;
+import org.divy.common.bo.command.*;
 import org.divy.common.bo.context.DatabaseContext;
 
-public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
-        implements ICommandProvider<ENTITY, ID>
+import java.lang.reflect.InvocationTargetException;
+
+public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
+        implements ICommandProvider<E, I>
 {
 
     private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
 
     private IDBCommandContext context;
 
-    private Class<? extends IGetCommand<ENTITY, ID>> getCommandType;
-    private Class<? extends IUpdateCommand<ENTITY, ID>> updateCommandType;
-    private Class<? extends IDeleteCommand<ENTITY, ID>> deleteCommandType;
-    private Class<? extends ICreateCommand<ENTITY, ID>> createCommandType;
-    private Class<? extends ISearchCommand<ENTITY, ID>> searchCommandType;
+    private Class<? extends IGetCommand<E, I>> getCommandType;
+    private Class<? extends IUpdateCommand<E, I>> updateCommandType;
+    private Class<? extends IDeleteCommand<E, I>> deleteCommandType;
+    private Class<? extends ICreateCommand<E, I>> createCommandType;
+    private Class<? extends ISearchCommand<E, I>> searchCommandType;
 
     public TypeBaseDBCommandProvider(String persistentUnitName)
     {
@@ -36,44 +32,44 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
         this.context = context;
     }
 
-    public Class<? extends IGetCommand<ENTITY, ID>> getGetCommandType() {
+    public Class<? extends IGetCommand<E, I>> getGetCommandType() {
         return getCommandType;
     }
 
-    public Class<? extends IUpdateCommand<ENTITY, ID>> getUpdateCommandType() {
-        return updateCommandType;
-    }
-
-    public Class<? extends IDeleteCommand<ENTITY, ID>> getDeleteCommandType() {
-        return deleteCommandType;
-    }
-
-    public Class<? extends ICreateCommand<ENTITY, ID>> getCreateCommandType() {
-        return createCommandType;
-    }
-
-    public Class<? extends ISearchCommand<ENTITY, ID>> getSearchCommandType() {
-        return searchCommandType;
-    }
-
-    public void setGetCommandType(final Class<? extends IGetCommand<ENTITY, ID>> getCommandType) {
+    public void setGetCommandType(final Class<? extends IGetCommand<E, I>> getCommandType) {
         this.getCommandType = getCommandType;
     }
 
-    public void setUpdateCommandType(final Class<? extends IUpdateCommand<ENTITY, ID>> updateCommandType) {
+    public Class<? extends IUpdateCommand<E, I>> getUpdateCommandType() {
+        return updateCommandType;
+    }
+
+    public void setUpdateCommandType(final Class<? extends IUpdateCommand<E, I>> updateCommandType) {
         this.updateCommandType = updateCommandType;
     }
 
-    public void setDeleteCommandType(final Class<? extends IDeleteCommand<ENTITY, ID>> deleteCommandType) {
+    public Class<? extends IDeleteCommand<E, I>> getDeleteCommandType() {
+        return deleteCommandType;
+    }
+
+    public void setDeleteCommandType(final Class<? extends IDeleteCommand<E, I>> deleteCommandType) {
         this.deleteCommandType = deleteCommandType;
     }
 
-    public void setCreateCommandType(final Class<? extends ICreateCommand<ENTITY, ID>> createCommandType) {
+    public Class<? extends ICreateCommand<E, I>> getCreateCommandType() {
+        return createCommandType;
+    }
+
+    public void setCreateCommandType(final Class<? extends ICreateCommand<E, I>> createCommandType) {
         this.createCommandType = createCommandType;
     }
 
+    public Class<? extends ISearchCommand<E, I>> getSearchCommandType() {
+        return searchCommandType;
+    }
+
     public void setSearchCommandType(
-            final Class<? extends ISearchCommand<ENTITY, ID>> searchCommandType) {
+            final Class<? extends ISearchCommand<E, I>> searchCommandType) {
         this.searchCommandType = searchCommandType;
     }
 
@@ -90,22 +86,8 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 
             return returnInstance;
 
-        } catch (InstantiationException e)
-        {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
-        } catch (IllegalAccessException e)
-        {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
-        } catch (IllegalArgumentException e)
-        {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
-        } catch (SecurityException e)
-        {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
-        } catch (InvocationTargetException e)
-        {
-            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
-        } catch (NoSuchMethodException e)
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                | SecurityException | InvocationTargetException | NoSuchMethodException e)
         {
             throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
         }
@@ -118,11 +100,11 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public IGetCommand<ENTITY, ID> getGetCommand()
+    public IGetCommand<E, I> getGetCommand()
     {
         final IDBCommandContext newContext = createContext();
 
-        IGetCommand<ENTITY, ID> returnGetCommand;
+        IGetCommand<E, I> returnGetCommand;
 
         returnGetCommand = (IGetCommand) createCommand(getCommandType,newContext);
 
@@ -131,39 +113,39 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
 
     @Override
     @SuppressWarnings("unchecked")
-    public ICreateCommand<ENTITY, ID> getCreateCommand()
+    public ICreateCommand<E, I> getCreateCommand()
     {
         final IDBCommandContext newContext = createContext();
 
-        ICreateCommand<ENTITY, ID> returnCreateCommand;
+        ICreateCommand<E, I> returnCreateCommand;
 
-        returnCreateCommand =  (ICreateCommand<ENTITY,ID>)createCommand(createCommandType,newContext);
+        returnCreateCommand = (ICreateCommand<E, I>) createCommand(createCommandType, newContext);
 
         return returnCreateCommand;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public IDeleteCommand<ENTITY, ID> getDeleteCommand()
+    public IDeleteCommand<E, I> getDeleteCommand()
     {
         final IDBCommandContext newContext = createContext();
 
-        IDeleteCommand<ENTITY, ID> returnDeleteCommand;
+        IDeleteCommand<E, I> returnDeleteCommand;
 
-        returnDeleteCommand = (IDeleteCommand<ENTITY, ID>)createCommand(deleteCommandType,newContext);
+        returnDeleteCommand = (IDeleteCommand<E, I>) createCommand(deleteCommandType, newContext);
 
         return returnDeleteCommand;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public IUpdateCommand<ENTITY, ID> getUpdateCommand()
+    public IUpdateCommand<E, I> getUpdateCommand()
     {
         final IDBCommandContext newContext = createContext();
 
-        IUpdateCommand<ENTITY, ID> returnUpdateCommand;
+        IUpdateCommand<E, I> returnUpdateCommand;
 
-        returnUpdateCommand = (IUpdateCommand<ENTITY, ID>)createCommand(updateCommandType,newContext);
+        returnUpdateCommand = (IUpdateCommand<E, I>) createCommand(updateCommandType, newContext);
 
         return returnUpdateCommand;
     }
@@ -175,13 +157,13 @@ public class TypeBaseDBCommandProvider<ENTITY extends IBusinessObject<ID>, ID>
      */
     @SuppressWarnings("unchecked")
     @Override
-    public ISearchCommand<ENTITY, ID> getSearchCommand() {
+    public ISearchCommand<E, I> getSearchCommand() {
 
         final IDBCommandContext newContext = createContext();
 
-        ISearchCommand<ENTITY, ID> returnSearchCommand;
+        ISearchCommand<E, I> returnSearchCommand;
 
-        returnSearchCommand = (ISearchCommand<ENTITY, ID>) createCommand(
+        returnSearchCommand = (ISearchCommand<E, I>) createCommand(
                 searchCommandType, newContext);
 
         return returnSearchCommand;

@@ -1,21 +1,17 @@
 package org.divy.common.bo;
 
-import org.divy.common.bo.command.ICreateCommand;
-import org.divy.common.bo.command.IDeleteCommand;
-import org.divy.common.bo.command.IGetCommand;
-import org.divy.common.bo.command.ISearchCommand;
-import org.divy.common.bo.command.IUpdateCommand;
+import org.divy.common.bo.command.*;
 
-public interface ICommandProvider<ENTITY, ID>
+public interface ICommandProvider<E, I>
 {
 
-    IGetCommand<ENTITY, ID> getGetCommand();
+    IGetCommand<E, I> getGetCommand();
 
-    ICreateCommand<ENTITY, ID> getCreateCommand();
+    ICreateCommand<E, I> getCreateCommand();
 
-    IDeleteCommand<ENTITY, ID> getDeleteCommand();
+    IDeleteCommand<E, I> getDeleteCommand();
 
-    IUpdateCommand<ENTITY, ID> getUpdateCommand();
+    IUpdateCommand<E, I> getUpdateCommand();
 
-    ISearchCommand<ENTITY, ID> getSearchCommand();
+    ISearchCommand<E, I> getSearchCommand();
 }

@@ -1,14 +1,13 @@
 package org.divy.common.rest.builder;
 
-import java.util.Collection;
-import java.util.List;
-import javax.ws.rs.core.Response;
-
 import org.divy.common.bo.IBusinessObject;
 
-class ListEntityResponseBuilder<ENTITY extends IBusinessObject<ID>,ID> extends ResponseEntityBuilder<List<ENTITY>> {
+import javax.ws.rs.core.Response;
+import java.util.List;
 
-    public ListEntityResponseBuilder(List<ENTITY> list) {
+class ListEntityResponseBuilder<E extends IBusinessObject<I>, I> extends ResponseEntityBuilder<List<E>> {
+
+    public ListEntityResponseBuilder(List<E> list) {
         setEntity(list);
     }
     @Override
@@ -16,7 +15,7 @@ class ListEntityResponseBuilder<ENTITY extends IBusinessObject<ID>,ID> extends R
         Response.Status statusCode  = getStatusCode();
 
         if(statusCode==null) {
-            if(entity==null || entity instanceof Collection && ((Collection<ENTITY>) entity).size()<1) {
+            if (entity == null || entity.isEmpty()) {
                 setStatusCode(Response.Status.NO_CONTENT);
             } else {
                 setStatusCode(Response.Status.OK);

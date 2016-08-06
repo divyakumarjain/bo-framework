@@ -9,6 +9,7 @@ public class AttributeReader implements Reader {
 
     @Override
     public AbstractRepresentation read(Object source, Object... argv) throws InvocationTargetException, IllegalAccessException {
+        //TODO implement
         return null;
     }
 

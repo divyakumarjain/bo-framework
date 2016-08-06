@@ -1,15 +1,8 @@
+
 /**
  * 
  */
 package org.divy.common.bo.test;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-
-import java.util.Iterator;
-import java.util.List;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.query.IQuery;
@@ -17,28 +10,40 @@ import org.divy.common.bo.query.defaults.Query;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Iterator;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Divyakumar
  *
- * @param <ENTITY>
- * @param <ID>
+ * @param <E>
+ * @param <I>
  */
-public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
+public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
-    final protected ITestDataProvider<ENTITY, ID> testDataProvider;
+    private static final Logger logger = LoggerFactory.getLogger(TestBOCRUDBase.class);
+
+    final protected ITestDataProvider<E, I> testDataProvider;
 
     /**
      *
      */
-    public TestBOCRUDBase(ITestDataProvider<ENTITY, ID> testDataProvider) {
+    public TestBOCRUDBase(ITestDataProvider<E, I> testDataProvider) {
         super();
         this.testDataProvider = testDataProvider;
     }
 
     @Test
     public void testCreate() {
-        ENTITY entity = testDataProvider.getEntityInstance();
+        E entity = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet1(entity);
 
@@ -50,11 +55,11 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
     }
 
-    abstract protected ID getIdentifier(ENTITY entity);
+    abstract protected I getIdentifier(E entity);
 
     @Test
     public void testUpdate() {
-        ENTITY entity = testDataProvider.getEntityInstance();
+        E entity = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet2(entity);
 
@@ -66,9 +71,9 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
         doUpdateEntity(entity);
 
-        ID id = getIdentifier(entity);
+        I id = getIdentifier(entity);
 
-        ENTITY updatedEntity = doAssertExists(id);
+        E updatedEntity = doAssertExists(id);
 
         assertThat("Updated Entity should be same",updatedEntity,equalTo(entity));
 
@@ -77,8 +82,8 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
     @Test
     public void testDelete() {
-        ENTITY entity1 = testDataProvider.getEntityInstance();
-        ENTITY entity2 = testDataProvider.getEntityInstance();
+        E entity1 = testDataProvider.getEntityInstance();
+        E entity2 = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet1(entity1);
         testDataProvider.fillTestDataSet2(entity2);
@@ -98,13 +103,13 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
     //TODO: Finish Search framework
     //FIXME:
     public void testSearch() {
-        ENTITY entity1 = testDataProvider.getEntityInstance();
+        E entity1 = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet1(entity1);
 
         doCreateEntity(entity1);
 
-        ENTITY entity2 = testDataProvider.getEntityInstance();
+        E entity2 = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet2(entity2);
 
@@ -112,7 +117,7 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
         IQuery searchQuery = testDataProvider.createSearchQuery();
 
-        List<ENTITY> searchedEntities = doSearchEntities(searchQuery);
+        List<E> searchedEntities = doSearchEntities(searchQuery);
 
         assertThat("Search result should not be null", searchedEntities,
                 notNullValue());
@@ -127,34 +132,41 @@ public abstract class TestBOCRUDBase<ENTITY extends IBusinessObject<ID>, ID> {
 
     /* Clean up */
     @After
-    public void cleanup() throws Exception{
-        List<ENTITY> searchedEntities = doSearchEntities(new Query());
+    public void cleanup() {
+        List<E> searchedEntities = doSearchEntities(new Query());
 
-        for (Iterator<ENTITY> iterator = searchedEntities.iterator(); iterator.hasNext();) {
+        for (Iterator<E> iterator = searchedEntities.iterator(); iterator.hasNext(); ) {
 
             try {
 
-                ENTITY entity = iterator.next();
+                E entity = iterator.next();
                 doDeleteEntity(entity);
 
-            } catch (Throwable e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                logger.error("Could not clean up the test case", e);
             }
         }
     }
 
 
     /* CRUD Operation */
-    protected abstract ENTITY doCreateEntity(ENTITY entity);
-    protected abstract void doUpdateEntity(ENTITY entity);
-    protected abstract ENTITY doGetByKey(ID id);
-    protected abstract ENTITY doAssertExists(ID id);
-    protected abstract void doAssertNotExists(ID id);
-    protected abstract void doDeleteEntity(ENTITY entity);
-    protected abstract List<ENTITY> doSearchEntities(IQuery searchQuery);
+    protected abstract E doCreateEntity(E entity);
+
+    protected abstract void doUpdateEntity(E entity);
+
+    protected abstract E doGetByKey(I id);
+
+    protected abstract E doAssertExists(I id);
+
+    protected abstract void doAssertNotExists(I id);
+
+    protected abstract void doDeleteEntity(E entity);
+
+    protected abstract List<E> doSearchEntities(IQuery searchQuery);
 
     /* Extended Tests */
-    protected abstract void extendedTestCreatedEntity(ENTITY entity);
-    protected abstract void extendedTestUpdatedEntity(ENTITY entity);
+    protected abstract void extendedTestCreatedEntity(E entity);
+
+    protected abstract void extendedTestUpdatedEntity(E entity);
 
 }

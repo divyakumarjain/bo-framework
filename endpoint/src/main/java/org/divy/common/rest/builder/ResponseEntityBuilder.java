@@ -1,8 +1,8 @@
 package org.divy.common.rest.builder;
 
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 public class ResponseEntityBuilder<T> {
     T entity;
@@ -12,7 +12,7 @@ public class ResponseEntityBuilder<T> {
         setEntity(entity);
     }
 
-    public ResponseEntityBuilder() {
+    protected ResponseEntityBuilder() {
     }
 
     public Response build(){

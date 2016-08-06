@@ -1,27 +1,26 @@
 package org.divy.common.bo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
 import org.divy.common.bo.command.ISearchCommand;
 import org.divy.common.bo.query.IEqualTo;
 import org.divy.common.bo.query.IOperator;
 import org.divy.common.bo.query.IQuery;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
-public abstract class AbstractDatabaseSearchCommand<ENTITY extends IBusinessObject<ID>, ID>
+
+public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>, I>
         extends
-        AbstractDatabaseCommand<ENTITY, ID> implements
-        ISearchCommand<ENTITY, ID>
+        AbstractDatabaseCommand<E, I> implements
+        ISearchCommand<E, I>
 {
     protected AbstractDatabaseSearchCommand(
-            Class<? extends ENTITY> typeParameterClass,IDBCommandContext context)
+            Class<? extends E> typeParameterClass, IDBCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
@@ -29,36 +28,36 @@ public abstract class AbstractDatabaseSearchCommand<ENTITY extends IBusinessObje
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<ENTITY> search(IQuery query) {
+    public List<E> search(IQuery query) {
 
-        CriteriaQuery<ENTITY> criteriaQuery;
+        CriteriaQuery<E> criteriaQuery;
 
         if (query == null) {
             CriteriaBuilder criteriaBuilder = getEntityManager()
                     .getCriteriaBuilder();
 
-            criteriaQuery = (CriteriaQuery<ENTITY>) criteriaBuilder
+            criteriaQuery = (CriteriaQuery<E>) criteriaBuilder
                     .createQuery(getEntityType());
 
             criteriaQuery.from(getEntityType());
         }
 
-        criteriaQuery = (CriteriaQuery<ENTITY>) createCriteriaQuery(query);
+        criteriaQuery = (CriteriaQuery<E>) createCriteriaQuery(query);
 
         return getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 
-    protected CriteriaQuery<? extends ENTITY> createCriteriaQuery(
+    protected CriteriaQuery<? extends E> createCriteriaQuery(
             IQuery query) {
 
-        CriteriaQuery<? extends ENTITY> criteriaQuery = null;
+        CriteriaQuery<? extends E> criteriaQuery = null;
 
         CriteriaBuilder criteriaBuilder = getEntityManager()
                 .getCriteriaBuilder();
 
         criteriaQuery = criteriaBuilder.createQuery(getEntityType());
 
-        Root<? extends ENTITY> entityRoot = criteriaQuery.from(getEntityType());
+        Root<? extends E> entityRoot = criteriaQuery.from(getEntityType());
 
         if(query!=null && !query.isEmpty()){
             List<Predicate> predicates = new ArrayList<>();
@@ -66,7 +65,7 @@ public abstract class AbstractDatabaseSearchCommand<ENTITY extends IBusinessObje
             for (Entry<String, IOperator> entry : query.entrySet()) {
             	predicates.add(createPredicate(entry,criteriaBuilder,entityRoot));
             }
-            criteriaQuery.where((Predicate[])predicates.toArray());
+            criteriaQuery.where((Predicate[]) predicates.toArray(new Predicate[predicates.size()]));
         }
 
         return criteriaQuery;
@@ -74,7 +73,7 @@ public abstract class AbstractDatabaseSearchCommand<ENTITY extends IBusinessObje
 
     @SuppressWarnings("unchecked")
     private Predicate createPredicate(Entry<String, IOperator> iOperatorEntry,
-            CriteriaBuilder cb,Root<? extends ENTITY> root ) {
+                                      CriteriaBuilder cb, Root<? extends E> root) {
 
         Predicate returnPredicate = null;
 

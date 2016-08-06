@@ -1,35 +1,35 @@
 package org.divy.common.bo.query.defaults;
 
+import org.divy.common.bo.query.INotInComparison;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.divy.common.bo.query.INotInComparison;
+public class NotInComparison<A> implements INotInComparison<A> {
 
-public class NotInComparison<ATTRIBUTE> implements INotInComparison<ATTRIBUTE> {
+    private List<A> values;
 
-    private List<ATTRIBUTE> values;
-
-    @Override
-    public List<ATTRIBUTE> getValues() {
-        if(values==null)
-            values = new ArrayList<ATTRIBUTE>();
-
-        return values;
-    }
-
-    public NotInComparison(List<ATTRIBUTE> values) {
+    public NotInComparison(List<A> values) {
         super();
         this.values = values;
     }
 
-    public NotInComparison(ATTRIBUTE[] values) {
+    public NotInComparison(A[] values) {
         super();
         this.values = Arrays.asList(values);
     }
 
     public NotInComparison() {
         super();
+    }
+
+    @Override
+    public List<A> getValues() {
+        if (values == null)
+            values = new ArrayList<A>();
+
+        return values;
     }
 
 

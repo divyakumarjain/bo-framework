@@ -3,25 +3,25 @@ package org.divy.common.bo.query.defaults;
 import org.divy.common.bo.query.ILessThanComparison;
 
 
-public class LessThanComparison<ATTRIBUTE> implements ILessThanComparison<ATTRIBUTE>{
+public class LessThanComparison<A> implements ILessThanComparison<A> {
 
-    private ATTRIBUTE value;
+    private A value;
 
     public LessThanComparison() {
         super();
     }
 
-    public LessThanComparison(ATTRIBUTE value) {
+    public LessThanComparison(A value) {
         super();
         this.value = value;
     }
 
-    public void setValue(ATTRIBUTE value) {
-        this.value = value;
+    @Override
+    public A getValue() {
+        return value;
     }
 
-    @Override
-    public ATTRIBUTE getValue() {
-        return value;
+    public void setValue(A value) {
+        this.value = value;
     }
 }

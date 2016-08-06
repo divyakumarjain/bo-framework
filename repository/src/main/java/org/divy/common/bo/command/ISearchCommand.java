@@ -3,14 +3,14 @@
  */
 package org.divy.common.bo.command;
 
-import java.util.List;
-
 import org.divy.common.bo.query.IQuery;
+
+import java.util.List;
 
 /**
  * @author Divyakumar
  *
  */
-public interface ISearchCommand<ENTITY, ID> extends ICommand {
-    List<ENTITY> search(IQuery query);
+public interface ISearchCommand<E, I> extends ICommand {
+    List<E> search(IQuery query);
 }

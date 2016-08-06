@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.json.test;
 
-public interface KeyGenerator<ENTITY, ID> {
-    ID getRandomKey();
+public interface KeyGenerator<E, I> {
+    I getRandomKey();
 
-    void initializeKey(ENTITY entity);
+    void initializeKey(E entity);
 }

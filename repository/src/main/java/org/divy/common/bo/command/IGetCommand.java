@@ -1,8 +1,8 @@
 package org.divy.common.bo.command;
 
 
-public interface IGetCommand<ENTITY,ID> extends ICommand
+public interface IGetCommand<E, I> extends ICommand
 {
-    ENTITY get(ID identity);
+    E get(I identity);
 
 }

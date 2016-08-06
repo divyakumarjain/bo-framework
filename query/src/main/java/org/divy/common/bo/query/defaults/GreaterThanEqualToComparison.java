@@ -3,27 +3,27 @@ package org.divy.common.bo.query.defaults;
 import org.divy.common.bo.query.IGreaterThanEqualToComparison;
 
 
-public class GreaterThanEqualToComparison<ATTRIBUTE> implements
-        IGreaterThanEqualToComparison<ATTRIBUTE> {
+public class GreaterThanEqualToComparison<A> implements
+        IGreaterThanEqualToComparison<A> {
 
-    private ATTRIBUTE value;
+    private A value;
 
     public GreaterThanEqualToComparison() {
         super();
     }
 
-    public GreaterThanEqualToComparison(ATTRIBUTE value) {
+    public GreaterThanEqualToComparison(A value) {
         super();
         this.value = value;
     }
 
-    public void setValue(ATTRIBUTE value) {
-        this.value = value;
+    @Override
+    public A getValue() {
+        return value;
     }
 
-    @Override
-    public ATTRIBUTE getValue() {
-        return value;
+    public void setValue(A value) {
+        this.value = value;
     }
 
 }

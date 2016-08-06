@@ -3,86 +3,84 @@
  */
 package org.divy.common.bo.endpoint;
 
+
+import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.query.IQuery;
+
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.divy.common.bo.IBORepository;
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
-import org.divy.common.bo.business.defaults.DefaultBOManager;
-import org.divy.common.bo.defaults.DefaultDatabaseRepository;
-import org.divy.common.bo.query.IQuery;
-
-import javax.inject.Inject;
-
 /**
- * 
- * @author Divyakumar
+ * Abstract Class for Endpoint for Business Object.
  *
+ * @author Divyakumar
+ * @param <E> The Entity or Business Object
+ * @param <I> The Identity type of Business Object
  */
-public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID extends Serializable>
-        extends AbstractCRUDEndpoint<ENTITY, ID> {
+public abstract class AbstractBOEndpoint<E extends IBusinessObject<I>, I extends Serializable>
+        extends AbstractCRUDEndpoint<E, I> {
 
+
+    private IBOManager<E, I> manager;
+
+    /**
+     * Constructs Endpoint for Business Object entity management
+     *
+     * @param manager the manger instance responsible for management for Business Object entity
+     */
     @Inject
-    private IBOManager<ENTITY, ID> manager;
-
-    public AbstractBOEndpoint(IBOManager<ENTITY, ID> manager) {
+    public AbstractBOEndpoint(IBOManager<E, I> manager) {
         this.manager = manager;
     }
 
-    public AbstractBOEndpoint(IBORepository<ENTITY,ID> repository) {
-        this(new DefaultBOManager<>( repository));
-    }
 
-    public AbstractBOEndpoint(String persistentUnitName,Class<ENTITY> entityClass) {
-        this(new DefaultDatabaseRepository<>(persistentUnitName, entityClass));
-    }
-
-    public AbstractBOEndpoint() {
-    }
-
-    public IBOManager<ENTITY, ID> getManager() {
+    public IBOManager<E, I> getManager() {
         return manager;
     }
 
-    public void setManager(IBOManager<ENTITY, ID> manager) {
+    public void setManager(IBOManager<E, I> manager) {
         this.manager = manager;
     }
 
-    protected Collection<ENTITY> doSearch(IQuery query){
+    @Override
+    protected Collection<E> doSearch(IQuery query) {
         return manager.search(query);
     }
 
-    protected ENTITY doCreate(ENTITY businessObject) {
+    @Override
+    protected E doCreate(E businessObject) {
         return manager.create(businessObject);
     }
 
-    protected ENTITY doUpdate(ENTITY businessObject) {
-
-        ENTITY updatedBo = manager.update(businessObject);
-
-        return updatedBo;
+    @Override
+    protected E doUpdate(E businessObject) {
+        return manager.update(businessObject);
     }
 
-    protected void doDelete(ENTITY businessObject) {
+    @Override
+    protected void doDelete(E businessObject) {
 
         manager.delete(businessObject);
 
     }
 
-    protected ENTITY doDelete(ID id) {
+    @Override
+    protected E doDelete(I id) {
 
         return manager.deleteById(id);
 
     }
 
-    protected Collection<ENTITY> doList() {
+    @Override
+    protected Collection<E> doList() {
 
-        List<ENTITY> boList = manager.list();
+        List<E> boList = manager.list();
 
-        List<ENTITY> resultList = new ArrayList<>();
+        List<E> resultList = new ArrayList<>();
 
         resultList.addAll(boList);
 
@@ -90,11 +88,13 @@ public abstract class AbstractBOEndpoint<ENTITY extends IBusinessObject<ID>, ID 
 
     }
 
-    protected String identity(ENTITY createdBo) {
+    @Override
+    protected String identity(E createdBo) {
         return createdBo.identity().toString();
     }
 
-    protected ENTITY doRead(ID id) {
+    @Override
+    protected E doRead(I id) {
         return manager.get(id);
     }
 }

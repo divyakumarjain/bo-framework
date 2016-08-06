@@ -2,29 +2,27 @@ package org.divy.common.bo;
 
 import javax.persistence.EntityManager;
 
-public abstract class AbstractDatabaseCommand<ENTITY extends IBusinessObject<ID>, ID>
+public abstract class AbstractDatabaseCommand<E extends IBusinessObject<I>, I>
 {
 
+    private final Class<? extends E> entityType;
     private IDBCommandContext context;
 
-    private final Class<? extends ENTITY> entityType;
 
+    protected AbstractDatabaseCommand(Class<? extends E> typeParameterClass) {
+        this.entityType = typeParameterClass;
+    }
 
     /**
      * @return the entityType
      */
-    public Class<? extends ENTITY> getEntityType() {
+    public Class<? extends E> getEntityType() {
         return entityType;
     }
 
     protected void setContext(IDBCommandContext context)
     {
         this.context = context;
-    }
-
-    protected AbstractDatabaseCommand(Class<? extends ENTITY> typeParameterClass)
-    {
-        this.entityType = typeParameterClass;
     }
 
     protected final EntityManager getEntityManager()
@@ -43,17 +41,17 @@ public abstract class AbstractDatabaseCommand<ENTITY extends IBusinessObject<ID>
         context.begin();
     }
 
-    protected ENTITY getReference(Object identity)
+    protected E getReference(Object identity)
     {
 
-        ENTITY entity = getEntityManager().find(entityType, identity);
+        E entity = getEntityManager().find(entityType, identity);
 
         return entity;
     }
 
-    protected ENTITY find(Object identity)
+    protected E find(Object identity)
     {
-        ENTITY entity = getEntityManager().find(entityType, identity);
+        E entity = getEntityManager().find(entityType, identity);
 
         return entity;
     }

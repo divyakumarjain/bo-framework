@@ -4,7 +4,6 @@
 package org.divy.common.bo.endpoint.test;
 
 import com.google.inject.servlet.GuiceFilter;
-
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.bo.test.ITestDataProvider;
@@ -25,7 +24,6 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -33,39 +31,17 @@ import java.util.List;
  * @author Divyakumar
  *
  */
-public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessObject<ID>, ID extends Serializable>
-    extends AbstractBOEndpointTest<ENTITY, ID> {
+public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<I>, I extends Serializable>
+        extends AbstractBOEndpointTest<E, I> {
 
     protected JerseyTest jerseyTestProxy;
 
-    public class RestResourceTest extends JerseyTest {
-
-        protected Client client(TestContainer tc) {
-            Client client = super.client();
-            client.register(LoggingFilter.class);
-            return client;
-        }
-
-        public RestResourceTest() {
-            super();
-        }
-
-        protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
-            return new JettyTestContainerFactory();
-        }
-
-
-        @Override
-        protected Application configure() {
-            return new JerseyConfig();
-        }
-    }
-    public class JerseyConfig extends ResourceConfig {
-        public JerseyConfig() {
-            register(GuiceFilter.class);
-            register(LoggingFilter.class);
-            packages(getEndPointClass().getPackage().getName());
-        }
+    /**
+     * @param testDataProvider
+     */
+    public AbstractBOEndpointContainerTest(ITestDataProvider<E, I> testDataProvider) {
+        super(testDataProvider);
+        jerseyTestProxy = new RestResourceTest();
     }
 
     @Before
@@ -87,13 +63,12 @@ public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessOb
     }
 
     @Override
-    protected void doUpdateEntity(ENTITY entity) {
+    protected void doUpdateEntity(E entity) {
         getEntityTarget((String) entity.identity()).request(MediaType.APPLICATION_JSON_TYPE).put(Entity.entity(entity,MediaType.APPLICATION_JSON_TYPE));
     }
 
-
     @Override
-    protected ENTITY doAssertExists(ID id) {
+    protected E doAssertExists(I id) {
         return getEntityTarget((String) id).request(MediaType.APPLICATION_JSON_TYPE).get(getEntityClass());
     }
 
@@ -101,29 +76,21 @@ public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessOb
      * @see org.divy.common.bo.test.TestBaseManager#doDeleteEntity(org.divy.common.bo.IBusinessObject)
      */
     @Override
-    protected void doDeleteEntity(ENTITY entity) {
+    protected void doDeleteEntity(E entity) {
         getEntityTarget((String) entity.identity()).request(MediaType.APPLICATION_JSON_TYPE).delete();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    protected List<ENTITY> doSearchEntities(IQuery searchQuery) {
-        return (List<ENTITY>) getEndPointTargetMethod("search").request(MediaType.APPLICATION_JSON_TYPE)
+    protected List<E> doSearchEntities(IQuery searchQuery) {
+        return (List<E>) getEndPointTargetMethod("search").request(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.entity(getEntityListClass(),MediaType.APPLICATION_JSON_TYPE))
                 .getEntity();
     }
 
-    protected abstract GenericType<ENTITY> getEntityClass();
+    protected abstract GenericType<E> getEntityClass();
 
-    protected abstract GenericType<List<ENTITY>> getEntityListClass();
-
-    /**
-     * @param testDataProvider
-     */
-    public AbstractBOEndpointContainerTest(ITestDataProvider<ENTITY, ID> testDataProvider) {
-        super(testDataProvider);
-        jerseyTestProxy = new RestResourceTest();
-    }
+    protected abstract GenericType<List<E>> getEntityListClass();
 
     /**
      * Create a web resource whose URI refers to the base URI the Web
@@ -133,5 +100,36 @@ public abstract class AbstractBOEndpointContainerTest<ENTITY extends IBusinessOb
      */
     protected UriBuilder uriBuilder() {
         return jerseyTestProxy.target().getUriBuilder();
+    }
+
+    public class RestResourceTest extends JerseyTest {
+
+        public RestResourceTest() {
+            super();
+        }
+
+        protected Client client(TestContainer tc) {
+            Client client = super.client();
+            client.register(LoggingFilter.class);
+            return client;
+        }
+
+        protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
+            return new JettyTestContainerFactory();
+        }
+
+
+        @Override
+        protected Application configure() {
+            return new JerseyConfig();
+        }
+    }
+
+    public class JerseyConfig extends ResourceConfig {
+        public JerseyConfig() {
+            register(GuiceFilter.class);
+            register(LoggingFilter.class);
+            packages(getEndPointClass().getPackage().getName());
+        }
     }
 }

@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class InComparison<ATTRIBUTE> implements IInComparison<ATTRIBUTE> {
+public class InComparison<A> implements IInComparison<A> {
 
-    private List<ATTRIBUTE> values;
+    private List<A> values;
 
-    @Override
-    public List<ATTRIBUTE> getValues() {
-        if(values==null)
-            values = new ArrayList<ATTRIBUTE>();
-
-        return values;
-    }
-
-    public InComparison(List<ATTRIBUTE> values) {
+    public InComparison(List<A> values) {
         super();
         this.values = values;
     }
 
-    public InComparison(ATTRIBUTE[] values) {
+    public InComparison(A[] values) {
         super();
         this.values = Arrays.asList(values);
     }
 
     public InComparison() {
         super();
+    }
+
+    @Override
+    public List<A> getValues() {
+        if (values == null)
+            values = new ArrayList<A>();
+
+        return values;
     }
 
 }

@@ -1,23 +1,23 @@
 package org.divy.common.bo.business;
 
-import java.util.List;
-
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.query.IQuery;
 
-public interface IBOManager<ENTITY extends IBusinessObject<ID>, ID> {
+import java.util.List;
 
-    ENTITY create(ENTITY businessObject);
+public interface IBOManager<E extends IBusinessObject<I>, I> {
 
-    ENTITY update(ENTITY businessObject);
+    E create(E businessObject);
 
-    ENTITY delete(ENTITY businessObject);
+    E update(E businessObject);
 
-    List<ENTITY> list();
+    E delete(E businessObject);
 
-    List<ENTITY> search(IQuery businessObjectQuery);
+    List<E> list();
 
-    ENTITY deleteById(ID id);
+    List<E> search(IQuery businessObjectQuery);
 
-    ENTITY get(ID identity);
+    E deleteById(I id);
+
+    E get(I identity);
 }

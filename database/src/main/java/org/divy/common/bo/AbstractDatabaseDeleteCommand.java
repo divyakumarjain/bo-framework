@@ -2,33 +2,33 @@ package org.divy.common.bo;
 
 import org.divy.common.bo.command.IDeleteCommand;
 
-public abstract class AbstractDatabaseDeleteCommand<ENTITY extends IBusinessObject<ID>, ID>
-        extends AbstractDatabaseCommand<ENTITY, ID> implements
-        IDeleteCommand<ENTITY, ID>
+public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>, I>
+        extends AbstractDatabaseCommand<E, I> implements
+        IDeleteCommand<E, I>
 {
     protected AbstractDatabaseDeleteCommand(
-            Class<? extends ENTITY> typeParameterClass, IDBCommandContext context)
+            Class<? extends E> typeParameterClass, IDBCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
     }
 
     @Override
-    public ENTITY delete(ENTITY entity)
+    public E delete(E entity)
     {
 
-        ID id = entity.identity();
+        I id = entity.identity();
 
         return deleteById(id);
     }
 
 
     @Override
-    public ENTITY deleteById(ID id)
+    public E deleteById(I id)
     {
         transactionBegin();
 
-        ENTITY entity = find(id);
+        E entity = find(id);
 
         if (entity != null) {
             getEntityManager().remove(entity);

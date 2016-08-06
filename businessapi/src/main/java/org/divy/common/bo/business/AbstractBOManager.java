@@ -1,16 +1,16 @@
 package org.divy.common.bo.business;
 
-import java.util.List;
-
 import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.query.IQuery;
 
-public class AbstractBOManager<ENTITY extends IBusinessObject<ID>, ID> implements IBOManager<ENTITY,ID>{
+import java.util.List;
 
-    IBORepository<ENTITY, ID> repository;
+public class AbstractBOManager<E extends IBusinessObject<I>, I> implements IBOManager<E, I> {
 
-    public AbstractBOManager(IBORepository<ENTITY, ID> repository){
+    IBORepository<E, I> repository;
+
+    public AbstractBOManager(IBORepository<E, I> repository) {
         this.repository = repository;
     }
 
@@ -18,42 +18,42 @@ public class AbstractBOManager<ENTITY extends IBusinessObject<ID>, ID> implement
         this.repository = createRepository();
     }
 
-    protected IBORepository<ENTITY, ID> createRepository() {
+    protected IBORepository<E, I> createRepository() {
         return null;
     }
 
     @Override
-    public ENTITY create(ENTITY businessObject) {
+    public E create(E businessObject) {
         return repository.create(businessObject);
     }
 
     @Override
-    public ENTITY update(ENTITY businessObject) {
+    public E update(E businessObject) {
         return repository.update(businessObject);
     }
 
     @Override
-    public ENTITY delete(ENTITY businessObject) {
+    public E delete(E businessObject) {
         return repository.delete(businessObject);
     }
 
     @Override
-    public List<ENTITY> list() {
+    public List<E> list() {
         return repository.list();
     }
 
     @Override
-    public List<ENTITY> search(IQuery businessObjectQuery) {
+    public List<E> search(IQuery businessObjectQuery) {
         return repository.search(businessObjectQuery);
     }
 
     @Override
-    public ENTITY deleteById(ID id) {
+    public E deleteById(I id) {
         return repository.deleteById(id);
     }
 
     @Override
-    public ENTITY get(ID identity) {
+    public E get(I identity) {
         return repository.get(identity);
     }
 

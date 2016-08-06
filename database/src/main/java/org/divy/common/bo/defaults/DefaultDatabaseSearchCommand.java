@@ -3,24 +3,24 @@
  */
 package org.divy.common.bo.defaults;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.AbstractDatabaseSearchCommand;
+import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.IDBCommandContext;
 
 /**
  * @author Divyakumar
  *
  */
-public class DefaultDatabaseSearchCommand<ENTITY extends IBusinessObject<ID>, ID>
+public class DefaultDatabaseSearchCommand<E extends IBusinessObject<I>, I>
         extends
-        AbstractDatabaseSearchCommand<ENTITY, ID> {
+        AbstractDatabaseSearchCommand<E, I> {
 
     /**
      * @param entityClass
      * @param context
      */
-    public DefaultDatabaseSearchCommand(Class<? extends ENTITY> entityClass,
-            IDBCommandContext context) {
+    public DefaultDatabaseSearchCommand(Class<? extends E> entityClass,
+                                        IDBCommandContext context) {
         super(entityClass, context);
     }
 

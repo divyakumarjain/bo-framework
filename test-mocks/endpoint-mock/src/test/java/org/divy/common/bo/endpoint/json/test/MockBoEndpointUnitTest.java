@@ -2,14 +2,13 @@ package org.divy.common.bo.endpoint.json.test;
 
 import com.google.inject.RuntimeTypeLiteral;
 import com.google.inject.TypeLiteral;
-
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.endpoint.AbstractBOEndpoint;
 import org.divy.common.bo.endpoint.test.AbstractBOEndpointUnitTest;
 import org.divy.common.bo.endpoint.test.InMemoryBOManager;
 
-import java.util.*;
+import java.util.UUID;
 
 public class MockBoEndpointUnitTest extends AbstractBOEndpointUnitTest<MockEntity, UUID> {
 
@@ -39,7 +38,7 @@ public class MockBoEndpointUnitTest extends AbstractBOEndpointUnitTest<MockEntit
 
     @Override
     protected MockBoEndpoint createEndpointInstance() {
-        return new MockBoEndpoint();
+        return new MockBoEndpoint(new InMemoryBOManager<MockEntity, UUID>());
     }
 
     @Override

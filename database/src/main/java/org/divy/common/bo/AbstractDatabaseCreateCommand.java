@@ -1,21 +1,22 @@
 package org.divy.common.bo;
 
-import java.util.Calendar;
-import java.util.UUID;
 import org.divy.common.bo.command.ICreateCommand;
 
-public abstract class AbstractDatabaseCreateCommand<ENTITY extends AbstractBusinessObject>
-        extends AbstractDatabaseCommand<ENTITY, UUID> implements
-        ICreateCommand<ENTITY, UUID>
+import java.util.Calendar;
+import java.util.UUID;
+
+public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessObject>
+        extends AbstractDatabaseCommand<E, UUID> implements
+        ICreateCommand<E, UUID>
 {
     protected AbstractDatabaseCreateCommand(
-            Class<? extends ENTITY> typeParameterClass, IDBCommandContext context)
+            Class<? extends E> typeParameterClass, IDBCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
     }
 
-    protected void persist(ENTITY entity)
+    protected void persist(E entity)
     {
         doPersist(entity);
     }
@@ -23,7 +24,7 @@ public abstract class AbstractDatabaseCreateCommand<ENTITY extends AbstractBusin
     /**
      * @param entity
      */
-    private void doPersist(ENTITY entity) {
+    private void doPersist(E entity) {
         transactionBegin();
         entity.setCreateTimestamp(Calendar.getInstance());
         getEntityManager().merge(entity);
@@ -31,7 +32,8 @@ public abstract class AbstractDatabaseCreateCommand<ENTITY extends AbstractBusin
         transactionCommit();
     }
 
-    public ENTITY create(ENTITY entity)
+    @Override
+    public E create(E entity)
     {
         persist(entity);
         return entity;

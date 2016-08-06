@@ -1,15 +1,14 @@
 package org.divy.common.rest.builder;
 
-import java.io.Serializable;
-import java.util.Collection;
-
-import javax.ws.rs.core.Response;
-
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.rest.RESTEntityURLBuilder;
 
-public class ReadEntityResponseBuilder<T extends IBusinessObject<ID>,ID extends Serializable> extends ResponseEntityBuilder<T> {
-    RESTEntityURLBuilder<T,ID> entityURLBuilder;
+import javax.ws.rs.core.Response;
+import java.io.Serializable;
+import java.util.Collection;
+
+public class ReadEntityResponseBuilder<T extends IBusinessObject<I>, I extends Serializable> extends ResponseEntityBuilder<T> {
+    RESTEntityURLBuilder<T, I> entityURLBuilder;
 
     public ReadEntityResponseBuilder(T entity) {
         setEntity(entity);
@@ -29,11 +28,11 @@ public class ReadEntityResponseBuilder<T extends IBusinessObject<ID>,ID extends 
         return super.build();
     }
 
-    public RESTEntityURLBuilder<T,ID> getEntityURLBuilder() {
+    public RESTEntityURLBuilder<T, I> getEntityURLBuilder() {
         return entityURLBuilder;
     }
 
-    public void setEntityURLBuilder(RESTEntityURLBuilder<T,ID> entityURLBuilder) {
+    public void setEntityURLBuilder(RESTEntityURLBuilder<T, I> entityURLBuilder) {
         this.entityURLBuilder = entityURLBuilder;
     }
 }

@@ -1,25 +1,26 @@
 package org.divy.common.bo;
 
-import java.util.Calendar;
-import java.util.UUID;
 import org.divy.common.bo.command.IUpdateCommand;
 
+import java.util.Calendar;
+import java.util.UUID;
 
-public abstract class AbstractDatabaseUpdateCommand<ENTITY extends AbstractBusinessObject>
-        extends AbstractDatabaseCommand<ENTITY, UUID> implements
-        IUpdateCommand<ENTITY, UUID>
+
+public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessObject>
+        extends AbstractDatabaseCommand<E, UUID> implements
+        IUpdateCommand<E, UUID>
 {
     protected AbstractDatabaseUpdateCommand(
-            Class<? extends ENTITY> typeParameterClass,IDBCommandContext context)
+            Class<? extends E> typeParameterClass, IDBCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
     }
 
-    protected abstract void merge(ENTITY source, ENTITY target);
+    protected abstract void merge(E source, E target);
 
     @Override
-    public ENTITY update(ENTITY entity)
+    public E update(E entity)
     {
         return doUpdate(entity);
     }
@@ -28,11 +29,11 @@ public abstract class AbstractDatabaseUpdateCommand<ENTITY extends AbstractBusin
      * @param entity
      * @return
      */
-    private ENTITY doUpdate(ENTITY entity) {
+    private E doUpdate(E entity) {
 
         transactionBegin();
 
-        ENTITY fromPersistence = getEntityManager().getReference(
+        E fromPersistence = getEntityManager().getReference(
                 getEntityType(), entity.identity());
 
         merge(entity, fromPersistence);

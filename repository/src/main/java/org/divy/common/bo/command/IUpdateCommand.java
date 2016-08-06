@@ -1,8 +1,8 @@
 package org.divy.common.bo.command;
 
 
-public interface IUpdateCommand <ENTITY,ID> extends ICommand
+public interface IUpdateCommand<E, I> extends ICommand
 {
-    ENTITY update(ENTITY user);
+    E update(E user);
 
 }

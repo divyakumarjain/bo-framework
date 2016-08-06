@@ -11,16 +11,16 @@ import org.divy.common.bo.IDBCommandContext;
  * @author Divyakumar
  *
  */
-public class DefaultDatabaseCreateCommand<ENTITY extends AbstractBusinessObject>
+public class DefaultDatabaseCreateCommand<E extends AbstractBusinessObject>
         extends
-        AbstractDatabaseCreateCommand<ENTITY> {
+        AbstractDatabaseCreateCommand<E> {
 
     /**
      * @param entityClass
      * @param context
      */
-    public DefaultDatabaseCreateCommand(Class<? extends ENTITY> entityClass,
-            IDBCommandContext context) {
+    public DefaultDatabaseCreateCommand(Class<? extends E> entityClass,
+                                        IDBCommandContext context) {
         super(entityClass, context);
     }
 
@@ -30,7 +30,7 @@ public class DefaultDatabaseCreateCommand<ENTITY extends AbstractBusinessObject>
      * @see org.divy.common.bo.command.ICreateCommand#create(java.lang.Object)
      */
     @Override
-    public ENTITY create(ENTITY entity) {
+    public E create(E entity) {
 
         persist(entity);
         return entity;

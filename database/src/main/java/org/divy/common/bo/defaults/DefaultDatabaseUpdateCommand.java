@@ -13,26 +13,23 @@ import org.divy.common.bo.mapper.defaults.DefaultBOMapper;
  * @author Divyakumar
  *
  */
-public class DefaultDatabaseUpdateCommand<ENTITY extends AbstractBusinessObject>
+public class DefaultDatabaseUpdateCommand<E extends AbstractBusinessObject>
         extends
-        AbstractDatabaseUpdateCommand<ENTITY> {
+        AbstractDatabaseUpdateCommand<E> {
+
+    IBOMapper<E, E> mapper;
 
     /**
      * @param typeParameterClass
      * @param context
      */
     public DefaultDatabaseUpdateCommand(
-            Class<ENTITY> typeParameterClass,
+            Class<E> typeParameterClass,
             IDBCommandContext context) {
         super(typeParameterClass, context);
 
         mapper = new DefaultBOMapper<>(typeParameterClass,typeParameterClass);
     }
-
-    IBOMapper<ENTITY,ENTITY> mapper;
-
-
-
 
     /*
      * (non-Javadoc)
@@ -42,7 +39,7 @@ public class DefaultDatabaseUpdateCommand<ENTITY extends AbstractBusinessObject>
      * .divy.common.bo.IBusinessObject, org.divy.common.bo.IBusinessObject)
      */
     @Override
-    protected void merge(ENTITY source, ENTITY target) {
+    protected void merge(E source, E target) {
         if(source != target)
             mapper.mapToBO(source, target);
     }

@@ -3,26 +3,26 @@ package org.divy.common.bo.query.defaults;
 import org.divy.common.bo.query.IEqualTo;
 
 
-public class EqualTo<ATTRIBUTE> implements IEqualTo<ATTRIBUTE> {
+public class EqualTo<A> implements IEqualTo<A> {
 
-    private ATTRIBUTE value;
+    private A value;
 
     public EqualTo() {
         super();
     }
 
-    public EqualTo(ATTRIBUTE value) {
+    public EqualTo(A value) {
         super();
         this.value = value;
     }
 
-    public void setValue(ATTRIBUTE value) {
-        this.value = value;
+    @Override
+    public A getValue() {
+        return value;
     }
 
-    @Override
-    public ATTRIBUTE getValue() {
-        return value;
+    public void setValue(A value) {
+        this.value = value;
     }
 
 }

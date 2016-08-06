@@ -1,7 +1,8 @@
-package org.divy.common.bo.endpoint.association;
+package org.divy.common.bo.endpoint.association.builder;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.InvocationHandler;
+import org.divy.common.bo.endpoint.association.Reader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

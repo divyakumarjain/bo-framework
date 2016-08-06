@@ -1,5 +1,5 @@
 package org.divy.common.bo.query;
 
-public interface IGreaterThanEqualToComparison<ATTRIBUTE> {
-    ATTRIBUTE getValue();
+public interface IGreaterThanEqualToComparison<A> {
+    A getValue();
 }

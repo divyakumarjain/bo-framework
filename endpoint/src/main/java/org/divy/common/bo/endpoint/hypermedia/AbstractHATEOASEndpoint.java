@@ -3,16 +3,10 @@
  */
 package org.divy.common.bo.endpoint.hypermedia;
 
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
-import org.divy.common.bo.endpoint.association.AbstractAssociations;
 import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
+import org.divy.common.bo.endpoint.association.AbstractAssociations;
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilder;
@@ -23,30 +17,34 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
- * 
+ * The Abstract implementation for HATEOAS based Business Object management Endpoint  
  * @author Divyakumar
+ * @param <E> The Business Object Entity
+ * @param <R> The HATEOAS representation of Business Object entity
  *
  */
-public abstract class AbstractHATEOASEndpoint <ENTITY extends IBusinessObject<UUID>,
-		REPRESENTATION extends AbstractRepresentation,
-		UUID extends Serializable>
-        extends AbstractCRUDEndpoint<REPRESENTATION, UUID> {
+public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>,
+        R extends AbstractRepresentation,
+        I extends Serializable>
+        extends AbstractCRUDEndpoint<R, I> {
 
-    public AbstractHATEOASEndpoint() {
-    }
-
-    public abstract IBOManager<ENTITY, UUID> getManager();
+    public abstract IBOManager<E, I> getManager();
 
 	@Override
-	protected String identity(REPRESENTATION representation) {
-		return representation.identity().toString();
+    protected String identity(R representation) {
+        return representation.identity().toString();
 	}
 
 	@Override
-	protected REPRESENTATION doRead(UUID UUID) {
-        ENTITY businessObject = getManager().get(UUID);
+    protected R doRead(I id) {
+        E businessObject = getManager().get(id);
         
         if(businessObject == null) {
             throw new NotFoundException("Could not find the entity");
@@ -56,30 +54,30 @@ public abstract class AbstractHATEOASEndpoint <ENTITY extends IBusinessObject<UU
 	}
 
 	@Override
-	protected REPRESENTATION doCreate(REPRESENTATION representation) {
-		return getRepresentationMapper().createFromBO(getManager().create(getRepresentationMapper().createBO(representation)));
+    protected R doCreate(R representation) {
+        return getRepresentationMapper().createFromBO(getManager().create(getRepresentationMapper().createBO(representation)));
 	}
 
 	@Override
-	protected REPRESENTATION doUpdate( REPRESENTATION representation) {
-		return getRepresentationMapper().createFromBO(getManager().update(getRepresentationMapper().createBO(representation)));
+    protected R doUpdate(R representation) {
+        return getRepresentationMapper().createFromBO(getManager().update(getRepresentationMapper().createBO(representation)));
 	}
 
 	@Override
-	protected void doDelete(REPRESENTATION representation) {
+    protected void doDelete(R representation) {
         getManager().delete(getRepresentationMapper().createBO(representation));
 	}
 
 	@Override
-	protected REPRESENTATION doDelete(UUID UUID) {
-		return getRepresentationMapper().createFromBO(getManager().deleteById(UUID));
-	}
+    protected R doDelete(I id) {
+        return getRepresentationMapper().createFromBO(getManager().deleteById(id));
+    }
 
 	@Override
-	protected Collection<REPRESENTATION> doList() {
-        Collection<ENTITY> boList = getManager().list();
+    protected Collection<R> doList() {
+        Collection<E> boList = getManager().list();
 
-        Collection<ENTITY> resultList = new ArrayList<>();
+        Collection<E> resultList = new ArrayList<>();
 
         resultList.addAll(boList);
 
@@ -87,10 +85,10 @@ public abstract class AbstractHATEOASEndpoint <ENTITY extends IBusinessObject<UU
 	}
 
 	@Override
-	protected Collection<REPRESENTATION> doSearch(IQuery query) {
-        Collection<ENTITY> boList = getManager().search(query);
+    protected Collection<R> doSearch(IQuery query) {
+        Collection<E> boList = getManager().search(query);
 
-        Collection<ENTITY> resultList = new ArrayList<>();
+        Collection<E> resultList = new ArrayList<>();
 
 		resultList.addAll(boList);
 
@@ -100,8 +98,8 @@ public abstract class AbstractHATEOASEndpoint <ENTITY extends IBusinessObject<UU
 
     @PUT
     @Path("/{id}/{relation}")
-    public Response updateRelation(@NotNull @PathParam("id") UUID id,
-                                   @PathParam("relation")String relation,
+    public Response updateRelation(@NotNull @PathParam("id") I id,
+                                   @NotNull @PathParam("relation") String relation,
                                    @Context UriInfo uriInfo) {
         //TODO Implement
         return Response.noContent().build();
@@ -110,18 +108,16 @@ public abstract class AbstractHATEOASEndpoint <ENTITY extends IBusinessObject<UU
     @GET
     @Path("/{id}/{relation}")
     @Produces({ MediaType.APPLICATION_JSON })
-    public Response readRelation(@NotNull @PathParam("id") UUID id,
-            @PathParam("relation")String relation,
-            @Context UriInfo uriInfo) {
+    public Response readRelation(@NotNull @PathParam("id") I id,
+                                 @PathParam("relation")String relation,
+                                 @Context UriInfo uriInfo) {
 
-    	ENTITY entity = getManager().get(id);
-        
-    	Object entityRelation = null;
+        E entity = getManager().get(id);
+
+        Object entityRelation = null;
         try {
-			entityRelation = this.getAssociations().getAssociation(relation).getReader().read(entity);
-		} catch (InvocationTargetException e) {
-			throw new InternalServerErrorException(e);
-		} catch (IllegalAccessException e) {
+            entityRelation = this.getAssociations().getAssociation(relation).read(entity);
+        } catch (InvocationTargetException | IllegalAccessException e) {
             throw new InternalServerErrorException(e);
 		}
 
@@ -134,10 +130,18 @@ public abstract class AbstractHATEOASEndpoint <ENTITY extends IBusinessObject<UU
 
     @POST
     @Path("/{id}/{relation}")
-    public Response createRelation(@NotNull @PathParam("id") UUID id,
+    public Response createRelation(@NotNull @PathParam("id") I id,
                                    @PathParam("relation")String relation,
                                    @Context UriInfo uriInfo) {
 
+        E businessObject = getManager().get(id);
+
+        if (businessObject == null) {
+            throw new NotFoundException("Could not find the entity");
+        }
+
+//        this.getAssociations().getAssociation(relation).
+        
         Object createdBo = null;
         URI createLocation = null;
 
@@ -154,7 +158,7 @@ public abstract class AbstractHATEOASEndpoint <ENTITY extends IBusinessObject<UU
         return Response.created(createLocation).build();
     }
 
-    public abstract HATEOASMapper<ENTITY, REPRESENTATION> getRepresentationMapper();
+    public abstract HATEOASMapper<E, R> getRepresentationMapper();
 
-	public abstract AbstractAssociations<ENTITY> getAssociations();
+    public abstract AbstractAssociations<E> getAssociations();
 }

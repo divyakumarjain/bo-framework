@@ -23,7 +23,7 @@ TODO
 ----
 1. In Progress - Complete implementation and Unit test of REST API layer
 	a. Done - Relationship navigation using read method on entity
-	b. Relationship navigation using read method from another endpoint.
+	b. Relationship navigation using method on managers.
 2. Support PUT and POST method on the relationship endpoint.
 2. DAL Layer
 

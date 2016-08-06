@@ -3,12 +3,12 @@ package org.divy.common.bo.defaults;
 import org.divy.common.bo.AbstractBODatabaseRepository;
 import org.divy.common.bo.IBusinessObject;
 
-public class DefaultDatabaseRepository<ENTITY extends IBusinessObject<ID>,ID> extends
-        AbstractBODatabaseRepository<ENTITY, ID> {
+public class DefaultDatabaseRepository<E extends IBusinessObject<I>, I> extends
+        AbstractBODatabaseRepository<E, I> {
 
     public DefaultDatabaseRepository(String persistentUnitName,
-            Class<ENTITY> entityClass){
-        setCommandProvider(new DefaultDBCommandProvider<ENTITY, ID>(persistentUnitName, entityClass));
+                                     Class<E> entityClass) {
+        setCommandProvider(new DefaultDBCommandProvider<E, I>(persistentUnitName, entityClass));
     }
 
 }

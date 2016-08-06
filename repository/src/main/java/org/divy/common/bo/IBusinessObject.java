@@ -9,14 +9,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Divyakumar
  *
  */
-public interface IBusinessObject<ID> {
+public interface IBusinessObject<I> {
 
     @XmlTransient
-    ID identity();
+    I identity();
 
     /**
      * update object with the copy
      * @param entity
      */
-    void update(IBusinessObject<ID> entity);
+    void update(IBusinessObject<I> entity);
 }

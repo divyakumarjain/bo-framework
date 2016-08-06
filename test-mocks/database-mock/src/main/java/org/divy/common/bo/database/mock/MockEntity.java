@@ -1,27 +1,15 @@
 package org.divy.common.bo.database.mock;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.UUID;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.xml.bind.annotation.XmlRootElement;
-
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.IBusinessObject;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @XmlRootElement
@@ -29,10 +17,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonAutoDetect(fieldVisibility=Visibility.NONE,getterVisibility=Visibility.NONE)
 public class MockEntity extends AbstractBusinessObject {
 
-
-
-    public MockEntity() {
-    }
+    private String name;
+    private MockEntity parentEntity;
+    // @JsonManagedReference
+    private List<MockEntity> childEntities;
 
     /**
      * update object with the copy
@@ -59,15 +47,6 @@ public class MockEntity extends AbstractBusinessObject {
     public UUID identity() {
         return getUuid();
     }
-
-
-    private String name;
-
-    private MockEntity parentEntity;
-
-
-    // @JsonManagedReference
-    private List<MockEntity> childEntities;
 
     @PrimaryKeyJoinColumn
     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, targetEntity = MockEntity.class)

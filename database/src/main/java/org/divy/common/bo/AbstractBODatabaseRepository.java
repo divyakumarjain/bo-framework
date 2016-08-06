@@ -1,42 +1,42 @@
 package org.divy.common.bo;
 
-import java.util.List;
-
 import org.divy.common.bo.query.IQuery;
 
+import java.util.List;
 
-public class AbstractBODatabaseRepository<ENTITY extends IBusinessObject<ID>, ID>
-        implements IBORepository<ENTITY, ID>
+
+public class AbstractBODatabaseRepository<E extends IBusinessObject<I>, I>
+        implements IBORepository<E, I>
 {
 
-    private ICommandProvider<ENTITY, ID> commandProvider;
+    private ICommandProvider<E, I> commandProvider;
 
-    protected void setCommandProvider(ICommandProvider<ENTITY, ID> commandProvider)
+    protected void setCommandProvider(ICommandProvider<E, I> commandProvider)
     {
         this.commandProvider = commandProvider;
     }
 
     @Override
-    public ENTITY create(ENTITY entity)
+    public E create(E entity)
     {
         return commandProvider.getCreateCommand().create(entity);
     }
 
     @Override
-    public ENTITY update(ENTITY entity)
+    public E update(E entity)
     {
         return commandProvider.getUpdateCommand().update(entity);
     }
 
 
     @Override
-    public List<ENTITY> search(IQuery query)
+    public List<E> search(IQuery query)
     {
         return commandProvider.getSearchCommand().search(query);
     }
 
     @Override
-    public ENTITY get(ID identity)
+    public E get(I identity)
     {
         return commandProvider.getGetCommand().get(identity);
     }
@@ -47,12 +47,12 @@ public class AbstractBODatabaseRepository<ENTITY extends IBusinessObject<ID>, ID
      * @see org.divy.common.bo.IBOManager#deleteById(java.lang.Object)
      */
     @Override
-    public ENTITY deleteById(ID id) {
+    public E deleteById(I id) {
         return commandProvider.getDeleteCommand().deleteById(id);
     }
 
     @Override
-    public ENTITY delete(ENTITY entity) {
+    public E delete(E entity) {
         return commandProvider.getDeleteCommand().delete(entity);
     }
 
@@ -62,7 +62,7 @@ public class AbstractBODatabaseRepository<ENTITY extends IBusinessObject<ID>, ID
      * @see org.divy.common.bo.IBOManager#list()
      */
     @Override
-    public List<ENTITY> list() {
+    public List<E> list() {
         return commandProvider.getSearchCommand().search(null);
     }
 }

@@ -28,6 +28,7 @@
         <glassfish-el.version>2.2.6</glassfish-el.version>
         <isRelease>false</isRelease>
         <sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
+        <sonar.host.url>http://192.168.99.100:9000</sonar.host.url>
     </properties>
 
     <build>
@@ -144,6 +145,11 @@
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-mapper</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-query</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>

@@ -3,25 +3,25 @@ package org.divy.common.bo.query.defaults;
 import org.divy.common.bo.query.INotEqualToComparison;
 
 
-public class NotEqualToComparison<ATTRIBUTE> implements INotEqualToComparison<ATTRIBUTE> {
+public class NotEqualToComparison<A> implements INotEqualToComparison<A> {
 
-    private ATTRIBUTE value;
+    private A value;
 
     public NotEqualToComparison() {
         super();
     }
 
-    public NotEqualToComparison(ATTRIBUTE value) {
+    public NotEqualToComparison(A value) {
         super();
         this.value = value;
     }
 
-    public void setValue(ATTRIBUTE value) {
-        this.value = value;
+    @Override
+    public A getValue() {
+        return value;
     }
 
-    @Override
-    public ATTRIBUTE getValue() {
-        return value;
+    public void setValue(A value) {
+        this.value = value;
     }
 }

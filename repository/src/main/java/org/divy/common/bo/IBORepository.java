@@ -1,24 +1,24 @@
 package org.divy.common.bo;
 
-import java.util.List;
-
 import org.divy.common.bo.query.IQuery;
 
+import java.util.List;
 
-public interface IBORepository<ENTITY extends IBusinessObject<ID>, ID>
+
+public interface IBORepository<E extends IBusinessObject<I>, I>
 {
-    ENTITY create(ENTITY businessObject);
+    E create(E businessObject);
 
-    ENTITY update(ENTITY businessObject);
+    E update(E businessObject);
 
-    ENTITY delete(ENTITY businessObject);
+    E delete(E businessObject);
 
-    List<ENTITY> list();
+    List<E> list();
 
-    List<ENTITY> search(IQuery businessObjectQuery);
+    List<E> search(IQuery businessObjectQuery);
 
-    ENTITY deleteById(ID id);
+    E deleteById(I id);
 
-    ENTITY get(ID identity);
+    E get(I identity);
 
 }
