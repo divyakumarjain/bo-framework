@@ -15,9 +15,9 @@ public class RESTEntityURLBuilder<T extends IBusinessObject<I>, I extends Serial
 
     final Map<Class<T>, Class<? extends AbstractCRUDEndpoint<T, I>>> entityEndPointMap = new HashMap<>();
     @Inject
-    LinkBuilderFactory linkBuilderFactory;
+    LinkBuilderFactoryImpl linkBuilderFactory;
 
-    public RESTEntityURLBuilder(LinkBuilderFactory linkBuilderFactory) {
+    public RESTEntityURLBuilder(LinkBuilderFactoryImpl linkBuilderFactory) {
         this.linkBuilderFactory = linkBuilderFactory;
     }
 

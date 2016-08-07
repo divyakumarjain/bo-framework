@@ -24,7 +24,7 @@ public class LinkBuilder {
      * @param basePath The base bath to use in the URI link. May be {@code null}.
      * @throws IllegalArgumentException If the scheme or host is {@code null}, empty, or blank.
      */
-    LinkBuilder(String scheme, String host, String basePath) {
+    public LinkBuilder(String scheme, String host, String basePath) {
         if (StringUtils.isBlank(scheme)) {
             throw new IllegalArgumentException("Scheme must not be null or blank");
         }

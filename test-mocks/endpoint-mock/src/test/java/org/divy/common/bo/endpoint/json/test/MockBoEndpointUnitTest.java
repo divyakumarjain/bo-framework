@@ -7,6 +7,7 @@ import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.endpoint.AbstractBOEndpoint;
 import org.divy.common.bo.endpoint.test.AbstractBOEndpointUnitTest;
 import org.divy.common.bo.endpoint.test.InMemoryBOManager;
+import org.divy.common.bo.endpoint.test.MockLinkBuilderFactory;
 
 import java.util.UUID;
 
@@ -38,7 +39,7 @@ public class MockBoEndpointUnitTest extends AbstractBOEndpointUnitTest<MockEntit
 
     @Override
     protected MockBoEndpoint createEndpointInstance() {
-        return new MockBoEndpoint(new InMemoryBOManager<MockEntity, UUID>());
+        return new MockBoEndpoint(new InMemoryBOManager<MockEntity, UUID>(), new MockLinkBuilderFactory("http", "localhost:8080", ""));
     }
 
     @Override

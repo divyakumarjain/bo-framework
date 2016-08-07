@@ -14,14 +14,6 @@ public class AbstractBOManager<E extends IBusinessObject<I>, I> implements IBOMa
         this.repository = repository;
     }
 
-    public AbstractBOManager(){
-        this.repository = createRepository();
-    }
-
-    protected IBORepository<E, I> createRepository() {
-        return null;
-    }
-
     @Override
     public E create(E businessObject) {
         return repository.create(businessObject);

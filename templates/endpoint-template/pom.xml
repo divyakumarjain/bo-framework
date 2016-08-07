@@ -27,17 +27,17 @@
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
             <artifactId>jersey-metainf-services</artifactId>
-            <version>${jersey-version}</version>
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
 			<groupId>org.glassfish.jersey.ext</groupId>
 			<artifactId>jersey-declarative-linking</artifactId>
-			<version>${jersey-version}</version>
+			<version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.bundles.repackaged</groupId>
             <artifactId>jersey-guava</artifactId>
-            <version>${jersey-version}</version>
+            <version>${jersey.version}</version>
         </dependency>
 
         <dependency>

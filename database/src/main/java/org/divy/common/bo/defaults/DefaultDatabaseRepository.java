@@ -8,7 +8,7 @@ public class DefaultDatabaseRepository<E extends IBusinessObject<I>, I> extends
 
     public DefaultDatabaseRepository(String persistentUnitName,
                                      Class<E> entityClass) {
-        setCommandProvider(new DefaultDBCommandProvider<E, I>(persistentUnitName, entityClass));
+        super(new DefaultDBCommandProvider<E, I>(persistentUnitName, entityClass));
     }
 
 }

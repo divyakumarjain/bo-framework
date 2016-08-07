@@ -19,10 +19,7 @@ public class MockBODBRepository extends
      *
      */
     public MockBODBRepository() {
-        ICommandProvider<MockEntity, UUID> commandProvider
-            =  new DefaultDBCommandProvider<>("org.divy.task",MockEntity.class);
-
-        setCommandProvider(commandProvider);
+        super(new DefaultDBCommandProvider<>("org.divy.task",MockEntity.class));
     }
 
 }

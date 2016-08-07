@@ -7,6 +7,7 @@ package org.divy.common.bo.endpoint;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.query.IQuery;
+import org.divy.common.rest.LinkBuilderFactory;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -33,7 +34,8 @@ public abstract class AbstractBOEndpoint<E extends IBusinessObject<I>, I extends
      * @param manager the manger instance responsible for management for Business Object entity
      */
     @Inject
-    public AbstractBOEndpoint(IBOManager<E, I> manager) {
+    public AbstractBOEndpoint(IBOManager<E, I> manager, LinkBuilderFactory linkBuilderFactory) {
+        super(linkBuilderFactory);
         this.manager = manager;
     }
 

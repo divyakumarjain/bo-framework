@@ -4,9 +4,10 @@ import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.bo.mapper.IBOMapper;
-import org.divy.common.bo.mapper.defaults.DefaultBOMapper;
 import org.divy.common.bo.query.IQuery;
+import org.divy.common.rest.LinkBuilderFactoryImpl;
 
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -17,11 +18,9 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
 
     private IBOManager<E, I> manager;
 
-    public AbstractEntityPresentationService(Class<E> businessObjectType, Class<VO> otherObjectType) {
-        mapper = createMapper(businessObjectType, otherObjectType);
-    }
-
-    public AbstractEntityPresentationService(IBOMapper<E, VO> mapper) {
+    @Inject
+    public AbstractEntityPresentationService(IBOMapper<E, VO> mapper, LinkBuilderFactoryImpl linkBuilderFactory) {
+        super(linkBuilderFactory);
         this.mapper = mapper;
     }
 
@@ -33,9 +32,6 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
         this.manager = manager;
     }
 
-    protected IBOMapper<E, VO> createMapper(Class<E> businessObjectType, Class<VO> otherObjectType) {
-        return new DefaultBOMapper<>(businessObjectType, otherObjectType);
-    }
 
     @Override
     protected E doRead(I id) {

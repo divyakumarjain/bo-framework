@@ -2,6 +2,7 @@ package org.divy.common.bo;
 
 import org.divy.common.bo.query.IQuery;
 
+import javax.inject.Inject;
 import java.util.List;
 
 
@@ -10,6 +11,11 @@ public class AbstractBODatabaseRepository<E extends IBusinessObject<I>, I>
 {
 
     private ICommandProvider<E, I> commandProvider;
+
+    @Inject
+    public AbstractBODatabaseRepository(ICommandProvider<E, I> commandProvider) {
+        this.commandProvider = commandProvider;
+    }
 
     protected void setCommandProvider(ICommandProvider<E, I> commandProvider)
     {

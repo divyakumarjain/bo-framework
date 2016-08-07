@@ -2,8 +2,8 @@ package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.bo.query.defaults.Query;
-import org.divy.common.rest.LinkBuilder;
 import org.divy.common.rest.LinkBuilderFactory;
+import org.divy.common.rest.LinkBuilder;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -18,10 +18,12 @@ import java.util.Collection;
 
 public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
 
-	@Inject
+
 	protected LinkBuilderFactory linkBuilderFactory;
 
-	public AbstractCRUDEndpoint() {
+    @Inject
+	public AbstractCRUDEndpoint(LinkBuilderFactory linkBuilderFactory) {
+        this.linkBuilderFactory = linkBuilderFactory;
     }
 
     @POST

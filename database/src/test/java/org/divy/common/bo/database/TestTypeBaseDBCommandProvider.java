@@ -5,11 +5,7 @@ import org.divy.common.bo.ICommandProvider;
 import org.divy.common.bo.TypeBaseDBCommandProvider;
 import org.divy.common.bo.IDBCommandContext;
 import org.divy.common.bo.context.DatabaseContext;
-import org.divy.common.bo.database.mock.MockCreateCommand;
-import org.divy.common.bo.database.mock.MockDeleteCommand;
-import org.divy.common.bo.database.mock.MockEntity;
-import org.divy.common.bo.database.mock.MockGetCommand;
-import org.divy.common.bo.database.mock.MockUpdateCommand;
+import org.divy.common.bo.database.mock.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,12 +19,12 @@ public class TestTypeBaseDBCommandProvider {
     {
         commandContext = new DatabaseContext("");
 
-        TypeBaseDBCommandProvider<MockEntity, UUID> commandProvider = new TypeBaseDBCommandProvider<>("");
-
-        commandProvider.setGetCommandType(MockGetCommand.class);
-        commandProvider.setUpdateCommandType(MockUpdateCommand.class);
-        commandProvider.setDeleteCommandType(MockDeleteCommand.class);
-        commandProvider.setCreateCommandType(MockCreateCommand.class);
+        TypeBaseDBCommandProvider<MockEntity, UUID> commandProvider = new TypeBaseDBCommandProvider<>("",
+                MockGetCommand.class,
+                MockUpdateCommand.class,
+                MockDeleteCommand.class,
+                MockCreateCommand.class,
+                MockSearchCommand.class);
 
         commandProvider.setContext(commandContext);
 

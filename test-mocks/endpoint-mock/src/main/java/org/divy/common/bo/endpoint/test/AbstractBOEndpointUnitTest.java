@@ -13,6 +13,7 @@ import org.divy.common.bo.endpoint.AbstractBOEndpoint;
 import org.divy.common.bo.query.IQuery;
 import org.divy.common.bo.query.defaults.Query;
 import org.divy.common.bo.test.ITestDataProvider;
+import org.divy.common.rest.LinkBuilderFactory;
 import org.junit.Before;
 
 import javax.inject.Inject;
@@ -135,6 +136,7 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
                 @SuppressWarnings("unchecked")
                 Class<AbstractBOEndpoint<E, I>> endPointClass = (Class<AbstractBOEndpoint<E, I>>) getEndPointClass();
 
+                bind(LinkBuilderFactory.class).toInstance(new MockLinkBuilderFactory("http", "localhost:8080", ""));
                 bind(getEndpointTypeLiteral()).to(endPointClass);
                 bind(getManagerTypeLiteral()).toInstance(getMockManagerInstance());
                 bind(HttpServletRequest.class).toInstance(mock(HttpServletRequest.class));

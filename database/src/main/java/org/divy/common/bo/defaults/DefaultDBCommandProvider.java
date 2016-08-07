@@ -24,16 +24,16 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
     @SuppressWarnings({"unchecked", "rawtypes"})
     public DefaultDBCommandProvider(String persistentUnitName,
                                     Class<E> entityClass) {
-        super(persistentUnitName);
-
         //See below link for explaination of typecasing.
         //http://stackoverflow.com/questions/30090242/java-lang-class-generics-and-wildcards
         //http://stackoverflow.com/questions/26766704/cannot-convert-from-listlist-to-listlist
-        setGetCommandType((Class<? extends IGetCommand<E, I>>) (Class<? extends DefaultDatabaseGetCommand>) DefaultDatabaseGetCommand.class);
-        setCreateCommandType((Class<? extends ICreateCommand<E, I>>) (Class<? extends DefaultDatabaseCreateCommand>) DefaultDatabaseCreateCommand.class);
-        setDeleteCommandType((Class<? extends IDeleteCommand<E, I>>) (Class<? extends DefaultDatabaseDeleteCommand>) DefaultDatabaseDeleteCommand.class);
-        setSearchCommandType((Class<? extends ISearchCommand<E, I>>) (Class<? extends DefaultDatabaseSearchCommand>) DefaultDatabaseSearchCommand.class);
-        setUpdateCommandType((Class<? extends IUpdateCommand<E, I>>) (Class<? extends DefaultDatabaseUpdateCommand>) DefaultDatabaseUpdateCommand.class);
+
+        super(persistentUnitName,
+                (Class<? extends IGetCommand<E, I>>) (Class<? extends DefaultDatabaseGetCommand>) DefaultDatabaseGetCommand.class,
+                (Class<? extends IUpdateCommand<E, I>>) (Class<? extends DefaultDatabaseUpdateCommand>) DefaultDatabaseUpdateCommand.class,
+                (Class<? extends IDeleteCommand<E, I>>) (Class<? extends DefaultDatabaseDeleteCommand>) DefaultDatabaseDeleteCommand.class,
+                (Class<? extends ICreateCommand<E, I>>) (Class<? extends DefaultDatabaseCreateCommand>) DefaultDatabaseCreateCommand.class,
+                (Class<? extends ISearchCommand<E, I>>) (Class<? extends DefaultDatabaseSearchCommand>) DefaultDatabaseSearchCommand.class);
 
         this.entityClass = entityClass;
     }

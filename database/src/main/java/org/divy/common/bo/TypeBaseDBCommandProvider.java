@@ -19,10 +19,22 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
     private Class<? extends ICreateCommand<E, I>> createCommandType;
     private Class<? extends ISearchCommand<E, I>> searchCommandType;
 
-    public TypeBaseDBCommandProvider(String persistentUnitName)
-    {
+    public TypeBaseDBCommandProvider(String persistentUnitName,
+                                     Class<? extends IGetCommand<E, I>> getCommandType,
+                                     Class<? extends IUpdateCommand<E, I>> updateCommandType,
+                                     Class<? extends IDeleteCommand<E, I>> deleteCommandType,
+                                     Class<? extends ICreateCommand<E, I>> createCommandType,
+                                     Class<? extends ISearchCommand<E, I>> searchCommandType) {
+
         context = new DatabaseContext(persistentUnitName);
+
+        this.getCommandType = getCommandType;
+        this.updateCommandType = updateCommandType;
+        this.deleteCommandType = deleteCommandType;
+        this.createCommandType = createCommandType;
+        this.searchCommandType = searchCommandType;
     }
+
 
     public IDBCommandContext getContext() {
         return context;

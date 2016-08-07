@@ -18,16 +18,12 @@ public class MockBODBRepository extends
      *
      */
     public MockBODBRepository() {
-        TypeBaseDBCommandProvider<MockEntity, UUID> commandProvider = new TypeBaseDBCommandProvider<>(
-                "org.divy.task");
-
-        commandProvider.setGetCommandType(MockGetCommand.class);
-        commandProvider.setUpdateCommandType(MockUpdateCommand.class);
-        commandProvider.setDeleteCommandType(MockDeleteCommand.class);
-        commandProvider.setCreateCommandType(MockCreateCommand.class);
-        commandProvider.setSearchCommandType(MockSearchCommand.class);
-
-        setCommandProvider(commandProvider);
+        super(new TypeBaseDBCommandProvider<>("org.divy.task",
+                MockGetCommand.class,
+                MockUpdateCommand.class,
+                MockDeleteCommand.class,
+                MockCreateCommand.class,
+                MockSearchCommand.class));
     }
 
 }
