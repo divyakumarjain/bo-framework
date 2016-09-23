@@ -19,7 +19,7 @@ public class DefaultDatabaseDeleteCommand<E extends IBusinessObject<I>, I>
      * @param entityClass
      * @param context
      */
-    public DefaultDatabaseDeleteCommand(Class<? extends E> entityClass,
+    public DefaultDatabaseDeleteCommand(Class<E> entityClass,
                                         IDBCommandContext context) {
         super(entityClass, context);
     }

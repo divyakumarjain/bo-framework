@@ -7,7 +7,7 @@ public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>
         IDeleteCommand<E, I>
 {
     protected AbstractDatabaseDeleteCommand(
-            Class<? extends E> typeParameterClass, IDBCommandContext context)
+            Class<E> typeParameterClass, IDBCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);

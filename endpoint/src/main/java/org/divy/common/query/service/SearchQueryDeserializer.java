@@ -2,7 +2,7 @@ package org.divy.common.query.service;
 
 import java.io.IOException;
 
-import org.divy.common.bo.query.IOperator;
+import org.divy.common.bo.query.Operator;
 import org.divy.common.bo.query.defaults.EqualTo;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -13,13 +13,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 
 final class SearchQueryDeserializer extends
-        JsonDeserializer<IOperator> {
+        JsonDeserializer<Operator> {
     @Override
-    public IOperator deserialize(JsonParser jp,
-            DeserializationContext ctxt) throws IOException,
+    public Operator deserialize(JsonParser jp,
+                                DeserializationContext ctxt) throws IOException,
             JsonProcessingException {
 
-        IOperator returnOperator = null;
+        Operator returnOperator = null;
 
         ObjectCodec oc = jp.getCodec();
         JsonNode node = oc.readTree(jp);

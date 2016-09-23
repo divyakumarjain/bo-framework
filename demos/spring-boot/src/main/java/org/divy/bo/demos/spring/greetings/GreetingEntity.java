@@ -11,20 +11,6 @@ import java.util.UUID;
 @XmlRootElement
 public class GreetingEntity extends AbstractBusinessObject {
 
-    /**
-     * update object with the copy
-     *
-     * @param entity
-     */
-    @Override
-    public void update(IBusinessObject<UUID> entity) {
-        if(entity instanceof GreetingEntity) {
-            this.setGreeting(((GreetingEntity) entity).getGreeting());
-        } else {
-            throw new IllegalArgumentException("Expecting instance of Mock");
-        }
-    }
-
     private String greeting;
 
     /**
@@ -41,15 +27,38 @@ public class GreetingEntity extends AbstractBusinessObject {
         this.greeting = greeting;
     }
 
+
+    /**
+     * update object with the copy
+     *
+     * @param entity
+     */
+    @Override
+    public void update(IBusinessObject<UUID> entity) {
+        if(entity instanceof GreetingEntity) {
+            this.setGreeting(((GreetingEntity) entity).getGreeting());
+        } else {
+            throw new IllegalArgumentException("Expecting instance of Mock");
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof GreetingEntity)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof GreetingEntity)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
         GreetingEntity that = (GreetingEntity) o;
 
-        if (!getUuid().equals(that.getUuid())) return false;
+        if (!getUuid().equals(that.getUuid())) {
+            return false;
+        }
         return getGreeting() != null ? getGreeting().equals(that.getGreeting()) : that.getGreeting() == null;
 
     }

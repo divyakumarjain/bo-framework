@@ -1,8 +1,7 @@
 package org.divy.common.bo;
 
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 
-import javax.inject.Inject;
 import java.util.List;
 
 
@@ -12,7 +11,6 @@ public class AbstractBODatabaseRepository<E extends IBusinessObject<I>, I>
 
     private ICommandProvider<E, I> commandProvider;
 
-    @Inject
     public AbstractBODatabaseRepository(ICommandProvider<E, I> commandProvider) {
         this.commandProvider = commandProvider;
     }
@@ -36,7 +34,7 @@ public class AbstractBODatabaseRepository<E extends IBusinessObject<I>, I>
 
 
     @Override
-    public List<E> search(IQuery query)
+    public List<E> search(Query query)
     {
         return commandProvider.getSearchCommand().search(query);
     }

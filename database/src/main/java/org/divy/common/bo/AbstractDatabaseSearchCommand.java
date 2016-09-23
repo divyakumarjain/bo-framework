@@ -1,9 +1,9 @@
 package org.divy.common.bo;
 
 import org.divy.common.bo.command.ISearchCommand;
-import org.divy.common.bo.query.IEqualTo;
-import org.divy.common.bo.query.IOperator;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.EqualTo;
+import org.divy.common.bo.query.Operator;
+import org.divy.common.bo.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,7 +20,7 @@ public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>
         ISearchCommand<E, I>
 {
     protected AbstractDatabaseSearchCommand(
-            Class<? extends E> typeParameterClass, IDBCommandContext context)
+            Class<E> typeParameterClass, IDBCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
@@ -28,7 +28,7 @@ public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<E> search(IQuery query) {
+    public List<E> search(Query query) {
 
         CriteriaQuery<E> criteriaQuery;
 
@@ -42,15 +42,15 @@ public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>
             criteriaQuery.from(getEntityType());
         }
 
-        criteriaQuery = (CriteriaQuery<E>) createCriteriaQuery(query);
+        criteriaQuery = createCriteriaQuery(query);
 
         return getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 
-    protected CriteriaQuery<? extends E> createCriteriaQuery(
-            IQuery query) {
+    protected CriteriaQuery<E> createCriteriaQuery(
+            Query query) {
 
-        CriteriaQuery<? extends E> criteriaQuery = null;
+        CriteriaQuery<E> criteriaQuery = null;
 
         CriteriaBuilder criteriaBuilder = getEntityManager()
                 .getCriteriaBuilder();
@@ -62,7 +62,7 @@ public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>
         if(query!=null && !query.isEmpty()){
             List<Predicate> predicates = new ArrayList<>();
 
-            for (Entry<String, IOperator> entry : query.entrySet()) {
+            for (Entry<String, Operator> entry : query.entrySet()) {
             	predicates.add(createPredicate(entry,criteriaBuilder,entityRoot));
             }
             criteriaQuery.where((Predicate[]) predicates.toArray(new Predicate[predicates.size()]));
@@ -72,13 +72,13 @@ public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>
     }
 
     @SuppressWarnings("unchecked")
-    private Predicate createPredicate(Entry<String, IOperator> iOperatorEntry,
+    private Predicate createPredicate(Entry<String, Operator> iOperatorEntry,
                                       CriteriaBuilder cb, Root<? extends E> root) {
 
         Predicate returnPredicate = null;
 
-        if (iOperatorEntry.getValue() instanceof IEqualTo<?>) {
-            IEqualTo<String> equalToOperator = (IEqualTo<String>) iOperatorEntry.getValue();
+        if (iOperatorEntry.getValue() instanceof EqualTo<?>) {
+            EqualTo<String> equalToOperator = (EqualTo<String>) iOperatorEntry.getValue();
             returnPredicate = cb.equal(root.get(iOperatorEntry.getKey()),equalToOperator.getValue());
         }
 

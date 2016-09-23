@@ -7,10 +7,10 @@ import java.util.UUID;
 
 public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessObject>
         extends AbstractDatabaseCommand<E, UUID> implements
-        ICreateCommand<E, UUID>
+        ICreateCommand<E>
 {
     protected AbstractDatabaseCreateCommand(
-            Class<? extends E> typeParameterClass, IDBCommandContext context)
+            Class<E> typeParameterClass, IDBCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
@@ -27,6 +27,7 @@ public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessOb
     private void doPersist(E entity) {
         transactionBegin();
         entity.setCreateTimestamp(Calendar.getInstance());
+        entity.setLastUpdateTimestamp(Calendar.getInstance());
         getEntityManager().merge(entity);
 
         transactionCommit();

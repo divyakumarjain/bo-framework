@@ -5,14 +5,13 @@ package org.divy.common.bo.endpoint.test;
 
 import com.google.inject.servlet.GuiceFilter;
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.jetty.JettyTestContainerFactory;
 import org.glassfish.jersey.test.spi.TestContainer;
-import org.glassfish.jersey.test.spi.TestContainerException;
 import org.glassfish.jersey.test.spi.TestContainerFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -39,7 +38,7 @@ public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<
     /**
      * @param testDataProvider
      */
-    public AbstractBOEndpointContainerTest(ITestDataProvider<E, I> testDataProvider) {
+    public AbstractBOEndpointContainerTest(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
         jerseyTestProxy = new RestResourceTest();
     }
@@ -82,7 +81,7 @@ public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<
 
     @Override
     @SuppressWarnings("unchecked")
-    protected List<E> doSearchEntities(IQuery searchQuery) {
+    protected List<E> doSearchEntities(Query searchQuery) {
         return (List<E>) getEndPointTargetMethod("search").request(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.entity(getEntityListClass(),MediaType.APPLICATION_JSON_TYPE))
                 .getEntity();
@@ -114,7 +113,8 @@ public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<
             return client;
         }
 
-        protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
+        @Override
+        protected TestContainerFactory getTestContainerFactory() {
             return new JettyTestContainerFactory();
         }
 

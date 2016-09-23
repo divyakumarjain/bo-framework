@@ -19,7 +19,8 @@ public class MockUpdateCommand extends AbstractDatabaseUpdateCommand<MockEntity>
 
     @Override
     protected void merge(MockEntity source, MockEntity target) {
-        if(source!=target)
+        if(source!=target) {
             mapper.mapToBO(source, target);
+        }
     }
 }

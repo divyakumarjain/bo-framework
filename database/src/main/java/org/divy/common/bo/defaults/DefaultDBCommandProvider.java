@@ -32,7 +32,7 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
                 (Class<? extends IGetCommand<E, I>>) (Class<? extends DefaultDatabaseGetCommand>) DefaultDatabaseGetCommand.class,
                 (Class<? extends IUpdateCommand<E, I>>) (Class<? extends DefaultDatabaseUpdateCommand>) DefaultDatabaseUpdateCommand.class,
                 (Class<? extends IDeleteCommand<E, I>>) (Class<? extends DefaultDatabaseDeleteCommand>) DefaultDatabaseDeleteCommand.class,
-                (Class<? extends ICreateCommand<E, I>>) (Class<? extends DefaultDatabaseCreateCommand>) DefaultDatabaseCreateCommand.class,
+                (Class<? extends ICreateCommand<E>>) (Class<? extends DefaultDatabaseCreateCommand>) DefaultDatabaseCreateCommand.class,
                 (Class<? extends ISearchCommand<E, I>>) (Class<? extends DefaultDatabaseSearchCommand>) DefaultDatabaseSearchCommand.class);
 
         this.entityClass = entityClass;

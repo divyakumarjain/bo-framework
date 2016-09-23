@@ -1,6 +1,6 @@
 package org.divy.common.bo.query;
 
 @FunctionalInterface
-public interface IEqualTo<A> extends IComparison {
+public interface EqualTo<A> extends Comparison {
     A getValue();
 }

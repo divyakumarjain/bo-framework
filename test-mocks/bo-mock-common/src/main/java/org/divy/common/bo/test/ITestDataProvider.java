@@ -1,6 +1,6 @@
 package org.divy.common.bo.test;
 
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 /**
  * 
  */
@@ -9,7 +9,7 @@ import org.divy.common.bo.query.IQuery;
  * @author Divyakumar
  *
  */
-public interface ITestDataProvider<E, I> {
+public interface ITestDataProvider<E> {
 
     /* Methods for Test Data generation */
     void modifyEntityWithTestData(E entity);
@@ -22,5 +22,5 @@ public interface ITestDataProvider<E, I> {
 
     void initialize();
 
-    IQuery createSearchQuery();
+    Query createSearchQuery();
 }

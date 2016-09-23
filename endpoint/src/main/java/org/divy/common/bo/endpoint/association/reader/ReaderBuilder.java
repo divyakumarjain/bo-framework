@@ -1,10 +1,10 @@
-package org.divy.common.bo.endpoint.association.builder;
+package org.divy.common.bo.endpoint.association.reader;
 
 
 import org.divy.common.bo.endpoint.association.AttributeReader;
 import org.divy.common.bo.endpoint.association.Reader;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 
 
 public class ReaderBuilder implements Reader {
@@ -12,9 +12,8 @@ public class ReaderBuilder implements Reader {
     protected Reader reader;
 
     @Override
-    public Object read(Object source, Object... argv) throws InvocationTargetException, IllegalAccessException {
-        Object result = getReader().read(source, argv);
-        return result;
+    public Optional<Object> read(Object source, Object... argv) {
+        return getReader().read(source, argv);
     }
 
     public Reader getReader() {

@@ -11,7 +11,7 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
         IUpdateCommand<E, UUID>
 {
     protected AbstractDatabaseUpdateCommand(
-            Class<? extends E> typeParameterClass, IDBCommandContext context)
+            Class<E> typeParameterClass, IDBCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);

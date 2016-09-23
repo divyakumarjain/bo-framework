@@ -7,7 +7,7 @@ public interface ICommandProvider<E, I>
 
     IGetCommand<E, I> getGetCommand();
 
-    ICreateCommand<E, I> getCreateCommand();
+    ICreateCommand<E> getCreateCommand();
 
     IDeleteCommand<E, I> getDeleteCommand();
 

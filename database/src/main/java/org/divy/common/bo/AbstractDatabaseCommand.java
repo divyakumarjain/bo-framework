@@ -5,22 +5,22 @@ import javax.persistence.EntityManager;
 public abstract class AbstractDatabaseCommand<E extends IBusinessObject<I>, I>
 {
 
-    private final Class<? extends E> entityType;
+    private final Class<E> entityType;
     private IDBCommandContext context;
 
 
-    protected AbstractDatabaseCommand(Class<? extends E> typeParameterClass) {
+    protected AbstractDatabaseCommand(Class<E> typeParameterClass) {
         this.entityType = typeParameterClass;
     }
 
     /**
      * @return the entityType
      */
-    public Class<? extends E> getEntityType() {
+    public Class<E> getEntityType() {
         return entityType;
     }
 
-    protected void setContext(IDBCommandContext context)
+    final void setContext(IDBCommandContext context)
     {
         this.context = context;
     }
@@ -43,16 +43,11 @@ public abstract class AbstractDatabaseCommand<E extends IBusinessObject<I>, I>
 
     protected E getReference(Object identity)
     {
-
-        E entity = getEntityManager().find(entityType, identity);
-
-        return entity;
+        return getEntityManager().find(entityType, identity);
     }
 
     protected E find(Object identity)
     {
-        E entity = getEntityManager().find(entityType, identity);
-
-        return entity;
+        return getEntityManager().find(entityType, identity);
     }
 }

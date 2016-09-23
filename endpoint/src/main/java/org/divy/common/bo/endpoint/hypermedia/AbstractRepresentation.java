@@ -2,41 +2,40 @@ package org.divy.common.bo.endpoint.hypermedia;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.UUID;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.Id;
 import javax.ws.rs.core.Link;
 
-public abstract class AbstractRepresentation {
+public abstract class AbstractRepresentation<I> {
 
-	private UUID uuid;
+	private I id;
 
 	private Set<Link> links;
-	private Map<String,Object> associations = new HashMap<>();
-	
-	public AbstractRepresentation() {}
+	private Map<String, Object> associations = new HashMap<>();
+	private Map<String, Object> data;
 
-	public java.util.UUID identity() {
-		return uuid;
+	public AbstractRepresentation() {
+		data = new HashMap<>();
+	}
+
+	public I identity() {
+		return id;
 	}
 
 	@Id
 	@JsonProperty
-	public java.util.UUID getUuid() {
-		return uuid;
+	public I getId() {
+		return id;
 	}
 
-	protected void setUuid(java.util.UUID uuid) {
-		this.uuid = uuid;
+	public void setId(I id) {
+		this.id = id;
 	}
 
 	public void addLink(Link link) {
 		if(links==null) {
-			links = new HashSet<Link>();
+			links = new HashSet<>();
 		}
 
 		links.add(link);
@@ -62,4 +61,12 @@ public abstract class AbstractRepresentation {
     public void addAssociation(String rel, Object association) {
         getAssociations().put(rel, association);
     }
+
+	public Map<String, Object> getData() {
+		return data;
+	}
+
+	public void setData(Map<String, Object> data) {
+		this.data = data;
+	}
 }

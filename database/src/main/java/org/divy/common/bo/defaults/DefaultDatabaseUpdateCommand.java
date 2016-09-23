@@ -40,7 +40,8 @@ public class DefaultDatabaseUpdateCommand<E extends AbstractBusinessObject>
      */
     @Override
     protected void merge(E source, E target) {
-        if(source != target)
+        if(source != target) {
             mapper.mapToBO(source, target);
+        }
     }
 }

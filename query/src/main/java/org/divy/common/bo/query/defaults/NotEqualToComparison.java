@@ -1,9 +1,7 @@
 package org.divy.common.bo.query.defaults;
 
-import org.divy.common.bo.query.INotEqualToComparison;
 
-
-public class NotEqualToComparison<A> implements INotEqualToComparison<A> {
+public class NotEqualToComparison<A> implements org.divy.common.bo.query.NotEqualToComparison<A> {
 
     private A value;
 

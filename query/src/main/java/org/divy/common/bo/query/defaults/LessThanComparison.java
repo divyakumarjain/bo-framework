@@ -1,9 +1,7 @@
 package org.divy.common.bo.query.defaults;
 
-import org.divy.common.bo.query.ILessThanComparison;
 
-
-public class LessThanComparison<A> implements ILessThanComparison<A> {
+public class LessThanComparison<A> implements org.divy.common.bo.query.LessThanComparison<A> {
 
     private A value;
 

@@ -5,8 +5,7 @@
 package org.divy.common.bo.test;
 
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.query.IQuery;
-import org.divy.common.bo.query.defaults.Query;
+import org.divy.common.bo.query.Query;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -29,14 +28,14 @@ import static org.junit.Assert.assertThat;
  */
 public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestBOCRUDBase.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestBOCRUDBase.class);
 
-    final protected ITestDataProvider<E, I> testDataProvider;
+    protected final ITestDataProvider<E> testDataProvider;
 
     /**
      *
      */
-    public TestBOCRUDBase(ITestDataProvider<E, I> testDataProvider) {
+    public TestBOCRUDBase(ITestDataProvider<E> testDataProvider) {
         super();
         this.testDataProvider = testDataProvider;
     }
@@ -55,7 +54,7 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
     }
 
-    abstract protected I getIdentifier(E entity);
+    protected abstract I getIdentifier(E entity);
 
     @Test
     public void testUpdate() {
@@ -115,7 +114,7 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
         doCreateEntity(entity2);
 
-        IQuery searchQuery = testDataProvider.createSearchQuery();
+        Query searchQuery = testDataProvider.createSearchQuery();
 
         List<E> searchedEntities = doSearchEntities(searchQuery);
 
@@ -133,7 +132,7 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
     /* Clean up */
     @After
     public void cleanup() {
-        List<E> searchedEntities = doSearchEntities(new Query());
+        List<E> searchedEntities = doSearchEntities(new org.divy.common.bo.query.defaults.Query());
 
         for (Iterator<E> iterator = searchedEntities.iterator(); iterator.hasNext(); ) {
 
@@ -143,7 +142,7 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
                 doDeleteEntity(entity);
 
             } catch (Exception e) {
-                logger.error("Could not clean up the test case", e);
+                LOGGER.error("Could not clean up the test case", e);
             }
         }
     }
@@ -162,7 +161,7 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
     protected abstract void doDeleteEntity(E entity);
 
-    protected abstract List<E> doSearchEntities(IQuery searchQuery);
+    protected abstract List<E> doSearchEntities(Query searchQuery);
 
     /* Extended Tests */
     protected abstract void extendedTestCreatedEntity(E entity);

@@ -3,7 +3,7 @@
  */
 package org.divy.common.bo.command;
 
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ import java.util.List;
  *
  */
 public interface ISearchCommand<E, I> extends ICommand {
-    List<E> search(IQuery query);
+    List<E> search(Query query);
 }

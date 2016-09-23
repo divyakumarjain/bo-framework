@@ -6,7 +6,7 @@ package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 import org.divy.common.rest.LinkBuilderFactory;
 
 import javax.inject.Inject;
@@ -49,7 +49,7 @@ public abstract class AbstractBOEndpoint<E extends IBusinessObject<I>, I extends
     }
 
     @Override
-    protected Collection<E> doSearch(IQuery query) {
+    protected Collection<E> doSearch(Query query) {
         return manager.search(query);
     }
 

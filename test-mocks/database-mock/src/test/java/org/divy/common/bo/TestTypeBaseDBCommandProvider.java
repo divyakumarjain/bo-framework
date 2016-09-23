@@ -42,7 +42,7 @@ public class TestTypeBaseDBCommandProvider {
 
     @Test
     public void testGetCreateCommand() {
-        ICreateCommand<MockEntity, UUID> createCommand = commandProvider.getCreateCommand();
+        ICreateCommand<MockEntity> createCommand = commandProvider.getCreateCommand();
         assertThat(createCommand,notNullValue());
     }
 

@@ -16,14 +16,14 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
     private Class<? extends IGetCommand<E, I>> getCommandType;
     private Class<? extends IUpdateCommand<E, I>> updateCommandType;
     private Class<? extends IDeleteCommand<E, I>> deleteCommandType;
-    private Class<? extends ICreateCommand<E, I>> createCommandType;
+    private Class<? extends ICreateCommand<E>> createCommandType;
     private Class<? extends ISearchCommand<E, I>> searchCommandType;
 
     public TypeBaseDBCommandProvider(String persistentUnitName,
                                      Class<? extends IGetCommand<E, I>> getCommandType,
                                      Class<? extends IUpdateCommand<E, I>> updateCommandType,
                                      Class<? extends IDeleteCommand<E, I>> deleteCommandType,
-                                     Class<? extends ICreateCommand<E, I>> createCommandType,
+                                     Class<? extends ICreateCommand<E>> createCommandType,
                                      Class<? extends ISearchCommand<E, I>> searchCommandType) {
 
         context = new DatabaseContext(persistentUnitName);
@@ -68,11 +68,11 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         this.deleteCommandType = deleteCommandType;
     }
 
-    public Class<? extends ICreateCommand<E, I>> getCreateCommandType() {
+    public Class<? extends ICreateCommand<E>> getCreateCommandType() {
         return createCommandType;
     }
 
-    public void setCreateCommandType(final Class<? extends ICreateCommand<E, I>> createCommandType) {
+    public void setCreateCommandType(final Class<? extends ICreateCommand<E>> createCommandType) {
         this.createCommandType = createCommandType;
     }
 
@@ -93,10 +93,8 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
                 throw new IllegalArgumentException("Command type not provided");
             }
 
-            final Object returnInstance = type.getConstructor(
+            return type.getConstructor(
                     IDBCommandContext.class).newInstance(context);
-
-            return returnInstance;
 
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                 | SecurityException | InvocationTargetException | NoSuchMethodException e)
@@ -125,13 +123,13 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
 
     @Override
     @SuppressWarnings("unchecked")
-    public ICreateCommand<E, I> getCreateCommand()
+    public ICreateCommand<E> getCreateCommand()
     {
         final IDBCommandContext newContext = createContext();
 
-        ICreateCommand<E, I> returnCreateCommand;
+        ICreateCommand<E> returnCreateCommand;
 
-        returnCreateCommand = (ICreateCommand<E, I>) createCommand(createCommandType, newContext);
+        returnCreateCommand = (ICreateCommand<E>) createCommand(createCommandType, newContext);
 
         return returnCreateCommand;
     }

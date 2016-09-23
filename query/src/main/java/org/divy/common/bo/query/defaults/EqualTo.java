@@ -1,9 +1,7 @@
 package org.divy.common.bo.query.defaults;
 
-import org.divy.common.bo.query.IEqualTo;
 
-
-public class EqualTo<A> implements IEqualTo<A> {
+public class EqualTo<A> implements org.divy.common.bo.query.EqualTo<A> {
 
     private A value;
 

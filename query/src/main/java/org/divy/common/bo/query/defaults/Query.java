@@ -1,11 +1,10 @@
 package org.divy.common.bo.query.defaults;
 
-import org.divy.common.bo.query.IOperator;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Operator;
 
 import java.util.HashMap;
 
-public class Query extends HashMap<String, IOperator> implements IQuery
+public class Query extends HashMap<String, Operator> implements org.divy.common.bo.query.Query
 {
 
     /**
@@ -14,12 +13,12 @@ public class Query extends HashMap<String, IOperator> implements IQuery
     private static final long serialVersionUID = 6670043546158499600L;
 
     @Override
-    public IOperator get(String attributeName) {
+    public Operator get(String attributeName) {
         return super.get(attributeName);
     }
 
     @Override
-    public IOperator remove(String attributeName) {
+    public Operator remove(String attributeName) {
         return super.remove(attributeName);
     }
 }

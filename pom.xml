@@ -19,20 +19,21 @@
         <module>templates</module>
         <module>spring-support</module>
         <module>demos</module>
+        <module>integration</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <jersey-version>2.24</jersey-version>
-        <jackson-version>2.3.2</jackson-version>
+        <jersey.version>2.24</jersey.version>
+        <jackson.version>2.3.2</jackson.version>
         <glassfish-el.version>2.2.6</glassfish-el.version>
         <isRelease>false</isRelease>
         <sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
         <sonar.host.url>http://192.168.99.100:9000</sonar.host.url>
 
         <!-- Make sure to update below dependencies as these are not updated from Spring Boot BOM-->
-        <org.springframework.boot.version>1.4.0.RELEASE</org.springframework.boot.version>
+        <org.springframework.boot.version>1.4.1.RELEASE</org.springframework.boot.version>
     </properties>
 
     <build>
@@ -219,17 +220,17 @@
             <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-client</artifactId>
-                <version>${jersey-version}</version>
+                <version>${jersey.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.test-framework</groupId>
                 <artifactId>jersey-test-framework-core</artifactId>
-                <version>${jersey-version}</version>
+                <version>${jersey.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.test-framework.providers</groupId>
                 <artifactId>jersey-test-framework-provider-jetty</artifactId>
-                <version>${jersey-version}</version>
+                <version>${jersey.version}</version>
             </dependency>
             <!--Hibernate/JPA-->
             <dependency>

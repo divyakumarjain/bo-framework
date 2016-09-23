@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.divy.common.bo.endpoint.test;
 
@@ -10,8 +10,7 @@ import com.google.inject.TypeLiteral;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.AbstractBOEndpoint;
-import org.divy.common.bo.query.IQuery;
-import org.divy.common.bo.query.defaults.Query;
+import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.divy.common.rest.LinkBuilderFactory;
 import org.junit.Before;
@@ -32,30 +31,31 @@ import static org.mockito.Mockito.mock;
 
 /**
  * @author Divyakumar
- *
  */
 public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I extends Serializable>
         extends AbstractBOEndpointTest<E, I> {
 
+    public static final String STATUS = "status";
+    public static final String HEADERS = "headers";
+    public static final String ENTITY = "entity";
     @Inject
     public AbstractBOEndpoint<E, I> endpointInstance;
 
     /**
-     *  @param testDataProvider
+     * @param testDataProvider
      */
-    public AbstractBOEndpointUnitTest(ITestDataProvider<E, I> testDataProvider) {
+    public AbstractBOEndpointUnitTest(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
     }
 
 
-	@Override
+    @Override
     protected E doAssertExists(I id) {
         Response response = endpointInstance.read(id, mock(UriInfo.class));
 
         assertThat(response,
-                either(
-                        both(hasProperty("status", is(equalTo(200)))).and(hasProperty("entity", notNullValue())))
-                .or(both(hasProperty("status", is(equalTo(204)))).and(hasProperty("entity", nullValue()))));
+                either(both(hasProperty(STATUS, is(equalTo(200)))).and(hasProperty(ENTITY, notNullValue())))
+                        .or(both(hasProperty(STATUS, is(equalTo(204)))).and(hasProperty(ENTITY, nullValue()))));
         return (E) response.getEntity();
     }
 
@@ -63,52 +63,52 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
     protected E doCreateEntity(E entity) {
 
         Response response = endpointInstance.create(entity, mock(UriInfo.class));
-        assertThat(response, hasProperty("headers",
+        assertThat(response, hasProperty(HEADERS,
                 hasKey(is(equalTo(HttpHeaders.LOCATION)))));
 
         I key = createKeyFromURI(response.getHeaders().getFirst(HttpHeaders.LOCATION).toString());
         return doGetByKey(key);
     }
-    
 
-	@Override
+
+    @Override
     protected E doGetByKey(I id) {
         Response response = endpointInstance.read(id, mock(UriInfo.class));
         return (E) response.getEntity();
     }
 
-	@Override
+    @Override
     protected void doAssertNotExists(I id) {
         Response response = endpointInstance.read(id, mock(UriInfo.class));
 
-        assertThat(response,both(hasProperty("status", is(equalTo(404)))).and(hasProperty("entity", nullValue())));
-		
-	}
+        assertThat(response, both(hasProperty(STATUS, is(equalTo(404)))).and(hasProperty(ENTITY, nullValue())));
+
+    }
 
     @Override
     protected void doUpdateEntity(E entity) {
-        Response response = this.endpointInstance.update(entity.identity(),entity, mock(UriInfo.class));
-        assertThat(response, hasProperty("status", is(equalTo(204))));
+        Response response = this.endpointInstance.update(entity.identity(), entity, mock(UriInfo.class));
+        assertThat(response, hasProperty(STATUS, is(equalTo(204))));
     }
 
     @Override
     protected void doDeleteEntity(E entity) {
         Response response = this.endpointInstance.delete(entity.identity(), mock(UriInfo.class));
-        assertThat(response,hasProperty("status",is(equalTo(204))));
+        assertThat(response, hasProperty(STATUS, is(equalTo(204))));
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    protected List<E> doSearchEntities(IQuery searchQuery) {
-        Response response = this.endpointInstance.search((Query) searchQuery, mock(UriInfo.class));
-        assertThat(response,hasProperty("status",is(equalTo(200))));
-        assertThat(response,hasProperty("entity",notNullValue()));
+    protected List<E> doSearchEntities(Query searchQuery) {
+        Response response = this.endpointInstance.search((org.divy.common.bo.query.defaults.Query) searchQuery, mock(UriInfo.class));
+        assertThat(response, hasProperty(STATUS, is(equalTo(200))));
+        assertThat(response, hasProperty(ENTITY, notNullValue()));
         return (List<E>) response.getEntity();
     }
 
     private I createKeyFromURI(String uri) {
         String[] segments = UriBuilder.fromPath(uri).build().getPath().split("/");
-        return toKey(segments[segments.length-1]);
+        return toKey(segments[segments.length - 1]);
     }
 
     public AbstractBOEndpoint<E, I> getEndpointInstance() {
@@ -129,8 +129,8 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
 
     protected abstract AbstractBOEndpoint<E, I> createEndpointInstance();
 
-    public Iterable<? extends Module> getTestModules() {
-        return Arrays.asList( new AbstractModule() {
+    public Iterable<Module> getTestModules() {
+        return Arrays.asList(new AbstractModule() {
             @Override
             public void configure() {
                 @SuppressWarnings("unchecked")

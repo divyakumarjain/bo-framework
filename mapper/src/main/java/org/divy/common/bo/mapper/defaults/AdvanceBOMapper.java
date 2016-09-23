@@ -1,21 +1,22 @@
 package org.divy.common.bo.mapper.defaults;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import org.divy.common.bo.mapper.AbstractBOMapper;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.dozer.loader.api.TypeMappingBuilder;
+import org.dozer.loader.api.TypeMappingOptions;
 
-public class AdvanceBOMapper<BO, OTHER> extends AbstractBOMapper<BO, OTHER> {
+public class AdvanceBOMapper<B, O> extends AbstractBOMapper<B, O> {
 
     private List<String> excludedLists;
 
-    public AdvanceBOMapper(Class<BO> businessObjectType,
-            Class<OTHER> otherObjectType) {
+    public AdvanceBOMapper(Class<B> businessObjectType,
+            Class<O> otherObjectType) {
         super(businessObjectType, otherObjectType);
 
         this.mapper = createMapper();
@@ -31,21 +32,15 @@ public class AdvanceBOMapper<BO, OTHER> extends AbstractBOMapper<BO, OTHER> {
     }
 
     protected void configureMapping(TypeMappingBuilder mapper) {
-
-        excludedLists = getExcludedList();
-
-        for (Iterator<String> iterator = excludedLists.iterator(); iterator
-                .hasNext();) {
-            String excludedField = iterator.next();
-            mapper.exclude(excludedField);
-        }
+        getExcludedList().stream().forEach(excludedField -> mapper.exclude(excludedField));
     }
 
     protected Mapper createMapper() {
         BeanMappingBuilder builder = new BeanMappingBuilder() {
+
             protected void configure() {
                 TypeMappingBuilder mapper = mapping(businessObjectType, otherObjectType);
-
+                mapping(UUID.class, UUID.class, TypeMappingOptions.beanFactory(UuidBeanFactory.class.getName()));
                 configureMapping(mapper);
             }
         };
@@ -54,4 +49,5 @@ public class AdvanceBOMapper<BO, OTHER> extends AbstractBOMapper<BO, OTHER> {
         mapper.addMapping(builder);
         return mapper;
     }
+
 }

@@ -19,7 +19,7 @@ public class DefaultDatabaseGetCommand<E extends IBusinessObject<I>, I>
      * @param context
      */
     public DefaultDatabaseGetCommand(
-            Class<? extends E> entityClass,
+            Class<E> entityClass,
             IDBCommandContext context) {
         super(entityClass, context);
     }

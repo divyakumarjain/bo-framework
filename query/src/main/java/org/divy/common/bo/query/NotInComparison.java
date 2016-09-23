@@ -2,6 +2,6 @@ package org.divy.common.bo.query;
 
 import java.util.List;
 
-public interface INotInComparison<A> extends IComparison {
+public interface NotInComparison<A> extends Comparison {
     List<A> getValues();
 }

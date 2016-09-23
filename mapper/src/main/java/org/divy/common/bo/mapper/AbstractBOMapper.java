@@ -4,81 +4,85 @@ import java.util.*;
 
 import org.dozer.Mapper;
 
-public class AbstractBOMapper<BO, OTHER> implements IBOMapper<BO, OTHER>{
+public class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
 
-    protected Class<BO> businessObjectType;
-    protected Class<OTHER> otherObjectType;
+    protected Class<S> businessObjectType;
+    protected Class<T> otherObjectType;
     protected Mapper mapper;
 
-    public AbstractBOMapper() {
-        super();
-    }
-
-    public AbstractBOMapper(Class<BO> businessObjectType,
-            Class<OTHER> otherObjectType) {
+    public AbstractBOMapper(Class<S> businessObjectType,
+            Class<T> otherObjectType) {
         this.businessObjectType = businessObjectType;
         this.otherObjectType = otherObjectType;
     }
 
     @Override
-    public final BO createBO(OTHER sourceData) {
+    public final S createBO(T sourceData) {
         return doCreateBO(sourceData);
     }
 
-    protected BO doCreateBO(OTHER sourceData) {
-        if(sourceData == null)
+    protected S doCreateBO(T sourceData) {
+        if(sourceData == null) {
             return null;
+        }
         return mapper.map(sourceData, businessObjectType);
     }
 
     @Override
-    public final BO mapToBO(OTHER sourceData, BO businessObject) {
+    public final S mapToBO(T sourceData, S businessObject) {
 
         return doMapToBO(sourceData, businessObject);
     }
 
-    protected BO doMapToBO(OTHER sourceData, BO businessObject) {
+    protected S doMapToBO(T sourceData, S businessObject) {
         
-        if(sourceData != null)
+        if(sourceData != null) {
             mapper.map(sourceData, businessObject);
+        }
 
         return businessObject;
     }
 
+    protected Object createOtherTargetTypeInstance() throws IllegalAccessException, InstantiationException {
+        return this.otherObjectType.newInstance();
+    }
+
     @Override
-    public final OTHER createFromBO(BO businessObject) {
+    public final T createFromBO(S businessObject) {
         return doCreateFromBO(businessObject);
     }
 
-    protected OTHER doCreateFromBO(BO businessObject) {
-        if(businessObject==null)
+    protected T doCreateFromBO(S businessObject) {
+        if(businessObject==null) {
             return null;
+        }
 
         return mapper.map(businessObject,otherObjectType);
     }
 
     @Override
-    public final OTHER mapFromBO(BO businessObject, OTHER targetData) {
+    public final T mapFromBO(S businessObject, T targetData) {
 
         return doMapFromBO(businessObject, targetData);
     }
 
-    protected OTHER doMapFromBO(BO businessObject, OTHER targetData) {
+    protected T doMapFromBO(S businessObject, T targetData) {
 
-        if(businessObject!=null)
-            mapper.map(businessObject,targetData);
+        if(businessObject!=null) {
+            mapper.map(businessObject, targetData);
+        }
 
         return targetData;
     }
 
     @Override
-    public final Collection<BO> createBO(Collection<OTHER> sourceData) {
+    public final Collection<S> createBO(Collection<T> sourceData) {
 
-        Collection<BO> businessObjectList = sourceData instanceof List? new ArrayList<BO>(sourceData.size()): new HashSet<BO>(sourceData.size());
+        Collection<S> businessObjectList = sourceData instanceof List? new ArrayList<S>(sourceData.size()): new HashSet<S>(sourceData.size());
 
-        for (Iterator<OTHER> iterator = sourceData.iterator(); iterator.hasNext();) {
+        for (Iterator<T> iterator = sourceData.iterator(); iterator.hasNext();) {
 
-            OTHER other = (OTHER) iterator.next();
+            T other = iterator.next();
             businessObjectList.add(createBO(other));
         }
 
@@ -86,13 +90,13 @@ public class AbstractBOMapper<BO, OTHER> implements IBOMapper<BO, OTHER>{
     }
 
     @Override
-    public final Collection<OTHER> createFromBO(Collection<BO> businessObjectList) {
+    public final Collection<T> createFromBO(Collection<S> businessObjectList) {
 
-        Collection<OTHER> targetList = businessObjectList instanceof List? new ArrayList<OTHER>(businessObjectList.size()): new HashSet<OTHER>(businessObjectList.size());
+        Collection<T> targetList = businessObjectList instanceof List? new ArrayList<T>(businessObjectList.size()): new HashSet<T>(businessObjectList.size());
 
-        for (Iterator<BO> iterator = businessObjectList.iterator(); iterator.hasNext();) {
+        for (Iterator<S> iterator = businessObjectList.iterator(); iterator.hasNext();) {
 
-            BO businessObject = (BO) iterator.next();
+            S businessObject = iterator.next();
             targetList.add(createFromBO(businessObject));
         }
 

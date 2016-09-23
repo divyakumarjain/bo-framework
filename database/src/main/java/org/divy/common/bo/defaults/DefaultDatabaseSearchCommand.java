@@ -19,7 +19,7 @@ public class DefaultDatabaseSearchCommand<E extends IBusinessObject<I>, I>
      * @param entityClass
      * @param context
      */
-    public DefaultDatabaseSearchCommand(Class<? extends E> entityClass,
+    public DefaultDatabaseSearchCommand(Class<E> entityClass,
                                         IDBCommandContext context) {
         super(entityClass, context);
     }

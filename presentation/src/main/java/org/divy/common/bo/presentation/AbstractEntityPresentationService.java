@@ -4,7 +4,7 @@ import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.bo.mapper.IBOMapper;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 import org.divy.common.rest.LinkBuilderFactoryImpl;
 
 import javax.inject.Inject;
@@ -70,7 +70,7 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
     }
 
     @Override
-    protected Collection<E> doSearch(IQuery query) {
+    protected Collection<E> doSearch(Query query) {
         List<E> boList = manager.search(query);
         return boList;
     }
@@ -106,7 +106,7 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
         return mapper.createFromBO(boList);
     }
 
-    protected Collection<VO> doSearchPresenter(IQuery query) {
+    protected Collection<VO> doSearchPresenter(Query query) {
         Collection<E> boList = doSearch(query);
         return mapper.createFromBO(boList);
     }

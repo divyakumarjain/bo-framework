@@ -4,7 +4,7 @@ import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.IDBCommandContext;
 import org.divy.common.bo.context.DatabaseContext;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.divy.common.bo.test.TestBOCRUDBase;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
     /**
      * @param testDataProvider
      */
-    public TestBaseDBRepository(ITestDataProvider<E, I> testDataProvider) {
+    public TestBaseDBRepository(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
     }
 
@@ -37,8 +37,7 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
 
     @Override
     protected E doCreateEntity(E entity) {
-        E createdEntity = boRepository.create(entity);
-        return createdEntity;
+        return boRepository.create(entity);
     }
 
     @Override
@@ -48,17 +47,16 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
         return entity;
     }
     
-	@Override
+    @Override
     protected E doGetByKey(I id) {
-        E entity = boRepository.get(id);
-        return entity;
-	}
+        return boRepository.get(id);
+    }
 
-	@Override
+    @Override
     protected void doAssertNotExists(I id) {
         E entity = doGetByKey(id);
         assertThat(entity, nullValue());
-	}
+    }
 
     @Override
     protected void doUpdateEntity(E entity) {
@@ -71,7 +69,7 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
     }
 
     @Override
-    protected List<E> doSearchEntities(IQuery searchQuery) {
+    protected List<E> doSearchEntities(Query searchQuery) {
         return boRepository.search(searchQuery);
     }
 

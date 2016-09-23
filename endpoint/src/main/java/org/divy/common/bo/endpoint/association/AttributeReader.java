@@ -1,19 +1,16 @@
 package org.divy.common.bo.endpoint.association;
 
-import org.divy.common.bo.endpoint.hypermedia.AbstractRepresentation;
-
-import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 
 public class AttributeReader implements Reader {
     private String attributeName;
 
-    @Override
-    public AbstractRepresentation read(Object source, Object... argv) throws InvocationTargetException, IllegalAccessException {
-        //TODO implement
-        return null;
-    }
-
     public void setAttributeName(String attributeName) {
         this.attributeName = attributeName;
+    }
+
+    @Override
+    public Optional<Object> read(Object source, Object... argv) {
+        return Optional.empty();
     }
 }

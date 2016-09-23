@@ -7,6 +7,7 @@ import javax.ws.rs.core.UriInfo;
 import org.apache.commons.lang.StringUtils;
 import org.divy.common.http.HttpRequestContext;
 
+
 public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
 
     @Inject
@@ -19,6 +20,7 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
     static final String DEFAULT_SCHEME = "http";
     static final String DEFAULT_HOST = "localhost";
 
+    @Override
     public LinkBuilder newBuilder() {
         String scheme = DEFAULT_SCHEME;
         String originalPath = StringUtils.EMPTY;
@@ -33,6 +35,7 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
         return new LinkBuilder(scheme, getOriginalHost(), originalPath);
     }
 
+    @Override
     public LinkBuilder newBuilder(UriInfo requestUriInfo) {
         String scheme = DEFAULT_SCHEME;
         String originalPath = StringUtils.EMPTY;

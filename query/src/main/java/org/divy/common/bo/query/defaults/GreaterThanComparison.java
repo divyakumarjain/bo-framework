@@ -1,9 +1,7 @@
 package org.divy.common.bo.query.defaults;
 
-import org.divy.common.bo.query.IGreaterThanComparison;
 
-
-public class GreaterThanComparison<A> implements IGreaterThanComparison<A> {
+public class GreaterThanComparison<A> implements org.divy.common.bo.query.GreaterThanComparison<A> {
 
     private A value;
 

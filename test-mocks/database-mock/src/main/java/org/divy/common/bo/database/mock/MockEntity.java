@@ -53,8 +53,9 @@ public class MockEntity extends AbstractBusinessObject {
     @JsonProperty
     public List<MockEntity> getChildEntities() {
 
-        if(childEntities==null)
+        if(childEntities==null) {
             childEntities = new ArrayList<MockEntity>();
+        }
         return childEntities;
     }
 
@@ -112,28 +113,37 @@ public class MockEntity extends AbstractBusinessObject {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         MockEntity other = (MockEntity) obj;
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (parentEntity == null) {
-            if (other.parentEntity != null)
+            if (other.parentEntity != null) {
                 return false;
-        } else if (!parentEntity.equals(other.parentEntity))
+            }
+        } else if (!parentEntity.equals(other.parentEntity)) {
             return false;
+        }
         if (getUuid() == null) {
-            if (other.getUuid() != null)
+            if (other.getUuid() != null) {
                 return false;
-        } else if (!getUuid().equals(other.getUuid()))
+            }
+        } else if (!getUuid().equals(other.getUuid())) {
             return false;
+        }
         return true;
     }
 

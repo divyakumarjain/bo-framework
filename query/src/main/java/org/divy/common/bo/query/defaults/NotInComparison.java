@@ -1,12 +1,10 @@
 package org.divy.common.bo.query.defaults;
 
-import org.divy.common.bo.query.INotInComparison;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class NotInComparison<A> implements INotInComparison<A> {
+public class NotInComparison<A> implements org.divy.common.bo.query.NotInComparison<A> {
 
     private List<A> values;
 

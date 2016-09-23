@@ -25,12 +25,12 @@ public abstract class AbstractBusinessObject implements IBusinessObject<UUID>{
     }
 
     public AbstractBusinessObject(AbstractBusinessObject entity) {
-        this.setUuid(entity.getUuid());
+        this.uuid = entity.uuid;
         this.update(entity);
     }
 
     public AbstractBusinessObject(UUID uuid) {
-        this.setUuid(uuid);
+        this.uuid = uuid;
     }
 
     @Override

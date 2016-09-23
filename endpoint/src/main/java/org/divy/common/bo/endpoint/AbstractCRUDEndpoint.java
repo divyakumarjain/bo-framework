@@ -1,7 +1,6 @@
 package org.divy.common.bo.endpoint;
 
-import org.divy.common.bo.query.IQuery;
-import org.divy.common.bo.query.defaults.Query;
+import org.divy.common.bo.query.Query;
 import org.divy.common.rest.LinkBuilderFactory;
 import org.divy.common.rest.LinkBuilder;
 
@@ -86,7 +85,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @Path("/search")
-    public final Response search(@NotNull Query query,
+    public final Response search(@NotNull org.divy.common.bo.query.defaults.Query query,
                                  @Context UriInfo uriInfo) {
         Collection<E> resultList = doSearch(query);
         return buildListResponse(resultList);
@@ -141,6 +140,6 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
 
     protected abstract Collection<E> doList();
 
-    protected abstract Collection<E> doSearch(IQuery query);
+    protected abstract Collection<E> doSearch(Query query);
 
 }

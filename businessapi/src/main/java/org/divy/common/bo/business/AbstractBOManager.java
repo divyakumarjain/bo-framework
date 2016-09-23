@@ -2,7 +2,7 @@ package org.divy.common.bo.business;
 
 import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class AbstractBOManager<E extends IBusinessObject<I>, I> implements IBOMa
     }
 
     @Override
-    public List<E> search(IQuery businessObjectQuery) {
+    public List<E> search(Query businessObjectQuery) {
         return repository.search(businessObjectQuery);
     }
 

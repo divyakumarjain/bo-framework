@@ -6,11 +6,9 @@ package org.divy.common.bo.endpoint.json.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.UUID;
 import org.divy.common.bo.database.mock.MockEntity;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 import org.divy.common.bo.query.defaults.EqualTo;
-import org.divy.common.bo.query.defaults.Query;
 import org.divy.common.bo.test.ITestDataProvider;
 
 /**
@@ -18,7 +16,7 @@ import org.divy.common.bo.test.ITestDataProvider;
  *
  */
 public class MockBoTestDataProvider implements
-        ITestDataProvider<MockEntity, UUID> {
+        ITestDataProvider<MockEntity> {
 
     /* (non-Javadoc)
      * @see org.divy.common.bo.test.ITestDataProvider#modifyEntityWithTestData(java.lang.Object)
@@ -88,12 +86,13 @@ public class MockBoTestDataProvider implements
 
     @Override
     public void initialize() {
+        //No thing to initialize
     }
 
 
     @Override
-    public IQuery createSearchQuery() {
-        IQuery userQuery = new Query();
+    public Query createSearchQuery() {
+        Query userQuery = new org.divy.common.bo.query.defaults.Query();
 
         userQuery.put("name",new EqualTo<>("data1"));
 

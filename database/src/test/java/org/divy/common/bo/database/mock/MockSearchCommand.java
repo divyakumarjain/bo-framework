@@ -9,7 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import org.divy.common.bo.AbstractDatabaseSearchCommand;
 import org.divy.common.bo.IDBCommandContext;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.Query;
 
 /**
  * @author divyakumar.a.jain@hp.com
@@ -27,8 +27,8 @@ public class MockSearchCommand extends
 
     @SuppressWarnings("unchecked")
     @Override
-    protected CriteriaQuery<? extends MockEntity> createCriteriaQuery(
-            IQuery query) {
+    protected CriteriaQuery<MockEntity> createCriteriaQuery(
+            Query query) {
         CriteriaQuery<MockEntity> taskQuery = null;
 
         CriteriaBuilder criteriaBuilder = getEntityManager()

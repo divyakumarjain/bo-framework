@@ -1,6 +1,6 @@
 package org.divy.common.query.service;
 
-import org.divy.common.bo.query.IOperator;
+import org.divy.common.bo.query.Operator;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
@@ -10,7 +10,7 @@ public class SearchQueryModule extends SimpleModule {
 
     public SearchQueryModule() {
         super();
-        addDeserializer(IOperator.class,new SearchQueryDeserializer() );
+        addDeserializer(Operator.class,new SearchQueryDeserializer() );
     }
 
 }

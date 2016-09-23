@@ -2,6 +2,9 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="org.divy.greeting">
         <class>org.divy.bo.demos.spring.greetings.GreetingEntity</class>
+        <class>org.divy.bo.demos.spring.cards.GreetingCardEntity</class>
+        <class>org.divy.bo.demos.spring.cards.pages.PagesEntity</class>
+        <class>org.divy.bo.demos.spring.cards.pages.SectionEntity</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:MyDB"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>

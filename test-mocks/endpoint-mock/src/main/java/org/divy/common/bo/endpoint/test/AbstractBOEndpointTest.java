@@ -13,7 +13,7 @@ public abstract class AbstractBOEndpointTest<E extends IBusinessObject<I>, I ext
     /**
      *  @param testDataProvider
      */
-    public AbstractBOEndpointTest(ITestDataProvider<E, I> testDataProvider) {
+    public AbstractBOEndpointTest(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
 
     }

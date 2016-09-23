@@ -1,10 +1,8 @@
 package org.divy.common.bo.query.defaults;
 
-import org.divy.common.bo.query.IGreaterThanEqualToComparison;
-
 
 public class GreaterThanEqualToComparison<A> implements
-        IGreaterThanEqualToComparison<A> {
+        org.divy.common.bo.query.GreaterThanEqualToComparison<A> {
 
     private A value;
 

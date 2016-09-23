@@ -19,7 +19,7 @@ public class DefaultDatabaseCreateCommand<E extends AbstractBusinessObject>
      * @param entityClass
      * @param context
      */
-    public DefaultDatabaseCreateCommand(Class<? extends E> entityClass,
+    public DefaultDatabaseCreateCommand(Class<E> entityClass,
                                         IDBCommandContext context) {
         super(entityClass, context);
     }

@@ -2,14 +2,14 @@ package org.divy.common.bo.endpoint.association;
 
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.association.builder.CreateBuilder;
-import org.divy.common.bo.endpoint.association.builder.ReaderBuilder;
+import org.divy.common.bo.endpoint.association.reader.ReaderBuilder;
 import org.divy.common.bo.endpoint.association.builder.UpdateBuilder;
 import org.divy.common.rest.impl.AbstractHATEOASMapper;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by divyjain on 2/5/2015.
@@ -35,18 +35,18 @@ public class Association<T> {
         return this;
     }
 
-    public Object read(Object source, Object... argv) throws InvocationTargetException, IllegalAccessException {
-        Object result = getReader().read(source, argv);
+    public Optional<Object> read(Object source, Object... argv) {
 
-        if (mapper != null) {
-            if (result instanceof Collection) {
-                return mapper.createFromBO((Collection) result);
+        return getReader().read(source, argv).map(value -> {
+            if (mapper != null) {
+                if (value instanceof Collection) {
+                    return mapper.createFromBO((Collection) value);
+                }
+                return mapper.createFromBO(value);
+            } else {
+                return value;
             }
-            return mapper.createFromBO(result);
-        } else {
-            return result;
-        }
-
+        });
     }
 
     public String getName() {

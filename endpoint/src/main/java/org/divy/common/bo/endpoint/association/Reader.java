@@ -1,7 +1,8 @@
 package org.divy.common.bo.endpoint.association;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 
+@FunctionalInterface
 public interface Reader {
-    Object read(Object source, Object... argv) throws InvocationTargetException, IllegalAccessException;
+    Optional<Object> read(Object source, Object... argv);
 }

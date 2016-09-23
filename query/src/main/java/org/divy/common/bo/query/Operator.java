@@ -1,5 +1,5 @@
 package org.divy.common.bo.query;
 
 
-public interface IOperator {
+public interface Operator {
 }
