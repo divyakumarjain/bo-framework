@@ -4,7 +4,7 @@
     <parent>
         <artifactId>bo-framework-root</artifactId>
         <groupId>org.divy</groupId>
-        <version>${bo-framework-version}</version>
+        <version>0.0.3-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-repository</artifactId>
@@ -13,15 +13,7 @@
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-query</artifactId>
-            <version>${bo-framework-version}</version>
+            <version>0.0.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>

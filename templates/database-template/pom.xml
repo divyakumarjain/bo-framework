@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-templates</artifactId>
-        <version>${bo-framework-version}</version>
+        <version>0.0.3-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-database-template</artifactId>
@@ -38,10 +38,6 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

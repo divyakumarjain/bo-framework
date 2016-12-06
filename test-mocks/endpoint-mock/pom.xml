@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-test-mock-common</artifactId>
-        <version>${bo-framework-version}</version>
+        <version>0.0.3-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-endpoint-mock</artifactId>
@@ -106,7 +106,7 @@
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <artifactId>mockito-core</artifactId>
             <scope>compile</scope>
         </dependency>
 
