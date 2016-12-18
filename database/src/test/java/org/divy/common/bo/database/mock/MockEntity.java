@@ -3,15 +3,10 @@ package org.divy.common.bo.database.mock;
 import java.util.List;
 
 import java.util.UUID;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.divy.common.bo.AbstractBusinessObject;
+import org.divy.common.bo.database.AbstractBusinessObject;
 import org.divy.common.bo.IBusinessObject;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -46,18 +41,12 @@ public class MockEntity extends AbstractBusinessObject {
 
     private String name;
 
-    @Id
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    @GeneratedValue(generator = "system-uuid")
+    private int integerAttribute;
+
     private UUID uuid;
 
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, targetEntity = MockEntity.class)
-    @PrimaryKeyJoinColumn
     private MockEntity parentEntity;
 
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH,
-            CascadeType.REMOVE }, targetEntity = MockEntity.class)
-    @PrimaryKeyJoinColumn
     private List<MockEntity> childEntities;
 
 
@@ -75,6 +64,10 @@ public class MockEntity extends AbstractBusinessObject {
         this.name = name;
     }
 
+
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH,
+            CascadeType.REMOVE }, targetEntity = MockEntity.class)
+    @PrimaryKeyJoinColumn
     public List<MockEntity> getChildEntities() {
         return childEntities;
     }
@@ -87,9 +80,8 @@ public class MockEntity extends AbstractBusinessObject {
         setUuid(identity);
     }
 
-    /**
-     * @return the parentEntity
-     */
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, targetEntity = MockEntity.class)
+    @PrimaryKeyJoinColumn
     public MockEntity getParentEntity() {
         return parentEntity;
     }
@@ -140,4 +132,11 @@ public class MockEntity extends AbstractBusinessObject {
         return true;
     }
 
+    public int getIntegerAttribute() {
+        return integerAttribute;
+    }
+
+    public void setIntegerAttribute(int integerAttribute) {
+        this.integerAttribute = integerAttribute;
+    }
 }

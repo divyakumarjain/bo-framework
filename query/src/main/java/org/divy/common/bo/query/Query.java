@@ -1,12 +1,25 @@
 package org.divy.common.bo.query;
 
-import java.util.Map;
+import org.divy.common.bo.query.operator.Operator;
+import org.divy.common.bo.query.Query;
 
-public interface Query extends Map<String, Operator>
+import java.util.HashMap;
+
+public class Query extends HashMap<String, Operator> implements IQuery
 {
-	Operator get(String attributeName);
 
-	Operator put(String attributeName, Operator operator);
+    /**
+     *
+     */
+    private static final long serialVersionUID = 6670043546158499600L;
 
-	Operator remove(String attributeName);
+    @Override
+    public Operator get(String attributeName) {
+        return super.get(attributeName);
+    }
+
+    @Override
+    public Operator remove(String attributeName) {
+        return super.remove(attributeName);
+    }
 }

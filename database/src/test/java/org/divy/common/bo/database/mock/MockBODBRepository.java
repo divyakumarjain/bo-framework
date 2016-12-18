@@ -4,9 +4,9 @@
 package org.divy.common.bo.database.mock;
 
 import java.util.UUID;
-import org.divy.common.bo.AbstractBODatabaseRepository;
-import org.divy.common.bo.ICommandProvider;
-import org.divy.common.bo.defaults.DefaultDBCommandProvider;
+import org.divy.common.bo.database.AbstractBODatabaseRepository;
+import org.divy.common.bo.database.ICommandProvider;
+import org.divy.common.bo.database.defaults.DefaultDBCommandProvider;
 
 /**
  * @author Divyakumar

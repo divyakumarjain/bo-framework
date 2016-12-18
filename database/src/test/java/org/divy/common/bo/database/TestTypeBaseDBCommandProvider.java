@@ -1,18 +1,22 @@
 package org.divy.common.bo.database;
 
 import java.util.UUID;
-import org.divy.common.bo.ICommandProvider;
-import org.divy.common.bo.TypeBaseDBCommandProvider;
-import org.divy.common.bo.IDBCommandContext;
-import org.divy.common.bo.context.DatabaseContext;
+import org.divy.common.bo.command.ICreateCommand;
+import org.divy.common.bo.command.IDeleteCommand;
+import org.divy.common.bo.command.IGetCommand;
+import org.divy.common.bo.command.IUpdateCommand;
+import org.divy.common.bo.database.context.DatabaseContext;
+import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.database.mock.*;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
 
 public class TestTypeBaseDBCommandProvider {
 
     ICommandProvider<MockEntity, UUID> commandProvider;
-    IDBCommandContext commandContext;
+    EntityManagerCommandContext commandContext;
 
     @Before
     public void before()
@@ -32,23 +36,27 @@ public class TestTypeBaseDBCommandProvider {
     }
 
     @Test
-    public void testGetGetCommand() {
-        commandProvider.getGetCommand();
+    public void testGetReadCommand() {
+        IGetCommand<MockEntity, UUID> readCommand = commandProvider.getGetCommand();
+        assertThat(readCommand,notNullValue());
     }
 
     @Test
     public void testGetCreateCommand() {
-        commandProvider.getCreateCommand();
+        ICreateCommand<MockEntity, UUID> createCommand = commandProvider.getCreateCommand();
+        assertThat(createCommand,notNullValue());
     }
 
     @Test
     public void testGetDeleteCommand() {
-        commandProvider.getDeleteCommand();
+        IDeleteCommand<MockEntity, UUID> deleteCommand = commandProvider.getDeleteCommand();
+        assertThat(deleteCommand,notNullValue());
     }
 
     @Test
     public void testGetUpdateCommand() {
-        commandProvider.getUpdateCommand();
+        IUpdateCommand<MockEntity, UUID> updateCommand = commandProvider.getUpdateCommand();
+        assertThat(updateCommand,notNullValue());
     }
 
 }

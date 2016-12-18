@@ -7,8 +7,8 @@ import java.util.UUID;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-import org.divy.common.bo.AbstractDatabaseSearchCommand;
-import org.divy.common.bo.IDBCommandContext;
+import org.divy.common.bo.database.AbstractDatabaseSearchCommand;
+import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.query.Query;
 
 /**
@@ -21,12 +21,11 @@ public class MockSearchCommand extends
     /**
      * @param context
      */
-    public MockSearchCommand(IDBCommandContext context) {
+    public MockSearchCommand(EntityManagerCommandContext context) {
         super(MockEntity.class, context);
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     protected CriteriaQuery<MockEntity> createCriteriaQuery(
             Query query) {
         CriteriaQuery<MockEntity> taskQuery = null;
