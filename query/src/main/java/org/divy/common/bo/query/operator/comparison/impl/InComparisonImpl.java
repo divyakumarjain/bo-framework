@@ -9,7 +9,7 @@ public class InComparisonImpl<ATTRIBUTE> implements org.divy.common.bo.query.ope
     private List<ATTRIBUTE> values;
 
     @Override
-    public List<ATTRIBUTE> getOperations() {
+    public List<ATTRIBUTE> getValues() {
         if(values==null)
             values = new ArrayList<ATTRIBUTE>();
 

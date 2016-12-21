@@ -1,8 +1,8 @@
 package org.divy.bo.demos.spring.cards.pages;
 
 import org.divy.bo.demos.spring.greetings.GreetingEntity;
-import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.database.AbstractBusinessObject;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

@@ -1,6 +1,6 @@
 package org.divy.common.bo.database;
 
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.operator.*;
 import org.divy.common.bo.query.operator.comparison.*;
 
@@ -21,7 +21,7 @@ public class JPACriteriaQueryBuilder<E> {
         this.entityType = entityType;
     }
 
-    public CriteriaQuery<? extends E> createCriteriaQuery(IQuery query) {
+    public CriteriaQuery<? extends E> createCriteriaQuery(AttributeQuery query) {
 
         CriteriaBuilder criteriaBuilder = this.entityManager.getCriteriaBuilder();
 
@@ -38,7 +38,6 @@ public class JPACriteriaQueryBuilder<E> {
             }
             criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
 
-            return criteriaQuery;
         }
         return criteriaQuery;
     }
@@ -70,7 +69,7 @@ public class JPACriteriaQueryBuilder<E> {
             returnPredicate = cb.le(path, createNumber(leOperator));
         } else if (operatorEntryValue instanceof InComparison) {
             InComparison<String> inOperator = (InComparison<String>) operatorEntryValue;
-            returnPredicate = cb.in(path).in(inOperator.getOperations());
+            returnPredicate = cb.in(path).in(inOperator.getValues());
         } else if (operatorEntryValue instanceof Or) {
             Or orOperator = (Or) operatorEntryValue;
             returnPredicate = cb.or(createPredicates(path,cb,orOperator.getOperations()));

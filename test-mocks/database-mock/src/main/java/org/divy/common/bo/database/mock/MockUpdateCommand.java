@@ -1,7 +1,7 @@
 package org.divy.common.bo.database.mock;
 
-import org.divy.common.bo.AbstractDatabaseUpdateCommand;
-import org.divy.common.bo.IDBCommandContext;
+import org.divy.common.bo.database.AbstractDatabaseUpdateCommand;
+import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.defaults.AdvanceBOMapper;
 import org.dozer.classmap.RelationshipType;
@@ -11,7 +11,7 @@ import org.dozer.loader.api.TypeMappingBuilder;
 public class MockUpdateCommand extends AbstractDatabaseUpdateCommand<MockEntity> {
 
     public MockUpdateCommand(
-            IDBCommandContext context) {
+            EntityManagerCommandContext context) {
         super(MockEntity.class, context);
         mapper = new AdvanceBOMapper<MockEntity,MockEntity>(MockEntity.class,MockEntity.class){
 

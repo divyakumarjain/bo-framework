@@ -1,7 +1,7 @@
 package org.divy.common.bo.database;
 
 import org.divy.common.bo.database.mock.MockEntity;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.query.operator.And;
 import org.divy.common.bo.query.operator.Not;
@@ -32,7 +32,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.doReturn;
-public class JPACriteriaQueryBuilderTest {
+public class JPACriteriaAttributeQueryBuilderTest {
 
     JPACriteriaQueryBuilder criteriaQueryBuilder;
 
@@ -49,7 +49,7 @@ public class JPACriteriaQueryBuilderTest {
     @Test
     public void equalsQuery() throws Exception {
 
-        IQuery query = new Query();
+        AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new EqualsComparisonImpl("1"));
 
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
@@ -62,7 +62,7 @@ public class JPACriteriaQueryBuilderTest {
 
     @Test
     public void notQuery() throws Exception {
-        IQuery query = new Query();
+        AttributeQuery query = new AttributeQuery();
         Not operator = new NotImpl( new GreaterThanComparisonImpl(1));
         query.put("integerAttribute", operator);
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
@@ -80,7 +80,7 @@ public class JPACriteriaQueryBuilderTest {
     @Test
     public void gtQuery() throws Exception {
 
-        IQuery query = new Query();
+        AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new GreaterThanComparisonImpl<Number>(1));
 
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
@@ -94,7 +94,7 @@ public class JPACriteriaQueryBuilderTest {
     @Test
     public void geQuery() throws Exception {
 
-        IQuery query = new Query();
+        AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new GreaterThanEqualToComparisonImpl<Number>( 1));
 
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
@@ -108,7 +108,7 @@ public class JPACriteriaQueryBuilderTest {
     @Test
     public void ltQuery() throws Exception {
 
-        IQuery query = new Query();
+        AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new LessThanComparisonImpl<>( 1));
 
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
@@ -121,7 +121,7 @@ public class JPACriteriaQueryBuilderTest {
 
     @Test
     public void leQuery() throws Exception {
-        IQuery query = new Query();
+        AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new LessThanEqualToComparisonImpl<>( 1));
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForComparisonPredicate(criteriaQuery
@@ -150,7 +150,7 @@ public class JPACriteriaQueryBuilderTest {
 
     @Test
     public void orQuery() throws Exception {
-        IQuery query = new Query();
+        AttributeQuery query = new AttributeQuery();
         OrImpl operator = new OrImpl( new EqualsComparisonImpl("1"), new LessThanComparisonImpl<>( 1));
         query.put("integerAttribute", operator);
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
@@ -161,7 +161,7 @@ public class JPACriteriaQueryBuilderTest {
 
     @Test
     public void andQuery() throws Exception {
-        IQuery query = new Query();
+        AttributeQuery query = new AttributeQuery();
         And operator = new AndImpl( new EqualsComparisonImpl("1"), new LessThanComparisonImpl<>( 1));
         query.put("integerAttribute", operator);
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);

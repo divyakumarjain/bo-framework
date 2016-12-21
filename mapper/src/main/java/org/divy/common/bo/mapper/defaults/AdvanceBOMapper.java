@@ -8,8 +8,12 @@ import org.divy.common.bo.mapper.AbstractBOMapper;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
+import org.dozer.loader.api.FieldsMappingOptions;
 import org.dozer.loader.api.TypeMappingBuilder;
 import org.dozer.loader.api.TypeMappingOptions;
+
+import static org.dozer.loader.api.FieldsMappingOptions.*;
+import static org.dozer.loader.api.TypeMappingOptions.*;
 
 public class AdvanceBOMapper<B, O> extends AbstractBOMapper<B, O> {
 

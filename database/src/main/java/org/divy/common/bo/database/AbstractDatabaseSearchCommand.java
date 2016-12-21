@@ -1,25 +1,22 @@
 package org.divy.common.bo.database;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 import javax.persistence.criteria.*;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.command.ISearchCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
-import org.divy.common.bo.query.IQuery;
+import org.divy.common.bo.query.AttributeQuery;
+import org.divy.common.bo.query.Query;
 
 
-public abstract class AbstractDatabaseSearchCommand<ENTITY extends IBusinessObject<ID>, ID>
-        extends
-        AbstractDatabaseCommand<ENTITY, ID> implements
-        ISearchCommand<ENTITY, ID> {
+public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>, I>
+        extends AbstractDatabaseCommand<E, I>
+        implements ISearchCommand<E, I> {
 
     protected AbstractDatabaseSearchCommand(
-            Class<? extends ENTITY> typeParameterClass,EntityManagerCommandContext context)
+            Class<E> typeParameterClass, EntityManagerCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
@@ -27,14 +24,17 @@ public abstract class AbstractDatabaseSearchCommand<ENTITY extends IBusinessObje
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<ENTITY> search(IQuery query) {
+    public List<E> search(Query query) {
 
-        CriteriaQuery<ENTITY> criteriaQuery;
+        CriteriaQuery<E> criteriaQuery;
 
         JPACriteriaQueryBuilder criteriaQueryBuilder = new JPACriteriaQueryBuilder(getEntityManager(), getEntityType());
 
-        criteriaQuery = (CriteriaQuery<ENTITY>) criteriaQueryBuilder.createCriteriaQuery(query);
-
-        return getEntityManager().createQuery(criteriaQuery).getResultList();
+        if(query instanceof AttributeQuery || query == null) {
+            criteriaQuery = (CriteriaQuery<E>) criteriaQueryBuilder.createCriteriaQuery((AttributeQuery)query);
+            return getEntityManager().createQuery(criteriaQuery).getResultList();
+        } else {
+            throw new IllegalArgumentException("Only Attribute Queries are supported");
+        }
     }
 }

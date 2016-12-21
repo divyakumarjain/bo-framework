@@ -9,7 +9,7 @@ public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>
         IDeleteCommand<E, I>
 {
     protected AbstractDatabaseDeleteCommand(
-            Class<? extends E> typeParameterClass, EntityManagerCommandContext context)
+            Class<E> typeParameterClass, EntityManagerCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
@@ -29,16 +29,19 @@ public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>
     public E deleteById(I id)
     {
         transactionBegin();
+        try {
+            E entity = find(id);
 
-        E entity = find(id);
-
-        if (entity != null) {
-            getEntityManager().remove(entity);
+            if (entity != null) {
+                getEntityManager().remove(entity);
+            }
+            return entity;
+        } catch (Exception e) {
+            transactionRollback();
+            throw e;
+        } finally {
+            transactionCommit();
         }
-
-        transactionCommit();
-
-        return entity;
     }
 
 }

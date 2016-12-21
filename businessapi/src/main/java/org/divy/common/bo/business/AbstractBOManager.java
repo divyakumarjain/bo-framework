@@ -20,8 +20,8 @@ public class AbstractBOManager<E extends IBusinessObject<I>, I> implements IBOMa
     }
 
     @Override
-    public E update(E businessObject) {
-        return repository.update(businessObject);
+    public E update(I id, E businessObject) {
+        return repository.update(id, businessObject);
     }
 
     @Override

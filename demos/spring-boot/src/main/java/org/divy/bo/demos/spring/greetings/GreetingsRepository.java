@@ -1,7 +1,7 @@
 package org.divy.bo.demos.spring.greetings;
 
-import org.divy.common.bo.AbstractBODatabaseRepository;
-import org.divy.common.bo.ICommandProvider;
+import org.divy.common.bo.database.AbstractBODatabaseRepository;
+import org.divy.common.bo.database.ICommandProvider;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

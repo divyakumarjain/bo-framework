@@ -4,8 +4,8 @@ import java.net.URI;
 import javax.ws.rs.core.Link;
 import javax.ws.rs.core.UriBuilder;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.glassfish.jersey.message.internal.JerseyLink;
 
 

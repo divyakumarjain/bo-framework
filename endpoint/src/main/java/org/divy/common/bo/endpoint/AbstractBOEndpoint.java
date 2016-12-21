@@ -59,8 +59,8 @@ public abstract class AbstractBOEndpoint<E extends IBusinessObject<I>, I extends
     }
 
     @Override
-    protected E doUpdate(E businessObject) {
-        return manager.update(businessObject);
+    protected E doUpdate(I id, E businessObject) {
+        return manager.update(id, businessObject);
     }
 
     @Override

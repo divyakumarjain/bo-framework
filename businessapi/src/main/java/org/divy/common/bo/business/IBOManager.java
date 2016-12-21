@@ -9,10 +9,9 @@ public interface IBOManager<E extends IBusinessObject<I>, I> {
 
     E create(E businessObject);
 
-    E update(E businessObject);
+    E update(I id, E businessObject);
 
     E delete(E businessObject);
-
     List<E> list();
 
     List<E> search(Query businessObjectQuery);

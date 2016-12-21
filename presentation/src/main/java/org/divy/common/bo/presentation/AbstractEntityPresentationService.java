@@ -2,9 +2,9 @@ package org.divy.common.bo.presentation;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
-import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.query.Query;
+import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.rest.LinkBuilderFactoryImpl;
 
 import javax.inject.Inject;
@@ -47,8 +47,8 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
     }
 
     @Override
-    protected E doUpdate(E entity) {
-        E updatedBusinessObject = manager.update(entity);
+    protected E doUpdate(I id, E entity) {
+        E updatedBusinessObject = manager.update(id, entity);
         return updatedBusinessObject;
     }
 
@@ -88,7 +88,7 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
 
     protected VO doUpdatePresenter(VO presentationObject) {
         E entityToBeUpdated = mapper.createBO(presentationObject);
-        E updatedBusinessObject = doUpdate(entityToBeUpdated);
+        E updatedBusinessObject = doUpdate(entityToBeUpdated.identity(), entityToBeUpdated);
         return mapper.createFromBO(updatedBusinessObject);
     }
 

@@ -35,6 +35,7 @@
 
         <!-- Make sure to update below dependencies as these are not updated from Spring Boot BOM-->
         <org.springframework.boot.version>1.4.1.RELEASE</org.springframework.boot.version>
+        <hibernate-search-orm-version>5.5.5.Final</hibernate-search-orm-version>
     </properties>
 
     <build>

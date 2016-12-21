@@ -8,7 +8,8 @@ import java.util.List;
 
 import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.query.defaults.EqualTo;
+import org.divy.common.bo.query.operator.comparison.impl.EqualsComparisonImpl;
+import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.test.ITestDataProvider;
 
 /**
@@ -92,9 +93,9 @@ public class MockBoTestDataProvider implements
 
     @Override
     public Query createSearchQuery() {
-        Query userQuery = new org.divy.common.bo.query.defaults.Query();
+        AttributeQuery userQuery = new AttributeQuery();
 
-        userQuery.put("name",new EqualTo<>("data1"));
+        userQuery.put("name",new EqualsComparisonImpl<>("data1"));
 
         return userQuery;
     }

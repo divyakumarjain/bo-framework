@@ -2,8 +2,8 @@ package org.divy.common.bo.repository.test;
 
 import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.IDBCommandContext;
-import org.divy.common.bo.context.DatabaseContext;
+import org.divy.common.bo.database.context.EntityManagerCommandContext;
+import org.divy.common.bo.database.context.DatabaseContext;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.divy.common.bo.test.TestBOCRUDBase;
@@ -19,7 +19,7 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
 {
 
     protected IBORepository<E, I> boRepository;
-    protected IDBCommandContext context;
+    protected EntityManagerCommandContext context;
     /**
      * @param testDataProvider
      */
@@ -59,8 +59,8 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
     }
 
     @Override
-    protected void doUpdateEntity(E entity) {
-        boRepository.update(entity);
+    protected void doUpdateEntity(I id, E entity) {
+        boRepository.update(id, entity);
     }
 
     @Override

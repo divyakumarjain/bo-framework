@@ -17,13 +17,19 @@ public abstract class AbstractEntityManagerContext implements EntityManagerComma
 
     public void commit()
     {
+        if(transaction.isActive()){
             transaction.commit();
+        }
     }
 
     public void begin()
     {
         transaction = getEntityManager().getTransaction();
         transaction.begin();
+    }
+
+    public void rollBack() {
+        transaction.rollback();
     }
 
     public CommandContext getParentContext()

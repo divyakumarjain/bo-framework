@@ -45,7 +45,7 @@ public abstract class AbstractBusinessObject implements IBusinessObject<UUID> {
         return uuid;
     }
 
-    protected void setUuid(UUID uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 

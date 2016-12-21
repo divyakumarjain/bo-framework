@@ -21,7 +21,7 @@ public class InMemoryBOManager<E extends IBusinessObject<I>, I extends Serializa
     }
 
     @Override
-    public E update(E businessObject) {
+    public E update(I id, E businessObject) {
         inMemoryMap.put(businessObject.identity(),businessObject);
         return businessObject;
     }

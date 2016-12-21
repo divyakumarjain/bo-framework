@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * The Abstract implementation for HATEOAS based Business Object management Endpoint  
+ * The Abstract implementation for HATEOAS based Business Object management Endpoint
  * @author Divyakumar
  * @param <E> The Business Object Entity
  * @param <R> The HATEOAS representation of Business Object entity
@@ -73,12 +73,12 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>,
 
     /**
      * Creates Relationship between Business Object Entities.
-     * 
+     *
      * @param id Business Object Entity identity of source of the relationship/association
      * @param relation name of the association attribute of relationship
      * @param uriInfo URL which is used by client trigger post method to create relationship
-     * 
-     * @return returns 201 status code for successful creation of relationship/association 
+     *
+     * @return returns 201 status code for successful creation of relationship/association
      */
     @POST
     @Path("/{id}/{relation}")
@@ -93,7 +93,7 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>,
         }
 
 //        this.getAssociations().getAssociation(relation).
-        
+
         Object createdBo = null;
         URI createLocation = null;
 
@@ -133,8 +133,8 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>,
     }
 
     @Override
-    protected R doUpdate(R representation) {
-        return mapFromBO(getManager().update(mapToBO(representation)));
+    protected R doUpdate(I id, R representation) {
+        return mapFromBO(getManager().update(id, mapToBO(representation)));
     }
 
     @Override

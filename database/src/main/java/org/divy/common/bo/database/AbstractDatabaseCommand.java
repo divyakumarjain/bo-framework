@@ -44,6 +44,10 @@ public abstract class AbstractDatabaseCommand<E extends IBusinessObject<I>, I>
         context.begin();
     }
 
+    protected void transactionRollback() {
+        context.rollBack();
+    }
+
     protected E getReference(Object identity)
     {
         return getEntityManager().find(entityType, identity);

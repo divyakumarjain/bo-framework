@@ -1,7 +1,7 @@
 package org.divy.common.rest.impl;
 
 
-import org.divy.common.bo.AbstractBusinessObject;
+import org.divy.common.bo.database.AbstractBusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.AbstractRepresentation;
 import org.divy.common.bo.mapper.defaults.AdvanceBOMapper;
 import org.divy.common.rest.HATEOASMapper;

@@ -12,6 +12,8 @@ import org.divy.common.bo.command.ISearchCommand;
 import org.divy.common.bo.command.IUpdateCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * @author Divyakumar
  *
@@ -49,7 +51,6 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
             return type.getConstructor(Class.class,
                     EntityManagerCommandContext.class).newInstance(entityClass, context);
 
-            return returnInstance;
 
         } catch (InstantiationException
                 | IllegalAccessException

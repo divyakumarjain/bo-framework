@@ -6,6 +6,7 @@ package org.divy.common.bo.test;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.query.Query;
+import org.divy.common.bo.query.AttributeQuery;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -68,9 +69,9 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
         testDataProvider.modifyEntityWithTestData(entity);
 
-        doUpdateEntity(entity);
-
         I id = getIdentifier(entity);
+
+        doUpdateEntity(id, entity);
 
         E updatedEntity = doAssertExists(id);
 
@@ -131,27 +132,17 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
     /* Clean up */
     @After
-    public void cleanup() {
-        List<E> searchedEntities = doSearchEntities(new org.divy.common.bo.query.defaults.Query());
+    public void cleanup() throws Exception{
+        List<E> searchedEntities = doSearchEntities(new AttributeQuery());
 
-        for (Iterator<E> iterator = searchedEntities.iterator(); iterator.hasNext(); ) {
-
-            try {
-
-                E entity = iterator.next();
-                doDeleteEntity(entity);
-
-            } catch (Exception e) {
-                LOGGER.error("Could not clean up the test case", e);
-            }
-        }
+        searchedEntities.stream().forEach(this::doDeleteEntity);
     }
 
 
     /* CRUD Operation */
     protected abstract E doCreateEntity(E entity);
 
-    protected abstract void doUpdateEntity(E entity);
+    protected abstract void doUpdateEntity(I id, E entity);
 
     protected abstract E doGetByKey(I id);
 

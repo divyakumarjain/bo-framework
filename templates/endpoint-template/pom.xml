@@ -48,12 +48,6 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-test-template</artifactId>
-            <type>pom</type>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

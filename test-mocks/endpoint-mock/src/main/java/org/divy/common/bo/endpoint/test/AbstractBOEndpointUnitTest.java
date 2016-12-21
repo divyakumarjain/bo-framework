@@ -25,6 +25,18 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.endpoint.AbstractBOEndpoint;
+import org.divy.common.bo.query.Query;
+import org.divy.common.bo.query.AttributeQuery;
+import org.divy.common.bo.test.ITestDataProvider;
+import org.junit.Before;
+
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Module;
+import com.google.inject.TypeLiteral;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.mock;
@@ -86,7 +98,7 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
     }
 
     @Override
-    protected void doUpdateEntity(E entity) {
+    protected void doUpdateEntity(I id, E entity) {
         Response response = this.endpointInstance.update(entity.identity(), entity, mock(UriInfo.class));
         assertThat(response, hasProperty(STATUS, is(equalTo(204))));
     }
@@ -100,7 +112,7 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
     @Override
     @SuppressWarnings("unchecked")
     protected List<E> doSearchEntities(Query searchQuery) {
-        Response response = this.endpointInstance.search((org.divy.common.bo.query.defaults.Query) searchQuery, mock(UriInfo.class));
+        Response response = this.endpointInstance.search((AttributeQuery) searchQuery, mock(UriInfo.class));
         assertThat(response, hasProperty(STATUS, is(equalTo(200))));
         assertThat(response, hasProperty(ENTITY, notNullValue()));
         return (List<E>) response.getEntity();

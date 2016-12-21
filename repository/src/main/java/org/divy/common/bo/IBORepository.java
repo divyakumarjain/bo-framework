@@ -4,12 +4,11 @@ import org.divy.common.bo.query.Query;
 
 import java.util.List;
 
-
 public interface IBORepository<E extends IBusinessObject<I>, I>
 {
     E create(E businessObject);
 
-    E update(E businessObject);
+    E update(I id, E businessObject);
 
     E delete(E businessObject);
 

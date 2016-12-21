@@ -4,9 +4,6 @@ import org.dozer.BeanFactory;
 
 import java.util.UUID;
 
-/**
- * Created by divyjain on 9/25/2016.
- */
 public class UuidBeanFactory implements BeanFactory {
     @Override
     public Object createBean(Object sourceBean, Class<?> destinationType, String mapId) {

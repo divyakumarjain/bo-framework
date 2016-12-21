@@ -7,6 +7,8 @@ import org.divy.common.bo.query.Query;
 
 import java.util.List;
 
+import org.divy.common.bo.query.Query;
+
 /**
  * @author Divyakumar
  *

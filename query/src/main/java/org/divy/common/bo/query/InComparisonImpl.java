@@ -1,5 +1,7 @@
 package org.divy.common.bo.query;
 
+import org.divy.common.bo.query.operator.comparison.InComparison;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -62,7 +62,7 @@ public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<
     }
 
     @Override
-    protected void doUpdateEntity(E entity) {
+    protected void doUpdateEntity(I id, E entity) {
         getEntityTarget((String) entity.identity()).request(MediaType.APPLICATION_JSON_TYPE).put(Entity.entity(entity,MediaType.APPLICATION_JSON_TYPE));
     }
 

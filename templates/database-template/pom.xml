@@ -43,11 +43,6 @@
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-jaxb-annotations</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-test-template</artifactId>
-            <type>pom</type>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -1,6 +1,6 @@
 package org.divy.common.query.service;
 
-import org.divy.common.bo.query.Operator;
+import org.divy.common.bo.query.operator.Operator;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 

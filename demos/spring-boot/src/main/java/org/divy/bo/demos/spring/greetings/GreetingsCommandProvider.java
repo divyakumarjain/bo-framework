@@ -1,6 +1,6 @@
 package org.divy.bo.demos.spring.greetings;
 
-import org.divy.common.bo.defaults.DefaultDBCommandProvider;
+import org.divy.common.bo.database.defaults.DefaultDBCommandProvider;
 import org.springframework.stereotype.Component;
 
 @Component

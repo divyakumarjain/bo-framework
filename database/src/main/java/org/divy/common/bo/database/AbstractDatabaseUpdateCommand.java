@@ -4,7 +4,7 @@ import org.divy.common.bo.command.IUpdateCommand;
 
 import java.util.Calendar;
 import java.util.UUID;
-import org.divy.common.bo.command.IUpdateCommand;
+
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
 
@@ -13,7 +13,7 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
         IUpdateCommand<E, UUID>
 {
     protected AbstractDatabaseUpdateCommand(
-            Class<? extends E> typeParameterClass,EntityManagerCommandContext context)
+            Class<E> typeParameterClass,EntityManagerCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
@@ -22,29 +22,39 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
     protected abstract void merge(E source, E target);
 
     @Override
-    public E update(E entity)
+    public E update(UUID id, E entity)
     {
-        return doUpdate(entity);
+        return doUpdate(id, entity);
     }
 
     /**
+     *
+     * @param id
      * @param entity
      * @return
      */
-    private E doUpdate(E entity) {
+    private E doUpdate(UUID id, E entity) {
 
         transactionBegin();
 
-        E fromPersistence = getEntityManager().getReference(
-                getEntityType(), entity.identity());
+        E fromPersistence = null;
+        try {
+            fromPersistence = getEntityManager().getReference(
+                    getEntityType(), id);
 
-        merge(entity, fromPersistence);
+            merge(entity, fromPersistence);
 
-        getEntityManager().merge(fromPersistence);
+            getEntityManager().merge(fromPersistence);
 
-        fromPersistence.setLastUpdateTimestamp(Calendar.getInstance());
+            fromPersistence.setLastUpdateTimestamp(Calendar.getInstance());
+        } catch (Exception e) {
+            transactionRollback();
+            throw e;
+        } finally {
+            transactionCommit();
+        }
 
-        transactionCommit();
+
 
         return fromPersistence;
     }

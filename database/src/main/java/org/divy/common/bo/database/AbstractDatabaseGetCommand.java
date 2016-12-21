@@ -8,7 +8,7 @@ public abstract class AbstractDatabaseGetCommand<E extends IBusinessObject<I>, I
         extends AbstractDatabaseCommand<E, I> implements IGetCommand<E, I>
 {
     protected AbstractDatabaseGetCommand(
-            Class<? extends E> typeParameterClass, EntityManagerCommandContext context)
+            Class<E> typeParameterClass, EntityManagerCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);

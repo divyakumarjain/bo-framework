@@ -15,6 +15,10 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.Collection;
 
+import org.divy.common.bo.query.Query;
+import org.divy.common.bo.query.AttributeQuery;
+import org.divy.common.rest.LinkBuilder;
+import org.divy.common.rest.LinkBuilderFactory;
 public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
 
 
@@ -47,10 +51,10 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
     @Path("/{entityId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    public final Response update(@NotNull @PathParam("entityId") I key, @NotNull E businessObject,
+    public final Response update(@NotNull @PathParam("entityId") I id, @NotNull E businessObject,
                                  @Context UriInfo uriInfo) {
 
-        doUpdate(businessObject);
+        doUpdate(id, businessObject);
 
         return Response.noContent().build();
     }
@@ -85,7 +89,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @Path("/search")
-    public final Response search(@NotNull org.divy.common.bo.query.defaults.Query query,
+    public final Response search(@NotNull Query query,
                                  @Context UriInfo uriInfo) {
         Collection<E> resultList = doSearch(query);
         return buildListResponse(resultList);
@@ -132,7 +136,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
 
     protected abstract E doCreate(E businessObject);
 
-    protected abstract E doUpdate(E businessObject);
+    protected abstract E doUpdate(I id, E businessObject);
 
     protected abstract void doDelete(E businessObject);
 

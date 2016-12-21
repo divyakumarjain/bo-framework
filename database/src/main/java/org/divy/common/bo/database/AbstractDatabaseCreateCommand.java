@@ -12,7 +12,7 @@ public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessOb
         ICreateCommand<E>
 {
     protected AbstractDatabaseCreateCommand(
-            Class<? extends E> typeParameterClass, EntityManagerCommandContext context)
+            Class<E> typeParameterClass, EntityManagerCommandContext context)
     {
         super(typeParameterClass);
         this.setContext(context);
@@ -28,11 +28,17 @@ public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessOb
      */
     private void doPersist(E entity) {
         transactionBegin();
-        entity.setCreateTimestamp(Calendar.getInstance());
-        entity.setLastUpdateTimestamp(Calendar.getInstance());
-        getEntityManager().merge(entity);
 
-        transactionCommit();
+        try {
+            entity.setCreateTimestamp(Calendar.getInstance());
+            entity.setLastUpdateTimestamp(Calendar.getInstance());
+            getEntityManager().merge(entity);
+        } catch (Exception e) {
+            transactionRollback();
+            throw e;
+        } finally {
+            transactionCommit();
+        }
     }
 
     @Override

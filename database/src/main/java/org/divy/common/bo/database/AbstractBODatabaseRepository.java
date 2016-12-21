@@ -4,6 +4,8 @@ import org.divy.common.bo.query.Query;
 
 import java.util.List;
 
+import org.divy.common.bo.IBORepository;
+import org.divy.common.bo.IBusinessObject;
 
 public class AbstractBODatabaseRepository<E extends IBusinessObject<I>, I>
         implements IBORepository<E, I>
@@ -27,9 +29,9 @@ public class AbstractBODatabaseRepository<E extends IBusinessObject<I>, I>
     }
 
     @Override
-    public E update(E entity)
+    public E update(I id, E entity)
     {
-        return commandProvider.getUpdateCommand().update(entity);
+        return commandProvider.getUpdateCommand().update(id, entity);
     }
 
 

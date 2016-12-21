@@ -5,7 +5,10 @@ import org.divy.common.bo.command.ICreateCommand;
 import org.divy.common.bo.command.IDeleteCommand;
 import org.divy.common.bo.command.IGetCommand;
 import org.divy.common.bo.command.IUpdateCommand;
-import org.divy.common.bo.context.DatabaseContext;
+import org.divy.common.bo.database.ICommandProvider;
+import org.divy.common.bo.database.context.EntityManagerCommandContext;
+import org.divy.common.bo.database.TypeBaseDBCommandProvider;
+import org.divy.common.bo.database.context.DatabaseContext;
 import org.divy.common.bo.database.mock.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +18,7 @@ import static org.hamcrest.Matchers.*;
 public class TestTypeBaseDBCommandProvider {
 
     ICommandProvider<MockEntity, UUID> commandProvider;
-    IDBCommandContext commandContext;
+    EntityManagerCommandContext commandContext;
 
     @Before
     public void before()

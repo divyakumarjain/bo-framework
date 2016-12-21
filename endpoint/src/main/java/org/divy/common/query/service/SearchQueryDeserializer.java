@@ -2,8 +2,8 @@ package org.divy.common.query.service;
 
 import java.io.IOException;
 
-import org.divy.common.bo.query.Operator;
-import org.divy.common.bo.query.defaults.EqualTo;
+import org.divy.common.bo.query.operator.Operator;
+import org.divy.common.bo.query.operator.comparison.impl.EqualsComparisonImpl;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,8 +16,7 @@ final class SearchQueryDeserializer extends
         JsonDeserializer<Operator> {
     @Override
     public Operator deserialize(JsonParser jp,
-                                DeserializationContext ctxt) throws IOException,
-            JsonProcessingException {
+                                DeserializationContext ctxt) throws IOException {
 
         Operator returnOperator = null;
 
@@ -27,7 +26,7 @@ final class SearchQueryDeserializer extends
         
         //TODO support all operators
         if(operatorValue!=null)
-            returnOperator = new EqualTo<String>(operatorValue.asText());
+            returnOperator = new EqualsComparisonImpl<String>(operatorValue.asText());
         
         return returnOperator;
     }
