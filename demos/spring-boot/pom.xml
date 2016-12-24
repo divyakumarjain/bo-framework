@@ -50,6 +50,11 @@
             <artifactId>bo-framework-database</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>spring-support</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>

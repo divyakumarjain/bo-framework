@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @XmlRootElement
-public class GreetingEntity extends AbstractBusinessObject {
+public class Greeting extends AbstractBusinessObject {
 
     private String greeting;
 
@@ -35,8 +35,8 @@ public class GreetingEntity extends AbstractBusinessObject {
      */
     @Override
     public void update(IBusinessObject<UUID> entity) {
-        if(entity instanceof GreetingEntity) {
-            this.setGreeting(((GreetingEntity) entity).getGreeting());
+        if(entity instanceof Greeting) {
+            this.setGreeting(((Greeting) entity).getGreeting());
         } else {
             throw new IllegalArgumentException("Expecting instance of Mock");
         }
@@ -47,14 +47,14 @@ public class GreetingEntity extends AbstractBusinessObject {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof GreetingEntity)) {
+        if (!(o instanceof Greeting)) {
             return false;
         }
         if (!super.equals(o)) {
             return false;
         }
 
-        GreetingEntity that = (GreetingEntity) o;
+        Greeting that = (Greeting) o;
 
         if (!getUuid().equals(that.getUuid())) {
             return false;
@@ -73,7 +73,7 @@ public class GreetingEntity extends AbstractBusinessObject {
 
     @Override
     public String toString() {
-        return "GreetingEntity{" +
+        return "Greeting{" +
                 "greeting='" + greeting + '\'' +
                 '}';
     }

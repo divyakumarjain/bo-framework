@@ -11,25 +11,25 @@ import java.util.UUID;
 
 @Entity
 @XmlRootElement
-public class PagesEntity extends AbstractBusinessObject {
+public class Page extends AbstractBusinessObject {
 
-    List<SectionEntity> sections;
+    List<Section> sections;
 
     @Override
     public void update(IBusinessObject<UUID> entity) {
-        if (entity instanceof PagesEntity) {
-            this.setSections(((PagesEntity) entity).getSections());
+        if (entity instanceof Page) {
+            this.setSections(((Page) entity).getSections());
         } else {
-            throw new IllegalArgumentException("Expecting instance of GreetingCardEntity");
+            throw new IllegalArgumentException("Expecting instance of GreetingCard");
         }
     }
 
     @OneToMany
-    public List<SectionEntity> getSections() {
+    public List<Section> getSections() {
         return sections;
     }
 
-    public void setSections(List<SectionEntity> sections) {
+    public void setSections(List<Section> sections) {
         this.sections = sections;
     }
 }

@@ -28,7 +28,7 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
     @SuppressWarnings({"unchecked", "rawtypes"})
     public DefaultDBCommandProvider(String persistentUnitName,
                                     Class<E> entityClass) {
-        //See below link for explaination of typecasing.
+        //See below link for explanation of typecasting.
         //http://stackoverflow.com/questions/30090242/java-lang-class-generics-and-wildcards
         //http://stackoverflow.com/questions/26766704/cannot-convert-from-listlist-to-listlist
 

@@ -6,26 +6,27 @@ import org.divy.common.bo.endpoint.hypermedia.AbstractHATEOASEndpoint;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilderFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.ws.rs.Path;
 import java.util.UUID;
 
 @Path("/greetings")
-public class GreetingsEndpoint extends AbstractHATEOASEndpoint<GreetingEntity,GreetingRepresentation, UUID> {
+public class GreetingsEndpoint extends AbstractHATEOASEndpoint<Greeting,GreetingRepresentation, UUID> {
 
 
-    private final IBOManager<GreetingEntity, UUID> manager;
-    private AbstractAssociations<GreetingEntity> associations;
+    private final IBOManager<Greeting, UUID> manager;
+    private AbstractAssociations<Greeting> associations;
     private GreetingHATEOASMapper greetingHATEOSMapper;
 
     @Autowired
-    public GreetingsEndpoint(IBOManager<GreetingEntity, UUID> greetingsManager,
+    public GreetingsEndpoint(@Qualifier("greetingManager") IBOManager<Greeting, UUID> greetingManager,
                              LinkBuilderFactoryImpl linkBuilderFactory,
                              GreetingHATEOASMapper greetingHATEOASMapper) {
         super(linkBuilderFactory);
-        this.manager = greetingsManager;
+        this.manager = greetingManager;
         this.greetingHATEOSMapper = greetingHATEOASMapper;
-        this.associations = new AbstractAssociations<GreetingEntity>(GreetingEntity.class) {
+        this.associations = new AbstractAssociations<Greeting>(Greeting.class) {
             @Override
             protected void doBuildAssociations() {
 //                association().name("pages").includeInRead()
@@ -35,17 +36,17 @@ public class GreetingsEndpoint extends AbstractHATEOASEndpoint<GreetingEntity,Gr
     }
 
     @Override
-    public IBOManager<GreetingEntity, UUID> getManager() {
+    public IBOManager<Greeting, UUID> getManager() {
         return this.manager;
     }
 
     @Override
-    public HATEOASMapper<GreetingEntity, GreetingRepresentation> getRepresentationMapper() {
+    public HATEOASMapper<Greeting, GreetingRepresentation> getRepresentationMapper() {
         return greetingHATEOSMapper;
     }
 
     @Override
-    public AbstractAssociations<GreetingEntity> getAssociations() {
+    public AbstractAssociations<Greeting> getAssociations() {
         return associations;
     }
 }

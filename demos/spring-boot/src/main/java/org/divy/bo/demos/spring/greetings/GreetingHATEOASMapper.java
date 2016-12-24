@@ -6,14 +6,14 @@ import org.divy.common.rest.impl.AbstractHATEOASMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-class GreetingHATEOASMapper extends AbstractHATEOASMapper<GreetingEntity, GreetingRepresentation> {
+class GreetingHATEOASMapper extends AbstractHATEOASMapper<Greeting, GreetingRepresentation> {
 
     public GreetingHATEOASMapper(LinkBuilderFactory linkBuilderFactory) {
-        super(GreetingEntity.class, GreetingRepresentation.class, linkBuilderFactory);
+        super(Greeting.class, GreetingRepresentation.class, linkBuilderFactory);
     }
 
     @Override
-    protected void doFillLinks(GreetingRepresentation representation, GreetingEntity businessObject) {
+    protected void doFillLinks(GreetingRepresentation representation, Greeting businessObject) {
         representation.addLink(getLinkBuilderFactory().newBuilder()
                 .path(GreetingsEndpoint.class)
                 .path(GreetingsEndpoint.class,"read")
@@ -21,17 +21,17 @@ class GreetingHATEOASMapper extends AbstractHATEOASMapper<GreetingEntity, Greeti
     }
 
     @Override
-    protected void doFillAssociations(GreetingRepresentation representation, GreetingEntity businessObject) {
+    protected void doFillAssociations(GreetingRepresentation representation, Greeting businessObject) {
 
     }
 
     @Override
-    protected void doReadLinks(GreetingRepresentation representation, GreetingEntity businessObject) {
+    protected void doReadLinks(GreetingRepresentation representation, Greeting businessObject) {
 
     }
 
     @Override
-    protected void doReadAssociations(GreetingRepresentation representation, GreetingEntity businessObject) {
+    protected void doReadAssociations(GreetingRepresentation representation, Greeting businessObject) {
 
     }
 }

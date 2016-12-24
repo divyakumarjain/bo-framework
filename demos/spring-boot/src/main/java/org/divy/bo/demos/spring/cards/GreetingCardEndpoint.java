@@ -12,20 +12,20 @@ import java.util.UUID;
 
 
 @Path("/GreetingCards")
-public class GreetingCardEndpoint extends AbstractHATEOASEndpoint<GreetingCardEntity, GreetingCardRepresentation, UUID> {
+public class GreetingCardEndpoint extends AbstractHATEOASEndpoint<GreetingCard, GreetingCardRepresentation, UUID> {
 
-    private final IBOManager<GreetingCardEntity, UUID> manager;
-    private final AbstractAssociations<GreetingCardEntity> associations;
+    private final IBOManager<GreetingCard, UUID> manager;
+    private final AbstractAssociations<GreetingCard> associations;
     private final GreetingCardsHATEOASMapper greetingCardsHATEOASMapper;
 
     @Autowired
-    public GreetingCardEndpoint(IBOManager<GreetingCardEntity, UUID> greetingManager,
+    public GreetingCardEndpoint(IBOManager<GreetingCard, UUID> greetingCardManager,
                                 GreetingCardsHATEOASMapper greetingCardsHATEOASMapper,
                                 LinkBuilderFactoryImpl linkBuilderFactory) {
         super(linkBuilderFactory);
-        this.manager = greetingManager;
+        this.manager = greetingCardManager;
         this.greetingCardsHATEOASMapper = greetingCardsHATEOASMapper;
-        this.associations = new AbstractAssociations<GreetingCardEntity>(GreetingCardEntity.class) {
+        this.associations = new AbstractAssociations<GreetingCard>(GreetingCard.class) {
             @Override
             protected void doBuildAssociations() {
                 association().name("pages").includeInRead()
@@ -35,17 +35,17 @@ public class GreetingCardEndpoint extends AbstractHATEOASEndpoint<GreetingCardEn
     }
 
     @Override
-    public IBOManager<GreetingCardEntity, UUID> getManager() {
+    public IBOManager<GreetingCard, UUID> getManager() {
         return this.manager;
     }
 
     @Override
-    public HATEOASMapper<GreetingCardEntity, GreetingCardRepresentation> getRepresentationMapper() {
+    public HATEOASMapper<GreetingCard, GreetingCardRepresentation> getRepresentationMapper() {
         return greetingCardsHATEOASMapper;
     }
 
     @Override
-    public AbstractAssociations<GreetingCardEntity> getAssociations() {
+    public AbstractAssociations<GreetingCard> getAssociations() {
         return associations;
     }
 }

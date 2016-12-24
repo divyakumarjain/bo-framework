@@ -1,6 +1,6 @@
 package org.divy.bo.demos.spring.cards.pages;
 
-import org.divy.bo.demos.spring.greetings.GreetingEntity;
+import org.divy.bo.demos.spring.greetings.Greeting;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.database.AbstractBusinessObject;
 
@@ -12,24 +12,24 @@ import java.util.UUID;
 
 @Entity
 @XmlRootElement
-public class SectionEntity extends AbstractBusinessObject {
-    private List<GreetingEntity> greetings;
+public class Section extends AbstractBusinessObject {
+    private List<Greeting> greetings;
 
     @Override
     public void update(IBusinessObject<UUID> entity) {
-        if (entity instanceof SectionEntity) {
-            this.setGreetings(((SectionEntity) entity).getGreetings());
+        if (entity instanceof Section) {
+            this.setGreetings(((Section) entity).getGreetings());
         } else {
-            throw new IllegalArgumentException("Expecting instance of GreetingCardEntity");
+            throw new IllegalArgumentException("Expecting instance of GreetingCard");
         }
     }
 
     @OneToMany
-    public List<GreetingEntity> getGreetings() {
+    public List<Greeting> getGreetings() {
         return greetings;
     }
 
-    public void setGreetings(List<GreetingEntity> greetings) {
+    public void setGreetings(List<Greeting> greetings) {
         this.greetings = greetings;
     }
 }
