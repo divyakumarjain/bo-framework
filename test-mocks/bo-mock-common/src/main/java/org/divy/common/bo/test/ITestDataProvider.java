@@ -6,7 +6,7 @@ import org.divy.common.bo.query.Query;
  */
 
 /**
- * @author Divyakumar
+ *
  *
  */
 public interface ITestDataProvider<E> {

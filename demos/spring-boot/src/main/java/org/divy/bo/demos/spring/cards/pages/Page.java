@@ -3,6 +3,7 @@ package org.divy.bo.demos.spring.cards.pages;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.database.AbstractBusinessObject;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,7 +25,7 @@ public class Page extends AbstractBusinessObject {
         }
     }
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Section> getSections() {
         return sections;
     }

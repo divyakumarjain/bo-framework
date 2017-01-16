@@ -5,9 +5,12 @@ import org.divy.common.bo.command.*;
 import org.divy.common.bo.context.HierarchicalCommandContext;
 import org.divy.common.bo.database.context.DatabaseContext;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
+import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.builder.MapperBuilder;
 
 import java.lang.reflect.InvocationTargetException;
 
+@Deprecated
 public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         implements ICommandProvider<E, I>
 {
@@ -15,6 +18,7 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
     private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
 
     private EntityManagerCommandContext context;
+    protected final Class<? extends E> entityClass;
 
     private Class<? extends IGetCommand<E, I>> getCommandType;
     private Class<? extends IUpdateCommand<E, I>> updateCommandType;
@@ -22,20 +26,46 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
     private Class<? extends ICreateCommand<E>> createCommandType;
     private Class<? extends ISearchCommand<E, I>> searchCommandType;
 
+    private final IBOMapper<E, E> updateMapper;
+
     public TypeBaseDBCommandProvider(String persistentUnitName,
+                                     Class<E> entityClass,
                                      Class<? extends IGetCommand<E, I>> getCommandType,
                                      Class<? extends IUpdateCommand<E, I>> updateCommandType,
                                      Class<? extends IDeleteCommand<E, I>> deleteCommandType,
                                      Class<? extends ICreateCommand<E>> createCommandType,
-                                     Class<? extends ISearchCommand<E, I>> searchCommandType) {
+                                     Class<? extends ISearchCommand<E, I>> searchCommandType,
+                                     MapperBuilder mapperBuilder) {
+
+        this(persistentUnitName
+                , entityClass
+                , getCommandType
+                , updateCommandType
+                , deleteCommandType
+                , createCommandType
+                , searchCommandType
+                , mapperBuilder.mapping(entityClass, entityClass).build());
+    }
+
+    public TypeBaseDBCommandProvider(String persistentUnitName,
+                                     Class<E> entityClass,
+                                     Class<? extends IGetCommand<E, I>> getCommandType,
+                                     Class<? extends IUpdateCommand<E, I>> updateCommandType,
+                                     Class<? extends IDeleteCommand<E, I>> deleteCommandType,
+                                     Class<? extends ICreateCommand<E>> createCommandType,
+                                     Class<? extends ISearchCommand<E, I>> searchCommandType,
+                                     IBOMapper<E, E> updateMapper) {
 
         context = new DatabaseContext(persistentUnitName);
+
+        this.entityClass = entityClass;
 
         this.getCommandType = getCommandType;
         this.updateCommandType = updateCommandType;
         this.deleteCommandType = deleteCommandType;
         this.createCommandType = createCommandType;
         this.searchCommandType = searchCommandType;
+        this.updateMapper = updateMapper;
     }
 
 
@@ -108,6 +138,22 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         }
     }
 
+    protected Object createCommand(Class<? extends IUpdateCommand<E, I>> updateCommandType, EntityManagerCommandContext newContext, IBOMapper<E, E> updateMapper) {
+        try
+        {
+            if (updateCommandType == null) {
+                throw new IllegalArgumentException("Command type not provided");
+            }
+            return updateCommandType.getConstructor(
+                    EntityManagerCommandContext.class).newInstance(context, updateMapper);
+
+        } catch (InstantiationException |IllegalAccessException | IllegalArgumentException
+                |SecurityException |InvocationTargetException |NoSuchMethodException e)
+        {
+            throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
+        }
+    }
+
     private EntityManagerCommandContext createContext()
     {
         if(context instanceof HierarchicalCommandContext){
@@ -164,7 +210,7 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
 
         IUpdateCommand<E, I> returnUpdateCommand;
 
-        returnUpdateCommand = (IUpdateCommand<E, I>) createCommand(updateCommandType, newContext);
+        returnUpdateCommand = (IUpdateCommand<E, I>) createCommand(updateCommandType, newContext, updateMapper);
 
         return returnUpdateCommand;
     }

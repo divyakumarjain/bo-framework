@@ -27,7 +27,7 @@ import java.util.Optional;
 
 /**
  * The Abstract implementation for HATEOAS based Business Object management Endpoint
- * @author Divyakumar
+ *
  * @param <E> The Business Object Entity
  * @param <R> The HATEOAS representation of Business Object entity
  *

@@ -1,6 +1,6 @@
 package org.divy.common.bo.spring;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.database.BoEntityMetaDataProvider;
 import org.divy.common.bo.spring.context.BoFrameworkSpringContext;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationEvent;
@@ -9,8 +9,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.support.GenericApplicationContext;
-
-import java.util.List;
 
 public class BoFrameworkSpringContextInitializer implements ApplicationContextInitializer<GenericApplicationContext>, ApplicationListener<ApplicationEvent> {
 
@@ -25,7 +23,7 @@ public class BoFrameworkSpringContextInitializer implements ApplicationContextIn
         context = new AnnotationConfigApplicationContext(BoFrameworkSpringContext.class);
         applicationContext.setParent(context);
         applicationContext.addBeanFactoryPostProcessor(new BoFrameworkBeanRegistryPostProcessor(
-                (List<Class<? extends IBusinessObject>>) context.getBean("typeList"),
+                (BoEntityMetaDataProvider) context.getBean("entityMetaDataProvider"),
                 context.getBean("dynamicBeanFactory", DynamicBeanFactory.class)));
         applicationContext.addApplicationListener(this);
     }

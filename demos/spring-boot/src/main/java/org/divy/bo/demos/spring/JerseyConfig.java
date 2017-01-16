@@ -5,7 +5,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import org.springframework.stereotype.Component;
 
-import org.divy.bo.demos.spring.greetings.GreetingsEndpoint;
+import org.divy.bo.demos.spring.greetings.GreetingEndpoint;
 
 @Component
 public class JerseyConfig extends ResourceConfig {
@@ -14,8 +14,8 @@ public class JerseyConfig extends ResourceConfig {
         initialize();
     }
 
-    private final void initialize() {
-        register(GreetingsEndpoint.class);
+    private void initialize() {
+        register(GreetingEndpoint.class);
         register(GreetingCardEndpoint.class);
     }
 }

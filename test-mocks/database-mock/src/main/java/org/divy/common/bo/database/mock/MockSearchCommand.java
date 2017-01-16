@@ -8,7 +8,7 @@ import org.divy.common.bo.database.AbstractDatabaseSearchCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ *.a.jain@hp.com
  *
  */
 public class MockSearchCommand extends

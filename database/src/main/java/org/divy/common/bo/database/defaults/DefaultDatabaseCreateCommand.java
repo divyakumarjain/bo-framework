@@ -8,7 +8,7 @@ import org.divy.common.bo.database.AbstractDatabaseCreateCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
 /**
- * @author Divyakumar
+ *
  *
  */
 public class DefaultDatabaseCreateCommand<E extends AbstractBusinessObject>

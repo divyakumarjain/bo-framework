@@ -13,7 +13,7 @@ import javax.ws.rs.Path;
 import java.util.UUID;
 
 /**
- * @author Divyakumar
+ *
  *
  */
 @Path("/mock")

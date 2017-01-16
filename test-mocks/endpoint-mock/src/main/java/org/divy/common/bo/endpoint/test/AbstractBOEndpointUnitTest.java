@@ -42,7 +42,7 @@ import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.mock;
 
 /**
- * @author Divyakumar
+ *
  */
 public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I extends Serializable>
         extends AbstractBOEndpointTest<E, I> {

@@ -8,27 +8,35 @@ import org.divy.common.bo.command.IUpdateCommand;
 import org.divy.common.bo.database.context.DatabaseContext;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.database.mock.*;
+import org.divy.common.bo.mapper.IBOMapper;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
+
+import static org.mockito.Mockito.*;
 
 public class TestTypeBaseDBCommandProvider {
 
     ICommandProvider<MockEntity, UUID> commandProvider;
     EntityManagerCommandContext commandContext;
 
+    IBOMapper<MockEntity, MockEntity> updateMapper;
+
     @Before
     public void before()
     {
         commandContext = new DatabaseContext("");
+        updateMapper = mock(IBOMapper.class);
 
-        TypeBaseDBCommandProvider<MockEntity, UUID> commandProvider = new TypeBaseDBCommandProvider<>("",
-                MockGetCommand.class,
-                MockUpdateCommand.class,
-                MockDeleteCommand.class,
-                MockCreateCommand.class,
-                MockSearchCommand.class);
+        TypeBaseDBCommandProvider<MockEntity, UUID> commandProvider = new TypeBaseDBCommandProvider<>(""
+                , MockEntity.class
+                , MockGetCommand.class
+                , MockUpdateCommand.class
+                , MockDeleteCommand.class
+                , MockCreateCommand.class
+                , MockSearchCommand.class
+                , updateMapper);
 
         commandProvider.setContext(commandContext);
 

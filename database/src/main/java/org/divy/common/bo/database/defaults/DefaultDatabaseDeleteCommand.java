@@ -8,7 +8,7 @@ import org.divy.common.bo.database.AbstractDatabaseDeleteCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
 /**
- * @author Divyakumar
+ *
  *
  */
 public class DefaultDatabaseDeleteCommand<E extends IBusinessObject<I>, I>

@@ -27,7 +27,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author Divyakumar
+ *
  *
  */
 public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<I>, I extends Serializable>

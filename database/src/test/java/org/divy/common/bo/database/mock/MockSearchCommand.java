@@ -12,7 +12,7 @@ import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.query.Query;
 
 /**
- * @author divyakumar.a.jain@hp.com
+ *.a.jain@hp.com
  *
  */
 public class MockSearchCommand extends

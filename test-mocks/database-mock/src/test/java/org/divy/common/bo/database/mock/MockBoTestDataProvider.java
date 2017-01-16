@@ -14,7 +14,7 @@ import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.test.ITestDataProvider;
 
 /**
- * @author Divyakumar
+ *
  *
  */
 public class MockBoTestDataProvider implements

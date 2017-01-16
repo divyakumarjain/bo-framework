@@ -5,26 +5,28 @@ import org.divy.common.bo.endpoint.association.AbstractAssociations;
 import org.divy.common.bo.endpoint.hypermedia.AbstractHATEOASEndpoint;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilderFactoryImpl;
+import org.divy.common.rest.impl.DefaultRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.ws.rs.Path;
 import java.util.UUID;
 
 
-@Path("/GreetingCards")
-public class GreetingCardEndpoint extends AbstractHATEOASEndpoint<GreetingCard, GreetingCardRepresentation, UUID> {
+@Path("/GreetingCard")
+public class GreetingCardEndpoint extends AbstractHATEOASEndpoint<GreetingCard, DefaultRepresentation, UUID> {
 
     private final IBOManager<GreetingCard, UUID> manager;
     private final AbstractAssociations<GreetingCard> associations;
-    private final GreetingCardsHATEOASMapper greetingCardsHATEOASMapper;
+    private final HATEOASMapper<GreetingCard, DefaultRepresentation> greetingCardHATEOASMapper;
 
     @Autowired
-    public GreetingCardEndpoint(IBOManager<GreetingCard, UUID> greetingCardManager,
-                                GreetingCardsHATEOASMapper greetingCardsHATEOASMapper,
+    public GreetingCardEndpoint(@Qualifier("greetingCardManager") IBOManager<GreetingCard, UUID> greetingCardManager,
+                                HATEOASMapper<GreetingCard, DefaultRepresentation> greetingCardHATEOASMapper,
                                 LinkBuilderFactoryImpl linkBuilderFactory) {
         super(linkBuilderFactory);
         this.manager = greetingCardManager;
-        this.greetingCardsHATEOASMapper = greetingCardsHATEOASMapper;
+        this.greetingCardHATEOASMapper = greetingCardHATEOASMapper;
         this.associations = new AbstractAssociations<GreetingCard>(GreetingCard.class) {
             @Override
             protected void doBuildAssociations() {
@@ -40,8 +42,8 @@ public class GreetingCardEndpoint extends AbstractHATEOASEndpoint<GreetingCard, 
     }
 
     @Override
-    public HATEOASMapper<GreetingCard, GreetingCardRepresentation> getRepresentationMapper() {
-        return greetingCardsHATEOASMapper;
+    public HATEOASMapper<GreetingCard, DefaultRepresentation> getRepresentationMapper() {
+        return greetingCardHATEOASMapper;
     }
 
     @Override

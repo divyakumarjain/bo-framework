@@ -144,7 +144,17 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-mapper</artifactId>
+                <artifactId>bo-framework-core-mapper</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-dozer-mapper</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-orika-mapper</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -248,6 +258,11 @@
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-search-orm</artifactId>
                 <version>${hibernate-search-orm-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>5.5.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

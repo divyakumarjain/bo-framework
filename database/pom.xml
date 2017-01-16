@@ -14,10 +14,13 @@
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-repository</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-mapper</artifactId>
+            <artifactId>bo-framework-dozer-mapper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-core-mapper</artifactId>
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>

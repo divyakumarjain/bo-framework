@@ -1,34 +1,30 @@
-/**
- * 
- */
 package org.divy.common.bo.database.defaults;
 
 import org.divy.common.bo.database.AbstractBusinessObject;
 import org.divy.common.bo.database.AbstractDatabaseUpdateCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
-import org.divy.common.bo.mapper.defaults.DefaultBOMapper;
 
 /**
- * @author Divyakumar
+ *
  *
  */
 public class DefaultDatabaseUpdateCommand<E extends AbstractBusinessObject>
         extends
         AbstractDatabaseUpdateCommand<E> {
 
-    IBOMapper<E, E> mapper;
+    private IBOMapper<E, E> updateMapper;
 
     /**
-     * @param typeParameterClass
-     * @param context
+     * @param entityType The Entity type
+     * @param context The Context for Database operation
+     * @param updateMapper mapper which will merge object from to be updated with object from database
      */
-    public DefaultDatabaseUpdateCommand(
-            Class<E> typeParameterClass,
-            EntityManagerCommandContext context) {
-        super(typeParameterClass, context);
-
-        mapper = new DefaultBOMapper<>(typeParameterClass,typeParameterClass);
+    public DefaultDatabaseUpdateCommand( Class<E> entityType
+            , EntityManagerCommandContext context
+            , IBOMapper<E,E> updateMapper) {
+        super(entityType, context);
+        this.updateMapper = updateMapper;
     }
 
     /*
@@ -41,7 +37,7 @@ public class DefaultDatabaseUpdateCommand<E extends AbstractBusinessObject>
     @Override
     protected void merge(E source, E target) {
         if(source != target) {
-            mapper.mapToBO(source, target);
+            updateMapper.mapToBO(source, target);
         }
     }
 }

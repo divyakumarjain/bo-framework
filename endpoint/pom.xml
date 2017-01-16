@@ -29,6 +29,15 @@
             <artifactId>bo-framework-database</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-core-mapper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-database-mock</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jersey</artifactId>
         </dependency>
@@ -46,21 +55,5 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <runOrder>random</runOrder>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

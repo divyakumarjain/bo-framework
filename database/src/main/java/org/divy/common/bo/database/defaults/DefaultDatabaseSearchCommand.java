@@ -8,7 +8,7 @@ import org.divy.common.bo.database.AbstractDatabaseSearchCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
 /**
- * @author Divyakumar
+ *
  *
  */
 public class DefaultDatabaseSearchCommand<E extends IBusinessObject<I>, I>

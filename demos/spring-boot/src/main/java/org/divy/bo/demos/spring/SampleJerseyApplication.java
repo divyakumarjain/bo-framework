@@ -29,7 +29,7 @@ public class SampleJerseyApplication extends SpringBootServletInitializer {
     }
 
     @Bean
-    public LinkBuilderFactory linkBuilder() {
+    public LinkBuilderFactory linkBuilderFactory() {
         return new LinkBuilderFactoryImpl();
     }
 

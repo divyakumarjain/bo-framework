@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Abstract Class for Endpoint for Business Object.
  *
- * @author Divyakumar
+ *
  * @param <E> The Entity or Business Object
  * @param <I> The Identity type of Business Object
  */

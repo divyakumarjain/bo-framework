@@ -8,7 +8,7 @@ import org.divy.common.bo.database.AbstractDatabaseGetCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
 /**
- * @author Divyakumar
+ *
  *
  */
 public class DefaultDatabaseGetCommand<E extends IBusinessObject<I>, I>

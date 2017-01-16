@@ -16,8 +16,8 @@ public class MockUpdateCommand extends AbstractDatabaseUpdateCommand<MockEntity>
         mapper = new AdvanceBOMapper<MockEntity,MockEntity>(MockEntity.class,MockEntity.class){
 
             @Override
-            protected void configureMapping(TypeMappingBuilder mapping) {
-                super.configureMapping(mapping);
+            protected void configureFieldMapping(TypeMappingBuilder mapping) {
+                super.configureFieldMapping(mapping);
 
                 mapping.fields("childEntities","childEntities"
                         ,FieldsMappingOptions.oneWay()
