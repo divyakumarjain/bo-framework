@@ -1,6 +1,7 @@
 package org.divy.common.bo.database;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.persistence.criteria.*;
 
@@ -36,5 +37,12 @@ public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>
         } else {
             throw new IllegalArgumentException("Only Attribute Queries are supported");
         }
+    }
+
+    @Override
+    public Stream<E> searchStream(Query query) {
+        //TODO Use steam support when available in JPA
+        return search(query)
+                .stream();
     }
 }

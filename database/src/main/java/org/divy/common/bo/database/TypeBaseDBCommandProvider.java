@@ -7,6 +7,7 @@ import org.divy.common.bo.database.context.DatabaseContext;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
+import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -44,7 +45,12 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
                 , deleteCommandType
                 , createCommandType
                 , searchCommandType
-                , mapperBuilder.mapping(entityClass, entityClass).build());
+                , mapperBuilder
+                        .mapping(entityClass, entityClass)
+                        .field("lastUpdateTimestamp", FieldMapperOptions.oneWay())
+                        .and()
+                        .field("createTimestamp", FieldMapperOptions.oneWay())
+                        .build());
     }
 
     public TypeBaseDBCommandProvider(String persistentUnitName,
@@ -144,8 +150,9 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
             if (updateCommandType == null) {
                 throw new IllegalArgumentException("Command type not provided");
             }
-            return updateCommandType.getConstructor(
-                    EntityManagerCommandContext.class).newInstance(context, updateMapper);
+            return updateCommandType.getConstructor(EntityManagerCommandContext.class
+                    , IBOMapper.class)
+                    .newInstance(context, updateMapper);
 
         } catch (InstantiationException |IllegalAccessException | IllegalArgumentException
                 |SecurityException |InvocationTargetException |NoSuchMethodException e)

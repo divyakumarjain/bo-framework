@@ -1,4 +1,4 @@
-package org.divy.common.rest.impl;
+package org.divy.common.bo.mapper.keyvaluemap;
 
 import org.divy.common.bo.mapper.IBOMapper;
 

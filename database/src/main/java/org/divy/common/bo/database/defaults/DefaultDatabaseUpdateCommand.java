@@ -13,8 +13,6 @@ public class DefaultDatabaseUpdateCommand<E extends AbstractBusinessObject>
         extends
         AbstractDatabaseUpdateCommand<E> {
 
-    private IBOMapper<E, E> updateMapper;
-
     /**
      * @param entityType The Entity type
      * @param context The Context for Database operation
@@ -23,21 +21,6 @@ public class DefaultDatabaseUpdateCommand<E extends AbstractBusinessObject>
     public DefaultDatabaseUpdateCommand( Class<E> entityType
             , EntityManagerCommandContext context
             , IBOMapper<E,E> updateMapper) {
-        super(entityType, context);
-        this.updateMapper = updateMapper;
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.divy.common.bo.command.AbstractDatabaseUpdateCommand#copyFields(org
-     * .divy.common.bo.IBusinessObject, org.divy.common.bo.IBusinessObject)
-     */
-    @Override
-    protected void merge(E source, E target) {
-        if(source != target) {
-            updateMapper.mapToBO(source, target);
-        }
+        super(entityType, context, updateMapper);
     }
 }

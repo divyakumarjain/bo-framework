@@ -2,7 +2,7 @@ package org.divy.common.bo.database;
 
 import org.divy.common.bo.command.ICreateCommand;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import org.divy.common.bo.command.ICreateCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
@@ -28,16 +28,19 @@ public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessOb
      */
     private void doPersist(E entity) {
         transactionBegin();
+        boolean operationSuccess = false;
 
         try {
-            entity.setCreateTimestamp(Calendar.getInstance());
-            entity.setLastUpdateTimestamp(Calendar.getInstance());
+            entity.setCreateTimestamp(LocalDateTime.now());
+            entity.setLastUpdateTimestamp(LocalDateTime.now());
             getEntityManager().merge(entity);
-        } catch (Exception e) {
-            transactionRollback();
-            throw e;
+            operationSuccess = true;
         } finally {
-            transactionCommit();
+            if(operationSuccess){
+                transactionCommit();
+            } else {
+                transactionRollback();
+            }
         }
     }
 

@@ -1,7 +1,9 @@
 package org.divy.common.bo.mapper.orika.builder;
 
+import org.divy.common.bo.mapper.FieldMapperContext;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.builder.FieldMapperBuilderContext;
+import org.divy.common.bo.mapper.builder.FieldMapperBuilderContextImpl;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.mapper.defaults.AdvanceBOMapper;
@@ -12,7 +14,7 @@ public class OrikaTypeMapperBuilderContext<S, T> implements TypeMapperBuilderCon
     private final Class<S> source;
     private final Class<T> target;
     private final List<MapperBuilderOption> mapperBuilderOptions;
-    private Map<String, FieldMapperBuilderContext<S, T>> fields;
+    private Map<String, FieldMapperContext> fields;
 
     public OrikaTypeMapperBuilderContext(Class<S> source, Class<T> target, List<MapperBuilderOption> mapperBuilderOptions) {
         this.source = source;
@@ -46,7 +48,7 @@ public class OrikaTypeMapperBuilderContext<S, T> implements TypeMapperBuilderCon
 
     @Override
     public FieldMapperBuilderContext<S, T> field(String fieldName, String targetFieldName, MapperBuilderOption... mapperBuilderOptions) {
-        FieldMapperBuilderContext fieldMapperBuilderContext = new OrikaFieldMapperBuilderContext(this);
+        FieldMapperBuilderContext fieldMapperBuilderContext = new FieldMapperBuilderContextImpl(this);
         fieldMapperBuilderContext.targetFieldName(targetFieldName);
         fieldMapperBuilderContext.setFieldMapperBuilderOptions(mapperBuilderOptions);
         this.fields.put(fieldName, fieldMapperBuilderContext);
@@ -60,6 +62,6 @@ public class OrikaTypeMapperBuilderContext<S, T> implements TypeMapperBuilderCon
 
     @Override
     public IBOMapper<S, T> build() {
-        return new AdvanceBOMapper<S, T>(source, target, mapperBuilderOptions, fields);
+        return new AdvanceBOMapper<>(source, target, mapperBuilderOptions, fields);
     }
 }

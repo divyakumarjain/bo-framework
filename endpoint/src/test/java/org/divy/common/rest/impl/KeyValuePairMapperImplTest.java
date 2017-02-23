@@ -5,12 +5,15 @@ import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.options.type.MapperBuilderOptions;
+import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
+import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -39,7 +42,7 @@ public class KeyValuePairMapperImplTest {
 
     @Test
     @Ignore
-    public void testMap() {
+    public void testHierarchy() {
         final KeyValuePairMapper<MockEntity> keyValuePairMapper
                 = new KeyValuePairMapperImpl<>(MockEntity.class
                 , mockMapperBuilder
@@ -72,5 +75,4 @@ public class KeyValuePairMapperImplTest {
                         , (Matcher)contains(both(hasEntry(is("name"), is("child1")))
                                 .and(hasEntry(is("name"), is("child2"))))));
     }
-
 }

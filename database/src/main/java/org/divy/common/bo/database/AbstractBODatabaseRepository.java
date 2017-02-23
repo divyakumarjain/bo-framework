@@ -3,6 +3,7 @@ package org.divy.common.bo.database;
 import org.divy.common.bo.query.Query;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
@@ -62,13 +63,24 @@ public class AbstractBODatabaseRepository<E extends IBusinessObject<I>, I>
         return commandProvider.getDeleteCommand().delete(entity);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.divy.common.bo.IBOManager#list()
-     */
     @Override
     public List<E> list() {
-        return commandProvider.getSearchCommand().search(null);
+        return commandProvider
+                .getSearchCommand()
+                .search(null);
+    }
+
+    @Override
+    public Stream<E> stream() {
+        return commandProvider
+                .getSearchCommand()
+                .searchStream(null);
+    }
+
+    @Override
+    public Stream<E> searchStream(Query businessObjectQuery) {
+        return commandProvider
+                .getSearchCommand()
+                .searchStream(businessObjectQuery);
     }
 }

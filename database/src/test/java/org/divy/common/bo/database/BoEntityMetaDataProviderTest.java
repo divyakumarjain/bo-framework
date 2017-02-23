@@ -2,11 +2,10 @@ package org.divy.common.bo.database;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.database.mock.MockEntity;
-import org.junit.Ignore;
+import org.divy.common.bo.metadata.FieldMetaData;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;

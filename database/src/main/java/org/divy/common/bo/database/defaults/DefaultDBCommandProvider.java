@@ -13,6 +13,7 @@ import org.divy.common.bo.mapper.builder.MapperBuilder;
 
 import java.lang.reflect.InvocationTargetException;
 
+@Deprecated
 public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
         extends
         TypeBaseDBCommandProvider<E, I> {

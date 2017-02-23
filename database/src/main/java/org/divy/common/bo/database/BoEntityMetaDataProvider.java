@@ -1,6 +1,8 @@
 package org.divy.common.bo.database;
 
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.metadata.FieldMetaData;
+import org.divy.common.bo.metadata.MetaDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class BoEntityMetaDataProvider implements MetaDataProvider {
 
@@ -49,9 +52,8 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
     }
 
     @Override
-    public Class<?> getEndpointClass(MetaDataProvider metaDataProvider) {
-        //TODO
-        throw new UnsupportedOperationException("Not Implemented");
+    public Optional<Class<?>> getEndpointClass(MetaDataProvider metaDataProvider) {
+       return Optional.empty();
     }
 
     private boolean isAssociation(PropertyDescriptor pd) {

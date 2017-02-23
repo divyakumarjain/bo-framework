@@ -1,4 +1,4 @@
-package org.divy.common.bo.database;
+package org.divy.common.bo.metadata;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.ParameterizedType;

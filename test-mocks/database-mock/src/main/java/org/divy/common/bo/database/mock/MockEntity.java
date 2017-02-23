@@ -6,9 +6,8 @@ import org.divy.common.bo.IBusinessObject;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,6 +37,8 @@ public class MockEntity extends AbstractBusinessObject {
     private MockEntity parentEntity;
     // @JsonManagedReference
     private List<MockEntity> childEntities;
+
+    private LocalDateTime dob;
 
     /**
      * update object with the copy
@@ -116,58 +117,29 @@ public class MockEntity extends AbstractBusinessObject {
         this.name = name;
     }
 
+
+    public LocalDateTime getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDateTime dob) {
+        this.dob = dob;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        MockEntity that = (MockEntity) o;
+        return Objects.equals(getName(), that.getName()) &&
+                Objects.equals(getParentEntity(), that.getParentEntity()) &&
+                Objects.equals(getChildEntities(), that.getChildEntities()) &&
+                Objects.equals(getDob(), that.getDob());
+    }
+
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result
-                + ((childEntities == null) ? 0 : childEntities.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
-        return result;
+        return Objects.hash(super.hashCode(), getName(), getParentEntity(), getChildEntities(), getDob());
     }
-
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        MockEntity other = (MockEntity) obj;
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        if (parentEntity == null) {
-            if (other.parentEntity != null) {
-                return false;
-            }
-        } else if (!parentEntity.equals(other.parentEntity)) {
-            return false;
-        }
-        if (getUuid() == null) {
-            if (other.getUuid() != null) {
-                return false;
-            }
-        } else if (!getUuid().equals(other.getUuid())) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "MockEntity [uuid=" + getUuid() + ", name=" + name
-                + ", childEntities=" + childEntities + "]";
-    }
-
 }

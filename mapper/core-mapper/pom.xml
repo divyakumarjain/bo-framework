@@ -12,5 +12,11 @@
     </parent>
     <artifactId>bo-framework-core-mapper</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-metadata</artifactId>
+        </dependency>
+    </dependencies>
     
 </project>

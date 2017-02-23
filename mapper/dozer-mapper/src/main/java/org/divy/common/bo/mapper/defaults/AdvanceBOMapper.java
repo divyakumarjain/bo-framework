@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import org.divy.common.bo.mapper.AbstractBOMapper;
 import org.divy.common.bo.mapper.DozerFieldMappingOptionMapping;
 import org.divy.common.bo.mapper.DozerTypeMappingOptionMapping;
-import org.divy.common.bo.mapper.builder.FieldMapperBuilderContext;
+import org.divy.common.bo.mapper.FieldMapperContext;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -14,13 +14,13 @@ import org.dozer.loader.api.*;
 
 public class AdvanceBOMapper<B, O> extends AbstractBOMapper<B, O> {
 
-    private Map<String, FieldMapperBuilderContext<B, O>> fields;
+    private Map<String, FieldMapperContext> fields;
     private List<MapperBuilderOption> mapperBuilderOptions;
 
     public AdvanceBOMapper(Class<B> businessObjectType
             , Class<O> otherObjectType
             , List<MapperBuilderOption> mapperBuilderOptions
-            , Map<String, FieldMapperBuilderContext<B, O>> fields) {
+            , Map<String, FieldMapperContext> fields) {
 
         super(businessObjectType, otherObjectType);
         this.mapperBuilderOptions = mapperBuilderOptions;
@@ -34,17 +34,17 @@ public class AdvanceBOMapper<B, O> extends AbstractBOMapper<B, O> {
 
 
     protected void configureFieldMapping(TypeMappingBuilder mapper) {
-        for( Map.Entry<String, FieldMapperBuilderContext<B, O>> entry : fields.entrySet())
+        for( Map.Entry<String, FieldMapperContext> entry : fields.entrySet())
             configFieldMapping(entry.getKey(), entry.getValue(), mapper);
     }
 
-    private void configFieldMapping(String fieldName, FieldMapperBuilderContext<B, O> context, TypeMappingBuilder mapper) {
+    private void configFieldMapping(String fieldName, FieldMapperContext context, TypeMappingBuilder mapper) {
         mapper.fields(fieldName, fieldName, covertFieldMappingOptions(context, mapper));
     }
 
-    private FieldsMappingOption[] covertFieldMappingOptions(FieldMapperBuilderContext<B, O> context, TypeMappingBuilder mapper) {
-        if(context!=null && context.getMapperBuilderOptions()!=null) {
-            final Stream<MapperBuilderOption> stream = context.getMapperBuilderOptions().stream();
+    private FieldsMappingOption[] covertFieldMappingOptions(FieldMapperContext context, TypeMappingBuilder mapper) {
+        if(context!=null && context.getFieldMapperBuilderOptions()!=null) {
+            final Stream<MapperBuilderOption> stream = context.getFieldMapperBuilderOptions().stream();
             return stream
                     .map(DozerFieldMappingOptionMapping::optionFor)
                     .toArray(FieldsMappingOption[]::new);

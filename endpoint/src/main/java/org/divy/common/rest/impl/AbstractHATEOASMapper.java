@@ -2,7 +2,7 @@ package org.divy.common.rest.impl;
 
 
 import org.divy.common.bo.database.AbstractBusinessObject;
-import org.divy.common.bo.database.MetaDataProvider;
+import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.endpoint.hypermedia.AbstractRepresentation;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.rest.HATEOASMapper;

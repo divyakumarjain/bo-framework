@@ -1,9 +1,11 @@
 package org.divy.common.rest.impl;
 
 import org.divy.common.bo.database.AbstractBusinessObject;
-import org.divy.common.bo.database.MetaDataProvider;
+import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.rest.LinkBuilderFactory;
 
+import java.util.Optional;
 
 
 public class DefaultHATEOASMapper<E extends AbstractBusinessObject>
@@ -23,10 +25,15 @@ public class DefaultHATEOASMapper<E extends AbstractBusinessObject>
 
     @Override
     protected void doFillLinks(DefaultRepresentation representation, E businessObject) {
-        representation.addLink(getLinkBuilderFactory().newBuilder()
-                .path(metaDataProvider.getEndpointClass(metaDataProvider))
-                .path(metaDataProvider.getEndpointClass(metaDataProvider), "read")
-                .buildLink("self", representation.getId()));
+        final Optional<Class<?>> optionalEndPointClass = metaDataProvider.getEndpointClass(metaDataProvider);
+        if(optionalEndPointClass.isPresent()) {
+            final Class<?> endPointClass = optionalEndPointClass.get();
+            representation.addLink(getLinkBuilderFactory().newBuilder()
+                    .path(endPointClass)
+                    .path(endPointClass, "read")
+                    .buildLink("self", representation.getId()));
+        }
+
     }
 
     @Override

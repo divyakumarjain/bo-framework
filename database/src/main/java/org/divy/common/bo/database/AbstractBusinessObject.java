@@ -8,7 +8,7 @@ import org.divy.common.bo.IBusinessObject;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@uuid")
@@ -16,13 +16,13 @@ import java.util.UUID;
 public abstract class AbstractBusinessObject implements IBusinessObject<UUID> {
 
     private UUID uuid;
-    private Calendar createTimestamp;
-    private Calendar lastUpdateTimestamp;
+    private LocalDateTime createTimestamp;
+    private LocalDateTime lastUpdateTimestamp;
 
     public AbstractBusinessObject() {
         uuid = UUID.randomUUID();
-        createTimestamp = Calendar.getInstance();
-        lastUpdateTimestamp = Calendar.getInstance();
+        createTimestamp = LocalDateTime.now();
+        lastUpdateTimestamp = LocalDateTime.now();
     }
 
     public AbstractBusinessObject(AbstractBusinessObject entity) {
@@ -49,19 +49,19 @@ public abstract class AbstractBusinessObject implements IBusinessObject<UUID> {
         this.uuid = uuid;
     }
 
-    public Calendar getCreateTimestamp() {
+    public LocalDateTime getCreateTimestamp() {
         return createTimestamp;
     }
 
-    public Calendar getLastUpdateTimestamp() {
+    public LocalDateTime getLastUpdateTimestamp() {
         return lastUpdateTimestamp;
     }
 
-    void setCreateTimestamp(Calendar createTimestamp) {
+    void setCreateTimestamp(LocalDateTime createTimestamp) {
         this.createTimestamp = createTimestamp;
     }
 
-    void setLastUpdateTimestamp(Calendar lastUpdateTimestamp) {
+    void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
         this.lastUpdateTimestamp = lastUpdateTimestamp;
     }
 

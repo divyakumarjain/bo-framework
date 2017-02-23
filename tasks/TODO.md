@@ -63,3 +63,13 @@ Requirement
 * Validation of Create, Update, Delete
 * Validation for Custom Business Operation
 * Exception Handling and HTTP status reporting
+
+Java 8
+======
+
+* Support Java 8 Streaming
+
+Exception Handling
+===
+
++ Exception to HTTP error code mapping

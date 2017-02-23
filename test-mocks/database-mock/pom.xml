@@ -24,7 +24,10 @@
             <artifactId>bo-framework-bo-mock-common</artifactId>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-core-mapper</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>

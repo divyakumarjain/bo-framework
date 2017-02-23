@@ -3,7 +3,7 @@ package org.divy.common.bo.spring.context;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.database.BoEntityMetaDataProvider;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
-import org.divy.common.bo.mapper.dozer.builder.DozerMapperBuilder;
+import org.divy.common.bo.mapper.orika.builder.OrikaMapperBuilder;
 import org.divy.common.bo.spring.BoBeansFactory;
 import org.divy.common.bo.spring.DynamicBeanFactory;
 import org.slf4j.Logger;
@@ -54,6 +54,6 @@ public class BoFrameworkSpringContext {
 
     @Bean
     MapperBuilder mapperBuilder() {
-        return new DozerMapperBuilder();
+        return new OrikaMapperBuilder();
     }
 }

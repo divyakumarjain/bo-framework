@@ -4,8 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.divy.common.http.HttpRequestContext;
 
 
@@ -24,7 +23,7 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
     @Override
     public LinkBuilder newBuilder() {
         String scheme = DEFAULT_SCHEME;
-        String originalPath = StringUtils.EMPTY;
+        String originalPath = "";
 
         if (request != null) {
             scheme = StringUtils.defaultIfBlank(StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),

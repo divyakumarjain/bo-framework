@@ -3,24 +3,10 @@ package org.divy.common.bo.database.mock;
 import org.divy.common.bo.database.AbstractDatabaseUpdateCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
-import static org.mockito.Mockito.*;
 
 public class MockUpdateCommand extends AbstractDatabaseUpdateCommand<MockEntity> {
 
-    public MockUpdateCommand(
-            EntityManagerCommandContext context) {
-        super(MockEntity.class, context);
-        mapper = mock(IBOMapper.class);
-    }
-
-
-    IBOMapper<MockEntity,MockEntity> mapper;
-
-
-    @Override
-    protected void merge(MockEntity source, MockEntity target) {
-        if(source!=target) {
-            mapper.mapToBO(source, target);
-        }
+    public MockUpdateCommand(EntityManagerCommandContext context, IBOMapper<MockEntity, MockEntity> updateMapper) {
+        super(MockEntity.class, context, updateMapper);
     }
 }

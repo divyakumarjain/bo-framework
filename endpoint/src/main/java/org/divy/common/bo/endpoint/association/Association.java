@@ -1,6 +1,8 @@
 package org.divy.common.bo.endpoint.association;
 
+import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.database.AbstractBusinessObject;
 import org.divy.common.bo.endpoint.association.builder.CreateBuilder;
 import org.divy.common.bo.endpoint.association.reader.ReaderBuilder;
 import org.divy.common.bo.endpoint.association.builder.UpdateBuilder;
@@ -41,8 +43,12 @@ public class Association<T> {
             if (mapper != null) {
                 if (value instanceof Collection) {
                     return mapper.createFromBO((Collection) value);
+                } else if(value instanceof AbstractBusinessObject) {
+                    return mapper.createFromBO((AbstractBusinessObject)value);
+                } else {
+                    throw new IllegalArgumentException("Not supported Type");
                 }
-                return mapper.createFromBO(value);
+                
             } else {
                 return value;
             }

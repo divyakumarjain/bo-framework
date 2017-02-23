@@ -3,7 +3,6 @@ package org.divy.bo.demos.spring.cards;
 import org.divy.bo.demos.spring.cards.pages.Page;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.database.AbstractBusinessObject;
-import org.dozer.Mapping;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

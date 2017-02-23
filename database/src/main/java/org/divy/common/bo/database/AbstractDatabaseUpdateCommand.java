@@ -2,24 +2,45 @@ package org.divy.common.bo.database;
 
 import org.divy.common.bo.command.IUpdateCommand;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
+import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.builder.MapperBuilder;
 
 
 public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessObject>
         extends AbstractDatabaseCommand<E, UUID> implements
-        IUpdateCommand<E, UUID>
-{
-    protected AbstractDatabaseUpdateCommand(
-            Class<E> typeParameterClass,EntityManagerCommandContext context)
-    {
+        IUpdateCommand<E, UUID> {
+
+    private IBOMapper<E, E> updateMapper;
+
+    protected AbstractDatabaseUpdateCommand( Class<E> typeParameterClass
+            , EntityManagerCommandContext context
+            , IBOMapper<E, E> updateMapper) {
         super(typeParameterClass);
         this.setContext(context);
+
+        this.updateMapper = updateMapper;
     }
 
-    protected abstract void merge(E source, E target);
+    protected AbstractDatabaseUpdateCommand(Class<E> typeParameterClass
+            , EntityManagerCommandContext context
+            , MapperBuilder mapperBuilder) {
+
+        super(typeParameterClass);
+        this.setContext(context);
+
+        this.updateMapper = mapperBuilder.mapping(typeParameterClass, typeParameterClass)
+                .build();
+    }
+
+    protected void merge(E source, E target) {
+        if(source != target) {
+            updateMapper.mapToBO(source, target);
+        }
+    }
 
     @Override
     public E update(UUID id, E entity)
@@ -27,12 +48,6 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
         return doUpdate(id, entity);
     }
 
-    /**
-     *
-     * @param id
-     * @param entity
-     * @return
-     */
     private E doUpdate(UUID id, E entity) {
 
         transactionBegin();
@@ -44,9 +59,10 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
 
             merge(entity, fromPersistence);
 
+
             getEntityManager().merge(fromPersistence);
 
-            fromPersistence.setLastUpdateTimestamp(Calendar.getInstance());
+            fromPersistence.setLastUpdateTimestamp(LocalDateTime.now());
         } catch (Exception e) {
             transactionRollback();
             throw e;

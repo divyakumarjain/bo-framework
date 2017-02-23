@@ -41,11 +41,6 @@
             <artifactId>bo-framework-endpoint</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-database</artifactId>
         </dependency>
@@ -133,7 +128,7 @@
                 <configuration>
                     <fork>true</fork>
                     <jvmArguments>
-                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=5005
                     </jvmArguments>
                 </configuration>
                 <dependencies>

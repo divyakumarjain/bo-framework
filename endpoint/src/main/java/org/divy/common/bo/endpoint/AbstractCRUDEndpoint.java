@@ -22,10 +22,10 @@ import org.divy.common.rest.LinkBuilderFactory;
 public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
 
 
-	protected LinkBuilderFactory linkBuilderFactory;
+    protected LinkBuilderFactory linkBuilderFactory;
 
     @Inject
-	public AbstractCRUDEndpoint(LinkBuilderFactory linkBuilderFactory) {
+    public AbstractCRUDEndpoint(LinkBuilderFactory linkBuilderFactory) {
         this.linkBuilderFactory = linkBuilderFactory;
     }
 
@@ -47,7 +47,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
         return Response.created(createLocation).build();
     }
 
-	@PUT
+    @PUT
     @Path("/{entityId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -68,9 +68,9 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
         E entity = doDelete(id);
 
         if(entity == null) {
-        	return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         } else {
-        	return Response.noContent().build();
+            return Response.noContent().build();
         }
         
     }
@@ -116,19 +116,19 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
 
     protected Response buildReadResponse(E entity) {
         if(entity!=null) {
-        	return Response.ok(entity).build();        	
+            return Response.ok(entity).build();            
         } else {
-        	return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-	}
-	
+    }
+    
     public LinkBuilderFactory getLinkBuilderFactory() {
-		return linkBuilderFactory;
-	}
+        return linkBuilderFactory;
+    }
 
-	public void setLinkBuilderFactory(LinkBuilderFactory linkBuilderFactory) {
-		this.linkBuilderFactory = linkBuilderFactory;
-	}
+    public void setLinkBuilderFactory(LinkBuilderFactory linkBuilderFactory) {
+        this.linkBuilderFactory = linkBuilderFactory;
+    }
 
     protected abstract String identity(E createdBo);
 

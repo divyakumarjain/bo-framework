@@ -15,6 +15,7 @@ import org.hibernate.search.query.dsl.QueryBuilder;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class HibernateSearchCommand<E, I> implements ISearchCommand<E, I> {
 
@@ -142,5 +143,12 @@ public class HibernateSearchCommand<E, I> implements ISearchCommand<E, I> {
             fullTextEntityManager = org.hibernate.search.jpa.Search.getFullTextEntityManager(getEntityManager());
         }
         return fullTextEntityManager;
+    }
+
+    @Override
+    public Stream<E> searchStream(Query query) {
+        //TODO Use steam support when available
+        return search(query)
+                .stream();
     }
 }

@@ -25,7 +25,7 @@ public abstract class AbstractAssociations<T> {
 
     public List<Association<T>> getAssociations() {
         if(associations==null){
-        	associations = new ArrayList<>();
+            associations = new ArrayList<>();
             doBuildAssociations();
         }
         return associations;
@@ -36,6 +36,6 @@ public abstract class AbstractAssociations<T> {
     protected Association<T> association() {
         Association<T> association = new Association<>();
         associations.add(association);
-		return association;
+        return association;
     }
 }

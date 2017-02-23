@@ -2,9 +2,12 @@ package org.divy.common.bo.spring;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.database.BoEntityMetaDataProvider;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.context.ConfigurableApplicationContext;
 
 public class BoFrameworkBeanRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
