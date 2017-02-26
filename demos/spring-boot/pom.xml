@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>spring-support</artifactId>
+            <artifactId>bo-framework-spring-support</artifactId>
         </dependency>
 
         <dependency>
@@ -57,6 +57,10 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-orika-mapper-spring</artifactId>
         </dependency>
     </dependencies>
 

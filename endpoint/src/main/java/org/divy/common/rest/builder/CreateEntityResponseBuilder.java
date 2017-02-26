@@ -22,8 +22,7 @@ public class CreateEntityResponseBuilder<T extends IBusinessObject<I>, I extends
 
     public Response build(UriInfo uriInfo) {
         setStatusCode(Response.Status.CREATED);
-        final Response response = Response.created(createLocation(uriInfo)).build();
-        return response;
+        return Response.created(createLocation(uriInfo)).build();
     }
 
     private URI createLocation(UriInfo uriInfo) {

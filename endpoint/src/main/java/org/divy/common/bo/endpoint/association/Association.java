@@ -1,11 +1,10 @@
 package org.divy.common.bo.endpoint.association;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.database.AbstractBusinessObject;
 import org.divy.common.bo.endpoint.association.builder.CreateBuilder;
-import org.divy.common.bo.endpoint.association.reader.ReaderBuilder;
 import org.divy.common.bo.endpoint.association.builder.UpdateBuilder;
+import org.divy.common.bo.endpoint.association.reader.ReaderBuilder;
 import org.divy.common.rest.impl.AbstractHATEOASMapper;
 
 import java.util.Arrays;
@@ -13,9 +12,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by divyjain on 2/5/2015.
- */
 public class Association<T> {
     protected AbstractHATEOASMapper mapper;
     private String name;

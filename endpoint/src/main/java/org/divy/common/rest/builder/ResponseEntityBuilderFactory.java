@@ -41,8 +41,7 @@ public class ResponseEntityBuilderFactory<T extends IBusinessObject<I>, I extend
     }
 
     public ResponseEntityBuilder<List<T>> list(List<T> list) {
-        ListEntityResponseBuilder<T, I> listEntityResponseBuilder = new ListEntityResponseBuilder<>(list);
-        return listEntityResponseBuilder;
+        return new ListEntityResponseBuilder<>(list);
     }
 
     public RESTEntityURLBuilder<T, I> getEntityURLBuilder() {

@@ -1,15 +1,9 @@
 package org.divy.common.bo.mapper.builder.options.field;
 
-import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
-
-public class FieldHintA implements MapperBuilderOption {
-    private final Class<?> hintClass;
+public class FieldHintA extends FieldHint {
 
     public FieldHintA(Class<?> hintClass) {
-        this.hintClass = hintClass;
+        super(hintClass);
     }
 
-    public Class<?> getHintClass() {
-        return hintClass;
-    }
 }

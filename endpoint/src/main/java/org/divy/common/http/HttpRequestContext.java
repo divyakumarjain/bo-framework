@@ -1,6 +1,3 @@
-/**
- * Copyright (C) 2012, Intellectual Reserve, Inc. All rights reserved.
- */
 package org.divy.common.http;
 
 import javax.servlet.ServletRequest;
@@ -17,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class HttpRequestContext {
 
     private static final ThreadLocal<HttpRequestContext> LOCAL_CONTEXT =
-            new ThreadLocal<HttpRequestContext>();
+            new ThreadLocal<>();
 
     /**
      * Return the local HttpRequestContext or null if thread is not

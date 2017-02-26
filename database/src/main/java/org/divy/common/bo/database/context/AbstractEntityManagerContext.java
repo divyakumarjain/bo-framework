@@ -6,9 +6,7 @@ import org.divy.common.bo.context.HierarchicalCommandContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-/**
- * Created by divyjain on 12/6/2016.
- */
+
 public abstract class AbstractEntityManagerContext implements EntityManagerCommandContext, HierarchicalCommandContext {
 
     protected EntityManager entityManager;

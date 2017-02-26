@@ -2,14 +2,12 @@ package org.divy.common.bo.spring.context;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.database.BoEntityMetaDataProvider;
-import org.divy.common.bo.mapper.builder.MapperBuilder;
-import org.divy.common.bo.mapper.orika.builder.OrikaMapperBuilder;
 import org.divy.common.bo.spring.BoBeansFactory;
-import org.divy.common.bo.spring.DynamicBeanFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -21,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 @PropertySource( value = {"classpath:/application.properties"})
+@ComponentScan(basePackages = "org.divy.mapper.spring")
 public class BoFrameworkSpringContext {
 
     static final private Logger LOGGER = LoggerFactory.getLogger(BoFrameworkSpringContext.class);
@@ -31,16 +30,16 @@ public class BoFrameworkSpringContext {
     }
 
     @Bean
-    public DynamicBeanFactory<Class<? extends IBusinessObject>> dynamicBeanFactory() {
+    public BoBeansFactory dynamicBeanFactory() {
         return new BoBeansFactory();
     }
 
     @Bean
-    BoEntityMetaDataProvider entityMetaDataProvider(@Value("${entityTypes}") String typesList) {
+    public BoEntityMetaDataProvider entityMetaDataProvider(@Value("${entityTypes}") String typesList) {
         List<Class<? extends IBusinessObject>> typeList = Arrays.stream(typesList.split(","))
                 .map(className -> {
                     try {
-                        return (Class<? extends IBusinessObject>) this.getClass().forName(className);
+                        return (Class<? extends IBusinessObject>) Class.forName(className);
                     } catch (ClassNotFoundException e) {
                         LOGGER.error("Entity Class not found :" + className,e);
                         return null;
@@ -50,10 +49,5 @@ public class BoFrameworkSpringContext {
                 .collect(Collectors.toList());
 
         return new BoEntityMetaDataProvider(typeList);
-    }
-
-    @Bean
-    MapperBuilder mapperBuilder() {
-        return new OrikaMapperBuilder();
     }
 }

@@ -2,9 +2,7 @@ package org.divy.common.bo.query.operator.comparison.impl;
 
 import org.divy.common.bo.query.operator.comparison.LessThanEqualToComparison;
 
-/**
- * Created by divyjain on 12/6/2016.
- */
+
 public class LessThanEqualToComparisonImpl<ATTRIBUTE> implements LessThanEqualToComparison<ATTRIBUTE> {
     private ATTRIBUTE value;
 

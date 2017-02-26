@@ -13,19 +13,18 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.hasEntry;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class KeyValuePairMapperImplTest {
 
-    BoEntityMetaDataProvider metaDataProvider = new BoEntityMetaDataProvider(Arrays.asList(MockEntity.class));
+    BoEntityMetaDataProvider metaDataProvider = new BoEntityMetaDataProvider(Collections.singletonList(MockEntity.class));
     private MapperBuilder mockMapperBuilder;
 
     @Before

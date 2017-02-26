@@ -1,16 +1,13 @@
-/**
- * 
- */
 package org.divy.common.bo.endpoint.json.test;
+
+import org.divy.common.bo.database.mock.MockEntity;
+import org.divy.common.bo.query.AttributeQuery;
+import org.divy.common.bo.query.Query;
+import org.divy.common.bo.query.operator.comparison.impl.EqualsComparisonImpl;
+import org.divy.common.bo.test.ITestDataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.divy.common.bo.database.mock.MockEntity;
-import org.divy.common.bo.query.Query;
-import org.divy.common.bo.query.operator.comparison.impl.EqualsComparisonImpl;
-import org.divy.common.bo.query.AttributeQuery;
-import org.divy.common.bo.test.ITestDataProvider;
 
 /**
  *

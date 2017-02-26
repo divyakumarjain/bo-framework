@@ -12,5 +12,6 @@
         <module>dozer-mapper</module>
         <module>orika-mapper</module>
         <module>core-mapper</module>
+        <module>orika-mapper-spring</module>
     </modules>
 </project>

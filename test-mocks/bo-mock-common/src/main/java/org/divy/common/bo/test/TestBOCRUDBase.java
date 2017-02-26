@@ -1,19 +1,14 @@
-
-/**
- * 
- */
 package org.divy.common.bo.test;
 
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.query.Query;
 import org.divy.common.bo.query.AttributeQuery;
+import org.divy.common.bo.query.Query;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -135,7 +130,7 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
     public void cleanup() throws Exception{
         List<E> searchedEntities = doSearchEntities(new AttributeQuery());
 
-        searchedEntities.stream().forEach(this::doDeleteEntity);
+        searchedEntities.forEach(this::doDeleteEntity);
     }
 
 

@@ -1,11 +1,9 @@
 package org.divy.common.json;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
-
-import org.divy.common.query.service.SearchQueryModule;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Provider
 public class SearchQueryMapperProvider implements ContextResolver<ObjectMapper>{
@@ -27,14 +25,13 @@ public class SearchQueryMapperProvider implements ContextResolver<ObjectMapper>{
     }
 
     protected ObjectMapper createContext() {
-        ObjectMapper mapper = new ObjectMapper();
 
 //        mapper.registerModule(new JaxbAnnotationModule());
 //        Hibernate4Module module = new Hibernate4Module();
 //        module.configure(Feature.FORCE_LAZY_LOADING, true);
 //        mapper.registerModule(module);
 //        mapper.registerModule(new SearchQueryModule());
-        return mapper;
+        return new ObjectMapper();
     }
 
 }

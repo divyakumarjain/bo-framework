@@ -16,6 +16,13 @@ public class Page extends AbstractBusinessObject {
 
     List<Section> sections;
 
+    public Page() {
+    }
+
+    public Page(UUID uuid) {
+        super(uuid);
+    }
+
     @Override
     public void update(IBusinessObject<UUID> entity) {
         if (entity instanceof Page) {

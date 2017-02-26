@@ -27,7 +27,7 @@ public class InComparisonImpl<A> implements InComparison<A> {
     @Override
     public List<A> getValues() {
         if (values == null)
-            values = new ArrayList<A>();
+            values = new ArrayList<>();
 
         return values;
     }

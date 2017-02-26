@@ -2,14 +2,14 @@ package org.divy.common.bo.presentation.navigation;
 
 public interface IOperation {
 
-    public abstract void setOperation(String operation);
+    void setOperation(String operation);
 
-    public abstract String getOperation();
+    String getOperation();
 
-    public abstract void setEntity(String entity);
+    void setEntity(String entity);
 
-    public abstract String getEntity();
+    String getEntity();
 
-    public abstract String getLabel();
+    String getLabel();
 
 }

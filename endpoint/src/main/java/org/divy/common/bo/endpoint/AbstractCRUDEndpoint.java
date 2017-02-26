@@ -1,8 +1,8 @@
 package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.query.Query;
-import org.divy.common.rest.LinkBuilderFactory;
 import org.divy.common.rest.LinkBuilder;
+import org.divy.common.rest.LinkBuilderFactory;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -14,11 +14,6 @@ import javax.ws.rs.core.UriInfo;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.Collection;
-
-import org.divy.common.bo.query.Query;
-import org.divy.common.bo.query.AttributeQuery;
-import org.divy.common.rest.LinkBuilder;
-import org.divy.common.rest.LinkBuilderFactory;
 public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
 
 

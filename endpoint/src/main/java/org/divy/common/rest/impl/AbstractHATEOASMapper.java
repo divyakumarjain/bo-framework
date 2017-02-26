@@ -2,15 +2,17 @@ package org.divy.common.rest.impl;
 
 
 import org.divy.common.bo.database.AbstractBusinessObject;
-import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.endpoint.hypermedia.AbstractRepresentation;
 import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public abstract class AbstractHATEOASMapper <E extends AbstractBusinessObject, R extends AbstractRepresentation<UUID>>
@@ -18,7 +20,7 @@ public abstract class AbstractHATEOASMapper <E extends AbstractBusinessObject, R
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractHATEOASMapper.class);
 
-    protected final MetaDataProvider metaDataProvider;
+    private final MetaDataProvider metaDataProvider;
     private final LinkBuilderFactory linkBuilderFactory;
     private final Class<R> representationType;
     private final Class<E> businessObjectType;
@@ -47,14 +49,14 @@ public abstract class AbstractHATEOASMapper <E extends AbstractBusinessObject, R
 
     @Override
     public Collection<R> createRepresentationFromBO(Collection<E> boList) {
-        return boList.stream().map(bo-> createRepresentationFromBO(bo)).collect(Collectors.toList());
+        return boList.stream().map(this::createRepresentationFromBO).collect(Collectors.toList());
     }
 
 
 
     @Override
     public Collection<E> createBOFromRepresentation(Collection<R> representations) {
-        return representations.stream().map(representation-> createBOFromRepresentation(representation))
+        return representations.stream().map(this::createBOFromRepresentation)
                 .collect(Collectors.toList());
     }
 
@@ -121,4 +123,8 @@ public abstract class AbstractHATEOASMapper <E extends AbstractBusinessObject, R
     protected abstract void doReadLinks(R representation, E businessObject);
 
     protected abstract void doReadAssociations(R representation, E businessObject);
+
+    protected MetaDataProvider getMetaDataProvider() {
+        return metaDataProvider;
+    }
 }

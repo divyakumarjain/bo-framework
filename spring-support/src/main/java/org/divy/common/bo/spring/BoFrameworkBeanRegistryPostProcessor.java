@@ -2,22 +2,21 @@ package org.divy.common.bo.spring;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.database.BoEntityMetaDataProvider;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.context.ConfigurableApplicationContext;
+
+import java.util.Collection;
 
 public class BoFrameworkBeanRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
     private final BoEntityMetaDataProvider metaDataProvider;
-    private DynamicBeanFactory<Class<? extends IBusinessObject>> factory;
+    private Collection<DynamicBeanFactory> factories;
 
     BoFrameworkBeanRegistryPostProcessor(BoEntityMetaDataProvider metaDataProvider,
-                                         DynamicBeanFactory<Class<? extends IBusinessObject>> factory) {
+                                         Collection<DynamicBeanFactory> factories) {
         this.metaDataProvider = metaDataProvider;
-        this.factory = factory;
+        this.factories = factories;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class BoFrameworkBeanRegistryPostProcessor implements BeanDefinitionRegis
     }
 
     private void registerBeans(Class<? extends IBusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
-        factory.register(type, beanDefinitionRegistry);
+        factories.forEach(factory-> factory.register(type, beanDefinitionRegistry));
     }
 
     @Override

@@ -22,6 +22,6 @@ public interface FieldMapperBuilderContext <S, T> extends org.divy.common.bo.map
     }
 
     default IBOMapper<S, T> build() {
-        return this.getTypeMapperBuilderContext().build();
+        return this.getTypeMapperBuilderContext().buildMapper();
     }
 }

@@ -1,13 +1,12 @@
 package org.divy.common.bo.database;
 
 import org.divy.common.bo.command.IUpdateCommand;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessObject>
@@ -33,7 +32,7 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
         this.setContext(context);
 
         this.updateMapper = mapperBuilder.mapping(typeParameterClass, typeParameterClass)
-                .build();
+                .buildMapper();
     }
 
     protected void merge(E source, E target) {
@@ -52,7 +51,7 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
 
         transactionBegin();
 
-        E fromPersistence = null;
+        E fromPersistence;
         try {
             fromPersistence = getEntityManager().getReference(
                     getEntityType(), id);

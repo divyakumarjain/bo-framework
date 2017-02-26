@@ -1,11 +1,10 @@
 package org.divy.common.bo.database;
 
 import org.divy.common.bo.command.ICreateCommand;
+import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-import org.divy.common.bo.command.ICreateCommand;
-import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
 public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessObject>
         extends AbstractDatabaseCommand<E, UUID> implements

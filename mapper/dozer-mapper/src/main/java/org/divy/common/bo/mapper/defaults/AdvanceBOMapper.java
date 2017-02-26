@@ -1,8 +1,5 @@
 package org.divy.common.bo.mapper.defaults;
 
-import java.util.*;
-import java.util.stream.Stream;
-
 import org.divy.common.bo.mapper.AbstractBOMapper;
 import org.divy.common.bo.mapper.DozerFieldMappingOptionMapping;
 import org.divy.common.bo.mapper.DozerTypeMappingOptionMapping;
@@ -11,6 +8,9 @@ import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.*;
+
+import java.util.*;
+import java.util.stream.Stream;
 
 public class AdvanceBOMapper<B, O> extends AbstractBOMapper<B, O> {
 
@@ -58,7 +58,7 @@ public class AdvanceBOMapper<B, O> extends AbstractBOMapper<B, O> {
         if(mapperBuilderOptions!=null) {
             return mapperBuilderOptions.stream()
                     .map(DozerTypeMappingOptionMapping::optionFor)
-                    .toArray(size -> new TypeMappingOption[size]);
+                    .toArray(TypeMappingOption[]::new);
         } else {
             return new TypeMappingOption[0];
         }

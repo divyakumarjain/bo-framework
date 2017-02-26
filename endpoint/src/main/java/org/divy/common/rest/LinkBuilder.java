@@ -1,12 +1,12 @@
 package org.divy.common.rest;
 
-import java.net.URI;
-import javax.ws.rs.core.Link;
-import javax.ws.rs.core.UriBuilder;
-
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.glassfish.jersey.message.internal.JerseyLink;
+
+import javax.ws.rs.core.Link;
+import javax.ws.rs.core.UriBuilder;
+import java.net.URI;
 
 
 public class LinkBuilder {
@@ -89,7 +89,7 @@ public class LinkBuilder {
     /**
      * Sets a relative URI for the associated resource.
      *
-     * @param path a URI path that will be used to build the link.
+     * @param path a URI path that will be used to buildMapper the link.
      * @return the updated LinkBuilder
      *
      * @throws IllegalArgumentException if path is null

@@ -1,14 +1,9 @@
-/**
- * 
- */
 package org.divy.common.bo.command;
 
 import org.divy.common.bo.query.Query;
 
 import java.util.List;
 import java.util.stream.Stream;
-
-import org.divy.common.bo.query.Query;
 
 /**
  *

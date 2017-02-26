@@ -5,7 +5,6 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 import ma.glasnost.orika.metadata.ClassMapBuilder;
-import ma.glasnost.orika.metadata.FieldMapBuilder;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
 import org.divy.common.bo.mapper.orika.builder.OrikaMapperBuilder;
@@ -18,8 +17,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.hasEntry;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class AdvanceBOMapperTest {
 
@@ -32,10 +30,13 @@ public class AdvanceBOMapperTest {
 
         underTest = builder.mapping(MockEntity.class, Map.class)
                 .field("parentEntity")
+                    .option(FieldMapperOptions.hintA(MockEntity.class))
                     .option(FieldMapperOptions.hintB(Map.class))
                     .and()
                 .field("childEntities")
+                    .option(FieldMapperOptions.hintA(List.class))
                     .option(FieldMapperOptions.hintB(List.class))
+                    .option(FieldMapperOptions.nestedHintA(Map.class))
                     .option(FieldMapperOptions.nestedHintB(Map.class))
                 .build();
 
@@ -50,7 +51,7 @@ public class AdvanceBOMapperTest {
         MockEntity parentEntity = new MockEntity();
         parentEntity.setName("ParentEntity");
         businessObject.setParentEntity(parentEntity);
-        parentEntity.setChildEntities(Arrays.asList(businessObject));
+        parentEntity.setChildEntities(Collections.singletonList(businessObject));
 
         MockEntity childEntity1 = new MockEntity();
         childEntity1.setName("child1");
@@ -111,14 +112,14 @@ public class AdvanceBOMapperTest {
 
         BeanWithList srcBean = new BeanWithList();
 
-        final BeanWithList srcChild = new BeanWithList();
+        final BeanWithMap srcChild = new BeanWithMap();
         srcChild.setId("child");
-        srcBean.setSrcBeanList(Arrays.asList(srcChild));
+        srcBean.setSrcBeanList(Collections.singletonList(srcChild));
         srcBean.setId("parentBean");
 
         final BeanWithList destList = mapperFacade.map(srcBean, BeanWithList.class);
         
-        Assert.assertThat(destList, both(notNullValue()).and(hasProperty("destBeanList", contains(hasProperty("id",is("child"))))));
+        Assert.assertThat(destList, both(notNullValue()).and(hasProperty("destBeanList", contains(both(isA(BeanWithMap.class)).and(hasProperty("id",is("child")))))));
 
     }
 
@@ -159,16 +160,16 @@ public class AdvanceBOMapperTest {
     }
 
     public static class BeanWithList {
-        List<BeanWithList> srcBeanList;
-        List<BeanWithList> destBeanList;
+        List<BeanWithMap> srcBeanList;
+        List<BeanWithMap> destBeanList;
 
         String id;
 
-        public List<BeanWithList> getSrcBeanList() {
+        public List<BeanWithMap> getSrcBeanList() {
             return srcBeanList;
         }
 
-        public void setSrcBeanList(List<BeanWithList> srcBeanList) {
+        public void setSrcBeanList(List<BeanWithMap> srcBeanList) {
             this.srcBeanList = srcBeanList;
         }
 
@@ -180,11 +181,11 @@ public class AdvanceBOMapperTest {
             this.id = id;
         }
 
-        public List<BeanWithList> getDestBeanList() {
+        public List<BeanWithMap> getDestBeanList() {
             return destBeanList;
         }
 
-        public void setDestBeanList(List<BeanWithList> destBeanList) {
+        public void setDestBeanList(List<BeanWithMap> destBeanList) {
             this.destBeanList = destBeanList;
         }
     }

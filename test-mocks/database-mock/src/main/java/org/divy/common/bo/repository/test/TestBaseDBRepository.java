@@ -2,8 +2,8 @@ package org.divy.common.bo.repository.test;
 
 import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.database.context.DatabaseContext;
+import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.divy.common.bo.test.TestBOCRUDBase;
@@ -29,7 +29,7 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
 
     @Before
     public void before() {
-        context = new DatabaseContext(getpersistentUnitName());
+        context = new DatabaseContext(getPersistentUnitName());
 
         boRepository = createRepository();
 
@@ -73,7 +73,7 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
         return boRepository.search(searchQuery);
     }
 
-    protected abstract String getpersistentUnitName();
+    protected abstract String getPersistentUnitName();
 
     protected abstract IBORepository<E, I> createRepository();
 }

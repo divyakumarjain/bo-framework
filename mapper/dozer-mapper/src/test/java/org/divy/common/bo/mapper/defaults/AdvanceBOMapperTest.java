@@ -14,8 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.hasEntry;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class AdvanceBOMapperTest {
 

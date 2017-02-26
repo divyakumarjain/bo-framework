@@ -1,6 +1,5 @@
 package org.divy.common.bo.mapper;
 
-import org.divy.common.bo.mapper.builder.FieldMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.mapper.builder.options.field.TargetFieldName;
 

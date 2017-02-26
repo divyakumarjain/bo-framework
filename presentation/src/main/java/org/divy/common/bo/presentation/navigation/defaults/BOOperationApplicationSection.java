@@ -2,8 +2,6 @@ package org.divy.common.bo.presentation.navigation.defaults;
 
 import java.util.ArrayList;
 
-import org.divy.common.bo.presentation.navigation.IOperation;
-
 public class BOOperationApplicationSection extends ApplicationSection {
 
     private static final String ADD_OPERATION = "add";
@@ -19,7 +17,7 @@ public class BOOperationApplicationSection extends ApplicationSection {
     }
 
     protected void init() {
-        operations = new ArrayList<IOperation>();
+        operations = new ArrayList<>();
         operations.add(new Operation(entityName, LIST_OPERATION,sectionLabel+"(s)"));
         operations.add(new Operation(entityName, ADD_OPERATION,"Create "+sectionLabel));
         operations.add(new Operation(entityName, UPDATE_OPERATION));

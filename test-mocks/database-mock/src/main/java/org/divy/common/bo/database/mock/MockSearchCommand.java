@@ -1,11 +1,9 @@
-/**
- * 
- */
 package org.divy.common.bo.database.mock;
 
-import java.util.UUID;
 import org.divy.common.bo.database.AbstractDatabaseSearchCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
+
+import java.util.UUID;
 
 /**
  *.a.jain@hp.com

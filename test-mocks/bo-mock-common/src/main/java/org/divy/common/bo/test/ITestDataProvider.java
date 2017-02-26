@@ -1,9 +1,6 @@
 package org.divy.common.bo.test;
 
 import org.divy.common.bo.query.Query;
-/**
- * 
- */
 
 /**
  *

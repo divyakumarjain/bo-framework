@@ -2,15 +2,14 @@ package org.divy.common.bo.presentation;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.rest.LinkBuilderFactoryImpl;
 
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 public abstract class AbstractEntityPresentationService<E extends IBusinessObject<I>, VO, I extends Serializable> extends AbstractCRUDEndpoint<E, I> {
 
@@ -35,21 +34,18 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
 
     @Override
     protected E doRead(I id) {
-        E boEntity = manager.get(id);
 
-        return boEntity;
+        return manager.get(id);
     }
 
     @Override
     protected E doCreate(E entity) {
-        E createdBusinessObject = manager.create(entity);
-        return createdBusinessObject;
+        return manager.create(entity);
     }
 
     @Override
     protected E doUpdate(I id, E entity) {
-        E updatedBusinessObject = manager.update(id, entity);
-        return updatedBusinessObject;
+        return manager.update(id, entity);
     }
 
     @Override
@@ -59,20 +55,17 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
 
     @Override
     protected E doDelete(I id) {
-        E deletedBusinessObject = manager.deleteById(id);
-        return deletedBusinessObject;
+        return manager.deleteById(id);
     }
 
     @Override
     protected Collection<E> doList() {
-        List<E> boList = manager.list();
-        return boList;
+        return manager.list();
     }
 
     @Override
     protected Collection<E> doSearch(Query query) {
-        List<E> boList = manager.search(query);
-        return boList;
+        return manager.search(query);
     }
 
     protected VO doGetPresenter(I id) {

@@ -1,11 +1,10 @@
 package org.divy.common.bo.mapper;
 
+import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.mapper.builder.options.OneWayMappingOption;
 import org.divy.common.bo.mapper.builder.options.field.FieldHintA;
-import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.mapper.builder.options.field.FieldHintB;
 import org.dozer.loader.api.FieldsMappingOption;
-import org.dozer.loader.api.TypeMappingBuilder;
 
 import static org.dozer.loader.api.FieldsMappingOptions.*;
 

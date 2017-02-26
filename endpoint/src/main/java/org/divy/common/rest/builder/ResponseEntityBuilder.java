@@ -56,9 +56,7 @@ public class ResponseEntityBuilder<T> {
             setStatusCode(getEntity()==null ? Status.NO_CONTENT : Status.OK);
         }
 
-        final Response response = javax.ws.rs.core.Response.status(getStatusCode()).entity(getEntity()).build();
-
-        return response;
+        return Response.status(getStatusCode()).entity(getEntity()).build();
     }
 
 }

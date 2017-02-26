@@ -1,8 +1,11 @@
 package org.divy.common.bo.mapper;
 
-import java.util.*;
-
 import org.dozer.Mapper;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
 
@@ -74,11 +77,9 @@ public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
     @Override
     public final Collection<S> createBO(Collection<T> sourceData) {
 
-        Collection<S> businessObjectList = sourceData instanceof List? new ArrayList<S>(sourceData.size()): new HashSet<S>(sourceData.size());
+        Collection<S> businessObjectList = sourceData instanceof List? new ArrayList<>(sourceData.size()): new HashSet<>(sourceData.size());
 
-        for (Iterator<T> iterator = sourceData.iterator(); iterator.hasNext();) {
-
-            T other = iterator.next();
+        for (T other : sourceData) {
             businessObjectList.add(createBO(other));
         }
 
@@ -88,11 +89,10 @@ public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
     @Override
     public final Collection<T> createFromBO(Collection<S> businessObjectList) {
 
-        Collection<T> targetList = businessObjectList instanceof List? new ArrayList<T>(businessObjectList.size()): new HashSet<T>(businessObjectList.size());
+        Collection<T> targetList = businessObjectList instanceof List? new ArrayList<>(businessObjectList.size()): new HashSet<>(businessObjectList.size());
 
-        for (Iterator<S> iterator = businessObjectList.iterator(); iterator.hasNext();) {
+        for (S businessObject : businessObjectList) {
 
-            S businessObject = iterator.next();
             targetList.add(createFromBO(businessObject));
         }
 

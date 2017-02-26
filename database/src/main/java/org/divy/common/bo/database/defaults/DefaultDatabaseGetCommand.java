@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.divy.common.bo.database.defaults;
 
 import org.divy.common.bo.IBusinessObject;

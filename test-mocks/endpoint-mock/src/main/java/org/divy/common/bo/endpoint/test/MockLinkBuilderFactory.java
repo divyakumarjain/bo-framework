@@ -1,13 +1,10 @@
 package org.divy.common.bo.endpoint.test;
 
-import org.divy.common.rest.LinkBuilderFactory;
 import org.divy.common.rest.LinkBuilder;
+import org.divy.common.rest.LinkBuilderFactory;
 
 import javax.ws.rs.core.UriInfo;
 
-/**
- * Created by divyjain on 8/7/2016.
- */
 public class MockLinkBuilderFactory implements LinkBuilderFactory {
 
     private String scheme;

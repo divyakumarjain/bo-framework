@@ -13,6 +13,14 @@ public class Greeting extends AbstractBusinessObject {
 
     private String greeting;
 
+
+    public Greeting() {
+    }
+
+    public Greeting(UUID uuid) {
+        super(uuid);
+    }
+
     /**
      * @return returns the greeting
      */

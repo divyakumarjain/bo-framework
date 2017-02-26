@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class FieldMetaData {
-    Type type;
+    Class<?> type;
     boolean isCollection;
     String fieldName;
 
@@ -16,10 +16,18 @@ public class FieldMetaData {
         Type genericReturnType = pd.getReadMethod().getGenericReturnType();
         if(genericReturnType instanceof ParameterizedType && isCollection((ParameterizedType)genericReturnType)) {
             this.isCollection = true;
-            type = ((ParameterizedType) genericReturnType).getActualTypeArguments()[0];
+            type = resolveType(((ParameterizedType) genericReturnType).getActualTypeArguments()[0]);
         } else {
-            type = genericReturnType;
+            type = resolveType(genericReturnType);
             this.isCollection = false;
+        }
+    }
+
+    private Class<?> resolveType(Type type) {
+        if(type instanceof Class)
+            return (Class<?>) type;
+        else {
+            throw new IllegalArgumentException("Could not resolve to java.lang.Class from " + type);
         }
     }
 
@@ -37,7 +45,7 @@ public class FieldMetaData {
         return isCollection;
     }
 
-    public Type getType() {
+    public Class<?> getType() {
         return type;
     }
 

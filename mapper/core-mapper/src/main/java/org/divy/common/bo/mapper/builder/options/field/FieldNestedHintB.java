@@ -1,15 +1,10 @@
 package org.divy.common.bo.mapper.builder.options.field;
 
-import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 
-public class FieldNestedHintB implements MapperBuilderOption {
-    private final Class<?> hintClass;
+public class FieldNestedHintB extends FieldHint {
 
-    public FieldNestedHintB(Class<?> nestedHintBClass) {
-        this.hintClass = nestedHintBClass;
+    public FieldNestedHintB(Class<?> hintClass) {
+        super(hintClass);
     }
 
-    public Class<?> getHintClass() {
-        return hintClass;
-    }
 }

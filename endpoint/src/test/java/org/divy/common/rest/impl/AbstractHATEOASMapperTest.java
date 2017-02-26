@@ -1,13 +1,11 @@
 package org.divy.common.rest.impl;
 
-import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
+import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.rest.LinkBuilderFactory;
 import org.divy.common.rest.impl.mock.MockRepresentation;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
 
 public class AbstractHATEOASMapperTest {
 

@@ -17,6 +17,13 @@ public class GreetingCard extends AbstractBusinessObject {
 
     List<Page> pages;
 
+    public GreetingCard() {
+    }
+
+    public GreetingCard(UUID uuid) {
+        super(uuid);
+    }
+
     @OneToMany(cascade = CascadeType.ALL)
     public List<Page> getPages() {
         return pages;

@@ -15,6 +15,13 @@ import java.util.UUID;
 public class Section extends AbstractBusinessObject {
     private List<Greeting> greetings;
 
+    public Section() {
+    }
+
+    public Section(UUID uuid) {
+        super(uuid);
+    }
+
     @Override
     public void update(IBusinessObject<UUID> entity) {
         if (entity instanceof Section) {

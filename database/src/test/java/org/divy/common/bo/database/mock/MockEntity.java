@@ -1,18 +1,23 @@
 package org.divy.common.bo.database.mock;
 
-import java.util.List;
+import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.database.AbstractBusinessObject;
 
-import java.util.UUID;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.divy.common.bo.database.AbstractBusinessObject;
-import org.divy.common.bo.IBusinessObject;
-import org.hibernate.annotations.GenericGenerator;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @XmlRootElement
 public class MockEntity extends AbstractBusinessObject {
+
+    public MockEntity() {
+    }
+
+    public MockEntity(UUID uuid) {
+        super(uuid);
+    }
 
     /*
      * (non-Javadoc)
@@ -74,10 +79,6 @@ public class MockEntity extends AbstractBusinessObject {
 
     public void setChildEntities(List<MockEntity> childEntities) {
         this.childEntities = childEntities;
-    }
-
-    public void setIdentity(UUID identity) {
-        setUuid(identity);
     }
 
     @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, targetEntity = MockEntity.class)

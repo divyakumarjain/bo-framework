@@ -1,6 +1,3 @@
-/**
- *
- */
 package org.divy.common.bo.endpoint.test;
 
 import com.google.inject.AbstractModule;
@@ -22,21 +19,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
-import org.divy.common.bo.endpoint.AbstractBOEndpoint;
-import org.divy.common.bo.query.Query;
-import org.divy.common.bo.query.AttributeQuery;
-import org.divy.common.bo.test.ITestDataProvider;
-import org.junit.Before;
-
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Module;
-import com.google.inject.TypeLiteral;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.mock;
@@ -112,7 +97,7 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
     @Override
     @SuppressWarnings("unchecked")
     protected List<E> doSearchEntities(Query searchQuery) {
-        Response response = this.endpointInstance.search((AttributeQuery) searchQuery, mock(UriInfo.class));
+        Response response = this.endpointInstance.search(searchQuery, mock(UriInfo.class));
         assertThat(response, hasProperty(STATUS, is(equalTo(200))));
         assertThat(response, hasProperty(ENTITY, notNullValue()));
         return (List<E>) response.getEntity();
@@ -142,7 +127,7 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
     protected abstract AbstractBOEndpoint<E, I> createEndpointInstance();
 
     public Iterable<Module> getTestModules() {
-        return Arrays.asList(new AbstractModule() {
+        return Collections.singletonList(new AbstractModule() {
             @Override
             public void configure() {
                 @SuppressWarnings("unchecked")

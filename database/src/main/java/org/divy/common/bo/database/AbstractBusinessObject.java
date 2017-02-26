@@ -7,7 +7,6 @@ import org.divy.common.bo.IBusinessObject;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -45,7 +44,7 @@ public abstract class AbstractBusinessObject implements IBusinessObject<UUID> {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 
@@ -76,11 +75,7 @@ public abstract class AbstractBusinessObject implements IBusinessObject<UUID> {
 
         AbstractBusinessObject that = (AbstractBusinessObject) o;
 
-        if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) {
-            return false;
-        }
-
-        return true;
+        return uuid != null ? uuid.equals(that.uuid) : that.uuid == null;
     }
 
     @Override

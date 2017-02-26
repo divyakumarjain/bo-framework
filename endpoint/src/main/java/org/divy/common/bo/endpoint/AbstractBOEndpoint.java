@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.divy.common.bo.endpoint;
 
 

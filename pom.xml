@@ -160,6 +160,11 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
+                <artifactId>bo-framework-orika-mapper-spring</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
                 <artifactId>bo-framework-metadata</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
@@ -208,7 +213,7 @@
 
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>spring-support</artifactId>
+                <artifactId>bo-framework-spring-support</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
 

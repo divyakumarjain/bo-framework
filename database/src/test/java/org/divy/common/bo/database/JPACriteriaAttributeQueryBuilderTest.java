@@ -2,7 +2,6 @@ package org.divy.common.bo.database;
 
 import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.query.AttributeQuery;
-import org.divy.common.bo.query.Query;
 import org.divy.common.bo.query.operator.And;
 import org.divy.common.bo.query.operator.Not;
 import org.divy.common.bo.query.operator.comparison.impl.*;
@@ -25,13 +24,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 
-
-import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 public class JPACriteriaAttributeQueryBuilderTest {
 
     JPACriteriaQueryBuilder criteriaQueryBuilder;

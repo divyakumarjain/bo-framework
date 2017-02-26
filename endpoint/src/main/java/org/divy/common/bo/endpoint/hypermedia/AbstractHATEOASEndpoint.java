@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.divy.common.bo.endpoint.hypermedia;
 
 import org.divy.common.bo.IBusinessObject;

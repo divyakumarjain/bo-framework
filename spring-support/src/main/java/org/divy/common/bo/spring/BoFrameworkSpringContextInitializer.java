@@ -22,23 +22,13 @@ public class BoFrameworkSpringContextInitializer implements ApplicationContextIn
     public void initialize(GenericApplicationContext applicationContext) {
         context = new AnnotationConfigApplicationContext(BoFrameworkSpringContext.class);
         applicationContext.setParent(context);
-        Object bean = null;
-        try {
-            bean = context.getBean("entityMetaDataProvider");
-            final BoEntityMetaDataProvider entityMetaDataProvider = (BoEntityMetaDataProvider) bean;
-            applicationContext.addBeanFactoryPostProcessor(new BoFrameworkBeanRegistryPostProcessor(
-                    entityMetaDataProvider,
-                    context.getBean("dynamicBeanFactory", DynamicBeanFactory.class)));
-            applicationContext.addApplicationListener(this);
-        } catch(ClassCastException exception) {
-            System.out.println("Could not load entityMetaDataProvider");
-            System.out.println(BoEntityMetaDataProvider.class.getClassLoader().getResource("org/divy/common/bo/database/BoEntityMetaDataProvider.class"));
-            System.out.println(BoEntityMetaDataProvider.class.getClassLoader().toString());
-            if(bean != null)
-                System.out.println(bean.getClass().getClassLoader().getResource("org/divy/common/bo/database/BoEntityMetaDataProvider.class"));
-                System.out.println(bean.getClass().getClassLoader().toString());
-
-        }
+        Object bean;
+        bean = context.getBean("entityMetaDataProvider");
+        final BoEntityMetaDataProvider entityMetaDataProvider = (BoEntityMetaDataProvider) bean;
+        applicationContext.addBeanFactoryPostProcessor(new BoFrameworkBeanRegistryPostProcessor(
+                entityMetaDataProvider,
+                context.getBeansOfType(DynamicBeanFactory.class).values()));
+        applicationContext.addApplicationListener(this);
     }
 
     @Override

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.divy.common.bo.endpoint.test;
 
 import com.google.inject.servlet.GuiceFilter;
@@ -57,8 +54,8 @@ public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<
         return jerseyTestProxy.target(UriBuilder.fromMethod(getEndPointClass(), method).build().toString());
     }
 
-    private WebTarget getEntityTarget(String idenity) {
-        return jerseyTestProxy.target(UriBuilder.fromResource(getEndPointClass()).path(idenity).build().toString());
+    private WebTarget getEntityTarget(String identity) {
+        return jerseyTestProxy.target(UriBuilder.fromResource(getEndPointClass()).path(identity).build().toString());
     }
 
     @Override

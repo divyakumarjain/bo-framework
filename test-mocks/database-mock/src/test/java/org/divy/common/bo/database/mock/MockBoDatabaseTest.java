@@ -1,12 +1,11 @@
 package org.divy.common.bo.database.mock;
 
-import java.util.UUID;
 import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.repository.test.TestBaseDBRepository;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
+import java.util.UUID;
+
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,UUID> {
@@ -16,7 +15,7 @@ public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,UUID> {
     }
 
     @Override
-    protected String getpersistentUnitName() {
+    protected String getPersistentUnitName() {
         return "org.divy.task";
     }
 

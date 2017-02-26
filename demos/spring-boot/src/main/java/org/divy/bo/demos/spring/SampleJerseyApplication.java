@@ -2,10 +2,8 @@ package org.divy.bo.demos.spring;
 
 
 import org.divy.common.bo.spring.BoFrameworkSpringContextInitializer;
-import org.divy.common.bo.spring.context.BoFrameworkSpringContext;
 import org.divy.common.rest.LinkBuilderFactory;
 import org.divy.common.rest.LinkBuilderFactoryImpl;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

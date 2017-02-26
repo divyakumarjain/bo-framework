@@ -7,11 +7,9 @@ import org.hibernate.search.jpa.FullTextEntityManager;
 
 import javax.persistence.EntityManager;
 
-import static org.hibernate.search.jpa.Search.*;
+import static org.hibernate.search.jpa.Search.getFullTextEntityManager;
 
-/**
- * Created by divyjain on 12/6/2016.
- */
+
 public class HibernateSearchCommandContext extends AbstractEntityManagerContext implements SearchCommandContext {
 
     FullTextEntityManager fullTextEntityManager;

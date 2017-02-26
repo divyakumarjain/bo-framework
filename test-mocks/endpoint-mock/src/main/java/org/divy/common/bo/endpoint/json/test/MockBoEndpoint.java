@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.divy.common.bo.endpoint.json.test;
 
 import org.divy.common.bo.business.IBOManager;

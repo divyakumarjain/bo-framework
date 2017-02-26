@@ -39,7 +39,7 @@ public class MockBoEndpointUnitTest extends AbstractBOEndpointUnitTest<MockEntit
 
     @Override
     protected MockBoEndpoint createEndpointInstance() {
-        return new MockBoEndpoint(new InMemoryBOManager<MockEntity, UUID>(), new MockLinkBuilderFactory("http", "localhost:8080", ""));
+        return new MockBoEndpoint(new InMemoryBOManager<>(), new MockLinkBuilderFactory("http", "localhost:8080", ""));
     }
 
     @Override

@@ -1,18 +1,17 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
-import org.divy.common.bo.metadata.FieldMetaData;
-import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
+import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
+import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
 import org.divy.common.bo.mapper.builder.options.type.MapperBuilderOptions;
+import org.divy.common.bo.metadata.FieldMetaData;
+import org.divy.common.bo.metadata.MetaDataProvider;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class KeyValuePairMapperImpl<E extends IBusinessObject> implements KeyValuePairMapper<E> {
 
@@ -22,30 +21,65 @@ public class KeyValuePairMapperImpl<E extends IBusinessObject> implements KeyVal
             , MapperBuilder mapperBuilder
             , MetaDataProvider metaDataProvider) {
 
+        buildTypeMapperBuilderContext(businessObjectType, mapperBuilder, metaDataProvider);
+    }
+
+    private void buildTypeMapperBuilderContext(Class<E> businessObjectType
+            , MapperBuilder mapperBuilder
+            , MetaDataProvider metaDataProvider) {
+
+        final TypeMapperBuilderContext<E, Map<String, Object>> typeMapperBuilderContext = populateTypeMapperBuilderContext(businessObjectType, mapperBuilder, metaDataProvider);
+
+        mapper = typeMapperBuilderContext
+                .buildMapper();
+    }
+
+    private TypeMapperBuilderContext<E, Map<String, Object>> populateTypeMapperBuilderContext(Class<E> businessObjectType
+            , MapperBuilder mapperBuilder
+            , MetaDataProvider metaDataProvider) {
+
         final TypeMapperBuilderContext<E, Map<String, Object>> typeMapperBuilderContext
-                = mapperBuilder.mapping(businessObjectType, (Class<Map<String, Object>>) (Class) Map.class
-                    , MapperBuilderOptions.oneWay())
-                        .field("lastUpdateTimestamp"
-                                , MapperBuilderOptions.oneWay()
-                                , FieldMapperOptions.hintB(LocalDateTime.class)
-                                , FieldMapperOptions.hintA(LocalDateTime.class))
-                    .and()
-                        .field("createTimestamp"
-                                , MapperBuilderOptions.oneWay()
-                                , FieldMapperOptions.hintB(LocalDateTime.class)
-                                , FieldMapperOptions.hintA(LocalDateTime.class))
-                            .and()
-                        .field("uuid", MapperBuilderOptions.oneWay()
-                                , FieldMapperOptions.hintB(UUID.class)
-                                , FieldMapperOptions.hintA(UUID.class))
-                    .and();
+                = mapperBuilder.mapping(businessObjectType, (Class<Map<String, Object>>) (Class) Map.class);
+
+        typeMapperBuilderContext
+                .field("lastUpdateTimestamp"
+                        , MapperBuilderOptions.oneWay()
+                        , FieldMapperOptions.hintB(LocalDateTime.class)
+                        , FieldMapperOptions.hintA(LocalDateTime.class))
+                .and()
+                .field("createTimestamp"
+                        , MapperBuilderOptions.oneWay()
+                        , FieldMapperOptions.hintB(LocalDateTime.class)
+                        , FieldMapperOptions.hintA(LocalDateTime.class))
+                .and()
+                .field("uuid"
+                        , FieldMapperOptions.hintB(UUID.class)
+                        , FieldMapperOptions.hintA(UUID.class));
 
         final Map<String, FieldMetaData> childEntities = metaDataProvider.getChildEntity(businessObjectType);
 
-        childEntities.entrySet().forEach(childEntity-> typeMapperBuilderContext.field(childEntity.getKey()));
+        childEntities.forEach((key, value) -> typeMapperBuilderContext.field(key, createFieldMappingOptions(value, typeMapperBuilderContext, mapperBuilder, metaDataProvider)));
+        return typeMapperBuilderContext;
+    }
 
-        mapper = typeMapperBuilderContext
-                .build();
+    private List<MapperBuilderOption> createFieldMappingOptions(FieldMetaData metaData, TypeMapperBuilderContext<E, Map<String, Object>> typeMapperBuilderContext, MapperBuilder mapperBuilder, MetaDataProvider metaDataProvider) {
+        List<MapperBuilderOption> mapperBuilderOptions = new ArrayList<>();
+        final Class<?> type = metaData.getType();
+        if(metaData.isCollection()) {
+            mapperBuilderOptions.add(FieldMapperOptions.hintB(List.class));
+            mapperBuilderOptions.add(FieldMapperOptions.nestedHintB(Map.class));
+            mapperBuilderOptions.add(FieldMapperOptions.hintA(List.class));
+            mapperBuilderOptions.add(FieldMapperOptions.nestedHintA(metaData.getType()));
+        } else {
+            mapperBuilderOptions.add(FieldMapperOptions.hintA(type));
+            mapperBuilderOptions.add(FieldMapperOptions.hintB(Map.class));
+        }
+
+        if(IBusinessObject.class.isAssignableFrom(type)) {
+            final TypeMapperBuilderContext<E, Map<String, Object>> childTypeMapperBuilderContext = populateTypeMapperBuilderContext((Class<E>) type, mapperBuilder, metaDataProvider);
+            typeMapperBuilderContext.addTypeMappingOption(MapperBuilderOptions.childTypeMapping(childTypeMapperBuilderContext));
+        }
+        return mapperBuilderOptions;
     }
 
     @Override

@@ -1,18 +1,20 @@
 package org.divy.common.bo.mapper;
 
 import ma.glasnost.orika.MapperFacade;
-import org.divy.common.bo.mapper.IBOMapper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
 
     protected Class<S> businessObjectType;
     protected Class<T> otherObjectType;
-    protected MapperFacade mapper;
+    protected MapperFacade mapperFacade;
 
-    public AbstractBOMapper(Class<S> businessObjectType,
-                            Class<T> otherObjectType) {
+    public AbstractBOMapper(Class<S> businessObjectType
+                            , Class<T> otherObjectType) {
         this.businessObjectType = businessObjectType;
         this.otherObjectType = otherObjectType;
     }
@@ -26,7 +28,7 @@ public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
         if(sourceData == null) {
             return null;
         }
-        return getMapper().map(sourceData, businessObjectType);
+        return getMapperFacade().map(sourceData, businessObjectType);
     }
 
     @Override
@@ -38,7 +40,7 @@ public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
     protected S doMapToBO(T sourceData, S businessObject) {
         
         if(sourceData != null) {
-            getMapper().map(sourceData, businessObject);
+            getMapperFacade().map(sourceData, businessObject);
         }
 
         return businessObject;
@@ -58,7 +60,7 @@ public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
             return null;
         }
 
-        return getMapper().map(businessObject,otherObjectType);
+        return getMapperFacade().map(businessObject,otherObjectType);
     }
 
     @Override
@@ -70,7 +72,7 @@ public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
     protected T doMapFromBO(S businessObject, T targetData) {
 
         if(businessObject!=null) {
-            getMapper().map(businessObject, targetData);
+            getMapperFacade().map(businessObject, targetData);
         }
 
         return targetData;
@@ -89,22 +91,21 @@ public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
     @Override
     public final Collection<T> createFromBO(Collection<S> businessObjectList) {
 
-        Collection<T> targetList = businessObjectList instanceof List? new ArrayList<T>(businessObjectList.size()): new HashSet<T>(businessObjectList.size());
+        Collection<T> targetList = businessObjectList instanceof List? new ArrayList<>(businessObjectList.size()): new HashSet<>(businessObjectList.size());
 
-        for (Iterator<S> iterator = businessObjectList.iterator(); iterator.hasNext();) {
+        for (S businessObject : businessObjectList) {
 
-            S businessObject = iterator.next();
             targetList.add(createFromBO(businessObject));
         }
 
         return targetList;
     }
 
-    public MapperFacade getMapper() {
-        if(mapper==null) {
-            this.mapper = createMapper();
+    public MapperFacade getMapperFacade() {
+        if(mapperFacade ==null) {
+            this.mapperFacade = createMapper();
         }
-        return mapper;
+        return mapperFacade;
     }
 
     protected abstract MapperFacade createMapper();
