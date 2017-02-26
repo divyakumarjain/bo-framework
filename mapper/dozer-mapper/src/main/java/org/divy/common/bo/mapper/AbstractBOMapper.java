@@ -9,8 +9,8 @@ import java.util.List;
 
 public abstract class AbstractBOMapper<S, T> implements IBOMapper<S, T>{
 
-    protected Class<S> businessObjectType;
-    protected Class<T> otherObjectType;
+    protected final Class<S> businessObjectType;
+    protected final Class<T> otherObjectType;
     protected Mapper mapper;
 
     public AbstractBOMapper(Class<S> businessObjectType,

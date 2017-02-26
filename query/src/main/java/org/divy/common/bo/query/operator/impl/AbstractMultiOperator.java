@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AbstractMultiOperator implements MultiOperator<Operator>{
-    List<Operator> operators;
+    final List<Operator> operators;
 
     public AbstractMultiOperator(Operator... operators) {
         this.operators = Arrays.asList(operators);

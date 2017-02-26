@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 public class KeyValuePairMapperImplTest {
 
-    BoEntityMetaDataProvider metaDataProvider = new BoEntityMetaDataProvider(Collections.singletonList(MockEntity.class));
+    final BoEntityMetaDataProvider metaDataProvider = new BoEntityMetaDataProvider(Collections.singletonList(MockEntity.class));
     private MapperBuilder mockMapperBuilder;
 
     @Before

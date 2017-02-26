@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 
 public class AdvanceBOMapper<B, O> extends AbstractBOMapper<B, O> {
 
-    private Map<String, FieldMapperContext> fields;
-    private List<MapperBuilderOption> mapperBuilderOptions;
+    private final Map<String, FieldMapperContext> fields;
+    private final List<MapperBuilderOption> mapperBuilderOptions;
 
     public AdvanceBOMapper(Class<B> businessObjectType
             , Class<O> otherObjectType

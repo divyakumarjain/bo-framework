@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AbstractBOManager<E extends IBusinessObject<I>, I> implements IBOManager<E, I> {
 
-    IBORepository<E, I> repository;
+    final IBORepository<E, I> repository;
 
     public AbstractBOManager(IBORepository<E, I> repository) {
         this.repository = repository;

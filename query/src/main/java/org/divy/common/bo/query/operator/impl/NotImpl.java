@@ -5,7 +5,7 @@ import org.divy.common.bo.query.operator.Operator;
 
 public class NotImpl implements Not{
 
-    private Operator operator;
+    private final Operator operator;
 
     public NotImpl(Operator operator) {
         this.operator = operator;

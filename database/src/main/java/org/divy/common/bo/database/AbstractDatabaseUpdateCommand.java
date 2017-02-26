@@ -13,7 +13,7 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
         extends AbstractDatabaseCommand<E, UUID> implements
         IUpdateCommand<E, UUID> {
 
-    private IBOMapper<E, E> updateMapper;
+    private final IBOMapper<E, E> updateMapper;
 
     protected AbstractDatabaseUpdateCommand( Class<E> typeParameterClass
             , EntityManagerCommandContext context

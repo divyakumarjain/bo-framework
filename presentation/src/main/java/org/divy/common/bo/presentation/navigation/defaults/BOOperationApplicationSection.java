@@ -8,7 +8,7 @@ public class BOOperationApplicationSection extends ApplicationSection {
     private static final String UPDATE_OPERATION = "update";
     private static final String LIST_OPERATION = "list";
 
-    private String entityName;
+    private final String entityName;
 
     public BOOperationApplicationSection(String entityName) {
         super(entityName);

@@ -61,7 +61,7 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
 
     private class MapperFacadeBuilder {
 
-        private DefaultMapperFactory mapperFactory;
+        private final DefaultMapperFactory mapperFactory;
 
         MapperFacadeBuilder(DefaultMapperFactory mapperFactory) {
             this.mapperFactory = mapperFactory;

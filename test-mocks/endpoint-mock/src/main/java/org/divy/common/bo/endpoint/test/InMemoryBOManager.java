@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class InMemoryBOManager<E extends IBusinessObject<I>, I extends Serializable> implements IBOManager<E, I> {
 
-    private Map<I, E> inMemoryMap = new HashMap<>();
+    private final Map<I, E> inMemoryMap = new HashMap<>();
 
     @Override
     public E create(E businessObject) {

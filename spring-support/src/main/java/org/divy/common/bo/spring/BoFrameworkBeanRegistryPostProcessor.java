@@ -11,7 +11,7 @@ import java.util.Collection;
 public class BoFrameworkBeanRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
     private final BoEntityMetaDataProvider metaDataProvider;
-    private Collection<DynamicBeanFactory> factories;
+    private final Collection<DynamicBeanFactory> factories;
 
     BoFrameworkBeanRegistryPostProcessor(BoEntityMetaDataProvider metaDataProvider,
                                          Collection<DynamicBeanFactory> factories) {

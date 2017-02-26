@@ -30,7 +30,7 @@ import java.util.List;
 public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<I>, I extends Serializable>
         extends AbstractBOEndpointTest<E, I> {
 
-    protected JerseyTest jerseyTestProxy;
+    protected final JerseyTest jerseyTestProxy;
 
     /**
      * @param testDataProvider

@@ -13,7 +13,7 @@ import java.util.Collection;
 
 public abstract class AbstractEntityPresentationService<E extends IBusinessObject<I>, VO, I extends Serializable> extends AbstractCRUDEndpoint<E, I> {
 
-    IBOMapper<E, VO> mapper;
+    final IBOMapper<E, VO> mapper;
 
     private IBOManager<E, I> manager;
 

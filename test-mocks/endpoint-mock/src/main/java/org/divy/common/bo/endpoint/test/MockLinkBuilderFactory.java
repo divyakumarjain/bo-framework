@@ -7,9 +7,9 @@ import javax.ws.rs.core.UriInfo;
 
 public class MockLinkBuilderFactory implements LinkBuilderFactory {
 
-    private String scheme;
-    private String host;
-    private String basePath;
+    private final String scheme;
+    private final String host;
+    private final String basePath;
 
     public MockLinkBuilderFactory(String scheme, String host, String basePath) {
         this.scheme = scheme;

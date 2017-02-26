@@ -1,7 +1,7 @@
 package org.divy.common.bo.mapper;
 
-import org.divy.common.bo.mapper.builder.options.OneWayMappingOption;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
+import org.divy.common.bo.mapper.builder.options.OneWayMappingOption;
 import org.dozer.loader.api.TypeMappingOption;
 import org.dozer.loader.api.TypeMappingOptions;
 
@@ -12,7 +12,7 @@ public enum DozerTypeMappingOptionMapping {
 
     OneWayMappingOptionMap(TypeMappingOptions.oneWay());
 
-    private TypeMappingOption dozerOption;
+    private final TypeMappingOption dozerOption;
 
     DozerTypeMappingOptionMapping(TypeMappingOption dozerOption) {
         this.dozerOption = dozerOption;

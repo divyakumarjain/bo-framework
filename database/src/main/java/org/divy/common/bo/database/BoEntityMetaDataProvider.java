@@ -24,7 +24,7 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
 
     static final Logger LOGGER = LoggerFactory.getLogger(BoEntityMetaDataProvider.class);
 
-    private List<Class<? extends IBusinessObject>> entityTypes;
+    private final List<Class<? extends IBusinessObject>> entityTypes;
 
     public BoEntityMetaDataProvider(List<Class<? extends IBusinessObject>> typeList) {
         entityTypes = typeList;

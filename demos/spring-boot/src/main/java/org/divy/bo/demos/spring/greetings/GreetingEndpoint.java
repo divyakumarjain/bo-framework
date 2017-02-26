@@ -17,8 +17,8 @@ public class GreetingEndpoint extends AbstractHATEOASEndpoint<Greeting, DefaultR
 
 
     private final IBOManager<Greeting, UUID> manager;
-    private AbstractAssociations<Greeting> associations;
-    private HATEOASMapper<Greeting, DefaultRepresentation> greetingHATEOSMapper;
+    private final AbstractAssociations<Greeting> associations;
+    private final HATEOASMapper<Greeting, DefaultRepresentation> greetingHATEOSMapper;
 
     @Autowired
     public GreetingEndpoint(@Qualifier("greetingManager") IBOManager<Greeting, UUID> greetingManager,

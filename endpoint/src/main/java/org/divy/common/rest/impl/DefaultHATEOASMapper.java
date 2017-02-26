@@ -26,12 +26,10 @@ public class DefaultHATEOASMapper<E extends AbstractBusinessObject>
     @Override
     protected void doFillLinks(DefaultRepresentation representation, E businessObject) {
         final Optional<Class<?>> optionalEndPointClass = getMetaDataProvider().getEndpointClass(getMetaDataProvider());
-        optionalEndPointClass.ifPresent(aClass -> {
-            representation.addLink(getLinkBuilderFactory().newBuilder()
-                    .path(aClass)
-                    .path(aClass, "read")
-                    .buildLink("self", representation.getId()));
-        });
+        optionalEndPointClass.ifPresent(aClass -> representation.addLink(getLinkBuilderFactory().newBuilder()
+                .path(aClass)
+                .path(aClass, "read")
+                .buildLink("self", representation.getId())));
 
     }
 

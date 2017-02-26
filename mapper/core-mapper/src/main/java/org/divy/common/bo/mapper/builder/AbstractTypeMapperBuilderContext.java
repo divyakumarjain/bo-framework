@@ -7,7 +7,7 @@ import org.divy.common.bo.mapper.builder.options.type.MapperBuilderOptions;
 import java.util.*;
 
 public abstract class AbstractTypeMapperBuilderContext<S, T> implements TypeMapperBuilderContext<S, T> {
-    private MapperBuilder builder;
+    private final MapperBuilder builder;
     protected final Class<S> source;
     protected final Class<T> target;
     protected final List<MapperBuilderOption> mapperBuilderOptions = new ArrayList<>();
