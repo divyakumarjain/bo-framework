@@ -13,10 +13,12 @@ public class FieldMapperContextImpl implements FieldMapperContext {
         this.mapperBuilderOptions = new ArrayList<>();
     }
 
+    @Override
     public List<MapperBuilderOption> getFieldMapperBuilderOptions() {
         return this.mapperBuilderOptions;
     }
 
+    @Override
     public void setFieldMapperBuilderOptions(MapperBuilderOption[] mapperBuilderOptions) {
         this.mapperBuilderOptions = new ArrayList<>();
         this.mapperBuilderOptions.addAll(Arrays.asList(mapperBuilderOptions));

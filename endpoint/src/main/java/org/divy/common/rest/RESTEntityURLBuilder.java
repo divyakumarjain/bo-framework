@@ -22,6 +22,7 @@ public class RESTEntityURLBuilder<T extends IBusinessObject<I>, I extends Serial
     }
 
     public RESTEntityURLBuilder() {
+        //noop
     }
 
     public Map<Class<T>, Class<? extends AbstractCRUDEndpoint<T, I>>> getEntityEndPointMap() {

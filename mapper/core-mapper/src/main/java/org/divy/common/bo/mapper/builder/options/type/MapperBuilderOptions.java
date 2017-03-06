@@ -5,6 +5,7 @@ import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.mapper.builder.options.OneWayMappingOption;
 
 public class MapperBuilderOptions {
+    private MapperBuilderOptions(){}
     public static MapperBuilderOption oneWay() {
         return new OneWayMappingOption();
     }

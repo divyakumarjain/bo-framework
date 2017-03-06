@@ -1,6 +1,5 @@
 package org.divy.common.bo.spring.endpoint;
 
-import javassist.CtClass;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.database.BoEntityMetaDataProvider;
@@ -20,8 +19,6 @@ import java.util.Optional;
 
 @Component
 public class JerseyEndPointFactory extends ResourceConfig {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(JerseyEndPointFactory.class);
 
     private final BoEntityMetaDataProvider metaDataProvider;
     private final BeanNamingStrategy beanNamingStrategy;
@@ -63,7 +60,6 @@ public class JerseyEndPointFactory extends ResourceConfig {
                 .superParam(LinkBuilderFactory.class)
                 .and()
                     .superParam(HATEOASMapper.class).addAnnotation(Qualifier.class).value(beanNamingStrategy.calculateHATEOASMapperId(typeClass))
-
             .build();
     }
 

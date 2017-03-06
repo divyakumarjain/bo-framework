@@ -6,14 +6,7 @@ public class Operation implements IOperation {
 
     String entity;
     String label;
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
+    String operation;
 
     public Operation(String entity, String operation) {
         super();
@@ -26,7 +19,14 @@ public class Operation implements IOperation {
         this.label = operationLabel;
     }
 
-    String operation;
+    @Override
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
     @Override
     public String getEntity() {

@@ -12,6 +12,8 @@ import static org.dozer.loader.api.FieldsMappingOptions.*;
 
 public class DozerFieldMappingOptionMapping {
 
+    private DozerFieldMappingOptionMapping(){}
+
     public static FieldsMappingOption optionFor(MapperBuilderOption option) {
         if (option instanceof FieldHintA) {
             FieldHintA hintA = (FieldHintA) option;

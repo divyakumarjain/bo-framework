@@ -24,8 +24,6 @@ import static org.junit.Assert.assertThat;
  */
 public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestBOCRUDBase.class);
-
     protected final ITestDataProvider<E> testDataProvider;
 
     /**
@@ -89,7 +87,7 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
         doDeleteEntity(entity1);
 
         doAssertNotExists(getIdentifier(entity1));
-        entity2 = doAssertExists(getIdentifier(entity2));
+        doAssertExists(getIdentifier(entity2));
 
     }
 
@@ -127,7 +125,7 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
 
     /* Clean up */
     @After
-    public void cleanup() throws Exception{
+    public void cleanup() {
         List<E> searchedEntities = doSearchEntities(new AttributeQuery());
 
         searchedEntities.forEach(this::doDeleteEntity);

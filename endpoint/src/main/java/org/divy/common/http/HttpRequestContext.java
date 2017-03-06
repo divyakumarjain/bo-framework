@@ -16,6 +16,14 @@ public class HttpRequestContext {
     private static final ThreadLocal<HttpRequestContext> LOCAL_CONTEXT =
             new ThreadLocal<>();
 
+    private final HttpServletRequest request;
+    private final HttpServletResponse response;
+
+    public HttpRequestContext(ServletRequest req, ServletResponse res) {
+        this.request = (HttpServletRequest) req;
+        this.response = (HttpServletResponse) res;
+    }
+
     /**
      * Return the local HttpRequestContext or null if thread is not
      * a request service thread.
@@ -82,14 +90,6 @@ public class HttpRequestContext {
      */
     public static void clearContext() {
         LOCAL_CONTEXT.set(null);
-    }
-
-    private final HttpServletRequest request;
-    private final HttpServletResponse response;
-
-    public HttpRequestContext(ServletRequest req, ServletResponse res) {
-        this.request = (HttpServletRequest) req;
-        this.response = (HttpServletResponse) res;
     }
 
     public HttpServletRequest getRequest() {

@@ -15,9 +15,6 @@ public class BoFrameworkSpringContextInitializer implements ApplicationContextIn
     private ConfigurableApplicationContext context;
 
 
-    public BoFrameworkSpringContextInitializer() {
-    }
-
     @Override
     public void initialize(GenericApplicationContext applicationContext) {
         context = new AnnotationConfigApplicationContext(BoFrameworkSpringContext.class);

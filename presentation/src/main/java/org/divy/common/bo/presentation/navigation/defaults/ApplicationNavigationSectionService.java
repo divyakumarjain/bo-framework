@@ -16,12 +16,12 @@ import org.divy.common.bo.presentation.navigation.IApplicationSection;
 @Produces({ MediaType.APPLICATION_JSON})
 public class ApplicationNavigationSectionService {
 
+    private Collection<IApplicationSection> applicationSection;
+
     @Inject
     public ApplicationNavigationSectionService(Set<IApplicationSection> applicationSection){
         this.applicationSection = applicationSection;
     }
-
-    private Collection<IApplicationSection> applicationSection;
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON})

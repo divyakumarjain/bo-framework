@@ -37,7 +37,7 @@ public class LinkBuilder {
 
         uriBuilder = UriBuilder.fromPath(fixedBasePath);
 
-        int colonPosInHost = host.indexOf(":");
+        int colonPosInHost = host.indexOf(':');
         String hostWithoutPort = host.substring(0, colonPosInHost >= 0 ? colonPosInHost : host.length());
 
         uriBuilder.scheme(scheme).host(hostWithoutPort);

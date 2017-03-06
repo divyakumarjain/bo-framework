@@ -11,14 +11,14 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Collection;
 
-public abstract class AbstractEntityPresentationService<E extends IBusinessObject<I>, VO, I extends Serializable> extends AbstractCRUDEndpoint<E, I> {
+public abstract class AbstractEntityPresentationService<E extends IBusinessObject<I>, V, I extends Serializable> extends AbstractCRUDEndpoint<E, I> {
 
-    final IBOMapper<E, VO> mapper;
+    final IBOMapper<E, V> mapper;
 
     private IBOManager<E, I> manager;
 
     @Inject
-    public AbstractEntityPresentationService(IBOMapper<E, VO> mapper, LinkBuilderFactoryImpl linkBuilderFactory) {
+    public AbstractEntityPresentationService(IBOMapper<E, V> mapper, LinkBuilderFactoryImpl linkBuilderFactory) {
         super(linkBuilderFactory);
         this.mapper = mapper;
     }
@@ -68,38 +68,38 @@ public abstract class AbstractEntityPresentationService<E extends IBusinessObjec
         return manager.search(query);
     }
 
-    protected VO doGetPresenter(I id) {
+    protected V doGetPresenter(I id) {
         E boEntity = doRead(id);
         return mapper.createFromBO(boEntity);
     }
 
-    protected VO doCreatePresenter(VO presentationObject) {
+    protected V doCreatePresenter(V presentationObject) {
         E entityToBeCreated = mapper.createBO(presentationObject);
         E createdBusinessObject = doCreate(entityToBeCreated);
         return mapper.createFromBO(createdBusinessObject);
     }
 
-    protected VO doUpdatePresenter(VO presentationObject) {
+    protected V doUpdatePresenter(V presentationObject) {
         E entityToBeUpdated = mapper.createBO(presentationObject);
         E updatedBusinessObject = doUpdate(entityToBeUpdated.identity(), entityToBeUpdated);
         return mapper.createFromBO(updatedBusinessObject);
     }
 
-    protected void doDeletePresenter(VO presentationObject) {
+    protected void doDeletePresenter(V presentationObject) {
         manager.delete(mapper.createBO(presentationObject));
     }
 
-    protected VO doDeletePresenter(I id) {
+    protected V doDeletePresenter(I id) {
         E deletedBusinessObject = doDelete(id);
         return mapper.createFromBO(deletedBusinessObject);
     }
 
-    protected Collection<VO> doListPresenter() {
+    protected Collection<V> doListPresenter() {
         Collection<E> boList = doList();
         return mapper.createFromBO(boList);
     }
 
-    protected Collection<VO> doSearchPresenter(Query query) {
+    protected Collection<V> doSearchPresenter(Query query) {
         Collection<E> boList = doSearch(query);
         return mapper.createFromBO(boList);
     }

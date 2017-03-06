@@ -11,7 +11,7 @@ public class MockDeleteCommand extends AbstractDatabaseDeleteCommand<MockEntity,
     }
 
     protected String getIdentity(MockEntity entity) {
-        return "";
+        return entity.getUuid().toString();
     }
 
 }

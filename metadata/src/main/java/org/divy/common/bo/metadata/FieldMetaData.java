@@ -23,18 +23,18 @@ public class FieldMetaData {
         }
     }
 
+    public FieldMetaData(String fieldName, Class type, boolean isCollection) {
+        this.fieldName = fieldName;
+        this.type = type;
+        this.isCollection = isCollection;
+    }
+
     private Class<?> resolveType(Type type) {
         if(type instanceof Class)
             return (Class<?>) type;
         else {
             throw new IllegalArgumentException("Could not resolve to java.lang.Class from " + type);
         }
-    }
-
-    public FieldMetaData(String fieldName, Class type, boolean isCollection) {
-        this.fieldName = fieldName;
-        this.type = type;
-        this.isCollection = isCollection;
     }
 
     private boolean isCollection(ParameterizedType genericReturnType) {

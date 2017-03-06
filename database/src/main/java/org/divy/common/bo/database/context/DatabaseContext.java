@@ -10,17 +10,17 @@ public class DatabaseContext extends AbstractEntityManagerContext {
     private String persistenceUnitName;
 
 
+    public DatabaseContext(String persistenceUnitName)
+    {
+        this.persistenceUnitName = persistenceUnitName;
+    }
+
     protected String getPersistenceUnitName()
     {
         return persistenceUnitName;
     }
 
     protected void setPersistenceUnitName(String persistenceUnitName)
-    {
-        this.persistenceUnitName = persistenceUnitName;
-    }
-
-    public DatabaseContext(String persistenceUnitName)
     {
         this.persistenceUnitName = persistenceUnitName;
     }

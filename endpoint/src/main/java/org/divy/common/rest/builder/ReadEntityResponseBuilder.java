@@ -19,7 +19,7 @@ public class ReadEntityResponseBuilder<T extends IBusinessObject<I>, I extends S
         Response.Status statusCode  = getStatusCode();
 
         if(statusCode==null) {
-            if(entity==null || entity instanceof Collection && ((Collection<T>) entity).size()<1) {
+            if(entity==null || entity instanceof Collection && ((Collection) entity).isEmpty()) {
                 setStatusCode(Response.Status.NOT_FOUND);
             } else {
                 setStatusCode(Response.Status.OK);

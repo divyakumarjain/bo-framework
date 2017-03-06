@@ -11,10 +11,11 @@ import java.util.UUID;
 @XmlRootElement
 public class Greeting extends AbstractBusinessObject {
 
-    private String greeting;
+    private String greetingMessage;
 
 
     public Greeting() {
+        //noop
     }
 
     public Greeting(UUID uuid) {
@@ -24,15 +25,15 @@ public class Greeting extends AbstractBusinessObject {
     /**
      * @return returns the greeting
      */
-    public String getGreeting() {
-        return greeting;
+    public String getGreetingMessage() {
+        return greetingMessage;
     }
 
     /**
-     * @param greeting sets the greeting
+     * @param greetingMessage sets the greeting
      */
-    public void setGreeting(String greeting) {
-        this.greeting = greeting;
+    public void setGreetingMessage(String greetingMessage) {
+        this.greetingMessage = greetingMessage;
     }
 
 
@@ -44,7 +45,7 @@ public class Greeting extends AbstractBusinessObject {
     @Override
     public void update(IBusinessObject<UUID> entity) {
         if(entity instanceof Greeting) {
-            this.setGreeting(((Greeting) entity).getGreeting());
+            this.setGreetingMessage(((Greeting) entity).getGreetingMessage());
         } else {
             throw new IllegalArgumentException("Expecting instance of Mock");
         }
@@ -67,7 +68,7 @@ public class Greeting extends AbstractBusinessObject {
         if (!getUuid().equals(that.getUuid())) {
             return false;
         }
-        return getGreeting() != null ? getGreeting().equals(that.getGreeting()) : that.getGreeting() == null;
+        return getGreetingMessage() != null ? getGreetingMessage().equals(that.getGreetingMessage()) : that.getGreetingMessage() == null;
 
     }
 
@@ -75,14 +76,14 @@ public class Greeting extends AbstractBusinessObject {
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + getUuid().hashCode();
-        result = 31 * result + (getGreeting() != null ? getGreeting().hashCode() : 0);
+        result = 31 * result + (getGreetingMessage() != null ? getGreetingMessage().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Greeting{" +
-                "greeting='" + greeting + '\'' +
+                "greeting='" + greetingMessage + '\'' +
                 '}';
     }
 }

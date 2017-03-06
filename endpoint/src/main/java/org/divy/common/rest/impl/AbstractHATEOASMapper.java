@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 public abstract class AbstractHATEOASMapper <E extends AbstractBusinessObject, R extends AbstractRepresentation<UUID>>
         implements HATEOASMapper<E, R> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractHATEOASMapper.class);
-
     private final MetaDataProvider metaDataProvider;
     private final LinkBuilderFactory linkBuilderFactory;
     private final Class<R> representationType;

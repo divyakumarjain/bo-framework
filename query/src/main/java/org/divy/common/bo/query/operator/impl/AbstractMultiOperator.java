@@ -13,6 +13,7 @@ public class AbstractMultiOperator implements MultiOperator<Operator>{
         this.operators = Arrays.asList(operators);
     }
 
+    @Override
     public List<Operator> getOperations() {
         return operators;
     }

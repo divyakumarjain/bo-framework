@@ -20,6 +20,7 @@ public abstract class AbstractTypeMapperBuilderContext<S, T> implements TypeMapp
         this.fields = new HashMap<>();
     }
 
+    @Override
     public TypeMapperBuilderContext<S, T> addTypeMappingOption(MapperBuilderOption... mapperBuilderOptions) {
         this.mapperBuilderOptions.addAll(Arrays.asList(mapperBuilderOptions));
         return this;
@@ -66,6 +67,7 @@ public abstract class AbstractTypeMapperBuilderContext<S, T> implements TypeMapp
         return childMapping;
     }
 
+    @Override
     public TypeMapperBuilderContext<S, T> autoFieldMapping() {
         return this;
     }

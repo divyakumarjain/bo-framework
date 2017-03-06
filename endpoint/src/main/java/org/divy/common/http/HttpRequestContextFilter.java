@@ -35,7 +35,7 @@ public class HttpRequestContextFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        //noop
     }
 }
 

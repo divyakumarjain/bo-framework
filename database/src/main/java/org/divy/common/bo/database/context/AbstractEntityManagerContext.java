@@ -13,6 +13,7 @@ public abstract class AbstractEntityManagerContext implements EntityManagerComma
     protected CommandContext parentContext;
     private EntityTransaction transaction;
 
+    @Override
     public void commit()
     {
         if(transaction.isActive()){
@@ -20,16 +21,19 @@ public abstract class AbstractEntityManagerContext implements EntityManagerComma
         }
     }
 
+    @Override
     public void begin()
     {
         transaction = getEntityManager().getTransaction();
         transaction.begin();
     }
 
+    @Override
     public void rollBack() {
         transaction.rollback();
     }
 
+    @Override
     public CommandContext getParentContext()
     {
         return parentContext;

@@ -20,6 +20,7 @@ public class CreateEntityResponseBuilder<T extends IBusinessObject<I>, I extends
         setEntityURLBuilder(entityURLBuilder);
     }
 
+    @Override
     public Response build(UriInfo uriInfo) {
         setStatusCode(Response.Status.CREATED);
         return Response.created(createLocation(uriInfo)).build();

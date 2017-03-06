@@ -30,6 +30,7 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
         entityTypes = typeList;
     }
 
+    @Override
     public List<Class<? extends IBusinessObject>> getEntityTypes() {
         return entityTypes;
     }

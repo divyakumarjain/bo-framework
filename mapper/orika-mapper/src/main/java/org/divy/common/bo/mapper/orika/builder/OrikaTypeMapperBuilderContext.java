@@ -90,10 +90,10 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
         private void configFieldMapping(List<MapperBuilderOption> fieldMapperBuilderOptions, FieldMapBuilder<S, T> boFieldMapBuilder) {
 
             resolveOption(fieldMapperBuilderOptions, OneWayMappingOption.class)
-                    .ifPresent((option) -> boFieldMapBuilder.aToB());
+                    .ifPresent(option -> boFieldMapBuilder.aToB());
 
             resolveOption(fieldMapperBuilderOptions, FieldExclude.class)
-                    .ifPresent((option) -> boFieldMapBuilder.exclude());
+                    .ifPresent(option -> boFieldMapBuilder.exclude());
         }
 
         private Property resolveFieldAProperty(List<MapperBuilderOption> fieldMapperBuilderOptions, String fieldName) {

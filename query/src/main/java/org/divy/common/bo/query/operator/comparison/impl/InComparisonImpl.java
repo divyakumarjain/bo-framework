@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class InComparisonImpl<ATTRIBUTE> implements org.divy.common.bo.query.operator.comparison.InComparison<ATTRIBUTE> {
+public class InComparisonImpl<A> implements org.divy.common.bo.query.operator.comparison.InComparison<A> {
 
-    private List<ATTRIBUTE> values;
+    private List<A> values;
 
-    @Override
-    public List<ATTRIBUTE> getValues() {
-        if(values==null)
-            values = new ArrayList<>();
-
-        return values;
-    }
-
-    public InComparisonImpl(List<ATTRIBUTE> values) {
+    public InComparisonImpl(List<A> values) {
         super();
         this.values = values;
     }
 
-    public InComparisonImpl(ATTRIBUTE[] values) {
+    public InComparisonImpl(A[] values) {
         super();
         this.values = Arrays.asList(values);
     }
 
     public InComparisonImpl() {
         super();
+    }
+
+    @Override
+    public List<A> getValues() {
+        if(values==null)
+            values = new ArrayList<>();
+
+        return values;
     }
 
 }

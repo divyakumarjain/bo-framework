@@ -32,7 +32,7 @@ Handling Search Request
 
 Requirement
 -----------
-1. API Endpoint for search entity
+1. API Ench entity
     * [X] Support Pure database approach
     * [ ] Support Hibernate Search
 2. Enhance API for search across relationships (Good Feature to have)

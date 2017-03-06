@@ -19,19 +19,20 @@ import java.util.UUID;
 @JsonAutoDetect(fieldVisibility=Visibility.NONE,getterVisibility=Visibility.NONE)
 public class MockEntity extends AbstractBusinessObject {
 
-    public MockEntity() {
-    }
-
-    public MockEntity(UUID uuid) {
-        super(uuid);
-    }
-
     private String name;
     private MockEntity parentEntity;
     // @JsonManagedReference
     private List<MockEntity> childEntities;
 
     private LocalDateTime dob;
+
+    public MockEntity() {
+        //noop
+    }
+
+    public MockEntity(UUID uuid) {
+        super(uuid);
+    }
 
     /**
      * update object with the copy

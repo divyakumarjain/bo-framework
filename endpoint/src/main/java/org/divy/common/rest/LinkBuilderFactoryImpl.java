@@ -40,14 +40,14 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
         String scheme = DEFAULT_SCHEME;
         String originalPath = StringUtils.EMPTY;
 
-        final HttpServletRequest request = HttpRequestContext.request();
-        if (request != null) {
-            scheme = StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),
+        final HttpServletRequest requestFromContext = HttpRequestContext.request();
+        if (requestFromContext != null) {
+            scheme = StringUtils.defaultIfBlank(requestFromContext.getHeader(HEADER_X_ORIGINAL_PROTO),
                     StringUtils.defaultIfBlank(requestUriInfo.getAbsolutePath().getScheme(),
-                            request.getScheme()));
-            originalPath = StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_BASE),
+                            requestFromContext.getScheme()));
+            originalPath = StringUtils.defaultIfBlank(requestFromContext.getHeader(HEADER_X_ORIGINAL_BASE),
                     StringUtils.defaultIfBlank(requestUriInfo.getBaseUri().toString(),
-                            request.getContextPath()));
+                            requestFromContext.getContextPath()));
         }
 
         return new LinkBuilder(scheme, getOriginalHost(requestUriInfo), originalPath);

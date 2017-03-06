@@ -1,25 +1,25 @@
 package org.divy.common.bo.query.operator.comparison.impl;
 
 
-public class EqualsComparisonImpl<ATTRIBUTE> implements org.divy.common.bo.query.operator.comparison.EqualsComparison<ATTRIBUTE> {
+public class EqualsComparisonImpl<A> implements org.divy.common.bo.query.operator.comparison.EqualsComparison<A> {
 
-    private ATTRIBUTE value;
+    private A value;
 
     public EqualsComparisonImpl() {
         super();
     }
 
-    public EqualsComparisonImpl(ATTRIBUTE value) {
+    public EqualsComparisonImpl(A value) {
         super();
         this.value = value;
     }
 
-    public void setValue(ATTRIBUTE value) {
+    public void setValue(A value) {
         this.value = value;
     }
 
     @Override
-    public ATTRIBUTE getValue() {
+    public A getValue() {
         return value;
     }
 

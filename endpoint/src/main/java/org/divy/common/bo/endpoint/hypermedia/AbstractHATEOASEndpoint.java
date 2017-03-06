@@ -34,12 +34,12 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>,
         I extends Serializable>
         extends AbstractCRUDEndpoint<R, I> {
 
-    public abstract IBOManager<E, I> getManager();
-
     @Inject
     public AbstractHATEOASEndpoint(LinkBuilderFactory linkBuilderFactory) {
         super(linkBuilderFactory);
     }
+
+    public abstract IBOManager<E, I> getManager();
 
     @PUT
     @Path("/{id}/{relation}")
@@ -89,20 +89,7 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>,
             throw new NotFoundException("Could not find the entity");
         }
 
-//        this.getAssociations().getAssociation(relation).
-
-        Object createdBo = null;
         URI createLocation = null;
-
-        //TODO Implement
-        //createdBo = doCreate(businessObject);
-
-        LinkBuilder linkBuilder = linkBuilderFactory.newBuilder();
-
-//        createLocation = linkBuilder
-//                .path(this.getClass())
-//                .path(this.getClass(),"read")
-//                .buildUri(identity(createdBo));
 
         return Response.created(createLocation).build();
     }

@@ -3,25 +3,25 @@ package org.divy.common.bo.query.operator.comparison.impl;
 import org.divy.common.bo.query.operator.comparison.LessThanComparison;
 
 
-public class LessThanComparisonImpl<ATTRIBUTE> implements LessThanComparison<ATTRIBUTE> {
+public class LessThanComparisonImpl<A> implements LessThanComparison<A> {
 
-    private ATTRIBUTE value;
+    private A value;
 
     public LessThanComparisonImpl() {
         super();
     }
 
-    public LessThanComparisonImpl(ATTRIBUTE value) {
+    public LessThanComparisonImpl(A value) {
         super();
         this.value = value;
     }
 
-    public void setValue(ATTRIBUTE value) {
+    public void setValue(A value) {
         this.value = value;
     }
 
     @Override
-    public ATTRIBUTE getValue() {
+    public A getValue() {
         return value;
     }
 }

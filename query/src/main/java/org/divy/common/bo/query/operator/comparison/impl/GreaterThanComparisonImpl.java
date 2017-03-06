@@ -3,25 +3,25 @@ package org.divy.common.bo.query.operator.comparison.impl;
 import org.divy.common.bo.query.operator.comparison.GreaterThanComparison;
 
 
-public class GreaterThanComparisonImpl<ATTRIBUTE> implements GreaterThanComparison<ATTRIBUTE> {
+public class GreaterThanComparisonImpl<A> implements GreaterThanComparison<A> {
 
-    private ATTRIBUTE value;
+    private A value;
 
     public GreaterThanComparisonImpl() {
         super();
     }
 
-    public GreaterThanComparisonImpl(ATTRIBUTE value) {
+    public GreaterThanComparisonImpl(A value) {
         super();
         this.value = value;
     }
 
-    public void setValue(ATTRIBUTE value) {
+    public void setValue(A value) {
         this.value = value;
     }
 
     @Override
-    public ATTRIBUTE getValue() {
+    public A getValue() {
         return value;
     }
 

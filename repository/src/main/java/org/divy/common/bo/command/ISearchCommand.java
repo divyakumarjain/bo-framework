@@ -9,7 +9,7 @@ import java.util.stream.Stream;
  *
  *
  */
-public interface ISearchCommand<E, I> extends ICommand {
+public interface ISearchCommand<E> extends ICommand {
     List<E> search(Query query);
     Stream<E> searchStream(Query query);
 }
