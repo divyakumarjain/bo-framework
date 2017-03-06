@@ -7,7 +7,7 @@ import org.divy.common.bo.endpoint.association.AbstractAssociations;
 import org.divy.common.bo.query.Query;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilder;
-import org.divy.common.rest.LinkBuilderFactoryImpl;
+import org.divy.common.rest.LinkBuilderFactory;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -37,7 +37,7 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>,
     public abstract IBOManager<E, I> getManager();
 
     @Inject
-    public AbstractHATEOASEndpoint(LinkBuilderFactoryImpl linkBuilderFactory) {
+    public AbstractHATEOASEndpoint(LinkBuilderFactory linkBuilderFactory) {
         super(linkBuilderFactory);
     }
 

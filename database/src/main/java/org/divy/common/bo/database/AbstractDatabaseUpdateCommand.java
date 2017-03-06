@@ -52,21 +52,25 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
         transactionBegin();
 
         E fromPersistence;
+        boolean isUpdateSuccess = false;
         try {
             fromPersistence = getEntityManager().getReference(
                     getEntityType(), id);
 
             merge(entity, fromPersistence);
 
-
             getEntityManager().merge(fromPersistence);
 
             fromPersistence.setLastUpdateTimestamp(LocalDateTime.now());
+            isUpdateSuccess = true;
+
         } catch (Exception e) {
             transactionRollback();
             throw e;
         } finally {
-            transactionCommit();
+            if(isUpdateSuccess){
+                transactionCommit();
+            }
         }
 
 

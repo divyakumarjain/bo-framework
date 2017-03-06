@@ -9,43 +9,32 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 public class BoBeansFactory implements DynamicBeanFactory<Class<? extends IBusinessObject>> {
 
+    private BeanNamingStrategy namingStrategy;
+
+    public BoBeansFactory(BeanNamingStrategy namingStrategy) {
+        this.namingStrategy = namingStrategy;
+    }
+
     @Override
     public void register(Class<? extends IBusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
-        beanDefinitionRegistry.registerBeanDefinition(calculateRepositoryId(type)
+        beanDefinitionRegistry.registerBeanDefinition(namingStrategy.calculateRepositoryId(type)
                 , BeanDefinitionBuilder.genericBeanDefinition(DefaultDatabaseRepository.class)
-                        .addConstructorArgReference(calculateCommandProviderId(type))
+                        .addConstructorArgReference(namingStrategy.calculateCommandProviderId(type))
                         .getBeanDefinition());
 
-        beanDefinitionRegistry.registerBeanDefinition(calculateCommandProviderId(type)
+        beanDefinitionRegistry.registerBeanDefinition(namingStrategy.calculateCommandProviderId(type)
                 , BeanDefinitionBuilder.genericBeanDefinition(DefaultDBCommandProvider.class)
                         .addConstructorArgValue("${persistentUnitName}")
                         .addConstructorArgValue(type)
-                        .addConstructorArgReference(calculateMergeMapperId(type))
+                        .addConstructorArgReference(namingStrategy.calculateMergeMapperId(type))
                         .getBeanDefinition());
 
 
 
-        beanDefinitionRegistry.registerBeanDefinition(calculateManagerId(type)
+        beanDefinitionRegistry.registerBeanDefinition(namingStrategy.calculateManagerId(type)
                 , BeanDefinitionBuilder.genericBeanDefinition(DefaultBOManager.class)
-                        .addConstructorArgReference(calculateRepositoryId(type))
+                        .addConstructorArgReference(namingStrategy.calculateRepositoryId(type))
                         .getBeanDefinition());
 
-    }
-
-
-    private String calculateManagerId(Class<? extends IBusinessObject> type) {
-        return calculatePrefix(type) + "Manager";
-    }
-
-    private String calculateCommandProviderId(Class<? extends IBusinessObject> type) {
-        return calculatePrefix(type) + "CommandProvider";
-    }
-
-    private String calculateRepositoryId(Class<? extends IBusinessObject> type) {
-        return calculatePrefix(type) + "Repository";
-    }
-
-    public String calculateMergeMapperId(Class<? extends IBusinessObject> type) {
-        return calculatePrefix(type) + "MergeMapper";
     }
 }

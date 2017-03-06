@@ -6,8 +6,6 @@ import org.divy.common.bo.context.HierarchicalCommandContext;
 import org.divy.common.bo.database.context.DatabaseContext;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
-import org.divy.common.bo.mapper.builder.MapperBuilder;
-import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -28,30 +26,6 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
     private Class<? extends ISearchCommand<E, I>> searchCommandType;
 
     private final IBOMapper<E, E> updateMapper;
-
-    public TypeBaseDBCommandProvider(String persistentUnitName,
-                                     Class<E> entityClass,
-                                     Class<? extends IGetCommand<E, I>> getCommandType,
-                                     Class<? extends IUpdateCommand<E, I>> updateCommandType,
-                                     Class<? extends IDeleteCommand<E, I>> deleteCommandType,
-                                     Class<? extends ICreateCommand<E>> createCommandType,
-                                     Class<? extends ISearchCommand<E, I>> searchCommandType,
-                                     MapperBuilder mapperBuilder) {
-
-        this(persistentUnitName
-                , entityClass
-                , getCommandType
-                , updateCommandType
-                , deleteCommandType
-                , createCommandType
-                , searchCommandType
-                , mapperBuilder
-                        .mapping(entityClass, entityClass)
-                        .field("lastUpdateTimestamp", FieldMapperOptions.oneWay())
-                        .and()
-                        .field("createTimestamp", FieldMapperOptions.oneWay())
-                        .build());
-    }
 
     public TypeBaseDBCommandProvider(String persistentUnitName,
                                      Class<E> entityClass,

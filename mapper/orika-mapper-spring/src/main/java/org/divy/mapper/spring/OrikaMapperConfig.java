@@ -1,6 +1,7 @@
 package org.divy.mapper.spring;
 
 import org.divy.common.bo.mapper.orika.builder.OrikaMapperBuilder;
+import org.divy.common.bo.spring.BeanNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,8 +14,8 @@ public class OrikaMapperConfig {
     }
 
     @Bean
-    public MapperBeansFactoryImpl mapperBeansFactory() {
-        return new MapperBeansFactoryImpl();
+    public MapperBeansFactoryImpl mapperBeansFactory(BeanNamingStrategy namingStrategy) {
+        return new MapperBeansFactoryImpl(namingStrategy);
     }
 
 }

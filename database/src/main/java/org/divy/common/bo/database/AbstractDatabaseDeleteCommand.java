@@ -29,18 +29,22 @@ public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>
     public E deleteById(I id)
     {
         transactionBegin();
+        boolean isDeleteSuccess = false;
         try {
             E entity = find(id);
 
             if (entity != null) {
                 getEntityManager().remove(entity);
+                isDeleteSuccess = true;
             }
             return entity;
         } catch (Exception e) {
             transactionRollback();
             throw e;
         } finally {
-            transactionCommit();
+            if(isDeleteSuccess) {
+                transactionCommit();
+            }
         }
     }
 

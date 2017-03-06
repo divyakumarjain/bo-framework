@@ -1,7 +1,10 @@
 package org.divy.bo.demos.spring;
 
 
+import org.divy.common.bo.database.BoEntityMetaDataProvider;
+import org.divy.common.bo.spring.BeanNamingStrategy;
 import org.divy.common.bo.spring.BoFrameworkSpringContextInitializer;
+import org.divy.common.bo.spring.endpoint.JerseyEndPointFactory;
 import org.divy.common.rest.LinkBuilderFactory;
 import org.divy.common.rest.LinkBuilderFactoryImpl;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,13 +19,13 @@ import java.util.HashMap;
 @SpringBootApplication
 @PropertySource( value = {"classpath:/application.properties"})
 @EnableAutoConfiguration
-public class SampleJerseyApplication extends SpringBootServletInitializer {
+public class SampleApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        HashMap<String, Object> defaults = new HashMap();
+        HashMap<String, Object> defaults = new HashMap<>();
         defaults.put("entityTypes", "org.divy.bo.demos.spring.greetings.Greeting");
-        new SampleJerseyApplication()
-                .configure(new SpringApplicationBuilder(SampleJerseyApplication.class)
+        new SampleApplication()
+                .configure(new SpringApplicationBuilder(SampleApplication.class)
                         .properties(defaults)
                         .initializers(new BoFrameworkSpringContextInitializer()))
                 .run(args);
@@ -33,4 +36,9 @@ public class SampleJerseyApplication extends SpringBootServletInitializer {
         return new LinkBuilderFactoryImpl();
     }
 
+    @Bean
+    public JerseyEndPointFactory endPointFactory(BoEntityMetaDataProvider metaDataProvider
+            , BeanNamingStrategy beanNamingStrategy) {
+        return new JerseyEndPointFactory(metaDataProvider, beanNamingStrategy);
+    }
 }

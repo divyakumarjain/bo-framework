@@ -22,6 +22,7 @@
         <module>spring-support</module>
         <module>demos</module>
         <module>integration</module>
+        <module>dynamic</module>
     </modules>
 
     <properties>
@@ -181,6 +182,11 @@
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-database</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-dynamic</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>

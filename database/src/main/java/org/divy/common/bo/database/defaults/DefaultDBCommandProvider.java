@@ -5,7 +5,6 @@ import org.divy.common.bo.command.*;
 import org.divy.common.bo.database.TypeBaseDBCommandProvider;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
-import org.divy.common.bo.mapper.builder.MapperBuilder;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -16,23 +15,6 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
 
     private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    public DefaultDBCommandProvider(String persistentUnitName,
-                                    Class<E> entityClass,
-                                    MapperBuilder mapperBuilder) {
-        //See below link for explanation of typecasting.
-        //http://stackoverflow.com/questions/30090242/java-lang-class-generics-and-wildcards
-        //http://stackoverflow.com/questions/26766704/cannot-convert-from-listlist-to-listlist
-
-        super(persistentUnitName
-                , entityClass
-                , (Class<? extends IGetCommand<E, I>>) DefaultDatabaseGetCommand.class
-                , (Class<? extends IUpdateCommand<E, I>>) DefaultDatabaseUpdateCommand.class
-                , (Class<? extends IDeleteCommand<E, I>>) DefaultDatabaseDeleteCommand.class
-                , (Class<? extends ICreateCommand<E>>) DefaultDatabaseCreateCommand.class
-                , (Class<? extends ISearchCommand<E, I>>) DefaultDatabaseSearchCommand.class
-                , mapperBuilder);
-    }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     public DefaultDBCommandProvider(String persistentUnitName,
@@ -44,11 +26,11 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
 
         super(persistentUnitName
                 , entityClass
-                , (Class<? extends IGetCommand<E, I>>) DefaultDatabaseGetCommand.class
-                , (Class<? extends IUpdateCommand<E, I>>) DefaultDatabaseUpdateCommand.class
-                , (Class<? extends IDeleteCommand<E, I>>) DefaultDatabaseDeleteCommand.class
-                , (Class<? extends ICreateCommand<E>>) DefaultDatabaseCreateCommand.class
-                , (Class<? extends ISearchCommand<E, I>>) DefaultDatabaseSearchCommand.class
+                , (Class<? extends IGetCommand<E, I>>) (Class<?>)DefaultDatabaseGetCommand.class
+                , (Class<? extends IUpdateCommand<E, I>>) (Class<?>)DefaultDatabaseUpdateCommand.class
+                , (Class<? extends IDeleteCommand<E, I>>) (Class<?>)DefaultDatabaseDeleteCommand.class
+                , (Class<? extends ICreateCommand<E>>) (Class<?>)DefaultDatabaseCreateCommand.class
+                , (Class<? extends ISearchCommand<E, I>>) (Class<?>)DefaultDatabaseSearchCommand.class
                 , updateMapper);
     }
 
