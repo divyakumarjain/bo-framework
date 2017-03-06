@@ -23,7 +23,7 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
     private Class<? extends IUpdateCommand<E, I>> updateCommandType;
     private Class<? extends IDeleteCommand<E, I>> deleteCommandType;
     private Class<? extends ICreateCommand<E>> createCommandType;
-    private Class<? extends ISearchCommand<E, I>> searchCommandType;
+    private Class<? extends ISearchCommand<E>> searchCommandType;
 
     private final IBOMapper<E, E> updateMapper;
 
@@ -33,7 +33,7 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
                                      Class<? extends IUpdateCommand<E, I>> updateCommandType,
                                      Class<? extends IDeleteCommand<E, I>> deleteCommandType,
                                      Class<? extends ICreateCommand<E>> createCommandType,
-                                     Class<? extends ISearchCommand<E, I>> searchCommandType,
+                                     Class<? extends ISearchCommand<E>> searchCommandType,
                                      IBOMapper<E, E> updateMapper) {
 
         context = new DatabaseContext(persistentUnitName);
@@ -89,12 +89,12 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         this.createCommandType = createCommandType;
     }
 
-    public Class<? extends ISearchCommand<E, I>> getSearchCommandType() {
+    public Class<? extends ISearchCommand<E>> getSearchCommandType() {
         return searchCommandType;
     }
 
     public void setSearchCommandType(
-            final Class<? extends ISearchCommand<E, I>> searchCommandType) {
+            final Class<? extends ISearchCommand<E>> searchCommandType) {
         this.searchCommandType = searchCommandType;
     }
 
@@ -203,13 +203,13 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
      */
     @SuppressWarnings("unchecked")
     @Override
-    public ISearchCommand<E, I> getSearchCommand() {
+    public ISearchCommand<E> getSearchCommand() {
 
         final EntityManagerCommandContext newContext = createContext();
 
-        ISearchCommand<E, I> returnSearchCommand;
+        ISearchCommand<E> returnSearchCommand;
 
-        returnSearchCommand = (ISearchCommand<E, I>) createCommand(
+        returnSearchCommand = (ISearchCommand<E>) createCommand(
                 searchCommandType, newContext);
 
         return returnSearchCommand;
