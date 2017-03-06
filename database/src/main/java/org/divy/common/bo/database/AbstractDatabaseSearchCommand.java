@@ -14,7 +14,7 @@ import org.divy.common.bo.query.Query;
 
 public abstract class AbstractDatabaseSearchCommand<E extends IBusinessObject<I>, I>
         extends AbstractDatabaseCommand<E, I>
-        implements ISearchCommand<E, I> {
+        implements ISearchCommand<E> {
 
     protected AbstractDatabaseSearchCommand(
             Class<E> typeParameterClass, EntityManagerCommandContext context)

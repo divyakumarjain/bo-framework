@@ -7,7 +7,7 @@ import org.divy.common.bo.database.AbstractBusinessObject;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime ;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +24,7 @@ public class MockEntity extends AbstractBusinessObject {
     // @JsonManagedReference
     private List<MockEntity> childEntities;
 
-    private LocalDateTime dob;
+    private OffsetDateTime  dob;
 
     public MockEntity() {
         //noop
@@ -112,11 +112,11 @@ public class MockEntity extends AbstractBusinessObject {
     }
 
 
-    public LocalDateTime getDob() {
+    public OffsetDateTime  getDob() {
         return dob;
     }
 
-    public void setDob(LocalDateTime dob) {
+    public void setDob(OffsetDateTime  dob) {
         this.dob = dob;
     }
 

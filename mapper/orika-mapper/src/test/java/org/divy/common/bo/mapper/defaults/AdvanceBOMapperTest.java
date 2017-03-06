@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime ;
 import java.util.*;
 
 import static org.hamcrest.Matchers.*;
@@ -76,11 +76,11 @@ public class AdvanceBOMapperTest {
     }
 
     @Test
-    public void testLocalDateTime() {
+    public void testOffsetDateTime () {
 
         MockEntity businessObject = new MockEntity();
         businessObject.setName("TestEntity");
-        final LocalDateTime dob = LocalDateTime.now();
+        final OffsetDateTime  dob = OffsetDateTime .now();
         businessObject.setDob(dob);
 
         Map<String, Object> representation = underTest.createFromBO(businessObject);

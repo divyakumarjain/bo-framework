@@ -7,7 +7,8 @@ import org.divy.common.bo.IBusinessObject;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime ;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@uuid")
@@ -15,13 +16,13 @@ import java.util.UUID;
 public abstract class AbstractBusinessObject implements IBusinessObject<UUID> {
 
     private UUID uuid;
-    private LocalDateTime createTimestamp;
-    private LocalDateTime lastUpdateTimestamp;
+    private OffsetDateTime createTimestamp;
+    private OffsetDateTime lastUpdateTimestamp;
 
     public AbstractBusinessObject() {
         uuid = UUID.randomUUID();
-        createTimestamp = LocalDateTime.now();
-        lastUpdateTimestamp = LocalDateTime.now();
+        createTimestamp = OffsetDateTime.now();
+        lastUpdateTimestamp = OffsetDateTime .now();
     }
 
     public AbstractBusinessObject(AbstractBusinessObject entity) {
@@ -48,19 +49,19 @@ public abstract class AbstractBusinessObject implements IBusinessObject<UUID> {
         this.uuid = uuid;
     }
 
-    public LocalDateTime getCreateTimestamp() {
+    public OffsetDateTime  getCreateTimestamp() {
         return createTimestamp;
     }
 
-    public LocalDateTime getLastUpdateTimestamp() {
+    public OffsetDateTime  getLastUpdateTimestamp() {
         return lastUpdateTimestamp;
     }
 
-    void setCreateTimestamp(LocalDateTime createTimestamp) {
+    void setCreateTimestamp(OffsetDateTime  createTimestamp) {
         this.createTimestamp = createTimestamp;
     }
 
-    void setLastUpdateTimestamp(LocalDateTime lastUpdateTimestamp) {
+    void setLastUpdateTimestamp(OffsetDateTime  lastUpdateTimestamp) {
         this.lastUpdateTimestamp = lastUpdateTimestamp;
     }
 

@@ -30,7 +30,7 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
                 , (Class<? extends IUpdateCommand<E, I>>) (Class<?>)DefaultDatabaseUpdateCommand.class
                 , (Class<? extends IDeleteCommand<E, I>>) (Class<?>)DefaultDatabaseDeleteCommand.class
                 , (Class<? extends ICreateCommand<E>>) (Class<?>)DefaultDatabaseCreateCommand.class
-                , (Class<? extends ISearchCommand<E, I>>) (Class<?>)DefaultDatabaseSearchCommand.class
+                , (Class<? extends ISearchCommand<E>>) (Class<?>)DefaultDatabaseSearchCommand.class
                 , updateMapper);
     }
 

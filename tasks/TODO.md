@@ -27,6 +27,13 @@ TODO
 2. Support PUT and POST method on the relationship endpoint.
 2. DAL Layer
 
+Security
+===
+* Action, Permission, Role Hierarchy
+* Allowed Action
+* Pluggable Security provider
+
+
 Handling Search Request
 =============================
 
@@ -71,5 +78,7 @@ Java 8
 
 Exception Handling
 ===
+* Exception to HTTP error code mapping
 
-+ Exception to HTTP error code mapping
+Guice Demo
+===

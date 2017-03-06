@@ -1,6 +1,6 @@
 package org.divy.common.bo.mapper.defaults;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime ;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,18 +11,18 @@ public class MockEntity {
     private MockEntity parentEntity;
     private List<MockEntity> childEntities;
     private UUID id;
-    private LocalDateTime dob;
+    private OffsetDateTime  dob;
 
     public MockEntity() {
         childEntities = new ArrayList<>();
         id = UUID.randomUUID();
     }
 
-    public LocalDateTime getDob() {
+    public OffsetDateTime  getDob() {
         return dob;
     }
 
-    public void setDob(LocalDateTime dob) {
+    public void setDob(OffsetDateTime  dob) {
         this.dob = dob;
     }
 

@@ -18,7 +18,7 @@ import org.divy.common.bo.mapper.builder.options.field.*;
 import org.divy.common.bo.mapper.builder.options.type.ChildTypeMapperOption;
 import org.divy.common.bo.mapper.defaults.AdvanceBOMapper;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime ;
 import java.util.*;
 import java.util.function.Function;
 
@@ -45,7 +45,7 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
 
     public MapperFacade buildMapperFacade() {
         final DefaultMapperFactory mapperFactory = new DefaultMapperFactory.Builder() .build();
-        mapperFactory.getConverterFactory().registerConverter(new PassThroughConverter(LocalDateTime.class));
+        mapperFactory.getConverterFactory().registerConverter(new PassThroughConverter(OffsetDateTime .class));
         mapperFactory.getConverterFactory().registerConverter(new PassThroughConverter(UUID.class));
 
         new MapperFacadeBuilder(mapperFactory)

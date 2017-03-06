@@ -3,7 +3,7 @@ package org.divy.common.bo.database;
 import org.divy.common.bo.command.ICreateCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime ;
 import java.util.UUID;
 
 public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessObject>
@@ -30,8 +30,8 @@ public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessOb
         boolean operationSuccess = false;
 
         try {
-            entity.setCreateTimestamp(LocalDateTime.now());
-            entity.setLastUpdateTimestamp(LocalDateTime.now());
+            entity.setCreateTimestamp(OffsetDateTime .now());
+            entity.setLastUpdateTimestamp(OffsetDateTime .now());
             getEntityManager().merge(entity);
             operationSuccess = true;
         } finally {

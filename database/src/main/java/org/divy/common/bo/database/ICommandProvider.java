@@ -13,5 +13,5 @@ public interface ICommandProvider<E, I>
 
     IUpdateCommand<E, I> getUpdateCommand();
 
-    ISearchCommand<E, I> getSearchCommand();
+    ISearchCommand<E> getSearchCommand();
 }

@@ -5,7 +5,7 @@ import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime ;
 import java.util.UUID;
 
 
@@ -61,7 +61,7 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
 
             getEntityManager().merge(fromPersistence);
 
-            fromPersistence.setLastUpdateTimestamp(LocalDateTime.now());
+            fromPersistence.setLastUpdateTimestamp(OffsetDateTime .now());
             isUpdateSuccess = true;
 
         } catch (Exception e) {

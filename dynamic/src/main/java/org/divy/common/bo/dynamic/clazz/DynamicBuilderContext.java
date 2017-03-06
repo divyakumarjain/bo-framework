@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
-public class DynamicBuilderContext<P extends DynamicBuilderContext> extends DynamicClassBuilder {
+public class DynamicBuilderContext<P extends DynamicBuilderContext> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicBuilderContext.class);
     private static ClassPool pool;
     private P parentContext;
