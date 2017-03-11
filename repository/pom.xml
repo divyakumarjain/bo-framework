@@ -14,5 +14,9 @@
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-query</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>exception-handling-core</artifactId>
+        </dependency>
     </dependencies>
 </project>

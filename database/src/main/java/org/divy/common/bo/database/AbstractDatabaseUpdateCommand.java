@@ -4,6 +4,7 @@ import org.divy.common.bo.command.IUpdateCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
+import org.divy.common.exception.impl.NotFoundException;
 
 import java.time.OffsetDateTime ;
 import java.util.UUID;
@@ -49,7 +50,6 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
 
     private E doUpdate(UUID id, E entity) {
 
-        transactionBegin();
 
         E fromPersistence;
         boolean isUpdateSuccess = false;
@@ -57,19 +57,24 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
             fromPersistence = getEntityManager().getReference(
                     getEntityType(), id);
 
+            if(fromPersistence == null) {
+                throw new NotFoundException("Could nt find " + getEntityType().getSimpleName() + " with id "+ id.toString());
+            }
+
             merge(entity, fromPersistence);
 
             getEntityManager().merge(fromPersistence);
 
+            transactionBegin();
+
             fromPersistence.setLastUpdateTimestamp(OffsetDateTime .now());
             isUpdateSuccess = true;
 
-        } catch (Exception e) {
-            transactionRollback();
-            throw e;
         } finally {
             if(isUpdateSuccess){
                 transactionCommit();
+            } else {
+                transactionRollback();
             }
         }
 

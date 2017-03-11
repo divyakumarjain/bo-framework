@@ -3,6 +3,7 @@ package org.divy.common.bo.database;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.command.IDeleteCommand;
 import org.divy.common.bo.database.context.EntityManagerCommandContext;
+import org.divy.common.exception.impl.NotFoundException;
 
 public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>, I>
         extends AbstractDatabaseCommand<E, I> implements
@@ -28,22 +29,23 @@ public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>
     @Override
     public E deleteById(I id)
     {
-        transactionBegin();
         boolean isDeleteSuccess = false;
         try {
             E entity = find(id);
 
-            if (entity != null) {
+            transactionBegin();
+            if(entity == null) {
+                throw new NotFoundException("Could nt find " + getEntityType().getSimpleName() + " with id "+ id.toString());
+            } else {
                 getEntityManager().remove(entity);
                 isDeleteSuccess = true;
             }
             return entity;
-        } catch (Exception e) {
-            transactionRollback();
-            throw e;
         } finally {
             if(isDeleteSuccess) {
                 transactionCommit();
+            } else  {
+                transactionRollback();
             }
         }
     }

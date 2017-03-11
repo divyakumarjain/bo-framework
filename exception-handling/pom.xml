@@ -8,10 +8,15 @@
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-root</artifactId>
         <version>0.0.3-SNAPSHOT</version>
-        <relativePath>..</relativePath>
     </parent>
-    <artifactId>bo-framework-integration</artifactId>
-    <name>bo-framework-integration</name>
-    <description>bo-framework-integration</description>
 
+    <groupId>org.divy</groupId>
+    <artifactId>exception-handling</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>exception-handling-core</module>
+        <module>exception-handling-spring</module>
+    </modules>
 </project>
