@@ -1,7 +1,6 @@
 package org.divy.bo.demos.spring.greetings;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.database.AbstractBusinessObject;
+import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -9,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @XmlRootElement
-public class Greeting extends AbstractBusinessObject {
+public class Greeting extends AbstractJPABusinessObject {
 
     private String greetingMessage;
 
@@ -36,20 +35,6 @@ public class Greeting extends AbstractBusinessObject {
         this.greetingMessage = greetingMessage;
     }
 
-
-    /**
-     * update object with the copy
-     *
-     * @param entity
-     */
-    @Override
-    public void update(IBusinessObject<UUID> entity) {
-        if(entity instanceof Greeting) {
-            this.setGreetingMessage(((Greeting) entity).getGreetingMessage());
-        } else {
-            throw new IllegalArgumentException("Expecting instance of Mock");
-        }
-    }
 
     @Override
     public boolean equals(Object o) {

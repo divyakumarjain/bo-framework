@@ -1,21 +1,19 @@
 package org.divy.common.rest.impl;
 
 
-import org.divy.common.bo.database.AbstractBusinessObject;
+import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.AbstractRepresentation;
 import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.rest.HATEOASMapper;
 import org.divy.common.rest.LinkBuilderFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public abstract class AbstractHATEOASMapper <E extends AbstractBusinessObject, R extends AbstractRepresentation<UUID>>
+public abstract class AbstractHATEOASMapper <E extends IBusinessObject<UUID>, R extends AbstractRepresentation<UUID>>
         implements HATEOASMapper<E, R> {
 
     private final MetaDataProvider metaDataProvider;
@@ -41,7 +39,7 @@ public abstract class AbstractHATEOASMapper <E extends AbstractBusinessObject, R
         return linkBuilderFactory;
     }
 
-    public IBOMapper<E, Map<String, Object>> getKeyValuePairMapper() {
+    private IBOMapper<E, Map<String, Object>> getKeyValuePairMapper() {
         return keyValuePairMapper;
     }
 
@@ -122,7 +120,7 @@ public abstract class AbstractHATEOASMapper <E extends AbstractBusinessObject, R
 
     protected abstract void doReadAssociations(R representation, E businessObject);
 
-    protected MetaDataProvider getMetaDataProvider() {
+    MetaDataProvider getMetaDataProvider() {
         return metaDataProvider;
     }
 }

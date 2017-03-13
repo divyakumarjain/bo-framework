@@ -1,7 +1,6 @@
 package org.divy.bo.demos.spring.cards.pages;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.database.AbstractBusinessObject;
+import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ import java.util.UUID;
 
 @Entity
 @XmlRootElement
-public class Page extends AbstractBusinessObject {
+public class Page extends AbstractJPABusinessObject {
 
     List<Section> sections;
 
@@ -23,15 +22,6 @@ public class Page extends AbstractBusinessObject {
 
     public Page(UUID uuid) {
         super(uuid);
-    }
-
-    @Override
-    public void update(IBusinessObject<UUID> entity) {
-        if (entity instanceof Page) {
-            this.setSections(((Page) entity).getSections());
-        } else {
-            throw new IllegalArgumentException("Expecting instance of GreetingCard");
-        }
     }
 
     @OneToMany(cascade = CascadeType.ALL)

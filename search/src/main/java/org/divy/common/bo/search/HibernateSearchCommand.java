@@ -8,11 +8,16 @@ import org.divy.common.bo.query.operator.Not;
 import org.divy.common.bo.query.operator.Operator;
 import org.divy.common.bo.query.operator.Or;
 import org.divy.common.bo.query.operator.comparison.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.query.dsl.BooleanJunction;
 import org.hibernate.search.query.dsl.QueryBuilder;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -33,10 +38,6 @@ public class HibernateSearchCommand<E, I> implements ISearchCommand<E> {
         this.context = context;
     }
 
-    private EntityManager getEntityManager()
-    {
-        return context.getEntityManager();
-    }
 
     private Class<? extends E> getEntityType() {
         return entityType;
@@ -48,18 +49,24 @@ public class HibernateSearchCommand<E, I> implements ISearchCommand<E> {
         if (query instanceof KeywordQuery) {
             KeywordQuery keywordQuery = (KeywordQuery) query;
 
-            getEntityManager().getTransaction().begin();
-
-            javax.persistence.Query jpaQuery = buildQuery(keywordQuery);
-
-            List resultList = jpaQuery.getResultList();
-
-            getEntityManager().getTransaction().commit();
-            getEntityManager().close();
-            return resultList;
+            try(FullTextSession fullTextSession = getFullTextEntityManager()) {
+                Transaction tx = fullTextSession.beginTransaction();
+                javax.persistence.Query jpaQuery = buildQuery(keywordQuery);
+                List resultList = jpaQuery.getResultList();
+                tx.commit();
+                return resultList;
+            }
         } else {
             throw new IllegalArgumentException("Only Keyword Queries are supported");
         }
+    }
+
+    private Session searchSession() {
+        return getSessionFactory().getCurrentSession();
+    }
+
+    private SessionFactory getSessionFactory() {
+        return new Configuration().buildSessionFactory();
     }
 
     private javax.persistence.Query buildQuery(KeywordQuery keywordQuery) {
@@ -138,11 +145,8 @@ public class HibernateSearchCommand<E, I> implements ISearchCommand<E> {
         }
     }
 
-    private FullTextEntityManager getFullTextEntityManager() {
-        if(fullTextEntityManager==null) {
-            fullTextEntityManager = org.hibernate.search.jpa.Search.getFullTextEntityManager(getEntityManager());
-        }
-        return fullTextEntityManager;
+    private FullTextSession getFullTextEntityManager() {
+        return Search.getFullTextSession(searchSession());
     }
 
     @Override

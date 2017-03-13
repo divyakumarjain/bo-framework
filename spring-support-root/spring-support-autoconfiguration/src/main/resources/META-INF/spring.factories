@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.divy.common.bo.spring.endpoint.EndpointConfig,\
+  org.divy.common.bo.spring.repository.RepositoryConfig
+
+org.springframework.context.ApplicationContextInitializer=org.divy.common.bo.spring.core.factory.BoFrameworkSpringContextInitializer

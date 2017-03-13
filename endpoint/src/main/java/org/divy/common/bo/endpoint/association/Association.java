@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.association;
 
+import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.business.IBOManager;
-import org.divy.common.bo.database.AbstractBusinessObject;
 import org.divy.common.bo.endpoint.association.builder.CreateBuilder;
 import org.divy.common.bo.endpoint.association.builder.UpdateBuilder;
 import org.divy.common.bo.endpoint.association.reader.ReaderBuilder;

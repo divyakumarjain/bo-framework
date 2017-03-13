@@ -10,7 +10,7 @@
     <modules>
         <module>metadata</module>
         <module>repository</module>
-        <module>database</module>
+        <module>database-root</module>
         <module>search</module>
         <module>endpoint</module>
         <module>test-mocks</module>
@@ -18,8 +18,7 @@
         <module>presentation</module>
         <module>businessapi</module>
         <module>query</module>
-        <module>templates</module>
-        <module>spring-support</module>
+        <module>spring-support-root</module>
         <module>demos</module>
         <module>integration</module>
         <module>dynamic</module>
@@ -68,16 +67,6 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>${org.springframework.boot.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -90,6 +79,11 @@
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-repository</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-database-core</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -114,7 +108,22 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
+                <artifactId>bo-framework-database-jpa</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
                 <artifactId>bo-framework-metadata</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-spring-jersey-endpoint-support</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-spring-database-jpa-support</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -124,7 +133,7 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-bo-mock-common</artifactId>
+                <artifactId>bo-framework-mock-common</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -149,35 +158,29 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-database-template</artifactId>
-                <version>0.0.3-SNAPSHOT</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
-                <artifactId>bo-framework-endpoint-template</artifactId>
-                <version>0.0.3-SNAPSHOT</version>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
                 <artifactId>bo-framework-businessapi</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
-
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-spring-support</artifactId>
+                <artifactId>bo-framework-spring-support-core</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
-
-
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>exception-handling-core</artifactId>
+                <artifactId>bo-framework-exception-handling-core</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-spring-core</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-spring-support-autoconfiguration</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>com.google.inject.extensions</groupId>
                 <artifactId>guice-servlet</artifactId>
@@ -216,11 +219,6 @@
                 <version>${jersey.version}</version>
             </dependency>
             <!--Hibernate/JPA-->
-            <dependency>
-                <groupId>org.hibernate.javax.persistence</groupId>
-                <artifactId>hibernate-jpa-2.1-api</artifactId>
-                <version>1.0.0.Final</version>
-            </dependency>
             <dependency>
                 <groupId>org.glassfish.web</groupId>
                 <artifactId>javax.el</artifactId>

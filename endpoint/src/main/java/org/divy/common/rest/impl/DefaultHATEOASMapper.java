@@ -1,6 +1,6 @@
 package org.divy.common.rest.impl;
 
-import org.divy.common.bo.database.AbstractBusinessObject;
+import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.rest.LinkBuilderFactory;

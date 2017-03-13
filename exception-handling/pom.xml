@@ -10,9 +10,8 @@
         <version>0.0.3-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.divy</groupId>
-    <artifactId>exception-handling</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <artifactId>bo-framework-exception-handling</artifactId>
+    <name>bo-framework-exception-handling</name>
     <packaging>pom</packaging>
 
     <modules>

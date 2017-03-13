@@ -2,8 +2,6 @@ package org.divy.common.bo.repository.test;
 
 import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.database.context.DatabaseContext;
-import org.divy.common.bo.database.context.EntityManagerCommandContext;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.divy.common.bo.test.TestBOCRUDBase;
@@ -18,18 +16,14 @@ import static org.junit.Assert.assertThat;
 public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> extends TestBOCRUDBase<E, I>
 {
 
-    protected IBORepository<E, I> boRepository;
-    protected EntityManagerCommandContext context;
-    /**
-     * @param testDataProvider
-     */
+    private IBORepository<E, I> boRepository;
+
     public TestBaseDBRepository(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
     }
 
     @Before
     public void before() {
-        context = new DatabaseContext(getPersistentUnitName());
 
         boRepository = createRepository();
 

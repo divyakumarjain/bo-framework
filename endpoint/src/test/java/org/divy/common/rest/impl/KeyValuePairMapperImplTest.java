@@ -1,12 +1,12 @@
 package org.divy.common.rest.impl;
 
-import org.divy.common.bo.database.BoEntityMetaDataProvider;
-import org.divy.common.bo.database.mock.MockEntity;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.options.type.MapperBuilderOptions;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
+import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.rest.impl.mock.MockEntity;
 import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,7 +14,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
@@ -24,7 +23,7 @@ import static org.mockito.Mockito.when;
 
 public class KeyValuePairMapperImplTest {
 
-    final BoEntityMetaDataProvider metaDataProvider = new BoEntityMetaDataProvider(Collections.singletonList(MockEntity.class));
+    private final MetaDataProvider metaDataProvider = mock(MetaDataProvider.class);
     private MapperBuilder mockMapperBuilder;
 
     @Before

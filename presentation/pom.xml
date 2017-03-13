@@ -30,6 +30,15 @@
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-endpoint</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-query</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
     </dependencies>
 
 </project>

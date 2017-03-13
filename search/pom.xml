@@ -17,11 +17,11 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-database</artifactId>
+            <artifactId>bo-framework-database-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-repository</artifactId>
+            <artifactId>bo-framework-query</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -12,5 +12,9 @@
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-repository</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-query</artifactId>
+        </dependency>
     </dependencies>
 </project>

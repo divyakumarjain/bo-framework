@@ -2,16 +2,16 @@ Exception Handling
 ===
 * [X] Standard UnChecked Exception
 * [X] Standard Checked Exception
-* [ ] Exception Handling and HTTP status reporting
+* [ ] Exception Handling and HTTP status reporting this needs to be done in Endpoint implementation
 
 Handling Entity Relationships
 =============================
 
 Requirement
 -----------
-1. API Endpoint for navigating relationships
-2. Management of relationship
-3. Persistence of relationship
+* [ ] API Endpoint for navigating relationships
+* [ ] CRD of relationships 
+* [ ] Update of relationships with entity merge and list merge
 
 
 Hypermedia Linking Relationships
@@ -38,6 +38,8 @@ Security
 * Action, Permission, Role Hierarchy
 * Allowed Action
 * Pluggable Security provider
+* Read allowed field based on roles
+* Update allowed field based on roles
 
 
 Handling Search Request
@@ -45,14 +47,13 @@ Handling Search Request
 
 Requirement
 -----------
-1. API Ench entity
+1. API Search entity
     * [X] Support Pure database approach
     * [ ] Support Hibernate Search
 2. Enhance API for search across relationships (Good Feature to have)
 
 Entity History
 ==============
-
 
 Requirement
 -----------
@@ -81,6 +82,7 @@ Guice Demo
 
 State Machine
 ===
+* Validation based on state
 
 Integration
 ===

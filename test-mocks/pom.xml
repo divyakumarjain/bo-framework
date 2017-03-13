@@ -12,7 +12,7 @@
     <description>bo-framework-test-mock-common</description>
     <packaging>pom</packaging>
     <modules>
-        <module>bo-mock-common</module>
+        <module>mock-common</module>
         <module>database-mock</module>
         <module>endpoint-mock</module>
     </modules>
