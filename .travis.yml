@@ -1,0 +1,8 @@
+language: java
+dist: trusty
+
+addons:
+    github_token:
+      secure: bf3d6fad516322e32ba7694937bc63871934a046
+script:
+    - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
