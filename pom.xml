@@ -33,7 +33,7 @@
         <glassfish-el.version>2.2.6</glassfish-el.version>
         <isRelease>false</isRelease>
         <sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
-        <sonar.host.url>http://192.168.99.100:9000</sonar.host.url>
+        <sonar.host.url>http://sonarqube.com</sonar.host.url>
 
         <!-- Make sure to update below dependencies as these are not updated from Spring Boot BOM-->
         <org.springframework.boot.version>1.5.2.RELEASE</org.springframework.boot.version>
@@ -133,11 +133,6 @@
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-mock-common</artifactId>
-                <version>0.0.3-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
-                <artifactId>bo-framework-database</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
