@@ -28,10 +28,6 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-database</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
             <artifactId>bo-framework-businessapi</artifactId>
         </dependency>
         <dependency>
