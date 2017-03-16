@@ -31,7 +31,9 @@ TODO
 	* [X] Relationship navigation using read method on entity
 	* [ ] Relationship navigation using method on managers.
 2. Support PUT and POST method on the relationship endpoint.
-2. DAL Layer
+3. DAL Layer
+4 [ ] Switching Config between Hypermedia and non Hypermedia Endpoint.
+    * [ ] Can be easily implemented for Spring boot auto-configuration
 
 Security
 ===

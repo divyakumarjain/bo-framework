@@ -8,12 +8,12 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-endpoint-mock</artifactId>
-    <name>bo-framework-endpoint-mock</name>
+
     <description>bo-framework-endpoint-mock</description>
     <dependencies>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-endpoint</artifactId>
+            <artifactId>bo-framework-endpoint-jersey</artifactId>
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
@@ -48,6 +48,10 @@
                     <artifactId>junit</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-database-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.inject.extensions</groupId>

@@ -8,7 +8,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-repository</artifactId>
-    <name>bo-framework-repository</name>
+
     <dependencies>
         <dependency>
             <groupId>org.divy</groupId>

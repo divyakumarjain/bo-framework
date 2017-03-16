@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>bo-framework-metadata</artifactId>
-    <name>bo-framework-metadata</name>
+
 
     <dependencies>
         <dependency>

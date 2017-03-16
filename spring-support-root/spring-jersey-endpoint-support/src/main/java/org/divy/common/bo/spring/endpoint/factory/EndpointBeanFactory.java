@@ -1,9 +1,9 @@
 package org.divy.common.bo.spring.endpoint.factory;
 
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.rest.DefaultHATEOASMapper;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.core.factory.DynamicBeanFactory;
-import org.divy.common.rest.impl.DefaultHATEOASMapper;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 

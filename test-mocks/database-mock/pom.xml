@@ -8,7 +8,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-database-mock</artifactId>
-    <name>bo-framework-database-mock</name>
+
     <dependencies>
         <dependency>
             <groupId>org.divy</groupId>

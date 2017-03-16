@@ -5,17 +5,16 @@
     <artifactId>bo-framework-root</artifactId>
     <version>0.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>bo-framework-root</name>
+
 
     <modules>
         <module>metadata</module>
         <module>repository</module>
         <module>database-root</module>
         <module>search</module>
-        <module>endpoint</module>
+        <module>endpoint-root</module>
         <module>test-mocks</module>
         <module>mapper</module>
-        <module>presentation</module>
         <module>businessapi</module>
         <module>query</module>
         <module>spring-support-root</module>
@@ -148,7 +147,12 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-endpoint</artifactId>
+                <artifactId>bo-framework-endpoint-core</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-endpoint-jersey</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>

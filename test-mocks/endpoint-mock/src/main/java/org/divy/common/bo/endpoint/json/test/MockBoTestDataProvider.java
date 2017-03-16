@@ -13,16 +13,16 @@ import java.util.List;
  *
  */
 public class MockBoTestDataProvider implements
-        ITestDataProvider<MockBoEndpoint.MockEntity> {
+        ITestDataProvider<MockBoJerseyEndpoint.MockEntity> {
 
     /* (non-Javadoc)
      * @see org.divy.common.bo.test.ITestDataProvider#modifyEntityWithTestData(java.lang.Object)
      */
     @Override
-    public void modifyEntityWithTestData(MockBoEndpoint.MockEntity businessObject) {
+    public void modifyEntityWithTestData(MockBoJerseyEndpoint.MockEntity businessObject) {
         businessObject.setName("updatedData1");
 
-        MockBoEndpoint.MockEntity childBusinessObject = getEntityInstance();
+        MockBoJerseyEndpoint.MockEntity childBusinessObject = getEntityInstance();
 
         childBusinessObject.setName("NewChildAddedDuringUpdate");
 
@@ -35,17 +35,17 @@ public class MockBoTestDataProvider implements
      * @see org.divy.common.bo.test.ITestDataProvider#fillTestDataSet1(java.lang.Object)
      */
     @Override
-    public void fillTestDataSet1(MockBoEndpoint.MockEntity businessObject) {
+    public void fillTestDataSet1(MockBoJerseyEndpoint.MockEntity businessObject) {
 
         businessObject.setName("data1");
 
-        MockBoEndpoint.MockEntity childBusinessObject = new MockBoEndpoint.MockEntity();
+        MockBoJerseyEndpoint.MockEntity childBusinessObject = new MockBoJerseyEndpoint.MockEntity();
 
         childBusinessObject.setName("child1");
 
         childBusinessObject.setParentEntity(businessObject);
 
-        List<MockBoEndpoint.MockEntity> childLists = new ArrayList<>();
+        List<MockBoJerseyEndpoint.MockEntity> childLists = new ArrayList<>();
 
         childLists.add(childBusinessObject);
 
@@ -57,16 +57,16 @@ public class MockBoTestDataProvider implements
      * @see org.divy.common.bo.test.ITestDataProvider#fillTestDataSet2(java.lang.Object)
      */
     @Override
-    public void fillTestDataSet2(MockBoEndpoint.MockEntity businessObject) {
+    public void fillTestDataSet2(MockBoJerseyEndpoint.MockEntity businessObject) {
         businessObject.setName("data2");
 
-        MockBoEndpoint.MockEntity childBusinessObject = new MockBoEndpoint.MockEntity();
+        MockBoJerseyEndpoint.MockEntity childBusinessObject = new MockBoJerseyEndpoint.MockEntity();
 
         childBusinessObject.setName("child2");
 
         childBusinessObject.setParentEntity(businessObject);
 
-        List<MockBoEndpoint.MockEntity> childLists = new ArrayList<>();
+        List<MockBoJerseyEndpoint.MockEntity> childLists = new ArrayList<>();
 
         childLists.add(childBusinessObject);
 
@@ -77,8 +77,8 @@ public class MockBoTestDataProvider implements
      * @see org.divy.common.bo.test.ITestDataProvider#getEntityInstance()
      */
     @Override
-    public MockBoEndpoint.MockEntity getEntityInstance() {
-        return new MockBoEndpoint.MockEntity();
+    public MockBoJerseyEndpoint.MockEntity getEntityInstance() {
+        return new MockBoJerseyEndpoint.MockEntity();
     }
 
     @Override

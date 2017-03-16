@@ -12,7 +12,6 @@
     </parent>
 
     <artifactId>bo-framework-database-core</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>

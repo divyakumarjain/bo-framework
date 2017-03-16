@@ -11,7 +11,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-integration</artifactId>
-    <name>bo-framework-integration</name>
+
     <description>bo-framework-integration</description>
 
 </project>

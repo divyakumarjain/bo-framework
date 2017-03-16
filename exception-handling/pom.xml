@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>bo-framework-exception-handling</artifactId>
-    <name>bo-framework-exception-handling</name>
+
     <packaging>pom</packaging>
 
     <modules>

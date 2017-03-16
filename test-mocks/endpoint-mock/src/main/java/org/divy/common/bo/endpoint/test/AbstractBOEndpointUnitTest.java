@@ -8,8 +8,8 @@ import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.AbstractBOEndpoint;
 import org.divy.common.bo.query.Query;
+import org.divy.common.bo.rest.LinkBuilderFactory;
 import org.divy.common.bo.test.ITestDataProvider;
-import org.divy.common.rest.LinkBuilderFactory;
 import org.junit.Before;
 
 import javax.inject.Inject;

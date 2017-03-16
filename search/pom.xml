@@ -8,7 +8,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-search</artifactId>
-    <name>bo-framework-search</name>
+
 
     <dependencies>
         <dependency>

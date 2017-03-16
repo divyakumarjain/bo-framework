@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-endpoint</artifactId>
+            <artifactId>bo-framework-endpoint-jersey</artifactId>
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>

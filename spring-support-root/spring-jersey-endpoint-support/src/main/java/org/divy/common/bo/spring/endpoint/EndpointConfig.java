@@ -5,8 +5,8 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.rest.LinkBuilderFactoryImpl;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.rest.LinkBuilderFactoryImpl;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration;
@@ -31,9 +31,9 @@ public class EndpointConfig implements Jackson2ObjectMapperBuilderCustomizer {
     }
 
     @Bean
-    public JerseyEndPointFactory endPointFactory(MetaDataProvider metaDataProvider
+    public JerseyHyperMediaEndPointFactory hyperMediaEndPointFactory(MetaDataProvider metaDataProvider
             , BeanNamingStrategy beanNamingStrategy) {
-        return new JerseyEndPointFactory(metaDataProvider, beanNamingStrategy);
+        return new JerseyHyperMediaEndPointFactory(metaDataProvider, beanNamingStrategy);
     }
 }
 

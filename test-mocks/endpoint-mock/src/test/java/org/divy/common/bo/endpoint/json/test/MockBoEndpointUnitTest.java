@@ -10,40 +10,40 @@ import org.divy.common.bo.endpoint.test.MockLinkBuilderFactory;
 
 import java.util.UUID;
 
-public class MockBoEndpointUnitTest extends AbstractBOEndpointUnitTest<MockBoEndpoint.MockEntity, UUID> {
+public class MockBoEndpointUnitTest extends AbstractBOEndpointUnitTest<MockBoJerseyEndpoint.MockEntity, UUID> {
 
     public MockBoEndpointUnitTest() {
         super(new MockBoTestDataProvider());
     }
 
     @Override
-    protected UUID getIdentifier(MockBoEndpoint.MockEntity mockEntity) {
+    protected UUID getIdentifier(MockBoJerseyEndpoint.MockEntity mockEntity) {
         return mockEntity.identity();
     }
 
     @Override
-    protected void extendedTestCreatedEntity(MockBoEndpoint.MockEntity mockEntity) {
+    protected void extendedTestCreatedEntity(MockBoJerseyEndpoint.MockEntity mockEntity) {
 
     }
 
     @Override
-    protected void extendedTestUpdatedEntity(MockBoEndpoint.MockEntity mockEntity) {
+    protected void extendedTestUpdatedEntity(MockBoJerseyEndpoint.MockEntity mockEntity) {
 
     }
 
     @Override
-    protected Class<? extends AbstractBOEndpoint<MockBoEndpoint.MockEntity, UUID>> getEndPointClass() {
-        return (Class<? extends AbstractBOEndpoint<MockBoEndpoint.MockEntity, UUID>>) MockBoEndpoint.class;
+    protected Class<? extends AbstractBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID>> getEndPointClass() {
+        return (Class<? extends AbstractBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID>>) MockBoJerseyEndpoint.class;
     }
 
     @Override
     protected AbstractBOEndpoint createEndpointInstance() {
-        return new MockBoEndpoint(new InMemoryBOManager<>(), new MockLinkBuilderFactory("http", "localhost:8080", ""));
+        return new MockBoJerseyEndpoint(new InMemoryBOManager<>(), new MockLinkBuilderFactory("http", "localhost:8080", ""));
     }
 
     @Override
-    protected TypeLiteral<AbstractBOEndpoint<MockBoEndpoint.MockEntity, UUID>> getEndpointTypeLiteral() {
-        return new TypeLiteral<AbstractBOEndpoint<MockBoEndpoint.MockEntity, UUID>>(){};
+    protected TypeLiteral<AbstractBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID>> getEndpointTypeLiteral() {
+        return new TypeLiteral<AbstractBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID>>(){};
     }
 
     @Override
@@ -51,17 +51,17 @@ public class MockBoEndpointUnitTest extends AbstractBOEndpointUnitTest<MockBoEnd
         return UUID.fromString(key);
     }
 
-    protected Class<MockBoEndpoint.MockEntity> getEntityClass() {
-        return MockBoEndpoint.MockEntity.class;
+    protected Class<MockBoJerseyEndpoint.MockEntity> getEntityClass() {
+        return MockBoJerseyEndpoint.MockEntity.class;
     }
 
-    protected TypeLiteral<IBOManager<MockBoEndpoint.MockEntity, UUID>> getManagerTypeLiteral() {
-        return RuntimeTypeLiteral.boManager(new TypeLiteral<MockBoEndpoint.MockEntity>() {
+    protected TypeLiteral<IBOManager<MockBoJerseyEndpoint.MockEntity, UUID>> getManagerTypeLiteral() {
+        return RuntimeTypeLiteral.boManager(new TypeLiteral<MockBoJerseyEndpoint.MockEntity>() {
         }, new TypeLiteral<UUID>() {
         });
     }
 
-    protected InMemoryBOManager<MockBoEndpoint.MockEntity, UUID> getMockManagerInstance() {
+    protected InMemoryBOManager<MockBoJerseyEndpoint.MockEntity, UUID> getMockManagerInstance() {
         return new InMemoryBOManager<>();
     }
 }

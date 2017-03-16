@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.test;
 
-import org.divy.common.rest.LinkBuilder;
-import org.divy.common.rest.LinkBuilderFactory;
+import org.divy.common.bo.rest.LinkBuilder;
+import org.divy.common.bo.rest.LinkBuilderFactory;
 
 import javax.ws.rs.core.UriInfo;
 
