@@ -1,7 +1,6 @@
 package org.divy.common.bo.dynamic;
 
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.annotation.ElementType;
@@ -144,21 +143,6 @@ public class DynamicClassBuilderTest {
 
         assertThat(instance, hasProperty("attribute1", is("attribute1")));
         assertThat(instance, hasProperty("attribute2", is("attribute2")));
-    }
-
-
-    @Test
-    @Ignore
-    public void subClassWithBaseClassAnnotation() {
-        final Optional<Class<?>> aSubClass = DynamicClassBuilder.createSubClass(BaseClass.class)
-                .build();
-
-        assertThat(aSubClass.get(), both(typeCompatibleWith(BaseClass.class)).and(notNullValue()));
-
-        assertThat(aSubClass.get().getAnnotation(ExistingAnnotation.class), notNullValue());
-
-        assertThat(aSubClass.get().getAnnotation(ExistingAnnotation.class)
-                .value(), is("ExistingValue"));
     }
 
     @ExistingAnnotation("ExistingValue")

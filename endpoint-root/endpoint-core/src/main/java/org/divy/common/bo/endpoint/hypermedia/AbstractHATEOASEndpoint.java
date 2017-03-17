@@ -73,10 +73,12 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>, R ex
         return Response.created(createLocation).build();
     }
 
+    @Override
     protected String identity(R representation) {
         return representation.identity().toString();
     }
 
+    @Override
     protected R doRead(I id) {
         E businessObject = getManager().get(id);
 
@@ -87,23 +89,28 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>, R ex
         return mapFromBO(businessObject);
     }
 
+    @Override
     protected R doCreate(R representation) {
         E createdBusinessObject = getManager().create(mapToBO(representation));
         return mapFromBO(createdBusinessObject);
     }
 
+    @Override
     protected R doUpdate(I id, R representation) {
         return mapFromBO(getManager().update(id, mapToBO(representation)));
     }
 
+    @Override
     protected void doDelete(R representation) {
         getManager().delete(mapToBO(representation));
     }
 
+    @Override
     protected R doDelete(I id) {
         return mapFromBO(getManager().deleteById(id));
     }
 
+    @Override
     protected Collection<R> doList() {
         Collection<E> boList = getManager().list();
 
@@ -114,6 +121,7 @@ public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>, R ex
         return getRepresentationMapper().createRepresentationFromBO(resultList);
     }
 
+    @Override
     protected Collection<R> doSearch(Query query) {
         Collection<E> boList = getManager().search(query);
 

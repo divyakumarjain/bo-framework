@@ -23,9 +23,18 @@ public class MockBoJerseyEndpoint extends AbstractBOJerseyEndpoint<MockBoJerseyE
     }
 
     @XmlRootElement
-    static public class MockEntity extends AbstractBusinessObject {
+    public static class MockEntity extends AbstractBusinessObject {
+
+        private String name;
+
+        private int integerAttribute;
+
+        private MockEntity parentEntity;
+
+        private List<MockEntity> childEntities;
 
         public MockEntity() {
+            //Noop Constructor
         }
 
         public MockEntity(UUID uuid) {
@@ -37,17 +46,10 @@ public class MockBoJerseyEndpoint extends AbstractBOJerseyEndpoint<MockBoJerseyE
          *
          * @see org.divy.common.bo.IBusinessObject#getIdentity()
          */
+        @Override
         public UUID identity() {
             return getUuid();
         }
-
-        private String name;
-
-        private int integerAttribute;
-
-        private MockEntity parentEntity;
-
-        private List<MockEntity> childEntities;
 
 
         /**

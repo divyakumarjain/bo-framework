@@ -35,18 +35,21 @@ public class DynamicMethodBuilderContext<T extends DynamicMethodBuilderContext> 
     }
 
     public void doBuild(CtClass newClass) {
-        try {
-            CtMethod method = CtNewMethod.make(getMemberType()
-                    , getMemberName()
-                    , getParameters()
-                    , getExceptions()
-                    , getBody()
-                    , newClass);
-            newClass.addMethod(method);
-            doBuild(method);
-        } catch (CannotCompileException e) {
-            LOGGER.error("Could not add method to the class", e);
-        }
+
+            getMemberType().ifPresent(type -> {
+                try {
+                    CtMethod method = CtNewMethod.make( type
+                            , getMemberName()
+                            , getParameters()
+                            , getExceptions()
+                            , getBody()
+                            , newClass);
+                    newClass.addMethod(method);
+                    doBuild(method);
+                } catch (CannotCompileException e) {
+                    LOGGER.error("Could not add method to the class", e);
+                }
+            });
     }
 
     protected void doBuild(CtBehavior behavior) {

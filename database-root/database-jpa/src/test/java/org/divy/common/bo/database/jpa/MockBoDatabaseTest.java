@@ -4,16 +4,12 @@ import org.divy.common.bo.IBORepository;
 import org.divy.common.bo.database.jpa.mock.MockBODBRepository;
 import org.divy.common.bo.database.jpa.mock.MockEntity;
 import org.divy.common.bo.repository.test.TestBaseDBRepository;
-import org.junit.Ignore;
 
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
-@Ignore
-//TODO
-//FIXME
 public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,UUID> {
 
     public MockBoDatabaseTest() {

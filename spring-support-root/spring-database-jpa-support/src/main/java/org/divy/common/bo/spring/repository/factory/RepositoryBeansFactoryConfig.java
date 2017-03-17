@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class RepositoryBeansFactoryConfig {
 
     @Bean
-    public RepositoryBeansFactory RepositoryBeansFactory(BeanNamingStrategy namingStrategy) {
+    public RepositoryBeansFactory repositoryBeansFactory(BeanNamingStrategy namingStrategy) {
         return new RepositoryBeansFactory(namingStrategy);
     }
 }

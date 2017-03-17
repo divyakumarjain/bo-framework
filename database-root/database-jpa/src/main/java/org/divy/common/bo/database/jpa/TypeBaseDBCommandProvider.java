@@ -7,6 +7,9 @@ import org.divy.common.bo.mapper.IBOMapper;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ *@deprecated Use Dependency injection instead of CommandProvider for Command Injection
+ */
 @Deprecated
 public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         implements ICommandProvider<E, I>
@@ -115,7 +118,9 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         }
     }
 
-    protected Object createCommand(Class<? extends IUpdateCommand<E, I>> updateCommandType, EntityManagerCommandContext newContext, IBOMapper<E, E> updateMapper) {
+    protected Object createCommand(Class<? extends IUpdateCommand<E, I>> updateCommandType
+            , EntityManagerCommandContext newContext
+            , IBOMapper<E, E> updateMapper) {
         try
         {
             if (updateCommandType == null) {
@@ -123,7 +128,7 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
             }
             return updateCommandType.getConstructor(EntityManagerCommandContext.class
                     , IBOMapper.class)
-                    .newInstance(context, updateMapper);
+                    .newInstance(newContext, updateMapper);
 
         } catch (InstantiationException |IllegalAccessException | IllegalArgumentException
                 |SecurityException |InvocationTargetException |NoSuchMethodException e)

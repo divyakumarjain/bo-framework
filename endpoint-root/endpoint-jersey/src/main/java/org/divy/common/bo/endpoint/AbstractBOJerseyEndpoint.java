@@ -36,6 +36,7 @@ public abstract class AbstractBOJerseyEndpoint<E extends IBusinessObject<I>, I e
     @Path("/{entityId}")
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
+    @Override
     public final Response update(@NotNull @PathParam("entityId") I id, @NotNull E businessObject,
                                  @Context UriInfo uriInfo) {
 
@@ -45,6 +46,7 @@ public abstract class AbstractBOJerseyEndpoint<E extends IBusinessObject<I>, I e
     @DELETE
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("/{id}")
+    @Override
     public final Response delete(@NotNull @PathParam("id") I id,
                                  @Context UriInfo uriInfo) {
 
@@ -52,18 +54,11 @@ public abstract class AbstractBOJerseyEndpoint<E extends IBusinessObject<I>, I e
 
     }
 
-    @GET
-    @Produces({ MediaType.APPLICATION_JSON })
-    @Consumes({ MediaType.APPLICATION_JSON })
-    public final Response list(@Context UriInfo uriInfo) {
-        return super.list(uriInfo);
-
-    }
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @Path("/search")
+    @Override
     public final Response search(@NotNull Query query,
                                  @Context UriInfo uriInfo) {
         return super.search(query, uriInfo);
@@ -71,7 +66,17 @@ public abstract class AbstractBOJerseyEndpoint<E extends IBusinessObject<I>, I e
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Override
+    public final Response list(@Context UriInfo uriInfo) {
+        return super.list(uriInfo);
+
+    }
+
+    @GET
+    @Produces({ MediaType.APPLICATION_JSON })
     @Path("/{id}")
+    @Override
     public final Response read(@NotNull @PathParam("id") I id,
                                @Context UriInfo uriInfo) {
         return super.read(id, uriInfo);

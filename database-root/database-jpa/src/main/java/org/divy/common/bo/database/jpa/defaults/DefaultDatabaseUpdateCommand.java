@@ -36,6 +36,6 @@ public class DefaultDatabaseUpdateCommand<E extends AbstractJPABusinessObject>
 
     @Override
     protected E getReference(UUID id) {
-        return context.getEntityManager().getReference(getEntityType(), id);
+        return context.getEntityManager().find(getEntityType(), id);
     }
 }

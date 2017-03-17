@@ -67,7 +67,7 @@ public class BoFrameworkSpringContext {
             metaDataProviderClass = Class.forName(className);
             return Optional.of((MetaDataProvider)metaDataProviderClass.getConstructor(List.class).newInstance(typeList));
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-            LOGGER.warn("Could not load Meta data provider " + className);
+            LOGGER.warn("Could not load Meta data provider " + className, e);
             return Optional.empty();
         }
     }

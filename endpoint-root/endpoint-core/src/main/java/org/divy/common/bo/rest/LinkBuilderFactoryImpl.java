@@ -2,13 +2,18 @@ package org.divy.common.bo.rest;
 
 import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.http.HttpRequestContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.UriInfo;
+import java.util.Optional;
 
 
 public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LinkBuilderFactoryImpl.class);
 
     @Inject
     private HttpServletRequest request;
@@ -54,40 +59,24 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
     }
 
     private String getOriginalHost(UriInfo requestUriInfo) {
-        String host = DEFAULT_HOST;
-
-        final HttpServletRequest request = HttpRequestContext.request();
-        if (request != null) {
-            String originalHostHeader = request.getHeader(HEADER_X_ORIGINAL_HOST);
-            if (StringUtils.isBlank(originalHostHeader)) {
-                String hostHeader = request.getHeader(HEADER_HOST);
-                if (StringUtils.isBlank(hostHeader)) {
-                    String portSuffix = request.getServerPort() == LinkBuilder.DEFAULT_HTTP_PORT ? "" : ":" + request.getServerPort();
-                    host = request.getServerName() + portSuffix;
-                }
-                else {
-                    host = hostHeader;
-                }
-            }
-            else {
-                host = originalHostHeader;
-            }
-        }
-
-        return host;
+        LOGGER.debug("Resolving Host for the URL" + requestUriInfo.getAbsolutePath().toString());
+        return resolveHost(HttpRequestContext.request()).orElse(DEFAULT_HOST);
     }
 
-    public String getOriginalHost() {
-        String host = DEFAULT_HOST;
 
-        final HttpServletRequest request = HttpRequestContext.request();
-        if (request != null) {
-            String originalHostHeader = request.getHeader(HEADER_X_ORIGINAL_HOST);
+    public String getOriginalHost() {
+        return resolveHost(HttpRequestContext.request()).orElse(DEFAULT_HOST);
+    }
+
+    private Optional<String> resolveHost(HttpServletRequest currentRequest) {
+        String host = null;
+        if (currentRequest != null) {
+            String originalHostHeader = currentRequest.getHeader(HEADER_X_ORIGINAL_HOST);
             if (StringUtils.isBlank(originalHostHeader)) {
-                String hostHeader = request.getHeader(HEADER_HOST);
+                String hostHeader = currentRequest.getHeader(HEADER_HOST);
                 if (StringUtils.isBlank(hostHeader)) {
-                    String portSuffix = request.getServerPort() == LinkBuilder.DEFAULT_HTTP_PORT ? "" : ":" + request.getServerPort();
-                    host = request.getServerName() + portSuffix;
+                    String portSuffix = currentRequest.getServerPort() == LinkBuilder.DEFAULT_HTTP_PORT ? "" : ":" + currentRequest.getServerPort();
+                    host = currentRequest.getServerName() + portSuffix;
                 }
                 else {
                     host = hostHeader;
@@ -97,7 +86,6 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
                 host = originalHostHeader;
             }
         }
-
-        return host;
+        return Optional.of(host);
     }
 }

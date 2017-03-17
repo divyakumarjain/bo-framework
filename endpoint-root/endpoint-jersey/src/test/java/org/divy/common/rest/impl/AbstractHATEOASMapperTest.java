@@ -35,10 +35,10 @@ public class AbstractHATEOASMapperTest {
 class TestHATEOASMapperMock extends AbstractHATEOASMapper<MockEntity, MockRepresentation> {
 
     TestHATEOASMapperMock(KeyValuePairMapper keyValuePairMapper, LinkBuilderFactory linkBuilderFactory, MetaDataProvider metaDataProvider) {
-        super(MockEntity.class
-                , MockRepresentation.class
+        super(MockRepresentation.class
                 , keyValuePairMapper
-                , linkBuilderFactory, metaDataProvider);
+                , linkBuilderFactory
+                , metaDataProvider);
     }
 
     @Override

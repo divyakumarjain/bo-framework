@@ -18,5 +18,6 @@ public class NotAuthorizedException extends UncheckedException {
     }
 
     public NotAuthorizedException() {
+        super();
     }
 }
