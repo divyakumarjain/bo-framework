@@ -1,7 +1,6 @@
 package org.divy.common.bo.endpoint.hypermedia;
 
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 
@@ -29,8 +28,6 @@ public abstract class AbstractHATEOASJerseyEndpoint<E extends IBusinessObject<I>
     public AbstractHATEOASJerseyEndpoint(LinkBuilderFactory linkBuilderFactory) {
         super(linkBuilderFactory);
     }
-
-    public abstract IBOManager<E, I> getManager();
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON})

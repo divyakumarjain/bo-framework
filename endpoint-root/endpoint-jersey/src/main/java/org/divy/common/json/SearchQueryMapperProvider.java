@@ -25,12 +25,6 @@ public class SearchQueryMapperProvider implements ContextResolver<ObjectMapper>{
     }
 
     protected ObjectMapper createContext() {
-
-//        mapper.registerModule(new JaxbAnnotationModule());
-//        Hibernate4Module module = new Hibernate4Module();
-//        module.configure(Feature.FORCE_LAZY_LOADING, true);
-//        mapper.registerModule(module);
-//        mapper.registerModule(new SearchQueryModule());
         return new ObjectMapper();
     }
 

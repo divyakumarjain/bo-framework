@@ -17,16 +17,12 @@ public abstract class AbstractHATEOASMapper <E extends IBusinessObject<UUID>, R 
     private final MetaDataProvider metaDataProvider;
     private final LinkBuilderFactory linkBuilderFactory;
     private final Class<R> representationType;
-    private final Class<E> businessObjectType;
-
     private final IBOMapper<E, Map<String, Object>> keyValuePairMapper;
 
-    public AbstractHATEOASMapper(Class<E> businessObjectType
-                                 , Class<R> representationType
+    public AbstractHATEOASMapper(Class<R> representationType
                                  , IBOMapper<E, Map<String, Object>> keyValuePairMapper
                                  , LinkBuilderFactory linkBuilderFactory
                                  , MetaDataProvider metaDataProvider) {
-        this.businessObjectType = businessObjectType;
         this.representationType = representationType;
         this.linkBuilderFactory = linkBuilderFactory;
         this.metaDataProvider = metaDataProvider;
@@ -76,7 +72,7 @@ public abstract class AbstractHATEOASMapper <E extends IBusinessObject<UUID>, R 
         try {
             return this.representationType.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException("Representation type " + representationType.getName() + " should have public default constructor", e);
         }
     }
 

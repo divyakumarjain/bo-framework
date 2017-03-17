@@ -13,21 +13,21 @@ import java.util.stream.Collectors;
 
 public class JPACriteriaQueryBuilder<E> {
     private final EntityManager entityManager;
-    private final Class<? extends E> entityType;
+    private final Class<E> entityType;
 
 
-    public JPACriteriaQueryBuilder(EntityManager entityManager, Class<? extends E> entityType) {
+    public JPACriteriaQueryBuilder(EntityManager entityManager, Class<E> entityType) {
         this.entityManager = entityManager;
         this.entityType = entityType;
     }
 
-    public CriteriaQuery<? extends E> createCriteriaQuery(AttributeQuery query) {
+    public CriteriaQuery<E> createCriteriaQuery(AttributeQuery query) {
 
         CriteriaBuilder criteriaBuilder = this.entityManager.getCriteriaBuilder();
 
-        CriteriaQuery<? extends E> criteriaQuery = criteriaBuilder.createQuery(entityType);
+        CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(entityType);
 
-        Root<? extends E> entityRoot = criteriaQuery.from(entityType);
+        Root<E> entityRoot = criteriaQuery.from(entityType);
 
         if (query != null && !query.isEmpty()) {
 

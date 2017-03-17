@@ -5,7 +5,7 @@
     <artifactId>bo-framework-root</artifactId>
     <version>0.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
-
+    <name>Business Object Framework</name>
 
     <modules>
         <module>metadata</module>

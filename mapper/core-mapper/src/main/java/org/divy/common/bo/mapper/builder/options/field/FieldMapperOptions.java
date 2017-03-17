@@ -5,7 +5,7 @@ import org.divy.common.bo.mapper.builder.options.OneWayMappingOption;
 
 public class FieldMapperOptions {
 
-    private FieldMapperOptions(){};
+    private FieldMapperOptions(){}
     public static MapperBuilderOption oneWay() {
         return new OneWayMappingOption();
     }

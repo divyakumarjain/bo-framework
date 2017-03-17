@@ -8,11 +8,11 @@ public class ResponseEntityBuilder<T> {
     T entity;
     private Status statusCode;
 
-    public ResponseEntityBuilder(T entity) {
+    ResponseEntityBuilder(T entity) {
         setEntity(entity);
     }
 
-    protected ResponseEntityBuilder() {
+    ResponseEntityBuilder() {
     }
 
     public Response build(){

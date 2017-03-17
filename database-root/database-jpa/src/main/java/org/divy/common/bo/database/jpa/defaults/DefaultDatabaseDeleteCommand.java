@@ -21,7 +21,7 @@ public class DefaultDatabaseDeleteCommand<E extends IBusinessObject<I>, I>
 
     @Override
     protected E getReference(Object identity) {
-        return this.context.getEntityManager().getReference(getEntityType(), identity);
+        return this.context.getEntityManager().find(getEntityType(), identity);
     }
 
     @Override

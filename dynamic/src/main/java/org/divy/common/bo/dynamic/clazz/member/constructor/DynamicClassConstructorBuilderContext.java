@@ -66,7 +66,7 @@ public class DynamicClassConstructorBuilderContext extends DynamicMethodBuilderC
         try {
             CtConstructor constructor = CtNewConstructor.make(getParameters()
                     , getExceptions()
-                    , getBody()
+                    , getConstructorBody()
                     , newClass);
             constructor.setModifiers(Modifier.PUBLIC);
             newClass.addConstructor(constructor);
@@ -78,7 +78,7 @@ public class DynamicClassConstructorBuilderContext extends DynamicMethodBuilderC
         }
     }
 
-    private String getBody() {
+    private String getConstructorBody() {
         return "{" + createSuperBlock() +
                 createFieldInitializeBlock() +
                 body +

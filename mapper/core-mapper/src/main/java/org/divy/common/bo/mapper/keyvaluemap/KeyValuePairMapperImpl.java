@@ -10,7 +10,7 @@ import org.divy.common.bo.mapper.builder.options.type.MapperBuilderOptions;
 import org.divy.common.bo.metadata.FieldMetaData;
 import org.divy.common.bo.metadata.MetaDataProvider;
 
-import java.time.OffsetDateTime ;
+import java.time.OffsetDateTime;
 import java.util.*;
 
 public class KeyValuePairMapperImpl<E extends IBusinessObject> implements KeyValuePairMapper<E> {
@@ -28,7 +28,10 @@ public class KeyValuePairMapperImpl<E extends IBusinessObject> implements KeyVal
             , MapperBuilder mapperBuilder
             , MetaDataProvider metaDataProvider) {
 
-        final TypeMapperBuilderContext<E, Map<String, Object>> typeMapperBuilderContext = populateTypeMapperBuilderContext(businessObjectType, mapperBuilder, metaDataProvider);
+        final TypeMapperBuilderContext<E, Map<String, Object>> typeMapperBuilderContext
+                = populateTypeMapperBuilderContext(businessObjectType
+                , mapperBuilder
+                , metaDataProvider);
 
         mapper = typeMapperBuilderContext
                 .buildMapper();

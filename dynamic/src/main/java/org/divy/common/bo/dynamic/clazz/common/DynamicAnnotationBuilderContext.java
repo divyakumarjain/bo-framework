@@ -126,11 +126,10 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
     }
 
     private <T> T[] ensureArrayLength(T[] originalArray, int length) {
-        T[] newArray = null;
         if(originalArray.length <= length) {
-            newArray = Arrays.copyOf(originalArray, length);
+            return Arrays.copyOf(originalArray, length);
         }
-        return newArray;
+        return originalArray;
     }
 
     public void doBuild(CtBehavior behavior) {

@@ -45,20 +45,19 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
 
 
     private Optional<Class<?>> buildEndPointClass(Class<? extends IBusinessObject> typeClass
-            , String value
-            , Class<?> implementationClass, String className) {
+            , String apiPath
+            , Class<?> implementationClass
+            , String className) {
 
         return DynamicClassBuilder.createClass(className)
                 .subClass(implementationClass)
                     .addAnnotation(javax.ws.rs.Path.class)
-                        .value(value)
+                        .value(apiPath)
                         .and()
                 .addConstructor()
                     .addAnnotation(Autowired.class)
                         .and()
                     .addAnnotation(Inject.class)
-                        .and()
-                    .superValue(typeClass)
                         .and()
                     .superParam(IBOManager.class)
                         .addAnnotation(Qualifier.class)

@@ -5,6 +5,8 @@ import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
 import org.divy.common.bo.dynamic.clazz.MemberVisibility;
 import org.divy.common.bo.dynamic.clazz.common.DynamicAnnotatableBuilderContext;
 
+import java.util.Optional;
+
 public abstract class DynamicMemberBuilderContext<T extends DynamicMemberBuilderContext>
         extends DynamicAnnotatableBuilderContext <T, DynamicClassBuilderContext> {
 
@@ -39,8 +41,8 @@ public abstract class DynamicMemberBuilderContext<T extends DynamicMemberBuilder
         return methodVisibility;
     }
 
-    protected CtClass getMemberType() {
-        return getCtClass(memberType).get();
+    protected Optional<CtClass> getMemberType() {
+        return getCtClass(memberType);
     }
 
 }

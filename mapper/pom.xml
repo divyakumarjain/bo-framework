@@ -9,7 +9,6 @@
     <artifactId>bo-framework-mapper</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>dozer-mapper</module>
         <module>orika-mapper</module>
         <module>core-mapper</module>
         <module>orika-mapper-spring</module>

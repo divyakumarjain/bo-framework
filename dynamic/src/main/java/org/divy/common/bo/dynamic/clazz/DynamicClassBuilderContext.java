@@ -78,7 +78,7 @@ public class DynamicClassBuilderContext
         this.constructors.forEach(constructorBuilderContext -> constructorBuilderContext.doBuild(newClass));
     }
 
-    private String getClassName() {
+    String getClassName() {
         return className;
     }
 

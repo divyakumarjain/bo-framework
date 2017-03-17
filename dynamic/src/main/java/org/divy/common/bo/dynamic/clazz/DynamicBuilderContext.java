@@ -26,7 +26,7 @@ public class DynamicBuilderContext<P extends DynamicBuilderContext> {
         }
     }
 
-    static protected ClassPool getClassPool() {
+    protected static ClassPool getClassPool() {
         if (pool == null) {
             pool = ClassPool.getDefault();
         }

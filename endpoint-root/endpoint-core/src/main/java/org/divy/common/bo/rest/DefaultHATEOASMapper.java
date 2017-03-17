@@ -11,13 +11,11 @@ import java.util.UUID;
 public class DefaultHATEOASMapper<E extends IBusinessObject<UUID>>
     extends AbstractHATEOASMapper<E, DefaultRepresentation> {
 
-    public DefaultHATEOASMapper(Class<E> businessObjectType
-            , KeyValuePairMapper<E> keyValuePairMapper
+    public DefaultHATEOASMapper(KeyValuePairMapper<E> keyValuePairMapper
             , LinkBuilderFactory linkBuilderFactory
             , MetaDataProvider metaDataProvider) {
 
-        super(businessObjectType
-                , DefaultRepresentation.class
+        super(DefaultRepresentation.class
                 , keyValuePairMapper
                 , linkBuilderFactory
                 , metaDataProvider);
@@ -35,16 +33,16 @@ public class DefaultHATEOASMapper<E extends IBusinessObject<UUID>>
 
     @Override
     protected void doFillAssociations(DefaultRepresentation representation, E businessObject) {
-
+        //noop
     }
 
     @Override
     protected void doReadLinks(DefaultRepresentation representation, E businessObject) {
-
+        //noop
     }
 
     @Override
     protected void doReadAssociations(DefaultRepresentation representation, E businessObject) {
-
+        //noop
     }
 }

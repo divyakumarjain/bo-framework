@@ -34,7 +34,7 @@ public class DefaultDatabaseSearchCommand<E extends IBusinessObject<I>, I>
         JPACriteriaQueryBuilder<E> criteriaQueryBuilder = new JPACriteriaQueryBuilder(context.getEntityManager(), getEntityType());
 
         if(query instanceof AttributeQuery || query == null) {
-            criteriaQuery = (CriteriaQuery<E>) criteriaQueryBuilder.createCriteriaQuery((AttributeQuery)query);
+            criteriaQuery = criteriaQueryBuilder.createCriteriaQuery((AttributeQuery)query);
             return context.getEntityManager().createQuery(criteriaQuery).getResultList();
         } else {
             throw new IllegalArgumentException("Only Attribute Queries are supported");

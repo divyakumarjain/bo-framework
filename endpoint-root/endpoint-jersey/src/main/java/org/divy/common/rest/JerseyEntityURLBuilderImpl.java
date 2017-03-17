@@ -37,9 +37,7 @@ public class JerseyEntityURLBuilderImpl<T extends IBusinessObject<I>, I extends 
     }
     @Override
     public URI buildEntityUri(T entity, UriInfo uriInfo) {
-        //TODO Use uriInfo object in LinkBuilder
-        //LinkBuilder linkBuilder = linkBuilderFactory.newBuilder(uriInfo);
-        LinkBuilder linkBuilder = linkBuilderFactory.newBuilder();
+        LinkBuilder linkBuilder = linkBuilderFactory.newBuilder(uriInfo);
         final Class<? extends AbstractBOJerseyEndpoint<T, I>> endPointClass = getEndPointClass(entity);
         return linkBuilder
                 .path(endPointClass)

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class HibernateSearchCommand<E, I> implements ISearchCommand<E> {
+public class HibernateSearchCommand<E> implements ISearchCommand<E> {
 
     private HibernateSearchCommandContext context;
 

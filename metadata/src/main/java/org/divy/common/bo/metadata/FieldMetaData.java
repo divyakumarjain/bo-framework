@@ -49,10 +49,6 @@ public class FieldMetaData {
         return type;
     }
 
-    public String getFieldName() {
-        return fieldName;
-    }
-
     @Override
     public String toString() {
         return "FieldMetaData{" +
@@ -64,8 +60,10 @@ public class FieldMetaData {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         FieldMetaData that = (FieldMetaData) o;
         return isCollection == that.isCollection &&
                 Objects.equals(type, that.type) &&

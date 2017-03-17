@@ -18,23 +18,23 @@ import org.divy.common.bo.mapper.builder.options.field.*;
 import org.divy.common.bo.mapper.builder.options.type.ChildTypeMapperOption;
 import org.divy.common.bo.mapper.defaults.AdvanceBOMapper;
 
-import java.time.OffsetDateTime ;
+import java.time.OffsetDateTime;
 import java.util.*;
 import java.util.function.Function;
 
 public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuilderContext<S, T> {
     private final PropertyResolverStrategy defaultPropertyResolverStrategy = UtilityResolver.getDefaultPropertyResolverStrategy();
 
-    public OrikaTypeMapperBuilderContext(OrikaMapperBuilder builder, Class<S> source, Class<T> target, List<MapperBuilderOption> mapperBuilderOptions) {
+    private OrikaTypeMapperBuilderContext(OrikaMapperBuilder builder, Class<S> source, Class<T> target, List<MapperBuilderOption> mapperBuilderOptions) {
         super(builder, source, target);
         this.mapperBuilderOptions.addAll(mapperBuilderOptions);
     }
 
-    public OrikaTypeMapperBuilderContext(OrikaMapperBuilder builder, Class<S> source, Class<T> target) {
+    OrikaTypeMapperBuilderContext(OrikaMapperBuilder builder, Class<S> source, Class<T> target) {
         this(builder, source, target, new ArrayList<>(0));
     }
 
-    public OrikaTypeMapperBuilderContext(OrikaMapperBuilder builder, Class<S> source, Class<T> target, MapperBuilderOption... mapperBuilderOptions) {
+    OrikaTypeMapperBuilderContext(OrikaMapperBuilder builder, Class<S> source, Class<T> target, MapperBuilderOption... mapperBuilderOptions) {
         this(builder, source, target, Arrays.asList(mapperBuilderOptions));
     }
 
@@ -68,9 +68,16 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
         }
 
         private void configureTypeMapping(ClassMapBuilder<S, T> boClassMapBuilder) {
+            processTypeOptions(boClassMapBuilder);
+            configFieldMapping(boClassMapBuilder);
+        }
+
+        private void processTypeOptions(ClassMapBuilder<S, T> boClassMapBuilder) {
             mapperBuilderOptions
                     .forEach( option -> configureTypeMapping(boClassMapBuilder, option));
+        }
 
+        private void configFieldMapping(ClassMapBuilder<S, T> boClassMapBuilder) {
             fields.forEach((key, value) -> value.getFieldMapperBuilderOptions()
                     .forEach(fieldOption -> configFieldMapping(key, value, boClassMapBuilder)));
         }
@@ -163,7 +170,7 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
 
         private Optional<String> getTargetFieldName(List<MapperBuilderOption> fieldMapperBuilderOptions) {
             return resolveOption(fieldMapperBuilderOptions, TargetFieldName.class)
-                    .map(TargetFieldName::getTargetFieldName);
+                    .map(TargetFieldName::getFieldName);
         }
 
         private <M> Optional<M> resolveOption(List<MapperBuilderOption> fieldMapperBuilderOptions, Class<M> optionClass) {

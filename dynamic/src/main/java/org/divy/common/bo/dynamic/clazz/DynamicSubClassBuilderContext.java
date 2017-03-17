@@ -4,13 +4,11 @@ import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.NotFoundException;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Random;
 
 public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext {
 
     private Class<?> parentClass;
-    private Map<String, Class> genericTypeMap = new HashMap<>();
 
     DynamicSubClassBuilderContext(Class<?> parentClass) {
         this.parentClass = parentClass;
@@ -29,5 +27,13 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext {
         super.doBuild(newClass);
     }
 
-
+    @Override
+    String getClassName() {
+        String className = super.getClassName();
+        if(className==null) {
+            return parentClass.getSimpleName() + new Random().nextInt();
+        } else {
+            return className;
+        }
+    }
 }

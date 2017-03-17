@@ -6,6 +6,8 @@ import org.divy.common.bo.query.Query;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -21,6 +23,8 @@ import static org.junit.Assert.assertThat;
  * @param <I>
  */
 public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestBOCRUDBase.class);
 
     private final ITestDataProvider<E> testDataProvider;
 
@@ -92,7 +96,6 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
     @Test
     @Ignore
     //TODO: Finish Search framework
-    //FIXME:
     public void testSearch() {
         E entity1 = testDataProvider.getEntityInstance();
 
@@ -124,9 +127,12 @@ public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
     /* Clean up */
     @After
     public void cleanup() {
-        List<E> searchedEntities = doSearchEntities(new AttributeQuery());
-
-        searchedEntities.forEach(this::doDeleteEntity);
+        try {
+            List<E> searchedEntities = doSearchEntities(new AttributeQuery());
+            searchedEntities.forEach(this::doDeleteEntity);
+        } catch (Exception e) {
+            LOGGER.error("Exception during cleanup", e);
+        }
     }
 
 
