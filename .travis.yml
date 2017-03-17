@@ -6,8 +6,10 @@ jdk:
   - oraclejdk8
 
 addons:
-    github_token:
-      secure: bf3d6fad516322e32ba7694937bc63871934a046
+  github_token:
+    secure: bf3d6fad516322e32ba7694937bc63871934a046
+  sonarqube:
+    organization: "divyakumarjain-github"
 
 script:
   # JaCoCo is used to have code coverage, the agent has to be activated
