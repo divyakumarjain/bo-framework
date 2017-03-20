@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-endpoint-spring-mvc</artifactId>
+    <name>endpoint-spring-mvc</name>
 
     <description>bo-framework-endpoint-spring-mvc</description>
     <packaging>jar</packaging>

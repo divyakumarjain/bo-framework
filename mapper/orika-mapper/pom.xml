@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>bo-framework-orika-mapper</artifactId>
+    <name>orika-mapper</name>
 
     <dependencies>
         <dependency>

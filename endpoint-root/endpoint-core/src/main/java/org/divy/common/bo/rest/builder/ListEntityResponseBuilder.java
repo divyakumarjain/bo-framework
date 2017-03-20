@@ -1,13 +1,11 @@
 package org.divy.common.bo.rest.builder;
 
-import org.divy.common.bo.IBusinessObject;
-
 import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.Collection;
 
-class ListEntityResponseBuilder<E extends IBusinessObject<I>, I> extends ResponseEntityBuilder<List<E>> {
+class ListEntityResponseBuilder<E, I> extends ResponseEntityBuilder<Collection<E>> {
 
-    public ListEntityResponseBuilder(List<E> list) {
+    public ListEntityResponseBuilder(Collection<E> list) {
         setEntity(list);
     }
     @Override

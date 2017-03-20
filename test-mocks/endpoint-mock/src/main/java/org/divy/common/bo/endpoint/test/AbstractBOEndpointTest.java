@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.test;
 
 import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.endpoint.AbstractBOEndpoint;
+import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.divy.common.bo.test.TestBOCRUDBase;
 
@@ -18,5 +18,5 @@ public abstract class AbstractBOEndpointTest<E extends IBusinessObject<I>, I ext
 
     }
 
-    protected abstract Class<? extends AbstractBOEndpoint<E, I>> getEndPointClass();
+    protected abstract Class<? extends BaseBOEndpoint<E, I>> getEndPointClass();
 }

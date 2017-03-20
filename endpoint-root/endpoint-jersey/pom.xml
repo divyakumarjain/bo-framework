@@ -8,7 +8,7 @@
     </parent>
 
     <artifactId>bo-framework-endpoint-jersey</artifactId>
-    <description>bo-framework-endpoint-jersey</description>
+    <name>endpoint-jersey</name>
     <packaging>jar</packaging>
 
     <dependencies>

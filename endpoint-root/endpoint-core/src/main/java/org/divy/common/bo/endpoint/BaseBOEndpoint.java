@@ -4,7 +4,7 @@ package org.divy.common.bo.endpoint;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.rest.LinkBuilderFactory;
+import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
  * @param <E> The Entity or Business Object
  * @param <I> The Identity type of Business Object
  */
-public abstract class AbstractBOEndpoint<E extends IBusinessObject<I>, I extends Serializable>
+public class BaseBOEndpoint<E extends IBusinessObject<I>, I extends Serializable>
         extends AbstractCRUDEndpoint<E, I> {
 
 
@@ -29,8 +29,8 @@ public abstract class AbstractBOEndpoint<E extends IBusinessObject<I>, I extends
      *
      * @param manager the manger instance responsible for management for Business Object entity
      */
-    public AbstractBOEndpoint(IBOManager<E, I> manager, LinkBuilderFactory linkBuilderFactory) {
-        super(linkBuilderFactory);
+    public BaseBOEndpoint(IBOManager<E, I> manager, ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+        super(responseEntityBuilderFactory);
         this.manager = manager;
     }
 

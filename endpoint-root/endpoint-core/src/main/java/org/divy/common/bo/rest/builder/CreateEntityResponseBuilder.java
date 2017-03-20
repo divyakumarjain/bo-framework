@@ -1,7 +1,6 @@
 package org.divy.common.bo.rest.builder;
 
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.rest.RESTEntityURLBuilder;
 
 import javax.ws.rs.core.Response;
@@ -10,7 +9,7 @@ import java.io.Serializable;
 import java.net.URI;
 
 
-public class CreateEntityResponseBuilder<T extends IBusinessObject<I>, I extends Serializable> extends ResponseEntityBuilder<T> {
+public class CreateEntityResponseBuilder<T, I extends Serializable> extends ResponseEntityBuilder<T> {
 
     RESTEntityURLBuilder<T, I> entityURLBuilder;
 
@@ -28,6 +27,16 @@ public class CreateEntityResponseBuilder<T extends IBusinessObject<I>, I extends
 
     private URI createLocation(UriInfo uriInfo) {
         return getEntityURLBuilder().buildEntityUri(getEntity(),uriInfo);
+    }
+
+    @Override
+    public Response build() {
+        setStatusCode(Response.Status.CREATED);
+        return Response.created(createLocation()).build();
+    }
+
+    private URI createLocation() {
+        return getEntityURLBuilder().buildEntityUri(getEntity());
     }
 
     public RESTEntityURLBuilder<T, I> getEntityURLBuilder() {

@@ -1,17 +1,20 @@
 package org.divy.common.bo.rest.builder;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.rest.RESTEntityURLBuilder;
 
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 
-public class ResponseEntityBuilderFactory<T extends IBusinessObject<I>, I extends Serializable> {
+public class ResponseEntityBuilderFactory<T, I extends Serializable> {
+
+    RESTEntityURLBuilder<T, I> entityURLBuilder;
 
     @Inject
-    RESTEntityURLBuilder<T, I> entityURLBuilder;
+    public ResponseEntityBuilderFactory(RESTEntityURLBuilder<T, I> entityURLBuilder) {
+        this.entityURLBuilder = entityURLBuilder;
+    }
 
     /* Builder static methods*/
 
@@ -22,8 +25,8 @@ public class ResponseEntityBuilderFactory<T extends IBusinessObject<I>, I extend
         return createEntityResponseBuilder;
     }
 
-    public UpdateEntityResponseBuilder<T, I> update(T entity) {
-        UpdateEntityResponseBuilder<T, I> updateEntityResponseBuilder = new UpdateEntityResponseBuilder<>(entity);
+    public UpdateEntityResponseBuilder<T, I> update() {
+        UpdateEntityResponseBuilder<T, I> updateEntityResponseBuilder = new UpdateEntityResponseBuilder<>();
         updateEntityResponseBuilder.setEntityURLBuilder(entityURLBuilder);
         return updateEntityResponseBuilder;
     }
@@ -34,13 +37,19 @@ public class ResponseEntityBuilderFactory<T extends IBusinessObject<I>, I extend
         return deleteEntityResponseBuilder;
     }
 
+    public DeleteEntityResponseBuilder<T, I> delete() {
+        DeleteEntityResponseBuilder<T, I> deleteEntityResponseBuilder = new DeleteEntityResponseBuilder<>();
+        deleteEntityResponseBuilder.setEntityURLBuilder(entityURLBuilder);
+        return deleteEntityResponseBuilder;
+    }
+
     public ReadEntityResponseBuilder<T, I> read(T entity) {
         ReadEntityResponseBuilder<T, I> readEntityResponseBuilder = new ReadEntityResponseBuilder<>(entity);
         readEntityResponseBuilder.setEntityURLBuilder(entityURLBuilder);
         return readEntityResponseBuilder;
     }
 
-    public ResponseEntityBuilder<List<T>> list(List<T> list) {
+    public ResponseEntityBuilder<Collection<T>> list(Collection<T> list) {
         return new ListEntityResponseBuilder<>(list);
     }
 

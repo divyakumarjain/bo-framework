@@ -2,7 +2,7 @@ package org.divy.common.bo.endpoint.hypermedia;
 
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.rest.LinkBuilderFactory;
+import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -25,8 +25,8 @@ public abstract class AbstractHATEOASJerseyEndpoint<E extends IBusinessObject<I>
         extends AbstractHATEOASEndpoint<E, R, I> {
 
     @Inject
-    public AbstractHATEOASJerseyEndpoint(LinkBuilderFactory linkBuilderFactory) {
-        super(linkBuilderFactory);
+    public AbstractHATEOASJerseyEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+        super(responseEntityBuilderFactory);
     }
 
     @POST

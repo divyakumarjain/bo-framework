@@ -5,6 +5,7 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import javassist.bytecode.*;
 import javassist.bytecode.annotation.Annotation;
+import javassist.bytecode.annotation.ArrayMemberValue;
 import javassist.bytecode.annotation.MemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
 import org.divy.common.bo.dynamic.clazz.DynamicBuilderContext;
@@ -61,6 +62,13 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
     private MemberValue doBuildAnnotationParamValue(Object paramValue, ConstPool constPool) {
         if (paramValue instanceof String) {
             return new StringMemberValue((String) paramValue, constPool);
+        } else if (paramValue instanceof String[]) {
+            StringMemberValue[] memberValues = Arrays.stream(((String[]) paramValue))
+                    .map(param -> new StringMemberValue(param, constPool))
+                    .toArray(size -> new StringMemberValue[size]);
+            ArrayMemberValue arrayMemberValue = new ArrayMemberValue(constPool);
+            arrayMemberValue.setValue(memberValues);
+            return arrayMemberValue;
         } else {
             throw new UnsupportedOperationException("Only String Dynamic Annotation are supported");
         }
@@ -93,7 +101,7 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
             Annotation[][] paramArrays = parameterAttribute.getAnnotations();
 
             paramArrays = initIfNot(paramArrays, behavior.getParameterTypes().length);
-            Annotation[] addAnno = paramArrays[index-1];
+            Annotation[] addAnno = paramArrays[index];
             Annotation[] newAnno;
             if(addAnno == null || addAnno.length == 0) {
                 newAnno = new Annotation[1];
@@ -103,7 +111,7 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
                 newAnno[addAnno.length] = parameterAnnotation;
             }
 
-            paramArrays[index-1] = newAnno;
+            paramArrays[index] = newAnno;
             parameterAttribute.setAnnotations(paramArrays);
         } catch (NotFoundException e) {
             LOGGER.error("Could not add annotation", e);

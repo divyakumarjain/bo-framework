@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-database-hibernate</artifactId>
+    <name>database-hibernate</name>
 
     
 </project>

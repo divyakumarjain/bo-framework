@@ -58,7 +58,7 @@ public class BoFrameworkSpringContext {
 
     private MetaDataProvider createMetadataProvider(List<Class<? extends IBusinessObject>> typeList) {
         return loadMetaDataProvider("org.divy.common.bo.database.jpa.BoEntityMetaDataProvider", typeList)
-                .orElseGet(loadMetaDataProvider("", typeList)::get);
+                .orElseGet(() -> loadMetaDataProvider("", typeList).get());
     }
 
     private Optional<MetaDataProvider> loadMetaDataProvider(String className, List<Class<? extends IBusinessObject>> typeList) {
@@ -67,7 +67,7 @@ public class BoFrameworkSpringContext {
             metaDataProviderClass = Class.forName(className);
             return Optional.of((MetaDataProvider)metaDataProviderClass.getConstructor(List.class).newInstance(typeList));
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-            LOGGER.warn("Could not load Meta data provider " + className, e);
+            LOGGER.warn("Could not load Meta data provider {}", className, e);
             return Optional.empty();
         }
     }

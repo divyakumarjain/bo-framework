@@ -6,7 +6,7 @@ import org.divy.common.bo.endpoint.hypermedia.AbstractHATEOASJerseyEndpoint;
 import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
 import org.divy.common.bo.rest.DefaultRepresentation;
 import org.divy.common.bo.rest.HATEOASMapper;
-import org.divy.common.bo.rest.LinkBuilderFactory;
+import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
 
 import java.util.UUID;
 
@@ -21,9 +21,9 @@ public class DefaultHATEOASJerseyEndpoint<E extends IBusinessObject<UUID>>
 
     public DefaultHATEOASJerseyEndpoint(Class<E> type,
                                         IBOManager<E, UUID> manager,
-                                        LinkBuilderFactory linkBuilderFactory,
+                                        ResponseEntityBuilderFactory responseEntityBuilderFactory,
                                         HATEOASMapper<E, DefaultRepresentation> greetingHATEOASMapper) {
-        super(linkBuilderFactory);
+        super(responseEntityBuilderFactory);
         this.manager = manager;
         this.greetingHATEOSMapper = greetingHATEOASMapper;
         this.type = type;

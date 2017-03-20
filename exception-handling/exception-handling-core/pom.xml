@@ -8,6 +8,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-exception-handling-core</artifactId>
+    <name>exception-handling-core</name>
 
     <packaging>jar</packaging>
 </project>

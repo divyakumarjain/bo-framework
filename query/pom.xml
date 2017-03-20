@@ -8,5 +8,6 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-query</artifactId>
+    <name>query</name>
 
 </project>

@@ -6,17 +6,14 @@
 
     <parent>
         <groupId>org.divy</groupId>
-        <artifactId>bo-framework-root</artifactId>
+        <artifactId>bo-framework-demos</artifactId>
         <version>0.0.3-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
-    <artifactId>bo-framework-exception-handling</artifactId>
-    <name>exception-handling</name>
+    <artifactId>bo-framework-jee-demo</artifactId>
+    <name>jee-demo</name>
+    <description>Demo Application for jee based Bo Framework</description>
 
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>exception-handling-core</module>
-        <module>exception-handling-spring</module>
-    </modules>
+    
 </project>

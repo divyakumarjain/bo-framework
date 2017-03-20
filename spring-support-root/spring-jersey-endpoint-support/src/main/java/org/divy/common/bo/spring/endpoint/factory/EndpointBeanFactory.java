@@ -20,7 +20,6 @@ public class EndpointBeanFactory implements DynamicBeanFactory<Class<? extends I
     public void register(Class<? extends IBusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
         beanDefinitionRegistry.registerBeanDefinition(namingStrategy.calculateHATEOASMapperId(type)
                 , BeanDefinitionBuilder.genericBeanDefinition(DefaultHATEOASMapper.class)
-                        .addConstructorArgValue(type)
                         .addConstructorArgReference(namingStrategy.calculateKeyValueMapper(type))
                         .addConstructorArgReference("linkBuilderFactory")
                         .addConstructorArgReference("entityMetaDataProvider")

@@ -6,7 +6,7 @@ import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.HATEOASMapper;
-import org.divy.common.bo.rest.LinkBuilderFactory;
+import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.NotFoundException;
@@ -21,8 +21,8 @@ import java.util.Optional;
 public abstract class AbstractHATEOASEndpoint<E extends IBusinessObject<I>, R extends AbstractRepresentation, I extends Serializable>
         extends AbstractCRUDEndpoint<R, I> {
 
-    public AbstractHATEOASEndpoint(LinkBuilderFactory linkBuilderFactory) {
-        super(linkBuilderFactory);
+    public AbstractHATEOASEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+        super(responseEntityBuilderFactory);
     }
 
     public abstract IBOManager<E, I> getManager();

@@ -6,7 +6,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.LinkBuilderFactoryImpl;
+import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
+import org.divy.common.rest.JerseyEntityURLBuilderImpl;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration;
@@ -32,8 +34,49 @@ public class EndpointConfig implements Jackson2ObjectMapperBuilderCustomizer {
 
     @Bean
     public JerseyHyperMediaEndPointFactory hyperMediaEndPointFactory(MetaDataProvider metaDataProvider
-            , BeanNamingStrategy beanNamingStrategy) {
-        return new JerseyHyperMediaEndPointFactory(metaDataProvider, beanNamingStrategy);
+            , BeanNamingStrategy beanNamingStrategy
+            , JerseyEntityURLBuilderImpl jerseyEntityHATEOASURLBuilder
+            , JerseyEndpointConfigProperties jerseyEndpointConfigProperties) {
+
+        return new JerseyHyperMediaEndPointFactory(metaDataProvider
+                , beanNamingStrategy
+                , jerseyEntityHATEOASURLBuilder
+                , jerseyEndpointConfigProperties);
+    }
+
+    @Bean
+    public JerseyEndPointFactory endPointFactory(MetaDataProvider metaDataProvider
+            , BeanNamingStrategy beanNamingStrategy
+            , JerseyEntityURLBuilderImpl jerseyEntityURLBuilder
+            , JerseyEndpointConfigProperties jerseyEndpointConfigPropertie) {
+        return new JerseyEndPointFactory(metaDataProvider
+                , beanNamingStrategy
+        , jerseyEntityURLBuilder, jerseyEndpointConfigPropertie);
+    }
+
+    @Bean
+    public JerseyEndpointConfigProperties jerseyEndpointConfigProperties() {
+        return new JerseyEndpointConfigProperties();
+    }
+
+    @Bean
+    public JerseyEntityURLBuilderImpl jerseyEntityHATEOASURLBuilder(LinkBuilderFactoryImpl linkBuilderFactory) {
+        return new JerseyEntityURLBuilderImpl(linkBuilderFactory);
+    }
+
+    @Bean
+    public JerseyEntityURLBuilderImpl jerseyEntityURLBuilder(LinkBuilderFactoryImpl linkBuilderFactory) {
+        return new JerseyEntityURLBuilderImpl(linkBuilderFactory);
+    }
+
+    @Bean
+    public ResponseEntityBuilderFactory responseEntityBuilderHATEOASFactory(JerseyEntityURLBuilderImpl jerseyEntityHATEOASURLBuilder) {
+        return new ResponseEntityBuilderFactory(jerseyEntityHATEOASURLBuilder);
+    }
+
+    @Bean
+    public ResponseEntityBuilderFactory responseEntityBuilderFactory(JerseyEntityURLBuilderImpl jerseyEntityURLBuilder) {
+        return new ResponseEntityBuilderFactory(jerseyEntityURLBuilder);
     }
 }
 

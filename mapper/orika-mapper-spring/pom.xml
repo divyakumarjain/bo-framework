@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>bo-framework-orika-mapper-spring</artifactId>
+    <name>orika-mapper-spring</name>
 
     <dependencies>
         <dependency>

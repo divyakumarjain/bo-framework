@@ -4,7 +4,6 @@ import javassist.*;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
 import org.divy.common.bo.dynamic.clazz.common.ConstantInitializationValueProvider;
 import org.divy.common.bo.dynamic.clazz.common.DynamicInitializationValueProvider;
-import org.divy.common.bo.dynamic.clazz.member.DynamicMemberBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.method.DynamicMethodBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.method.DynamicMethodParamBuilderContext;
 import org.slf4j.Logger;
@@ -14,51 +13,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DynamicClassConstructorBuilderContext extends DynamicMethodBuilderContext<DynamicClassConstructorBuilderContext> {
+public class DynamicClassConstructorBuilderContext<P extends DynamicClassBuilderContext>
+        extends DynamicMethodBuilderContext<DynamicClassConstructorBuilderContext<P>, P> {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicClassConstructorBuilderContext.class);
-    private List<DynamicConstructorBehaviourContext> superBehaviour = new ArrayList<>();
-    private List<DynamicConstructorBehaviourContext> fieldBehaviour = new ArrayList<>();
+    private List<DynamicConstructorBehaviourContext<P>> superBehaviour = new ArrayList<>();
+    private List<DynamicConstructorBehaviourContext<P>> fieldBehaviour = new ArrayList<>();
     private String body="";
 
-    public DynamicClassConstructorBuilderContext(DynamicClassBuilderContext builderContext) {
+    public DynamicClassConstructorBuilderContext(P builderContext) {
         super(builderContext);
         type(Void.class);
     }
 
-    public DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext> param(String fieldName, Class<?> paramClass) {
-        final DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext> param = super.param(paramClass);
+    public DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext<P>> param(String fieldName, Class<?> paramClass) {
+        final DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext<P>> param = super.param(paramClass);
 
-        final DynamicConstructorFieldInitializer paramBuilderContext = new DynamicConstructorFieldInitializer(this,fieldName, paramClass, param);
+        final DynamicConstructorFieldInitializer<P> paramBuilderContext = new DynamicConstructorFieldInitializer<>(this,fieldName, paramClass, param);
         superBehaviour.add(paramBuilderContext);
         return param;
     }
 
 
-    public DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext> superParam(Class<?> paramClass) {
-        final DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext> param = super.param(paramClass);
-        final DynamicConstructorSuperInitializer superInitializer
-                = new DynamicConstructorSuperInitializer(this, paramClass, param);
+    public DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext<P>> superParam(Class<?> paramClass) {
+        final DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext<P>> param = super.param(paramClass);
+        final DynamicConstructorSuperInitializer<P> superInitializer
+                = new DynamicConstructorSuperInitializer<>(this, paramClass, param);
         superBehaviour.add(superInitializer);
         return param;
     }
 
-    public DynamicConstructorSuperInitializer superValue(Object value) {
+    public DynamicConstructorSuperInitializer<P> superValue(Object value) {
         DynamicInitializationValueProvider param = new ConstantInitializationValueProvider(value);
-        final DynamicConstructorSuperInitializer paramBuilderContext
-                = new DynamicConstructorSuperInitializer(this, value.getClass(), param);
+        final DynamicConstructorSuperInitializer<P> paramBuilderContext
+                = new DynamicConstructorSuperInitializer<>(this, value.getClass(), param);
         superBehaviour.add(paramBuilderContext);
         return paramBuilderContext;
     }
 
 
     @Override
-    public DynamicClassConstructorBuilderContext body(String body) {
+    public DynamicClassConstructorBuilderContext<P> body(String body) {
         this.body = body;
         return this;
     }
 
     @Override
-    public DynamicMemberBuilderContext name(String methodName) {
+    public DynamicClassConstructorBuilderContext<P> name(String methodName) {
         throw new UnsupportedOperationException("Constructor cannot have name");
     }
     @Override
