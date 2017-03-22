@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-database-root</artifactId>
+    <name>database-root</name>
     <packaging>pom</packaging>
 
     <modules>

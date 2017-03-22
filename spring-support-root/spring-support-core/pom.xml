@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-spring-support-core</artifactId>
+    <name>spring-support-core</name>
 
     <packaging>jar</packaging>
 

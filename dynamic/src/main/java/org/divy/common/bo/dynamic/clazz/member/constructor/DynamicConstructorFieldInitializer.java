@@ -1,8 +1,9 @@
 package org.divy.common.bo.dynamic.clazz.member.constructor;
 
+import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
 import org.divy.common.bo.dynamic.clazz.common.DynamicInitializationValueProvider;
 
-class DynamicConstructorFieldInitializer extends DynamicConstructorBehaviourContext {
+class DynamicConstructorFieldInitializer<P extends DynamicClassBuilderContext> extends DynamicConstructorBehaviourContext<P> {
 
     private String fieldName;
     private DynamicInitializationValueProvider valueProvider;

@@ -34,7 +34,7 @@ public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>
 
             transactionBegin();
             if(entity == null) {
-                throw new NotFoundException("Could nt find " + getEntityType().getSimpleName() + " with id "+ id.toString());
+                throw new NotFoundException("Could not find " + getEntityType().getSimpleName() + " with id "+ id.toString());
             } else {
                 doDeleteEntity(entity);
                 isDeleteSuccess = true;

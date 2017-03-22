@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>bo-framework-metadata</artifactId>
+    <name>metadata</name>
 
 
     <dependencies>

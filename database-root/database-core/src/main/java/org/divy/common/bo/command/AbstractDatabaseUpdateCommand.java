@@ -56,7 +56,7 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
             fromPersistence = getReference(id);
 
             if(fromPersistence == null) {
-                throw new NotFoundException("Could nt find " + getEntityType().getSimpleName() + " with id "+ id.toString());
+                throw new NotFoundException("Could not find " + getEntityType().getSimpleName() + " with id "+ id.toString());
             }
 
             merge(entity, fromPersistence);

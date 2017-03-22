@@ -7,28 +7,28 @@ import org.divy.common.bo.dynamic.clazz.common.DynamicAnnotatableBuilderContext;
 
 import java.util.Optional;
 
-public abstract class DynamicMemberBuilderContext<T extends DynamicMemberBuilderContext>
-        extends DynamicAnnotatableBuilderContext <T, DynamicClassBuilderContext> {
+public abstract class DynamicMemberBuilderContext<C extends DynamicMemberBuilderContext, P extends DynamicClassBuilderContext>
+        extends DynamicAnnotatableBuilderContext <C, P> {
 
-    private String memberName = null;
+    protected String memberName = null;
     private MemberVisibility methodVisibility;
     private Class<?> memberType;
 
-    public DynamicMemberBuilderContext(DynamicClassBuilderContext builderContext) {
+    public DynamicMemberBuilderContext(P builderContext) {
         super(builderContext);
     }
 
-    public DynamicMemberBuilderContext visibility(MemberVisibility methodVisibility) {
+    public DynamicMemberBuilderContext<C, P> visibility(MemberVisibility methodVisibility) {
         this.methodVisibility = methodVisibility;
         return this;
     }
 
-    public DynamicMemberBuilderContext name(String methodName) {
+    public DynamicMemberBuilderContext<C, P> name(String methodName) {
         this.memberName = methodName;
         return this;
     }
 
-    public DynamicMemberBuilderContext type(Class<?> memberType) {
+    public DynamicMemberBuilderContext<C, P> type(Class<?> memberType) {
         this.memberType = memberType;
         return this;
     }

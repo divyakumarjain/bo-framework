@@ -8,6 +8,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-repository</artifactId>
+    <name>repository</name>
 
     <dependencies>
         <dependency>

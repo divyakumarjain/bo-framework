@@ -8,24 +8,33 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class DynamicMethodBuilderContext<T extends DynamicMethodBuilderContext> extends DynamicMemberBuilderContext<T> {
+public class DynamicMethodBuilderContext<C extends DynamicMethodBuilderContext, P extends DynamicClassBuilderContext>
+        extends DynamicMemberBuilderContext<C, P> {
     private static final Logger LOGGER = LoggerFactory.getLogger(org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext.class);
-    protected List<DynamicMethodParamBuilderContext> parameters = new ArrayList<>();
+    protected List<DynamicMethodParamBuilderContext<C>> parameters = new ArrayList<>();
     private String body="";
-    private int paramCount=0;
+    int paramCount=0;
 
-    public DynamicMethodBuilderContext(DynamicClassBuilderContext builderContext) {
+    public DynamicMethodBuilderContext(P builderContext) {
         super(builderContext);
     }
 
-    protected DynamicMethodParamBuilderContext<T> param(Class<?> paramClass) {
-        final DynamicMethodParamBuilderContext<T> paramBuilderContext =
-                new DynamicMethodParamBuilderContext<>((T)this, paramClass);
+    public DynamicMethodParamBuilderContext<C> param(Class<?> paramClass) {
 
-        paramBuilderContext.index(++paramCount);
-        parameters.add(paramBuilderContext);
+        DynamicMethodParamBuilderContext paramBuilderContext;
+        if(paramCount<parameters.size()) {
+            paramBuilderContext = parameters.get(paramCount);
+        } else {
+            paramBuilderContext = new DynamicMethodParamBuilderContext<>((C)this);
+            parameters.add(paramBuilderContext);
+            paramBuilderContext.index(paramCount);
+        }
+
+        paramBuilderContext.type(paramClass);
+
+
+        paramCount++;
         return paramBuilderContext;
     }
 
@@ -70,8 +79,6 @@ public class DynamicMethodBuilderContext<T extends DynamicMethodBuilderContext> 
 
         return parameters.stream()
                 .map(DynamicMethodParamBuilderContext::getParamCtClass)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
                 .toArray(CtClass[]::new);
     }
 }

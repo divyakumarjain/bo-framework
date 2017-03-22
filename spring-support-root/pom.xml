@@ -8,7 +8,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-spring-support-root</artifactId>
-
+    <name>spring-support-root</name>
     <description>bo-framework-endpoint-root</description>
     <packaging>pom</packaging>
 

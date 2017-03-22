@@ -1,20 +1,18 @@
 package org.divy.common.bo.rest.builder;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.rest.RESTEntityURLBuilder;
 
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
 import java.util.Collection;
 
-public class ReadEntityResponseBuilder<T extends IBusinessObject<I>, I extends Serializable> extends ResponseEntityBuilder<T> {
+public class ReadEntityResponseBuilder<T, I extends Serializable> extends ResponseEntityBuilder<T> {
     RESTEntityURLBuilder<T, I> entityURLBuilder;
 
     public ReadEntityResponseBuilder(T entity) {
         setEntity(entity);
     }
     @Override
-    @SuppressWarnings("unchecked")
     public Response build() {
         Response.Status statusCode  = getStatusCode();
 

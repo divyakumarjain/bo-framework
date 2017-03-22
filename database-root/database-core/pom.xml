@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-database-core</artifactId>
+    <name>database-core</name>
     <packaging>jar</packaging>
 
     <dependencies>

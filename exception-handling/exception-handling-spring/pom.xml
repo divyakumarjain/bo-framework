@@ -8,7 +8,7 @@
         <version>0.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>bo-framework-exception-handling-spring</artifactId>
-
+    <name>exception-handling-spring</name>
     <dependencies>
         <dependency>
             <groupId>org.divy</groupId>

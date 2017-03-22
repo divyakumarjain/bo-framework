@@ -1,29 +1,21 @@
 package org.divy.common.bo.rest.builder;
 
-import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.rest.RESTEntityURLBuilder;
 
-import javax.ws.rs.core.Response;
 import java.io.Serializable;
 
-public class UpdateEntityResponseBuilder<T extends IBusinessObject<I>, I extends Serializable> extends ResponseEntityBuilder<T> {
+public class UpdateEntityResponseBuilder<T, I extends Serializable> extends ResponseEntityBuilder<T> {
     RESTEntityURLBuilder<T, I> entityURLBuilder;
 
-    public UpdateEntityResponseBuilder(T entity) {
-        super(entity);
-    }
-
-    @Override
-    public Response build() {
-        setStatusCode(Response.Status.ACCEPTED);
-        return super.build();
+    UpdateEntityResponseBuilder() {
+        super(null);
     }
 
     public RESTEntityURLBuilder<T, I> getEntityURLBuilder() {
         return entityURLBuilder;
     }
 
-    public void setEntityURLBuilder(RESTEntityURLBuilder<T, I> entityURLBuilder) {
+    void setEntityURLBuilder(RESTEntityURLBuilder<T, I> entityURLBuilder) {
         this.entityURLBuilder = entityURLBuilder;
     }
 }

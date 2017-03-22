@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>bo-framework-dynamic</artifactId>
+    <name>dynamic</name>
 
     <dependencies>
         <dependency>

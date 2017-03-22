@@ -27,7 +27,7 @@ import java.util.List;
  *
  *
  */
-public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<I>, I extends Serializable>
+public abstract class BaseBOEndpointContainerTest<E extends IBusinessObject<I>, I extends Serializable>
         extends AbstractBOEndpointTest<E, I> {
 
     protected final JerseyTest jerseyTestProxy;
@@ -35,7 +35,7 @@ public abstract class AbstractBOEndpointContainerTest<E extends IBusinessObject<
     /**
      * @param testDataProvider
      */
-    public AbstractBOEndpointContainerTest(ITestDataProvider<E> testDataProvider) {
+    public BaseBOEndpointContainerTest(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
         jerseyTestProxy = new RestResourceTest();
     }

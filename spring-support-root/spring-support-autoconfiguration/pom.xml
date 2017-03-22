@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-spring-support-autoconfiguration</artifactId>
+    <name>spring-support-autoconfiguration</name>
 
     <packaging>jar</packaging>
 

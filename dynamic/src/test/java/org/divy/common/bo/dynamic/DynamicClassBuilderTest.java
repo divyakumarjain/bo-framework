@@ -34,8 +34,8 @@ public class DynamicClassBuilderTest {
                         .and()
                     .body("")
                     .addAnnotation(NewAnnotation1.class).value("methodAnnotaion")
+                        .and()
                     .and()
-                .and()
                 .addField("sttribute1", String.class)
                 .build();
 

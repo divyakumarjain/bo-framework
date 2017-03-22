@@ -8,8 +8,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-test-mock-common</artifactId>
-
-    <description>bo-framework-test-mock-common</description>
+    <name>test-mock-common</name>
     <packaging>pom</packaging>
     <modules>
         <module>mock-common</module>

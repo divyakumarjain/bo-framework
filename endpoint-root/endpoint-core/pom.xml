@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-endpoint-core</artifactId>
+    <name>endpoint-core</name>
 
     <description>bo-framework-endpoint-core</description>
     <packaging>jar</packaging>

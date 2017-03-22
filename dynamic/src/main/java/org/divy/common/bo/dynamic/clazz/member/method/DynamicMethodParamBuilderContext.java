@@ -5,17 +5,20 @@ import javassist.CtClass;
 import org.divy.common.bo.dynamic.clazz.common.DynamicAnnotatableBuilderContext;
 import org.divy.common.bo.dynamic.clazz.common.DynamicInitializationValueProvider;
 
-import java.util.Optional;
-
 public class DynamicMethodParamBuilderContext<P extends DynamicMethodBuilderContext>
         extends DynamicAnnotatableBuilderContext<DynamicMethodParamBuilderContext<P>, P>
     implements DynamicInitializationValueProvider {
     private int index = 1;
-    private Class<?> paramClass;
+    private CtClass paramClass;
 
-    DynamicMethodParamBuilderContext(P parentContext, Class<?> paramClass) {
+    DynamicMethodParamBuilderContext(P parentContext, CtClass paramClass, int paramIndex) {
         super(parentContext);
+        this.index(paramIndex);
         this.paramClass = paramClass;
+    }
+
+    DynamicMethodParamBuilderContext(P parentContext) {
+        super(parentContext);
     }
 
     DynamicMethodParamBuilderContext index(int i) {
@@ -23,14 +26,19 @@ public class DynamicMethodParamBuilderContext<P extends DynamicMethodBuilderCont
         return this;
     }
 
+    public DynamicMethodParamBuilderContext<P> type(Class<?> paramClass) {
+        getCtClass(paramClass).ifPresent(paramCtClass-> this.paramClass = paramCtClass);
+        return this;
+    }
 
-    Optional<CtClass> getParamCtClass() {
-        return getCtClass(paramClass);
+
+    CtClass getParamCtClass() {
+        return paramClass;
     }
 
     @Override
     public String code() {
-        return "$"+index;
+        return "$"+(index+1);
     }
 
     public void doBuild(CtBehavior behavior) {

@@ -6,17 +6,13 @@
 
     <parent>
         <groupId>org.divy</groupId>
-        <artifactId>bo-framework-root</artifactId>
+        <artifactId>bo-framework-demos</artifactId>
         <version>0.0.3-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
-    <artifactId>bo-framework-exception-handling</artifactId>
-    <name>exception-handling</name>
-
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>exception-handling-core</module>
-        <module>exception-handling-spring</module>
-    </modules>
+    <artifactId>bo-framework-guice-jersey</artifactId>
+    <name>guice-jersey</name>
+    <description>Demo Application for Guice and Jersey based Bo Framework</description>
+    
 </project>

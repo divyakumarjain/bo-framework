@@ -1,96 +1,57 @@
 package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.rest.LinkBuilder;
-import org.divy.common.bo.rest.LinkBuilderFactory;
+import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.Serializable;
-import java.net.URI;
 import java.util.Collection;
 
 public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
-    protected LinkBuilderFactory linkBuilderFactory;
+    private ResponseEntityBuilderFactory<E, I> responseEntityBuilderFactory;
 
-    public AbstractCRUDEndpoint(LinkBuilderFactory linkBuilderFactory) {
-        this.linkBuilderFactory = linkBuilderFactory;
+    public AbstractCRUDEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+        this.responseEntityBuilderFactory = responseEntityBuilderFactory;
     }
 
-    public  Response create(E businessObject, UriInfo uriInfo) {
-
+    public  Response create(@NotNull E businessObject, UriInfo uriInfo) {
         E createdBo = doCreate(businessObject);
 
-        LinkBuilder linkBuilder = linkBuilderFactory.newBuilder();
-
-        URI createLocation = linkBuilder
-                .path(this.getClass())
-                .path(this.getClass(),"read")
-                .buildUri(identity(createdBo));
-
-        return Response.created(createLocation).build();
+        return responseEntityBuilderFactory.create(createdBo).build();
     }
 
-    public  Response update(I id, E businessObject, UriInfo uriInfo) {
-
+    public  Response update(@NotNull I id,@NotNull E businessObject, UriInfo uriInfo) {
         doUpdate(id, businessObject);
 
-        return Response.noContent().build();
+        return responseEntityBuilderFactory.update().build();
     }
 
-    public  Response delete(I id, UriInfo uriInfo) {
-
+    public  Response delete(@NotNull I id, UriInfo uriInfo) {
         E entity = doDelete(id);
 
-        if(entity == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else {
-            return Response.noContent().build();
-        }
-
+        return responseEntityBuilderFactory.delete().build();
     }
 
     public  Response list(UriInfo uriInfo) {
         Collection<E> resultList = doList();
-        return buildListResponse(resultList);
+
+        return responseEntityBuilderFactory.list(resultList).build();
 
     }
 
-    public  Response search( Query query,
+    public  Response search(@NotNull Query query,
                                  UriInfo uriInfo) {
         Collection<E> resultList = doSearch(query);
-        return buildListResponse(resultList);
+        return responseEntityBuilderFactory.list(resultList).build();
     }
 
-    public  Response read( I id,
+    public  Response read(@NotNull I id,
                                UriInfo uriInfo) {
         E entity = doRead(id);
 
-        return buildReadResponse(entity);
-    }
-
-    protected Response buildListResponse(Collection<E> resultList) {
-        if (resultList == null || resultList.isEmpty()) {
-            return Response.noContent().build();
-        } else {
-            return Response.ok(resultList).build();
-        }
-    }
-
-    protected Response buildReadResponse(E entity) {
-        if(entity!=null) {
-            return Response.ok(entity).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-    }
-
-    public LinkBuilderFactory getLinkBuilderFactory() {
-        return linkBuilderFactory;
-    }
-
-    public void setLinkBuilderFactory(LinkBuilderFactory linkBuilderFactory) {
-        this.linkBuilderFactory = linkBuilderFactory;
+        return responseEntityBuilderFactory.read(entity).build();
     }
 
     protected abstract String identity(E createdBo);

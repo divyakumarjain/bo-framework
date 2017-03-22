@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-database-jpa</artifactId>
+    <name>database-jpa</name>
 
 
     <dependencies>

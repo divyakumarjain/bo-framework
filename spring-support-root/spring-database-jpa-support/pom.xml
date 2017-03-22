@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>bo-framework-spring-database-jpa-support</artifactId>
+    <name>spring-database-jpa-support</name>
     <packaging>jar</packaging>
 
     <dependencies>

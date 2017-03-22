@@ -2,24 +2,75 @@ package org.divy.common.bo.endpoint.json.test;
 
 import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.business.IBOManager;
-import org.divy.common.bo.endpoint.AbstractBOJerseyEndpoint;
-import org.divy.common.bo.rest.LinkBuilderFactory;
+import org.divy.common.bo.endpoint.BaseBOEndpoint;
+import org.divy.common.bo.query.Query;
+import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.UUID;
 
-/**
- *
- *
- */
-@Path("/mock")
-public class MockBoJerseyEndpoint extends AbstractBOJerseyEndpoint<MockBoJerseyEndpoint.MockEntity, UUID> {
-    @Inject
-    public MockBoJerseyEndpoint(IBOManager<MockEntity, UUID> manager, LinkBuilderFactory linkBuilderFactory) {
-        super(manager, linkBuilderFactory);
+@Path("mock")
+public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID> {
+
+    MockBoJerseyEndpoint(IBOManager<MockEntity, UUID> manager, ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+        super(manager, responseEntityBuilderFactory);
+    }
+
+    @Consumes({"application/json"})
+    @GET
+    @Produces({"application/json"})
+    @Path("/{id}")
+    public Response readEndPoint(@PathParam("id") @NotNull UUID id, @Context UriInfo uri) {
+        return super.read(id, uri);
+    }
+
+    @Produces({"application/json"})
+    @Consumes({"application/json"})
+    @Path("/{id}")
+    @Override
+    @DELETE
+    public Response delete(@NotNull @PathParam("id") UUID id, @Context UriInfo uri) {
+        return super.delete(id, uri);
+    }
+
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    @Override
+    @GET
+    public Response list(@Context UriInfo uri) {
+        return super.list(uri);
+    }
+
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
+    @Override
+    @POST
+    public Response create(@NotNull MockBoJerseyEndpoint.MockEntity entity, @Context UriInfo uri) {
+        return super.create(entity, uri);
+    }
+
+    @Override
+    @Consumes({"application/json"})
+    @Path("/{id}")
+    @PUT
+    @Produces({"application/json"})
+    public Response update(@PathParam("id") UUID id, @NotNull MockBoJerseyEndpoint.MockEntity entity, @Context UriInfo uri) {
+        return super.update(id, entity, uri);
+    }
+
+    @Consumes({"application/json"})
+    @Override
+    @Produces({"application/json"})
+    @POST
+    @Path("/search")
+    public Response search(@NotNull Query query, @Context UriInfo uri) {
+        return super.search(query, uri);
     }
 
     @XmlRootElement
@@ -33,12 +84,8 @@ public class MockBoJerseyEndpoint extends AbstractBOJerseyEndpoint<MockBoJerseyE
 
         private List<MockEntity> childEntities;
 
-        public MockEntity() {
+        MockEntity() {
             //Noop Constructor
-        }
-
-        public MockEntity(UUID uuid) {
-            super(uuid);
         }
 
         /*

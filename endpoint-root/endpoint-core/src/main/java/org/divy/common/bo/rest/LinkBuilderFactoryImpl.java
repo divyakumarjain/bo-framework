@@ -18,12 +18,12 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
     @Inject
     private HttpServletRequest request;
 
-    static final String HEADER_HOST = "Host";
-    static final String HEADER_X_ORIGINAL_PROTO = "X-Orig-Proto";
-    static final String HEADER_X_ORIGINAL_HOST = "X-Orig-Host";
-    static final String HEADER_X_ORIGINAL_BASE = "X-Orig-Base";
-    static final String DEFAULT_SCHEME = "http";
-    static final String DEFAULT_HOST = "localhost";
+    private static final String HEADER_HOST = "Host";
+    private static final String HEADER_X_ORIGINAL_PROTO = "X-Orig-Proto";
+    private static final String HEADER_X_ORIGINAL_HOST = "X-Orig-Host";
+    private static final String HEADER_X_ORIGINAL_BASE = "X-Orig-Base";
+    private static final String DEFAULT_SCHEME = "http";
+    private static final String DEFAULT_HOST = "localhost";
 
     @Override
     public LinkBuilder newBuilder() {
@@ -59,7 +59,7 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
     }
 
     private String getOriginalHost(UriInfo requestUriInfo) {
-        LOGGER.debug("Resolving Host for the URL" + requestUriInfo.getAbsolutePath().toString());
+        LOGGER.debug("Resolving Host for the URL {} ", requestUriInfo.getAbsolutePath().toString());
         return resolveHost(HttpRequestContext.request()).orElse(DEFAULT_HOST);
     }
 
@@ -86,6 +86,6 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
                 host = originalHostHeader;
             }
         }
-        return Optional.of(host);
+        return Optional.ofNullable(host);
     }
 }

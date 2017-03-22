@@ -6,13 +6,14 @@ import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
-import org.divy.common.bo.endpoint.AbstractBOEndpoint;
+import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.rest.LinkBuilderFactory;
+import org.divy.common.bo.rest.LinkBuilderFactoryImpl;
 import org.divy.common.bo.test.ITestDataProvider;
 import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
@@ -29,19 +30,20 @@ import static org.mockito.Mockito.mock;
 /**
  *
  */
-public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I extends Serializable>
+public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I extends Serializable>
         extends AbstractBOEndpointTest<E, I> {
 
-    public static final String STATUS = "status";
-    public static final String HEADERS = "headers";
-    public static final String ENTITY = "entity";
-    @Inject
-    public AbstractBOEndpoint<E, I> endpointInstance;
+    private static final String STATUS = "status";
+    private static final String HEADERS = "headers";
+    private static final String ENTITY = "entity";
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseBOEndpointUnitTest.class);
+
+    private BaseBOEndpoint<E, I> endpointInstance;
 
     /**
      * @param testDataProvider
      */
-    public AbstractBOEndpointUnitTest(ITestDataProvider<E> testDataProvider) {
+    public BaseBOEndpointUnitTest(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
     }
 
@@ -108,14 +110,6 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
         return toKey(segments[segments.length - 1]);
     }
 
-    public AbstractBOEndpoint<E, I> getEndpointInstance() {
-        return endpointInstance;
-    }
-
-    public void setEndpointInstance(AbstractBOEndpoint<E, I> endpointInstance) {
-        this.endpointInstance = endpointInstance;
-    }
-
     @Before
     public void setup() {
 
@@ -124,17 +118,13 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
                 .injectMembers(this);
     }
 
-    protected abstract AbstractBOEndpoint<E, I> createEndpointInstance();
+    protected abstract BaseBOEndpoint<E, I> createEndpointInstance();
 
     public Iterable<Module> getTestModules() {
         return Collections.singletonList(new AbstractModule() {
             @Override
             public void configure() {
-                @SuppressWarnings("unchecked")
-                Class<AbstractBOEndpoint<E, I>> endPointClass = (Class<AbstractBOEndpoint<E, I>>) getEndPointClass();
-
-                bind(LinkBuilderFactory.class).toInstance(new MockLinkBuilderFactory("http", "localhost:8080", ""));
-                bind(getEndpointTypeLiteral()).to(endPointClass);
+                bind(LinkBuilderFactoryImpl.class);
                 bind(getManagerTypeLiteral()).toInstance(getMockManagerInstance());
                 bind(HttpServletRequest.class).toInstance(mock(HttpServletRequest.class));
             }
@@ -147,7 +137,7 @@ public abstract class AbstractBOEndpointUnitTest<E extends IBusinessObject<I>, I
 
     protected abstract Class<E> getEntityClass();
 
-    protected abstract TypeLiteral<AbstractBOEndpoint<E, I>> getEndpointTypeLiteral();
+    protected abstract TypeLiteral<BaseBOEndpoint<E, I>> getEndpointTypeLiteral();
 
     protected abstract I toKey(String segment);
 }
