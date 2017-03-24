@@ -59,7 +59,9 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
     }
 
     private String getOriginalHost(UriInfo requestUriInfo) {
-        LOGGER.debug("Resolving Host for the URL {} ", requestUriInfo.getAbsolutePath().toString());
+        if(LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Resolving Host for the URL {} ", requestUriInfo.getAbsolutePath().toString());
+        }
         return resolveHost(HttpRequestContext.request()).orElse(DEFAULT_HOST);
     }
 

@@ -29,7 +29,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
     }
 
     public  Response delete(@NotNull I id, UriInfo uriInfo) {
-        E entity = doDelete(id);
+        doDelete(id);
 
         return responseEntityBuilderFactory.delete().build();
     }
