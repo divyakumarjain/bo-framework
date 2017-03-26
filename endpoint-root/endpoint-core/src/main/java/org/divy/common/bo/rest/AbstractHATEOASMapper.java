@@ -23,31 +23,19 @@ public abstract class AbstractHATEOASMapper <E extends IBusinessObject<UUID>, R 
                                  , IBOMapper<E, Map<String, Object>> keyValuePairMapper
                                  , LinkBuilderFactory linkBuilderFactory
                                  , MetaDataProvider metaDataProvider) {
+
         this.representationType = representationType;
+        this.keyValuePairMapper = keyValuePairMapper;
         this.linkBuilderFactory = linkBuilderFactory;
         this.metaDataProvider = metaDataProvider;
-        this.keyValuePairMapper = keyValuePairMapper;
     }
 
-    public LinkBuilderFactory getLinkBuilderFactory() {
+    LinkBuilderFactory getLinkBuilderFactory() {
         return linkBuilderFactory;
     }
 
     private IBOMapper<E, Map<String, Object>> getKeyValuePairMapper() {
         return keyValuePairMapper;
-    }
-
-    @Override
-    public Collection<R> createRepresentationFromBO(Collection<E> boList) {
-        return boList.stream().map(this::createRepresentationFromBO).collect(Collectors.toList());
-    }
-
-
-
-    @Override
-    public Collection<E> createBOFromRepresentation(Collection<R> representations) {
-        return representations.stream().map(this::createBOFromRepresentation)
-                .collect(Collectors.toList());
     }
 
     @Override
@@ -58,6 +46,17 @@ public abstract class AbstractHATEOASMapper <E extends IBusinessObject<UUID>, R 
         doFillLinks(representation, businessObject);
         doFillAssociations(representation, businessObject);
         return representation;
+    }
+
+    @Override
+    public Collection<R> createRepresentationFromBO(Collection<E> boList) {
+        return boList.stream().map(this::createRepresentationFromBO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<E> createBOFromRepresentation(Collection<R> representations) {
+        return representations.stream().map(this::createBOFromRepresentation)
+                .collect(Collectors.toList());
     }
 
     @Override
