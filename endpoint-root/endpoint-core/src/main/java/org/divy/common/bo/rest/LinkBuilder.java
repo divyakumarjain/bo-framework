@@ -50,7 +50,7 @@ public class LinkBuilder {
         }
     }
 
-    /**
+    /**e
      * Append the path from a Path-annotated class to the existing path. When constructing the final path, a '/'
      * separator will be inserted between the existing path and the supplied path if necessary.
      *

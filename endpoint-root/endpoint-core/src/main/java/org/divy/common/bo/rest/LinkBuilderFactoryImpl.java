@@ -25,6 +25,15 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
     private static final String DEFAULT_SCHEME = "http";
     private static final String DEFAULT_HOST = "localhost";
 
+    public LinkBuilderFactoryImpl() {
+        this(null);
+    }
+
+    public LinkBuilderFactoryImpl(HttpServletRequest request) {
+        this.request = request;
+    }
+
+
     @Override
     public LinkBuilder newBuilder() {
         String scheme = DEFAULT_SCHEME;
@@ -42,52 +51,55 @@ public class LinkBuilderFactoryImpl implements LinkBuilderFactory {
 
     @Override
     public LinkBuilder newBuilder(UriInfo requestUriInfo) {
-        String scheme = DEFAULT_SCHEME;
-        String originalPath = StringUtils.EMPTY;
+        String scheme = getRequestHeader(HEADER_X_ORIGINAL_PROTO)
+                .orElseGet(() -> requestUriInfo.getAbsolutePath().getScheme());
 
-        final HttpServletRequest requestFromContext = HttpRequestContext.request();
-        if (requestFromContext != null) {
-            scheme = StringUtils.defaultIfBlank(requestFromContext.getHeader(HEADER_X_ORIGINAL_PROTO),
-                    StringUtils.defaultIfBlank(requestUriInfo.getAbsolutePath().getScheme(),
-                            requestFromContext.getScheme()));
-            originalPath = StringUtils.defaultIfBlank(requestFromContext.getHeader(HEADER_X_ORIGINAL_BASE),
-                    StringUtils.defaultIfBlank(requestUriInfo.getBaseUri().toString(),
-                            requestFromContext.getContextPath()));
-        }
+        String originalPath = getRequestHeader(HEADER_X_ORIGINAL_BASE)
+                        .orElseGet(()-> requestUriInfo.getPath().toString());
 
         return new LinkBuilder(scheme, getOriginalHost(requestUriInfo), originalPath);
+    }
+
+    private Optional<String> getRequestHeader(String headerName) {
+        Optional<String> headerValue = getRequestHeader(this.request, headerName);
+        if(!headerValue.isPresent()) {
+            return getRequestHeader(HttpRequestContext.request(), headerName);
+        }
+        return headerValue;
+    }
+
+    private Optional<String> getRequestHeader(HttpServletRequest request, String headerName) {
+        if(request != null) {
+            String headerValue;
+            headerValue = request.getHeader(headerName);
+            return Optional.ofNullable(headerValue);
+        } else {
+            return Optional.empty();
+        }
     }
 
     private String getOriginalHost(UriInfo requestUriInfo) {
         if(LOGGER.isDebugEnabled()) {
             LOGGER.debug("Resolving Host for the URL {} ", requestUriInfo.getAbsolutePath().toString());
         }
-        return resolveHost(HttpRequestContext.request()).orElse(DEFAULT_HOST);
-    }
-
-
-    public String getOriginalHost() {
-        return resolveHost(HttpRequestContext.request()).orElse(DEFAULT_HOST);
-    }
-
-    private Optional<String> resolveHost(HttpServletRequest currentRequest) {
-        String host = null;
-        if (currentRequest != null) {
-            String originalHostHeader = currentRequest.getHeader(HEADER_X_ORIGINAL_HOST);
-            if (StringUtils.isBlank(originalHostHeader)) {
-                String hostHeader = currentRequest.getHeader(HEADER_HOST);
-                if (StringUtils.isBlank(hostHeader)) {
-                    String portSuffix = currentRequest.getServerPort() == LinkBuilder.DEFAULT_HTTP_PORT ? "" : ":" + currentRequest.getServerPort();
-                    host = currentRequest.getServerName() + portSuffix;
-                }
-                else {
-                    host = hostHeader;
-                }
+        return resolveHost().orElseGet(() -> {
+            if(requestUriInfo!=null) {
+                return requestUriInfo.getAbsolutePath().getHost();
             }
             else {
-                host = originalHostHeader;
+                return DEFAULT_HOST;
             }
-        }
-        return Optional.ofNullable(host);
+        });
+    }
+
+
+    private String getOriginalHost() {
+        return resolveHost().orElse(DEFAULT_HOST);
+    }
+
+    private Optional<String> resolveHost() {
+
+        return Optional.ofNullable(getRequestHeader(HEADER_X_ORIGINAL_HOST)
+                    .orElseGet(() -> getRequestHeader(HEADER_HOST).orElse(null)));
     }
 }
