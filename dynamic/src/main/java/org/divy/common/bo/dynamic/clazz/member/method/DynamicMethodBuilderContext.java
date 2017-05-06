@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DynamicMethodBuilderContext<C extends DynamicMethodBuilderContext, P extends DynamicClassBuilderContext>
         extends DynamicMemberBuilderContext<C, P> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicMethodBuilderContext.class);
     protected List<DynamicMethodParamBuilderContext<C>> parameters = new ArrayList<>();
     private String body="";
     int paramCount=0;
