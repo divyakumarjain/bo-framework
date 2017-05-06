@@ -2,8 +2,7 @@ package org.divy.common.bo.endpoint.test;
 
 import org.divy.common.bo.rest.LinkBuilder;
 import org.divy.common.bo.rest.LinkBuilderFactory;
-
-import javax.ws.rs.core.UriInfo;
+import org.divy.common.rest.JerseyLinkBuilderImpl;
 
 public class MockLinkBuilderFactory implements LinkBuilderFactory {
 
@@ -19,11 +18,6 @@ public class MockLinkBuilderFactory implements LinkBuilderFactory {
 
     @Override
     public LinkBuilder newBuilder() {
-        return new LinkBuilder(this.scheme, this.host, this.basePath);
-    }
-
-    @Override
-    public LinkBuilder newBuilder(UriInfo requestUriInfo) {
-        return new LinkBuilder(this.scheme, this.host, this.basePath);
+        return new JerseyLinkBuilderImpl(this.scheme, this.host, this.basePath);
     }
 }

@@ -5,7 +5,7 @@ import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.hypermedia.association.builder.CreateBuilder;
 import org.divy.common.bo.endpoint.hypermedia.association.builder.UpdateBuilder;
 import org.divy.common.bo.endpoint.hypermedia.association.reader.ReaderBuilder;
-import org.divy.common.bo.rest.AbstractHATEOASMapper;
+import org.divy.common.bo.rest.AbstractHyperMediaMapper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Association<T> {
-    protected AbstractHATEOASMapper mapper;
+    protected AbstractHyperMediaMapper mapper;
     private String name;
     private Cardinality cardinality;
     private List<PropagateSave> propagateSaves;
@@ -23,7 +23,7 @@ public class Association<T> {
     private Create create;
     private Update update;
 
-    public Association<T> withMapper(AbstractHATEOASMapper mapper) {
+    public Association<T> withMapper(AbstractHyperMediaMapper mapper) {
         this.mapper = mapper;
         return this;
     }

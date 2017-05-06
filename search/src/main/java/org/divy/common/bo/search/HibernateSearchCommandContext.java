@@ -3,7 +3,6 @@ package org.divy.common.bo.search;
 import org.divy.common.bo.context.CommandContext;
 import org.hibernate.search.jpa.FullTextEntityManager;
 
-//TODO
 public class HibernateSearchCommandContext implements SearchCommandContext {
 
     FullTextEntityManager fullTextEntityManager;

@@ -10,8 +10,9 @@ import java.util.UUID;
 @XmlRootElement
 public class MockEntity implements IBusinessObject<UUID> {
 
-    protected OffsetDateTime createTimestamp;
-    protected OffsetDateTime lastUpdateTimestamp;
+    private OffsetDateTime createTimestamp;
+    private OffsetDateTime lastUpdateTimestamp;
+    private String type;
 
     public MockEntity() {
     }
@@ -21,11 +22,16 @@ public class MockEntity implements IBusinessObject<UUID> {
         this.uuid = uuid;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.divy.common.bo.IBusinessObject#getIdentity()
-     */
+    @Override
+    public String _type() {
+        return type;
+    }
+
+    @Override
+    public void _type(String type) {
+        this.type = type;
+    }
+
     public UUID identity() {
         return getUuid();
     }

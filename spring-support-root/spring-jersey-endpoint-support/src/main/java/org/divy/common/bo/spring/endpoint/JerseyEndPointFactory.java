@@ -6,7 +6,7 @@ import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.EndPointRegistry;
-import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
+import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +15,18 @@ import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import java.util.Optional;
 import java.util.UUID;
 
 public class JerseyEndPointFactory implements ResourceConfigCustomizer {
 
+    private static final String ID_PATH = "/{id}";
     private final MetaDataProvider metaDataProvider;
     private final BeanNamingStrategy beanNamingStrategy;
     private final EndPointRegistry endPointRegistry;
     private final JerseyEndpointConfigProperties configProperties;
 
-    @Autowired
     public JerseyEndPointFactory(MetaDataProvider metaDataProvider
             , BeanNamingStrategy beanNamingStrategy
             , EndPointRegistry endPointRegistry
@@ -52,39 +52,35 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
                     .addAnnotation(javax.ws.rs.Path.class)
                         .value(configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase())
                         .and()
-                .proxySuperMethod("create")
+                .proxySuperMethod("create").name("createMethod")
                     .addAnnotation(POST.class)
                         .and()
                     .addAnnotation(Override.class)
                         .and()
                     .addAnnotation(Produces.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .addAnnotation(Consumes.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .param(typeClass)
                         .addAnnotation(NotNull.class)
                             .and()
                         .and()
-                    .param()
-                        .addAnnotation(Context.class)
-                            .and()
-                        .and()
                     .and()
-                .proxySuperMethod("update")
+                .proxySuperMethod("update").name("updateMethod")
                     .addAnnotation(PUT.class)
                         .and()
                     .addAnnotation(Path.class)
-                        .value("/{id}")
+                        .value(ID_PATH)
                         .and()
                     .addAnnotation(Override.class)
                         .and()
                     .addAnnotation(Produces.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .addAnnotation(Consumes.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .param(UUID.class)
                         .addAnnotation(PathParam.class)
@@ -95,24 +91,20 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
                         .addAnnotation(NotNull.class)
                             .and()
                         .and()
-                    .param()
-                        .addAnnotation(Context.class)
-                            .and()
-                        .and()
                     .and()
-                .proxySuperMethod("delete")
+                .proxySuperMethod("delete").name("deleteMethod")
                     .addAnnotation(DELETE.class)
                         .and()
                     .addAnnotation(Path.class)
-                        .value("/{id}")
+                        .value(ID_PATH)
                         .and()
                     .addAnnotation(Override.class)
                         .and()
                     .addAnnotation(Produces.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .addAnnotation(Consumes.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .param(UUID.class)
                         .addAnnotation(NotNull.class)
@@ -120,13 +112,9 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
                         .addAnnotation(PathParam.class)
                             .value("id")
                             .and()
-                        .and()
-                    .param()
-                        .addAnnotation(Context.class)
-                            .and()
-                        .and()
+                         .and()
                     .and()
-                .proxySuperMethod("search")
+                .proxySuperMethod("search").name("searchMethod")
                     .addAnnotation(POST.class)
                         .and()
                     .addAnnotation(Path.class)
@@ -135,49 +123,41 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
                     .addAnnotation(Override.class)
                         .and()
                     .addAnnotation(Produces.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .addAnnotation(Consumes.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .param()
                         .addAnnotation(NotNull.class)
                             .and()
-                        .and()
-                    .param()
-                        .addAnnotation(Context.class)
-                            .and()
-                        .and()
+                         .and()
                     .and()
-                .proxySuperMethod("list")
+                .proxySuperMethod("list").name("listMethod")
                     .addAnnotation(GET.class)
                         .and()
                     .addAnnotation(Override.class)
                         .and()
                     .addAnnotation(Produces.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .addAnnotation(Consumes.class)
-                        .value(new String[] {"application/json"})
-                        .and()
-                    .param()
-                        .addAnnotation(Context.class)
-                            .and()
-                        .and()
+                        .value(new String[] {MediaType.APPLICATION_JSON})
+                         .and()
                     .and()
-                .proxySuperMethod("read").name("readEndPoint")
+                .proxySuperMethod("read").name("readMethod")
                     .addAnnotation(GET.class)
                         .and()
                     .addAnnotation(Path.class)
-                        .value("/{id}")
+                        .value(ID_PATH)
                         .and()
                     .addAnnotation(Override.class)
                         .and()
                     .addAnnotation(Produces.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .addAnnotation(Consumes.class)
-                        .value(new String[] {"application/json"})
+                        .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .param(UUID.class)
                         .addAnnotation(NotNull.class)
@@ -185,11 +165,7 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
                         .addAnnotation(PathParam.class)
                             .value("id")
                             .and()
-                        .and()
-                    .param()
-                        .addAnnotation(Context.class)
-                            .and()
-                        .and()
+                         .and()
                     .and()
                 .addConstructor()
                     .addAnnotation(Autowired.class)
@@ -201,12 +177,12 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
                         .and()
                     .superParam(ResponseEntityBuilderFactory.class)
                         .addAnnotation(Qualifier.class)
-                            .value("responseEntityBuilderFactory")
+                            .value("jerseyResponseEntityBuilderFactory")
                             .and()
                         .and()
                 .build()
         .map(endpointClass-> {
-            endPointRegistry.addEntityEndPointMap(typeClass, endpointClass);
+            endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
             return endpointClass;
         });
     }

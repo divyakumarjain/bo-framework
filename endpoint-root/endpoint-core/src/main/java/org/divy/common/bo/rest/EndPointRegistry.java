@@ -1,7 +1,10 @@
 package org.divy.common.bo.rest;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.Identifiable;
+
+import java.util.UUID;
 
 public interface EndPointRegistry {
-    void addEntityEndPointMap(Class<? extends IBusinessObject> entityClass, Class<?> endpointClass);
+    void addEntityEndPointMap(String type, Class<?> endpointClass);
+    Class<?> getEndPointClass(Identifiable<UUID> entity);
 }

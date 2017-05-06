@@ -70,7 +70,7 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
         CtClass newClass = getClassPool().makeClass(this.getClassName());
         try {
             doBuild(newClass);
-//            newClass.debugWriteFile();
+            newClass.debugWriteFile();
             return Optional.of(newClass.toClass());
         } catch (CannotCompileException | NotFoundException e) {
             LOGGER.error("Could not create the class", e);

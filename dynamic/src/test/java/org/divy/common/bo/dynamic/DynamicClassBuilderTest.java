@@ -27,7 +27,7 @@ public class DynamicClassBuilderTest {
     public void createClassWithConstructor() throws NoSuchMethodException {
         final Optional<Class<?>> newClass = DynamicClassBuilder.createClass("NewClassWithConstructor")
                 .addConstructor()
-                    .param("sttribute1", String.class)
+                    .param("attribute1", String.class)
                         .addAnnotation(NewAnnotation1.class)
                             .value("NewAnnotation1Value")
                             .and()
@@ -36,7 +36,7 @@ public class DynamicClassBuilderTest {
                     .addAnnotation(NewAnnotation1.class).value("methodAnnotaion")
                         .and()
                     .and()
-                .addField("sttribute1", String.class)
+                .addField("attribute1", String.class)
                 .build();
 
         assertThat(newClass.get().getSimpleName(), is("NewClassWithConstructor"));

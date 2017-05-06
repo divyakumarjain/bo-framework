@@ -3,13 +3,14 @@ package org.divy.common.rest.impl;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.metadata.MetaDataProvider;
-import org.divy.common.bo.rest.AbstractHATEOASMapper;
+import org.divy.common.bo.rest.AbstractHyperMediaMapper;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 import org.divy.common.rest.impl.mock.MockEntity;
 import org.divy.common.rest.impl.mock.MockRepresentation;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.ws.rs.core.Link;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,11 +25,11 @@ import static org.mockito.Mockito.mock;
 public class AbstractHATEOASMapperTest {
 
     private final KeyValuePairMapper<MockEntity> mockKeyValuePairMapper = mock(KeyValuePairMapperImpl.class);
-    private TestHATEOASMapperMock underTest;
+    private TestHyperMediaMapperMock underTest;
 
     @Before
     public void setup() {
-        underTest = new TestHATEOASMapperMock(mockKeyValuePairMapper, mock(LinkBuilderFactory.class), mock(MetaDataProvider.class));
+        underTest = new TestHyperMediaMapperMock(mockKeyValuePairMapper, mock(LinkBuilderFactory.class), mock(MetaDataProvider.class));
     }
 
     @Test
@@ -81,9 +82,9 @@ public class AbstractHATEOASMapperTest {
 
 }
 
-class TestHATEOASMapperMock extends AbstractHATEOASMapper<MockEntity, MockRepresentation> {
+class TestHyperMediaMapperMock extends AbstractHyperMediaMapper<MockEntity, MockRepresentation, Link> {
 
-    TestHATEOASMapperMock(KeyValuePairMapper<MockEntity> keyValuePairMapper, LinkBuilderFactory linkBuilderFactory, MetaDataProvider metaDataProvider) {
+    TestHyperMediaMapperMock(KeyValuePairMapper<MockEntity> keyValuePairMapper, LinkBuilderFactory linkBuilderFactory, MetaDataProvider metaDataProvider) {
         super(MockRepresentation.class
                 , keyValuePairMapper
                 , linkBuilderFactory

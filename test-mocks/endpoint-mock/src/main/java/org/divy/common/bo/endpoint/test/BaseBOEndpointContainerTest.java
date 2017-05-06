@@ -27,13 +27,15 @@ import java.util.List;
  *
  *
  */
-public abstract class BaseBOEndpointContainerTest<E extends IBusinessObject<I>, I extends Serializable>
-        extends AbstractBOEndpointTest<E, I> {
+public abstract class BaseBOEndpointContainerTest<E extends IBusinessObject<I>
+        , I extends Serializable
+        , R>
+        extends AbstractBOEndpointTest<E, I, R> {
 
-    protected final JerseyTest jerseyTestProxy;
+    private final JerseyTest jerseyTestProxy;
 
     /**
-     * @param testDataProvider
+     * @param testDataProvider data provider for the test
      */
     public BaseBOEndpointContainerTest(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
@@ -84,9 +86,9 @@ public abstract class BaseBOEndpointContainerTest<E extends IBusinessObject<I>, 
                 .getEntity();
     }
 
-    protected abstract GenericType<E> getEntityClass();
+    abstract GenericType<E> getEntityClass();
 
-    protected abstract GenericType<List<E>> getEntityListClass();
+    abstract GenericType<List<E>> getEntityListClass();
 
     /**
      * Create a web resource whose URI refers to the base URI the Web
@@ -100,7 +102,7 @@ public abstract class BaseBOEndpointContainerTest<E extends IBusinessObject<I>, 
 
     public class RestResourceTest extends JerseyTest {
 
-        public RestResourceTest() {
+        RestResourceTest() {
             super();
         }
 
