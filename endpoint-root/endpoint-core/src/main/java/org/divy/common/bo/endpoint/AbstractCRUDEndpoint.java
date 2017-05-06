@@ -1,54 +1,51 @@
 package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
+import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import java.io.Serializable;
 import java.util.Collection;
 
-public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
-    private ResponseEntityBuilderFactory<E, I> responseEntityBuilderFactory;
+public abstract class AbstractCRUDEndpoint<E, I extends Serializable, R> {
 
-    public AbstractCRUDEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+    protected ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory;
+
+    public AbstractCRUDEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory) {
         this.responseEntityBuilderFactory = responseEntityBuilderFactory;
     }
 
-    public  Response create(@NotNull E businessObject, UriInfo uriInfo) {
+    public  R create(@NotNull E businessObject) {
         E createdBo = doCreate(businessObject);
 
         return responseEntityBuilderFactory.create(createdBo).build();
     }
 
-    public  Response update(@NotNull I id,@NotNull E businessObject, UriInfo uriInfo) {
+    public  R update(@NotNull I id,@NotNull E businessObject) {
         doUpdate(id, businessObject);
 
         return responseEntityBuilderFactory.update().build();
     }
 
-    public  Response delete(@NotNull I id, UriInfo uriInfo) {
+    public  R delete(@NotNull I id) {
         doDelete(id);
 
         return responseEntityBuilderFactory.delete().build();
     }
 
-    public  Response list(UriInfo uriInfo) {
+    public  R list() {
         Collection<E> resultList = doList();
 
         return responseEntityBuilderFactory.list(resultList).build();
 
     }
 
-    public  Response search(@NotNull Query query,
-                                 UriInfo uriInfo) {
+    public  R search(@NotNull Query query) {
         Collection<E> resultList = doSearch(query);
         return responseEntityBuilderFactory.list(resultList).build();
     }
 
-    public  Response read(@NotNull I id,
-                               UriInfo uriInfo) {
+    public  R read(@NotNull I id) {
         E entity = doRead(id);
 
         return responseEntityBuilderFactory.read(entity).build();
@@ -61,8 +58,6 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable> {
     protected abstract E doCreate(E businessObject);
 
     protected abstract E doUpdate(I id, E businessObject);
-
-    protected abstract void doDelete(E businessObject);
 
     protected abstract E doDelete(I id);
 

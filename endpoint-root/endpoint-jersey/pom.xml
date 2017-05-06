@@ -75,10 +75,10 @@
             <artifactId>jersey-guava</artifactId>
             <version>${jersey.version}</version>
         </dependency>
-        <!--TODO check if hibernate4 library is need in this layer-->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-hibernate4</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

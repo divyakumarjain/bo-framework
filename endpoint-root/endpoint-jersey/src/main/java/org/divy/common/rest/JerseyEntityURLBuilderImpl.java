@@ -1,56 +1,49 @@
 package org.divy.common.rest;
 
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.Identifiable;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.LinkBuilder;
-import org.divy.common.bo.rest.LinkBuilderFactoryImpl;
+import org.divy.common.bo.rest.LinkBuilderFactory;
 import org.divy.common.bo.rest.RESTEntityURLBuilder;
 
 import javax.inject.Inject;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Link;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class JerseyEntityURLBuilderImpl implements RESTEntityURLBuilder<IBusinessObject<UUID>, UUID>, EndPointRegistry {
+public class JerseyEntityURLBuilderImpl implements RESTEntityURLBuilder<Identifiable<UUID>>, EndPointRegistry {
 
-    private final Map<Class<? extends IBusinessObject>, Class<?>> entityEndPointMap = new HashMap<>();
+    private final Map<String, Class<?>> entityEndPointMap = new HashMap<>();
 
 
-    private LinkBuilderFactoryImpl linkBuilderFactory;
+    private LinkBuilderFactory<Link> linkBuilderFactory;
 
     @Inject
-    public JerseyEntityURLBuilderImpl(LinkBuilderFactoryImpl linkBuilderFactory) {
+    public JerseyEntityURLBuilderImpl(LinkBuilderFactory<Link> linkBuilderFactory) {
         this.linkBuilderFactory = linkBuilderFactory;
     }
 
     @Override
-    public void addEntityEndPointMap(Class<? extends IBusinessObject> entityClass, Class<?> endpointClass) {
-        entityEndPointMap.put(entityClass, endpointClass);
+    public void addEntityEndPointMap(String type, Class<?> endpointClass) {
+        entityEndPointMap.put(type, endpointClass);
     }
 
-    @Override
-    public URI buildEntityUri(IBusinessObject entity, UriInfo uriInfo) {
-        LinkBuilder linkBuilder = linkBuilderFactory.newBuilder(uriInfo);
-        return buildEntityUri(entity, linkBuilder);
-    }
-
-    private URI buildEntityUri(IBusinessObject entity, LinkBuilder linkBuilder) {
+    private URI buildEntityUri(Identifiable entity, LinkBuilder<Link> linkBuilder) {
         final Class<?> endPointClass = getEndPointClass(entity);
         return linkBuilder
-                .path(endPointClass)
-                .path(endPointClass,"readEndPoint")
-                .buildUri(entity.identity());
+                .buildURI(endPointClass,"readMethod", entity.identity());
     }
 
     @Override
-    public URI buildEntityUri(IBusinessObject entity) {
+    public URI buildEntityUri(Identifiable entity) {
         return buildEntityUri(entity, linkBuilderFactory.newBuilder());
     }
 
-    private Class<?> getEndPointClass(IBusinessObject entity) {
-        return entityEndPointMap.get(entity.getClass());
+    @Override
+    public Class<?> getEndPointClass(Identifiable entity) {
+        return entityEndPointMap.get(entity._type());
     }
 }

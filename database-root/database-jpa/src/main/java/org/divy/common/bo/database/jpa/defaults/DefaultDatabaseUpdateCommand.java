@@ -18,7 +18,7 @@ public class DefaultDatabaseUpdateCommand<E extends AbstractJPABusinessObject>
     private final EntityManagerCommandContext context;
 
     /**
-     * @param entityType The Entity type
+     * @param entityType The Entity _type
      * @param context The Context for Database operation
      * @param updateMapper mapper which will merge object from to be updated with object from database
      */

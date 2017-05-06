@@ -5,13 +5,16 @@ import java.util.UUID;
 
 public class AbstractBusinessObject implements IBusinessObject<UUID> {
     protected UUID uuid;
-    protected OffsetDateTime createTimestamp;
-    protected OffsetDateTime lastUpdateTimestamp;
+    private OffsetDateTime createTimestamp;
+    private OffsetDateTime lastUpdateTimestamp;
+    private String type;
 
-    public AbstractBusinessObject() {
+
+    protected AbstractBusinessObject() {
         uuid = UUID.randomUUID();
         createTimestamp = OffsetDateTime.now();
         lastUpdateTimestamp = OffsetDateTime .now();
+        type = this.getClass().getSimpleName();
     }
 
     public AbstractBusinessObject(UUID uuid) {
@@ -21,6 +24,16 @@ public class AbstractBusinessObject implements IBusinessObject<UUID> {
     @Override
     public UUID identity() {
         return uuid;
+    }
+
+    @Override
+    public String _type() {
+        return type;
+    }
+
+    @Override
+    public void _type(String type) {
+        this.type = type;
     }
 
     public UUID getUuid() {

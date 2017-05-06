@@ -2,71 +2,44 @@ package org.divy.common.bo.endpoint.hypermedia;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.ws.rs.core.Link;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-public abstract class AbstractRepresentation<I> {
+public abstract class AbstractRepresentation<I, D, L> implements Representation<I, D, L> {
 
     private I id;
+    private String type;
+    D data;
 
-    private Set<Link> links;
-    private Map<String, Object> associations = new HashMap<>();
-    private Map<String, Object> data;
-
-    public AbstractRepresentation() {
-        data = new HashMap<>();
+    @Override
+    public D getData() {
+        return data;
     }
 
-    public I identity() {
-        return id;
+    public void setData(D data) {
+        this.data = data;
     }
 
+    @Override
     @JsonProperty
     public I getId() {
         return id;
     }
 
+    @Override
     public void setId(I id) {
         this.id = id;
     }
 
-    public void addLink(Link link) {
-        if(links==null) {
-            links = new HashSet<>();
-        }
-
-        links.add(link);
+    @Override
+    public String _type() {
+        return type;
     }
 
-    public Set<Link> getLinks() {
-        return links;
+    @Override
+    public void _type(String type) {
+        this.type = type;
     }
 
-    public void setLinks(Set<Link> links) {
-        this.links = links;
-    }
-
-
-    public Map<String, Object> getAssociations() {
-        return associations;
-    }
-
-    public void setAssociations(Map<String, Object> associations) {
-        this.associations = associations;
-    }
-
-    public void addAssociation(String rel, Object association) {
-        getAssociations().put(rel, association);
-    }
-
-    public Map<String, Object> getData() {
-        return data;
-    }
-
-    public void setData(Map<String, Object> data) {
-        this.data = data;
+    @Override
+    public I identity() {
+        return id;
     }
 }

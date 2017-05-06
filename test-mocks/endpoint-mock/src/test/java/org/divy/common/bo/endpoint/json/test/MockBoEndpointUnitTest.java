@@ -6,10 +6,12 @@ import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.endpoint.test.BaseBOEndpointUnitTest;
 import org.divy.common.bo.endpoint.test.InMemoryBOManager;
-import org.divy.common.bo.rest.LinkBuilderFactoryImpl;
-import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
+import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.rest.JerseyEntityURLBuilderImpl;
+import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
+import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
 
+import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyEndpoint.MockEntity, UUID> {
@@ -34,22 +36,22 @@ public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyE
     }
 
     @Override
-    protected Class<? extends BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID>> getEndPointClass() {
+    protected Class<? extends BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response>> getEndPointClass() {
         return MockBoJerseyEndpoint.class;
     }
 
     @Override
-    protected BaseBOEndpoint createEndpointInstance() {
-        LinkBuilderFactoryImpl mock = new LinkBuilderFactoryImpl();
+    protected BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response> createEndpointInstance() {
+        JerseyLinkBuilderFactoryImpl mock = new JerseyLinkBuilderFactoryImpl();
         JerseyEntityURLBuilderImpl jerseyEntityURLBuilder = new JerseyEntityURLBuilderImpl(mock);
-        jerseyEntityURLBuilder.addEntityEndPointMap(MockBoJerseyEndpoint.MockEntity.class, getEndPointClass());
-        ResponseEntityBuilderFactory responseEntityBuilderFactory =  new ResponseEntityBuilderFactory(jerseyEntityURLBuilder);
+        jerseyEntityURLBuilder.addEntityEndPointMap(MockBoJerseyEndpoint.MockEntity.class.getSimpleName(), getEndPointClass());
+        ResponseEntityBuilderFactory responseEntityBuilderFactory =  new JerseyResponseEntityBuilderFactory<>(jerseyEntityURLBuilder);
         return new MockBoJerseyEndpoint(new InMemoryBOManager<>(), responseEntityBuilderFactory);
     }
 
     @Override
-    protected TypeLiteral<BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID>> getEndpointTypeLiteral() {
-        return new TypeLiteral<BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID>>(){};
+    protected TypeLiteral<BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response>> getEndpointTypeLiteral() {
+        return new TypeLiteral<BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response>>(){};
     }
 
     @Override
