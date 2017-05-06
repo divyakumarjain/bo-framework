@@ -1,10 +1,6 @@
 package org.divy.common.bo;
 
-import javax.xml.bind.annotation.XmlTransient;
 
-@FunctionalInterface
-public interface IBusinessObject<I> {
+public interface IBusinessObject<I> extends Identifiable<I> {
 
-    @XmlTransient
-    I identity();
 }

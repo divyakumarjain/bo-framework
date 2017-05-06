@@ -4,7 +4,7 @@ package org.divy.common.bo.endpoint;
 import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
+import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import java.util.List;
  *
  *
  * @param <E> The Entity or Business Object
- * @param <I> The Identity type of Business Object
+ * @param <I> The Identity _type of Business Object
  */
-public class BaseBOEndpoint<E extends IBusinessObject<I>, I extends Serializable>
-        extends AbstractCRUDEndpoint<E, I> {
+public class BaseBOEndpoint<E extends IBusinessObject<I>, I extends Serializable, R>
+        extends AbstractCRUDEndpoint<E, I, R> {
 
 
     private IBOManager<E, I> manager;
@@ -29,12 +29,8 @@ public class BaseBOEndpoint<E extends IBusinessObject<I>, I extends Serializable
      *
      * @param manager the manger instance responsible for management for Business Object entity
      */
-    public BaseBOEndpoint(IBOManager<E, I> manager, ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+    public BaseBOEndpoint(IBOManager<E, I> manager, ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory) {
         super(responseEntityBuilderFactory);
-        this.manager = manager;
-    }
-
-    protected void setManager(IBOManager<E, I> manager) {
         this.manager = manager;
     }
 
@@ -51,13 +47,6 @@ public class BaseBOEndpoint<E extends IBusinessObject<I>, I extends Serializable
     @Override
     protected E doUpdate(I id, E businessObject) {
         return manager.update(id, businessObject);
-    }
-
-    @Override
-    protected void doDelete(E businessObject) {
-
-        manager.delete(businessObject);
-
     }
 
     @Override

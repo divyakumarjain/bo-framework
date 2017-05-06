@@ -61,9 +61,8 @@ public class DynamicProxyMethodBuilderContext
         }
     }
 
-    //TODO
     private String prepareProxyBody() throws NotFoundException {
-        return "{ return (("+methodTobeProxied.getDeclaringClass().getName()+")super)."
+        return "{ return (("+methodTobeProxied.getDeclaringClass().getName()+") super)."
                 + this.methodTobeProxied.getName()
                 + "("
                 + getParamCode()

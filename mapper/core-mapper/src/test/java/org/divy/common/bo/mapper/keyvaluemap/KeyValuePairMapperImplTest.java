@@ -78,8 +78,9 @@ public class KeyValuePairMapperImplTest {
 
     static public class MockEntity implements IBusinessObject<UUID> {
 
-        protected OffsetDateTime createTimestamp;
-        protected OffsetDateTime lastUpdateTimestamp;
+        OffsetDateTime createTimestamp;
+        OffsetDateTime lastUpdateTimestamp;
+        private String type;
 
         public MockEntity() {
         }
@@ -96,6 +97,16 @@ public class KeyValuePairMapperImplTest {
          */
         public UUID identity() {
             return getUuid();
+        }
+
+        @Override
+        public String _type() {
+            return type;
+        }
+
+        @Override
+        public void _type(String type) {
+            this.type = type;
         }
 
         private String name;

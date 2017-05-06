@@ -104,7 +104,7 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         try
         {
             if (type == null) {
-                throw new IllegalArgumentException("Command type not provided");
+                throw new IllegalArgumentException("Command _type not provided");
             }
 
             return type.getConstructor(
@@ -124,7 +124,7 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         try
         {
             if (updateCommandType == null) {
-                throw new IllegalArgumentException("Command type not provided");
+                throw new IllegalArgumentException("Command _type not provided");
             }
             return updateCommandType.getConstructor(EntityManagerCommandContext.class
                     , IBOMapper.class)

@@ -7,9 +7,9 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class FieldMetaData {
-    final Class<?> type;
-    final boolean isCollection;
-    final String fieldName;
+    private final Class<?> type;
+    private final boolean isCollection;
+    private final String fieldName;
 
     public FieldMetaData(PropertyDescriptor pd) {
         this.fieldName = pd.getName();
@@ -52,7 +52,7 @@ public class FieldMetaData {
     @Override
     public String toString() {
         return "FieldMetaData{" +
-                "type=" + type +
+                "_type=" + type +
                 ", isCollection=" + isCollection +
                 ", fieldName='" + fieldName + '\'' +
                 '}';

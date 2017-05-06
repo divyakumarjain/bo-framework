@@ -8,15 +8,15 @@ import org.divy.common.bo.test.TestBOCRUDBase;
 import java.io.Serializable;
 
 
-public abstract class AbstractBOEndpointTest<E extends IBusinessObject<I>, I extends Serializable> extends TestBOCRUDBase<E, I> {
+public abstract class AbstractBOEndpointTest<E extends IBusinessObject<I>, I extends Serializable, R> extends TestBOCRUDBase<E, I> {
 
     /**
-     *  @param testDataProvider
+     *  @param testDataProvider data provider for the test
      */
-    public AbstractBOEndpointTest(ITestDataProvider<E> testDataProvider) {
+    AbstractBOEndpointTest(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
 
     }
 
-    protected abstract Class<? extends BaseBOEndpoint<E, I>> getEndPointClass();
+    protected abstract Class<? extends BaseBOEndpoint<E, I, R>> getEndPointClass();
 }

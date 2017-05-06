@@ -8,8 +8,8 @@ import org.divy.common.bo.IBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.rest.LinkBuilderFactoryImpl;
 import org.divy.common.bo.test.ITestDataProvider;
+import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
 import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
@@ -31,17 +30,16 @@ import static org.mockito.Mockito.mock;
  *
  */
 public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I extends Serializable>
-        extends AbstractBOEndpointTest<E, I> {
+        extends AbstractBOEndpointTest<E, I, Response> {
 
     private static final String STATUS = "status";
     private static final String HEADERS = "headers";
     private static final String ENTITY = "entity";
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseBOEndpointUnitTest.class);
 
-    private BaseBOEndpoint<E, I> endpointInstance;
+    private BaseBOEndpoint<E, I, Response> endpointInstance;
 
     /**
-     * @param testDataProvider
+     * @param testDataProvider the test data provider
      */
     public BaseBOEndpointUnitTest(ITestDataProvider<E> testDataProvider) {
         super(testDataProvider);
@@ -50,7 +48,7 @@ public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I ext
 
     @Override
     protected E doAssertExists(I id) {
-        Response response = endpointInstance.read(id, mock(UriInfo.class));
+        Response response = endpointInstance.read(id);
 
         assertThat(response,
                 either(both(hasProperty(STATUS, is(equalTo(200)))).and(hasProperty(ENTITY, notNullValue())))
@@ -61,7 +59,7 @@ public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I ext
     @Override
     protected E doCreateEntity(E entity) {
 
-        Response response = endpointInstance.create(entity, mock(UriInfo.class));
+        Response response = endpointInstance.create(entity);
         assertThat(response, hasProperty(HEADERS,
                 hasKey(is(equalTo(HttpHeaders.LOCATION)))));
 
@@ -72,13 +70,13 @@ public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I ext
 
     @Override
     protected E doGetByKey(I id) {
-        Response response = endpointInstance.read(id, mock(UriInfo.class));
+        Response response = endpointInstance.read(id);
         return (E) response.getEntity();
     }
 
     @Override
     protected void doAssertNotExists(I id) {
-        Response response = endpointInstance.read(id, mock(UriInfo.class));
+        Response response = endpointInstance.read(id);
 
         assertThat(response, both(hasProperty(STATUS, is(equalTo(404)))).and(hasProperty(ENTITY, nullValue())));
 
@@ -86,20 +84,20 @@ public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I ext
 
     @Override
     protected void doUpdateEntity(I id, E entity) {
-        Response response = this.endpointInstance.update(entity.identity(), entity, mock(UriInfo.class));
+        Response response = this.endpointInstance.update(entity.identity(), entity);
         assertThat(response, hasProperty(STATUS, is(equalTo(204))));
     }
 
     @Override
     protected void doDeleteEntity(E entity) {
-        Response response = this.endpointInstance.delete(entity.identity(), mock(UriInfo.class));
+        Response response = this.endpointInstance.delete(entity.identity());
         assertThat(response, hasProperty(STATUS, is(equalTo(204))));
     }
 
     @Override
     @SuppressWarnings("unchecked")
     protected List<E> doSearchEntities(Query searchQuery) {
-        Response response = this.endpointInstance.search(searchQuery, mock(UriInfo.class));
+        Response response = this.endpointInstance.search(searchQuery);
         assertThat(response, hasProperty(STATUS, is(equalTo(200))));
         assertThat(response, hasProperty(ENTITY, notNullValue()));
         return (List<E>) response.getEntity();
@@ -118,13 +116,13 @@ public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I ext
                 .injectMembers(this);
     }
 
-    protected abstract BaseBOEndpoint<E, I> createEndpointInstance();
+    protected abstract BaseBOEndpoint<E, I, Response> createEndpointInstance();
 
     public Iterable<Module> getTestModules() {
         return Collections.singletonList(new AbstractModule() {
             @Override
             public void configure() {
-                bind(LinkBuilderFactoryImpl.class);
+                bind(JerseyLinkBuilderFactoryImpl.class);
                 bind(getManagerTypeLiteral()).toInstance(getMockManagerInstance());
                 bind(HttpServletRequest.class).toInstance(mock(HttpServletRequest.class));
             }
@@ -137,7 +135,7 @@ public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I ext
 
     protected abstract Class<E> getEntityClass();
 
-    protected abstract TypeLiteral<BaseBOEndpoint<E, I>> getEndpointTypeLiteral();
+    protected abstract TypeLiteral<BaseBOEndpoint<E, I, Response>> getEndpointTypeLiteral();
 
     protected abstract I toKey(String segment);
 }

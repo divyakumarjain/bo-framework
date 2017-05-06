@@ -35,7 +35,7 @@ public class BoFrameworkSpringContext {
     }
 
     @Bean
-    public BeanNamingStrategy namingStrategy() {
+    public BeanNamingStrategyImpl namingStrategy() {
         return new BeanNamingStrategyImpl();
     }
 

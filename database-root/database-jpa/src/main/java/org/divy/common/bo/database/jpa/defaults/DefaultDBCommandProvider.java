@@ -38,7 +38,7 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
     protected Object createCommand(Class<?> type, EntityManagerCommandContext context) {
         try {
             if (type == null) {
-                throw new IllegalArgumentException("Command type not provided");
+                throw new IllegalArgumentException("Command _type not provided");
             }
             return type.getConstructor(Class.class,
                     EntityManagerCommandContext.class).newInstance(entityClass, context);
@@ -56,7 +56,7 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
     protected Object createCommand(Class<? extends IUpdateCommand<E, I>> updateCommandType, EntityManagerCommandContext newContext, IBOMapper<E, E> updateMapper) {
         try {
             if (updateCommandType == null) {
-                throw new IllegalArgumentException("Command type not provided");
+                throw new IllegalArgumentException("Command _type not provided");
             }
             return updateCommandType.getConstructor(Class.class
                     , EntityManagerCommandContext.class

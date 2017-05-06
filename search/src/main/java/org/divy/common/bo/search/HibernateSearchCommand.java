@@ -141,7 +141,7 @@ public class HibernateSearchCommand<E> implements ISearchCommand<E> {
             }
             return booleanJunction.createQuery();
         } else {
-            throw new IllegalArgumentException("Does not support Query of type " + operator.getClass().getSimpleName());
+            throw new IllegalArgumentException("Does not support Query of _type " + operator.getClass().getSimpleName());
         }
     }
 

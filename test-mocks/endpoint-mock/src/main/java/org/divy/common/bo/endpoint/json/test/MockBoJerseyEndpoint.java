@@ -4,19 +4,17 @@ import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.business.IBOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.rest.builder.ResponseEntityBuilderFactory;
+import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.UUID;
 
 @Path("mock")
-public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID> {
+public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response> {
 
     MockBoJerseyEndpoint(IBOManager<MockEntity, UUID> manager, ResponseEntityBuilderFactory responseEntityBuilderFactory) {
         super(manager, responseEntityBuilderFactory);
@@ -26,8 +24,8 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @GET
     @Produces({"application/json"})
     @Path("/{id}")
-    public Response readEndPoint(@PathParam("id") @NotNull UUID id, @Context UriInfo uri) {
-        return super.read(id, uri);
+    public Response readMethod(@PathParam("id") @NotNull UUID id) {
+        return super.read(id);
     }
 
     @Produces({"application/json"})
@@ -35,24 +33,24 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Path("/{id}")
     @Override
     @DELETE
-    public Response delete(@NotNull @PathParam("id") UUID id, @Context UriInfo uri) {
-        return super.delete(id, uri);
+    public Response delete(@NotNull @PathParam("id") UUID id) {
+        return super.delete(id);
     }
 
     @Consumes({"application/json"})
     @Produces({"application/json"})
     @Override
     @GET
-    public Response list(@Context UriInfo uri) {
-        return super.list(uri);
+    public Response list() {
+        return super.list();
     }
 
     @Consumes({"application/json"})
     @Produces({"application/json"})
     @Override
     @POST
-    public Response create(@NotNull MockBoJerseyEndpoint.MockEntity entity, @Context UriInfo uri) {
-        return super.create(entity, uri);
+    public Response create(@NotNull MockBoJerseyEndpoint.MockEntity entity) {
+        return super.create(entity);
     }
 
     @Override
@@ -60,8 +58,8 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Path("/{id}")
     @PUT
     @Produces({"application/json"})
-    public Response update(@PathParam("id") UUID id, @NotNull MockBoJerseyEndpoint.MockEntity entity, @Context UriInfo uri) {
-        return super.update(id, entity, uri);
+    public Response update(@PathParam("id") UUID id, @NotNull MockBoJerseyEndpoint.MockEntity entity) {
+        return super.update(id, entity);
     }
 
     @Consumes({"application/json"})
@@ -69,8 +67,8 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Produces({"application/json"})
     @POST
     @Path("/search")
-    public Response search(@NotNull Query query, @Context UriInfo uri) {
-        return super.search(query, uri);
+    public Response search(@NotNull Query query) {
+        return super.search(query);
     }
 
     @XmlRootElement

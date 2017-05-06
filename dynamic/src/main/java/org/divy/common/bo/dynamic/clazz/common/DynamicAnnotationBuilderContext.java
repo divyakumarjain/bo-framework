@@ -5,9 +5,6 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 import javassist.bytecode.*;
 import javassist.bytecode.annotation.Annotation;
-import javassist.bytecode.annotation.ArrayMemberValue;
-import javassist.bytecode.annotation.MemberValue;
-import javassist.bytecode.annotation.StringMemberValue;
 import org.divy.common.bo.dynamic.clazz.DynamicBuilderContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,21 +16,42 @@ import java.util.Map;
 public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilderContext> extends DynamicBuilderContext<P> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicAnnotationBuilderContext.class);
     private final Class<?> annotationClass;
-    private final Map<String, Object> annotationParam = new HashMap<>();
+    private final Map<String, DynamicAnnotationParam> annotationParam = new HashMap<>();
 
     DynamicAnnotationBuilderContext(P parentContext, Class<?> annotationClass) {
         super(parentContext);
         this.annotationClass = annotationClass;
     }
 
-    public DynamicAnnotationBuilderContext<P> value(Object value) {
+    public DynamicAnnotationBuilderContext<P> value(DynamicAnnotationParam value) {
         annotationParam.put("value", value);
         return this;
     }
 
-    public DynamicAnnotationBuilderContext<P> param(String paramName, Object value) {
+    public DynamicAnnotationBuilderContext<P> value(String value) {
+        return this.value(new StringAnnotationParam(value));
+    }
+
+    public DynamicAnnotationBuilderContext<P> value(String[] values) {
+        return this.value(new StringArrayAnnotationParam(values));
+    }
+
+
+    public DynamicAnnotationBuilderContext<P> param(String paramName, DynamicAnnotationParam value) {
         annotationParam.put(paramName, value);
         return this;
+    }
+
+    public DynamicAnnotationBuilderContext<P> param(String paramName, String value) {
+        return this.param(paramName, new StringAnnotationParam(value));
+    }
+
+    public DynamicAnnotationBuilderContext<P> param(String paramName, String[] values) {
+        return this.param(paramName, new StringArrayAnnotationParam(values));
+    }
+
+    public DynamicAnnotationBuilderContext<P> param(String paramName, Enum value) {
+        return this.param(paramName, new EnumAnnotationParam(value));
     }
 
     public void doBuild(CtClass newClassCt) {
@@ -56,29 +74,14 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
     }
 
     private void doBuildAnnotationParam(Annotation annot, ConstPool constPool) {
-        this.annotationParam.forEach((paramName, paramValue) -> annot.addMemberValue(paramName, doBuildAnnotationParamValue(paramValue, constPool)));
-    }
-
-    private MemberValue doBuildAnnotationParamValue(Object paramValue, ConstPool constPool) {
-        if (paramValue instanceof String) {
-            return new StringMemberValue((String) paramValue, constPool);
-        } else if (paramValue instanceof String[]) {
-            StringMemberValue[] memberValues = Arrays.stream(((String[]) paramValue))
-                    .map(param -> new StringMemberValue(param, constPool))
-                    .toArray(size -> new StringMemberValue[size]);
-            ArrayMemberValue arrayMemberValue = new ArrayMemberValue(constPool);
-            arrayMemberValue.setValue(memberValues);
-            return arrayMemberValue;
-        } else {
-            throw new UnsupportedOperationException("Only String Dynamic Annotation are supported");
-        }
+        this.annotationParam.forEach((paramName, paramValue) -> annot.addMemberValue(paramName, paramValue.doBuildAnnotationParamValue(constPool)));
     }
 
     private Class<?> getAnnotationClass() {
         return annotationClass;
     }
 
-    public Map<String, Object> getAnnotationParam() {
+    public Map<String, DynamicAnnotationParam> getAnnotationParam() {
         return annotationParam;
     }
 

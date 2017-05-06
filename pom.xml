@@ -87,6 +87,12 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
+                <artifactId>bo-framework-exception-handling-core</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.divy</groupId>
                 <artifactId>bo-framework-core-mapper</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
@@ -147,6 +153,11 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
+                <artifactId>bo-framework-endpoint-spring-mvc</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
                 <artifactId>bo-framework-endpoint-jersey</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
@@ -167,17 +178,17 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-exception-handling-core</artifactId>
-                <version>0.0.3-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-core</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-support-autoconfiguration</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>spring-mvc-endpoint-support</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
