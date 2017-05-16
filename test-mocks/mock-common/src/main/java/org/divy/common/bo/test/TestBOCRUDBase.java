@@ -1,6 +1,6 @@
 package org.divy.common.bo.test;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
 import org.junit.After;
@@ -22,16 +22,16 @@ import static org.junit.Assert.assertThat;
  * @param <E>
  * @param <I>
  */
-public abstract class TestBOCRUDBase<E extends IBusinessObject<I>, I> {
+public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestBOCRUDBase.class);
 
-    private final ITestDataProvider<E> testDataProvider;
+    private final TestDataProvider<E> testDataProvider;
 
     /**
      *
      */
-    public TestBOCRUDBase(ITestDataProvider<E> testDataProvider) {
+    public TestBOCRUDBase(TestDataProvider<E> testDataProvider) {
         super();
         this.testDataProvider = testDataProvider;
     }

@@ -2,7 +2,7 @@ package org.divy.common.bo.command;
 
 import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.context.CommandContext;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.exception.NotFoundException;
 
@@ -11,13 +11,13 @@ import java.util.UUID;
 
 public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessObject>
         extends AbstractDatabaseCommand<E, UUID> implements
-        IUpdateCommand<E, UUID> {
+        UpdateCommand<E, UUID> {
 
-    private final IBOMapper<E, E> updateMapper;
+    private final BOMapper<E, E> updateMapper;
 
     protected AbstractDatabaseUpdateCommand( Class<E> typeParameterClass
             , CommandContext context
-            , IBOMapper<E, E> updateMapper) {
+            , BOMapper<E, E> updateMapper) {
         super(typeParameterClass);
         this.setContext(context);
 

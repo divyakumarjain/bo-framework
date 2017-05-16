@@ -3,7 +3,7 @@ package org.divy.common.bo;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-public class AbstractBusinessObject implements IBusinessObject<UUID> {
+public class AbstractBusinessObject implements BusinessObject<UUID> {
     protected UUID uuid;
     private OffsetDateTime createTimestamp;
     private OffsetDateTime lastUpdateTimestamp;

@@ -1,12 +1,12 @@
 package org.divy.common.bo.database.jpa.defaults;
 
 import org.divy.common.bo.AbstractBODatabaseRepository;
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.command.ICommandProvider;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.command.CommandProvider;
 
-public class DefaultDatabaseRepository<E extends IBusinessObject<I>, I> extends
+public class DefaultDatabaseRepository<E extends BusinessObject<I>, I> extends
         AbstractBODatabaseRepository<E, I> {
-    public DefaultDatabaseRepository(ICommandProvider<E, I> commandProvider) {
+    public DefaultDatabaseRepository(CommandProvider<E, I> commandProvider) {
         super(commandProvider);
     }
 }

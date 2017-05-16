@@ -5,7 +5,7 @@ import org.divy.common.bo.query.Query;
 import java.util.List;
 import java.util.stream.Stream;
 
-public interface ISearchCommand<E> extends ICommand {
+public interface SearchCommand<E> extends Command {
     List<E> search(Query query);
     Stream<E> searchStream(Query query);
 }

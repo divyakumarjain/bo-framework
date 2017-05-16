@@ -1,7 +1,7 @@
 package org.divy.common.bo.spring.endpoint.factory;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.hypermedia.AbstractHyperMediaJerseyEndpoint;
 import org.divy.common.bo.endpoint.hypermedia.JerseyRepresentation;
 import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
@@ -10,17 +10,17 @@ import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
 import java.util.UUID;
 
-public class DefaultHATEOASJerseyEndpoint<E extends IBusinessObject<UUID>>
+public class DefaultHATEOASJerseyEndpoint<E extends BusinessObject<UUID>>
         extends AbstractHyperMediaJerseyEndpoint<E, JerseyRepresentation<UUID>, UUID> {
 
 
-    private final IBOManager<E, UUID> manager;
+    private final BOManager<E, UUID> manager;
     private final AbstractAssociations<E> associations;
     private final HyperMediaMapper<E, JerseyRepresentation<UUID>> greetingHATEOSMapper;
     private final Class<E> type;
 
     public DefaultHATEOASJerseyEndpoint(Class<E> type,
-                                        IBOManager<E, UUID> manager,
+                                        BOManager<E, UUID> manager,
                                         ResponseEntityBuilderFactory responseEntityBuilderFactory,
                                         HyperMediaMapper<E, JerseyRepresentation<UUID>> greetingHATEOASMapper) {
         super(responseEntityBuilderFactory);
@@ -37,7 +37,7 @@ public class DefaultHATEOASJerseyEndpoint<E extends IBusinessObject<UUID>>
     }
 
     @Override
-    public IBOManager<E, UUID> getManager() {
+    public BOManager<E, UUID> getManager() {
         return this.manager;
     }
 

@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.hypermedia;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
 import org.divy.common.bo.query.Query;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
-public abstract class AbstractHyperMediaEndpoint<B extends IBusinessObject<I>
+public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
         , E extends Representation
         , I extends Serializable
         , R>
@@ -25,7 +25,7 @@ public abstract class AbstractHyperMediaEndpoint<B extends IBusinessObject<I>
         super(responseEntityBuilderFactory);
     }
 
-    public abstract IBOManager<B, I> getManager();
+    public abstract BOManager<B, I> getManager();
 
     R updateRelation(I id, String relation) {
         //TODO Implement

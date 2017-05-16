@@ -1,6 +1,6 @@
 package org.divy.common.rest;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.JerseyRepresentation;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 
-public class JerseyHyperMediaMapper<E extends IBusinessObject<UUID>>
+public class JerseyHyperMediaMapper<E extends BusinessObject<UUID>>
     extends AbstractHyperMediaMapper<E, JerseyRepresentation<UUID>, Link> {
 
     public JerseyHyperMediaMapper(KeyValuePairMapper<E> keyValuePairMapper

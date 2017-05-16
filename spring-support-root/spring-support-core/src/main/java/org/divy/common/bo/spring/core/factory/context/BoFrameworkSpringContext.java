@@ -1,8 +1,7 @@
 package org.divy.common.bo.spring.core.factory.context;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.metadata.MetaDataProvider;
-import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategyImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,10 +40,10 @@ public class BoFrameworkSpringContext {
 
     @Bean
     public MetaDataProvider entityMetaDataProvider(@Value("${entityTypes}") String typesList) {
-        List<Class<? extends IBusinessObject>> typeList = Arrays.stream(typesList.split(","))
+        List<Class<? extends BusinessObject>> typeList = Arrays.stream(typesList.split(","))
                 .map(className -> {
                     try {
-                        return (Class<? extends IBusinessObject>) Class.forName(className);
+                        return (Class<? extends BusinessObject>) Class.forName(className);
                     } catch (ClassNotFoundException e) {
                         LOGGER.error("Entity Class not found :" + className,e);
                         return null;
@@ -56,12 +55,12 @@ public class BoFrameworkSpringContext {
         return createMetadataProvider(typeList);
     }
 
-    private MetaDataProvider createMetadataProvider(List<Class<? extends IBusinessObject>> typeList) {
+    private MetaDataProvider createMetadataProvider(List<Class<? extends BusinessObject>> typeList) {
         return loadMetaDataProvider("org.divy.common.bo.database.jpa.BoEntityMetaDataProvider", typeList)
                 .orElseGet(() -> loadMetaDataProvider("", typeList).get());
     }
 
-    private Optional<MetaDataProvider> loadMetaDataProvider(String className, List<Class<? extends IBusinessObject>> typeList) {
+    private Optional<MetaDataProvider> loadMetaDataProvider(String className, List<Class<? extends BusinessObject>> typeList) {
         Class<?> metaDataProviderClass = null;
         try {
             metaDataProviderClass = Class.forName(className);

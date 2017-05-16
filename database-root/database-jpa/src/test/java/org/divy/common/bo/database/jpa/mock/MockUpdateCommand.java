@@ -2,13 +2,13 @@ package org.divy.common.bo.database.jpa.mock;
 
 import org.divy.common.bo.command.AbstractDatabaseUpdateCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 
 import java.util.UUID;
 
 public class MockUpdateCommand extends AbstractDatabaseUpdateCommand<MockEntity> {
 
-    public MockUpdateCommand(EntityManagerCommandContext context, IBOMapper<MockEntity, MockEntity> updateMapper) {
+    public MockUpdateCommand(EntityManagerCommandContext context, BOMapper<MockEntity, MockEntity> updateMapper) {
         super(MockEntity.class, context, updateMapper);
     }
 

@@ -1,6 +1,6 @@
 package org.divy.common.bo.mapper.builder;
 
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.mapper.builder.options.field.TargetFieldName;
 
@@ -21,7 +21,7 @@ public interface FieldMapperBuilderContext <S, T> extends org.divy.common.bo.map
         return this;
     }
 
-    default IBOMapper<S, T> build() {
+    default BOMapper<S, T> build() {
         return this.getTypeMapperBuilderContext().buildMapper();
     }
 }

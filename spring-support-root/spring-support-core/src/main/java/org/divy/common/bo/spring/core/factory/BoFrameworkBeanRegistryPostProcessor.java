@@ -1,6 +1,6 @@
 package org.divy.common.bo.spring.core.factory;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -27,7 +27,7 @@ public class BoFrameworkBeanRegistryPostProcessor implements BeanDefinitionRegis
 
     }
 
-    private void registerBeans(Class<? extends IBusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
+    private void registerBeans(Class<? extends BusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
         factories.forEach(factory-> factory.register(type, beanDefinitionRegistry));
     }
 

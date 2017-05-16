@@ -1,6 +1,6 @@
 package org.divy.common.rest.impl.mock;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.OffsetDateTime;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @XmlRootElement
-public class MockEntity implements IBusinessObject<UUID> {
+public class MockEntity implements BusinessObject<UUID> {
 
     private OffsetDateTime createTimestamp;
     private OffsetDateTime lastUpdateTimestamp;

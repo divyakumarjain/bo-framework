@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.json.test;
 
 import org.divy.common.bo.AbstractBusinessObject;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Path("mock")
 public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response> {
 
-    MockBoJerseyEndpoint(IBOManager<MockEntity, UUID> manager, ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+    MockBoJerseyEndpoint(BOManager<MockEntity, UUID> manager, ResponseEntityBuilderFactory responseEntityBuilderFactory) {
         super(manager, responseEntityBuilderFactory);
     }
 
@@ -89,7 +89,7 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
         /*
          * (non-Javadoc)
          *
-         * @see org.divy.common.bo.IBusinessObject#getIdentity()
+         * @see org.divy.common.bo.BusinessObject#getIdentity()
          */
         @Override
         public UUID identity() {

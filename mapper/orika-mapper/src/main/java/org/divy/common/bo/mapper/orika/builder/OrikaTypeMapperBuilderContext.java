@@ -9,8 +9,8 @@ import ma.glasnost.orika.metadata.FieldMapBuilder;
 import ma.glasnost.orika.metadata.Property;
 import ma.glasnost.orika.metadata.TypeFactory;
 import ma.glasnost.orika.property.PropertyResolverStrategy;
+import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.FieldMapperContext;
-import org.divy.common.bo.mapper.IBOMapper;
 import org.divy.common.bo.mapper.builder.AbstractTypeMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.mapper.builder.options.OneWayMappingOption;
@@ -39,7 +39,7 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
     }
 
     @Override
-    public IBOMapper<S, T> buildMapper() {
+    public BOMapper<S, T> buildMapper() {
         return new AdvanceBOMapper<>(source, target, buildMapperFacade());
     }
 

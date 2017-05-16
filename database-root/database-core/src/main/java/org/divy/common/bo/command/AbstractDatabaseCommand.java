@@ -1,9 +1,9 @@
 package org.divy.common.bo.command;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.context.CommandContext;
 
-public abstract class AbstractDatabaseCommand<E extends IBusinessObject<I>, I>
+public abstract class AbstractDatabaseCommand<E extends BusinessObject<I>, I>
 {
 
     private final Class<E> entityType;

@@ -1,9 +1,9 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.command.*;
 import org.divy.common.bo.context.HierarchicalCommandContext;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,8 +11,8 @@ import java.lang.reflect.InvocationTargetException;
  *@deprecated Use Dependency injection instead of CommandProvider for Command Injection
  */
 @Deprecated
-public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
-        implements ICommandProvider<E, I>
+public class TypeBaseDBCommandProvider<E extends BusinessObject<I>, I>
+        implements CommandProvider<E, I>
 {
 
     private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
@@ -20,22 +20,22 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
     private EntityManagerCommandContext context;
     protected final Class<? extends E> entityClass;
 
-    private Class<? extends IGetCommand<E, I>> getCommandType;
-    private Class<? extends IUpdateCommand<E, I>> updateCommandType;
-    private Class<? extends IDeleteCommand<E, I>> deleteCommandType;
-    private Class<? extends ICreateCommand<E>> createCommandType;
-    private Class<? extends ISearchCommand<E>> searchCommandType;
+    private Class<? extends GetCommand<E, I>> getCommandType;
+    private Class<? extends UpdateCommand<E, I>> updateCommandType;
+    private Class<? extends DeleteCommand<E, I>> deleteCommandType;
+    private Class<? extends CreateCommand<E>> createCommandType;
+    private Class<? extends SearchCommand<E>> searchCommandType;
 
-    private final IBOMapper<E, E> updateMapper;
+    private final BOMapper<E, E> updateMapper;
 
     public TypeBaseDBCommandProvider(EntityManagerCommandContext context,
                                      Class<E> entityClass,
-                                     Class<? extends IGetCommand<E, I>> getCommandType,
-                                     Class<? extends IUpdateCommand<E, I>> updateCommandType,
-                                     Class<? extends IDeleteCommand<E, I>> deleteCommandType,
-                                     Class<? extends ICreateCommand<E>> createCommandType,
-                                     Class<? extends ISearchCommand<E>> searchCommandType,
-                                     IBOMapper<E, E> updateMapper) {
+                                     Class<? extends GetCommand<E, I>> getCommandType,
+                                     Class<? extends UpdateCommand<E, I>> updateCommandType,
+                                     Class<? extends DeleteCommand<E, I>> deleteCommandType,
+                                     Class<? extends CreateCommand<E>> createCommandType,
+                                     Class<? extends SearchCommand<E>> searchCommandType,
+                                     BOMapper<E, E> updateMapper) {
 
         this.context = context;
 
@@ -58,44 +58,44 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         this.context = context;
     }
 
-    public Class<? extends IGetCommand<E, I>> getGetCommandType() {
+    public Class<? extends GetCommand<E, I>> getGetCommandType() {
         return getCommandType;
     }
 
-    public void setGetCommandType(final Class<? extends IGetCommand<E, I>> getCommandType) {
+    public void setGetCommandType(final Class<? extends GetCommand<E, I>> getCommandType) {
         this.getCommandType = getCommandType;
     }
 
-    public Class<? extends IUpdateCommand<E, I>> getUpdateCommandType() {
+    public Class<? extends UpdateCommand<E, I>> getUpdateCommandType() {
         return updateCommandType;
     }
 
-    public void setUpdateCommandType(final Class<? extends IUpdateCommand<E, I>> updateCommandType) {
+    public void setUpdateCommandType(final Class<? extends UpdateCommand<E, I>> updateCommandType) {
         this.updateCommandType = updateCommandType;
     }
 
-    public Class<? extends IDeleteCommand<E, I>> getDeleteCommandType() {
+    public Class<? extends DeleteCommand<E, I>> getDeleteCommandType() {
         return deleteCommandType;
     }
 
-    public void setDeleteCommandType(final Class<? extends IDeleteCommand<E, I>> deleteCommandType) {
+    public void setDeleteCommandType(final Class<? extends DeleteCommand<E, I>> deleteCommandType) {
         this.deleteCommandType = deleteCommandType;
     }
 
-    public Class<? extends ICreateCommand<E>> getCreateCommandType() {
+    public Class<? extends CreateCommand<E>> getCreateCommandType() {
         return createCommandType;
     }
 
-    public void setCreateCommandType(final Class<? extends ICreateCommand<E>> createCommandType) {
+    public void setCreateCommandType(final Class<? extends CreateCommand<E>> createCommandType) {
         this.createCommandType = createCommandType;
     }
 
-    public Class<? extends ISearchCommand<E>> getSearchCommandType() {
+    public Class<? extends SearchCommand<E>> getSearchCommandType() {
         return searchCommandType;
     }
 
     public void setSearchCommandType(
-            final Class<? extends ISearchCommand<E>> searchCommandType) {
+            final Class<? extends SearchCommand<E>> searchCommandType) {
         this.searchCommandType = searchCommandType;
     }
 
@@ -118,16 +118,16 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
         }
     }
 
-    protected Object createCommand(Class<? extends IUpdateCommand<E, I>> updateCommandType
+    protected Object createCommand(Class<? extends UpdateCommand<E, I>> updateCommandType
             , EntityManagerCommandContext newContext
-            , IBOMapper<E, E> updateMapper) {
+            , BOMapper<E, E> updateMapper) {
         try
         {
             if (updateCommandType == null) {
                 throw new IllegalArgumentException("Command _type not provided");
             }
             return updateCommandType.getConstructor(EntityManagerCommandContext.class
-                    , IBOMapper.class)
+                    , BOMapper.class)
                     .newInstance(newContext, updateMapper);
 
         } catch (InstantiationException |IllegalAccessException | IllegalArgumentException
@@ -148,52 +148,52 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
 
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public IGetCommand<E, I> getGetCommand()
+    public GetCommand<E, I> getGetCommand()
     {
         final EntityManagerCommandContext newContext = createContext();
 
-        IGetCommand<E, I> returnGetCommand;
+        GetCommand<E, I> returnGetCommand;
 
-        returnGetCommand = (IGetCommand) createCommand(getCommandType,newContext);
+        returnGetCommand = (GetCommand) createCommand(getCommandType,newContext);
 
         return  returnGetCommand;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public ICreateCommand<E> getCreateCommand()
+    public CreateCommand<E> getCreateCommand()
     {
         final EntityManagerCommandContext newContext = createContext();
 
-        ICreateCommand<E> returnCreateCommand;
+        CreateCommand<E> returnCreateCommand;
 
-        returnCreateCommand = (ICreateCommand<E>) createCommand(createCommandType, newContext);
+        returnCreateCommand = (CreateCommand<E>) createCommand(createCommandType, newContext);
 
         return returnCreateCommand;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public IDeleteCommand<E, I> getDeleteCommand()
+    public DeleteCommand<E, I> getDeleteCommand()
     {
         final EntityManagerCommandContext newContext = createContext();
 
-        IDeleteCommand<E, I> returnDeleteCommand;
+        DeleteCommand<E, I> returnDeleteCommand;
 
-        returnDeleteCommand = (IDeleteCommand<E, I>) createCommand(deleteCommandType, newContext);
+        returnDeleteCommand = (DeleteCommand<E, I>) createCommand(deleteCommandType, newContext);
 
         return returnDeleteCommand;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public IUpdateCommand<E, I> getUpdateCommand()
+    public UpdateCommand<E, I> getUpdateCommand()
     {
         final EntityManagerCommandContext newContext = createContext();
 
-        IUpdateCommand<E, I> returnUpdateCommand;
+        UpdateCommand<E, I> returnUpdateCommand;
 
-        returnUpdateCommand = (IUpdateCommand<E, I>) createCommand(updateCommandType, newContext, updateMapper);
+        returnUpdateCommand = (UpdateCommand<E, I>) createCommand(updateCommandType, newContext, updateMapper);
 
         return returnUpdateCommand;
     }
@@ -201,17 +201,17 @@ public class TypeBaseDBCommandProvider<E extends IBusinessObject<I>, I>
     /*
      * (non-Javadoc)
      *
-     * @see org.divy.common.bo.database.ICommandProvider#getSearchCommand()
+     * @see org.divy.common.bo.database.CommandProvider#getSearchCommand()
      */
     @SuppressWarnings("unchecked")
     @Override
-    public ISearchCommand<E> getSearchCommand() {
+    public SearchCommand<E> getSearchCommand() {
 
         final EntityManagerCommandContext newContext = createContext();
 
-        ISearchCommand<E> returnSearchCommand;
+        SearchCommand<E> returnSearchCommand;
 
-        returnSearchCommand = (ISearchCommand<E>) createCommand(
+        returnSearchCommand = (SearchCommand<E>) createCommand(
                 searchCommandType, newContext);
 
         return returnSearchCommand;

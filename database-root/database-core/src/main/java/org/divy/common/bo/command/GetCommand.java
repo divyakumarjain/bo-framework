@@ -1,7 +1,7 @@
 package org.divy.common.bo.command;
 
 @FunctionalInterface
-public interface IGetCommand<E, I> extends ICommand
+public interface GetCommand<E, I> extends Command
 {
     E get(I identity);
 

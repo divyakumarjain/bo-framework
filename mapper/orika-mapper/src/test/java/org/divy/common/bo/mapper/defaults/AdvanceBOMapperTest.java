@@ -5,7 +5,7 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 import ma.glasnost.orika.metadata.ClassMapBuilder;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
 import org.divy.common.bo.mapper.orika.builder.OrikaMapperBuilder;
 import org.hamcrest.Matcher;
@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.OffsetDateTime ;
+import java.time.OffsetDateTime;
 import java.util.*;
 
 import static org.hamcrest.Matchers.*;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThat;
 
 public class AdvanceBOMapperTest {
 
-    IBOMapper<MockEntity, Map> underTest;
+    BOMapper<MockEntity, Map> underTest;
 
     @Before
     public void setup() {

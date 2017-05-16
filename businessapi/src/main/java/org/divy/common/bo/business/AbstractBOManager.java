@@ -1,16 +1,16 @@
 package org.divy.common.bo.business;
 
-import org.divy.common.bo.IBORepository;
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BORepository;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.Query;
 
 import java.util.List;
 
-public class AbstractBOManager<E extends IBusinessObject<I>, I> implements IBOManager<E, I> {
+public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOManager<E, I> {
 
-    final IBORepository<E, I> repository;
+    final BORepository<E, I> repository;
 
-    public AbstractBOManager(IBORepository<E, I> repository) {
+    public AbstractBOManager(BORepository<E, I> repository) {
         this.repository = repository;
     }
 

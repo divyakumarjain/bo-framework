@@ -1,14 +1,14 @@
 package org.divy.common.bo.business.defaults;
 
-import org.divy.common.bo.IBORepository;
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BORepository;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.AbstractBOManager;
 
 
 
-public class DefaultBOManager<E extends IBusinessObject<I>, I> extends AbstractBOManager<E, I> {
+public class DefaultBOManager<E extends BusinessObject<I>, I> extends AbstractBOManager<E, I> {
 
-    public DefaultBOManager(IBORepository<E, I> repository) {
+    public DefaultBOManager(BORepository<E, I> repository) {
         super(repository);
     }
 }

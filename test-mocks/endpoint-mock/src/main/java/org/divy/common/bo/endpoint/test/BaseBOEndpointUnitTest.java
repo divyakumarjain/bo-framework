@@ -4,15 +4,13 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.test.ITestDataProvider;
+import org.divy.common.bo.test.TestDataProvider;
 import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
 import org.junit.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.HttpHeaders;
@@ -29,7 +27,7 @@ import static org.mockito.Mockito.mock;
 /**
  *
  */
-public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I extends Serializable>
+public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I extends Serializable>
         extends AbstractBOEndpointTest<E, I, Response> {
 
     private static final String STATUS = "status";
@@ -41,7 +39,7 @@ public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I ext
     /**
      * @param testDataProvider the test data provider
      */
-    public BaseBOEndpointUnitTest(ITestDataProvider<E> testDataProvider) {
+    public BaseBOEndpointUnitTest(TestDataProvider<E> testDataProvider) {
         super(testDataProvider);
     }
 
@@ -131,7 +129,7 @@ public abstract class BaseBOEndpointUnitTest<E extends IBusinessObject<I>, I ext
 
     protected abstract InMemoryBOManager<E, I> getMockManagerInstance();
 
-    protected abstract TypeLiteral<IBOManager<E, I>> getManagerTypeLiteral();
+    protected abstract TypeLiteral<BOManager<E, I>> getManagerTypeLiteral();
 
     protected abstract Class<E> getEntityClass();
 

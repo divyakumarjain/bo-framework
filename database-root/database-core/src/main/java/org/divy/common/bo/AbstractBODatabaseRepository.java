@@ -1,22 +1,22 @@
 package org.divy.common.bo;
 
-import org.divy.common.bo.command.ICommandProvider;
+import org.divy.common.bo.command.CommandProvider;
 import org.divy.common.bo.query.Query;
 
 import java.util.List;
 import java.util.stream.Stream;
 
-public class AbstractBODatabaseRepository<E extends IBusinessObject<I>, I>
-        implements IBORepository<E, I>
+public class AbstractBODatabaseRepository<E extends BusinessObject<I>, I>
+        implements BORepository<E, I>
 {
 
-    private ICommandProvider<E, I> commandProvider;
+    private CommandProvider<E, I> commandProvider;
 
-    public AbstractBODatabaseRepository(ICommandProvider<E, I> commandProvider) {
+    public AbstractBODatabaseRepository(CommandProvider<E, I> commandProvider) {
         this.commandProvider = commandProvider;
     }
 
-    protected void setCommandProvider(ICommandProvider<E, I> commandProvider)
+    protected void setCommandProvider(CommandProvider<E, I> commandProvider)
     {
         this.commandProvider = commandProvider;
     }

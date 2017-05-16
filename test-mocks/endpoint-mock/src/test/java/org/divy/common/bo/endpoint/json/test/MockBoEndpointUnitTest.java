@@ -2,7 +2,7 @@ package org.divy.common.bo.endpoint.json.test;
 
 import com.google.inject.RuntimeTypeLiteral;
 import com.google.inject.TypeLiteral;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.endpoint.test.BaseBOEndpointUnitTest;
 import org.divy.common.bo.endpoint.test.InMemoryBOManager;
@@ -63,7 +63,7 @@ public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyE
         return MockBoJerseyEndpoint.MockEntity.class;
     }
 
-    protected TypeLiteral<IBOManager<MockBoJerseyEndpoint.MockEntity, UUID>> getManagerTypeLiteral() {
+    protected TypeLiteral<BOManager<MockBoJerseyEndpoint.MockEntity, UUID>> getManagerTypeLiteral() {
         return RuntimeTypeLiteral.boManager(new TypeLiteral<MockBoJerseyEndpoint.MockEntity>() {
         }, new TypeLiteral<UUID>() {
         });

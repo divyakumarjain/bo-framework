@@ -1,10 +1,10 @@
 package org.divy.common.bo.repository.test;
 
-import org.divy.common.bo.IBORepository;
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BORepository;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.test.ITestDataProvider;
 import org.divy.common.bo.test.TestBOCRUDBase;
+import org.divy.common.bo.test.TestDataProvider;
 import org.junit.Before;
 
 import java.util.List;
@@ -13,12 +13,12 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> extends TestBOCRUDBase<E, I>
+public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> extends TestBOCRUDBase<E, I>
 {
 
-    private IBORepository<E, I> boRepository;
+    private BORepository<E, I> boRepository;
 
-    public TestBaseDBRepository(ITestDataProvider<E> testDataProvider) {
+    public TestBaseDBRepository(TestDataProvider<E> testDataProvider) {
         super(testDataProvider);
     }
 
@@ -69,5 +69,5 @@ public abstract class TestBaseDBRepository<E extends IBusinessObject<I>, I> exte
 
     protected abstract String getPersistentUnitName();
 
-    protected abstract IBORepository<E, I> createRepository();
+    protected abstract BORepository<E, I> createRepository();
 }

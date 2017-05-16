@@ -1,6 +1,6 @@
 package org.divy.common.bo.search;
 
-import org.divy.common.bo.command.ISearchCommand;
+import org.divy.common.bo.command.SearchCommand;
 import org.divy.common.bo.query.KeywordQuery;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.query.operator.And;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class HibernateSearchCommand<E> implements ISearchCommand<E> {
+public class HibernateSearchCommand<E> implements SearchCommand<E> {
 
     private HibernateSearchCommandContext context;
 

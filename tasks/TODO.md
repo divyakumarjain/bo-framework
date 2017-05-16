@@ -85,6 +85,8 @@ Guice Demo
 State Machine
 ===
 * Validation based on state
+* State as a field in BO
+* State Transition POST support in controller and HATEOAS link in Representation
 
 Integration
 ===

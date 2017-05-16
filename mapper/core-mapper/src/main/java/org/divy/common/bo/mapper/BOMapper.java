@@ -2,7 +2,7 @@ package org.divy.common.bo.mapper;
 
 import java.util.Collection;
 
-public interface IBOMapper<S, T> {
+public interface BOMapper<S, T> {
 
     S createBO(T sourceData);
     S mapToBO(T sourceData, S businessObject);

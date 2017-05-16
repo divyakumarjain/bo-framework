@@ -1,7 +1,7 @@
 package org.divy.common.bo.spring.endpoint;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
 import org.divy.common.bo.endpoint.hypermedia.JerseyRepresentation;
 import org.divy.common.bo.metadata.MetaDataProvider;
@@ -50,7 +50,7 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                 .forEach(config::register);
     }
 
-    private Optional<Class> buildEndpointClass(Class<? extends IBusinessObject> typeClass) {
+    private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
 
         return DynamicClassBuilder.createClass(typeClass.getSimpleName() + "HyperMediaEndPoint")
                 .subClass(DefaultHATEOASJerseyEndpoint.class)
@@ -177,7 +177,7 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                         .and()
                     .superValue(typeClass)
                         .and()
-                    .superParam(IBOManager.class)
+                    .superParam(BOManager.class)
                         .addAnnotation(Qualifier.class)
                             .value(beanNamingStrategy.calculateManagerId(typeClass))
                             .and()
