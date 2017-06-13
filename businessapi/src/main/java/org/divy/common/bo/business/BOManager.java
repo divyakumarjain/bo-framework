@@ -1,13 +1,14 @@
 package org.divy.common.bo.business;
 
 import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.validation.BOValidationExeception;
 import org.divy.common.bo.query.Query;
 
 import java.util.List;
 
 public interface BOManager<E extends BusinessObject<I>, I> {
 
-    E create(E businessObject) ;
+    E create(E businessObject)throws BOValidationExeception;
 
     E update(I id, E businessObject);
 
