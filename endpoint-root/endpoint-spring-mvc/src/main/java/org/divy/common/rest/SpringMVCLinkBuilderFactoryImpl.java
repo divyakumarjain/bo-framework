@@ -3,17 +3,15 @@ package org.divy.common.rest;
 import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.http.HttpRequestContext;
 import org.divy.common.bo.rest.LinkBuilderFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 
 public class SpringMVCLinkBuilderFactoryImpl implements LinkBuilderFactory {
 
-    @Inject
+    @Autowired
     private HttpServletRequest request;
 
     private static final String HEADER_HOST = "Host";

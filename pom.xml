@@ -21,7 +21,8 @@
         <module>demos</module>
         <module>integration</module>
         <module>dynamic</module>
-        <module>exception-handling</module>
+        <module>exception-handling-root</module>
+        <module>validation-root</module>
     </modules>
 
     <properties>
@@ -36,7 +37,7 @@
         <sonar.host.url>http://sonarqube.com</sonar.host.url>
 
         <!-- Make sure to update below dependencies as these are not updated from Spring Boot BOM-->
-        <org.springframework.boot.version>1.5.2.RELEASE</org.springframework.boot.version>
+        <org.springframework.boot.version>1.5.9.RELEASE</org.springframework.boot.version>
         <hibernate-search-orm-version>5.5.5.Final</hibernate-search-orm-version>
     </properties>
 
@@ -78,6 +79,11 @@
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-repository</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-exception-handling-core</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -188,7 +194,22 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>spring-mvc-endpoint-support</artifactId>
+                <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-validation-core</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-jsr303-validation</artifactId>
+                <version>0.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-spring-jsr303-validation</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>

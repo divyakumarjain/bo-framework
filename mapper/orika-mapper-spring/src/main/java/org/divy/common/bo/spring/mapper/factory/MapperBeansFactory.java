@@ -33,4 +33,10 @@ public class MapperBeansFactory implements DynamicBeanFactory<Class<? extends Bu
                         .addConstructorArgReference("entityMetaDataProvider")
                         .getBeanDefinition());
     }
+
+    @Override
+    public void register(BeanDefinitionRegistry beanDefinitionRegistry)
+    {
+
+    }
 }

@@ -1,6 +1,5 @@
 package org.divy.common.bo.spring.endpoint.factory;
 
-import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.endpoint.SpringMVCEndPointFactory;
 import org.divy.common.bo.spring.endpoint.SpringMVCEndpointConfigProperties;
@@ -40,12 +39,12 @@ public class SpringMVCEndpointBeanFactoryConfig {
     }
 
     @Bean
-    public EndPointRegistry mvcEndPointRegistry() {
+    public SpringMVCEndPointRegistry mvcEndPointRegistry() {
         return new SpringMVCEndPointRegistry();
     }
 
     @Bean
-    public EndPointRegistry mvcHyperMediaEndPointRegistry() {
+    public SpringMVCEndPointRegistry mvcHyperMediaEndPointRegistry() {
         return new SpringMVCEndPointRegistry();
     }
 

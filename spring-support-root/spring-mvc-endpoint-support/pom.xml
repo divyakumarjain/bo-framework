@@ -10,7 +10,7 @@
         <version>0.0.3-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-mvc-endpoint-support</artifactId>
+    <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
     <name>spring-mvc-endpoint-support</name>
     <packaging>jar</packaging>
     

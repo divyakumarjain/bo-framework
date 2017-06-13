@@ -25,4 +25,10 @@ public class EndpointBeanFactory implements DynamicBeanFactory<Class<? extends B
                         .addConstructorArgReference("entityMetaDataProvider")
                         .getBeanDefinition());
     }
+
+    @Override
+    public void register(BeanDefinitionRegistry beanDefinitionRegistry)
+    {
+
+    }
 }

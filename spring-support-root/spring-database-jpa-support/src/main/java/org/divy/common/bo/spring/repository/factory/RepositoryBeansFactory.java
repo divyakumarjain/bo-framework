@@ -36,7 +36,14 @@ public class RepositoryBeansFactory implements DynamicBeanFactory<Class<? extend
         beanDefinitionRegistry.registerBeanDefinition(namingStrategy.calculateManagerId(type)
                 , BeanDefinitionBuilder.genericBeanDefinition(DefaultBOManager.class)
                         .addConstructorArgReference(namingStrategy.calculateRepositoryId(type))
+                        .addConstructorArgReference("boValidator")
                         .getBeanDefinition());
+
+    }
+
+    @Override
+    public void register(BeanDefinitionRegistry beanDefinitionRegistry)
+    {
 
     }
 }

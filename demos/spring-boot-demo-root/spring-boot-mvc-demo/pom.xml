@@ -6,11 +6,11 @@
 
     <parent>
         <groupId>org.divy</groupId>
-        <artifactId>spring-boot-demo-root</artifactId>
+        <artifactId>bo-framework-spring-boot-demo-root</artifactId>
         <version>0.0.3-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-boot-mvc-demo</artifactId>
+    <artifactId>bo-framework-spring-boot-mvc-demo</artifactId>
     <version>0.0.3-SNAPSHOT</version>
 
     <dependencies>
@@ -26,6 +26,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <!--<scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
@@ -52,6 +56,10 @@
             <artifactId>bo-framework-spring-support-autoconfiguration</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-spring-jsr303-validation</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -66,7 +74,7 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>spring-mvc-endpoint-support</artifactId>
+            <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

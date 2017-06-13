@@ -8,9 +8,11 @@ import org.divy.common.bo.Identifiable;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
+import org.divy.common.bo.spring.rest.jersey.response.JerseyResponseEntityBuilderFactory;
 import org.divy.common.rest.JerseyEntityURLBuilderImpl;
 import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
-import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
+import org.divy.common.rest.NotFoundExceptionMapper;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -25,6 +27,18 @@ import java.util.UUID;
 @Configuration
 @AutoConfigureBefore(JerseyAutoConfiguration.class)
 public class EndpointConfig implements Jackson2ObjectMapperBuilderCustomizer {
+
+    @Bean
+    public ResourceConfig resourceConfig() {
+        final ResourceConfig resourceConfig = new ResourceConfig();
+        resourceConfig.register(notFoundExceptionMapper());
+        return resourceConfig;
+    }
+
+    @Bean
+    public NotFoundExceptionMapper notFoundExceptionMapper() {
+        return new NotFoundExceptionMapper();
+    }
 
     @Bean
     public JerseyLinkBuilderFactoryImpl linkBuilderFactory() {
