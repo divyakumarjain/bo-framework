@@ -1,15 +1,17 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
 import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.mapper.builder.FieldMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
-import org.divy.common.bo.mapper.builder.options.type.MapperBuilderOptions;
+import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Matchers;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -18,31 +20,44 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class KeyValuePairMapperImplTest {
 
-    private final MetaDataProvider metaDataProvider = mock(MetaDataProvider.class);
+    private MetaDataProvider metaDataProvider;
     private MapperBuilder mockMapperBuilder;
+    private TypeMapperBuilderContext<MockEntity, Map> typeMapperBuilderContext;
 
     @Before
     public void setup() {
+        metaDataProvider = mock(MetaDataProvider.class);
         mockMapperBuilder = mock(MapperBuilder.class);
-        TypeMapperBuilderContext<MockEntity, Map> typeMapperBuilderContext = mock(TypeMapperBuilderContext.class);
+        typeMapperBuilderContext = mock(TypeMapperBuilderContext.class);
         when(mockMapperBuilder
                 .mapping(MockEntity.class
-                        , Map.class
-                        , MapperBuilderOptions.oneWay()))
+                        , Map.class))
                 .thenReturn(typeMapperBuilderContext);
 
+        initializeBoFieldsMetaData();
+    }
+
+    private void initializeBoFieldsMetaData() {
+        FieldMapperBuilderContext mockFieldMapperContext = mock(FieldMapperBuilderContext.class);
+
+        doReturn(mockFieldMapperContext).when(typeMapperBuilderContext).field(anyString()
+                , Matchers.any(MapperBuilderOption.class)
+                , Matchers.anyObject()
+                , Matchers.anyObject());
+
+        doReturn(typeMapperBuilderContext).when(mockFieldMapperContext).and();
     }
 
     @Test
     @Ignore
-    public void testHierarchy() {
+    public void testHierarchyMappingFromEntityToMap() {
         final KeyValuePairMapper<MockEntity> keyValuePairMapper
                 = new KeyValuePairMapperImpl<>(MockEntity.class
                 , mockMapperBuilder

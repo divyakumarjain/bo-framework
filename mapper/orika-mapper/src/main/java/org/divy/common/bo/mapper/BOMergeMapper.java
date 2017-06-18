@@ -26,7 +26,7 @@ public class BOMergeMapper<B extends BusinessObject> extends AdvanceBOMapper<B, 
                 .and()
                 .field("createTimestamp", FieldMapperOptions.exclude());
 
-        metaDataProvider.getChildEntity(businessObjectType);
+        metaDataProvider.getChildEntities(businessObjectType);
         return mapping.buildMapperFacade();
     }
 }
