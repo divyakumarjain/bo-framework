@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.hypermedia.association;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.hypermedia.association.builder.CreateBuilder;
 import org.divy.common.bo.endpoint.hypermedia.association.builder.UpdateBuilder;
 import org.divy.common.bo.endpoint.hypermedia.association.reader.ReaderBuilder;
@@ -19,7 +19,7 @@ public class Association<T> {
     private List<PropagateSave> propagateSaves;
     private Reader reader;
     private boolean includeInReadOperation;
-    private IBOManager<?, ?> manager;
+    private BOManager<?, ?> manager;
     private Create create;
     private Update update;
 
@@ -28,7 +28,7 @@ public class Association<T> {
         return this;
     }
 
-    public Association<T> manager(IBOManager<?, ?> manager) {
+    public Association<T> manager(BOManager<?, ?> manager) {
         this.manager = manager;
         return this;
     }
@@ -39,8 +39,8 @@ public class Association<T> {
             if (mapper != null) {
                 if (value instanceof Collection) {
                     return mapper.createFromBO((Collection) value);
-                } else if(value instanceof IBusinessObject) {
-                    return mapper.createFromBO((IBusinessObject)value);
+                } else if(value instanceof BusinessObject) {
+                    return mapper.createFromBO((BusinessObject)value);
                 } else {
                     throw new IllegalArgumentException("Not supported Type");
                 }

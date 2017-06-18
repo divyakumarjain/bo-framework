@@ -1,6 +1,6 @@
 package org.divy.common.bo.spring.endpoint.factory;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.core.factory.DynamicBeanFactory;
 import org.divy.common.rest.JerseyHyperMediaMapper;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 
-public class EndpointBeanFactory implements DynamicBeanFactory<Class<? extends IBusinessObject>> {
+public class EndpointBeanFactory implements DynamicBeanFactory<Class<? extends BusinessObject>> {
     
     private final BeanNamingStrategy namingStrategy;
 
@@ -17,7 +17,7 @@ public class EndpointBeanFactory implements DynamicBeanFactory<Class<? extends I
     }
 
     @Override
-    public void register(Class<? extends IBusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
+    public void register(Class<? extends BusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
         beanDefinitionRegistry.registerBeanDefinition(namingStrategy.calculateHyperMediaMapperId(type)
                 , BeanDefinitionBuilder.genericBeanDefinition(JerseyHyperMediaMapper.class)
                         .addConstructorArgReference(namingStrategy.calculateKeyValueMapper(type))

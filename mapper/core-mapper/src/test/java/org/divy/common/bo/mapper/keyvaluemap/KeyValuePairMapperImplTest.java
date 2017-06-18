@@ -1,6 +1,6 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.mapper.builder.FieldMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
@@ -91,7 +91,7 @@ public class KeyValuePairMapperImplTest {
                                 .and(hasEntry(is("name"), is("child2"))))));
     }
 
-    static public class MockEntity implements IBusinessObject<UUID> {
+    static public class MockEntity implements BusinessObject<UUID> {
 
         protected OffsetDateTime createTimestamp;
         protected OffsetDateTime lastUpdateTimestamp;
@@ -114,7 +114,7 @@ public class KeyValuePairMapperImplTest {
         /*
          * (non-Javadoc)
          *
-         * @see org.divy.common.bo.IBusinessObject#getIdentity()
+         * @see org.divy.common.bo.BusinessObject#getIdentity()
          */
         public UUID identity() {
             return getUuid();
@@ -123,11 +123,6 @@ public class KeyValuePairMapperImplTest {
         @Override
         public String _type() {
             return type;
-        }
-
-        @Override
-        public void _type(String type) {
-            this.type = type;
         }
 
         /**

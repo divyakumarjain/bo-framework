@@ -8,7 +8,4 @@ public interface Identifiable<I> {
 
     @XmlTransient
     String _type();
-
-    @XmlTransient
-    void _type(String _type);
 }

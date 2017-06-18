@@ -1,6 +1,6 @@
 package org.divy.common.bo.spring.mapper.factory;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.mapper.BOMergeMapper;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 
-public class MapperBeansFactory implements DynamicBeanFactory<Class<? extends IBusinessObject>> {
+public class MapperBeansFactory implements DynamicBeanFactory<Class<? extends BusinessObject>> {
     
     private final BeanNamingStrategy namingStrategy;
 
@@ -18,7 +18,7 @@ public class MapperBeansFactory implements DynamicBeanFactory<Class<? extends IB
     }
 
     @Override
-    public void register(Class<? extends IBusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
+    public void register(Class<? extends BusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
         beanDefinitionRegistry.registerBeanDefinition(namingStrategy.calculateMergeMapperId(type)
                 , BeanDefinitionBuilder.genericBeanDefinition(BOMergeMapper.class)
                         .addConstructorArgValue(type)

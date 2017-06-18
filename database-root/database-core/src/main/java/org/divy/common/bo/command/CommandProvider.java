@@ -8,16 +8,16 @@ package org.divy.common.bo.command;
  * @deprecated Please use Dependency injection framework
  */
 @Deprecated
-public interface ICommandProvider<E, I>
+public interface CommandProvider<E, I>
 {
 
-    IGetCommand<E, I> getGetCommand();
+    GetCommand<E, I> getGetCommand();
 
-    ICreateCommand<E> getCreateCommand();
+    CreateCommand<E> getCreateCommand();
 
-    IDeleteCommand<E, I> getDeleteCommand();
+    DeleteCommand<E, I> getDeleteCommand();
 
-    IUpdateCommand<E, I> getUpdateCommand();
+    UpdateCommand<E, I> getUpdateCommand();
 
-    ISearchCommand<E> getSearchCommand();
+    SearchCommand<E> getSearchCommand();
 }

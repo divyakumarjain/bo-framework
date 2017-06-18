@@ -1,7 +1,7 @@
 package org.divy.common.bo.spring.endpoint;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
 import org.divy.common.bo.dynamic.clazz.common.EnumArrayAnnotationParam;
 import org.divy.common.bo.dynamic.clazz.common.StringArrayAnnotationParam;
@@ -31,7 +31,7 @@ public class SpringMVCHyperMediaEndPointFactory  extends SpringMVCEndPointFactor
     }
 
     @Override
-    public Optional<Class> buildEndpointClass(Class<? extends IBusinessObject> typeClass) {
+    public Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
 
         return DynamicClassBuilder.createClass(typeClass.getSimpleName() + "HyperMediaEndPoint")
                 .subClass(DefaultHATEOASMVCEndpoint.class)
@@ -108,7 +108,7 @@ public class SpringMVCHyperMediaEndPointFactory  extends SpringMVCEndPointFactor
                         .and()
                     .superValue(typeClass)
                         .and()
-                    .superParam(IBOManager.class)
+                    .superParam(BOManager.class)
                         .addAnnotation(Qualifier.class)
                             .value(beanNamingStrategy.calculateManagerId(typeClass))
                             .and()

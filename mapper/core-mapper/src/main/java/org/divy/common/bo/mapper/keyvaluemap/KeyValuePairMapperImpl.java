@@ -1,7 +1,7 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
@@ -13,9 +13,9 @@ import org.divy.common.bo.metadata.MetaDataProvider;
 import java.time.OffsetDateTime;
 import java.util.*;
 
-public class KeyValuePairMapperImpl<E extends IBusinessObject> implements KeyValuePairMapper<E> {
+public class KeyValuePairMapperImpl<E extends BusinessObject> implements KeyValuePairMapper<E> {
 
-    private IBOMapper<E, Map<String, Object>> mapper;
+    private BOMapper<E, Map<String, Object>> mapper;
 
     public KeyValuePairMapperImpl(Class<E> businessObjectType
             , MapperBuilder mapperBuilder
@@ -88,7 +88,7 @@ public class KeyValuePairMapperImpl<E extends IBusinessObject> implements KeyVal
             mapperBuilderOptions.add(FieldMapperOptions.hintB(Map.class));
         }
 
-        if(IBusinessObject.class.isAssignableFrom(type)) {
+        if(BusinessObject.class.isAssignableFrom(type)) {
             final TypeMapperBuilderContext<E, Map<String, Object>> childTypeMapperBuilderContext = populateTypeMapperBuilderContext((Class<E>) type, mapperBuilder, metaDataProvider);
             typeMapperBuilderContext.addTypeMappingOption(MapperBuilderOptions.childTypeMapping(childTypeMapperBuilderContext));
         }

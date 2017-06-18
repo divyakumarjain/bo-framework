@@ -1,15 +1,15 @@
 package org.divy.common.bo.database.jpa.defaults;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.command.*;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 import org.divy.common.bo.database.jpa.TypeBaseDBCommandProvider;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 
 import java.lang.reflect.InvocationTargetException;
 
 @Deprecated
-public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
+public class DefaultDBCommandProvider<E extends BusinessObject<I>, I>
         extends
         TypeBaseDBCommandProvider<E, I> {
 
@@ -19,18 +19,18 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
     @SuppressWarnings({"unchecked", "rawtypes"})
     public DefaultDBCommandProvider(EntityManagerCommandContext context,
                                     Class<E> entityClass,
-                                    IBOMapper<E, E> updateMapper) {
+                                    BOMapper<E, E> updateMapper) {
         //See below link for explanation of typecasting.
         //http://stackoverflow.com/questions/30090242/java-lang-class-generics-and-wildcards
         //http://stackoverflow.com/questions/26766704/cannot-convert-from-listlist-to-listlist
 
         super(context
                 , entityClass
-                , (Class<? extends IGetCommand<E, I>>) (Class<?>)DefaultDatabaseGetCommand.class
-                , (Class<? extends IUpdateCommand<E, I>>) (Class<?>)DefaultDatabaseUpdateCommand.class
-                , (Class<? extends IDeleteCommand<E, I>>) (Class<?>)DefaultDatabaseDeleteCommand.class
-                , (Class<? extends ICreateCommand<E>>) (Class<?>)DefaultDatabaseCreateCommand.class
-                , (Class<? extends ISearchCommand<E>>) (Class<?>)DefaultDatabaseSearchCommand.class
+                , (Class<? extends GetCommand<E, I>>) (Class<?>)DefaultDatabaseGetCommand.class
+                , (Class<? extends UpdateCommand<E, I>>) (Class<?>)DefaultDatabaseUpdateCommand.class
+                , (Class<? extends DeleteCommand<E, I>>) (Class<?>)DefaultDatabaseDeleteCommand.class
+                , (Class<? extends CreateCommand<E>>) (Class<?>)DefaultDatabaseCreateCommand.class
+                , (Class<? extends SearchCommand<E>>) (Class<?>)DefaultDatabaseSearchCommand.class
                 , updateMapper);
     }
 
@@ -53,14 +53,14 @@ public class DefaultDBCommandProvider<E extends IBusinessObject<I>, I>
     }
 
     @Override
-    protected Object createCommand(Class<? extends IUpdateCommand<E, I>> updateCommandType, EntityManagerCommandContext newContext, IBOMapper<E, E> updateMapper) {
+    protected Object createCommand(Class<? extends UpdateCommand<E, I>> updateCommandType, EntityManagerCommandContext newContext, BOMapper<E, E> updateMapper) {
         try {
             if (updateCommandType == null) {
                 throw new IllegalArgumentException("Command _type not provided");
             }
             return updateCommandType.getConstructor(Class.class
                     , EntityManagerCommandContext.class
-                    , IBOMapper.class).newInstance(entityClass, newContext, updateMapper);
+                    , BOMapper.class).newInstance(entityClass, newContext, updateMapper);
 
 
         } catch (InstantiationException

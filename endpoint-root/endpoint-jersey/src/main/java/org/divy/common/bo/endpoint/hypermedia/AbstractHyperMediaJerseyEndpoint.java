@@ -1,6 +1,6 @@
 package org.divy.common.bo.endpoint.hypermedia;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @param <E> The HATEOAS representation of Business Object entity
  *
  */
-public abstract class AbstractHyperMediaJerseyEndpoint<B extends IBusinessObject<I>,
+public abstract class AbstractHyperMediaJerseyEndpoint<B extends BusinessObject<I>,
         E extends JerseyRepresentation,
         I extends Serializable>
         extends AbstractHyperMediaEndpoint<B, E, I, Response> {

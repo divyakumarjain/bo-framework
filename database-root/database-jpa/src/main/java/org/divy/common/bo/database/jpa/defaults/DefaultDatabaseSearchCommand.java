@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa.defaults;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.command.AbstractDatabaseSearchCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 import org.divy.common.bo.database.jpa.JPACriteriaQueryBuilder;
@@ -14,7 +14,7 @@ import java.util.List;
  *
  *
  */
-public class DefaultDatabaseSearchCommand<E extends IBusinessObject<I>, I>
+public class DefaultDatabaseSearchCommand<E extends BusinessObject<I>, I>
         extends AbstractDatabaseSearchCommand<E, I> {
 
     private final EntityManagerCommandContext context;

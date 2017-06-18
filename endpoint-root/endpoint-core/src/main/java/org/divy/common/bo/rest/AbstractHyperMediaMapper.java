@@ -1,9 +1,9 @@
 package org.divy.common.bo.rest;
 
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.Representation;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
 
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public abstract class AbstractHyperMediaMapper<E extends IBusinessObject<UUID>
+public abstract class AbstractHyperMediaMapper<E extends BusinessObject<UUID>
         , R extends Representation<UUID, Map<String, Object>, L>
         , L>
         implements HyperMediaMapper<E, R> {
@@ -19,10 +19,10 @@ public abstract class AbstractHyperMediaMapper<E extends IBusinessObject<UUID>
     private final MetaDataProvider metaDataProvider;
     private final LinkBuilderFactory<L> linkBuilderFactory;
     private final Class<R> representationType;
-    private final IBOMapper<E, Map<String, Object>> keyValuePairMapper;
+    private final BOMapper<E, Map<String, Object>> keyValuePairMapper;
 
     public AbstractHyperMediaMapper(Class<R> representationType
-                                 , IBOMapper<E, Map<String, Object>> keyValuePairMapper
+                                 , BOMapper<E, Map<String, Object>> keyValuePairMapper
                                  , LinkBuilderFactory<L> linkBuilderFactory
                                  , MetaDataProvider metaDataProvider) {
 
@@ -36,7 +36,7 @@ public abstract class AbstractHyperMediaMapper<E extends IBusinessObject<UUID>
         return linkBuilderFactory;
     }
 
-    private IBOMapper<E, Map<String, Object>> getKeyValuePairMapper() {
+    private BOMapper<E, Map<String, Object>> getKeyValuePairMapper() {
         return keyValuePairMapper;
     }
 

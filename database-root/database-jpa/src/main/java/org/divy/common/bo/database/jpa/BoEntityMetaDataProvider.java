@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.metadata.FieldMetaData;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.slf4j.Logger;
@@ -18,19 +18,19 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BoEntityMetaDataProvider.class);
 
-    private final List<Class<? extends IBusinessObject>> entityTypes;
+    private final List<Class<? extends BusinessObject>> entityTypes;
 
-    public BoEntityMetaDataProvider(List<Class<? extends IBusinessObject>> typeList) {
+    public BoEntityMetaDataProvider(List<Class<? extends BusinessObject>> typeList) {
         entityTypes = typeList;
     }
 
     @Override
-    public List<Class<? extends IBusinessObject>> getEntityTypes() {
+    public List<Class<? extends BusinessObject>> getEntityTypes() {
         return entityTypes;
     }
 
     @Override
-    public Map<String, FieldMetaData> getChildEntities(Class<? extends IBusinessObject> businessObjectType) {
+    public Map<String, FieldMetaData> getChildEntities(Class<? extends BusinessObject> businessObjectType) {
         return resolveMatchingChildEntities(businessObjectType, this::isAssociation);
     }
 

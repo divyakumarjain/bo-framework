@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.IBORepository;
+import org.divy.common.bo.BORepository;
 import org.divy.common.bo.database.jpa.mock.MockBODBRepository;
 import org.divy.common.bo.database.jpa.mock.MockEntity;
 import org.divy.common.bo.repository.test.TestBaseDBRepository;
@@ -22,7 +22,7 @@ public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,UUID> {
     }
 
     @Override
-    protected IBORepository<MockEntity, UUID> createRepository() {
+    protected BORepository<MockEntity, UUID> createRepository() {
         return new MockBODBRepository();
     }
 
@@ -36,7 +36,7 @@ public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,UUID> {
      *
      * @see
      * org.divy.common.bo.test.TestBaseManager#extendedTestCreatedEntity(org
-     * .divy.common.bo.IBusinessObject)
+     * .divy.common.bo.BusinessObject)
      */
     @Override
     protected void extendedTestCreatedEntity(MockEntity entity) {
@@ -52,7 +52,7 @@ public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,UUID> {
      *
      * @see
      * org.divy.common.bo.test.TestBaseManager#extendedTestUpdatedEntity(org
-     * .divy.common.bo.IBusinessObject)
+     * .divy.common.bo.BusinessObject)
      */
     @Override
     protected void extendedTestUpdatedEntity(MockEntity entity) {

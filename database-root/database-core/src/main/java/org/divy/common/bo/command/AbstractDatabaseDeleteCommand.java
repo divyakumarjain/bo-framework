@@ -1,12 +1,12 @@
 package org.divy.common.bo.command;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.context.CommandContext;
 import org.divy.common.exception.NotFoundException;
 
-public abstract class AbstractDatabaseDeleteCommand<E extends IBusinessObject<I>, I>
+public abstract class AbstractDatabaseDeleteCommand<E extends BusinessObject<I>, I>
         extends AbstractDatabaseCommand<E, I> implements
-        IDeleteCommand<E, I>
+        DeleteCommand<E, I>
 {
     protected AbstractDatabaseDeleteCommand(
             Class<E> typeParameterClass, CommandContext context)

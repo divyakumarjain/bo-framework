@@ -1,6 +1,6 @@
 package org.divy.common.bo.mapper.builder;
 
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 
 import java.util.List;
@@ -21,5 +21,5 @@ public interface TypeMapperBuilderContext<S, T> {
             , Class<CT> target
             , MapperBuilderOption... mapperBuilderOptions);
 
-    IBOMapper<S, T> buildMapper();
+    BOMapper<S, T> buildMapper();
 }

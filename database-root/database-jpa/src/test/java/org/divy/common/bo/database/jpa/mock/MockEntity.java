@@ -21,7 +21,7 @@ public class MockEntity extends AbstractJPABusinessObject {
     /*
      * (non-Javadoc)
      *
-     * @see org.divy.common.bo.IBusinessObject#getIdentity()
+     * @see org.divy.common.bo.BusinessObject#getIdentity()
      */
     public UUID identity() {
         return getUuid();

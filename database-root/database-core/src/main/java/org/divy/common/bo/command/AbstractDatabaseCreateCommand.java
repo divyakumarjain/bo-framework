@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessObject>
         extends AbstractDatabaseCommand<E, UUID> implements
-        ICreateCommand<E>
+        CreateCommand<E>
 {
     protected AbstractDatabaseCreateCommand(
             Class<E> typeParameterClass, CommandContext context)

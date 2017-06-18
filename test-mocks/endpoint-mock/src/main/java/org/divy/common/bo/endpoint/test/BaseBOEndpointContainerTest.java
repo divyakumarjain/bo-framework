@@ -1,9 +1,9 @@
 package org.divy.common.bo.endpoint.test;
 
 import com.google.inject.servlet.GuiceFilter;
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.test.ITestDataProvider;
+import org.divy.common.bo.test.TestDataProvider;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -27,7 +27,7 @@ import java.util.List;
  *
  *
  */
-public abstract class BaseBOEndpointContainerTest<E extends IBusinessObject<I>
+public abstract class BaseBOEndpointContainerTest<E extends BusinessObject<I>
         , I extends Serializable
         , R>
         extends AbstractBOEndpointTest<E, I, R> {
@@ -37,7 +37,7 @@ public abstract class BaseBOEndpointContainerTest<E extends IBusinessObject<I>
     /**
      * @param testDataProvider data provider for the test
      */
-    public BaseBOEndpointContainerTest(ITestDataProvider<E> testDataProvider) {
+    public BaseBOEndpointContainerTest(TestDataProvider<E> testDataProvider) {
         super(testDataProvider);
         jerseyTestProxy = new RestResourceTest();
     }
@@ -71,7 +71,7 @@ public abstract class BaseBOEndpointContainerTest<E extends IBusinessObject<I>
     }
 
     /* (non-Javadoc)
-     * @see org.divy.common.bo.test.TestBaseManager#doDeleteEntity(org.divy.common.bo.IBusinessObject)
+     * @see org.divy.common.bo.test.TestBaseManager#doDeleteEntity(org.divy.common.bo.BusinessObject)
      */
     @Override
     protected void doDeleteEntity(E entity) {

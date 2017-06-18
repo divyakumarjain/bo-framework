@@ -6,7 +6,7 @@ import org.divy.common.bo.query.Query;
  *
  *
  */
-public interface ITestDataProvider<E> {
+public interface TestDataProvider<E> {
 
     /* Methods for Test Data generation */
     void modifyEntityWithTestData(E entity);
@@ -16,8 +16,6 @@ public interface ITestDataProvider<E> {
     void fillTestDataSet2(E entity);
 
     E getEntityInstance();
-
-    void initialize();
 
     Query createSearchQuery();
 }

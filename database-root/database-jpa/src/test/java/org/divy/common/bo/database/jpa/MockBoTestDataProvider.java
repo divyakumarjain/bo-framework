@@ -4,7 +4,7 @@ import org.divy.common.bo.database.jpa.mock.MockEntity;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.query.operator.comparison.impl.EqualsComparisonImpl;
-import org.divy.common.bo.test.ITestDataProvider;
+import org.divy.common.bo.test.TestDataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.List;
  *
  */
 public class MockBoTestDataProvider implements
-        ITestDataProvider<MockEntity> {
+        TestDataProvider<MockEntity> {
 
     /* (non-Javadoc)
-     * @see org.divy.common.bo.test.ITestDataProvider#modifyEntityWithTestData(java.lang.Object)
+     * @see org.divy.common.bo.test.TestDataProvider#modifyEntityWithTestData(java.lang.Object)
      */
     @Override
     public void modifyEntityWithTestData(MockEntity businessObject) {
@@ -33,7 +33,7 @@ public class MockBoTestDataProvider implements
     }
 
     /* (non-Javadoc)
-     * @see org.divy.common.bo.test.ITestDataProvider#fillTestDataSet1(java.lang.Object)
+     * @see org.divy.common.bo.test.TestDataProvider#fillTestDataSet1(java.lang.Object)
      */
     @Override
     public void fillTestDataSet1(MockEntity businessObject) {
@@ -55,7 +55,7 @@ public class MockBoTestDataProvider implements
     }
 
     /* (non-Javadoc)
-     * @see org.divy.common.bo.test.ITestDataProvider#fillTestDataSet2(java.lang.Object)
+     * @see org.divy.common.bo.test.TestDataProvider#fillTestDataSet2(java.lang.Object)
      */
     @Override
     public void fillTestDataSet2(MockEntity businessObject) {
@@ -75,18 +75,12 @@ public class MockBoTestDataProvider implements
     }
 
     /* (non-Javadoc)
-     * @see org.divy.common.bo.test.ITestDataProvider#getEntityInstance()
+     * @see org.divy.common.bo.test.TestDataProvider#getEntityInstance()
      */
     @Override
     public MockEntity getEntityInstance() {
         return new MockEntity();
     }
-
-    @Override
-    public void initialize() {
-        //Nothing to initialize
-    }
-
 
     @Override
     public Query createSearchQuery() {

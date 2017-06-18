@@ -3,7 +3,7 @@ package org.divy.common.bo.database.jpa.defaults;
 import org.divy.common.bo.command.AbstractDatabaseUpdateCommand;
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public class DefaultDatabaseUpdateCommand<E extends AbstractJPABusinessObject>
      */
     public DefaultDatabaseUpdateCommand( Class<E> entityType
             , EntityManagerCommandContext context
-            , IBOMapper<E,E> updateMapper) {
+            , BOMapper<E,E> updateMapper) {
         super(entityType, context, updateMapper);
         this.context = context;
     }

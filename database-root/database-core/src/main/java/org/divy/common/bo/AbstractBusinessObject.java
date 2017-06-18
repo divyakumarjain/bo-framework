@@ -3,18 +3,17 @@ package org.divy.common.bo;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-public class AbstractBusinessObject implements IBusinessObject<UUID> {
+public class AbstractBusinessObject implements BusinessObject<UUID> {
     protected UUID uuid;
     private OffsetDateTime createTimestamp;
     private OffsetDateTime lastUpdateTimestamp;
-    private String type;
+    private String type = this.getClass().getSimpleName();
 
 
     protected AbstractBusinessObject() {
         uuid = UUID.randomUUID();
         createTimestamp = OffsetDateTime.now();
         lastUpdateTimestamp = OffsetDateTime .now();
-        type = this.getClass().getSimpleName();
     }
 
     public AbstractBusinessObject(UUID uuid) {
@@ -29,11 +28,6 @@ public class AbstractBusinessObject implements IBusinessObject<UUID> {
     @Override
     public String _type() {
         return type;
-    }
-
-    @Override
-    public void _type(String type) {
-        this.type = type;
     }
 
     public UUID getUuid() {

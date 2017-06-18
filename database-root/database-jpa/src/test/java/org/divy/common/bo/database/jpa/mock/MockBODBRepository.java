@@ -3,7 +3,7 @@ package org.divy.common.bo.database.jpa.mock;
 import org.divy.common.bo.AbstractBODatabaseRepository;
 import org.divy.common.bo.database.jpa.context.DatabaseContext;
 import org.divy.common.bo.database.jpa.defaults.DefaultDBCommandProvider;
-import org.divy.common.bo.mapper.IBOMapper;
+import org.divy.common.bo.mapper.BOMapper;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +14,7 @@ public class MockBODBRepository extends
         AbstractBODatabaseRepository<MockEntity, UUID> {
 
     public MockBODBRepository() {
-        super(new DefaultDBCommandProvider<>(new DatabaseContext("org.divy.mock"), MockEntity.class, new IBOMapper<MockEntity, MockEntity>() {
+        super(new DefaultDBCommandProvider<>(new DatabaseContext("org.divy.mock"), MockEntity.class, new BOMapper<MockEntity, MockEntity>() {
 
             @Override
             public MockEntity createBO(MockEntity sourceData) {

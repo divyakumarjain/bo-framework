@@ -1,7 +1,7 @@
 package org.divy.common.bo.command;
 
 @FunctionalInterface
-public interface IUpdateCommand<E, I> extends ICommand
+public interface UpdateCommand<E, I> extends Command
 {
     E update(I id, E user);
 }

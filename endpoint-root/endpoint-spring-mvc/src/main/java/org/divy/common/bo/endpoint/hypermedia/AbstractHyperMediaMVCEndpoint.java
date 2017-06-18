@@ -1,11 +1,10 @@
 package org.divy.common.bo.endpoint.hypermedia;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,7 +17,7 @@ import java.io.Serializable;
  * @param <R> The HATEOAS representation of Business Object entity
  *
  */
-public abstract class AbstractHyperMediaMVCEndpoint<E extends IBusinessObject<I>,
+public abstract class AbstractHyperMediaMVCEndpoint<E extends BusinessObject<I>,
         R extends Representation,
         I extends Serializable>
         extends AbstractHyperMediaEndpoint<E, R, I, ResponseEntity> {

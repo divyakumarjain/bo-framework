@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa.defaults;
 
-import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.command.AbstractDatabaseDeleteCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 
@@ -8,7 +8,7 @@ import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
  *
  *
  */
-public class DefaultDatabaseDeleteCommand<E extends IBusinessObject<I>, I>
+public class DefaultDatabaseDeleteCommand<E extends BusinessObject<I>, I>
         extends AbstractDatabaseDeleteCommand<E, I> {
 
     private final EntityManagerCommandContext context;

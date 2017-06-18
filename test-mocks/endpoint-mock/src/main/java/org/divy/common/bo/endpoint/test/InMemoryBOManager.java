@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.test;
 
-import org.divy.common.bo.IBusinessObject;
-import org.divy.common.bo.business.IBOManager;
+import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.query.Query;
 
 import java.io.Serializable;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryBOManager<E extends IBusinessObject<I>, I extends Serializable> implements IBOManager<E, I> {
+public class InMemoryBOManager<E extends BusinessObject<I>, I extends Serializable> implements BOManager<E, I> {
 
     private final Map<I, E> inMemoryMap = new HashMap<>();
 
