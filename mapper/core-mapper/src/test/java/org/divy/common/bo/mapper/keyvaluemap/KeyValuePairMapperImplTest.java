@@ -78,9 +78,15 @@ public class KeyValuePairMapperImplTest {
 
     static public class MockEntity implements BusinessObject<UUID> {
 
-        OffsetDateTime createTimestamp;
-        OffsetDateTime lastUpdateTimestamp;
+        protected OffsetDateTime createTimestamp;
+        protected OffsetDateTime lastUpdateTimestamp;
         private String type;
+        private String name;
+        private int integerAttribute;
+        private UUID uuid;
+        private MockEntity parentEntity;
+        private List<MockEntity> childEntities;
+        private MockEmbeddedEntity embeddedEntity;
 
         public MockEntity() {
         }
@@ -103,22 +109,6 @@ public class KeyValuePairMapperImplTest {
         public String _type() {
             return type;
         }
-
-        @Override
-        public void _type(String type) {
-            this.type = type;
-        }
-
-        private String name;
-
-        private int integerAttribute;
-
-        private UUID uuid;
-
-        private MockEntity parentEntity;
-
-        private List<MockEntity> childEntities;
-
 
         /**
          * @return the name
@@ -211,6 +201,26 @@ public class KeyValuePairMapperImplTest {
         @Override
         public int hashCode() {
             return uuid != null ? uuid.hashCode() : 0;
+        }
+
+        public MockEmbeddedEntity getEmbeddedEntity() {
+            return embeddedEntity;
+        }
+
+        public void setEmbeddedEntity(MockEmbeddedEntity embeddedEntity) {
+            this.embeddedEntity = embeddedEntity;
+        }
+    }
+
+    static class MockEmbeddedEntity {
+        String embeddedValue;
+
+        public String getEmbeddedValue() {
+            return embeddedValue;
+        }
+
+        public void setEmbeddedValue(String embeddedValue) {
+            this.embeddedValue = embeddedValue;
         }
     }
 }

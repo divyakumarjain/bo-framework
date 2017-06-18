@@ -27,11 +27,6 @@ public class MockEntity implements BusinessObject<UUID> {
         return type;
     }
 
-    @Override
-    public void _type(String type) {
-        this.type = type;
-    }
-
     public UUID identity() {
         return getUuid();
     }
