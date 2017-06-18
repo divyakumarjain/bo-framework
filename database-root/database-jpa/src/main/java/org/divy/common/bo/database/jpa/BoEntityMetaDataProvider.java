@@ -6,19 +6,13 @@ import org.divy.common.bo.metadata.MetaDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
+import javax.persistence.*;
+import java.beans.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class BoEntityMetaDataProvider implements MetaDataProvider {
 
@@ -36,17 +30,23 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
     }
 
     @Override
-    public Map<String, FieldMetaData> getChildEntity(Class<? extends IBusinessObject> businessObjectType) {
+    public Map<String, FieldMetaData> getChildEntities(Class<? extends IBusinessObject> businessObjectType) {
+        return resolveMatchingChildEntities(businessObjectType, this::isAssociation);
+    }
+
+    @Override
+    public Map<String, FieldMetaData> getEmbeddedEntities(Class<? extends IBusinessObject> businessObjectType) {
+        return resolveMatchingChildEntities(businessObjectType, this::isEmbedded);
+    }
+
+    private Map<String, FieldMetaData> resolveMatchingChildEntities(Class<? extends IBusinessObject> businessObjectType, Predicate<PropertyDescriptor> predicate) {
         HashMap<String, FieldMetaData> result = new HashMap<>();
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(businessObjectType);
             PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
-            for (int i = 0, pdsLength = pds.length; i < pdsLength; i++) {
-                PropertyDescriptor pd = pds[i];
-                if (isAssociation(pd)) {
-                    result.put(pd.getName(), new FieldMetaData(pd));
-                }
-            }
+            result = Arrays.stream(pds)
+                    .filter(predicate)
+                    .collect(Collectors.toMap(FeatureDescriptor::getName, FieldMetaData::new, (a, b) -> b, HashMap::new));
         } catch (IntrospectionException e) {
             LOGGER.error("Could not get Child Entities", e);
         }
@@ -65,7 +65,26 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
                 || hasAnnotation(pd, ManyToOne.class);
     }
 
+    private boolean isEmbedded(PropertyDescriptor pd) {
+        return hasAnnotation(pd, Embedded.class);
+    }
+
     private boolean hasAnnotation(PropertyDescriptor pd, Class annotation) {
+        return isReadMethodAnnotated(pd, annotation) || isFieldAnnotated(pd, annotation);
+    }
+
+    private boolean isFieldAnnotated(PropertyDescriptor pd, Class annotation) {
+        Class<?> declaringClass = pd.getReadMethod().getDeclaringClass();
+        try {
+            Field field = declaringClass.getField(pd.getName());
+            return field.getAnnotation(annotation) != null;
+        } catch (NoSuchFieldException e) {
+            LOGGER.info("Could not find field with name " + pd.getName() + " in " + declaringClass);
+        }
+        return false;
+    }
+
+    private boolean isReadMethodAnnotated(PropertyDescriptor pd, Class annotation) {
         Method readMethod = pd.getReadMethod();
         return readMethod!=null && readMethod.getAnnotation(annotation) !=null;
     }

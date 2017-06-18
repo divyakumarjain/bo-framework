@@ -26,7 +26,7 @@ public class BoEntityMetaDataProviderTest {
         typeList.add(MockEntity.class);
 
         BoEntityMetaDataProvider metaDataProvider = new BoEntityMetaDataProvider(typeList);
-        Map<String, FieldMetaData> childEntity = metaDataProvider.getChildEntity(MockEntity.class);
+        Map<String, FieldMetaData> childEntity = metaDataProvider.getChildEntities(MockEntity.class);
 
         assertThat(childEntity, hasEntry(equalTo("parentEntity"), equalTo(new FieldMetaData("parentEntity", MockEntity.class, false))));
         assertThat(childEntity, hasEntry(equalTo("childEntities"), equalTo(new FieldMetaData("childEntities", MockEntity.class, true))));
