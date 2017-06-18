@@ -1,15 +1,17 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
 import org.divy.common.bo.IBusinessObject;
+import org.divy.common.bo.mapper.builder.FieldMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
-import org.divy.common.bo.mapper.builder.options.type.MapperBuilderOptions;
+import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Matchers;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -18,31 +20,44 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class KeyValuePairMapperImplTest {
 
-    private final MetaDataProvider metaDataProvider = mock(MetaDataProvider.class);
+    private MetaDataProvider metaDataProvider;
     private MapperBuilder mockMapperBuilder;
+    private TypeMapperBuilderContext<MockEntity, Map> typeMapperBuilderContext;
 
     @Before
     public void setup() {
+        metaDataProvider = mock(MetaDataProvider.class);
         mockMapperBuilder = mock(MapperBuilder.class);
-        TypeMapperBuilderContext<MockEntity, Map> typeMapperBuilderContext = mock(TypeMapperBuilderContext.class);
+        typeMapperBuilderContext = mock(TypeMapperBuilderContext.class);
         when(mockMapperBuilder
                 .mapping(MockEntity.class
-                        , Map.class
-                        , MapperBuilderOptions.oneWay()))
+                        , Map.class))
                 .thenReturn(typeMapperBuilderContext);
 
+        initializeBoFieldsMetaData();
+    }
+
+    private void initializeBoFieldsMetaData() {
+        FieldMapperBuilderContext mockFieldMapperContext = mock(FieldMapperBuilderContext.class);
+
+        doReturn(mockFieldMapperContext).when(typeMapperBuilderContext).field(anyString()
+                , Matchers.any(MapperBuilderOption.class)
+                , Matchers.anyObject()
+                , Matchers.anyObject());
+
+        doReturn(typeMapperBuilderContext).when(mockFieldMapperContext).and();
     }
 
     @Test
     @Ignore
-    public void testHierarchy() {
+    public void testHierarchyMappingFromEntityToMap() {
         final KeyValuePairMapper<MockEntity> keyValuePairMapper
                 = new KeyValuePairMapperImpl<>(MockEntity.class
                 , mockMapperBuilder
@@ -78,9 +93,15 @@ public class KeyValuePairMapperImplTest {
 
     static public class MockEntity implements IBusinessObject<UUID> {
 
-        OffsetDateTime createTimestamp;
-        OffsetDateTime lastUpdateTimestamp;
+        protected OffsetDateTime createTimestamp;
+        protected OffsetDateTime lastUpdateTimestamp;
         private String type;
+        private String name;
+        private int integerAttribute;
+        private UUID uuid;
+        private MockEntity parentEntity;
+        private List<MockEntity> childEntities;
+        private MockEmbeddedEntity embeddedEntity;
 
         public MockEntity() {
         }
@@ -108,17 +129,6 @@ public class KeyValuePairMapperImplTest {
         public void _type(String type) {
             this.type = type;
         }
-
-        private String name;
-
-        private int integerAttribute;
-
-        private UUID uuid;
-
-        private MockEntity parentEntity;
-
-        private List<MockEntity> childEntities;
-
 
         /**
          * @return the name
@@ -211,6 +221,26 @@ public class KeyValuePairMapperImplTest {
         @Override
         public int hashCode() {
             return uuid != null ? uuid.hashCode() : 0;
+        }
+
+        public MockEmbeddedEntity getEmbeddedEntity() {
+            return embeddedEntity;
+        }
+
+        public void setEmbeddedEntity(MockEmbeddedEntity embeddedEntity) {
+            this.embeddedEntity = embeddedEntity;
+        }
+    }
+
+    static class MockEmbeddedEntity {
+        String embeddedValue;
+
+        public String getEmbeddedValue() {
+            return embeddedValue;
+        }
+
+        public void setEmbeddedValue(String embeddedValue) {
+            this.embeddedValue = embeddedValue;
         }
     }
 }
