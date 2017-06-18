@@ -35,11 +35,11 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
     }
 
     @Override
-    public Map<String, FieldMetaData> getEmbeddedEntities(Class<? extends IBusinessObject> businessObjectType) {
+    public Map<String, FieldMetaData> getEmbeddedEntities(Class<? extends BusinessObject> businessObjectType) {
         return resolveMatchingChildEntities(businessObjectType, this::isEmbedded);
     }
 
-    private Map<String, FieldMetaData> resolveMatchingChildEntities(Class<? extends IBusinessObject> businessObjectType, Predicate<PropertyDescriptor> predicate) {
+    private Map<String, FieldMetaData> resolveMatchingChildEntities(Class<? extends BusinessObject> businessObjectType, Predicate<PropertyDescriptor> predicate) {
         HashMap<String, FieldMetaData> result = new HashMap<>();
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(businessObjectType);

@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface MetaDataProvider {
     List<Class<? extends BusinessObject>> getEntityTypes();
     Map<String, FieldMetaData> getChildEntities(Class<? extends BusinessObject> businessObjectType);
-    Map<String, FieldMetaData> getEmbeddedEntities(Class<? extends IBusinessObject> businessObjectType);
+    Map<String, FieldMetaData> getEmbeddedEntities(Class<? extends BusinessObject> businessObjectType);
     Optional<Class<?>> getEndpointClass(MetaDataProvider metaDataProvider);
 }
