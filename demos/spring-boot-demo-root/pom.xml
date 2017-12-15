@@ -11,7 +11,7 @@
         <version>0.0.3-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-boot-demo-root</artifactId>
+    <artifactId>bo-framework-spring-boot-demo-root</artifactId>
     <packaging>pom</packaging>
 
     <modules>

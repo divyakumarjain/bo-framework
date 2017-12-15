@@ -22,6 +22,7 @@ public class BoFrameworkBeanRegistryPostProcessor implements BeanDefinitionRegis
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) {
 
+        factories.forEach(factory -> factory.register(beanDefinitionRegistry));
         metaDataProvider.getEntityTypes()
                 .forEach(metaData -> registerBeans(metaData, beanDefinitionRegistry));
 

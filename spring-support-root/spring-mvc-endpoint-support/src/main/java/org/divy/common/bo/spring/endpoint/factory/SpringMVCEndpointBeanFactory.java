@@ -3,6 +3,7 @@ package org.divy.common.bo.spring.endpoint.factory;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.core.factory.DynamicBeanFactory;
+import org.divy.common.bo.spring.endpoint.GlobalControllerExceptionHandler;
 import org.divy.common.bo.spring.endpoint.SpringMVCEndPointFactory;
 import org.divy.common.rest.SpringMVCHyperMediaMapper;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -34,5 +35,11 @@ public class SpringMVCEndpointBeanFactory implements DynamicBeanFactory<Class<? 
                 beanDefinitionRegistry.registerBeanDefinition(endpointClass.getSimpleName().toLowerCase()
                         , BeanDefinitionBuilder.genericBeanDefinition(endpointClass).getBeanDefinition())
         ));
+    }
+
+    @Override
+    public void register(BeanDefinitionRegistry beanDefinitionRegistry) {
+        beanDefinitionRegistry.registerBeanDefinition("globalControllerExceptionHandler", BeanDefinitionBuilder.genericBeanDefinition(GlobalControllerExceptionHandler.class)
+                .getBeanDefinition());
     }
 }

@@ -2,21 +2,40 @@ package org.divy.common.bo.business;
 
 import org.divy.common.bo.BORepository;
 import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.business.validation.BOValidationException;
+import org.divy.common.bo.business.validation.BOValidator;
+import org.divy.common.bo.business.validation.ValidationResult;
 import org.divy.common.bo.query.Query;
 
+import java.util.Collections;
 import java.util.List;
 
 public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOManager<E, I> {
 
     final BORepository<E, I> repository;
+    final BOValidator<E, I> validator;
 
-    public AbstractBOManager(BORepository<E, I> repository) {
+    public AbstractBOManager(BORepository<E, I> repository, BOValidator<E, I> boValidator) {
         this.repository = repository;
+        this.validator = boValidator;
     }
 
     @Override
     public E create(E businessObject) {
-        return repository.create(businessObject);
+        List<ValidationResult> results = doValidate(businessObject);
+        if(results.isEmpty())
+            return repository.create(businessObject);
+        else {
+            throw new BOValidationException("Could not validate Business object " + businessObject.identity(), "BO-VALIDATION", results);
+        }
+    }
+
+    private List<ValidationResult> doValidate(E businessObject) {
+        if(validator!=null) {
+            return this.validator.validate(businessObject);
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     @Override

@@ -1,3 +1,7 @@
+Embedded Non-Entity
+===
+* Support Mapping of Embedded Non-Entity
+ 
 Exception Handling
 ===
 * [X] Standard UnChecked Exception
