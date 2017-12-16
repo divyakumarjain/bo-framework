@@ -4,10 +4,9 @@ import org.divy.common.bo.BORepository;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.business.validation.BOValidator;
-import org.divy.common.bo.business.validation.ValidationResult;
+import org.divy.common.bo.business.validation.ValidationResults;
 import org.divy.common.bo.query.Query;
 
-import java.util.Collections;
 import java.util.List;
 
 public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOManager<E, I> {
@@ -22,7 +21,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
 
     @Override
     public E create(E businessObject) {
-        List<ValidationResult> results = doValidate(businessObject);
+        ValidationResults results = doValidate(businessObject);
         if(results.isEmpty())
             return repository.create(businessObject);
         else {
@@ -30,11 +29,11 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
         }
     }
 
-    private List<ValidationResult> doValidate(E businessObject) {
+    private ValidationResults doValidate(E businessObject) {
         if(validator!=null) {
             return this.validator.validate(businessObject);
         } else {
-            return Collections.emptyList();
+            return new ValidationResults();
         }
     }
 

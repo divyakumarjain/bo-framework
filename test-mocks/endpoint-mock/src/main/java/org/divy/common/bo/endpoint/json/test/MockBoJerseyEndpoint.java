@@ -2,7 +2,7 @@ package org.divy.common.bo.endpoint.json.test;
 
 import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.business.validation.BOValidationExeception;
+import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
@@ -50,7 +50,8 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Produces({"application/json"})
     @Override
     @POST
-    public Response create(@NotNull MockBoJerseyEndpoint.MockEntity entity) throws BOValidationExeception {
+    public Response create(@NotNull MockBoJerseyEndpoint.MockEntity entity) throws BOValidationException
+    {
         return super.create(entity);
     }
 

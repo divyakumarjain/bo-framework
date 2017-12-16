@@ -3,13 +3,11 @@ package org.divy.common.bo.business.validation;
 import org.divy.common.bo.BusinessObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BOValidatorChain<B extends BusinessObject<I>, I> implements BOValidator<B, I> {
 
-    final List<BOValidator> validators;
+    private final List<BOValidator> validators;
 
     public BOValidatorChain(List<BOValidator> validators) {
         this.validators = new ArrayList<>(validators);
@@ -20,10 +18,12 @@ public class BOValidatorChain<B extends BusinessObject<I>, I> implements BOValid
     }
 
     @Override
-    public List<ValidationResult> validate(B businessObject) {
+    public ValidationResults validate(B businessObject) {
         return validators.stream()
-                .map((BOValidator boValidator) -> (List<ValidationResult>)boValidator.validate(businessObject))
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+                .map((BOValidator boValidator) -> boValidator.validate(businessObject))
+                .reduce(new ValidationResults(), (result1, result2) -> {
+                    result1.addValidationResults(result2.getResults());
+                    return  result1;
+                });
     }
 }

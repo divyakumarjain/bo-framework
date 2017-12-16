@@ -3,7 +3,7 @@ package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.business.validation.BOValidationExeception;
+import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
@@ -41,7 +41,7 @@ public class BaseBOEndpoint<E extends BusinessObject<I>, I extends Serializable,
     }
 
     @Override
-    protected E doCreate(E businessObject) throws BOValidationExeception {
+    protected E doCreate(E businessObject) throws BOValidationException {
         return manager.create(businessObject);
     }
 

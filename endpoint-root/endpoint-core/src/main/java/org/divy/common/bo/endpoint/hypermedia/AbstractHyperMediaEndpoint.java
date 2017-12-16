@@ -2,7 +2,7 @@ package org.divy.common.bo.endpoint.hypermedia;
 
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.business.validation.BOValidationExeception;
+import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
 import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
 import org.divy.common.bo.query.Query;
@@ -85,7 +85,8 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
     }
 
     @Override
-    protected E doCreate(E representation) throws BOValidationExeception {
+    protected E doCreate(E representation) throws BOValidationException
+    {
         B createdBusinessObject = getManager().create(mapToBO(representation));
         return mapFromBO(createdBusinessObject);
     }

@@ -44,5 +44,9 @@
             <artifactId>hamcrest-core</artifactId>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-businessapi</artifactId>
+        </dependency>
     </dependencies>
 </project>

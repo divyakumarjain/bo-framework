@@ -2,11 +2,11 @@ package org.divy.common.bo.business.validation.jsr303;
 
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.validation.BOValidator;
-import org.divy.common.bo.business.validation.ValidationResult;
+import org.divy.common.bo.business.validation.ValidationResults;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Collection;
 
 public class JSR303Validator implements BOValidator {
 
@@ -16,10 +16,10 @@ public class JSR303Validator implements BOValidator {
         this.validator = validator;
     }
     @Override
-    public List<ValidationResult> validate(BusinessObject businessObject) {
-        return validator.validate(businessObject)
-                .stream()
-                .map(ValidationResult::new)
-                .collect(Collectors.toList());
+    public ValidationResults validate(BusinessObject businessObject) {
+        final Collection<ConstraintViolation<BusinessObject>> results = validator.validate(businessObject);
+        final ValidationResults validationResults = new ValidationResults();
+        validationResults.addConstraintViolation(results);
+        return validationResults;
     }
 }

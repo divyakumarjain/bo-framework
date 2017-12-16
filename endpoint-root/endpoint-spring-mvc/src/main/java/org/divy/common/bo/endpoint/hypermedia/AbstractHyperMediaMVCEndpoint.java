@@ -1,7 +1,7 @@
 package org.divy.common.bo.endpoint.hypermedia;
 
 import org.divy.common.bo.BusinessObject;
-import org.divy.common.bo.business.validation.BOValidationExeception;
+import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,8 @@ public abstract class AbstractHyperMediaMVCEndpoint<E extends BusinessObject<I>,
     }
 
     @Override
-    public final ResponseEntity create(R businessObject) throws BOValidationExeception {
+    public final ResponseEntity create(R businessObject) throws BOValidationException
+    {
         return super.create(businessObject);
     }
 

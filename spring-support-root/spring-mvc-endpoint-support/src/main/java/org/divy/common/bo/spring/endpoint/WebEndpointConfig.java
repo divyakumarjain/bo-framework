@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.hateoas.Link;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
@@ -32,7 +33,7 @@ public class WebEndpointConfig implements Jackson2ObjectMapperBuilderCustomizer 
     }
 
     @Bean
-    @Scope(value = "request")
+    @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
     public LinkBuilderFactory<Link> linkBuilderFactory() {
         return new SpringMVCLinkBuilderFactoryImpl();
     }

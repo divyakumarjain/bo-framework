@@ -6,7 +6,7 @@ import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.business.validation.BOValidationExeception;
+import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestDataProvider;
@@ -56,7 +56,8 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     }
 
     @Override
-    protected E doCreateEntity(E entity) throws BOValidationExeception {
+    protected E doCreateEntity(E entity) throws BOValidationException
+    {
 
         Response response = endpointInstance.create(entity);
         assertThat(response, hasProperty(HEADERS,
