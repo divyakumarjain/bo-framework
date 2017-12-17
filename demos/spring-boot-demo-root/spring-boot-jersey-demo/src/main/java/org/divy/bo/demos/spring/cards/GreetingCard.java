@@ -6,6 +6,7 @@ import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Objects;
@@ -26,6 +27,7 @@ public class GreetingCard extends AbstractJPABusinessObject {
     }
 
     @OneToMany(cascade = CascadeType.ALL)
+    @NotNull
     public List<Page> getPages() {
         return pages;
     }

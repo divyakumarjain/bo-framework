@@ -3,6 +3,7 @@ package org.divy.common.bo.test;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
+import org.divy.common.bo.validation.BOValidationException;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -137,7 +138,7 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
 
     /* CRUD Operation */
-    protected abstract E doCreateEntity(E entity) ;
+    protected abstract E doCreateEntity(E entity) throws BOValidationException;
 
     protected abstract void doUpdateEntity(I id, E entity);
 

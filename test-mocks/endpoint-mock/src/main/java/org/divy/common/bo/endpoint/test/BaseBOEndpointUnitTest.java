@@ -9,6 +9,7 @@ import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestDataProvider;
+import org.divy.common.bo.validation.BOValidationException;
 import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
 import org.junit.Before;
 
@@ -55,7 +56,8 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     }
 
     @Override
-    protected E doCreateEntity(E entity) {
+    protected E doCreateEntity(E entity) throws BOValidationException
+    {
 
         Response response = endpointInstance.create(entity);
         assertThat(response, hasProperty(HEADERS,

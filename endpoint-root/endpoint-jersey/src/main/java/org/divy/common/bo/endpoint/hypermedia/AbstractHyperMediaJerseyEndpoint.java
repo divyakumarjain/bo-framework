@@ -3,6 +3,7 @@ package org.divy.common.bo.endpoint.hypermedia;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.bo.validation.BOValidationException;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -28,7 +29,8 @@ public abstract class AbstractHyperMediaJerseyEndpoint<B extends BusinessObject<
     }
 
     @Override
-    public final Response create(E businessObject) {
+    public final Response create(E businessObject) throws BOValidationException
+    {
         return super.create(businessObject);
     }
 

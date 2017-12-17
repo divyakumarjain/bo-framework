@@ -1,7 +1,7 @@
 package org.divy.common.bo.spring.core.factory;
 
 import org.divy.common.bo.metadata.MetaDataProvider;
-import org.divy.common.bo.spring.core.factory.context.BoFrameworkSpringContext;
+import org.divy.common.bo.spring.core.factory.context.BoFrameworkSpringParentContext;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -17,7 +17,7 @@ public class BoFrameworkSpringContextInitializer implements ApplicationContextIn
 
     @Override
     public void initialize(GenericApplicationContext applicationContext) {
-        context = new AnnotationConfigApplicationContext(BoFrameworkSpringContext.class);
+        context = new AnnotationConfigApplicationContext(BoFrameworkSpringParentContext.class);
         applicationContext.setParent(context);
         Object bean;
         bean = context.getBean("entityMetaDataProvider");

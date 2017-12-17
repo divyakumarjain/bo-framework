@@ -9,7 +9,7 @@ import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.HyperMediaMapper;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.endpoint.factory.DefaultHATEOASJerseyEndpoint;
-import org.divy.common.bo.spring.rest.jersey.response.JerseyResponseEntityBuilderFactory;
+import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

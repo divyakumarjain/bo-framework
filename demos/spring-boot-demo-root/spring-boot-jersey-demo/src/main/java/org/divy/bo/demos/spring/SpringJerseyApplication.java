@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 @PropertySource( value = {"classpath:/application.properties"})
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"org.divy.common.bo.business.validation.spring.autoconfiguration"})
+@ComponentScan(basePackages = {"org.divy.common.bo.validation.spring.autoconfiguration"})
 public class SpringJerseyApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

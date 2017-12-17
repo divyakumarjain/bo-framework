@@ -5,6 +5,7 @@ import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.bo.validation.BOValidationException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class BaseBOEndpoint<E extends BusinessObject<I>, I extends Serializable,
     }
 
     @Override
-    protected E doCreate(E businessObject) {
+    protected E doCreate(E businessObject) throws BOValidationException {
         return manager.create(businessObject);
     }
 

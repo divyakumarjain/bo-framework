@@ -7,6 +7,7 @@ import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.HyperMediaMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.bo.validation.BOValidationException;
 import org.divy.common.exception.NotFoundException;
 
 import javax.validation.constraints.NotNull;
@@ -84,7 +85,8 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
     }
 
     @Override
-    protected E doCreate(E representation) {
+    protected E doCreate(E representation) throws BOValidationException
+    {
         B createdBusinessObject = getManager().create(mapToBO(representation));
         return mapFromBO(createdBusinessObject);
     }

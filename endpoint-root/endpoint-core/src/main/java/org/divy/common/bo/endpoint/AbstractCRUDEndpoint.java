@@ -2,6 +2,7 @@ package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.bo.validation.BOValidationException;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -15,7 +16,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable, R> {
         this.responseEntityBuilderFactory = responseEntityBuilderFactory;
     }
 
-    public  R create(@NotNull E businessObject) {
+    public  R create(@NotNull E businessObject) throws BOValidationException {
         E createdBo = doCreate(businessObject);
 
         return responseEntityBuilderFactory.create(createdBo).build();
@@ -55,7 +56,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable, R> {
 
     protected abstract E doRead(I id);
 
-    protected abstract E doCreate(E businessObject);
+    protected abstract E doCreate(E businessObject) throws BOValidationException;
 
     protected abstract E doUpdate(I id, E businessObject);
 
