@@ -10,7 +10,9 @@ import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.rest.JerseyEntityURLBuilderImpl;
 import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
-import org.divy.common.rest.NotFoundExceptionMapper;
+import org.divy.common.rest.exception.mapper.BadRequestExceptionMapper;
+import org.divy.common.rest.exception.mapper.NotAuthorizedExceptionMapper;
+import org.divy.common.rest.exception.mapper.NotFoundExceptionMapper;
 import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -38,6 +40,16 @@ public class EndpointConfig implements Jackson2ObjectMapperBuilderCustomizer {
     @Bean
     public NotFoundExceptionMapper notFoundExceptionMapper() {
         return new NotFoundExceptionMapper();
+    }
+
+    @Bean
+    public BadRequestExceptionMapper badRequestExceptionMapper() {
+        return new BadRequestExceptionMapper();
+    }
+
+    @Bean
+    public NotAuthorizedExceptionMapper notAuthorizedExceptionMapper() {
+        return new NotAuthorizedExceptionMapper();
     }
 
     @Bean

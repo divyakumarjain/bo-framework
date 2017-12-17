@@ -1,4 +1,4 @@
-package org.divy.common.rest;
+package org.divy.common.rest.exception.mapper;
 
 import org.divy.common.exception.NotFoundException;
 
