@@ -20,7 +20,7 @@ public class BOValidatorChain<B extends BusinessObject<I>, I> extends AbstractBO
     @Override
     public ValidationResults validate(B businessObject) {
         return validators.stream()
-                .map((boValidator) -> boValidator.validate(businessObject))
+                .map(boValidator -> boValidator.validate(businessObject))
                 .reduce(new ValidationResults(), (result1, result2) -> {
                     result1.addValidationResults(result2.getResults());
                     return  result1;
@@ -31,7 +31,7 @@ public class BOValidatorChain<B extends BusinessObject<I>, I> extends AbstractBO
     public ValidationResults validate(B businessObject, Class validationGroup)
     {
         return validators.stream()
-                .map((boValidator) -> boValidator.validate(businessObject,validationGroup))
+                .map(boValidator -> boValidator.validate(businessObject,validationGroup))
                 .reduce(new ValidationResults(), (result1, result2) -> {
                     result1.addValidationResults(result2.getResults());
                     return  result1;

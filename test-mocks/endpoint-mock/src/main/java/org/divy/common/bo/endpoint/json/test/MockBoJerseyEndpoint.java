@@ -50,7 +50,7 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Produces({"application/json"})
     @Override
     @POST
-    public Response create(@NotNull MockBoJerseyEndpoint.MockEntity entity) throws BOValidationException
+    public Response create(@NotNull MockBoJerseyEndpoint.MockEntity entity)
     {
         return super.create(entity);
     }

@@ -16,7 +16,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable, R> {
         this.responseEntityBuilderFactory = responseEntityBuilderFactory;
     }
 
-    public  R create(@NotNull E businessObject) throws BOValidationException {
+    public  R create(@NotNull E businessObject)  {
         E createdBo = doCreate(businessObject);
 
         return responseEntityBuilderFactory.create(createdBo).build();
@@ -56,7 +56,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable, R> {
 
     protected abstract E doRead(I id);
 
-    protected abstract E doCreate(E businessObject) throws BOValidationException;
+    protected abstract E doCreate(E businessObject) ;
 
     protected abstract E doUpdate(I id, E businessObject);
 

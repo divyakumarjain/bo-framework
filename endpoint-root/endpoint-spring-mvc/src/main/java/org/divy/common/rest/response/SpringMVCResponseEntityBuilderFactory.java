@@ -5,7 +5,6 @@ import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.springframework.http.ResponseEntity;
 
 import javax.inject.Inject;
-import java.io.Serializable;
 import java.util.Collection;
 
 

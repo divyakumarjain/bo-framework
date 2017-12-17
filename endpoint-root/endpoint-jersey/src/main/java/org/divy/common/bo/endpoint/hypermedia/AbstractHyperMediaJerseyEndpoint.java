@@ -29,8 +29,7 @@ public abstract class AbstractHyperMediaJerseyEndpoint<B extends BusinessObject<
     }
 
     @Override
-    public final Response create(E businessObject) throws BOValidationException
-    {
+    public final Response create(E businessObject) {
         return super.create(businessObject);
     }
 

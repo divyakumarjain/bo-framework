@@ -32,9 +32,16 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<Dy
 
 
     @Override
-    protected void doBuild(CtClass newClass) throws CannotCompileException, NotFoundException {
-        final CtClass superClass = getClassPool().getCtClass(parentClass.getName());
-        newClass.setSuperclass(superClass);
+    protected void doBuild(CtClass newClass) throws CannotCompileException {
+        final CtClass superClass;
+        try
+        {
+            superClass = getClassPool().getCtClass(parentClass.getName());
+            newClass.setSuperclass(superClass);
+        } catch (NotFoundException e)
+        {
+            LOGGER.error("Could not find parent Class" + parentClass.getName() + " for " + newClass.getName(),e);
+        }
         super.doBuild(newClass);
     }
 
@@ -53,7 +60,7 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<Dy
         return getCtClass(parentClass).map(parentCtClass-> getDeclaredMethod(methodName, parentCtClass))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
-                .map((method) -> {
+                .map(method -> {
                     DynamicProxyMethodBuilderContext dynamicProxyMethodBuilderContext = new DynamicProxyMethodBuilderContext(this, method);
                     this.methods.add(dynamicProxyMethodBuilderContext);
                     return dynamicProxyMethodBuilderContext;

@@ -4,7 +4,6 @@ import org.divy.common.bo.rest.response.ReadEntityResponseBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 public class SpringMVCReadEntityResponseBuilder<T> extends ReadEntityResponseBuilder<T, ResponseEntity> {

@@ -28,7 +28,7 @@ public abstract class AbstractHyperMediaMVCEndpoint<E extends BusinessObject<I>,
     }
 
     @Override
-    public final ResponseEntity create(R businessObject) throws BOValidationException
+    public final ResponseEntity create(R businessObject)
     {
         return super.create(businessObject);
     }
