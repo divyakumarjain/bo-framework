@@ -59,8 +59,7 @@ class DynamicReader implements Reader {
     class MethodRecorder implements InvocationHandler {
 
         @Override
-        public Object invoke(Object source, Method method, Object[] args)
-                throws Throwable {
+        public Object invoke(Object source, Method method, Object[] args) {
 
             DynamicReader.this.addMethod(method);
 

@@ -17,6 +17,5 @@
 
     <modules>
         <module>exception-handling-core</module>
-        <module>exception-handling-spring</module>
     </modules>
 </project>

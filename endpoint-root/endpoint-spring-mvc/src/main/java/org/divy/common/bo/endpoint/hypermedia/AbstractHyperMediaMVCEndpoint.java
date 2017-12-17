@@ -3,7 +3,6 @@ package org.divy.common.bo.endpoint.hypermedia;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
-import org.divy.common.bo.validation.BOValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

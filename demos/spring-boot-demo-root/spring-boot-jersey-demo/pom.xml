@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>bo-framework-spring-boot-jersey-demo</artifactId>
+    <name>spring-boot-jersey-demo</name>
     <version>0.0.3-SNAPSHOT</version>
 
     <dependencies>

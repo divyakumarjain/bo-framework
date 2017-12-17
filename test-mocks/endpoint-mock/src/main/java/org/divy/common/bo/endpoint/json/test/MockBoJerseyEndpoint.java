@@ -5,7 +5,6 @@ import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
-import org.divy.common.bo.validation.BOValidationException;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
@@ -165,11 +164,8 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
             } else if (!childEntities.equals(other.childEntities))
                 return false;
             if (uuid == null) {
-                if (other.uuid != null)
-                    return false;
-            } else if (!uuid.equals(other.uuid))
-                return false;
-            return true;
+                return other.uuid == null;
+            } else return uuid.equals(other.uuid);
         }
 
         public int getIntegerAttribute() {

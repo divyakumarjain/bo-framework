@@ -43,7 +43,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     }
 
     @Test
-    public void equalsQuery() throws Exception {
+    public void equalsQuery() {
 
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new EqualsComparisonImpl("1"));
@@ -57,7 +57,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     }
 
     @Test
-    public void notQuery() throws Exception {
+    public void notQuery() {
         AttributeQuery query = new AttributeQuery();
         Not operator = new NotImpl( new GreaterThanComparisonImpl(1));
         query.put("integerAttribute", operator);
@@ -74,7 +74,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     }
 
     @Test
-    public void gtQuery() throws Exception {
+    public void gtQuery() {
 
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new GreaterThanComparisonImpl<Number>(1));
@@ -88,7 +88,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     }
 
     @Test
-    public void geQuery() throws Exception {
+    public void geQuery() {
 
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new GreaterThanEqualToComparisonImpl<Number>( 1));
@@ -102,7 +102,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     }
 
     @Test
-    public void ltQuery() throws Exception {
+    public void ltQuery() {
 
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new LessThanComparisonImpl<>( 1));
@@ -116,7 +116,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     }
 
     @Test
-    public void leQuery() throws Exception {
+    public void leQuery() {
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", new LessThanEqualToComparisonImpl<>( 1));
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
@@ -145,7 +145,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     }
 
     @Test
-    public void orQuery() throws Exception {
+    public void orQuery() {
         AttributeQuery query = new AttributeQuery();
         OrImpl operator = new OrImpl( new EqualsComparisonImpl("1"), new LessThanComparisonImpl<>( 1));
         query.put("integerAttribute", operator);
@@ -156,7 +156,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     }
 
     @Test
-    public void andQuery() throws Exception {
+    public void andQuery() {
         AttributeQuery query = new AttributeQuery();
         And operator = new AndImpl( new EqualsComparisonImpl("1"), new LessThanComparisonImpl<>( 1));
         query.put("integerAttribute", operator);

@@ -3,7 +3,6 @@ package org.divy.common.bo.endpoint.hypermedia;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
-import org.divy.common.bo.validation.BOValidationException;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -16,49 +15,56 @@ import java.io.Serializable;
  *
  * @param <B> The Business Object Entity
  * @param <E> The HATEOAS representation of Business Object entity
- *
  */
 public abstract class AbstractHyperMediaJerseyEndpoint<B extends BusinessObject<I>,
         E extends JerseyRepresentation,
         I extends Serializable>
-        extends AbstractHyperMediaEndpoint<B, E, I, Response> {
+        extends AbstractHyperMediaEndpoint<B, E, I, Response>
+{
 
     @Inject
-    public AbstractHyperMediaJerseyEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory) {
+    public AbstractHyperMediaJerseyEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory)
+    {
         super(responseEntityBuilderFactory);
     }
 
     @Override
-    public final Response create(E businessObject) {
+    public final Response create(E businessObject)
+    {
         return super.create(businessObject);
     }
 
     @Override
-    public final Response update(I id, E businessObject) {
+    public final Response update(I id, E businessObject)
+    {
 
         return super.update(id, businessObject);
     }
 
     @Override
-    public final Response delete(I id) {
+    public final Response delete(I id)
+    {
 
         return super.delete(id);
 
     }
 
     @Override
-    public final Response list() {
+    public final Response list()
+    {
         return super.list();
 
     }
 
     @Override
-    public final Response search(Query query) {
+    public final Response search(Query query)
+    {
         return super.search(query);
     }
 
     @Override
-    public final Response read(I id) {
+    public final Response read(I id)
+    {
         return super.read(id);
     }
 
@@ -66,16 +72,18 @@ public abstract class AbstractHyperMediaJerseyEndpoint<B extends BusinessObject<
     @Path("/{id}/{relation}")
     @Override
     public Response updateRelation(@PathParam("id") I id,
-                                   @PathParam("relation") String relation) {
+                                   @PathParam("relation") String relation)
+    {
         return super.updateRelation(id, relation);
     }
 
     @GET
     @Path("/{id}/{relation}")
-    @Produces({ MediaType.APPLICATION_JSON })
+    @Produces({MediaType.APPLICATION_JSON})
     @Override
     public Response readRelation(@PathParam("id") I id,
-                                 @PathParam("relation")String relation) {
+                                 @PathParam("relation") String relation)
+    {
 
         return super.readRelation(id, relation);
     }
@@ -83,16 +91,16 @@ public abstract class AbstractHyperMediaJerseyEndpoint<B extends BusinessObject<
     /**
      * Creates Relationship between Business Object Entities.
      *
-     * @param id Business Object Entity identity of source of the relationship/association
+     * @param id       Business Object Entity identity of source of the relationship/association
      * @param relation name of the association attribute of relationship
-     *
      * @return returns 201 status code for successful creation of relationship/association
      */
     @POST
     @Path("/{id}/{relation}")
     @Override
     public Response createRelation(@PathParam("id") I id,
-                                   @PathParam("relation")String relation) {
+                                   @PathParam("relation") String relation)
+    {
         return super.createRelation(id, relation);
     }
 }

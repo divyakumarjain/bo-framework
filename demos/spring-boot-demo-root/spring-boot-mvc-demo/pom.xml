@@ -10,7 +10,7 @@
         <version>0.0.3-SNAPSHOT</version>
     </parent>
 
-    <artifactId>bo-framework-spring-boot-mvc-demo</artifactId>
+    <artifactId>spring-boot-mvc-demo</artifactId>
     <version>0.0.3-SNAPSHOT</version>
 
     <dependencies>

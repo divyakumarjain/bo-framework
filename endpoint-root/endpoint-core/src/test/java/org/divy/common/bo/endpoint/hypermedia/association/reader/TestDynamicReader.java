@@ -5,12 +5,10 @@ import org.divy.common.bo.endpoint.hypermedia.association.reader.mock.MockReturn
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class TestDynamicReader {
 
     @Test
-    public void testWithMethodOnAndRead() throws InvocationTargetException, IllegalAccessException {
+    public void testWithMethodOnAndRead() {
 
         MockReturnType mockReturnType = Mockito.mock(MockReturnType.class);
         MockInterface mockInterface = Mockito.mock(MockInterface.class);
