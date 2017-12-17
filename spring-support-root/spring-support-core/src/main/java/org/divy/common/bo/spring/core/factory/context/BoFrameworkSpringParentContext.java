@@ -24,9 +24,10 @@ import java.util.stream.Collectors;
 @ComponentScan(basePackages = {"org.divy.common.bo.spring.mapper.factory"
         , "org.divy.common.bo.spring.endpoint.factory"
         , "org.divy.common.bo.spring.repository.factory"})
-public class BoFrameworkSpringContext {
+public class BoFrameworkSpringParentContext
+{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BoFrameworkSpringContext.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BoFrameworkSpringParentContext.class);
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {

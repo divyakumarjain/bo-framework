@@ -1,4 +1,4 @@
-package org.divy.common.bo.business.validation;
+package org.divy.common.bo.validation;
 
 import org.divy.common.bo.BusinessObject;
 

@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.divy.common.bo.business.validation.spring.autoconfiguration.ValidationConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.divy.common.bo.validation.spring.autoconfiguration.ValidationConfig

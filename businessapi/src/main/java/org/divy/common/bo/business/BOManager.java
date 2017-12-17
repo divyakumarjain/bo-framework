@@ -1,8 +1,8 @@
 package org.divy.common.bo.business;
 
 import org.divy.common.bo.BusinessObject;
-import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.query.Query;
+import org.divy.common.bo.validation.BOValidationException;
 
 import java.util.List;
 

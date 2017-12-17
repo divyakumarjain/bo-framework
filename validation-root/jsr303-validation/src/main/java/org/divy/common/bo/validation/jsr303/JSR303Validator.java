@@ -1,23 +1,32 @@
-package org.divy.common.bo.business.validation.jsr303;
+package org.divy.common.bo.validation.jsr303;
 
 import org.divy.common.bo.BusinessObject;
-import org.divy.common.bo.business.validation.BOValidator;
-import org.divy.common.bo.business.validation.ValidationResults;
+import org.divy.common.bo.validation.AbstractBOValidator;
+import org.divy.common.bo.validation.ValidationResults;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Collection;
 
-public class JSR303Validator implements BOValidator {
+public class JSR303Validator extends AbstractBOValidator {
 
     Validator validator;
 
     public JSR303Validator(Validator validator) {
         this.validator = validator;
     }
+
     @Override
     public ValidationResults validate(BusinessObject businessObject) {
         final Collection<ConstraintViolation<BusinessObject>> results = validator.validate(businessObject);
+        final ValidationResults validationResults = new ValidationResults();
+        validationResults.addConstraintViolation(results);
+        return validationResults;
+    }
+
+    @Override
+    public ValidationResults validate(BusinessObject businessObject, Class validationGroup) {
+        final Collection<ConstraintViolation<BusinessObject>> results = validator.validate(businessObject, validationGroup);
         final ValidationResults validationResults = new ValidationResults();
         validationResults.addConstraintViolation(results);
         return validationResults;

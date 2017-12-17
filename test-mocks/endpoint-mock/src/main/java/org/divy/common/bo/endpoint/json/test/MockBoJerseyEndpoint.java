@@ -2,10 +2,10 @@ package org.divy.common.bo.endpoint.json.test;
 
 import org.divy.common.bo.AbstractBusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.bo.validation.BOValidationException;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;

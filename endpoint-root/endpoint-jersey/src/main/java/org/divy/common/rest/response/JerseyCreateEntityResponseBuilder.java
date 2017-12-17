@@ -6,7 +6,6 @@ import org.divy.common.bo.rest.response.CreateEntityResponseBuilder;
 
 import javax.ws.rs.core.Response;
 
-
 public class JerseyCreateEntityResponseBuilder<T> extends CreateEntityResponseBuilder<T, Response> {
 
 

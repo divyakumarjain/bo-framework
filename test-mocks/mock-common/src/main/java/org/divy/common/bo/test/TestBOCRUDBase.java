@@ -1,9 +1,9 @@
 package org.divy.common.bo.test;
 
 import org.divy.common.bo.BusinessObject;
-import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
+import org.divy.common.bo.validation.BOValidationException;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;

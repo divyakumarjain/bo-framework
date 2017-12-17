@@ -100,6 +100,3 @@ Java 8
 
 * Support Java 8 Streaming
 
-
-
-

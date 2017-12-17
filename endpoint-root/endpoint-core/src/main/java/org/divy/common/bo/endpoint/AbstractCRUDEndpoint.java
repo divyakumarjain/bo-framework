@@ -1,8 +1,8 @@
 package org.divy.common.bo.endpoint;
 
-import org.divy.common.bo.business.validation.BOValidationException;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.bo.validation.BOValidationException;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;

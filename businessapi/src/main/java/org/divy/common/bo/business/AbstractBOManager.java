@@ -2,10 +2,12 @@ package org.divy.common.bo.business;
 
 import org.divy.common.bo.BORepository;
 import org.divy.common.bo.BusinessObject;
-import org.divy.common.bo.business.validation.BOValidationException;
-import org.divy.common.bo.business.validation.BOValidator;
-import org.divy.common.bo.business.validation.ValidationResults;
 import org.divy.common.bo.query.Query;
+import org.divy.common.bo.validation.BOValidationException;
+import org.divy.common.bo.validation.BOValidator;
+import org.divy.common.bo.validation.ValidationResults;
+import org.divy.common.bo.validation.group.BOCreateCheck;
+import org.divy.common.bo.validation.group.BOUpdateCheck;
 
 import java.util.List;
 
@@ -21,17 +23,17 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
 
     @Override
     public E create(E businessObject) {
-        ValidationResults results = doValidate(businessObject);
-        if(results.isEmpty())
+        ValidationResults results = doValidate(businessObject, BOCreateCheck.class);
+        if (results.isEmpty())
             return repository.create(businessObject);
         else {
-            throw new BOValidationException("Could not validate Business object " + businessObject.identity(), "BO-VALIDATION", results);
+            throw new BOValidationException("Validation for Business object " + businessObject.identity() + " failed", "BO-VALIDATION", results);
         }
     }
 
-    private ValidationResults doValidate(E businessObject) {
-        if(validator!=null) {
-            return this.validator.validate(businessObject);
+    private ValidationResults doValidate(E businessObject, Class checkGroupClass) {
+        if (validator!=null) {
+            return this.validator.validate(businessObject,checkGroupClass);
         } else {
             return new ValidationResults();
         }
@@ -39,12 +41,24 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
 
     @Override
     public E update(I id, E businessObject) {
-        return repository.update(id, businessObject);
+        ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
+        if (results.isEmpty()) {
+            return repository.update(id, businessObject);
+        }
+        else {
+            throw new BOValidationException("Validation for Business object " + businessObject.identity() + " failed", "BO-VALIDATION", results);
+        }
     }
 
     @Override
     public E delete(E businessObject) {
-        return repository.delete(businessObject);
+        ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
+        if (results.isEmpty()) {
+            return repository.delete(businessObject);
+        }
+        else {
+            throw new BOValidationException("Validation for Business object " + businessObject.identity() + " failed", "BO-VALIDATION", results);
+        }
     }
 
     @Override
@@ -59,7 +73,14 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
 
     @Override
     public E deleteById(I id) {
-        return repository.deleteById(id);
+        final E businessObject = get(id);
+        ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
+        if (results.isEmpty()) {
+            return repository.deleteById(id);
+        }
+        else {
+            throw new BOValidationException("Validation for Business object " + businessObject.identity() + " failed", "BO-VALIDATION", results);
+        }
     }
 
     @Override
