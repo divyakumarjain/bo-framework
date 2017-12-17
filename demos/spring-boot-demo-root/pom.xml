@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>bo-framework-spring-boot-demo-root</artifactId>
+    <name>spring-boot-demo-root</name>
     <packaging>pom</packaging>
 
     <modules>

@@ -1,6 +1,6 @@
 package org.divy.common.bo.mapper.defaults;
 
-import java.time.OffsetDateTime ;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

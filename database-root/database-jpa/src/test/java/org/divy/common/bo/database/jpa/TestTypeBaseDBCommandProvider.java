@@ -29,11 +29,11 @@ public class TestTypeBaseDBCommandProvider {
         TypeBaseDBCommandProvider<MockEntity, UUID> commandProvider
                 = new TypeBaseDBCommandProvider<MockEntity, UUID>(commandContext
                     , MockEntity.class
-                    ,(Class<? extends GetCommand<MockEntity, UUID>>) (Class<?>) MockGetCommand.class
-                    ,(Class<? extends UpdateCommand<MockEntity, UUID>>) (Class<?>) MockUpdateCommand.class
-                    ,(Class<? extends DeleteCommand<MockEntity, UUID>>) (Class<?>)MockDeleteCommand.class
-                    ,(Class<? extends CreateCommand<MockEntity>>) (Class<?>) MockCreateCommand.class
-                    ,(Class<? extends SearchCommand<MockEntity>>) (Class<?>) MockSearchCommand.class
+                    ,(Class<? extends GetCommand<MockEntity, UUID>>) MockGetCommand.class
+                    ,(Class<? extends UpdateCommand<MockEntity, UUID>>) MockUpdateCommand.class
+                    ,(Class<? extends DeleteCommand<MockEntity, UUID>>) MockDeleteCommand.class
+                    ,(Class<? extends CreateCommand<MockEntity>>) MockCreateCommand.class
+                    ,(Class<? extends SearchCommand<MockEntity>>) MockSearchCommand.class
                     , updateMapper);
 
         commandProvider.setContext(commandContext);

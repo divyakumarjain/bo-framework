@@ -7,7 +7,6 @@ import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.HyperMediaMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
-import org.divy.common.bo.validation.BOValidationException;
 import org.divy.common.exception.NotFoundException;
 
 import javax.validation.constraints.NotNull;

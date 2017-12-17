@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 
 public class BoEntityMetaDataProviderTest {
     @Test
-    public void getEntityTypes() throws Exception {
+    public void getEntityTypes() {
         ArrayList<Class<? extends BusinessObject>> typeList = new ArrayList<>();
         typeList.add(MockEntity.class);
         BoEntityMetaDataProvider metaDataProvider = new BoEntityMetaDataProvider(typeList);
@@ -21,7 +21,7 @@ public class BoEntityMetaDataProviderTest {
     }
 
     @Test
-    public void getChildEntity() throws Exception {
+    public void getChildEntity() {
         ArrayList<Class<? extends BusinessObject>> typeList = new ArrayList<>();
         typeList.add(MockEntity.class);
 

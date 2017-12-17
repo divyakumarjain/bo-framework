@@ -9,7 +9,6 @@ import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestDataProvider;
-import org.divy.common.bo.validation.BOValidationException;
 import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
 import org.junit.Before;
 
