@@ -3,7 +3,6 @@ package org.divy.common.rest.response;
 import org.divy.common.bo.rest.response.UpdateEntityResponseBuilder;
 
 import javax.ws.rs.core.Response;
-import java.io.Serializable;
 import java.util.Collection;
 
 public class JerseyUpdateEntityResponseBuilder<T>

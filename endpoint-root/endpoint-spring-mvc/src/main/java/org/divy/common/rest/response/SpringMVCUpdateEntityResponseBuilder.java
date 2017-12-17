@@ -4,7 +4,6 @@ import org.divy.common.bo.rest.response.UpdateEntityResponseBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 public class SpringMVCUpdateEntityResponseBuilder<T> extends UpdateEntityResponseBuilder<T, ResponseEntity> {

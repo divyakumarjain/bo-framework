@@ -3,7 +3,6 @@ package org.divy.common.bo.dynamic.clazz;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.Modifier;
-import javassist.NotFoundException;
 import org.divy.common.bo.dynamic.clazz.common.DynamicAnnotatableBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.field.DynamicClassFieldBuilderContext;
@@ -72,14 +71,14 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
             doBuild(newClass);
             newClass.debugWriteFile();
             return Optional.of(newClass.toClass());
-        } catch (CannotCompileException | NotFoundException e) {
+        } catch (CannotCompileException e) {
             LOGGER.error("Could not create the class", e);
             return Optional.empty();
         }
     }
 
 
-    protected void doBuild(CtClass newClass) throws CannotCompileException, NotFoundException {
+    protected void doBuild(CtClass newClass) throws CannotCompileException {
         newClass.setModifiers(Modifier.PUBLIC);
         this.annotations.forEach(annotationBuilderContext -> annotationBuilderContext.doBuild(newClass));
         this.fields.forEach(fieldBuilderContext -> fieldBuilderContext.doBuild(newClass));

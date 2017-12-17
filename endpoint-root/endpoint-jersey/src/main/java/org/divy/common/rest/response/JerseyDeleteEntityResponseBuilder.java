@@ -4,7 +4,6 @@ import org.divy.common.bo.rest.response.AbstractResponseEntityBuilder;
 import org.divy.common.bo.rest.response.DeleteEntityResponseBuilder;
 
 import javax.ws.rs.core.Response;
-import java.io.Serializable;
 import java.util.Collection;
 
 public class JerseyDeleteEntityResponseBuilder<T> extends AbstractResponseEntityBuilder<T, Response>

@@ -4,11 +4,12 @@ install: true
 jdk:
 - oraclejdk8
 addons:
-  github_token:
-    secure: q5msmSZzGEFFNFjgrsb13JJOoWzL4CBXNpm1qEGh1A8upaaa+EFJ+HMh2lkEC72j4eqA3YqcD13UMqdCz3Ic1Ghv9/Sy4MmCwI69lAynghXFFjZo+Aly75mlmrwsRuhSr9kIG2HKdspF1HzBLsUMGdmB5zKV0wNixhgY1sfnH1TtcVdeu1aKr6C2kVssyedQhGKUVPo6eCsN11yodHl7Ei97fzdx13qSlN1Jl6lmlEE9HehFeevUfUQqvQBj/gcVD0DFaq6bo44bJinFAwiybyIo4QcMYPPaa+VMbE8NdmPm1c+DcUPA0j3GbJXjEIUjeD8u6ruwxFhdtd8eaxZY3MGnUunSD7yJRN9iDf84tfKjt7uPMJyfwTn2hXV5DhwFbOzeABHHsQZQaJGGmbTv9sOC6BFnq0Kv/2FSMgmC3YkRealYI3K9wTlLNOg/k3mQjOaj4ALCLqbLAJmpNjTQtr3bp3Y33S6Ga+0HS+nIjET9GMnhXjeJdefYCxyn/wnP/i/Oj7ILJd0EqjZjiHTNtlIgATQk6S6roRaNNYluk722Y7WHFE0n6z4ONvF2793b0YVJaB1ztYfw+TsFwwaVdhJt1t6sFUBOeuivtanN2FY7h3zqybOXCrie5lQ3s6Jn3I3FONbkrPNuFSC0B+P3ZOMDXnYoL/OraAYmNueSQnQ=
-  sonarqube:
+  sonarcloud:
     organization: divyakumarjain-github
-
+    token:
+      secure: 882041644b43f437f2ca990154b379269bd51112
+    github_token:
+      secure: 2f6eaa2e99a99dfb69895a635d47b01a708bcd9f
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 cache:

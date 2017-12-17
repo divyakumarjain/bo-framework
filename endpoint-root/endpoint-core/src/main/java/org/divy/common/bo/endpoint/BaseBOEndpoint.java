@@ -41,7 +41,7 @@ public class BaseBOEndpoint<E extends BusinessObject<I>, I extends Serializable,
     }
 
     @Override
-    protected E doCreate(E businessObject) throws BOValidationException {
+    protected E doCreate(E businessObject)  {
         return manager.create(businessObject);
     }
 

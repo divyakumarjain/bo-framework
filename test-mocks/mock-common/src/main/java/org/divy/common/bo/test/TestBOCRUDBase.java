@@ -138,7 +138,7 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
 
     /* CRUD Operation */
-    protected abstract E doCreateEntity(E entity) throws BOValidationException;
+    protected abstract E doCreateEntity(E entity);
 
     protected abstract void doUpdateEntity(I id, E entity);
 

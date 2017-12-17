@@ -56,7 +56,7 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     }
 
     @Override
-    protected E doCreateEntity(E entity) throws BOValidationException
+    protected E doCreateEntity(E entity)
     {
 
         Response response = endpointInstance.create(entity);

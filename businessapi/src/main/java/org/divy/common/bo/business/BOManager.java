@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BOManager<E extends BusinessObject<I>, I> {
 
-    E create(E businessObject)throws BOValidationException;
+    E create(E businessObject);
 
     E update(I id, E businessObject);
 

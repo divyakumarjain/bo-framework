@@ -85,7 +85,7 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
     }
 
     @Override
-    protected E doCreate(E representation) throws BOValidationException
+    protected E doCreate(E representation)
     {
         B createdBusinessObject = getManager().create(mapToBO(representation));
         return mapFromBO(createdBusinessObject);
