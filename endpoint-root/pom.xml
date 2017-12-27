@@ -13,6 +13,5 @@
     <modules>
         <module>endpoint-core</module>
         <module>endpoint-jersey</module>
-        <module>endpoint-spring-mvc</module>
     </modules>
 </project>

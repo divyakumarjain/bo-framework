@@ -61,9 +61,7 @@ public class BaseBOEndpoint<E extends BusinessObject<I>, I extends Serializable,
 
         List<E> boList = manager.list();
 
-        List<E> resultList = new ArrayList<>();
-
-        resultList.addAll(boList);
+        List<E> resultList = new ArrayList<>(boList);
 
         return resultList;
 

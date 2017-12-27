@@ -79,7 +79,7 @@ public class HttpRequestContext {
     /**
      * Store the HttpRequestContext in the ThreadLocal instance.
      *
-     * @param ctx
+     * @param ctx the http request context
      */
     public static void setContext(HttpRequestContext ctx) {
         LOCAL_CONTEXT.set(ctx);

@@ -27,7 +27,7 @@ public class EndpointBeanFactory implements DynamicBeanFactory<Class<? extends B
     }
 
     @Override
-    public void register(BeanDefinitionRegistry beanDefinitionRegistry)
+    public void registerSingletons(BeanDefinitionRegistry beanDefinitionRegistry)
     {
         //NO OPERATION
     }

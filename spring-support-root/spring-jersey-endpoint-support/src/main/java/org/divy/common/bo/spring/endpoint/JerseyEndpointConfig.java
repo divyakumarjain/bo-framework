@@ -28,7 +28,7 @@ import java.util.UUID;
 
 @Configuration
 @AutoConfigureBefore(JerseyAutoConfiguration.class)
-public class EndpointConfig implements Jackson2ObjectMapperBuilderCustomizer {
+public class JerseyEndpointConfig implements Jackson2ObjectMapperBuilderCustomizer {
 
     @Bean
     public ResourceConfig resourceConfig() {

@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.endpoint;
+package org.divy.common.bo.endpoint;
 
 import org.divy.common.exception.BadRequestException;
 import org.divy.common.exception.NotAuthorizedException;

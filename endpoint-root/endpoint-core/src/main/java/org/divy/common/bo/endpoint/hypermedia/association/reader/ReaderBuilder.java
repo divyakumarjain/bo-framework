@@ -34,6 +34,7 @@ public class ReaderBuilder implements Reader {
         AttributeReader attributeReader = new AttributeReader();
         setReader(attributeReader);
         attributeReader.setAttributeName(attributeName);
+        setReader(attributeReader);
         return attributeReader;
     }
 }

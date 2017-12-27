@@ -1,9 +1,9 @@
-package org.divy.common.bo.spring.endpoint;
+package org.divy.common.bo.endpoint;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import static org.divy.common.bo.spring.endpoint.SpringMVCEndpointConfigProperties.BO_FRAMEWORK_MVC_ENDPOINT_CONFIG_PREFIX;
+import static org.divy.common.bo.endpoint.SpringMVCEndpointConfigProperties.BO_FRAMEWORK_MVC_ENDPOINT_CONFIG_PREFIX;
 
 @ConfigurationProperties(prefix = BO_FRAMEWORK_MVC_ENDPOINT_CONFIG_PREFIX)
 @Component

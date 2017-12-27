@@ -1,12 +1,11 @@
 package org.divy.common.bo.dynamic;
 
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
+import org.divy.common.bo.dynamic.testclasses.BaseClass;
+import org.divy.common.bo.dynamic.testclasses.NewAnnotation1;
+import org.divy.common.bo.dynamic.testclasses.NewAnnotation2;
 import org.junit.Test;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
@@ -145,40 +144,4 @@ public class DynamicClassBuilderTest {
         assertThat(instance, hasProperty("attribute2", is("attribute2")));
     }
 
-    @ExistingAnnotation("ExistingValue")
-    public static class BaseClass {
-        protected String attribute1;
-        protected String attribute2;
-
-        public BaseClass(String attribute1, String attribute2) {
-            this.attribute1 = attribute1;
-            this.attribute2 = attribute2;
-        }
-
-        public String getAttribute1() {
-            return attribute1;
-        }
-
-        public String getAttribute2() {
-            return attribute2;
-        }
-    }
-
-    @Target(ElementType.TYPE)
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface ExistingAnnotation {
-        String value();
-    }
-
-    @Target(ElementType.TYPE)
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface NewAnnotation1 {
-        String value();
-    }
-
-    @Target(ElementType.TYPE)
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface NewAnnotation2 {
-        String value();
-    }
 }
