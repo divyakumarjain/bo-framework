@@ -1,17 +1,18 @@
-package org.divy.common.bo.spring.endpoint;
+package org.divy.common.bo.endpoint;
 
 
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.rest.SpringMVCEndPointRegistry;
 import org.divy.common.rest.SpringMVCEntityURLBuilderImpl;
 import org.divy.common.rest.SpringMVCLinkBuilderFactoryImpl;
 import org.divy.common.rest.response.SpringMVCResponseEntityBuilderFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -39,12 +40,13 @@ public class WebEndpointConfig implements Jackson2ObjectMapperBuilderCustomizer 
     }
 
     @Bean
-    public SpringMVCEntityURLBuilderImpl mvcEntityHyperMediaURLBuilder(@Qualifier("mvcHyperMediaEndPointRegistry") EndPointRegistry springEndPointRegistry) {
+    @ConditionalOnProperty(value = "bo-framework.endpoint.mvc.enable-hateoas-api", havingValue="true")
+    public SpringMVCEntityURLBuilderImpl mvcEntityHyperMediaURLBuilder(@Qualifier("mvcHyperMediaEndPointRegistry") SpringMVCEndPointRegistry springEndPointRegistry) {
         return new SpringMVCEntityURLBuilderImpl(linkBuilderFactory(), springEndPointRegistry);
     }
 
     @Bean
-    public SpringMVCEntityURLBuilderImpl mvcEntityURLBuilder(@Qualifier("mvcEndPointRegistry") EndPointRegistry springHyperMediaEndPointRegistry) {
+    public SpringMVCEntityURLBuilderImpl mvcEntityURLBuilder(@Qualifier("mvcEndPointRegistry") SpringMVCEndPointRegistry springHyperMediaEndPointRegistry) {
         return new SpringMVCEntityURLBuilderImpl(linkBuilderFactory(), springHyperMediaEndPointRegistry);
     }
 

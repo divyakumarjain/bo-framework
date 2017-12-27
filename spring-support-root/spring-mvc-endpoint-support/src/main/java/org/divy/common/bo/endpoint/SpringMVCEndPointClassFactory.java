@@ -1,17 +1,14 @@
-package org.divy.common.bo.spring.endpoint;
+package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
 import org.divy.common.bo.dynamic.clazz.common.EnumArrayAnnotationParam;
 import org.divy.common.bo.dynamic.clazz.common.StringArrayAnnotationParam;
-import org.divy.common.bo.endpoint.hypermedia.SpringMVCRepresentation;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.EndPointRegistry;
-import org.divy.common.bo.rest.HyperMediaMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.bo.spring.endpoint.factory.DefaultHATEOASMVCEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -19,33 +16,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.UUID;
 
+public class SpringMVCEndPointClassFactory {
 
-public class SpringMVCHyperMediaEndPointFactory  extends SpringMVCEndPointFactory {
+    final BeanNamingStrategy beanNamingStrategy;
+    final EndPointRegistry endPointRegistry;
+    final SpringMVCEndpointConfigProperties configProperties;
 
-    public SpringMVCHyperMediaEndPointFactory(BeanNamingStrategy beanNamingStrategy
+    public SpringMVCEndPointClassFactory(BeanNamingStrategy beanNamingStrategy
             , EndPointRegistry endPointRegistry
             , SpringMVCEndpointConfigProperties configProperties) {
 
-        super(beanNamingStrategy, endPointRegistry, configProperties);
-
+        this.beanNamingStrategy = beanNamingStrategy;
+        this.endPointRegistry = endPointRegistry;
+        this.configProperties = configProperties;
     }
 
-    @Override
-    public Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
-
-        return DynamicClassBuilder.createClass(typeClass.getSimpleName() + "HyperMediaEndPoint")
-                .subClass(DefaultHATEOASMVCEndpoint.class)
+     public Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
+        return DynamicClassBuilder.createClass(typeClass.getSimpleName() + "EndPoint")
+                .subClass(BaseBOEndpoint.class)
                     .addAnnotation(RestController.class)
                         .and()
                     .addAnnotation(RequestMapping.class)
-                        .value(new StringArrayAnnotationParam("/" + configProperties.getHateoasApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase()))
+                        .value(new StringArrayAnnotationParam("/" +configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase()))
                         .and()
                 .proxySuperMethod("create").name("createMethod")
                     .addAnnotation(RequestMapping.class)
                         .param("method", new EnumArrayAnnotationParam(RequestMethod.POST))
                         .and()
                     .param()
-                        .type(SpringMVCRepresentation.class)
+                        .type(typeClass)
                             .addAnnotation(RequestBody.class)
                             .and()
                         .and()
@@ -53,15 +52,15 @@ public class SpringMVCHyperMediaEndPointFactory  extends SpringMVCEndPointFactor
                 .proxySuperMethod("update").name("updateMethod")
                     .addAnnotation(RequestMapping.class)
                         .param("method", new EnumArrayAnnotationParam(RequestMethod.PUT))
-                            .value(new StringArrayAnnotationParam(new String[]{"/{entityId}"}))
+                        .value(new StringArrayAnnotationParam(new String[]{"/{entityId}"}))
+                        .and()
+                    .param(UUID.class)
+                        .addAnnotation(PathVariable.class)
+                            .value("entityId")
                             .and()
-                        .param(UUID.class)
-                            .addAnnotation(PathVariable.class)
-                                .value("entityId")
-                                .and()
-                            .and()
-                        .param()
-                            .type(SpringMVCRepresentation.class)
+                        .and()
+                    .param()
+                        .type(typeClass)
                             .addAnnotation(RequestBody.class)
                             .and()
                         .and()
@@ -106,8 +105,6 @@ public class SpringMVCHyperMediaEndPointFactory  extends SpringMVCEndPointFactor
                 .addConstructor()
                     .addAnnotation(Autowired.class)
                         .and()
-                    .superValue(typeClass)
-                        .and()
                     .superParam(BOManager.class)
                         .addAnnotation(Qualifier.class)
                             .value(beanNamingStrategy.calculateManagerId(typeClass))
@@ -115,17 +112,13 @@ public class SpringMVCHyperMediaEndPointFactory  extends SpringMVCEndPointFactor
                         .and()
                     .superParam(ResponseEntityBuilderFactory.class)
                         .addAnnotation(Qualifier.class)
-                            .value("mvcResponseEntityBuilderHyperMediaFactory")
+                            .value("mvcResponseEntityBuilderFactory")
                             .and()
                         .and()
-                    .superParam(HyperMediaMapper.class)
-                        .addAnnotation(Qualifier.class)
-                            .value(beanNamingStrategy.calculateHyperMediaMapperId(typeClass))
-                    .build()
+                .build()
         .map(endpointClass-> {
             endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
             return endpointClass;
         });
     }
 }
-

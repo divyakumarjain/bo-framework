@@ -2,6 +2,7 @@ package org.divy.common.bo.endpoint.jersey.hypermedia;
 
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.AbstractHyperMediaEndpoint;
+import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
@@ -24,9 +25,9 @@ public abstract class AbstractHyperMediaJerseyEndpoint<B extends BusinessObject<
 {
 
     @Inject
-    public AbstractHyperMediaJerseyEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory)
+    public AbstractHyperMediaJerseyEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory, AssociationsHandler<B,I> associationsHandler)
     {
-        super(responseEntityBuilderFactory);
+        super(responseEntityBuilderFactory,associationsHandler);
     }
 
     @Override

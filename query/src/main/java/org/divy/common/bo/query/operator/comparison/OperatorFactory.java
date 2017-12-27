@@ -11,6 +11,10 @@ import org.divy.common.bo.query.operator.impl.OrImpl;
 
 public class OperatorFactory
 {
+    private OperatorFactory() {
+        //NOOP
+    }
+
     public static <A> EqualsComparison equalsComparison(A value) {
         return new EqualsComparisonImpl<>(value);
     }

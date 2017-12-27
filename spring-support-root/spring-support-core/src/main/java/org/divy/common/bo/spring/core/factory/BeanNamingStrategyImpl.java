@@ -32,4 +32,9 @@ public class BeanNamingStrategyImpl implements BeanNamingStrategy {
     public String calculateHyperMediaMapperId(Class<? extends BusinessObject> type) {
         return calculatePrefix(type) + "HyperMediaMapper";
     }
+
+    @Override
+    public String calculateAssociationsHandler(Class<? extends BusinessObject> type) {
+        return calculatePrefix(type) + "AssociationsHandler";
+    }
 }

@@ -58,14 +58,8 @@ public class BaseBOEndpoint<E extends BusinessObject<I>, I extends Serializable,
 
     @Override
     protected Collection<E> doList() {
-
         List<E> boList = manager.list();
-
-        List<E> resultList = new ArrayList<>();
-
-        resultList.addAll(boList);
-
-        return resultList;
+        return new ArrayList<>(boList);
 
     }
 

@@ -8,8 +8,6 @@ addons:
     organization: divyakumarjain-github
     token:
       secure: 882041644b43f437f2ca990154b379269bd51112
-    github_token:
-        secure: "q2jRmZ9mukv9KsGudA/PhOMUJQZ64C/VzZyNTf585HMT/gfbNsvqHNX9u9m798oi1+2jCr1pTp8x47ib2CMCo/vyBa5x8P1n1xTvmAY/9Jk+AgNHLEUg+/R48klAJU8pfgav3PckIALrC3qZ6/gZG30Y9qpxM2ZeKCe57rjUWIQzktNmAZBQw/0qc5ZMxtDoh+o8KcGnMk1B+T6X34atl9pi6jFC9Sj+VbyZ6MuPQ5e0iKVgXMEMvOeI9P9JVcOlVYPkJKhibZciKy/rlq2m/T0waIkyaB5RcMJV79ONXwYkZJ1/X2QDERTKwwS9ZJmz9bQ5YfAAcxdVaJP0sgq4S2lg3fvrdERT/g6pk0n24ijH29Kn6bLM5CtemmVcuW9fMdD3IAGUfHhx2PG+tSwdabGamJYRuwWcGZaLOzob99D3o+jWw8vXYaXOHd26iBNU47lcPHCdJ3KhQEm8tdUMNRnynG1ulWj6ybjzO1KwZZnlwYcmt/s0fD+oX/w0SZQ34N2pyM0dmRjOZKdPp99dyPPFlhuUeBEM9p1nGsl4x8VGZA4+UVwwG+BbJfDGdCkf43+S9ZH7vD1+8x525Vdgqz8hWG4WUuFf3gg9dJuXdvcJYHsCshq3UnzACotSVAefLHMsyI5VJwtKcOVWpBxHs/ml5/9s3s7C4RZ2u9fFZ/s="
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 cache:

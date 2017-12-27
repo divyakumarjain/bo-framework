@@ -15,8 +15,8 @@ public class DefaultDatabaseGetCommand<E extends BusinessObject<I>, I>
     private final EntityManagerCommandContext context;
 
     /**
-     * @param entityClass
-     * @param context
+     * @param entityClass the entity class
+     * @param context the context
      */
     public DefaultDatabaseGetCommand(
             Class<E> entityClass,

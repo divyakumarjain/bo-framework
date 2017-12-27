@@ -33,16 +33,12 @@ public class InMemoryBOManager<E extends BusinessObject<I>, I extends Serializab
 
     @Override
     public List<E> list() {
-        ArrayList<E> arrayList = new ArrayList<>();
-        arrayList.addAll(inMemoryMap.values());
-        return arrayList;
+        return new ArrayList<>(inMemoryMap.values());
     }
 
     @Override
     public List<E> search(Query businessObjectQuery) {
-        ArrayList<E> arrayList = new ArrayList<>();
-        arrayList.addAll(inMemoryMap.values());
-        return arrayList;
+        return new ArrayList<>(inMemoryMap.values());
     }
 
     @Override

@@ -78,9 +78,5 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-endpoint-spring-mvc</artifactId>
-        </dependency>
     </dependencies>
 </project>

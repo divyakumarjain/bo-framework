@@ -1,5 +1,10 @@
 package org.divy.common.bo.endpoint.hypermedia.association;
 
+import org.apache.commons.beanutils.PropertyUtils;
+import org.divy.common.exception.NotFoundException;
+import org.divy.common.exception.UncheckedException;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 public class AttributeReader implements Reader {
@@ -11,6 +16,13 @@ public class AttributeReader implements Reader {
 
     @Override
     public Optional<Object> read(Object source, Object... argv) {
-        return Optional.empty();
+        try {
+
+            return Optional.ofNullable(PropertyUtils.getSimpleProperty(source,attributeName));
+        } catch (InvocationTargetException ex) {
+            throw new UncheckedException("Could not read property "+attributeName, ex);
+        } catch (IllegalAccessException|NoSuchMethodException ex){
+            throw new NotFoundException(ex);
+        }
     }
 }

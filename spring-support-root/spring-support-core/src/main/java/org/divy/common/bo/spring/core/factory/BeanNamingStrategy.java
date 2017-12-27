@@ -21,4 +21,6 @@ public interface BeanNamingStrategy {
     String calculateKeyValueMapper(Class<? extends BusinessObject> type);
 
     String calculateHyperMediaMapperId(Class<? extends BusinessObject> type);
+
+    String calculateAssociationsHandler(Class<? extends BusinessObject> type);
 }

@@ -2,45 +2,33 @@ package org.divy.common.bo.endpoint.hypermedia.association;
 
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.endpoint.hypermedia.association.builder.CreateBuilder;
-import org.divy.common.bo.endpoint.hypermedia.association.builder.UpdateBuilder;
-import org.divy.common.bo.endpoint.hypermedia.association.reader.ReaderBuilder;
 import org.divy.common.bo.rest.AbstractHyperMediaMapper;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class Association<T> {
-    protected AbstractHyperMediaMapper mapper;
+public class Association<T extends BusinessObject<I>, I> {
+    protected AbstractHyperMediaMapper hyperMediaMapper;
     private String name;
     private Cardinality cardinality;
     private List<PropagateSave> propagateSaves;
     private Reader reader;
     private boolean includeInReadOperation;
-    private BOManager<?, ?> manager;
+    private BOManager<T, I> manager;
     private Create create;
     private Update update;
 
-    public Association<T> withMapper(AbstractHyperMediaMapper mapper) {
-        this.mapper = mapper;
-        return this;
-    }
 
-    public Association<T> manager(BOManager<?, ?> manager) {
-        this.manager = manager;
-        return this;
-    }
 
     public Optional<Object> read(Object source, Object... argv) {
 
         return getReader().read(source, argv).map(value -> {
-            if (mapper != null) {
+            if (hyperMediaMapper != null) {
                 if (value instanceof Collection) {
-                    return mapper.createFromBO((Collection) value);
+                    return hyperMediaMapper.createRepresentationFromBO((Collection) value);
                 } else if(value instanceof BusinessObject) {
-                    return mapper.createFromBO((BusinessObject)value);
+                    return hyperMediaMapper.createRepresentationFromBO((BusinessObject)value);
                 } else {
                     throw new IllegalArgumentException("Not supported Type");
                 }
@@ -83,12 +71,12 @@ public class Association<T> {
         this.reader = reader;
     }
 
-    private void setCreate(Create create) {
+    protected void setCreate(Create create) {
         this.create = create;
     }
 
 
-    private void setUpdater(Update update) {
+    protected void setUpdater(Update update) {
         this.update = update;
     }
 
@@ -100,50 +88,13 @@ public class Association<T> {
         this.includeInReadOperation = includeInReadOperation;
     }
 
-    public Association<T> name(String name) {
-        this.name = name;
-        return this;
+    public BOManager<T, I> getManager()
+    {
+        return manager;
     }
 
-    public Association<T> includeInRead() {
-        setIncludeInReadOperation(true);
-        return this;
-    }
-
-    public Association<T> propagateSave(PropagateSave ... propagateSaves) {
-        setPropagateSaves(Arrays.asList(propagateSaves));
-        return this;
-    }
-
-    public Association<T> cardinality(Cardinality cardinality) {
-        this.cardinality = cardinality;
-        ReaderBuilder readerBuilder = new ReaderBuilder();
-        setReader(readerBuilder);
-        return this;
-    }
-
-    public T readWith(Class<T> groupClass) {
-        ReaderBuilder readerBuilder = new ReaderBuilder();
-        setReader(readerBuilder);
-        return readerBuilder.withMethodOn(groupClass);
-    }
-
-    public T createWith(Class<T> groupClass) {
-        CreateBuilder createBuilder = new CreateBuilder();
-        setCreate(createBuilder);
-        return createBuilder.createWith(groupClass);
-    }
-
-    public T updateWith(Class<T> groupClass) {
-        UpdateBuilder updateBuilder = new UpdateBuilder();
-        setUpdater(updateBuilder);
-        return updateBuilder.updateWith(groupClass);
-    }
-
-
-    public AttributeReader attribute(String attributeName) {
-        ReaderBuilder readerBuilder = new ReaderBuilder();
-        setReader(readerBuilder);
-        return readerBuilder.attribute(attributeName);
+    public void setManager(BOManager<T, I> manager)
+    {
+        this.manager = manager;
     }
 }

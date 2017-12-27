@@ -1,6 +1,9 @@
-package org.divy.common.bo.endpoint.hypermedia;
+package org.divy.common.bo.endpoint;
 
 import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.endpoint.hypermedia.AbstractHyperMediaEndpoint;
+import org.divy.common.bo.endpoint.hypermedia.Representation;
+import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +23,11 @@ import java.io.Serializable;
 public abstract class AbstractHyperMediaMVCEndpoint<E extends BusinessObject<I>,
         R extends Representation,
         I extends Serializable>
-        extends AbstractHyperMediaEndpoint<E, R, I, ResponseEntity> {
+        extends AbstractHyperMediaEndpoint<E, R, I, ResponseEntity>
+{
 
-    public AbstractHyperMediaMVCEndpoint(ResponseEntityBuilderFactory<R, ResponseEntity> responseEntityBuilderFactory) {
-        super(responseEntityBuilderFactory);
+    public AbstractHyperMediaMVCEndpoint(ResponseEntityBuilderFactory<R, ResponseEntity> responseEntityBuilderFactory, AssociationsHandler<E,I> associationsHandler) {
+        super(responseEntityBuilderFactory, associationsHandler);
     }
 
     @Override
