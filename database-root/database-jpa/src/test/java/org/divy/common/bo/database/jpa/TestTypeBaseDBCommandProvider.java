@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.command.*;
+import org.divy.common.bo.database.command.*;
 import org.divy.common.bo.database.jpa.context.DatabaseContext;
 import org.divy.common.bo.database.jpa.mock.*;
 import org.divy.common.bo.mapper.BOMapper;

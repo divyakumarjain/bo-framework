@@ -3,7 +3,7 @@ package org.divy.common.bo.database.jpa;
 import org.divy.common.bo.database.jpa.mock.MockEntity;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
-import org.divy.common.bo.query.operator.comparison.impl.EqualsComparisonImpl;
+import org.divy.common.bo.query.operator.comparison.OperatorFactory;
 import org.divy.common.bo.test.TestDataProvider;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class MockBoTestDataProvider implements
     public Query createSearchQuery() {
         AttributeQuery userQuery = new AttributeQuery();
 
-        userQuery.put("name", new EqualsComparisonImpl<>("data1"));
+        userQuery.put("name", OperatorFactory.equalsComparison("data1"));
 
         return userQuery;
     }

@@ -4,10 +4,9 @@ import org.divy.common.bo.database.jpa.mock.MockEntity;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.operator.And;
 import org.divy.common.bo.query.operator.Not;
-import org.divy.common.bo.query.operator.comparison.impl.*;
-import org.divy.common.bo.query.operator.impl.AndImpl;
-import org.divy.common.bo.query.operator.impl.NotImpl;
-import org.divy.common.bo.query.operator.impl.OrImpl;
+import static org.divy.common.bo.query.operator.comparison.OperatorFactory.*;
+
+import org.divy.common.bo.query.operator.Operator;
 import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsIterableContainingInOrder;
 import org.hibernate.jpa.criteria.CriteriaBuilderImpl;
@@ -46,7 +45,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     public void equalsQuery() {
 
         AttributeQuery query = new AttributeQuery();
-        query.put("integerAttribute", new EqualsComparisonImpl("1"));
+        query.put("integerAttribute", equalsComparison("1"));
 
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
 
@@ -59,7 +58,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     @Test
     public void notQuery() {
         AttributeQuery query = new AttributeQuery();
-        Not operator = new NotImpl( new GreaterThanComparisonImpl(1));
+        Not operator = not( greaterThanComparison(1));
         query.put("integerAttribute", operator);
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForComparisonPredicateWithNot(criteriaQuery
@@ -77,7 +76,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     public void gtQuery() {
 
         AttributeQuery query = new AttributeQuery();
-        query.put("integerAttribute", new GreaterThanComparisonImpl<Number>(1));
+        query.put("integerAttribute", greaterThanComparison(1));
 
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
 
@@ -91,7 +90,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     public void geQuery() {
 
         AttributeQuery query = new AttributeQuery();
-        query.put("integerAttribute", new GreaterThanEqualToComparisonImpl<Number>( 1));
+        query.put("integerAttribute", greaterThanEqualToComparison(1));
 
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
 
@@ -105,7 +104,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     public void ltQuery() {
 
         AttributeQuery query = new AttributeQuery();
-        query.put("integerAttribute", new LessThanComparisonImpl<>( 1));
+        query.put("integerAttribute", lessThanComparison(1));
 
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
 
@@ -118,7 +117,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     @Test
     public void leQuery() {
         AttributeQuery query = new AttributeQuery();
-        query.put("integerAttribute", new LessThanEqualToComparisonImpl<>( 1));
+        query.put("integerAttribute", lessThanEqualToComparison(1));
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForComparisonPredicate(criteriaQuery
                 , ComparisonPredicate.ComparisonOperator.LESS_THAN_OR_EQUAL
@@ -147,7 +146,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     @Test
     public void orQuery() {
         AttributeQuery query = new AttributeQuery();
-        OrImpl operator = new OrImpl( new EqualsComparisonImpl("1"), new LessThanComparisonImpl<>( 1));
+        Operator operator = or( equalsComparison("1"), lessThanComparison(1));
         query.put("integerAttribute", operator);
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForCompoundPredicate(criteriaQuery
@@ -158,7 +157,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     @Test
     public void andQuery() {
         AttributeQuery query = new AttributeQuery();
-        And operator = new AndImpl( new EqualsComparisonImpl("1"), new LessThanComparisonImpl<>( 1));
+        And operator = and( equalsComparison("1"), lessThanComparison( 1));
         query.put("integerAttribute", operator);
         CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForCompoundPredicate(criteriaQuery

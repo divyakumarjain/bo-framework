@@ -1,7 +1,7 @@
 package org.divy.common.bo.database.jpa.defaults;
 
 import org.divy.common.bo.BusinessObject;
-import org.divy.common.bo.command.AbstractDatabaseGetCommand;
+import org.divy.common.bo.database.command.impl.AbstractDatabaseGetCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 
 /**
@@ -9,7 +9,8 @@ import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
  *
  */
 public class DefaultDatabaseGetCommand<E extends BusinessObject<I>, I>
-        extends AbstractDatabaseGetCommand<E, I> {
+        extends AbstractDatabaseGetCommand<E, I>
+{
 
     private final EntityManagerCommandContext context;
 

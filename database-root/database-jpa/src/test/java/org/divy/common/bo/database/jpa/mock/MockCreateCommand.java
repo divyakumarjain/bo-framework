@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa.mock;
 
-import org.divy.common.bo.command.AbstractDatabaseCreateCommand;
+import org.divy.common.bo.database.command.impl.AbstractDatabaseCreateCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 
 public class MockCreateCommand extends AbstractDatabaseCreateCommand<MockEntity> {

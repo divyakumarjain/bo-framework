@@ -1,6 +1,6 @@
 package org.divy.common.bo.search;
 
-import org.divy.common.bo.command.SearchCommand;
+import org.divy.common.bo.database.command.SearchCommand;
 import org.divy.common.bo.query.KeywordQuery;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.query.operator.And;

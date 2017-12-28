@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.context.CommandContext;
+import org.divy.common.bo.database.context.CommandContext;
 
 import javax.persistence.EntityManager;
 

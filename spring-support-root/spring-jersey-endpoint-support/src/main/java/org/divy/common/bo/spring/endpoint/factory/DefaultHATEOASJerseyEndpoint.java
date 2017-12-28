@@ -2,8 +2,8 @@ package org.divy.common.bo.spring.endpoint.factory;
 
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.endpoint.hypermedia.AbstractHyperMediaJerseyEndpoint;
-import org.divy.common.bo.endpoint.hypermedia.JerseyRepresentation;
+import org.divy.common.bo.endpoint.jersey.hypermedia.AbstractHyperMediaJerseyEndpoint;
+import org.divy.common.bo.endpoint.jersey.hypermedia.JerseyRepresentation;
 import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
 import org.divy.common.bo.rest.HyperMediaMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;

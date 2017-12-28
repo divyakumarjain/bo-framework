@@ -1,7 +1,7 @@
 package org.divy.common.bo.database.jpa.defaults;
 
 import org.divy.common.bo.BusinessObject;
-import org.divy.common.bo.command.AbstractDatabaseDeleteCommand;
+import org.divy.common.bo.database.command.impl.AbstractDatabaseDeleteCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 
 /**

@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa.defaults;
 
-import org.divy.common.bo.command.AbstractDatabaseUpdateCommand;
+import org.divy.common.bo.database.command.impl.AbstractDatabaseUpdateCommand;
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 import org.divy.common.bo.mapper.BOMapper;
@@ -13,7 +13,8 @@ import java.util.UUID;
  */
 public class DefaultDatabaseUpdateCommand<E extends AbstractJPABusinessObject>
         extends
-        AbstractDatabaseUpdateCommand<E> {
+        AbstractDatabaseUpdateCommand<E>
+{
 
     private final EntityManagerCommandContext context;
 

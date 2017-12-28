@@ -21,13 +21,13 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
         , R>
         extends AbstractCRUDEndpoint<E, I, R> {
 
-    AbstractHyperMediaEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory) {
+    public AbstractHyperMediaEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory) {
         super(responseEntityBuilderFactory);
     }
 
     public abstract BOManager<B, I> getManager();
 
-    R updateRelation(I id, String relation) {
+    protected R updateRelation(I id, String relation) {
         //TODO Implement
         return responseEntityBuilderFactory.update().build();
     }

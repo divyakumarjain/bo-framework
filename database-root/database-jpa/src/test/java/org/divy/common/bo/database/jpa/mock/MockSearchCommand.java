@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa.mock;
 
-import org.divy.common.bo.command.AbstractDatabaseSearchCommand;
+import org.divy.common.bo.database.command.impl.AbstractDatabaseSearchCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 import org.divy.common.bo.query.Query;
 
@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class MockSearchCommand extends
-        AbstractDatabaseSearchCommand<MockEntity, UUID> {
+        AbstractDatabaseSearchCommand<MockEntity, UUID>
+{
 
     /**
      * @param context

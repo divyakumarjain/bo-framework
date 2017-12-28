@@ -6,7 +6,16 @@ public abstract class AbstractRepresentation<I, D, L> implements Representation<
 
     private I id;
     private String type;
-    D data;
+    protected D data;
+
+    public AbstractRepresentation(D data)
+    {
+        this.data = data;
+    }
+
+    public AbstractRepresentation()
+    {
+    }
 
     @Override
     public D getData() {

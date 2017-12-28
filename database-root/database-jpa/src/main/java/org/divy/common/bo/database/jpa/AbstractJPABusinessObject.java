@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.AbstractBusinessObject;
+import org.divy.common.bo.database.AbstractBusinessObject;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;

@@ -3,7 +3,7 @@ package org.divy.common.bo.spring.endpoint;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
-import org.divy.common.bo.endpoint.hypermedia.JerseyRepresentation;
+import org.divy.common.bo.endpoint.jersey.hypermedia.JerseyRepresentation;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.HyperMediaMapper;

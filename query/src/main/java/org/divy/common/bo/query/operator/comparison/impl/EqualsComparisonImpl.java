@@ -5,10 +5,6 @@ public class EqualsComparisonImpl<A> implements org.divy.common.bo.query.operato
 
     private A value;
 
-    public EqualsComparisonImpl() {
-        super();
-    }
-
     public EqualsComparisonImpl(A value) {
         super();
         this.value = value;
