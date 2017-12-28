@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.command.impl;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.database.context.CommandContext;
 import org.divy.common.exception.NotFoundException;
 

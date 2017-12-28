@@ -1,6 +1,6 @@
 package org.divy.common.bo.database;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -37,7 +37,7 @@ public class AbstractBusinessObject implements BusinessObject<UUID>
         return uuid;
     }
 
-    void setUuid(UUID uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 

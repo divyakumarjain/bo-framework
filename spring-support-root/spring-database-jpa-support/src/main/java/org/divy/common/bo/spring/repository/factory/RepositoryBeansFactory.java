@@ -1,6 +1,6 @@
 package org.divy.common.bo.spring.repository.factory;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.defaults.DefaultBOManager;
 import org.divy.common.bo.database.jpa.defaults.DefaultDBCommandProvider;
 import org.divy.common.bo.database.jpa.defaults.DefaultDatabaseRepository;

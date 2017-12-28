@@ -1,6 +1,6 @@
 package org.divy.common.bo.endpoint.factory;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.association.SpringAssociationsHandler;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.endpoint.SpringMVCEndPointClassFactory;

@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa.defaults;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.database.command.impl.AbstractDatabaseGetCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 

@@ -1,6 +1,6 @@
 package org.divy.common.bo.validation.jsr303;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.validation.AbstractBOValidator;
 import org.divy.common.bo.validation.ValidationResults;
 

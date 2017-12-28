@@ -1,6 +1,6 @@
 package org.divy.common.bo.endpoint.test;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.test.TestBOCRUDBase;
 import org.divy.common.bo.test.TestDataProvider;

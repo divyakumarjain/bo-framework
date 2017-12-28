@@ -4,16 +4,23 @@
     <parent>
         <artifactId>bo-framework-root</artifactId>
         <groupId>org.divy</groupId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-repository</artifactId>
     <name>repository</name>
-
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-query</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
         </dependency>
     </dependencies>
 </project>

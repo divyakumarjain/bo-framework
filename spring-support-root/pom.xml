@@ -4,12 +4,15 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-root</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-spring-support-root</artifactId>
     <name>spring-support-root</name>
-    <description>bo-framework-endpoint-root</description>
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>    <description>bo-framework-endpoint-root</description>
     <packaging>pom</packaging>
 
     <modules>

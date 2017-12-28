@@ -1,6 +1,6 @@
 package org.divy.common.bo.rest;
 
-import org.divy.common.bo.Identifiable;
+import org.divy.common.bo.repository.Identifiable;
 
 import java.util.UUID;
 

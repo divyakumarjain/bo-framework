@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.database.command.*;
 import org.divy.common.bo.database.context.HierarchicalCommandContext;
 import org.divy.common.bo.mapper.BOMapper;

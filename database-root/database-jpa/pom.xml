@@ -7,14 +7,16 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-database-root</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
     <artifactId>bo-framework-database-jpa</artifactId>
     <name>database-jpa</name>
-
-
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.divy</groupId>
@@ -39,7 +41,6 @@
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -57,6 +58,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-database-mock</artifactId>
             <scope>test</scope>
@@ -72,22 +77,17 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
+            <artifactId>hamcrest-all</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

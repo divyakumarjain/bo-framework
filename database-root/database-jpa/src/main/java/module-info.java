@@ -1,0 +1,11 @@
+module bo.framework.database.jpa {
+    requires java.persistence;
+    requires bo.framework.database.core;
+    requires bo.framework.repository;
+    requires bo.framework.mapper;
+    requires bo.framework.query;
+    requires bo.framework.metadata;
+    requires slf4j.api;
+    requires java.desktop;
+    exports org.divy.common.bo.database.jpa;
+}

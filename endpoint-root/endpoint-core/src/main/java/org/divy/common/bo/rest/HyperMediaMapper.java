@@ -1,6 +1,6 @@
 package org.divy.common.bo.rest;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.Representation;
 import org.divy.common.bo.mapper.BOMapper;
 

@@ -1,11 +1,12 @@
 package org.divy.common.bo.rest;
 
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.Representation;
 import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
@@ -72,8 +73,8 @@ public abstract class AbstractHyperMediaMapper<E extends BusinessObject<UUID>
 
     private R createRepresentationInstance() {
         try {
-            return this.representationType.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return this.representationType.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e ) {
             throw new IllegalArgumentException("Representation _type " + representationType.getName() + " should have public default constructor", e);
         }
     }

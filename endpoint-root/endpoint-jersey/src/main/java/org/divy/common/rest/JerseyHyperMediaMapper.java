@@ -1,6 +1,6 @@
 package org.divy.common.rest;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.jersey.hypermedia.JerseyRepresentation;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;

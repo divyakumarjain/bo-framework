@@ -4,15 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-support-root</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
     </parent>
 
     <artifactId>bo-framework-spring-database-jpa-support</artifactId>
     <name>spring-database-jpa-support</name>
-    <packaging>jar</packaging>
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -51,7 +55,7 @@
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
+            <artifactId>hamcrest-all</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

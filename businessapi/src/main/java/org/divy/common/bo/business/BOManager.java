@@ -1,6 +1,6 @@
 package org.divy.common.bo.business;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.query.Query;
 
 import java.util.List;

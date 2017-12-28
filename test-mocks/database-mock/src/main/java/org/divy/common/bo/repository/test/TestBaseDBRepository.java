@@ -1,7 +1,7 @@
 package org.divy.common.bo.repository.test;
 
-import org.divy.common.bo.BORepository;
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BORepository;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestBOCRUDBase;
 import org.divy.common.bo.test.TestDataProvider;

@@ -1,6 +1,6 @@
 package org.divy.common.bo.endpoint.factory;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.spring.core.factory.DynamicBeanFactory;
 import org.divy.common.bo.endpoint.GlobalControllerExceptionHandler;
 import org.divy.common.bo.endpoint.SpringMVCEndPointClassFactory;

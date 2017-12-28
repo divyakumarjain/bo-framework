@@ -1,6 +1,6 @@
 package org.divy.common.bo.endpoint;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
 import org.divy.common.bo.dynamic.clazz.common.EnumArrayAnnotationParam;

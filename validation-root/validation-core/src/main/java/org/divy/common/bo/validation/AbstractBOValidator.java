@@ -1,6 +1,6 @@
 package org.divy.common.bo.validation;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.validation.group.BOCreateCheck;
 import org.divy.common.bo.validation.group.BODeleteCheck;
 import org.divy.common.bo.validation.group.BOUpdateCheck;

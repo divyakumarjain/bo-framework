@@ -1,6 +1,6 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;

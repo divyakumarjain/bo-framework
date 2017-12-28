@@ -2,6 +2,7 @@ package org.divy.common.bo.mapper;
 
 import ma.glasnost.orika.MapperFacade;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -46,8 +47,9 @@ public abstract class AbstractBOMapper<S, T> implements BOMapper<S, T> {
         return businessObject;
     }
 
-    protected Object createOtherTargetTypeInstance() throws IllegalAccessException, InstantiationException {
-        return this.otherObjectType.newInstance();
+    protected Object createOtherTargetTypeInstance() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException
+    {
+        return this.otherObjectType.getDeclaredConstructor().newInstance();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package org.divy.common.bo.endpoint.hypermedia.association.builder;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.hypermedia.association.Association;
 import org.divy.common.bo.endpoint.hypermedia.association.AttributeReader;

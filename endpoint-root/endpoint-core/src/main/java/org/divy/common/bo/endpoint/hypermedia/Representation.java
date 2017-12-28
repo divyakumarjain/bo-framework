@@ -1,8 +1,7 @@
 package org.divy.common.bo.endpoint.hypermedia;
 
-import org.divy.common.bo.Identifiable;
+import org.divy.common.bo.repository.Identifiable;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,6 +21,5 @@ public interface Representation<I, D, L> extends Identifiable<I> {
 
     void setId(I identity);
 
-    @XmlTransient
     void _type(String _type);
 }

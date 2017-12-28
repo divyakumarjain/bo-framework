@@ -7,13 +7,16 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-boot-demo-root</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
     </parent>
+
 
     <artifactId>bo-framework-spring-boot-jersey-demo</artifactId>
     <name>spring-boot-jersey-demo</name>
-    <version>0.0.3-SNAPSHOT</version>
-
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -115,6 +118,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
     

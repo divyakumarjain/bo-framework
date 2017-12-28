@@ -1,6 +1,5 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.database.jpa.mock.MockEntity;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.query.operator.comparison.OperatorFactory;

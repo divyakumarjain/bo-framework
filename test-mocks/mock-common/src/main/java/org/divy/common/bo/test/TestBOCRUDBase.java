@@ -1,6 +1,6 @@
 package org.divy.common.bo.test;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
 import org.junit.After;
@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.IsEqual.*;
+import static org.hamcrest.core.IsNull.*;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 

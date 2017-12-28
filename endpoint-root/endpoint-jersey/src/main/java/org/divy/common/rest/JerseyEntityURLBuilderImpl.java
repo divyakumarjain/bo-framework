@@ -1,7 +1,7 @@
 package org.divy.common.rest;
 
 
-import org.divy.common.bo.Identifiable;
+import org.divy.common.bo.repository.Identifiable;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.LinkBuilder;
 import org.divy.common.bo.rest.LinkBuilderFactory;

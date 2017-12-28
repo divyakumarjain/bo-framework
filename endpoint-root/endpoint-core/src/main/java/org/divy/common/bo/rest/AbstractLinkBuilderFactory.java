@@ -14,7 +14,7 @@ public abstract class AbstractLinkBuilderFactory implements LinkBuilderFactory {
     protected static final String HEADER_X_ORIGINAL_BASE = "X-Orig-Base";
     protected static final String DEFAULT_SCHEME = "http";
     protected static final String DEFAULT_HOST = "localhost";
-    @Inject
+
     protected HttpServletRequest request;
 
     public AbstractLinkBuilderFactory(HttpServletRequest request)
@@ -63,5 +63,14 @@ public abstract class AbstractLinkBuilderFactory implements LinkBuilderFactory {
         scheme = StringUtils.defaultIfBlank(StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),
                 request.getScheme()),DEFAULT_SCHEME);
         return scheme;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    @Inject
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
     }
 }

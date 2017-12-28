@@ -1,6 +1,6 @@
 package org.divy.common.bo.spring.core.factory.context;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategyImpl;
 import org.slf4j.Logger;

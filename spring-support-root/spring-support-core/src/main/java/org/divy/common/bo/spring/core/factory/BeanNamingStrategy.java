@@ -1,6 +1,6 @@
 package org.divy.common.bo.spring.core.factory;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.springframework.util.ClassUtils;
 
 import java.beans.Introspector;

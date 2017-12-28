@@ -1,6 +1,6 @@
 package org.divy.common.bo.spring.endpoint.factory;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
 import org.divy.common.bo.endpoint.jersey.hypermedia.AbstractHyperMediaJerseyEndpoint;

@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
@@ -47,6 +47,7 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     @Override
     protected E doAssertExists(I id) {
         Response response = endpointInstance.read(id);
+
 
         assertThat(response,
                 either(both(hasProperty(STATUS, is(equalTo(200)))).and(hasProperty(ENTITY, notNullValue())))

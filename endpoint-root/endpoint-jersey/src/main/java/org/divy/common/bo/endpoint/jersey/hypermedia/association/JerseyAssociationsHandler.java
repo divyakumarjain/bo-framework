@@ -1,6 +1,7 @@
 package org.divy.common.bo.endpoint.jersey.hypermedia.association;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
+import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociationsHandler;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.metadata.FieldMetaData;

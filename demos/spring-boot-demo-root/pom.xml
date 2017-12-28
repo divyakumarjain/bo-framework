@@ -8,15 +8,26 @@
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-demos</artifactId>
         <relativePath>..</relativePath>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
     </parent>
+
+    <repositories>
+        <repository>
+            <id>spring</id>
+            <url>https://repo.spring.io/milestone/</url>
+        </repository>
+    </repositories>
 
     <artifactId>bo-framework-spring-boot-demo-root</artifactId>
     <name>spring-boot-demo-root</name>
-    <packaging>pom</packaging>
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>    <packaging>pom</packaging>
 
     <modules>
-        <module>spring-boot-jersey-demo</module>
+        <!--<module>spring-boot-jersey-demo</module>-->
+        <!--TODO Fix the java module system-->
         <module>spring-boot-mvc-demo</module>
     </modules>
     

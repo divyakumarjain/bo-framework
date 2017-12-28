@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.metadata.FieldMetaData;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.slf4j.Logger;

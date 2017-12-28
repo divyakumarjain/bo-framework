@@ -4,7 +4,7 @@ package org.divy.common.bo.spring.endpoint;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import org.divy.common.bo.Identifiable;
+import org.divy.common.bo.repository.Identifiable;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;

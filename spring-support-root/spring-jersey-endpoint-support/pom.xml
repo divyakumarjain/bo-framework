@@ -7,13 +7,16 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-support-root</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
     <artifactId>bo-framework-spring-jersey-endpoint-support</artifactId>
     <name>spring-jersey-endpoint-support</name>
-    <packaging>jar</packaging>
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

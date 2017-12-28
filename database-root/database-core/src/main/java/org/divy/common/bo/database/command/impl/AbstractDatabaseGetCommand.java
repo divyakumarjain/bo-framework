@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.command.impl;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.database.context.CommandContext;
 
 public abstract class AbstractDatabaseGetCommand<E extends BusinessObject<I>, I>

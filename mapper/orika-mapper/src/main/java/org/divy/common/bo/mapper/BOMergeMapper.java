@@ -1,7 +1,7 @@
 package org.divy.common.bo.mapper;
 
 import ma.glasnost.orika.MapperFacade;
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
 import org.divy.common.bo.mapper.defaults.AdvanceBOMapper;
 import org.divy.common.bo.mapper.orika.builder.OrikaMapperBuilder;

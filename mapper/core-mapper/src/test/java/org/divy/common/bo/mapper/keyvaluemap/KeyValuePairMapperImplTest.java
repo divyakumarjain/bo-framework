@@ -1,6 +1,6 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.builder.FieldMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -48,9 +48,9 @@ public class KeyValuePairMapperImplTest {
         FieldMapperBuilderContext mockFieldMapperContext = mock(FieldMapperBuilderContext.class);
 
         doReturn(mockFieldMapperContext).when(typeMapperBuilderContext).field(anyString()
-                , Matchers.any(MapperBuilderOption.class)
-                , Matchers.anyObject()
-                , Matchers.anyObject());
+                , ArgumentMatchers.any(MapperBuilderOption.class)
+                , ArgumentMatchers.any()
+                , ArgumentMatchers.any());
 
         doReturn(typeMapperBuilderContext).when(mockFieldMapperContext).and();
     }
@@ -114,7 +114,7 @@ public class KeyValuePairMapperImplTest {
         /*
          * (non-Javadoc)
          *
-         * @see org.divy.common.bo.BusinessObject#getIdentity()
+         * @see org.divy.common.bo.repository.BusinessObject#getIdentity()
          */
         public UUID identity() {
             return getUuid();

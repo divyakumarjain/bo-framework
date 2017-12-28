@@ -1,6 +1,6 @@
 package org.divy.common.bo.endpoint.jersey.hypermedia;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.AbstractHyperMediaEndpoint;
 import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
 import org.divy.common.bo.query.Query;

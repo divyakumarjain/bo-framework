@@ -6,12 +6,15 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-root</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-demos</artifactId>
     <name>demos</name>
-
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
     <description>Demo applications for bo framework</description>
     <packaging>pom</packaging>
     <modules>

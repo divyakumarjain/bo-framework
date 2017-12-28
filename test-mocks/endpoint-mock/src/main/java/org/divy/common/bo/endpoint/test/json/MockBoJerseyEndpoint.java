@@ -90,7 +90,7 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
         /*
          * (non-Javadoc)
          *
-         * @see org.divy.common.bo.BusinessObject#getIdentity()
+         * @see org.divy.common.bo.repository.BusinessObject#getIdentity()
          */
         @Override
         public UUID identity() {

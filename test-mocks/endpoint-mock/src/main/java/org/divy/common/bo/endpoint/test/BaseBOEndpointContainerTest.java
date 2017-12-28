@@ -1,10 +1,10 @@
 package org.divy.common.bo.endpoint.test;
 
 import com.google.inject.servlet.GuiceFilter;
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestDataProvider;
-import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.jetty.JettyTestContainerFactory;
@@ -71,7 +71,7 @@ public abstract class BaseBOEndpointContainerTest<E extends BusinessObject<I>
     }
 
     /* (non-Javadoc)
-     * @see org.divy.common.bo.test.TestBaseManager#doDeleteEntity(org.divy.common.bo.BusinessObject)
+     * @see org.divy.common.bo.test.TestBaseManager#doDeleteEntity(org.divy.common.bo.repository.BusinessObject)
      */
     @Override
     protected void doDeleteEntity(E entity) {
@@ -108,7 +108,7 @@ public abstract class BaseBOEndpointContainerTest<E extends BusinessObject<I>
 
         protected Client client(TestContainer tc) {
             Client client = super.client();
-            client.register(LoggingFilter.class);
+            client.register(new LoggingFeature());
             return client;
         }
 
@@ -127,7 +127,7 @@ public abstract class BaseBOEndpointContainerTest<E extends BusinessObject<I>
     public class JerseyConfig extends ResourceConfig {
         public JerseyConfig() {
             register(GuiceFilter.class);
-            register(LoggingFilter.class);
+            register(new LoggingFeature());
             packages(getEndPointClass().getPackage().getName());
         }
     }

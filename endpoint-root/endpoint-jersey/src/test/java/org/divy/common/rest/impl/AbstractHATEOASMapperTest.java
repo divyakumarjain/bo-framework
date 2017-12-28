@@ -5,8 +5,8 @@ import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.AbstractHyperMediaMapper;
 import org.divy.common.bo.rest.LinkBuilderFactory;
-import org.divy.common.rest.impl.mock.MockEntity;
-import org.divy.common.rest.impl.mock.MockRepresentation;
+import org.divy.common.rest.MockEntity;
+import org.divy.common.rest.MockRepresentation;
 import org.junit.Before;
 import org.junit.Test;
 

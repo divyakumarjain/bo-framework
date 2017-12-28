@@ -1,6 +1,6 @@
 package org.divy.common.bo.validation;
 
-import org.divy.common.bo.BusinessObject;
+import org.divy.common.bo.repository.BusinessObject;
 
 import javax.validation.ConstraintViolation;
 import java.util.ArrayList;

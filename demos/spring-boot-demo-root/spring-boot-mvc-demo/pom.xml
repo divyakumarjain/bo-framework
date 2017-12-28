@@ -7,11 +7,10 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-boot-demo-root</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.11-SNAPSHOT</version>
     </parent>
 
     <artifactId>spring-boot-mvc-demo</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -93,6 +92,10 @@
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -134,7 +137,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
-    
 </project>
