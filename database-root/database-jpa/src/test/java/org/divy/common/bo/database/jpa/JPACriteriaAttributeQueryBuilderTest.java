@@ -9,11 +9,11 @@ import static org.divy.common.bo.query.operator.comparison.OperatorFactory.*;
 import org.divy.common.bo.query.operator.Operator;
 import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsIterableContainingInOrder;
-import org.hibernate.jpa.criteria.CriteriaBuilderImpl;
-import org.hibernate.jpa.criteria.path.SingularAttributePath;
-import org.hibernate.jpa.criteria.predicate.ComparisonPredicate;
-import org.hibernate.jpa.criteria.predicate.CompoundPredicate;
-import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
+import org.hibernate.internal.SessionFactoryImpl;
+import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
+import org.hibernate.query.criteria.internal.path.SingularAttributePath;
+import org.hibernate.query.criteria.internal.predicate.ComparisonPredicate;
+import org.hibernate.query.criteria.internal.predicate.CompoundPredicate;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class JPACriteriaAttributeQueryBuilderTest {
     public void setupCriteriaQueryBuilder() {
         EntityManager mockEntityManager = Mockito.mock(EntityManager.class);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.divy.mock");
-        CriteriaBuilder mockCriteriaBuilder = new CriteriaBuilderImpl((EntityManagerFactoryImpl)entityManagerFactory);
+        CriteriaBuilder mockCriteriaBuilder = new CriteriaBuilderImpl((SessionFactoryImpl) entityManagerFactory);
         doReturn(mockCriteriaBuilder).when(mockEntityManager).getCriteriaBuilder();
 
         criteriaQueryBuilder = new JPACriteriaQueryBuilder(mockEntityManager, MockEntity.class);

@@ -7,6 +7,19 @@
     <packaging>pom</packaging>
     <name>Business Object Framework</name>
 
+    <repositories>
+        <repository>
+            <id>spring</id>
+            <url>https://repo.spring.io/milestone/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring</id>
+            <url>https://repo.spring.io/milestone/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <modules>
         <module>metadata</module>
         <module>repository</module>
@@ -25,6 +38,7 @@
         <module>validation-root</module>
     </modules>
 
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -37,8 +51,8 @@
         <sonar.host.url>http://sonarqube.com</sonar.host.url>
 
         <!-- Make sure to update below dependencies as these are not updated from Spring Boot BOM-->
-        <org.springframework.boot.version>1.5.9.RELEASE</org.springframework.boot.version>
-        <hibernate-search-orm-version>5.5.5.Final</hibernate-search-orm-version>
+        <org.springframework.boot.version>2.0.0.M7</org.springframework.boot.version>
+        <hibernate-search-orm-version>5.8.2.Final</hibernate-search-orm-version>
     </properties>
 
     <build>
@@ -86,12 +100,6 @@
                 <artifactId>bo-framework-database-core</artifactId>
                 <version>0.0.3-SNAPSHOT</version>
             </dependency>
-            <dependency>
-                <groupId>org.divy</groupId>
-                <artifactId>bo-framework-exception-handling-core</artifactId>
-                <version>0.0.3-SNAPSHOT</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-core-mapper</artifactId>
