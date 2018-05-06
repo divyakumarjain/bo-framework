@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Configuration
 @PropertySource( value = {"classpath:/application.properties"})
 @ComponentScan(basePackages = {"org.divy.common.bo.spring.mapper.factory"
-        , "org.divy.common.bo.spring.endpoint.factory"
+        , "org.divy.common.bo.endpoint.factory"
         , "org.divy.common.bo.spring.repository.factory"})
 public class BoFrameworkSpringParentContext
 {
@@ -62,7 +62,7 @@ public class BoFrameworkSpringParentContext
     }
 
     private Optional<MetaDataProvider> loadMetaDataProvider(String className, List<Class<? extends BusinessObject>> typeList) {
-        Class<?> metaDataProviderClass = null;
+        Class<?> metaDataProviderClass;
         try {
             metaDataProviderClass = Class.forName(className);
             return Optional.of((MetaDataProvider)metaDataProviderClass.getConstructor(List.class).newInstance(typeList));

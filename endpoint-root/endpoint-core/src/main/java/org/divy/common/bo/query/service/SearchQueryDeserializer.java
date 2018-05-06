@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.divy.common.bo.query.operator.Operator;
-import org.divy.common.bo.query.operator.comparison.impl.EqualsComparisonImpl;
+import org.divy.common.bo.query.operator.comparison.OperatorFactory;
 
 import java.io.IOException;
 
@@ -23,8 +23,8 @@ final class SearchQueryDeserializer extends
         JsonNode operatorValue = node.get("value");
         
         //TODO support all operators
-        if(operatorValue!=null)
-            returnOperator = new EqualsComparisonImpl<>(operatorValue.asText());
+        if (operatorValue!=null)
+            returnOperator = OperatorFactory.equalsComparison(operatorValue.asText());
         
         return returnOperator;
     }

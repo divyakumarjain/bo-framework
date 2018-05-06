@@ -9,8 +9,7 @@ import org.junit.Before;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.IsNull.*;
 import static org.junit.Assert.assertThat;
 
 public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> extends TestBOCRUDBase<E, I>

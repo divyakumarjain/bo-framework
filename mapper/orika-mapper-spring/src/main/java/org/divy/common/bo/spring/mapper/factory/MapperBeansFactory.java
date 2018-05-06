@@ -35,7 +35,7 @@ public class MapperBeansFactory implements DynamicBeanFactory<Class<? extends Bu
     }
 
     @Override
-    public void register(BeanDefinitionRegistry beanDefinitionRegistry)
+    public void registerSingletons(BeanDefinitionRegistry beanDefinitionRegistry)
     {
         //NO OPERATION
     }

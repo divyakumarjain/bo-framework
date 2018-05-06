@@ -42,7 +42,7 @@ public class RepositoryBeansFactory implements DynamicBeanFactory<Class<? extend
     }
 
     @Override
-    public void register(BeanDefinitionRegistry beanDefinitionRegistry)
+    public void registerSingletons(BeanDefinitionRegistry beanDefinitionRegistry)
     {
         //NO OPERATION
     }

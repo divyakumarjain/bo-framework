@@ -1,6 +1,6 @@
 package org.divy.common.bo.database.jpa.mock;
 
-import org.divy.common.bo.command.AbstractDatabaseDeleteCommand;
+import org.divy.common.bo.database.command.impl.AbstractDatabaseDeleteCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 
 import java.util.UUID;

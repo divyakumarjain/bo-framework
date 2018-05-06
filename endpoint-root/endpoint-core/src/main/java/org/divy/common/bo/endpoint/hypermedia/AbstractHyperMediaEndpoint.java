@@ -3,7 +3,8 @@ package org.divy.common.bo.endpoint.hypermedia;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.AbstractCRUDEndpoint;
-import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociations;
+import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
+import org.divy.common.bo.endpoint.hypermedia.association.Association;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.HyperMediaMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
@@ -11,9 +12,7 @@ import org.divy.common.exception.NotFoundException;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
         , E extends Representation
@@ -21,14 +20,16 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
         , R>
         extends AbstractCRUDEndpoint<E, I, R> {
 
-    AbstractHyperMediaEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory) {
+    private final AssociationsHandler<B,I> associationsHandler;
+
+    public AbstractHyperMediaEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory, AssociationsHandler<B,I> associationsHandler) {
         super(responseEntityBuilderFactory);
+        this.associationsHandler = associationsHandler;
     }
 
     public abstract BOManager<B, I> getManager();
 
-    R updateRelation(I id, String relation) {
-        //TODO Implement
+    protected R updateRelation(I id, String relation) {
         return responseEntityBuilderFactory.update().build();
     }
 
@@ -36,10 +37,13 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
 
         B entity = getManager().get(id);
 
-        Optional<Object> optionalEntityRelation = this.getAssociations().getAssociation(relation).read(entity);
+        final Association<B, I> biAssociation = this.getAssociationsHandler().getAssociation(relation)
+                .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
 
-        if(optionalEntityRelation.isPresent()) {
-            return responseEntityBuilderFactory.read((E)optionalEntityRelation.get()).build();
+        Optional<Object> optionalEntityRelation = biAssociation.read(entity);
+
+        if (optionalEntityRelation.isPresent()) {
+            return responseEntityBuilderFactory.list((Collection<E>) optionalEntityRelation.get()).build();
         } else {
             return responseEntityBuilderFactory.read().build();
         }
@@ -104,9 +108,7 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
     protected Collection<E> doList() {
         Collection<B> boList = getManager().list();
 
-        Collection<B> resultList = new ArrayList<>();
-
-        resultList.addAll(boList);
+        Collection<B> resultList = new ArrayList<>(boList);
 
         return getRepresentationMapper().createRepresentationFromBO(resultList);
     }
@@ -115,9 +117,7 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
     protected Collection<E> doSearch(Query query) {
         Collection<B> boList = getManager().search(query);
 
-        Collection<B> resultList = new ArrayList<>();
-
-        resultList.addAll(boList);
+        Collection<B> resultList = new ArrayList<>(boList);
 
         return getRepresentationMapper().createRepresentationFromBO(resultList);
     }
@@ -130,7 +130,9 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
         return getRepresentationMapper().createRepresentationFromBO(createdBusinessObject);
     }
 
-    public abstract HyperMediaMapper<B, E> getRepresentationMapper();
+    public AssociationsHandler<B,I> getAssociationsHandler() {
+        return associationsHandler;
+    }
 
-    public abstract AbstractAssociations<B> getAssociations();
+    public abstract HyperMediaMapper<B, E> getRepresentationMapper();
 }

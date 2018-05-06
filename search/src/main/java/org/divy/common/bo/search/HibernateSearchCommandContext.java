@@ -1,6 +1,6 @@
 package org.divy.common.bo.search;
 
-import org.divy.common.bo.context.CommandContext;
+import org.divy.common.bo.database.context.CommandContext;
 import org.hibernate.search.jpa.FullTextEntityManager;
 
 public class HibernateSearchCommandContext implements SearchCommandContext {

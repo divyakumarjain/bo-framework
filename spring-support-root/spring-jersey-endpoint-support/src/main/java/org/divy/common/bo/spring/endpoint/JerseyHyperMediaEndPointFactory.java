@@ -3,7 +3,8 @@ package org.divy.common.bo.spring.endpoint;
 import org.divy.common.bo.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
-import org.divy.common.bo.endpoint.hypermedia.JerseyRepresentation;
+import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
+import org.divy.common.bo.endpoint.jersey.hypermedia.JerseyRepresentation;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.HyperMediaMapper;
@@ -175,8 +176,6 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                 .addConstructor()
                     .addAnnotation(Autowired.class)
                         .and()
-                    .superValue(typeClass)
-                        .and()
                     .superParam(BOManager.class)
                         .addAnnotation(Qualifier.class)
                             .value(beanNamingStrategy.calculateManagerId(typeClass))
@@ -187,9 +186,16 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                             .value("jerseyResponseEntityBuilderHyperMediaFactory")
                             .and()
                         .and()
-                    .superParam(HyperMediaMapper.class).addAnnotation(Qualifier.class)
-                        .value(beanNamingStrategy.calculateHyperMediaMapperId(typeClass))
+                    .superParam(HyperMediaMapper.class)
+                        .addAnnotation(Qualifier.class)
+                            .value(beanNamingStrategy.calculateHyperMediaMapperId(typeClass))
+                            .and()
+                        .and()
+                    .superParam(AssociationsHandler.class)
+                        .addAnnotation(Qualifier.class)
+                            .value(beanNamingStrategy.calculateAssociationsHandler(typeClass))
                         .build()
+
         .map(endpointClass-> {
             endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
 

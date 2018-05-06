@@ -14,7 +14,10 @@ Handling Entity Relationships
 Requirement
 -----------
 * [ ] API Endpoint for navigating relationships
-* [ ] CRD of relationships 
+* [X] Read of relationships
+* [ ] Create of relationships 
+* [ ] Update of relationships 
+* [ ] Delete of relationships 
 * [ ] Update of relationships with entity merge and list merge
 
 
