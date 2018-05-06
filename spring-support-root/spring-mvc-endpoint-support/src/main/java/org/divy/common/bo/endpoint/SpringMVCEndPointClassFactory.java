@@ -18,6 +18,7 @@ import java.util.UUID;
 
 public class SpringMVCEndPointClassFactory {
 
+    protected static final String HTTP_METHOD = "method";
     final BeanNamingStrategy beanNamingStrategy;
     final EndPointRegistry endPointRegistry;
     final SpringMVCEndpointConfigProperties configProperties;
@@ -41,7 +42,7 @@ public class SpringMVCEndPointClassFactory {
                         .and()
                 .proxySuperMethod("create").name("createMethod")
                     .addAnnotation(RequestMapping.class)
-                        .param("method", new EnumArrayAnnotationParam(RequestMethod.POST))
+                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.POST))
                         .and()
                     .param()
                         .type(typeClass)
@@ -51,7 +52,7 @@ public class SpringMVCEndPointClassFactory {
                     .and()
                 .proxySuperMethod("update").name("updateMethod")
                     .addAnnotation(RequestMapping.class)
-                        .param("method", new EnumArrayAnnotationParam(RequestMethod.PUT))
+                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.PUT))
                         .value(new StringArrayAnnotationParam(new String[]{"/{entityId}"}))
                         .and()
                     .param(UUID.class)
@@ -67,7 +68,7 @@ public class SpringMVCEndPointClassFactory {
                     .and()
                 .proxySuperMethod("delete").name("deleteMethod")
                     .addAnnotation(RequestMapping.class)
-                        .param("method", new EnumArrayAnnotationParam(RequestMethod.DELETE))
+                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.DELETE))
                         .value(new StringArrayAnnotationParam(new String[]{"/{id}"}))
                         .and()
                     .param(UUID.class)
@@ -78,7 +79,7 @@ public class SpringMVCEndPointClassFactory {
                     .and()
                 .proxySuperMethod("search").name("searchMethod")
                     .addAnnotation(RequestMapping.class)
-                        .param("method", new EnumArrayAnnotationParam(RequestMethod.POST))
+                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.POST))
                         .value(new StringArrayAnnotationParam(new String[]{"/search"}))
                         .and()
                     .param(Query.class)
@@ -88,12 +89,12 @@ public class SpringMVCEndPointClassFactory {
                     .and()
                 .proxySuperMethod("list").name("listMethod")
                     .addAnnotation(RequestMapping.class)
-                        .param("method", new EnumArrayAnnotationParam(RequestMethod.GET))
+                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.GET))
                         .and()
                     .and()
                 .proxySuperMethod("read").name("readMethod")
                     .addAnnotation(RequestMapping.class)
-                        .param("method", new EnumArrayAnnotationParam(RequestMethod.GET))
+                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.GET))
                         .value(new StringArrayAnnotationParam(new String[]{"/{id}"}))
                         .and()
                     .param(UUID.class)

@@ -12,7 +12,6 @@ public class JerseyRepresentation<I> extends AbstractRepresentation<I, Map<Strin
 {
 
     private Set<Link> links;
-    private Map<String, Object> associations = new HashMap<>();
 
 
     public JerseyRepresentation() {
@@ -36,21 +35,4 @@ public class JerseyRepresentation<I> extends AbstractRepresentation<I, Map<Strin
     public void setLinks(Set<Link> links) {
         this.links = links;
     }
-
-
-    @Override
-    public Map<String, Object> getAssociations() {
-        return associations;
-    }
-
-    public void setAssociations(Map<String, Object> associations) {
-        this.associations = associations;
-    }
-
-    @Override
-    public void addAssociation(String rel, Object association) {
-        getAssociations().put(rel, association);
-    }
-
-
 }
