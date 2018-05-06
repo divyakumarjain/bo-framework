@@ -2,11 +2,16 @@ package org.divy.common.bo.endpoint.hypermedia;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class AbstractRepresentation<I, D, L> implements Representation<I, D, L> {
 
     private I id;
     private String type;
     protected D data;
+
+    private Map<String, Object> associations = new HashMap<>();
 
     public AbstractRepresentation(D data)
     {
@@ -50,5 +55,19 @@ public abstract class AbstractRepresentation<I, D, L> implements Representation<
     @Override
     public I identity() {
         return id;
+    }
+
+    @Override
+    public Map<String, Object> getAssociations() {
+        return associations;
+    }
+
+    public void setAssociations(Map<String, Object> associations) {
+        this.associations = associations;
+    }
+
+    @Override
+    public void addAssociation(String rel, Object association) {
+        getAssociations().put(rel, association);
     }
 }

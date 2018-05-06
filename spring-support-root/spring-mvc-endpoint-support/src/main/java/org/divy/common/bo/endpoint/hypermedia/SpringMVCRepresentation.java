@@ -10,7 +10,6 @@ import java.util.Set;
 public class SpringMVCRepresentation<I> extends AbstractRepresentation<I, Map<String, Object>, Link> {
 
     private Set<Link> links;
-    private Map<String, Object> associations = new HashMap<>();
 
     public SpringMVCRepresentation() {
         data = new HashMap<>();
@@ -33,20 +32,4 @@ public class SpringMVCRepresentation<I> extends AbstractRepresentation<I, Map<St
     public void setLinks(Set<Link> links) {
         this.links = links;
     }
-
-
-    @Override
-    public Map<String, Object> getAssociations() {
-        return associations;
-    }
-
-    public void setAssociations(Map<String, Object> associations) {
-        this.associations = associations;
-    }
-
-    @Override
-    public void addAssociation(String rel, Object association) {
-        getAssociations().put(rel, association);
-    }
-
 }
