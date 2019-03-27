@@ -48,7 +48,7 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
                     .filter(predicate)
                     .collect(Collectors.toMap(FeatureDescriptor::getName, FieldMetaData::new, (a, b) -> b, HashMap::new));
         } catch (IntrospectionException e) {
-            LOGGER.error("Could not get Child Entities", e);
+            LOGGER.debug("Could not get Child Entities", e);
         }
         return result;
     }
@@ -79,7 +79,7 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
             Field field = declaringClass.getField(pd.getName());
             return field.getAnnotation(annotation) != null;
         } catch (NoSuchFieldException e) {
-            LOGGER.info("Could not find field with name " + pd.getName() + " in " + declaringClass);
+            LOGGER.debug("Could not find field with name {} in {}", pd.getName(), declaringClass);
         }
         return false;
     }

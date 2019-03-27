@@ -23,8 +23,10 @@ public class BOMergeMapper<B extends BusinessObject> extends AdvanceBOMapper<B, 
         final OrikaTypeMapperBuilderContext<B, B> mapping = builder.mapping(businessObjectType, businessObjectType);
 
         mapping.field("lastUpdateTimestamp", FieldMapperOptions.exclude())
-                .and()
-                .field("createTimestamp", FieldMapperOptions.exclude());
+              .and()
+                    .field("createTimestamp", FieldMapperOptions.exclude())
+              .and()
+                    .field( "uuid", FieldMapperOptions.exclude() );
 
         return mapping.buildMapperFacade();
     }

@@ -10,6 +10,8 @@ import org.divy.common.bo.dynamic.clazz.member.method.DynamicMethodBuilderContex
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -64,14 +66,14 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
     }
 
     @Override
-    public Optional<Class<?>> build() {
+    public Optional<Class<?>> build( MethodHandles.Lookup lookup ) {
 
         CtClass newClass = getClassPool().makeClass(this.getClassName());
         try {
             doBuild(newClass);
-            newClass.debugWriteFile();
-            return Optional.of(newClass.toClass());
-        } catch (CannotCompileException e) {
+            return Optional.of(newClass.toClass( lookup ));
+
+        } catch ( CannotCompileException e) {
             LOGGER.error("Could not create the class", e);
             return Optional.empty();
         }

@@ -126,7 +126,6 @@ public class AdvanceBOMapperTest {
     @Test
     public void testOrikaMap() {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder()
-                .compilerStrategy(new EclipseJdtCompilerStrategy())
                 .build();
 
         final ClassMapBuilder<BeanWithMap, BeanWithMap> beanMapping = mapperFactory.classMap(BeanWithMap.class, BeanWithMap.class);

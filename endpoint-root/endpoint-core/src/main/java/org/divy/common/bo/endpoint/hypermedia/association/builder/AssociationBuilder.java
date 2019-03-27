@@ -1,12 +1,12 @@
 package org.divy.common.bo.endpoint.hypermedia.association.builder;
 
+import org.divy.common.bo.dynamic.clazz.member.method.reader.ReaderBuilder;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.hypermedia.association.Association;
-import org.divy.common.bo.endpoint.hypermedia.association.AttributeReader;
+import org.divy.common.bo.dynamic.clazz.member.method.reader.AttributeReader;
 import org.divy.common.bo.endpoint.hypermedia.association.Cardinality;
 import org.divy.common.bo.endpoint.hypermedia.association.PropagateSave;
-import org.divy.common.bo.endpoint.hypermedia.association.reader.ReaderBuilder;
 import org.divy.common.bo.rest.AbstractHyperMediaMapper;
 
 import java.util.Arrays;

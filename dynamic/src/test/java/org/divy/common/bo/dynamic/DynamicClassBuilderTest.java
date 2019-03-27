@@ -4,8 +4,10 @@ import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
 import org.divy.common.bo.dynamic.testclasses.BaseClass;
 import org.divy.common.bo.dynamic.testclasses.NewAnnotation1;
 import org.divy.common.bo.dynamic.testclasses.NewAnnotation2;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
@@ -14,17 +16,30 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 public class DynamicClassBuilderTest {
 
-    @Test
-    public void createClass() {
-        final Optional<Class<?>> newClass = DynamicClassBuilder.createClass("NewClass")
-                .build();
+    MethodHandles.Lookup prvlookup;
+    
+    @Before
+    public void setup() throws IllegalAccessException
+    {
+        MethodHandles.Lookup lookup = MethodHandles.lookup();
 
-        assertThat(newClass.get().getSimpleName(), is("NewClass"));
+        this.getClass().getModule().addReads(this.getClass().getModule());
+
+        prvlookup = MethodHandles.privateLookupIn(this.getClass(), lookup);
+    }
+
+    @Test
+    public void createClass()
+    {
+        final Optional<Class<?>> newClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.NewClass")
+                .build(prvlookup);
+
+        assertThat(newClass.get().getName(), is("org.divy.common.bo.dynamic.NewClass"));
     }
 
     @Test
     public void createClassWithConstructor() throws NoSuchMethodException {
-        final Optional<Class<?>> newClass = DynamicClassBuilder.createClass("NewClassWithConstructor")
+        final Optional<Class<?>> newClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.NewClassWithConstructor")
                 .addConstructor()
                     .param("attribute1", String.class)
                         .addAnnotation(NewAnnotation1.class)
@@ -36,9 +51,9 @@ public class DynamicClassBuilderTest {
                         .and()
                     .and()
                 .addField("attribute1", String.class)
-                .build();
+                .build( prvlookup );
 
-        assertThat(newClass.get().getSimpleName(), is("NewClassWithConstructor"));
+        assertThat(newClass.get().getName(), is("org.divy.common.bo.dynamic.NewClassWithConstructor"));
 
         final Constructor<?> constructor = newClass.get().getConstructor(String.class);
         assertThat(constructor, notNullValue());
@@ -48,10 +63,10 @@ public class DynamicClassBuilderTest {
 
     @Test
     public void createClassWithAnnotation() {
-        final Optional<Class<?>> newClassWithAnnotation = DynamicClassBuilder.createClass("NewClassWithSingleAnnotation")
+        final Optional<Class<?>> newClassWithAnnotation = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.NewClassWithSingleAnnotation")
                 .addAnnotation(NewAnnotation1.class)
                 .value("NewAnnotation1Value")
-                .build();
+                .build( prvlookup );
 
         assertThat(newClassWithAnnotation.get().getAnnotation(NewAnnotation1.class), notNullValue());
 
@@ -61,13 +76,13 @@ public class DynamicClassBuilderTest {
 
     @Test
     public void createClassWithTwoAnnotation() {
-        final Optional<Class<?>> newClassWithAnnotation = DynamicClassBuilder.createClass("NewClassWithTwoAnnotation")
+        final Optional<Class<?>> newClassWithAnnotation = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.NewClassWithTwoAnnotation")
                 .addAnnotation(NewAnnotation1.class)
                     .value("NewAnnotation1Value")
                     .and()
                 .addAnnotation(NewAnnotation2.class)
                 .param("value", "NewAnnotation2Value")
-                .build();
+                .build( prvlookup );
 
         assertThat(newClassWithAnnotation.get().getAnnotation(NewAnnotation1.class), notNullValue());
 
@@ -85,17 +100,17 @@ public class DynamicClassBuilderTest {
     @Test
     public void subClass() {
         final Optional<Class<?>> aSubClass = DynamicClassBuilder.createSubClass(BaseClass.class)
-                .name("SubClass")
-                .build();
+                .name("org.divy.common.bo.dynamic.SubClass")
+                .build(prvlookup);
 
         assertThat(aSubClass.get(), both(typeCompatibleWith(BaseClass.class)).and(notNullValue()));
     }
 
     @Test
     public void subClassWithName() {
-        final Optional<Class<?>> aSubClass = DynamicClassBuilder.createClass("SubClassWithName")
+        final Optional<Class<?>> aSubClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.SubClassWithName")
                 .subClass(BaseClass.class)
-                .build();
+                .build( prvlookup );
 
         assertThat(aSubClass.get().getSimpleName(), is("SubClassWithName"));
         assertThat(aSubClass.get(), both(typeCompatibleWith(BaseClass.class)).and(notNullValue()));
@@ -103,14 +118,14 @@ public class DynamicClassBuilderTest {
 
     @Test
     public void subClassWithBaseConstructor() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        final Optional<Class<?>> optionalResult = DynamicClassBuilder.createClass("SubClassWithBaseConstructor")
+        final Optional<Class<?>> optionalResult = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.SubClassWithBaseConstructor")
                 .subClass(BaseClass.class)
                     .addConstructor()
                         .superParam(String.class)
                         .and()
                         .superParam(String.class)
                     .and()
-                .build();
+                .build( prvlookup );
 
         final Class<?> subClass = optionalResult.get();
         assertThat(subClass, both(typeCompatibleWith(BaseClass.class)).and(notNullValue()));
@@ -125,14 +140,14 @@ public class DynamicClassBuilderTest {
 
     @Test
     public void subClassWithConstantValueForBaseConstructor() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        final Optional<Class<?>> aSubClass = DynamicClassBuilder.createClass("SubClassWithConstantValueForBaseConstructor")
+        final Optional<Class<?>> aSubClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.SubClassWithConstantValueForBaseConstructor")
                 .subClass(BaseClass.class)
                     .addConstructor()
                         .superParam(String.class)
                         .and()
                         .superValue("attribute2")
                     .and()
-                .build();
+                .build( prvlookup );
 
         assertThat(aSubClass.get(), both(typeCompatibleWith(BaseClass.class)).and(notNullValue()));
         final Constructor<?> constructor = aSubClass.get().getConstructor(String.class);

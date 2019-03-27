@@ -3,6 +3,7 @@ package org.divy.common.bo.endpoint.hypermedia.association;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.rest.AbstractHyperMediaMapper;
+import org.divy.common.bo.dynamic.clazz.member.method.reader.Reader;
 
 import java.util.Collection;
 import java.util.List;

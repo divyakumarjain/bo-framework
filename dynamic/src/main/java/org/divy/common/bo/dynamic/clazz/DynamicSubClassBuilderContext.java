@@ -8,6 +8,7 @@ import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderC
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.SecureRandom;
 import java.util.Optional;
 import java.util.Random;
 
@@ -36,7 +37,7 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<Dy
         final CtClass superClass;
         try
         {
-            superClass = getClassPool().getCtClass(parentClass.getName());
+            superClass = getClassPool(parentClass).getCtClass(parentClass.getName());
             newClass.setSuperclass(superClass);
         } catch (NotFoundException e)
         {
@@ -49,7 +50,7 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<Dy
     String getClassName() {
         String className = super.getClassName();
         if(className==null) {
-            return parentClass.getSimpleName() + new Random().nextInt();
+            return parentClass.getSimpleName() + new SecureRandom().nextInt();
         } else {
             return className;
         }

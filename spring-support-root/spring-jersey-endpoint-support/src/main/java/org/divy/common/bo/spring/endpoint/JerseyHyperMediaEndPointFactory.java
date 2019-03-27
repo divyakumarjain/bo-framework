@@ -1,5 +1,6 @@
 package org.divy.common.bo.spring.endpoint;
 
+import org.divy.common.bo.dynamic.clazz.common.StringAnnotationParam;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
@@ -12,6 +13,8 @@ import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.endpoint.factory.DefaultHATEOASJerseyEndpoint;
 import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
@@ -19,11 +22,14 @@ import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.lang.invoke.MethodHandles;
 import java.util.Optional;
 import java.util.UUID;
 
 
 public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer {
+
+    private static final Logger LOGGER  = LoggerFactory.getLogger( JerseyHyperMediaEndPointFactory.class);
 
     private static final String ID_PATH = "/{id}";
 
@@ -49,6 +55,21 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .forEach(config::register);
+    }
+
+    private static       MethodHandles.Lookup           prvlookup;
+
+    static {
+        MethodHandles.Lookup lookup = MethodHandles.lookup();
+
+        JerseyHyperMediaEndPointFactory.class.getModule().addReads(JerseyHyperMediaEndPointFactory.class.getModule());
+        try
+        {
+            prvlookup = MethodHandles.privateLookupIn(JerseyHyperMediaEndPointFactory.class, lookup);
+        }
+        catch( IllegalAccessException e ) {
+            LOGGER.error( e.getMessage(), e );
+        }
     }
 
     private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
@@ -194,7 +215,7 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                     .superParam(AssociationsHandler.class)
                         .addAnnotation(Qualifier.class)
                             .value(beanNamingStrategy.calculateAssociationsHandler(typeClass))
-                        .build()
+                        .build( prvlookup )
 
         .map(endpointClass-> {
             endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);

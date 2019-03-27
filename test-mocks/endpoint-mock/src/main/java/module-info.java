@@ -11,19 +11,16 @@ module bo.framework.endpoint.mock {
     requires java.ws.rs;
     requires jersey.common;
     requires jersey.server;
-
-
-    requires guice;
-    requires guice.servlet;
+    requires java.activation;
 
     requires jersey.test.framework.core;
     requires jersey.test.framework.provider.jetty;
-//    requires org.glassfish.jersey.logging;
 
     requires junit;
-    requires hamcrest.all;
+    requires org.hamcrest;
     requires org.mockito;
-
+    requires com.google.guice;
+    requires com.google.guice.extensions.servlet;
     exports org.divy.common.bo.endpoint.test.json to junit;
     exports org.divy.common.bo.endpoint.test to junit;
 }

@@ -62,9 +62,9 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
 
             merge(entity, fromPersistence);
 
-            doPersist(fromPersistence);
-
             transactionBegin();
+
+            doPersist(fromPersistence);
 
             fromPersistence.refreshLastUpdateTimestamp();
             isUpdateSuccess = true;

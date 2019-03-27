@@ -15,7 +15,6 @@ import org.hibernate.query.criteria.internal.predicate.ComparisonPredicate;
 import org.hibernate.query.criteria.internal.predicate.CompoundPredicate;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -28,9 +27,6 @@ import javax.persistence.criteria.Predicate;
 
 import static org.mockito.Mockito.doReturn;
 
-@Ignore
-//TODO Fix failing test case
-//FIXME Fix failing test case
 public class JPACriteriaQueryBuilderTest
 {
 

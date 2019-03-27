@@ -93,7 +93,7 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
         doAssertExists(getIdentifier(entity2));
 
     }
-
+ 
     @Test
     @Ignore
     //TODO: Finish Search framework
