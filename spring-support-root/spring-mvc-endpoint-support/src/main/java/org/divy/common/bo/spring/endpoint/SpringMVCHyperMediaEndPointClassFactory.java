@@ -1,6 +1,8 @@
 package org.divy.common.bo.spring.endpoint;
 
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
+import org.divy.common.bo.metadata.FieldMetaData;
+import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.dynamic.clazz.DynamicSubClassBuilderContext;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
@@ -22,6 +24,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.invoke.MethodHandles;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -33,6 +36,7 @@ public class SpringMVCHyperMediaEndPointClassFactory extends SpringMVCEndPointCl
     private static final Logger LOGGER = LoggerFactory.getLogger( SpringMVCHyperMediaEndPointClassFactory.class);
 
     private static MethodHandles.Lookup prvlookup;
+    private MetaDataProvider metaDataProvider;
 
     static {
         MethodHandles.Lookup lookup = MethodHandles.lookup();
@@ -47,12 +51,13 @@ public class SpringMVCHyperMediaEndPointClassFactory extends SpringMVCEndPointCl
         }
     }
 
-    public SpringMVCHyperMediaEndPointClassFactory(BeanNamingStrategy beanNamingStrategy
+    public SpringMVCHyperMediaEndPointClassFactory( BeanNamingStrategy beanNamingStrategy
           , EndPointRegistry endPointRegistry
-          , SpringMVCEndpointConfigProperties configProperties) {
+          , MetaDataProvider metaDataProvider,
+          SpringMVCEndpointConfigProperties configProperties ) {
 
         super(beanNamingStrategy, endPointRegistry, configProperties);
-
+        this.metaDataProvider = metaDataProvider;
     }
 
     @Override

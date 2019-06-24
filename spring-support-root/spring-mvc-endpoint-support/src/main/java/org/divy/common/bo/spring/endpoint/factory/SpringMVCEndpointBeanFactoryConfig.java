@@ -1,11 +1,13 @@
 package org.divy.common.bo.spring.endpoint.factory;
 
+import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.endpoint.SpringMVCEndPointClassFactory;
 import org.divy.common.bo.spring.endpoint.SpringMVCEndpointConfigProperties;
 import org.divy.common.bo.spring.endpoint.SpringMVCHyperMediaEndPointClassFactory;
 import org.divy.common.rest.SpringMVCEndPointRegistry;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -19,35 +21,39 @@ public class SpringMVCEndpointBeanFactoryConfig {
     @Bean
     @ConditionalOnProperty(value = "bo-framework.endpoint.mvc.enable-hateoas-api", havingValue="true")
     public SpringMVCHyperMediaEndPointClassFactory mvcHyperMediaEndPointFactory(BeanNamingStrategy beanNamingStrategy
+            , @Qualifier("entityMetaDataProvider") MetaDataProvider metaDataProvider
+            , EndPointRegistry mvcEndPointRegistry
             , SpringMVCEndpointConfigProperties endpointConfigProperties) {
 
         return new SpringMVCHyperMediaEndPointClassFactory(beanNamingStrategy
-                , mvcEndPointRegistry()
+                , mvcEndPointRegistry
+                , metaDataProvider
                 , endpointConfigProperties);
     }
 
     @Bean
     @ConditionalOnProperty(value = "bo-framework.endpoint.mvc.enable-hateoas-api", havingValue="true")
-    public SpringMVCHyperMediaEndpointBeansFactory hyperMediaEndpointBeanFactory(BeanNamingStrategy namingStrategy
-            , Set<SpringMVCEndPointClassFactory> springMVCEndPointFactories
-            , EndPointRegistry endPointRegistry) {
-        return new SpringMVCHyperMediaEndpointBeansFactory(namingStrategy, springMVCEndPointFactories, endPointRegistry );
+    public SpringMVCHyperMediaEndpointBeansFactory hyperMediaEndpointBeansFactory(BeanNamingStrategy namingStrategy
+            , Set<SpringMVCEndPointClassFactory> springMVCEndPointFactories) {
+        return new SpringMVCHyperMediaEndpointBeansFactory(namingStrategy, springMVCEndPointFactories, mvcEndPointRegistry());
     }
 
     @Bean
     @ConditionalOnMissingBean
     public SpringMVCEndPointClassFactory mvcEndPointClassFactory(BeanNamingStrategy beanNamingStrategy
+            , EndPointRegistry mvcEndPointRegistry
             , SpringMVCEndpointConfigProperties endpointConfigProperties) {
+
         return new SpringMVCEndPointClassFactory(beanNamingStrategy
-                , mvcEndPointRegistry(), endpointConfigProperties);
+              , mvcEndPointRegistry
+              , endpointConfigProperties);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public SpringMVCEndpointBeansFactory mvcEndPointBeanFactory(
-            Set<SpringMVCEndPointClassFactory> springMVCEndPointFactories
-    , EndPointRegistry endPointRegistry ) {
-        return new SpringMVCEndpointBeansFactory(springMVCEndPointFactories, endPointRegistry);
+    public SpringMVCEndpointBeansFactory mvcEndPointBeansFactory(
+            Set<SpringMVCEndPointClassFactory> springMVCEndPointFactories) {
+        return new SpringMVCEndpointBeansFactory(springMVCEndPointFactories, mvcEndPointRegistry());
     }
 
     @Bean

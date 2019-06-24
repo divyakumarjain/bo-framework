@@ -8,6 +8,7 @@ import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -64,13 +65,6 @@ public abstract class AbstractHyperMediaMVCEndpoint<E extends BusinessObject<I>,
         return super.read(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/{id}/{relation}")
-    @Override
-    public ResponseEntity updateRelation(I id,
-                                   @PathVariable("relation") String relation) {
-        return super.updateRelation(id, relation);
-    }
-
     @RequestMapping(method = RequestMethod.GET, value =  "/{id}/{relation}")
     @Override
     public ResponseEntity readRelation(@PathVariable("id") I id,
@@ -90,7 +84,16 @@ public abstract class AbstractHyperMediaMVCEndpoint<E extends BusinessObject<I>,
     @RequestMapping(method = RequestMethod.POST ,value = "/{id}/{relation}")
     @Override
     public ResponseEntity createRelation(@PathVariable("id") I id,
-                                   @PathVariable("relation")String relation) {
-        return super.createRelation(id, relation);
+                                   @PathVariable("relation")String relation,
+                                   @RequestBody R representation) {
+
+        return super.createRelation(id, relation, representation);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}/{relation}")
+    @Override
+    public ResponseEntity updateRelation(I id,
+                                         @PathVariable("relation") String relation) {
+        return super.updateRelation(id, relation);
     }
 }

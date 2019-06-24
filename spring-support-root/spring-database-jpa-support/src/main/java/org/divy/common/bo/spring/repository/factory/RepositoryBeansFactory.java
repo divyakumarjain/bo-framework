@@ -5,11 +5,12 @@ import org.divy.common.bo.business.defaults.DefaultBOManager;
 import org.divy.common.bo.database.jpa.defaults.DefaultDBCommandProvider;
 import org.divy.common.bo.database.jpa.defaults.DefaultDatabaseRepository;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.bo.spring.core.factory.DynamicBeanFactory;
+import org.divy.common.bo.spring.core.factory.DynamicBeansFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
-public class RepositoryBeansFactory implements DynamicBeanFactory<Class<? extends BusinessObject>> {
+public class RepositoryBeansFactory implements DynamicBeansFactory<Class<? extends BusinessObject>>
+{
 
     private BeanNamingStrategy namingStrategy;
 

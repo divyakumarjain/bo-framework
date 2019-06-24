@@ -17,7 +17,8 @@ public class SpringMVCHyperMediaEndpointBeansFactory extends SpringMVCEndpointBe
     
     private final BeanNamingStrategy namingStrategy;
 
-    public SpringMVCHyperMediaEndpointBeansFactory( BeanNamingStrategy namingStrategy, Set<SpringMVCEndPointClassFactory> springMVCEndPointFactories,
+    public SpringMVCHyperMediaEndpointBeansFactory( BeanNamingStrategy namingStrategy
+          , Set<SpringMVCEndPointClassFactory> springMVCEndPointFactories,
           EndPointRegistry endPointRegistry ) {
         super(springMVCEndPointFactories, endPointRegistry );
         this.namingStrategy = namingStrategy;

@@ -100,9 +100,10 @@ public abstract class AbstractHyperMediaJerseyEndpoint<B extends BusinessObject<
     @POST
     @Path("/{id}/{relation}")
     @Override
-    public Response createRelation(@PathParam("id") I id,
-                                   @PathParam("relation") String relation)
+    public Response createRelation(@PathParam("id") I id
+          ,@PathParam("relation") String relation
+          , E respresentation)
     {
-        return super.createRelation(id, relation);
+        return super.createRelation(id, relation, respresentation);
     }
 }

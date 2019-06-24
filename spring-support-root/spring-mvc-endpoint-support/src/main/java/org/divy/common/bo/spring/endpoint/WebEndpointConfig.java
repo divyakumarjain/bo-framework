@@ -10,7 +10,6 @@ import org.divy.common.rest.SpringMVCEndPointRegistry;
 import org.divy.common.rest.SpringMVCEntityURLBuilderImpl;
 import org.divy.common.rest.SpringMVCLinkBuilderFactoryImpl;
 import org.divy.common.rest.response.SpringMVCResponseEntityBuilderFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -28,9 +27,9 @@ public class WebEndpointConfig implements Jackson2ObjectMapperBuilderCustomizer 
 
     @Override
     public void customize(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
-        jackson2ObjectMapperBuilder.modulesToInstall(new ParameterNamesModule()
-        , new Jdk8Module()
-        , new JavaTimeModule());
+        jackson2ObjectMapperBuilder.modulesToInstall(ParameterNamesModule.class
+        ,  Jdk8Module.class
+        , JavaTimeModule.class);
     }
 
     @Bean

@@ -27,8 +27,6 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
         this.associationsHandler = associationsHandler;
     }
 
-    public abstract BOManager<B, I> getManager();
-
     protected R updateRelation(I id, String relation) {
         return responseEntityBuilderFactory.update().build();
     }
@@ -37,16 +35,22 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
 
         B entity = getManager().get(id);
 
-        final Association<B, I> biAssociation = this.getAssociationsHandler().getAssociation(relation)
+        final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
                 .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
 
-        Optional<Object> optionalEntityRelation = biAssociation.read(entity);
+        Optional<Object> optionalEntityRelation = association.read(entity);
 
         if (optionalEntityRelation.isPresent()) {
-            return responseEntityBuilderFactory.list((Collection<E>) optionalEntityRelation.get()).build();
-        } else {
-            return responseEntityBuilderFactory.read().build();
+            final Object result = optionalEntityRelation.get();
+            if(result instanceof Collection)
+            {
+                return responseEntityBuilderFactory.list((Collection<E>) result).build();
+            } else if (result instanceof Representation) {
+                return responseEntityBuilderFactory.read((E)result).build();
+            }
         }
+
+        return responseEntityBuilderFactory.read().build();
     }
 
     /**
@@ -58,16 +62,26 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
      * @return returns 201 status code for successful creation of relationship/association
      */
     public R createRelation(@NotNull I id
-                            ,String relation) {
+                            , String relation
+                            , E respresentation) {
 
         B businessObject = getManager().get(id);
-
-        if (businessObject == null) {
-            throw new NotFoundException("Could not find the entity");
-        }
-
-        //TODO Implement
-
+//
+//        if (businessObject == null) {
+//            throw new NotFoundException("Could not find the entity");
+//        }
+//
+//        final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
+//                .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
+//
+//        Optional<Object> optionalEntityRelation = association.create(businessObject,respresentation);
+//
+//        if (optionalEntityRelation.isPresent()) {
+//            return responseEntityBuilderFactory.create((Collection<E>) optionalEntityRelation.get()).build();
+//        } else {
+//            return responseEntityBuilderFactory.create().build();
+//        }
+//
         return responseEntityBuilderFactory.create(this.mapFromBO(businessObject)).build();
     }
 
@@ -129,6 +143,8 @@ public abstract class AbstractHyperMediaEndpoint<B extends BusinessObject<I>
     private E mapFromBO(B createdBusinessObject) {
         return getRepresentationMapper().createRepresentationFromBO(createdBusinessObject);
     }
+
+    public abstract BOManager<B, I> getManager();
 
     public AssociationsHandler<B,I> getAssociationsHandler() {
         return associationsHandler;

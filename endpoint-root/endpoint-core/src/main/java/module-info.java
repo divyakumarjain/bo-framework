@@ -1,4 +1,5 @@
 module bo.framework.endpoint.core {
+    requires java.validation;
     requires bo.framework.repository;
     requires bo.framework.exception.handling;
     requires bo.framework.businessapi;

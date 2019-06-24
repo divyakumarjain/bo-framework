@@ -13,7 +13,8 @@
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>    <packaging>jar</packaging>
+    </properties>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

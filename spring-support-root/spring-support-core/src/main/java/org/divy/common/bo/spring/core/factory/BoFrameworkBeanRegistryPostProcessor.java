@@ -11,25 +11,25 @@ import java.util.Collection;
 public class BoFrameworkBeanRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
     private final MetaDataProvider metaDataProvider;
-    private final Collection<DynamicBeanFactory> factories;
+    private final Collection<DynamicBeansFactory> beansfactories;
 
     BoFrameworkBeanRegistryPostProcessor(MetaDataProvider metaDataProvider,
-                                         Collection<DynamicBeanFactory> factories) {
+                                         Collection<DynamicBeansFactory> beansfactories) {
         this.metaDataProvider = metaDataProvider;
-        this.factories = factories;
+        this.beansfactories = beansfactories;
     }
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) {
 
-        factories.forEach(factory -> factory.registerSingletons(beanDefinitionRegistry));
+        beansfactories.forEach(factory -> factory.registerSingletons(beanDefinitionRegistry));
         metaDataProvider.getEntityTypes()
                 .forEach(metaData -> registerBeans(metaData, beanDefinitionRegistry));
 
     }
 
     private void registerBeans(Class<? extends BusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry) {
-        factories.forEach(factory-> factory.register(type, beanDefinitionRegistry));
+        beansfactories.forEach(beansFactory-> beansFactory.register(type, beanDefinitionRegistry));
     }
 
     @Override

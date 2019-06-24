@@ -26,10 +26,10 @@
             <artifactId>bo-framework-spring-database-jpa-support</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-spring-jersey-endpoint-support</artifactId>
-            <optional>true</optional>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.divy</groupId>-->
+<!--            <artifactId>bo-framework-spring-jersey-endpoint-support</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
     </dependencies>
 </project>
