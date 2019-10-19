@@ -1,11 +1,13 @@
 package org.divy.common.bo.dynamic.clazz;
 
+import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
 import java.util.Optional;
 
 public class DynamicBuilderContext<P extends DynamicBuilderContext> {
@@ -21,8 +23,12 @@ public class DynamicBuilderContext<P extends DynamicBuilderContext> {
         try {
             return Optional.of(getClassPool().getCtClass(type.getName()));
         } catch (NotFoundException e) {
-            LOGGER.error("Could not get class for " + type.getName(), e);
-            return Optional.empty();
+            try {
+                return Optional.ofNullable(getClassPool(type).getCtClass(type.getName()));
+            } catch (NotFoundException e1) {
+                LOGGER.error("Could not get class for " + type.getName(), e);
+                return Optional.empty();
+            }
         }
     }
 
@@ -33,11 +39,19 @@ public class DynamicBuilderContext<P extends DynamicBuilderContext> {
         return pool;
     }
 
+    protected static ClassPool getClassPool(Class<?> type) {
+        if (pool == null) {
+            pool = ClassPool.getDefault();
+        }
+        pool.insertClassPath(new ClassClassPath(type));
+        return pool;
+    }
+
     public P and() {
         return parentContext;
     }
 
-    public Optional<Class<?>> build() {
-        return parentContext.build();
+    public Optional<Class<?>> build( MethodHandles.Lookup lookup ) {
+        return parentContext.build( lookup );
     }
 }

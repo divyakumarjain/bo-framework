@@ -26,8 +26,7 @@
     </properties>    <packaging>pom</packaging>
 
     <modules>
-        <!--<module>spring-boot-jersey-demo</module>-->
-        <!--TODO Fix the java module system-->
+        <module>spring-boot-jersey-demo</module>
         <module>spring-boot-mvc-demo</module>
     </modules>
     

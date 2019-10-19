@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Configuration
 @PropertySource( value = {"classpath:/application.properties"})
 @ComponentScan(basePackages = {"org.divy.common.bo.spring.mapper.factory"
-        , "org.divy.common.bo.endpoint.factory"
+        , "org.divy.common.bo.spring.endpoint.factory"
         , "org.divy.common.bo.spring.repository.factory"})
 public class BoFrameworkSpringParentContext
 {

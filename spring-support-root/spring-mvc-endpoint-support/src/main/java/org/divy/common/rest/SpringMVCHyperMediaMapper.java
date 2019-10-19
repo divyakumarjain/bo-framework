@@ -1,7 +1,7 @@
 package org.divy.common.rest;
 
 import org.divy.common.bo.repository.BusinessObject;
-import org.divy.common.bo.endpoint.hypermedia.SpringMVCRepresentation;
+import org.divy.common.bo.spring.endpoint.hypermedia.SpringMVCRepresentation;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.AbstractHyperMediaMapper;

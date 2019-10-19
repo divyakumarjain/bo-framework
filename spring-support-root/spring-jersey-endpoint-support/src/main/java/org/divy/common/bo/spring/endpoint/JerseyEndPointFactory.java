@@ -9,6 +9,8 @@ import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
@@ -16,6 +18,7 @@ import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.lang.invoke.MethodHandles;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,6 +39,23 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
         this.beanNamingStrategy = beanNamingStrategy;
         this.endPointRegistry = endPointRegistry;
         this.configProperties = configProperties;
+    }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger( JerseyEndPointFactory.class);
+
+    private static       MethodHandles.Lookup prvlookup;
+
+    static {
+        MethodHandles.Lookup lookup = MethodHandles.lookup();
+
+        JerseyEndPointFactory.class.getModule().addReads(JerseyEndPointFactory.class.getModule());
+        try
+        {
+            prvlookup = MethodHandles.privateLookupIn(JerseyEndPointFactory.class, lookup);
+        }
+        catch( IllegalAccessException e ) {
+            LOGGER.error( e.getMessage(), e );
+        }
     }
 
     private void initializeEndpoints(ResourceConfig config) {
@@ -180,7 +200,7 @@ public class JerseyEndPointFactory implements ResourceConfigCustomizer {
                             .value("jerseyResponseEntityBuilderFactory")
                             .and()
                         .and()
-                .build()
+                .build(prvlookup)
         .map(endpointClass-> {
             endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
             return endpointClass;

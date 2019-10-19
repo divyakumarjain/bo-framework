@@ -3,6 +3,6 @@ module bo.framework.mock.common {
     requires bo.framework.repository;
     requires junit;
     requires slf4j.api;
-    requires hamcrest.all;
+    requires org.hamcrest;
     exports org.divy.common.bo.test;
 }
