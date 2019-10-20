@@ -71,18 +71,19 @@ public class JerseyEndpointConfig implements Jackson2ObjectMapperBuilderCustomiz
 
     @Bean
     @ConditionalOnProperty(prefix = "bo-framework.endpoint.jersey", value = "enable-hateoas-api", havingValue="true")
-    public JerseyHyperMediaEndPointClassFactory jerseyHyperMediaEndPointFactory(MetaDataProvider metaDataProvider
-          , BeanNamingStrategy beanNamingStrategy
-          , EndPointRegistry endPointRegistry
-          , JerseyEndpointConfigProperties configProperties) {
+    public JerseyHATOASEndPointFactory jerseyHATOASEndPointFactory(MetaDataProvider metaDataProvider
+            , BeanNamingStrategy beanNamingStrategy
+            , EndPointRegistry endPointRegistry
+            , JerseyEndpointConfigProperties jerseyEndpointConfigProperties) {
 
-        return new JerseyHyperMediaEndPointClassFactory(metaDataProvider
+        return new JerseyHATOASEndPointFactory(metaDataProvider
                 , beanNamingStrategy
                 , endPointRegistry
-                , configProperties);
+                , jerseyEndpointConfigProperties);
     }
 
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnMissingBean
     public JerseyEndPointClassFactory jerseyEndPointFactory(MetaDataProvider metaDataProvider
             , BeanNamingStrategy beanNamingStrategy
@@ -95,14 +96,13 @@ public class JerseyEndpointConfig implements Jackson2ObjectMapperBuilderCustomiz
     }
 
     @Bean
-    public JerseyEntityURLBuilderImpl jerseyEntityURLBuilder(EndPointRegistry endPointRegistry) {
+    public JerseyEntityURLBuilderImpl jerseyEntityHATOASURLBuilder(EndPointRegistry endPointRegistry) {
         return new JerseyEntityURLBuilderImpl(linkBuilderFactory(),endPointRegistry);
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "bo-framework.endpoint.jersey", value = "enable-hateoas-api", havingValue="true")
-    public ResponseEntityBuilderFactory<Identifiable<UUID>, Response> jerseyResponseEntityBuilderHyperMediaFactory(EndPointRegistry endPointRegistry) {
-        return new JerseyResponseEntityBuilderFactory<>(jerseyEntityURLBuilder(endPointRegistry));
+    public ResponseEntityBuilderFactory<Identifiable<UUID>, Response> jerseyResponseEntityBuilderHATOASFactory() {
+        return new JerseyResponseEntityBuilderFactory<>(jerseyEntityHATOASURLBuilder());
     }
 
     @Bean

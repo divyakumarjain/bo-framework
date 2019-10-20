@@ -40,18 +40,18 @@ public class WebEndpointConfig implements Jackson2ObjectMapperBuilderCustomizer 
 
     @Bean
     @ConditionalOnProperty(value = "bo-framework.endpoint.mvc.enable-hateoas-api", havingValue="true")
-    public SpringMVCEntityURLBuilderImpl mvcEntityHyperMediaURLBuilder(SpringMVCEndPointRegistry springEndPointRegistry) {
-        return new SpringMVCEntityURLBuilderImpl(linkBuilderFactory(), springEndPointRegistry);
+    public SpringMVCEntityURLBuilderImpl mvcEntityHATOASURLBuilder(SpringMVCEndPointRegistry mvcEndPointRegistry) {
+        return new SpringMVCEntityURLBuilderImpl(linkBuilderFactory(), mvcEndPointRegistry);
     }
 
     @Bean
-    public SpringMVCEntityURLBuilderImpl mvcEntityURLBuilder(SpringMVCEndPointRegistry springHyperMediaEndPointRegistry) {
-        return new SpringMVCEntityURLBuilderImpl(linkBuilderFactory(), springHyperMediaEndPointRegistry);
+    public SpringMVCEntityURLBuilderImpl mvcEntityURLBuilder(SpringMVCEndPointRegistry mvcEndPointRegistry) {
+        return new SpringMVCEntityURLBuilderImpl(linkBuilderFactory(), mvcEndPointRegistry);
     }
 
     @Bean
-    public ResponseEntityBuilderFactory mvcResponseEntityBuilderHyperMediaFactory(SpringMVCEntityURLBuilderImpl mvcEntityHyperMediaURLBuilder) {
-        return new SpringMVCResponseEntityBuilderFactory(mvcEntityHyperMediaURLBuilder);
+    public ResponseEntityBuilderFactory mvcResponseEntityBuilderHATOASFactory(SpringMVCEntityURLBuilderImpl mvcEntityHATOASURLBuilder) {
+        return new SpringMVCResponseEntityBuilderFactory(mvcEntityHATOASURLBuilder);
     }
 
     @Bean

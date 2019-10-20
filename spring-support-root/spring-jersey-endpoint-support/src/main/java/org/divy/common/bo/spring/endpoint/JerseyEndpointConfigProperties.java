@@ -11,7 +11,7 @@ public class JerseyEndpointConfigProperties {
 
     public static final String BO_FRAMEWORK_JERSEY_ENDPOINT_CONFIG_PREFIX = "bo-framework.endpoint.jersey";
 
-    private static final String HATEOAS_ENDPOINT_PATH = "hypermedia";
+    private static final String HATEOAS_ENDPOINT_PATH = "hatoas";
     private static final String ENDPOINT_PATH = "api";
 
     private String hateoasAPIEndpointPath = HATEOAS_ENDPOINT_PATH;

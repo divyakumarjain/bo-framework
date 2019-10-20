@@ -13,6 +13,6 @@ module bo.framework.endpoint.jersey {
     exports org.divy.common.rest;
     exports org.divy.common.rest.response;
     exports org.divy.common.rest.exception.mapper;
-    exports org.divy.common.bo.endpoint.jersey.hypermedia;
-    exports org.divy.common.bo.endpoint.jersey.hypermedia.association;
+    exports org.divy.common.bo.endpoint.jersey.hatoas;
+    exports org.divy.common.bo.endpoint.jersey.hatoas.association;
 }

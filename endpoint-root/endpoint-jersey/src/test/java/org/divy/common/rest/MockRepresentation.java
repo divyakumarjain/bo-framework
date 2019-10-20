@@ -1,6 +1,6 @@
 package org.divy.common.rest;
 
-import org.divy.common.bo.endpoint.jersey.hypermedia.JerseyRepresentation;
+import org.divy.common.bo.endpoint.jersey.hatoas.JerseyRepresentation;
 
 import java.util.UUID;
 

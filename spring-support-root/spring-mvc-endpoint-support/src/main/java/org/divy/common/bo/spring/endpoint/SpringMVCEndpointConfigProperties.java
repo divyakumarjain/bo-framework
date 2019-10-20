@@ -11,10 +11,10 @@ public class SpringMVCEndpointConfigProperties {
 
     static final String BO_FRAMEWORK_MVC_ENDPOINT_CONFIG_PREFIX = "bo-framework.endpoint.mvc";
 
-    private static final String HYPERMEDIA_ENDPOINT_PATH = "hypermedia";
+    private static final String HATOAS_ENDPOINT_PATH = "hatoas";
     private static final String ENDPOINT_PATH = "api";
 
-    private String hypermediaApiEndpointPath = HYPERMEDIA_ENDPOINT_PATH;
+    private String hatoasApiEndpointPath = HATOAS_ENDPOINT_PATH;
     private String apiEndpointPath = ENDPOINT_PATH;
     private boolean enableHateoasApi = false;
 
@@ -27,11 +27,11 @@ public class SpringMVCEndpointConfigProperties {
     }
 
     public String getHateoasApiEndpointPath() {
-        return hypermediaApiEndpointPath;
+        return hatoasApiEndpointPath;
     }
 
-    public void setHateoasApiEndpointPath(String hATEOASAPIEndpointPath) {
-        this.hypermediaApiEndpointPath = hATEOASAPIEndpointPath;
+    public void setHateoasApiEndpointPath(String hatoasApiEndpointPath) {
+        this.hatoasApiEndpointPath = hatoasApiEndpointPath;
     }
 
     public String getApiEndpointPath() {

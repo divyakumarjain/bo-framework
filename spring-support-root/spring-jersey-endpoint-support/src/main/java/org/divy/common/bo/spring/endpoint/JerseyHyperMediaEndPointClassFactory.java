@@ -3,11 +3,11 @@ package org.divy.common.bo.spring.endpoint;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
-import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
-import org.divy.common.bo.endpoint.jersey.hypermedia.JerseyRepresentation;
+import org.divy.common.bo.endpoint.hatoas.association.AssociationsHandler;
+import org.divy.common.bo.endpoint.jersey.hatoas.JerseyRepresentation;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.EndPointRegistry;
-import org.divy.common.bo.rest.HyperMediaMapper;
+import org.divy.common.bo.rest.HATOASMapper;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.endpoint.factory.DefaultHATEOASJerseyEndpoint;
 import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
@@ -26,9 +26,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 
-public class JerseyHyperMediaEndPointClassFactory extends JerseyEndPointClassFactory implements ResourceConfigCustomizer {
+public class JerseyHATOASEndPointFactory implements ResourceConfigCustomizer {
 
-    private static final Logger LOGGER  = LoggerFactory.getLogger( JerseyHyperMediaEndPointClassFactory.class);
+    private static final Logger LOGGER  = LoggerFactory.getLogger( JerseyHATOASEndPointFactory.class);
 
     private static final String ID_PATH = "/{id}";
 
@@ -37,7 +37,7 @@ public class JerseyHyperMediaEndPointClassFactory extends JerseyEndPointClassFac
     private final EndPointRegistry endPointRegistry;
     private final JerseyEndpointConfigProperties configProperties;
 
-    public JerseyHyperMediaEndPointClassFactory(MetaDataProvider metaDataProvider
+    public JerseyHATOASEndPointFactory(MetaDataProvider metaDataProvider
             , BeanNamingStrategy beanNamingStrategy
             , EndPointRegistry endPointRegistry
             , JerseyEndpointConfigProperties configProperties) {
@@ -48,7 +48,7 @@ public class JerseyHyperMediaEndPointClassFactory extends JerseyEndPointClassFac
         this.configProperties = configProperties;
     }
 
-    private void initializeHypermediaEndpoints(ResourceConfig config) {
+    private void initializeHATOASEndpoints(ResourceConfig config) {
         metaDataProvider.getEntityTypes().stream()
                 .map(this::buildEndpointClass)
                 .filter(Optional::isPresent)
@@ -61,10 +61,10 @@ public class JerseyHyperMediaEndPointClassFactory extends JerseyEndPointClassFac
     static {
         MethodHandles.Lookup lookup = MethodHandles.lookup();
 
-        JerseyHyperMediaEndPointClassFactory.class.getModule().addReads( JerseyHyperMediaEndPointClassFactory.class.getModule());
+        JerseyHATOASEndPointFactory.class.getModule().addReads(JerseyHATOASEndPointFactory.class.getModule());
         try
         {
-            prvlookup = MethodHandles.privateLookupIn( JerseyHyperMediaEndPointClassFactory.class, lookup);
+            prvlookup = MethodHandles.privateLookupIn(JerseyHATOASEndPointFactory.class, lookup);
         }
         catch( IllegalAccessException e ) {
             LOGGER.error( e.getMessage(), e );
@@ -72,7 +72,6 @@ public class JerseyHyperMediaEndPointClassFactory extends JerseyEndPointClassFac
     }
 
     private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
-
         return DynamicClassBuilder.createClass( JerseyHyperMediaEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "HyperMediaEndPoint")
                 .subClass(DefaultHATEOASJerseyEndpoint.class)
                     .addAnnotation(javax.ws.rs.Path.class)
@@ -203,12 +202,12 @@ public class JerseyHyperMediaEndPointClassFactory extends JerseyEndPointClassFac
                         .and()
                     .superParam(JerseyResponseEntityBuilderFactory.class)
                         .addAnnotation(Qualifier.class)
-                            .value("jerseyResponseEntityBuilderHyperMediaFactory")
+                            .value("jerseyResponseEntityBuilderHATOASFactory")
                             .and()
                         .and()
-                    .superParam(HyperMediaMapper.class)
+                    .superParam( HATOASMapper.class)
                         .addAnnotation(Qualifier.class)
-                            .value(beanNamingStrategy.calculateHyperMediaMapperId(typeClass))
+                            .value(beanNamingStrategy.calculateHATOASMapperId(typeClass))
                             .and()
                         .and()
                     .superParam(AssociationsHandler.class)
@@ -226,7 +225,7 @@ public class JerseyHyperMediaEndPointClassFactory extends JerseyEndPointClassFac
 
     @Override
     public void customize(ResourceConfig config) {
-        this.initializeHypermediaEndpoints(config);
+        this.initializeHATOASEndpoints(config);
     }
 }
 

@@ -45,10 +45,10 @@ public class SpringMVCEndPointClassFactory {
     static {
         MethodHandles.Lookup lookup = MethodHandles.lookup();
 
-        SpringMVCHyperMediaEndPointClassFactory.class.getModule().addReads(SpringMVCHyperMediaEndPointClassFactory.class.getModule());
+        SpringMVCHATOASEndPointClassFactory.class.getModule().addReads( SpringMVCHATOASEndPointClassFactory.class.getModule());
         try
         {
-            prvlookup = MethodHandles.privateLookupIn(SpringMVCHyperMediaEndPointClassFactory.class, lookup);
+            prvlookup = MethodHandles.privateLookupIn( SpringMVCHATOASEndPointClassFactory.class, lookup);
         }
         catch( IllegalAccessException e ) {
             LOGGER.error( e.getMessage(), e );
@@ -66,7 +66,7 @@ public class SpringMVCEndPointClassFactory {
     }
 
     private Optional<Class<?>> buildClass( Class<? extends BusinessObject> typeClass, String url ) {
-        return DynamicClassBuilder.createClass(SpringMVCHyperMediaEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
+        return DynamicClassBuilder.createClass( SpringMVCHATOASEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
             .subClass( BaseBOEndpoint.class)
                 .addAnnotation(RestController.class)
                     .and()

@@ -2,24 +2,25 @@ package org.divy.common.bo.spring.endpoint.factory;
 
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.spring.endpoint.AbstractHyperMediaMVCEndpoint;
-import org.divy.common.bo.spring.endpoint.hypermedia.SpringMVCRepresentation;
-import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
-import org.divy.common.bo.rest.HyperMediaMapper;
+import org.divy.common.bo.spring.endpoint.AbstractHATOASMVCEndpoint;
+import org.divy.common.bo.spring.endpoint.hatoas.SpringMVCRepresentation;
+import org.divy.common.bo.endpoint.hatoas.association.AssociationsHandler;
+import org.divy.common.bo.rest.HATOASMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
 import java.util.UUID;
 
 public class DefaultHATEOASMVCEndpoint<E extends BusinessObject<UUID>>
-        extends AbstractHyperMediaMVCEndpoint<E, SpringMVCRepresentation, UUID> {
+        extends AbstractHATOASMVCEndpoint<E, SpringMVCRepresentation, UUID>
+{
 
 
-    private final BOManager<E, UUID> manager;
-    private final HyperMediaMapper<E, SpringMVCRepresentation> hateosMapper;
+    private final BOManager<E, UUID>                       manager;
+    private final HATOASMapper<E, SpringMVCRepresentation> hateosMapper;
 
     public DefaultHATEOASMVCEndpoint(BOManager<E, UUID> manager,
                                         ResponseEntityBuilderFactory responseEntityBuilderFactory,
-                                        HyperMediaMapper<E, SpringMVCRepresentation> hateosMapper,
+                                        HATOASMapper<E, SpringMVCRepresentation> hateosMapper,
                                         AssociationsHandler<E,UUID> associationsHandler) {
         super(responseEntityBuilderFactory, associationsHandler);
         this.manager = manager;
@@ -33,7 +34,7 @@ public class DefaultHATEOASMVCEndpoint<E extends BusinessObject<UUID>>
     }
 
     @Override
-    public HyperMediaMapper<E, SpringMVCRepresentation> getRepresentationMapper() {
+    public HATOASMapper<E, SpringMVCRepresentation> getRepresentationMapper() {
         return hateosMapper;
     }
 }

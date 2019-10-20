@@ -1,11 +1,19 @@
 package org.divy.common.bo.dynamic.clazz.member.method.reader;
 
+import org.divy.common.bo.dynamic.clazz.Builder;
+
 import java.util.Optional;
 
 
-public class ReaderBuilder implements Reader {
+public class ReaderBuilder<P extends Builder> implements Reader, Builder {
 
     protected Reader reader;
+    private P parent;
+
+    public ReaderBuilder(P parent)
+    {
+        this.parent = parent;
+    }
 
     @Override
     public Optional<Object> read(Object source, Object... argv) {
@@ -32,6 +40,11 @@ public class ReaderBuilder implements Reader {
         attributeReader.setAttributeName(attributeName);
         setReader(attributeReader);
         return attributeReader;
+    }
+
+    @Override public P and()
+    {
+        return this.parent;
     }
 }
 

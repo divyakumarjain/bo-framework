@@ -3,7 +3,7 @@ package org.divy.common.rest.impl;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.metadata.MetaDataProvider;
-import org.divy.common.bo.rest.AbstractHyperMediaMapper;
+import org.divy.common.bo.rest.AbstractHATOASMapper;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 import org.divy.common.rest.MockEntity;
 import org.divy.common.rest.MockRepresentation;
@@ -25,11 +25,11 @@ import static org.mockito.Mockito.mock;
 public class AbstractHATEOASMapperTest {
 
     private final KeyValuePairMapper<MockEntity> mockKeyValuePairMapper = mock(KeyValuePairMapperImpl.class);
-    private TestHyperMediaMapperMock underTest;
+    private       TestHATOASMapperMock           underTest;
 
     @Before
     public void setup() {
-        underTest = new TestHyperMediaMapperMock(mockKeyValuePairMapper, mock(LinkBuilderFactory.class), mock(MetaDataProvider.class));
+        underTest = new TestHATOASMapperMock(mockKeyValuePairMapper, mock(LinkBuilderFactory.class), mock(MetaDataProvider.class));
     }
 
     @Test
@@ -82,9 +82,10 @@ public class AbstractHATEOASMapperTest {
 
 }
 
-class TestHyperMediaMapperMock extends AbstractHyperMediaMapper<MockEntity, MockRepresentation, Link> {
+class TestHATOASMapperMock extends AbstractHATOASMapper<MockEntity, MockRepresentation, Link>
+{
 
-    TestHyperMediaMapperMock(KeyValuePairMapper<MockEntity> keyValuePairMapper, LinkBuilderFactory linkBuilderFactory, MetaDataProvider metaDataProvider) {
+    TestHATOASMapperMock(KeyValuePairMapper<MockEntity> keyValuePairMapper, LinkBuilderFactory linkBuilderFactory, MetaDataProvider metaDataProvider) {
         super(MockRepresentation.class
                 , keyValuePairMapper
                 , linkBuilderFactory

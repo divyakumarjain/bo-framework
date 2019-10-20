@@ -14,10 +14,10 @@ module bo.framework.endpoint.core {
     requires bo.framework.mapper;
     requires jakarta.inject;
     exports org.divy.common.bo.endpoint;
-    exports org.divy.common.bo.endpoint.hypermedia;
+    exports org.divy.common.bo.endpoint.hatoas;
     exports org.divy.common.bo.rest;
     exports org.divy.common.bo.rest.response;
     exports org.divy.common.bo.http;
-    exports org.divy.common.bo.endpoint.hypermedia.association;
-    exports org.divy.common.bo.endpoint.hypermedia.association.builder;
+    exports org.divy.common.bo.endpoint.hatoas.association;
+    exports org.divy.common.bo.endpoint.hatoas.association.builder;
 }

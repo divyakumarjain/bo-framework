@@ -11,7 +11,7 @@ TODO
 * [ ] Update of relationships with entity merge and list merge
 
 
-Hypermedia Linking Relationships
+HATOAS Linking Relationships
 ================================
 
 Requirements
@@ -29,7 +29,7 @@ TODO
 	* [ ] Relationship navigation using method on managers.
 2. Support PUT and POST method on the relationship endpoint.
 3. DAL Layer
-4 [ ] Switching Config between Hypermedia and non Hypermedia Endpoint.
+4 [ ] Switching Config between HATOAS and non HATOAS Endpoint.
     * [ ] Can be easily implemented for Spring boot auto-configuration
     
 Embedded Non-Entity
