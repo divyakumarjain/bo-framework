@@ -1,5 +1,7 @@
 package org.divy.common.bo.endpoint.jersey.hypermedia.association;
 
+import org.divy.common.bo.endpoint.hypermedia.association.Cardinality;
+import org.divy.common.bo.endpoint.hypermedia.association.builder.AssociationBuilder;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.hypermedia.association.AbstractAssociationsHandler;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
@@ -23,8 +25,17 @@ public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends A
 
     protected void doBuildAssociations() {
         final Map<String, FieldMetaData> childEntities = metaDataProvider.getChildEntities(source);
-        childEntities.forEach((name, entityMeta) -> association()
-                .withMapper(new JerseyHyperMediaMapper<>(new KeyValuePairMapperImpl<>(source,mapperBuilder, metaDataProvider),linkBuilderFactory ,metaDataProvider))
-                .attribute(name));
+        childEntities.forEach((name, entityMeta) -> {
+            final AssociationBuilder<T, UUID> association = association();
+            association
+                  .withMapper(new JerseyHyperMediaMapper<>(
+                        new KeyValuePairMapperImpl<>(source, mapperBuilder, metaDataProvider), linkBuilderFactory,metaDataProvider))
+                  .attribute(name);
+
+            if(entityMeta.isCollection()) {
+                association.cardinality( Cardinality.MANY);
+            }
+        });
+
     }
 }

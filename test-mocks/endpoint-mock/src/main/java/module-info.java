@@ -11,7 +11,6 @@ module bo.framework.endpoint.mock {
     requires java.ws.rs;
     requires jersey.common;
     requires jersey.server;
-    requires java.activation;
 
     requires jersey.test.framework.core;
     requires jersey.test.framework.provider.jetty;

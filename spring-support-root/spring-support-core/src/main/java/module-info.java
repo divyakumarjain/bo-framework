@@ -5,6 +5,6 @@ module bo.framework.spring.support.core {
     requires java.desktop;
     requires bo.framework.metadata;
     requires spring.beans;
-    requires slf4j.api;
+    requires org.slf4j;
     requires spring.context;
 }

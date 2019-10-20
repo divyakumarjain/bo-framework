@@ -4,8 +4,9 @@ import org.divy.common.bo.rest.AbstractLinkBuilderFactory;
 import org.divy.common.bo.rest.LinkBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Link;
 
-public class JerseyLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory {
+public class JerseyLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory<Link> {
 
 
     public JerseyLinkBuilderFactoryImpl() {
@@ -17,7 +18,7 @@ public class JerseyLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory {
     }
 
     @Override
-    public LinkBuilder newBuilder() {
+    public LinkBuilder<Link> newBuilder() {
         String scheme = DEFAULT_SCHEME;
         String originalPath = "";
 

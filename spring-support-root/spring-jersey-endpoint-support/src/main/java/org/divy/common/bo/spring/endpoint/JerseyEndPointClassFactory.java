@@ -1,17 +1,13 @@
 package org.divy.common.bo.spring.endpoint;
 
-import org.divy.common.bo.dynamic.clazz.common.StringAnnotationParam;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
-import org.divy.common.bo.endpoint.hypermedia.association.AssociationsHandler;
-import org.divy.common.bo.endpoint.jersey.hypermedia.JerseyRepresentation;
+import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.EndPointRegistry;
-import org.divy.common.bo.rest.HyperMediaMapper;
+import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.bo.spring.endpoint.factory.DefaultHATEOASJerseyEndpoint;
-import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,19 +22,15 @@ import java.lang.invoke.MethodHandles;
 import java.util.Optional;
 import java.util.UUID;
 
-
-public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer {
-
-    private static final Logger LOGGER  = LoggerFactory.getLogger( JerseyHyperMediaEndPointFactory.class);
+public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
 
     private static final String ID_PATH = "/{id}";
-
     private final MetaDataProvider metaDataProvider;
     private final BeanNamingStrategy beanNamingStrategy;
     private final EndPointRegistry endPointRegistry;
     private final JerseyEndpointConfigProperties configProperties;
 
-    public JerseyHyperMediaEndPointFactory(MetaDataProvider metaDataProvider
+    public JerseyEndPointClassFactory(MetaDataProvider metaDataProvider
             , BeanNamingStrategy beanNamingStrategy
             , EndPointRegistry endPointRegistry
             , JerseyEndpointConfigProperties configProperties) {
@@ -49,7 +41,24 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
         this.configProperties = configProperties;
     }
 
-    private void initializeHypermediaEndpoints(ResourceConfig config) {
+    private static final Logger LOGGER = LoggerFactory.getLogger( JerseyEndPointClassFactory.class);
+
+    private static       MethodHandles.Lookup prvlookup;
+
+    static {
+        MethodHandles.Lookup lookup = MethodHandles.lookup();
+
+        JerseyEndPointClassFactory.class.getModule().addReads( JerseyEndPointClassFactory.class.getModule());
+        try
+        {
+            prvlookup = MethodHandles.privateLookupIn( JerseyEndPointClassFactory.class, lookup);
+        }
+        catch( IllegalAccessException e ) {
+            LOGGER.error( e.getMessage(), e );
+        }
+    }
+
+    private void initializeEndpoints(ResourceConfig config) {
         metaDataProvider.getEntityTypes().stream()
                 .map(this::buildEndpointClass)
                 .filter(Optional::isPresent)
@@ -57,27 +66,11 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                 .forEach(config::register);
     }
 
-    private static       MethodHandles.Lookup           prvlookup;
-
-    static {
-        MethodHandles.Lookup lookup = MethodHandles.lookup();
-
-        JerseyHyperMediaEndPointFactory.class.getModule().addReads(JerseyHyperMediaEndPointFactory.class.getModule());
-        try
-        {
-            prvlookup = MethodHandles.privateLookupIn(JerseyHyperMediaEndPointFactory.class, lookup);
-        }
-        catch( IllegalAccessException e ) {
-            LOGGER.error( e.getMessage(), e );
-        }
-    }
-
     private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
-
-        return DynamicClassBuilder.createClass(typeClass.getSimpleName() + "HyperMediaEndPoint")
-                .subClass(DefaultHATEOASJerseyEndpoint.class)
+        return DynamicClassBuilder.createClass( JerseyEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
+                .subClass(BaseBOEndpoint.class)
                     .addAnnotation(javax.ws.rs.Path.class)
-                        .value(configProperties.getHateoasApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase())
+                        .value(configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase())
                         .and()
                 .proxySuperMethod("create").name("createMethod")
                     .addAnnotation(POST.class)
@@ -90,7 +83,7 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                     .addAnnotation(Consumes.class)
                         .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
-                    .param(JerseyRepresentation.class)
+                    .param(typeClass)
                         .addAnnotation(NotNull.class)
                             .and()
                         .and()
@@ -114,7 +107,7 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                         .value("id")
                             .and()
                         .and()
-                    .param(JerseyRepresentation.class)
+                    .param(typeClass)
                         .addAnnotation(NotNull.class)
                             .and()
                         .and()
@@ -139,7 +132,7 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                         .addAnnotation(PathParam.class)
                             .value("id")
                             .and()
-                        .and()
+                         .and()
                     .and()
                 .proxySuperMethod("search").name("searchMethod")
                     .addAnnotation(POST.class)
@@ -202,32 +195,21 @@ public class JerseyHyperMediaEndPointFactory implements ResourceConfigCustomizer
                             .value(beanNamingStrategy.calculateManagerId(typeClass))
                             .and()
                         .and()
-                    .superParam(JerseyResponseEntityBuilderFactory.class)
+                    .superParam(ResponseEntityBuilderFactory.class)
                         .addAnnotation(Qualifier.class)
-                            .value("jerseyResponseEntityBuilderHyperMediaFactory")
+                            .value("jerseyResponseEntityBuilderFactory")
                             .and()
                         .and()
-                    .superParam(HyperMediaMapper.class)
-                        .addAnnotation(Qualifier.class)
-                            .value(beanNamingStrategy.calculateHyperMediaMapperId(typeClass))
-                            .and()
-                        .and()
-                    .superParam(AssociationsHandler.class)
-                        .addAnnotation(Qualifier.class)
-                            .value(beanNamingStrategy.calculateAssociationsHandler(typeClass))
-                        .build( prvlookup )
-
+                .build(prvlookup)
         .map(endpointClass-> {
             endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
-
             return endpointClass;
         });
     }
 
-
     @Override
     public void customize(ResourceConfig config) {
-        this.initializeHypermediaEndpoints(config);
+        initializeEndpoints(config);
     }
 }
 

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-public abstract class AbstractLinkBuilderFactory implements LinkBuilderFactory {
+public abstract class AbstractLinkBuilderFactory<L> implements LinkBuilderFactory<L> {
     protected static final String HEADER_HOST = "Host";
     protected static final String HEADER_X_ORIGINAL_PROTO = "X-Orig-Proto";
     protected static final String HEADER_X_ORIGINAL_HOST = "X-Orig-Host";

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="org.divy.greeting">
-        <class>org.divy.bo.demos.spring.greetings.Greeting</class>
-        <class>org.divy.bo.demos.spring.cards.GreetingCard</class>
-        <class>org.divy.bo.demos.spring.cards.pages.Page</class>
-        <class>org.divy.bo.demos.spring.cards.pages.Section</class>
+        <class>org.divy.bo.demos.spring.jersey.greetings.Greeting</class>
+        <class>org.divy.bo.demos.spring.jersey.cards.GreetingCard</class>
+        <class>org.divy.bo.demos.spring.jersey.cards.pages.Page</class>
+        <class>org.divy.bo.demos.spring.jersey.cards.pages.Section</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:MyDB"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:MyDB;DB_CLOSE_DELAY=-1"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>

@@ -18,9 +18,5 @@
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-query</artifactId>
         </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
     </dependencies>
 </project>

@@ -6,6 +6,7 @@ import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.endpoint.test.BaseBOEndpointUnitTest;
 import org.divy.common.bo.endpoint.test.InMemoryBOManager;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.rest.JerseyEndPointRegistry;
 import org.divy.common.rest.JerseyEntityURLBuilderImpl;
 import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
 import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
@@ -42,8 +43,9 @@ public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyE
     @Override
     protected BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response> createEndpointInstance() {
         JerseyLinkBuilderFactoryImpl mock = new JerseyLinkBuilderFactoryImpl();
-        JerseyEntityURLBuilderImpl jerseyEntityURLBuilder = new JerseyEntityURLBuilderImpl(mock);
-        jerseyEntityURLBuilder.addEntityEndPointMap(MockBoJerseyEndpoint.MockEntity.class.getSimpleName(), getEndPointClass());
+        JerseyEndPointRegistry registry = new JerseyEndPointRegistry();
+        JerseyEntityURLBuilderImpl jerseyEntityURLBuilder = new JerseyEntityURLBuilderImpl(mock, registry);
+        registry.addEntityEndPointMap(MockBoJerseyEndpoint.MockEntity.class.getSimpleName(), getEndPointClass());
         ResponseEntityBuilderFactory responseEntityBuilderFactory =  new JerseyResponseEntityBuilderFactory<>(jerseyEntityURLBuilder);
         return new MockBoJerseyEndpoint(new InMemoryBOManager<>(), responseEntityBuilderFactory);
     }

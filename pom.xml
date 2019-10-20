@@ -43,14 +43,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
-        <jersey.version>2.28</jersey.version>
+        <jersey.version>2.29.1</jersey.version>
         <glassfish-el.version>3.0.1-b11</glassfish-el.version>
         <isRelease>false</isRelease>
         <sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
         <sonar.host.url>http://sonarqube.com</sonar.host.url>
 
         <!-- Make sure to update below dependencies as these are not updated from Spring Boot BOM-->
-        <org.springframework.boot.version>2.1.5.RELEASE</org.springframework.boot.version>
+        <org.springframework.boot.version>2.2.1.RELEASE</org.springframework.boot.version>
         <hibernate-search-orm-version>5.11.1.Final</hibernate-search-orm-version>
     </properties>
 
@@ -300,7 +300,7 @@
             <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-server</artifactId>
-                <version>2.25.1</version>
+                <version>${jersey.version}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>aopalliance-repackaged</artifactId>
@@ -377,12 +377,6 @@
                 <version>2.4.0-b180830.0359</version>
             </dependency>
             <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest</artifactId>
-                <version>2.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.glassfish.jersey.bundles</groupId>
                 <artifactId>jaxrs-ri</artifactId>
                 <version>${jersey.version}</version>
@@ -401,7 +395,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.9.12</version>
+                <version>1.10.2</version>
             </dependency>
             <dependency>
                 <groupId>commons-beanutils</groupId>
