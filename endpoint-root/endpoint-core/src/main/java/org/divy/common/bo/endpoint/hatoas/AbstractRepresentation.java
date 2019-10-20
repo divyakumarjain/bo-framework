@@ -27,6 +27,7 @@ public abstract class AbstractRepresentation<I, D, L> implements Representation<
         return data;
     }
 
+    @Override
     public void setData(D data) {
         this.data = data;
     }

@@ -39,7 +39,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
     public R readRelation(I id, String relation) {
 
-        B entity = getManager().get(id);
+        B entity = getManager().get(id).orElseThrow( ()->new NotFoundException("Could not find the entity") );
 
         final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
                 .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
@@ -71,7 +71,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
                             , String relation
                             , E respresentation) {
 
-        B businessObject = getManager().get(id);
+        B businessObject = getManager().get(id).orElseThrow( () -> new NotFoundException("Could not find the entity") );
 //
 //        if (businessObject == null) {
 //            throw new NotFoundException("Could not find the entity");
@@ -98,12 +98,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
     @Override
     protected E doRead(I id) {
-        B businessObject = getManager().get(id);
-
-        if(businessObject == null) {
-            throw new NotFoundException("Could not find the entity");
-        }
-
+        var businessObject = getManager().get(id).orElseThrow( ()-> new NotFoundException("Could not find the entity") );
         return mapFromBO(businessObject);
     }
 
@@ -130,7 +125,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
         Collection<B> resultList = new ArrayList<>(boList);
 
-        return getRepresentationMapper().createRepresentationFromBO(resultList);
+        return getRepresentationMapper().createFromBO(resultList);
     }
 
     @Override
@@ -139,15 +134,15 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
         Collection<B> resultList = new ArrayList<>(boList);
 
-        return getRepresentationMapper().createRepresentationFromBO(resultList);
+        return getRepresentationMapper().createFromBO(resultList);
     }
 
     private B mapToBO(E representation) {
-        return getRepresentationMapper().createBOFromRepresentation(representation);
+        return getRepresentationMapper().createBO(representation);
     }
 
     private E mapFromBO(B createdBusinessObject) {
-        return getRepresentationMapper().createRepresentationFromBO(createdBusinessObject);
+        return getRepresentationMapper().createFromBO(createdBusinessObject);
     }
 
     public abstract BOManager<B, I> getManager();

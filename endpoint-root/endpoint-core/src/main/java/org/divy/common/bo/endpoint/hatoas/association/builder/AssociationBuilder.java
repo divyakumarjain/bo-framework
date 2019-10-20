@@ -2,6 +2,7 @@ package org.divy.common.bo.endpoint.hatoas.association.builder;
 
 import org.divy.common.bo.dynamic.clazz.Builder;
 import org.divy.common.bo.dynamic.clazz.member.method.reader.ReaderBuilder;
+import org.divy.common.bo.dynamic.clazz.member.method.setter.SetterBuilder;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.hatoas.association.Association;
@@ -26,7 +27,7 @@ public class AssociationBuilder<T extends BusinessObject<I>, I, P extends Builde
     }
 
     public AssociationBuilder<T,I, P> withMapper( AbstractHATOASMapper hatoasMapper) {
-        this.hatoasMapper = hatoasMapper;
+        this.mapper = hatoasMapper;
         return this;
     }
 
@@ -70,15 +71,9 @@ public class AssociationBuilder<T extends BusinessObject<I>, I, P extends Builde
     }
 
     public  <O> O createWith(Class<O> groupClass) {
-        CreateBuilder createBuilder = new CreateBuilder();
-        setCreate(createBuilder);
+        SetterBuilder createBuilder = new SetterBuilder();
+        setSetter(createBuilder);
         return createBuilder.withMethodOn(groupClass);
-    }
-
-    public  <O> O updateWith(Class<O> groupClass) {
-        UpdateBuilder updateBuilder = new UpdateBuilder();
-        setUpdater(updateBuilder);
-        return (O) updateBuilder.withMethodOn(groupClass);
     }
 
 

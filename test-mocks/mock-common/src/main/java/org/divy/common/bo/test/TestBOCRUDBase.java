@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.core.IsEqual.*;
 import static org.hamcrest.core.IsNull.*;
@@ -142,7 +143,7 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
     protected abstract void doUpdateEntity(I id, E entity);
 
-    protected abstract E doGetByKey(I id);
+    protected abstract Optional<E> doGetByKey(I id);
 
     protected abstract E doAssertExists(I id);
 

@@ -3,6 +3,8 @@ package org.divy.common.bo.database.command.impl;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.database.context.CommandContext;
 
+import java.util.Optional;
+
 public abstract class AbstractDatabaseGetCommand<E extends BusinessObject<I>, I>
         extends AbstractDatabaseCommand<E, I> implements org.divy.common.bo.database.command.GetCommand<E, I>
 {
@@ -14,10 +16,10 @@ public abstract class AbstractDatabaseGetCommand<E extends BusinessObject<I>, I>
     }
 
     @Override
-    public E get(I id)
+    public Optional<E> get(I id)
     {
         return getReference(id);
     }
 
-    protected abstract E getReference(I id);
+    protected abstract Optional<E> getReference(I id);
 }

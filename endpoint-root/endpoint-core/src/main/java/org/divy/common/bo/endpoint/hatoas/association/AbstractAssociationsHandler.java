@@ -10,10 +10,10 @@ import java.util.*;
 
 public abstract class AbstractAssociationsHandler<T extends BusinessObject<UUID>> implements AssociationsHandler<T, UUID>
 {
-    protected final Class<T> source;
-    protected final MetaDataProvider metaDataProvider;
-    protected final MapperBuilder mapperBuilder;
-    protected final LinkBuilderFactory linkBuilderFactory;
+    protected final Class<T>                                         source;
+    protected final MetaDataProvider                                 metaDataProvider;
+    protected final MapperBuilder                                    mapperBuilder;
+    protected final LinkBuilderFactory                               linkBuilderFactory;
     private ArrayList<Association<T, UUID>> associations = null;
 
     public AbstractAssociationsHandler(MetaDataProvider metaDataProvider, Class<T> source, MapperBuilder mapperBuilder, LinkBuilderFactory linkBuilderFactory)

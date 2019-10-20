@@ -4,6 +4,7 @@ import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BOManager<E extends BusinessObject<I>, I> {
 
@@ -18,5 +19,5 @@ public interface BOManager<E extends BusinessObject<I>, I> {
 
     E deleteById(I id);
 
-    E get(I identity);
+    Optional<E> get(I identity);
 }

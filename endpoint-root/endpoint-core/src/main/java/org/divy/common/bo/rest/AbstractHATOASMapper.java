@@ -8,6 +8,7 @@ import org.divy.common.bo.metadata.MetaDataProvider;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -42,36 +43,6 @@ public abstract class AbstractHATOASMapper<E extends BusinessObject<UUID>
         return keyValuePairMapper;
     }
 
-    @Override
-    public R createRepresentationFromBO(E businessObject) {
-        R representation = createRepresentationInstance();
-        representation.setId(businessObject.identity());
-        representation._type(businessObject._type());
-        mapFromBO(businessObject, representation.getData());
-        doFillLinks(representation, businessObject);
-        doFillAssociations(representation, businessObject);
-        return representation;
-    }
-
-    @Override
-    public Collection<R> createRepresentationFromBO(Collection<E> boList) {
-        return boList.stream().map(this::createRepresentationFromBO).collect(Collectors.toList());
-    }
-
-    @Override
-    public Collection<E> createBOFromRepresentation(Collection<R> representations) {
-        return representations.stream().map(this::createBOFromRepresentation)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public E createBOFromRepresentation(R representation) {
-        final E businessObject = createBO(representation.getData());
-        doReadAssociations(representation, businessObject);
-        doReadLinks(representation, businessObject);
-        return businessObject;
-    }
-
     private R createRepresentationInstance() {
         try {
             return this.representationType.getDeclaredConstructor().newInstance();
@@ -81,33 +52,42 @@ public abstract class AbstractHATOASMapper<E extends BusinessObject<UUID>
     }
 
     @Override
-    public E createBO(Map<String, Object> stringObjectMap) {
-        return this.getKeyValuePairMapper().createBO(stringObjectMap);
+    public E createBO(R representation) {
+        final E businessObject = this.keyValuePairMapper.createBO( representation.getData() );
+        doReadAssociations(representation, businessObject);
+        doReadLinks(representation, businessObject);
+        return businessObject;
     }
 
     @Override
-    public E mapToBO(Map<String, Object> stringObjectMap, E bo) {
-        return this.getKeyValuePairMapper().mapToBO(stringObjectMap,bo);
+    public E mapToBO(R representation, E bo) {
+        return this.getKeyValuePairMapper().mapToBO(representation.getData(),bo);
     }
 
     @Override
-    public Map<String, Object> createFromBO(E e) {
-        return this.getKeyValuePairMapper().createFromBO(e);
+    public R createFromBO(E businessObject) {
+        R representation = createRepresentationInstance();
+        representation.setId(businessObject.identity());
+        representation._type(businessObject._type());
+        mapFromBO(businessObject, representation);
+        doFillLinks(representation, businessObject);
+        doFillAssociations(representation, businessObject);
+        return representation;
     }
 
     @Override
-    public Map<String, Object> mapFromBO(E e, Map<String, Object> stringObjectMap) {
-        return this.getKeyValuePairMapper().mapFromBO(e, stringObjectMap);
+    public R mapFromBO(E e, R representation) {
+        if(representation.getData() == null) {
+            representation.setData( new HashMap<>( ) );
+        }
+        this.getKeyValuePairMapper().mapFromBO(e, representation.getData());
+        return representation;
     }
 
     @Override
-    public Collection<E> createBO(Collection<Map<String, Object>> collection) {
-        return this.getKeyValuePairMapper().createBO(collection);
-    }
-
-    @Override
-    public Collection<Map<String, Object>> createFromBO(Collection<E> collection) {
-        return this.getKeyValuePairMapper().createFromBO(collection);
+    public Collection<E> createBO( Collection<R> representations) {
+        return representations.stream().map(this::createBO)
+              .collect(Collectors.toList());
     }
 
     protected abstract void doFillLinks(R representation, E businessObject);
@@ -120,5 +100,12 @@ public abstract class AbstractHATOASMapper<E extends BusinessObject<UUID>
 
     protected MetaDataProvider getMetaDataProvider() {
         return metaDataProvider;
+    }
+
+    @Override
+    public Collection<R> createFromBO( Collection<E> businessObjects )
+    {
+        return businessObjects.stream().map( this::createFromBO )
+              .collect( Collectors.toList());
     }
 }

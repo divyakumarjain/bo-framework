@@ -9,6 +9,7 @@ import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestDataProvider;
+import org.divy.common.exception.NotFoundException;
 import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
 import org.junit.Before;
 
@@ -19,6 +20,7 @@ import javax.ws.rs.core.UriBuilder;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -58,20 +60,19 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     @Override
     protected E doCreateEntity(E entity)
     {
-
         Response response = endpointInstance.create(entity);
         assertThat(response, hasProperty(HEADERS,
                 hasKey(is(equalTo(HttpHeaders.LOCATION)))));
 
         I key = createKeyFromURI(response.getHeaders().getFirst(HttpHeaders.LOCATION).toString());
-        return doGetByKey(key);
+        return doGetByKey(key).orElseThrow( () -> new NotFoundException("Could not find the entity") );
     }
 
 
     @Override
-    protected E doGetByKey(I id) {
+    protected Optional<E> doGetByKey(I id) {
         Response response = endpointInstance.read(id);
-        return (E) response.getEntity();
+        return Optional.ofNullable( (E)response.getEntity() );
     }
 
     @Override

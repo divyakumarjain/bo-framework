@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 public interface Representation<I, D, L> extends Identifiable<I> {
-
     I getId();
 
     void addLink(L link);
@@ -18,6 +17,8 @@ public interface Representation<I, D, L> extends Identifiable<I> {
     void addAssociation(String rel, Object association);
 
     D getData();
+
+    void setData( D data );
 
     void setId(I identity);
 

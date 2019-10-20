@@ -20,6 +20,7 @@ module bo.framework.endpoint.mock {
     requires org.mockito;
     requires com.google.guice;
     requires com.google.guice.extensions.servlet;
+    requires bo.framework.exception.handling;
     exports org.divy.common.bo.endpoint.test.json to junit;
     exports org.divy.common.bo.endpoint.test to junit;
 }

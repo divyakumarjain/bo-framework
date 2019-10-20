@@ -6,6 +6,7 @@ import org.divy.common.bo.database.command.CommandProvider;
 import org.divy.common.bo.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class AbstractBODatabaseRepository<E extends BusinessObject<I>, I>
@@ -43,7 +44,7 @@ public class AbstractBODatabaseRepository<E extends BusinessObject<I>, I>
     }
 
     @Override
-    public E get(I identity)
+    public Optional<E> get(I identity)
     {
         return commandProvider.getGetCommand().get(identity);
     }

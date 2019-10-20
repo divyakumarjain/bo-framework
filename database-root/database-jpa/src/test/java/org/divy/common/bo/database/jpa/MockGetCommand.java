@@ -2,6 +2,7 @@ package org.divy.common.bo.database.jpa;
 
 import org.divy.common.bo.database.command.impl.AbstractDatabaseGetCommand;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class MockGetCommand extends AbstractDatabaseGetCommand<MockEntity, UUID>
@@ -12,7 +13,7 @@ public class MockGetCommand extends AbstractDatabaseGetCommand<MockEntity, UUID>
     }
 
     @Override
-    protected MockEntity getReference(UUID id) {
+    protected Optional<MockEntity> getReference(UUID id) {
         return null;
     }
 }

@@ -1,9 +1,10 @@
 package org.divy.common.bo.endpoint.hatoas.association;
 
+import org.divy.common.bo.dynamic.clazz.member.method.setter.Setter;
 import org.divy.common.bo.endpoint.hatoas.Representation;
+import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
-import org.divy.common.bo.rest.AbstractHATOASMapper;
 import org.divy.common.bo.dynamic.clazz.member.method.reader.Reader;
 
 import java.util.Collection;
@@ -11,26 +12,25 @@ import java.util.List;
 import java.util.Optional;
 
 public class Association<T extends BusinessObject<I>, I> {
-    protected AbstractHATOASMapper hatoasMapper;
-    private   String               name;
-    private   Cardinality          cardinality;
-    private   List<PropagateSave>  propagateSaves;
-    private   Reader               reader;
-    private   boolean              includeInReadOperation;
-    private   BOManager<T, I>      manager;
-    private   Create               create;
-    private   Update               update;
+    protected BOMapper<T, Representation> mapper;
+    private   String                      name;
+    private   Cardinality                 cardinality;
+    private   List<PropagateSave>         propagateSaves;
+    private   Reader                      reader;
+    private   boolean                     includeInReadOperation;
+    private   BOManager<T, I>             manager;
+    private   Setter                      setter;
 
 
 
     public Optional<Object> read(Object source, Object... argv) {
 
         return getReader().read(source, argv).map(value -> {
-            if ( hatoasMapper != null) {
+            if ( mapper != null) {
                 if (value instanceof Collection) {
-                    return hatoasMapper.createRepresentationFromBO((Collection) value);
+                    return mapper.createFromBO((Collection) value);
                 } else if(value instanceof BusinessObject) {
-                    return hatoasMapper.createRepresentationFromBO((BusinessObject)value);
+                    return mapper.createFromBO( (T) value );
                 } else {
                     throw new IllegalArgumentException("Not supported Type");
                 }
@@ -41,14 +41,24 @@ public class Association<T extends BusinessObject<I>, I> {
         });
     }
 
-    public <E extends Representation> Optional<Object> create( T source,  E target )
-    {
-        return getCreator().createWith(source, target);
+    public Optional<Object> create( T source,  Representation target ) {
+        final var targetBo = mapper.createBO( target ) ;
+
+        BusinessObject fromStore = null;
+
+        if(targetBo.identity() == null) {
+            fromStore = manager.create(targetBo);
+        } else {
+            fromStore = manager.get( targetBo.identity() )
+                  .orElseGet( () -> manager.create( targetBo ) );
+        }
+
+        return Optional.ofNullable( fromStore );
     }
 
-    private Create getCreator()
+    private Setter getCreator()
     {
-        return this.create;
+        return this.setter;
     }
 
     public String getName() {
@@ -83,13 +93,8 @@ public class Association<T extends BusinessObject<I>, I> {
         this.reader = reader;
     }
 
-    protected void setCreate(Create create) {
-        this.create = create;
-    }
-
-
-    protected void setUpdater(Update update) {
-        this.update = update;
+    protected void setSetter( Setter setter ) {
+        this.setter = setter;
     }
 
     public boolean isIncludeInReadOperation() {

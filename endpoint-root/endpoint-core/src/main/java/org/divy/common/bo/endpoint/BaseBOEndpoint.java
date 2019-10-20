@@ -5,6 +5,7 @@ import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
+import org.divy.common.exception.NotFoundException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,6 +71,6 @@ public class BaseBOEndpoint<E extends BusinessObject<I>, I extends Serializable,
 
     @Override
     protected E doRead(I id) {
-        return manager.get(id);
+        return manager.get(id).orElseThrow( ()-> new NotFoundException("Could not find the entity") );
     }
 }

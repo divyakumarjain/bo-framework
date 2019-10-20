@@ -1,10 +1,9 @@
-package org.divy.common.bo.endpoint.hatoas.association.builder;
-
-import org.divy.common.bo.endpoint.hatoas.association.Create;
+package org.divy.common.bo.dynamic.clazz.member.method.setter;
 
 import java.util.Optional;
 
-public class CreateBuilder implements Create {
+public class SetterBuilder implements Setter
+{
 
     public <T> T createWith(Class<T> groupClass) {
         // TODO Auto-generated method stub

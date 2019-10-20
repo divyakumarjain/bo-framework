@@ -8,10 +8,12 @@ import org.divy.common.bo.validation.BOValidator;
 import org.divy.common.bo.validation.ValidationResults;
 import org.divy.common.bo.validation.group.BOCreateCheck;
 import org.divy.common.bo.validation.group.BOUpdateCheck;
+import org.divy.common.exception.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
-public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOManager<E, I> {
+public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOManager<E,I> {
 
     final BORepository<E, I> repository;
     final BOValidator<E, I> validator;
@@ -21,7 +23,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
         this.validator = boValidator;
     }
 
-    public E create(E businessObject) {
+    public E create( E businessObject) {
         ValidationResults results = doValidate(businessObject, BOCreateCheck.class);
         if (results.isEmpty())
             return repository.create(businessObject);
@@ -48,7 +50,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
         }
     }
 
-    public E delete(E businessObject) {
+    public E delete( E businessObject) {
         ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
         if (results.isEmpty()) {
             return repository.delete(businessObject);
@@ -67,7 +69,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
     }
 
     public E deleteById(I id) {
-        final E businessObject = get(id);
+        final E businessObject = get(id).orElseThrow( () -> new NotFoundException("Could not find the entity") );
         ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
         if (results.isEmpty()) {
             return repository.deleteById(id);
@@ -77,7 +79,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
         }
     }
 
-    public E get(I identity) {
+    public Optional<E> get(I identity) {
         return repository.get(identity);
     }
 
