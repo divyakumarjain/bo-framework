@@ -8,7 +8,7 @@ module bo.framework.spring.mvc {
     requires bo.framework.endpoint.core;
     requires bo.framework.exception.handling;
     requires bo.framework.spring.support.core;
-    requires slf4j.api;
+    requires org.slf4j;
     requires spring.web;
     requires spring.beans;
     requires spring.boot;
@@ -19,4 +19,5 @@ module bo.framework.spring.mvc {
     requires com.fasterxml.jackson.datatype.jdk8;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.module.paramnames;
+    requires com.fasterxml.jackson.databind;
 }

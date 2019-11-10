@@ -3,7 +3,7 @@ package org.divy.common.rest;
 import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.rest.LinkBuilder;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.reflect.Method;
@@ -48,22 +48,22 @@ public class SpringLinkBuilderImpl implements LinkBuilder<Link> {
 
     @Override
     public Link buildLinkFor(String rel, Class<?> resource) {
-        return ControllerLinkBuilder.linkTo(resource).withRel(rel);
+        return WebMvcLinkBuilder.linkTo(resource).withRel(rel);
     }
 
     @Override
     public Link buildLinkFor(String rel, Class<?> resource, String methodName, Object... param) {
-        return ControllerLinkBuilder.linkTo(resolveMethod(resource, methodName)).withRel(rel).expand(param);
+        return WebMvcLinkBuilder.linkTo(resolveMethod(resource, methodName)).withRel(rel).expand(param);
     }
 
     @Override
     public URI buildURI(Class<?> resource) {
-        return ControllerLinkBuilder.linkTo(resource).toUri();
+        return WebMvcLinkBuilder.linkTo(resource).toUri();
     }
 
     @Override
     public URI buildURI(Class<?> resource, String methodName, Object... param) {
-        return ControllerLinkBuilder.linkTo(resolveMethod(resource, methodName), param).toUri();
+        return WebMvcLinkBuilder.linkTo(resolveMethod(resource, methodName), param).toUri();
     }
 
     private Method resolveMethod(Class<?> resource, String methodName) {

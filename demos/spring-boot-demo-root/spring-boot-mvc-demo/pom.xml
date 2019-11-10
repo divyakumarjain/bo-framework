@@ -10,7 +10,7 @@
         <version>0.0.11-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spring-boot-mvc-demo</artifactId>
+    <artifactId>bo-framework-spring-boot-mvc-demo</artifactId>
 
     <dependencies>
         <dependency>
@@ -98,10 +98,6 @@
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
         </dependency>
     </dependencies>
 

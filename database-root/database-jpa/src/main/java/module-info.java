@@ -5,7 +5,7 @@ module bo.framework.database.jpa {
     requires bo.framework.mapper;
     requires bo.framework.query;
     requires bo.framework.metadata;
-    requires slf4j.api;
+    requires org.slf4j;
     requires java.desktop;
     exports org.divy.common.bo.database.jpa;
 }
