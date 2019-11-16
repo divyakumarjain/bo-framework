@@ -2,7 +2,7 @@ package org.divy.common.bo.endpoint.test;
 
 import org.divy.common.bo.rest.LinkBuilder;
 import org.divy.common.bo.rest.LinkBuilderFactory;
-import org.divy.common.rest.JerseyLinkBuilderImpl;
+import org.divy.common.bo.spring.jersey.rest.JerseyLinkBuilderImpl;
 
 public class MockLinkBuilderFactory implements LinkBuilderFactory {
 

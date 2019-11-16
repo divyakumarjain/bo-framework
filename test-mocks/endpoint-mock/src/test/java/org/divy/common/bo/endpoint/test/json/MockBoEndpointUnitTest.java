@@ -6,10 +6,10 @@ import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.endpoint.test.BaseBOEndpointUnitTest;
 import org.divy.common.bo.endpoint.test.InMemoryBOManager;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
-import org.divy.common.rest.JerseyEndPointRegistry;
-import org.divy.common.rest.JerseyEntityURLBuilderImpl;
-import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
-import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
+import org.divy.common.bo.spring.jersey.rest.JerseyEndPointRegistry;
+import org.divy.common.bo.spring.jersey.rest.JerseyEntityURLBuilderImpl;
+import org.divy.common.bo.spring.jersey.rest.JerseyLinkBuilderFactoryImpl;
+import org.divy.common.bo.spring.jersey.rest.response.JerseyResponseEntityBuilderFactory;
 
 import javax.ws.rs.core.Response;
 import java.util.UUID;

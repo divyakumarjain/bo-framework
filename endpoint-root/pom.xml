@@ -15,6 +15,6 @@
     </properties>    <packaging>pom</packaging>
     <modules>
         <module>endpoint-core</module>
-<!--        <module>endpoint-jersey</module>-->
+        <module>endpoint-jersey</module>
     </modules>
 </project>

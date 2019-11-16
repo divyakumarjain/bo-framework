@@ -21,6 +21,7 @@ module bo.framework.endpoint.mock {
     requires com.google.guice;
     requires com.google.guice.extensions.servlet;
     requires bo.framework.exception.handling;
+    requires bo.framework.endpoint.jersey;
     exports org.divy.common.bo.endpoint.test.json to junit;
     exports org.divy.common.bo.endpoint.test to junit;
 }

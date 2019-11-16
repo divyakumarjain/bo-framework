@@ -10,7 +10,7 @@ import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestDataProvider;
 import org.divy.common.exception.NotFoundException;
-import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
+import org.divy.common.bo.spring.jersey.rest.JerseyLinkBuilderFactoryImpl;
 import org.junit.Before;
 
 import javax.servlet.http.HttpServletRequest;

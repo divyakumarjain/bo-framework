@@ -121,6 +121,9 @@
                 <version>${org.springframework.boot.version}</version>
                 <configuration>
                     <fork>true</fork>
+                    <jvmArguments>
+                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=5005
+                    </jvmArguments>
                 </configuration>
                 <dependencies>
                     <dependency>
