@@ -58,7 +58,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-scm-plugin</artifactId>
-                <version>1.4</version>
+                <version>1.11.2</version>
                 <configuration>
                     <tag>${project.artifactId}-0.0.11-SNAPSHOT</tag>
                 </configuration>
