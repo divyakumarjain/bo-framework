@@ -10,4 +10,5 @@ module bo.framework.dynamic {
     exports org.divy.common.bo.dynamic.clazz.member.method;
     exports org.divy.common.bo.dynamic.clazz.member.constructor;
     exports org.divy.common.bo.dynamic.clazz.member.method.reader;
+    exports org.divy.common.bo.dynamic.clazz.member.method.setter;
 }

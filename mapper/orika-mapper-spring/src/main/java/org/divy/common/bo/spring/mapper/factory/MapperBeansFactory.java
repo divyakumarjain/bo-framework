@@ -4,12 +4,13 @@ import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.BOMergeMapper;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.bo.spring.core.factory.DynamicBeanFactory;
+import org.divy.common.bo.spring.core.factory.DynamicBeansFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 
-public class MapperBeansFactory implements DynamicBeanFactory<Class<? extends BusinessObject>> {
+public class MapperBeansFactory implements DynamicBeansFactory<Class<? extends BusinessObject>>
+{
     
     private final BeanNamingStrategy namingStrategy;
 

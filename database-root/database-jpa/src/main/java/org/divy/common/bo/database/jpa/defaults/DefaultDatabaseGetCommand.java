@@ -4,12 +4,14 @@ import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.database.command.impl.AbstractDatabaseGetCommand;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 
+import java.util.Optional;
+
 /**
  *
  *
  */
 public class DefaultDatabaseGetCommand<E extends BusinessObject<I>, I>
-        extends AbstractDatabaseGetCommand<E, I>
+        extends AbstractDatabaseGetCommand<E,I>
 {
 
     private final EntityManagerCommandContext context;
@@ -26,7 +28,7 @@ public class DefaultDatabaseGetCommand<E extends BusinessObject<I>, I>
     }
 
     @Override
-    protected E getReference(Object identity) {
-        return this.context.getEntityManager().find(getEntityType(), identity);
+    protected Optional<E> getReference( I identity) {
+        return Optional.ofNullable(this.context.getEntityManager().find(getEntityType(), identity));
     }
 }

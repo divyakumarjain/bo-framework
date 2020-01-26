@@ -4,7 +4,7 @@ module bo.framework.endpoint.mock {
     requires bo.framework.query;
     requires bo.framework.database.core;
     requires bo.framework.mock.common;
-    requires bo.framework.endpoint.jersey;
+//    requires bo.framework.endpoint.jersey;
     requires bo.framework.endpoint.core;
 
     requires javax.servlet.api;
@@ -20,6 +20,8 @@ module bo.framework.endpoint.mock {
     requires org.mockito;
     requires com.google.guice;
     requires com.google.guice.extensions.servlet;
+    requires bo.framework.exception.handling;
+    requires bo.framework.endpoint.jersey;
     exports org.divy.common.bo.endpoint.test.json to junit;
     exports org.divy.common.bo.endpoint.test to junit;
 }

@@ -10,9 +10,9 @@ module bo.framework.endpoint.jersey {
     requires com.fasterxml.jackson.databind;
     requires jakarta.inject;
     requires java.ws.rs;
-    exports org.divy.common.rest;
-    exports org.divy.common.rest.response;
-    exports org.divy.common.rest.exception.mapper;
-    exports org.divy.common.bo.endpoint.jersey.hypermedia;
-    exports org.divy.common.bo.endpoint.jersey.hypermedia.association;
+    exports org.divy.common.bo.jersey.rest;
+    exports org.divy.common.bo.jersey.rest.response;
+    exports org.divy.common.bo.jersey.rest.exception.mapper;
+    exports org.divy.common.bo.jersey.rest.hatoas;
+    exports org.divy.common.bo.jersey.rest.hatoas.association;
 }

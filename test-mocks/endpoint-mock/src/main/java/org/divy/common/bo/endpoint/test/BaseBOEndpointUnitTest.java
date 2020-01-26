@@ -1,28 +1,22 @@
 package org.divy.common.bo.endpoint.test;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Module;
-import com.google.inject.TypeLiteral;
 import org.divy.common.bo.repository.BusinessObject;
-import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestDataProvider;
-import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
+import org.divy.common.exception.NotFoundException;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.mock;
 
 /**
  *
@@ -58,20 +52,19 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     @Override
     protected E doCreateEntity(E entity)
     {
-
         Response response = endpointInstance.create(entity);
         assertThat(response, hasProperty(HEADERS,
                 hasKey(is(equalTo(HttpHeaders.LOCATION)))));
 
         I key = createKeyFromURI(response.getHeaders().getFirst(HttpHeaders.LOCATION).toString());
-        return doGetByKey(key);
+        return doGetByKey(key).orElseThrow( () -> new NotFoundException("Could not find the entity") );
     }
 
 
     @Override
-    protected E doGetByKey(I id) {
+    protected Optional<E> doGetByKey(I id) {
         Response response = endpointInstance.read(id);
-        return (E) response.getEntity();
+        return Optional.ofNullable( (E)response.getEntity() );
     }
 
     @Override
@@ -98,8 +91,7 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     @SuppressWarnings("unchecked")
     protected List<E> doSearchEntities(Query searchQuery) {
         Response response = this.endpointInstance.search(searchQuery);
-        assertThat(response, hasProperty(STATUS, is(equalTo(200))));
-        assertThat(response, hasProperty(ENTITY, notNullValue()));
+        assertThat(response, hasProperty(STATUS, is( Matchers.anyOf(equalTo(200), equalTo(204)))));
         return (List<E>) response.getEntity();
     }
 
@@ -112,30 +104,14 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     public void setup() {
 
         this.endpointInstance = createEndpointInstance();
-        Guice.createInjector(getTestModules())
-                .injectMembers(this);
     }
 
     protected abstract BaseBOEndpoint<E, I, Response> createEndpointInstance();
 
-    public Iterable<Module> getTestModules() {
-        return Collections.singletonList(new AbstractModule() {
-            @Override
-            public void configure() {
-                bind(JerseyLinkBuilderFactoryImpl.class);
-                bind(getManagerTypeLiteral()).toInstance(getMockManagerInstance());
-                bind(HttpServletRequest.class).toInstance(mock(HttpServletRequest.class));
-            }
-        });
-    }
 
     protected abstract InMemoryBOManager<E, I> getMockManagerInstance();
 
-    protected abstract TypeLiteral<BOManager<E, I>> getManagerTypeLiteral();
-
     protected abstract Class<E> getEntityClass();
-
-    protected abstract TypeLiteral<BaseBOEndpoint<E, I, Response>> getEndpointTypeLiteral();
 
     protected abstract I toKey(String segment);
 }

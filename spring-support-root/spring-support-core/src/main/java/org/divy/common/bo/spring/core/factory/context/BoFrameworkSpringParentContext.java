@@ -2,6 +2,7 @@ package org.divy.common.bo.spring.core.factory.context;
 
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategyImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,8 @@ import java.util.stream.Collectors;
 @Configuration
 @PropertySource( value = {"classpath:/application.properties"})
 @ComponentScan(basePackages = {"org.divy.common.bo.spring.mapper.factory"
-        , "org.divy.common.bo.spring.endpoint.factory"
+        , "org.divy.common.bo.spring.jersey.rest.factory"
+        , "org.divy.common.bo.spring.mvc.rest.factory"
         , "org.divy.common.bo.spring.repository.factory"})
 public class BoFrameworkSpringParentContext
 {
@@ -35,7 +37,7 @@ public class BoFrameworkSpringParentContext
     }
 
     @Bean
-    public BeanNamingStrategyImpl namingStrategy() {
+    public BeanNamingStrategy namingStrategy() {
         return new BeanNamingStrategyImpl();
     }
 
@@ -57,6 +59,7 @@ public class BoFrameworkSpringParentContext
     }
 
     private MetaDataProvider createMetadataProvider(List<Class<? extends BusinessObject>> typeList) {
+        //TODO load metadata provider automatically based on either spring autoconfig or class in the classpath
         return loadMetaDataProvider("org.divy.common.bo.database.jpa.BoEntityMetaDataProvider", typeList)
                 .orElseGet(() -> loadMetaDataProvider("", typeList).get());
     }

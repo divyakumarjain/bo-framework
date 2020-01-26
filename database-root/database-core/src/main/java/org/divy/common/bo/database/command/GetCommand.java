@@ -1,8 +1,9 @@
 package org.divy.common.bo.database.command;
 
+import java.util.Optional;
+
 @FunctionalInterface
 public interface GetCommand<E, I> extends Command
 {
-    E get(I identity);
-
+    Optional<E> get(I identity);
 }

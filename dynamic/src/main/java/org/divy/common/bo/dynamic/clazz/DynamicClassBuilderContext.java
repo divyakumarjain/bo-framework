@@ -65,6 +65,12 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
         return dynamicClassConstructorBuilderContext;
     }
 
+    public DynamicMethodBuilderContext<DynamicMethodBuilderContext, DynamicClassBuilderContext<C>> addMethod() {
+        final DynamicMethodBuilderContext<DynamicMethodBuilderContext, DynamicClassBuilderContext<C>> dynamicMethodBuilderContext = new DynamicMethodBuilderContext<>(this);
+        this.methods.add(dynamicMethodBuilderContext);
+        return dynamicMethodBuilderContext;
+    }
+
     @Override
     public Optional<Class<?>> build( MethodHandles.Lookup lookup ) {
 

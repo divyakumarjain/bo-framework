@@ -26,7 +26,7 @@
     </properties>    <packaging>pom</packaging>
 
     <modules>
-        <module>spring-boot-jersey-demo</module>
+<!--        <module>spring-boot-jersey-demo</module>-->
         <module>spring-boot-mvc-demo</module>
     </modules>
     

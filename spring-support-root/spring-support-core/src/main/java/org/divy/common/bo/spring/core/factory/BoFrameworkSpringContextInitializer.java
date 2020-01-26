@@ -24,7 +24,7 @@ public class BoFrameworkSpringContextInitializer implements ApplicationContextIn
         final MetaDataProvider entityMetaDataProvider = (MetaDataProvider) bean;
         applicationContext.addBeanFactoryPostProcessor(new BoFrameworkBeanRegistryPostProcessor(
                 entityMetaDataProvider,
-                context.getBeansOfType(DynamicBeanFactory.class).values()));
+                context.getBeansOfType(DynamicBeansFactory.class).values()));
         applicationContext.addApplicationListener(this);
     }
 

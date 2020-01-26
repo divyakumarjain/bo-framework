@@ -17,7 +17,7 @@ import static org.junit.Assert.assertThat;
 public class DynamicClassBuilderTest {
 
     MethodHandles.Lookup prvlookup;
-    
+
     @Before
     public void setup() throws IllegalAccessException
     {
@@ -158,5 +158,7 @@ public class DynamicClassBuilderTest {
         assertThat(instance, hasProperty("attribute1", is("attribute1")));
         assertThat(instance, hasProperty("attribute2", is("attribute2")));
     }
+
+
 
 }

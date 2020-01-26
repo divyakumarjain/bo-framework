@@ -5,10 +5,7 @@ import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.query.Query;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InMemoryBOManager<E extends BusinessObject<I>, I extends Serializable> implements BOManager<E, I> {
 
@@ -47,7 +44,7 @@ public class InMemoryBOManager<E extends BusinessObject<I>, I extends Serializab
     }
 
     @Override
-    public E get(I identity) {
-        return inMemoryMap.get(identity);
+    public Optional<E> get(I identity) {
+        return Optional.ofNullable(inMemoryMap.get(identity));
     }
 }

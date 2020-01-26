@@ -8,9 +8,10 @@ import org.divy.common.bo.test.TestDataProvider;
 import org.junit.Before;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.core.IsNull.*;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> extends TestBOCRUDBase<E, I>
 {
@@ -35,20 +36,21 @@ public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> exten
 
     @Override
     protected E doAssertExists(I id) {
-        E entity = doGetByKey(id);
+        var entity = doGetByKey(id);
         assertThat(entity, notNullValue());
-        return entity;
+        assertTrue( entity.isPresent() );
+        return entity.get();
     }
     
     @Override
-    protected E doGetByKey(I id) {
+    protected Optional<E> doGetByKey(I id) {
         return boRepository.get(id);
     }
 
     @Override
     protected void doAssertNotExists(I id) {
-        E entity = doGetByKey(id);
-        assertThat(entity, nullValue());
+        var entity = doGetByKey(id);
+        assertFalse(entity.isPresent());
     }
 
     @Override

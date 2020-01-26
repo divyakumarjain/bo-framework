@@ -6,7 +6,6 @@ import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,7 +23,7 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @GET
     @Produces({"application/json"})
     @Path("/{id}")
-    public Response readMethod(@PathParam("id") @NotNull UUID id) {
+    public Response readMethod(@PathParam("id") UUID id) {
         return super.read(id);
     }
 
@@ -33,7 +32,7 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Path("/{id}")
     @Override
     @DELETE
-    public Response delete(@NotNull @PathParam("id") UUID id) {
+    public Response delete(@PathParam("id") UUID id) {
         return super.delete(id);
     }
 
@@ -49,7 +48,7 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Produces({"application/json"})
     @Override
     @POST
-    public Response create(@NotNull MockBoJerseyEndpoint.MockEntity entity)
+    public Response create(MockBoJerseyEndpoint.MockEntity entity)
     {
         return super.create(entity);
     }
@@ -59,7 +58,7 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Path("/{id}")
     @PUT
     @Produces({"application/json"})
-    public Response update(@PathParam("id") UUID id, @NotNull MockBoJerseyEndpoint.MockEntity entity) {
+    public Response update(@PathParam("id") UUID id, MockBoJerseyEndpoint.MockEntity entity) {
         return super.update(id, entity);
     }
 
@@ -68,7 +67,7 @@ public class MockBoJerseyEndpoint extends BaseBOEndpoint<MockBoJerseyEndpoint.Mo
     @Produces({"application/json"})
     @POST
     @Path("/search")
-    public Response search(@NotNull Query query) {
+    public Response search(Query query) {
         return super.search(query);
     }
 

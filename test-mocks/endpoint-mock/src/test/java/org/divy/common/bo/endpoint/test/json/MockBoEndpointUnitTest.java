@@ -5,14 +5,20 @@ import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.endpoint.test.BaseBOEndpointUnitTest;
 import org.divy.common.bo.endpoint.test.InMemoryBOManager;
+import org.divy.common.bo.jersey.rest.JerseyEndPointRegistry;
+import org.divy.common.bo.jersey.rest.JerseyEntityURLBuilderImpl;
+import org.divy.common.bo.jersey.rest.JerseyLinkBuilderFactoryImpl;
+import org.divy.common.bo.jersey.rest.response.JerseyResponseEntityBuilderFactory;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
-import org.divy.common.rest.JerseyEndPointRegistry;
-import org.divy.common.rest.JerseyEntityURLBuilderImpl;
-import org.divy.common.rest.JerseyLinkBuilderFactoryImpl;
-import org.divy.common.rest.response.JerseyResponseEntityBuilderFactory;
+import org.divy.common.exception.NotFoundException;
 
 import javax.ws.rs.core.Response;
 import java.util.UUID;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.fail;
 
 public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyEndpoint.MockEntity, UUID> {
 
@@ -23,6 +29,16 @@ public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyE
     @Override
     protected UUID getIdentifier(MockBoJerseyEndpoint.MockEntity mockEntity) {
         return mockEntity.identity();
+    }
+
+    @Override
+    protected void doAssertNotExists(UUID id) {
+        try {
+            super.doAssertNotExists( id );
+            fail("Expected org.divy.common.exception.NotFoundException");
+        } catch ( NotFoundException ex ) {
+            //success
+        }
     }
 
     @Override
@@ -51,21 +67,12 @@ public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyE
     }
 
     @Override
-    protected TypeLiteral<BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response>> getEndpointTypeLiteral() {
-        return new TypeLiteral<BaseBOEndpoint<MockBoJerseyEndpoint.MockEntity, UUID, Response>>(){};
-    }
-
-    @Override
     protected UUID toKey(String key) {
         return UUID.fromString(key);
     }
 
     protected Class<MockBoJerseyEndpoint.MockEntity> getEntityClass() {
         return MockBoJerseyEndpoint.MockEntity.class;
-    }
-
-    protected TypeLiteral<BOManager<MockBoJerseyEndpoint.MockEntity, UUID>> getManagerTypeLiteral() {
-        return new TypeLiteral<BOManager<MockBoJerseyEndpoint.MockEntity, UUID>>(){};
     }
 
     protected InMemoryBOManager<MockBoJerseyEndpoint.MockEntity, UUID> getMockManagerInstance() {

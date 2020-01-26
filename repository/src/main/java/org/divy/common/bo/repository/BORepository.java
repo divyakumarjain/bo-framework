@@ -3,6 +3,7 @@ package org.divy.common.bo.repository;
 import org.divy.common.bo.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public interface BORepository<E extends BusinessObject<I>, I>
@@ -23,6 +24,6 @@ public interface BORepository<E extends BusinessObject<I>, I>
 
     E deleteById(I id);
 
-    E get(I identity);
+    Optional<E> get(I identity);
 
 }

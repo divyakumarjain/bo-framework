@@ -1,27 +1,17 @@
-Embedded Non-Entity
-===
-* Support Mapping of Embedded Non-Entity
- 
-Exception Handling
-===
-* [X] Standard UnChecked Exception
-* [X] Standard Checked Exception
-* [ ] Exception Handling and HTTP status reporting this needs to be done in Endpoint implementation
-
 Handling Entity Relationships
 =============================
 
-Requirement
------------
+TODO
+----
 * [ ] API Endpoint for navigating relationships
 * [X] Read of relationships
-* [ ] Create of relationships 
-* [ ] Update of relationships 
-* [ ] Delete of relationships 
+* [ ] Create of relationships
+* [ ] Update of relationships
+* [ ] Delete of relationships
 * [ ] Update of relationships with entity merge and list merge
 
 
-Hypermedia Linking Relationships
+HATOAS Linking Relationships
 ================================
 
 Requirements
@@ -39,8 +29,26 @@ TODO
 	* [ ] Relationship navigation using method on managers.
 2. Support PUT and POST method on the relationship endpoint.
 3. DAL Layer
-4 [ ] Switching Config between Hypermedia and non Hypermedia Endpoint.
+4 [ ] Switching Config between HATOAS and non HATOAS Endpoint.
     * [ ] Can be easily implemented for Spring boot auto-configuration
+    
+Embedded Non-Entity
+===
+
+Requirement
+----------
+* Support Mapping of Embedded Non-Entity
+ 
+Exception Handling
+===
+
+TODO
+-----
+* [X] Standard UnChecked Exception
+* [X] Standard Checked Exception
+* [ ] Exception Handling and HTTP status reporting this needs to be done in Endpoint implementation
+
+
 
 Security
 ===
@@ -87,10 +95,14 @@ Requirement
 * Validation for Custom Business Operation
 
 Guice Demo
-===
+==========
 
 State Machine
-===
+=============
+
+Requirement
+-----------
+
 * Validation based on state
 * State as a field in BO
 * State Transition POST support in controller and HATEOAS link in Representation
@@ -101,5 +113,15 @@ Integration
 Java 8
 ======
 
+Requirement
+-----------
 * Support Java 8 Streaming
 
+
+Documentation
+=============
+
+TODO
+----
+* [X] update readme.md with features
+* [X] Update readme.md with samples
