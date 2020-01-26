@@ -1,14 +1,13 @@
 package org.divy.common.bo.dynamic.clazz.member.method.setter;
 
+import org.apache.commons.beanutils.PropertyUtils;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 public class SetterBuilder implements Setter
 {
-
-    public <T> T createWith(Class<T> groupClass) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    private String attributeName;
 
     public <O> O withMethodOn( Class<O> groupClass )
     {
@@ -16,8 +15,21 @@ public class SetterBuilder implements Setter
     }
 
     @Override
-    public Optional<Object> createWith( Object source, Object target )
+    public Optional<Object> set( Object source, Object target )
     {
+        try
+        {
+            Optional.ofNullable( PropertyUtils.getSimpleProperty(source,attributeName));
+        }
+        catch( IllegalAccessException|InvocationTargetException|NoSuchMethodException e )
+        {
+            e.printStackTrace();
+        }
         return Optional.empty();
+    }
+
+    public void setAttributeName( String attributeName )
+    {
+        this.attributeName = attributeName;
     }
 }

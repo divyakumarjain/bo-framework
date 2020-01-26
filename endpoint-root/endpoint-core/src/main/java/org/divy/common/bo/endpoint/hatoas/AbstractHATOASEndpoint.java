@@ -72,23 +72,24 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
                             , E respresentation) {
 
         B businessObject = getManager().get(id).orElseThrow( () -> new NotFoundException("Could not find the entity") );
-//
-//        if (businessObject == null) {
-//            throw new NotFoundException("Could not find the entity");
-//        }
-//
-//        final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
-//                .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
-//
-//        Optional<Object> optionalEntityRelation = association.create(businessObject, respresentation);
-//
-//        if (optionalEntityRelation.isPresent()) {
-//            return responseEntityBuilderFactory.create((Collection<E>) optionalEntityRelation.get()).build();
-//        } else {
-//            return responseEntityBuilderFactory.create().build();
-//        }
-//
-        return responseEntityBuilderFactory.create(this.mapFromBO(businessObject)).build();
+
+        if (businessObject == null) {
+            throw new NotFoundException("Could not find the entity");
+        }
+
+        final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
+                .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
+
+        association.create(businessObject, respresentation);
+
+        Optional<Object> optionalEntityRelation = association.read(businessObject);
+
+        if (optionalEntityRelation.isPresent()) {
+            final Object result = optionalEntityRelation.get();
+            return responseEntityBuilderFactory.read((E)result).build();
+        }
+
+        return responseEntityBuilderFactory.read().build();
     }
 
     @Override

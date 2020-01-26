@@ -16,6 +16,6 @@
     <modules>
         <module>mock-common</module>
         <module>database-mock</module>
-<!--        <module>endpoint-mock</module>-->
+        <module>endpoint-mock</module>
     </modules>
 </project>

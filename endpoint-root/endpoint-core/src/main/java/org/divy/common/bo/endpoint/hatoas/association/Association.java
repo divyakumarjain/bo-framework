@@ -44,7 +44,7 @@ public class Association<T extends BusinessObject<I>, I> {
     public Optional<Object> create( T source,  Representation target ) {
         final var targetBo = mapper.createBO( target ) ;
 
-        BusinessObject fromStore = null;
+        BusinessObject fromStore;
 
         if(targetBo.identity() == null) {
             fromStore = manager.create(targetBo);
