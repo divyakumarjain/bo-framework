@@ -43,7 +43,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
-        <jersey.version>2.29.1</jersey.version>
+        <jersey.version>2.30</jersey.version>
         <glassfish-el.version>3.0.1-b11</glassfish-el.version>
         <isRelease>false</isRelease>
         <sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
