@@ -51,7 +51,7 @@
 
         <!-- Make sure to update below dependencies as these are not updated from Spring Boot BOM-->
         <org.springframework.boot.version>2.2.1.RELEASE</org.springframework.boot.version>
-        <hibernate-search-orm-version>5.11.1.Final</hibernate-search-orm-version>
+        <hibernate-search-orm-version>5.11.4.Final</hibernate-search-orm-version>
     </properties>
 
     <build>
