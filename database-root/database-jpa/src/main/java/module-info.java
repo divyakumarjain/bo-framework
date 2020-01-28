@@ -8,4 +8,6 @@ module bo.framework.database.jpa {
     requires org.slf4j;
     requires java.desktop;
     exports org.divy.common.bo.database.jpa;
+    exports org.divy.common.bo.database.jpa.defaults;
+    exports org.divy.common.bo.database.jpa.context;
 }

@@ -1,6 +1,7 @@
-package org.divy.common.bo.mapper;
+package org.divy.common.bo.mapper.orika;
 
 import ma.glasnost.orika.MapperFacade;
+import org.divy.common.bo.mapper.BOMapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

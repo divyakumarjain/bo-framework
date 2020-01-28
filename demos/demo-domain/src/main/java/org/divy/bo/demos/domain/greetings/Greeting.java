@@ -1,9 +1,8 @@
-package org.divy.bo.demos.spring.jersey.greetings;
+package org.divy.bo.demos.domain.greetings;
 
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
@@ -23,7 +22,6 @@ public class Greeting extends AbstractJPABusinessObject {
     /**
      * @return returns the greeting
      */
-    @NotNull
     public String getGreetingMessage() {
         return greetingMessage;
     }

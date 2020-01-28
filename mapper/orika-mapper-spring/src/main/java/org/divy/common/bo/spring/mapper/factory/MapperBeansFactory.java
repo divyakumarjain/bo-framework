@@ -1,7 +1,7 @@
 package org.divy.common.bo.spring.mapper.factory;
 
 import org.divy.common.bo.repository.BusinessObject;
-import org.divy.common.bo.mapper.BOMergeMapper;
+import org.divy.common.bo.mapper.orika.BOMergeMapper;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.core.factory.DynamicBeansFactory;

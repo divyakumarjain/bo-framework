@@ -1,4 +1,4 @@
-package org.divy.common.bo.mapper;
+package org.divy.common.bo.mapper.orika;
 
 import ma.glasnost.orika.MapperFacade;
 import org.divy.common.bo.repository.BusinessObject;

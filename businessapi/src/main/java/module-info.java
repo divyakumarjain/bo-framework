@@ -4,4 +4,5 @@ module bo.framework.businessapi {
     requires bo.framework.validation;
     requires bo.framework.exception.handling;
     exports org.divy.common.bo.business;
+    exports org.divy.common.bo.business.defaults;
 }

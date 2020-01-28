@@ -1,6 +1,6 @@
-package org.divy.bo.demos.spring.jersey.cards.pages;
+package org.divy.bo.demos.domain.cards.pages;
 
-import org.divy.bo.demos.spring.jersey.greetings.Greeting;
+import org.divy.bo.demos.domain.greetings.Greeting;
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
 import javax.persistence.Entity;

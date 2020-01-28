@@ -1,5 +1,6 @@
-package org.divy.bo.demos.spring.jersey.cards.pages;
+package org.divy.bo.demos.domain.cards;
 
+import org.divy.bo.demos.domain.cards.pages.Page;
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
 import javax.persistence.CascadeType;
@@ -10,25 +11,25 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class Page extends AbstractJPABusinessObject {
+public class GreetingCard extends AbstractJPABusinessObject {
 
-    private List<Section> sections;
+    private List<Page> pages;
 
-    public Page() {
+    public GreetingCard() {
         //noop
     }
 
-    public Page(UUID uuid) {
+    public GreetingCard(UUID uuid) {
         super(uuid);
     }
 
     @OneToMany(cascade = CascadeType.ALL)
-    public List<Section> getSections() {
-        return sections;
+    public List<Page> getPages() {
+        return pages;
     }
 
-    public void setSections(List<Section> sections) {
-        this.sections = sections;
+    public void setPages(List<Page> pages) {
+        this.pages = pages;
     }
 
     @Override
@@ -39,12 +40,12 @@ public class Page extends AbstractJPABusinessObject {
             return false;
         if (!super.equals(o))
             return false;
-        Page page = (Page) o;
-        return Objects.equals(getSections(), page.getSections());
+        GreetingCard that = (GreetingCard) o;
+        return Objects.equals(getPages(), that.getPages());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getSections());
+        return Objects.hash(super.hashCode(), getPages());
     }
 }
