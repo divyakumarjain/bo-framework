@@ -5,14 +5,13 @@ module bo.framework.spring.boot.jersey.demo {
     requires spring.boot.autoconfigure;
     requires spring.boot;
     requires spring.context;
-    requires spring.web;
-
+    requires bo.framework.orika.mapper;
+    requires bo.framework.demo.domain;
     requires java.sql;
     requires net.bytebuddy;
+
     requires com.fasterxml.classmate;
+    requires com.fasterxml.jackson.databind;
 
     opens org.divy.bo.demos.spring.jersey;
-
-    exports org.divy.bo.demos.spring.jersey.greetings;
-    exports org.divy.bo.demos.spring.jersey.cards;
 }

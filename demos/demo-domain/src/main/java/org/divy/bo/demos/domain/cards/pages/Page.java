@@ -1,4 +1,4 @@
-package org.divy.bo.demos.spring.mvc.cards.pages;
+package org.divy.bo.demos.domain.cards.pages;
 
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 

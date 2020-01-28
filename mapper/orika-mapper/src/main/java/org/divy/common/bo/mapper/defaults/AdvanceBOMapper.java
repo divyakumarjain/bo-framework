@@ -1,7 +1,7 @@
 package org.divy.common.bo.mapper.defaults;
 
 import ma.glasnost.orika.MapperFacade;
-import org.divy.common.bo.mapper.AbstractBOMapper;
+import org.divy.common.bo.mapper.orika.AbstractBOMapper;
 
 public class AdvanceBOMapper<B, O> extends AbstractBOMapper<B, O> {
 

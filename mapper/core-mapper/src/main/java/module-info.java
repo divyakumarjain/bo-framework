@@ -6,4 +6,7 @@ module bo.framework.mapper {
     exports org.divy.common.bo.mapper;
     exports org.divy.common.bo.mapper.builder;
     exports org.divy.common.bo.mapper.keyvaluemap;
+    exports org.divy.common.bo.mapper.builder.options.field;
+    exports org.divy.common.bo.mapper.builder.options;
+    exports org.divy.common.bo.mapper.builder.options.type;
 }

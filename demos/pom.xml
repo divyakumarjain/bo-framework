@@ -11,15 +11,12 @@
     </parent>
     <artifactId>bo-framework-demos</artifactId>
     <name>demos</name>
-    <properties>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>
     <description>Demo applications for bo framework</description>
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-demo-root</module>
         <module>guice-jersey</module>
         <module>jee-demo</module>
+        <module>demo-domain</module>
     </modules>
 </project>

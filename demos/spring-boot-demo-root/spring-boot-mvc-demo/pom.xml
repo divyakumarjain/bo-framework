@@ -99,6 +99,17 @@
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>spring-mock-mvc</artifactId>
+            <version>4.1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>demo-domain</artifactId>
+            <version>0.0.11-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -121,9 +132,6 @@
                 <version>2.2.4.RELEASE</version>
                 <configuration>
                     <fork>true</fork>
-                    <jvmArguments>
-                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=5005
-                    </jvmArguments>
                 </configuration>
                 <dependencies>
                     <dependency>

@@ -8,4 +8,6 @@ module bo.framework.database.core {
     exports org.divy.common.bo.database.command;
     exports org.divy.common.bo.database.command.impl to bo.framework.database.jpa;
     exports org.divy.common.bo.database.context;
+
+    opens org.divy.common.bo.database to com.fasterxml.jackson.databind;
 }
