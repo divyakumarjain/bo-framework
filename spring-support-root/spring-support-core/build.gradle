@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+dependencies {
+    implementation 'org.springframework:spring-beans:5.2.3.RELEASE'
+    implementation 'org.springframework:spring-context:5.2.3.RELEASE'
+    implementation 'org.springframework:spring-core:5.2.3.RELEASE'
+    implementation project(':bo-framework-metadata')
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-validation-root:bo-framework-spring-jsr303-validation')
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'org.springframework.boot:spring-boot:2.2.4.RELEASE'
+}
+
+description = 'spring-support-core'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

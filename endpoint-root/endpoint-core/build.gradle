@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'de.jjohannes.extra-java-module-info' version "0.3"
+}
+dependencies {
+    compileOnly 'jakarta.inject:jakarta.inject-api:2.0.0'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    compileOnly 'jakarta.validation:jakarta.validation-api:3.0.0'
+
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-query')
+    implementation project(':bo-framework-mapper:bo-framework-core-mapper')
+    implementation project(':bo-framework-exception-handling-root:bo-framework-exception-handling-core')
+    implementation project(':bo-framework-metadata')
+    implementation project(':bo-framework-businessapi')
+    implementation project(':bo-framework-dynamic')
+
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.10.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.10.2'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.mockito:mockito-core:3.2.4'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation 'org.glassfish.hk2:hk2-api:3.0.0'
+    testImplementation 'org.glassfish.hk2:hk2-locator:3.0.0'
+    testImplementation 'com.google.guava:guava:23.0'
+}
+
+description = 'endpoint-core'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+
+extraJavaModuleInfo {
+    automaticModule('hk2-api-3.0.0.jar', 'org.glassfish.hk2.api')
+    automaticModule('jakarta.inject-api-2.0.0.jar', 'jakarta.inject')
+    automaticModule('jakarta.inject-2.6.1.jar', 'jakarta.inject')
+    automaticModule("hk2-locator-3.0.0.jar", "org.glassfish.hk2.locator")
+    automaticModule('guava-23.0.jar', 'com.google.guava')
+
+    automaticModule('logback-core-1.2.3.jar', 'logback.core')
+    automaticModule('hamcrest-core-1.3.jar','org.hamcrest')
+    automaticModule('objenesis-2.6.jar','objenesis')
+    automaticModule('hk2-utils-3.0.0.jar','org.glassfish.hk2.utils')
+    automaticModule('aopalliance-repackaged-2.6.1.jar','org.glassfish.hk2.external.aopalliance-repackaged')
+
+    automaticModule('jsr305-1.3.9.jar','org.jsr-305')
+    automaticModule('j2objc-annotations-1.1.jar','j2objc')
+    automaticModule('animal-sniffer-annotations-1.14.jar','org.codehaus.mojo.animal_sniffer')
+    automaticModule('javassist-3.22.0-CR2.jar','javassist')
+    automaticModule('javassist-3.27.0-GA.jar','javassist')
+    automaticModule('error_prone_annotations-2.0.18.jar','error_prone_annotations')
+    automaticModule('commons-beanutils-1.9.4.jar','org.apache.commons.commons-beanutils')
+    automaticModule('commons-logging-1.2.jar','org.apache.commons.logging')
+    automaticModule('commons-collections-3.2.2.jar','org.apache.commons.collections')
+}

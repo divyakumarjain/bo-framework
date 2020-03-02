@@ -1,0 +1,33 @@
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.3.4.RELEASE'
+}
+
+dependencies {
+    implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+    implementation 'org.springframework.boot:spring-boot-starter-jersey'
+    implementation 'org.springframework.boot:spring-boot-starter-jetty'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat:2.2.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.2.4.RELEASE'
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-support-core')
+    implementation project(':bo-framework-endpoint-root:bo-framework-endpoint-jersey')
+    implementation project(':bo-framework-mapper:bo-framework-orika-mapper-spring')
+    implementation project(':bo-framework-database-root:bo-framework-database-jpa')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-database-jpa-support')
+    implementation project(':bo-framework-database-root:bo-framework-database-core')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-jersey-endpoint-support')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-support-autoconfiguration')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-mvc-endpoint-support')
+    implementation project(':bo-framework-demos:demo-domain')
+    implementation 'org.springframework:spring-orm:5.2.3.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-actuator'
+    implementation 'org.hibernate:hibernate-entitymanager:6.0.0.Alpha6'
+    implementation 'org.springframework.hateoas:spring-hateoas:1.0.3.RELEASE'
+    runtimeOnly 'org.hsqldb:hsqldb:2.5.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.2.4.RELEASE'
+    testImplementation 'io.rest-assured:spring-mock-mvc:4.1.2'
+}
+

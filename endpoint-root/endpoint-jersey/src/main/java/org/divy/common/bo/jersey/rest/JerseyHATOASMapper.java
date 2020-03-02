@@ -7,7 +7,7 @@ import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.AbstractHATOASMapper;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 
-import javax.ws.rs.core.Link;
+import jakarta.ws.rs.core.Link;
 import java.util.Optional;
 import java.util.UUID;
 

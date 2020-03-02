@@ -9,15 +9,17 @@ import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.ExtendedConfig;
+import jakarta.ws.rs.core.Configurable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
 
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import java.lang.invoke.MethodHandles;
 import java.util.Optional;
 import java.util.UUID;
@@ -69,7 +71,7 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
     private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
         return DynamicClassBuilder.createClass( JerseyEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
                 .subClass(BaseBOEndpoint.class)
-                    .addAnnotation(javax.ws.rs.Path.class)
+                    .addAnnotation(jakarta.ws.rs.Path.class)
                         .value(configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase())
                         .and()
                 .proxySuperMethod("create").name("createMethod")

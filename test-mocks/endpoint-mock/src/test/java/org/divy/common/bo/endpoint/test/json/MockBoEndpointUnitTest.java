@@ -10,7 +10,7 @@ import org.divy.common.bo.jersey.rest.response.JerseyResponseEntityBuilderFactor
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.exception.NotFoundException;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.UUID;
 
 import static org.junit.Assert.fail;

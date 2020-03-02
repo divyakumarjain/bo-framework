@@ -1,0 +1,96 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'de.jjohannes.extra-java-module-info' version "0.3"
+}
+dependencies {
+    compileOnly 'jakarta.inject:jakarta.inject-api:2.0.0'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+//    compileOnly("jakarta.ws.rs:jakarta.ws.rs-api:3.0.0")
+
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-businessapi')
+    implementation project(':bo-framework-mapper:bo-framework-core-mapper')
+    implementation project(':bo-framework-metadata')
+    implementation project(':bo-framework-dynamic')
+    implementation 'cglib:cglib-nodep:3.3.0'
+    implementation 'junit:junit:4.13'
+    implementation 'org.glassfish.jersey.core:jersey-client:3.0.0'
+    implementation 'org.glassfish.jersey.media:jersey-media-json-jackson:3.0.0'
+    implementation 'org.glassfish.jersey.containers:jersey-container-servlet:3.0.0'
+    implementation 'org.glassfish.jersey.ext:jersey-metainf-services:3.0.0'
+    implementation 'org.glassfish.jersey.ext:jersey-declarative-linking:3.0.0'
+    implementation 'org.glassfish.jersey.bundles.repackaged:jersey-guava:2.26-b03'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.10.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.10.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.10.2'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation project(':bo-framework-endpoint-root:bo-framework-endpoint-core')
+    implementation project(':bo-framework-query')
+    implementation project(':bo-framework-exception-handling-root:bo-framework-exception-handling-core')
+    testImplementation project(':bo-framework-test-mock-common:bo-framework-database-mock')
+    testImplementation 'org.mockito:mockito-core:3.2.4'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+}
+
+description = 'endpoint-jersey'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+extraJavaModuleInfo {
+    automaticModule('jersey-declarative-linking-3.0.0.jar', 'org.glassfish.jersey.linking')
+    automaticModule('jakarta.inject-2.6.1.jar', 'jakarta.inject')
+    automaticModule('hamcrest-core-1.3.jar','org.hamcrest')
+    automaticModule('javassist-3.27.0-GA.jar','javassist')
+    automaticModule('commons-beanutils-1.9.4.jar','org.apache.commons.commons-beanutils')
+    automaticModule('objenesis-2.6.jar','objenesis')
+    automaticModule('commons-logging-1.2.jar','org.apache.commons.logging')
+    automaticModule('commons-collections-3.2.2.jar','org.apache.commons.collections')
+
+    module('jersey-entity-filtering-3.0.0.jar', 'org.glassfish.jersey.ext.jersey-entity-filtering', "3.0.0") {
+        exports("org.glassfish.jersey.message.filtering")
+    }
+
+    module('jersey-common-3.0.0.jar', 'jersey.common', '3.0.0'){
+        exports("org.glassfish.jersey")
+    }
+    module('jersey-media-jaxb-3.0.0.jar', 'org.glassfish.jersey.media.jersey-media-jaxb', "3.0.0") {
+        exports("org.glassfish.jersey.jaxb")
+    }
+
+    module('jersey-container-servlet-3.0.0.jar', 'org.glassfish.jersey.containers.jersey-container-servlet', "3.0.0") {
+        exports("org.glassfish.jersey.servlet")
+    }
+    module('jersey-container-servlet-core-3.0.0.jar', 'org.glassfish.jersey.containers.jersey-container-servlet-core', '3.0.0') {
+        exports("org.glassfish.jersey.servlet")
+    }
+    module('jersey-server-3.0.0.jar', 'org.glassfish.jersey.core.jersey-server', "3.0.0") {
+        exports("org.glassfish.jersey.server")
+    }
+    module('jersey-client-3.0.0.jar', 'org.glassfish.jersey.core.jersey-client', "3.0.0") {
+        exports("org.glassfish.jersey.client")
+    }
+    module('jersey-media-json-jackson-3.0.0.jar', 'org.glassfish.jersey.media.jersey-media-json-jackson', "3.0.0") {
+        exports("org.glassfish.jersey.jackson")
+    }
+    module('jersey-metainf-services-3.0.0.jar', 'org.glassfish.jersey.ext.jersey-metainf-services', "3.0.0") {
+        exports("org.glassfish.jersey.spidiscovery")
+    }
+    module('jackson-datatype-hibernate4-2.10.2.jar', 'com.fasterxml.jackson.datatype.jackson-datatype-hibernate4', "2.10.2") {
+        exports("com.fasterxml.jackson.datatype.hibernate4")
+    }
+    module('osgi-resource-locator-1.0.3.jar', 'org.glassfish.hk2.osgi-resource-locator', "1.0.3") {
+        exports("org.glassfish.hk2.osgiresourcelocator")
+    }
+    module('jersey-guava-2.26-b03.jar', 'org.glassfish.jersey.bundles.repackaged.jersey-guava', "2.26-b03") {
+        exports("jersey.repackaged.com.google.common")
+    }
+
+}

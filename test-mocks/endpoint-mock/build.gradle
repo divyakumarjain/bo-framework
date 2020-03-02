@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-businessapi')
+    implementation project(':bo-framework-query')
+    implementation project(':bo-framework-endpoint-root:bo-framework-endpoint-jersey')
+    implementation project(':bo-framework-endpoint-root:bo-framework-endpoint-core')
+    implementation project(':bo-framework-test-mock-common:bo-framework-mock-common')
+    implementation project(':bo-framework-test-mock-common:bo-framework-database-mock')
+    implementation project(':bo-framework-database-root:bo-framework-database-core')
+    implementation project(':bo-framework-exception-handling-root:bo-framework-exception-handling-core')
+    implementation 'com.google.inject.extensions:guice-servlet:4.2.2'
+    implementation 'org.glassfish.jersey.test-framework:jersey-test-framework-core:3.0.0'
+    implementation 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jetty:3.0.0'
+    implementation 'org.hsqldb:hsqldb:2.5.0'
+    implementation 'org.hamcrest:hamcrest:2.2'
+    implementation 'junit:junit:4.13'
+    implementation 'org.mockito:mockito-core:3.2.4'
+    implementation 'com.google.inject:guice:4.2.2'
+    implementation 'org.glassfish.jersey.core:jersey-common:3.0.0'
+    implementation 'jakarta.activation:jakarta.activation-api:1.2.1'
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+}
+
+description = 'endpoint-mock'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'de.jjohannes.extra-java-module-info' version "0.3"
+}
+
+dependencies {
+    compileOnly 'jakarta.validation:jakarta.validation-api:3.0.0'
+
+    implementation project(':bo-framework-validation-root:bo-framework-jsr303-validation')
+    implementation project(':bo-framework-validation-root:bo-framework-validation-core')
+    implementation project(':bo-framework-repository')
+    implementation 'org.springframework.boot:spring-boot:2.2.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.2.4.RELEASE'
+
+}
+
+description = 'spring-jsr303-validation'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+extraJavaModuleInfo {
+    module('jakarta.validation-api-3.0.0.jar', 'jakarta.validation', '3.0.0') {
+        exports("jakarta.validation")
+    }
+}

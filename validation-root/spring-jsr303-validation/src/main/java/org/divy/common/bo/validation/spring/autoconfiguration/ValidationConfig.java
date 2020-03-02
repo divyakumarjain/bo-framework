@@ -6,7 +6,7 @@ import org.divy.common.bo.validation.jsr303.JSR303Validator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import java.util.ArrayList;
 
 @Configuration

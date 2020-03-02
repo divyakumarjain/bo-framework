@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation 'org.springframework:spring-context:5.2.3.RELEASE'
+    implementation project(':bo-framework-database-root:bo-framework-database-jpa')
+    implementation project(':bo-framework-dynamic')
+    implementation project(':bo-framework-businessapi')
+    implementation project(':bo-framework-metadata')
+    implementation 'org.springframework:spring-beans:5.2.3.RELEASE'
+    implementation project(':bo-framework-mapper:bo-framework-orika-mapper')
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-support-core')
+    testImplementation project(':bo-framework-test-mock-common:bo-framework-database-mock')
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+}
+
+description = 'spring-database-jpa-support'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

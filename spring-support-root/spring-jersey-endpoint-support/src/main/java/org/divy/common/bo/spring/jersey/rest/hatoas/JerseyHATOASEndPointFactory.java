@@ -19,9 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
 
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import java.lang.invoke.MethodHandles;
 import java.util.Optional;
 import java.util.UUID;
@@ -75,7 +75,7 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
     private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
         return DynamicClassBuilder.createClass( JerseyHATOASEndPointFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "HyperMediaEndPoint")
                 .subClass(DefaultHATEOASJerseyEndpoint.class)
-                    .addAnnotation(javax.ws.rs.Path.class)
+                    .addAnnotation(Path.class)
                         .value(configProperties.getHateoasApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase())
                         .and()
                 .proxySuperMethod("create").name("createMethod")

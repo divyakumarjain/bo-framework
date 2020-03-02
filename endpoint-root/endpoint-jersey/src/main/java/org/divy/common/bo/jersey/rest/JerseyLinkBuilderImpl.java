@@ -1,12 +1,12 @@
 package org.divy.common.bo.jersey.rest;
 
-import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.rest.LinkBuilder;
 
-import javax.ws.rs.core.Link;
-import javax.ws.rs.core.UriBuilder;
+import jakarta.ws.rs.core.Link;
+import jakarta.ws.rs.core.UriBuilder;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.function.Supplier;
 
 public class JerseyLinkBuilderImpl implements LinkBuilder<Link> {
 
@@ -15,15 +15,15 @@ public class JerseyLinkBuilderImpl implements LinkBuilder<Link> {
     private final UriBuilder uriBuilder;
 
     public JerseyLinkBuilderImpl(String scheme, String host, String basePath) {
-        if (StringUtils.isBlank(scheme)) {
+        if (isBlank(scheme)) {
             throw new IllegalArgumentException("Scheme must not be null or blank");
         }
 
-        if (StringUtils.isBlank(host)) {
+        if (isBlank(host)) {
             throw new IllegalArgumentException("Host must not be null or blank");
         }
 
-        final String fixedBasePath = StringUtils.defaultIfBlank(basePath, StringUtils.EMPTY);
+        final String fixedBasePath = defaultIfBlank(basePath, () -> "" );
 
         uriBuilder = UriBuilder.fromPath(fixedBasePath);
 
@@ -40,6 +40,25 @@ public class JerseyLinkBuilderImpl implements LinkBuilder<Link> {
         }
     }
 
+    private boolean isBlank( String value )
+    {
+        int strLen;
+        if (value != null && (strLen = value.length()) != 0) {
+            for(int i = 0; i < strLen; ++i) {
+                if (!Character.isWhitespace(value.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private String defaultIfBlank(String value, Supplier<String> supplier) {
+        if(isBlank( value ))
+            return supplier.get();
+        else
+            return value;
+    }
 
     @Override
     public Link buildLinkFor(String rel, Class<?> resource) {

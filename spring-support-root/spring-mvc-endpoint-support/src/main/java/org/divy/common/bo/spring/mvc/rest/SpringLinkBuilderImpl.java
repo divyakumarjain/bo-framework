@@ -1,6 +1,5 @@
 package org.divy.common.bo.spring.mvc.rest;
 
-import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.rest.LinkBuilder;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -23,11 +22,11 @@ public class SpringLinkBuilderImpl implements LinkBuilder<Link> {
      * @throws IllegalArgumentException If the scheme or host is {@code null}, empty, or blank.
      */
     public SpringLinkBuilderImpl(String scheme, String host, String basePath) {
-        if (StringUtils.isBlank(scheme)) {
+        if (isBlank(scheme)) {
             throw new IllegalArgumentException("Scheme must not be null or blank");
         }
 
-        if (StringUtils.isBlank(host)) {
+        if (isBlank(host)) {
             throw new IllegalArgumentException("Host must not be null or blank");
         }
 
@@ -44,6 +43,19 @@ public class SpringLinkBuilderImpl implements LinkBuilder<Link> {
         } else if ("localhost".equals(host)) {
             uriComponentsBuilder.port(DEFAULT_LOCAL_PORT);
         }
+    }
+
+    private boolean isBlank( String value )
+    {
+        int strLen;
+        if (value != null && (strLen = value.length()) != 0) {
+            for(int i = 0; i < strLen; ++i) {
+                if (!Character.isWhitespace(value.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override

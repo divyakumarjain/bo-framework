@@ -15,12 +15,12 @@ module bo.framework.spring.mvc {
     requires spring.context;
     requires spring.hateoas;
     requires spring.boot.autoconfigure;
-    requires commons.lang;
     requires com.fasterxml.jackson.datatype.jdk8;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.module.paramnames;
     requires com.fasterxml.jackson.databind;
-    requires javax.servlet.api;
+    requires jakarta.servlet;
+    requires jakarta.inject;
 
     exports org.divy.common.bo.spring.mvc.rest.config;
 }

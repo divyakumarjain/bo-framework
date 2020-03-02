@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'de.jjohannes.extra-java-module-info' version "0.3"
+}
+dependencies {
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-query')
+    implementation project(':bo-framework-test-mock-common:bo-framework-mock-common')
+    implementation 'junit:junit:4.13'
+    implementation 'org.hamcrest:hamcrest:2.2'
+}
+
+description = 'database-mock'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+extraJavaModuleInfo {
+    automaticModule('javassist-3.27.0-GA.jar', 'javassist')
+    automaticModule('hamcrest-core-1.3.jar','org.hamcrest')
+}

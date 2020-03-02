@@ -4,8 +4,8 @@ import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.validation.AbstractBOValidator;
 import org.divy.common.bo.validation.ValidationResults;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.util.Collection;
 
 public class JSR303Validator extends AbstractBOValidator {

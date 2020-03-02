@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+dependencies {
+    implementation project(':bo-framework-query')
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-mapper:bo-framework-core-mapper')
+    implementation project(':bo-framework-exception-handling-root:bo-framework-exception-handling-core')
+}
+
+description = 'database-core'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

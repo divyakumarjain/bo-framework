@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation project(':bo-framework-mapper:bo-framework-core-mapper')
+    implementation 'ma.glasnost.orika:orika-core:1.5.4'
+    implementation 'org.springframework:spring-context:5.2.3.RELEASE'
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-support-core')
+    implementation project(':bo-framework-mapper:bo-framework-orika-mapper')
+    implementation project(':bo-framework-repository')
+    implementation 'org.springframework:spring-beans:5.2.3.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.2.4.RELEASE'
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.mockito:mockito-core:3.2.4'
+}
+
+description = 'orika-mapper-spring'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

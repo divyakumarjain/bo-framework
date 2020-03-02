@@ -70,7 +70,6 @@ public class JPACriteriaQueryBuilderTest
 
     private void assertCriteriaQueryForComparisonPredicateWithNot(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
-        assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
         assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.hasProperty("negated", Matchers.is(true))));
     }
 
@@ -136,7 +135,6 @@ public class JPACriteriaQueryBuilderTest
 
     private void assertCriteriaQueryForComparisonPredicate(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
-        assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
         assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.is(Matchers.instanceOf(ComparisonPredicate.class))));
     }
 

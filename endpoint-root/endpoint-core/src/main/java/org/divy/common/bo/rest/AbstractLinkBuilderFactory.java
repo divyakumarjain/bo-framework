@@ -1,11 +1,11 @@
 package org.divy.common.bo.rest;
 
-import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.http.HttpRequestContext;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public abstract class AbstractLinkBuilderFactory<L> implements LinkBuilderFactory<L> {
     protected static final String HEADER_HOST = "Host";
@@ -52,16 +52,16 @@ public abstract class AbstractLinkBuilderFactory<L> implements LinkBuilderFactor
     protected String resolveOriginalPath()
     {
         String originalPath;
-        originalPath = StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_BASE),
-                request.getContextPath());
+        originalPath = defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_BASE),
+                request::getContextPath);
         return originalPath;
     }
 
     protected String resolveSchema()
     {
         String scheme;
-        scheme = StringUtils.defaultIfBlank(StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),
-                request.getScheme()),DEFAULT_SCHEME);
+        scheme = defaultIfBlank(defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),
+                request::getScheme),() -> DEFAULT_SCHEME );
         return scheme;
     }
 
@@ -72,5 +72,17 @@ public abstract class AbstractLinkBuilderFactory<L> implements LinkBuilderFactor
     @Inject
     public void setRequest(HttpServletRequest request) {
         this.request = request;
+    }
+
+    private String defaultIfBlank(String value, Supplier<String> supplier) {
+        int strLen;
+        if (value != null && (strLen = value.length()) != 0) {
+            for(int i = 0; i < strLen; ++i) {
+                if (!Character.isWhitespace(value.charAt(i))) {
+                    return value;
+                }
+            }
+        }
+        return supplier.get();
     }
 }

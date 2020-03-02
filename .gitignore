@@ -17,6 +17,7 @@ tmp/
 local.properties
 .loadpath
 .recommenders
+**/out/
 
 # Eclipse Core
 
@@ -44,3 +45,22 @@ local.properties
 rebel.xml
 
 **/build/**
+
+
+
+# Gradle
+.gradle
+/build
+/buildSrc/build
+/buildSrc/subprojects/*/build
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties

@@ -1,13 +1,13 @@
 package org.divy.common.bo.endpoint.test.json;
 
-import org.divy.common.bo.database.AbstractBusinessObject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 import org.divy.common.bo.business.BOManager;
+import org.divy.common.bo.database.AbstractBusinessObject;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.UUID;

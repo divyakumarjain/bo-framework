@@ -1,0 +1,30 @@
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.3.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-support-core')
+    implementation project(':bo-framework-mapper:bo-framework-orika-mapper-spring')
+    implementation project(':bo-framework-database-root:bo-framework-database-jpa')
+    implementation project(':bo-framework-database-root:bo-framework-database-core')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-database-jpa-support')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-support-autoconfiguration')
+    implementation project(':bo-framework-validation-root:bo-framework-spring-jsr303-validation')
+    implementation 'org.springframework:spring-orm:5.2.3.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-actuator'
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-mvc-endpoint-support')
+    implementation 'org.hibernate:hibernate-entitymanager:6.0.0.Alpha6'
+    implementation 'org.springframework.hateoas:spring-hateoas'
+    implementation project(':bo-framework-demos:demo-domain')
+    runtimeOnly 'org.hsqldb:hsqldb:2.5.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.rest-assured:spring-mock-mvc:4.1.2'
+}

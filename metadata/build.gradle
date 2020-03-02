@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation project(':bo-framework-repository')
+}
+
+description = 'metadata'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

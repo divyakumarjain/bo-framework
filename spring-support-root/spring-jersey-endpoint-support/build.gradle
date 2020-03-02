@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'de.jjohannes.extra-java-module-info' version "0.3"
+}
+
+dependencies {
+    compileOnly "jakarta.servlet:jakarta.servlet-api:5.0.0"
+//    compileOnly "jakarta.ws.rs:jakarta.ws.rs-api:3.0.0"
+    compileOnly 'jakarta.validation:jakarta.validation-api:3.0.0'
+
+    implementation project(':bo-framework-endpoint-root:bo-framework-endpoint-jersey')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-support-core')
+    implementation project(':bo-framework-dynamic')
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-metadata')
+    implementation project(':bo-framework-businessapi')
+    implementation project(':bo-framework-endpoint-root:bo-framework-endpoint-core')
+    implementation project(':bo-framework-mapper:bo-framework-core-mapper')
+
+    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.10.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.10.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.2'
+
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+    implementation 'org.springframework:spring-context:5.2.3.RELEASE'
+    implementation 'org.springframework:spring-beans:5.2.3.RELEASE'
+    implementation 'org.springframework:spring-web:5.2.3.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.2.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.2.4.RELEASE'
+    implementation 'org.glassfish.jersey.core:jersey-server:3.0.0'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+}
+
+description = 'spring-jersey-endpoint-support'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+extraJavaModuleInfo {
+    automaticModule('jakarta.inject-2.6.1.jar', 'jakarta.inject')
+//    automaticModule('jakarta.ws.rs-api-3.0.0.jar','jakarta.ws.rs')
+    module('osgi-resource-locator-1.0.3.jar', 'org.glassfish.hk2.osgi-resource-locator', "1.0.3") {
+        exports("org.glassfish.hk2.osgiresourcelocator")
+    }
+    module('jersey-server-3.0.0.jar', 'jersey.server', "3.0.0") {
+        exports("org.glassfish.jersey.server")
+    }
+    module('jersey-media-jaxb-3.0.0.jar', 'org.glassfish.jersey.media.jersey-media-jaxb', "3.0.0") {
+        exports("org.glassfish.jersey.jaxb")
+    }
+    module('jersey-common-3.0.0.jar', 'jersey.common', "3.0.0") {
+        exports("org.glassfish.jersey")
+    }
+    module('jersey-client-3.0.0.jar', 'org.glassfish.jersey.core.jersey-client', "3.0.0") {
+        exports("org.glassfish.jersey.client")
+    }
+}

@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation 'org.hibernate:hibernate-search-orm:5.11.4.Final'
+    implementation project(':bo-framework-database-root:bo-framework-database-core')
+    implementation project(':bo-framework-query')
+}
+
+description = 'search'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

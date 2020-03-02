@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-database-jpa-support')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-jersey-endpoint-support')
+}
+
+description = 'spring-support-autoconfiguration'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

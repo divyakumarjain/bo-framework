@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+dependencies {
+    compileOnly "jakarta.servlet:jakarta.servlet-api:5.0.0"
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+    compileOnly 'jakarta.inject:jakarta.inject-api:2.0.0'
+
+    implementation project(':bo-framework-businessapi')
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-exception-handling-root:bo-framework-exception-handling-core')
+    implementation project(':bo-framework-metadata')
+    implementation project(':bo-framework-dynamic')
+    implementation project(':bo-framework-query')
+    implementation project(':bo-framework-spring-support-root:bo-framework-spring-support-core')
+    implementation project(':bo-framework-endpoint-root:bo-framework-endpoint-core')
+    implementation project(':bo-framework-mapper:bo-framework-core-mapper')
+
+    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.10.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.10.2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.2'
+    implementation 'org.springframework:spring-context:5.2.3.RELEASE'
+    implementation 'org.springframework:spring-beans:5.2.3.RELEASE'
+    implementation 'org.springframework:spring-web:5.2.3.RELEASE'
+    implementation 'org.springframework.hateoas:spring-hateoas:1.0.3.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.2.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.2.4.RELEASE'
+}
+
+description = 'spring-mvc-endpoint-support'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

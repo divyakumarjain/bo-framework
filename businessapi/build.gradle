@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+dependencies {
+    implementation project(':bo-framework-repository')
+    implementation project(':bo-framework-query')
+    implementation project(':bo-framework-exception-handling-root:bo-framework-exception-handling-core')
+    implementation project(':bo-framework-validation-root:bo-framework-validation-core')
+}
+
+description = 'businessapi'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}

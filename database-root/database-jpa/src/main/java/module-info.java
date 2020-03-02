@@ -1,5 +1,5 @@
 module bo.framework.database.jpa {
-    requires java.persistence;
+    requires javax.persistence;
     requires bo.framework.database.core;
     requires bo.framework.repository;
     requires bo.framework.mapper;

@@ -7,8 +7,8 @@ module bo.framework.endpoint.mock {
 //    requires bo.framework.endpoint.jersey;
     requires bo.framework.endpoint.core;
 
-    requires javax.servlet.api;
-    requires java.ws.rs;
+    requires jakarta.servlet;
+    requires jakarta.ws.rs;
     requires jersey.common;
     requires jersey.server;
 
@@ -22,6 +22,7 @@ module bo.framework.endpoint.mock {
     requires com.google.guice.extensions.servlet;
     requires bo.framework.exception.handling;
     requires bo.framework.endpoint.jersey;
+    requires java.xml.bind;
     exports org.divy.common.bo.endpoint.test.json to junit;
     exports org.divy.common.bo.endpoint.test to junit;
 }
