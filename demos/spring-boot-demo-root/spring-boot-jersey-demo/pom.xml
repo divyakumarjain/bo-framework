@@ -16,6 +16,7 @@
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <main.basedir>${project.parent.parent.parent.basedir}</main.basedir>
     </properties>
     <dependencies>
         <dependency>
@@ -34,19 +35,15 @@
                     <groupId>org.glassfish.hk2</groupId>
                     <artifactId>class-model</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <exclusions>
-                <exclusion>
-                    <!-- served by tomcat-annotations-api instead -->
-                    <groupId>javax.annotation</groupId>
-                    <artifactId>javax.annotation-api</artifactId>
-                </exclusion>
-            </exclusions>
-            <!--<scope>provided</scope>-->
+            <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

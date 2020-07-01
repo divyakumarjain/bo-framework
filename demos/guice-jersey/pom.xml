@@ -17,6 +17,8 @@
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>    <description>Demo Application for Guice and Jersey based Bo Framework</description>
+        <main.basedir>${project.parent.parent.basedir}</main.basedir>
+    </properties>
+    <description>Demo Application for Guice and Jersey based Bo Framework</description>
 
 </project>

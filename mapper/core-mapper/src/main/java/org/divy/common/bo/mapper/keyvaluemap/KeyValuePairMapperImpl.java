@@ -1,5 +1,6 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
+import org.divy.common.bo.mapper.builder.options.field.FieldConverter;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
@@ -47,18 +48,20 @@ public class KeyValuePairMapperImpl<E extends BusinessObject> implements KeyValu
 
         typeMapperBuilderContext
                 .field("lastUpdateTimestamp"
-                        , MapperBuilderOptions.oneWay()
-                        , FieldMapperOptions.hintB(OffsetDateTime.class)
-                        , FieldMapperOptions.hintA(OffsetDateTime.class))
+                        , FieldMapperOptions.hintB(String.class)
+                        , FieldMapperOptions.hintA(OffsetDateTime.class)
+                , FieldMapperOptions.converter( "timeConverter" ))
                 .and()
                 .field("createTimestamp"
                         , MapperBuilderOptions.oneWay()
-                        , FieldMapperOptions.hintB(OffsetDateTime.class)
-                        , FieldMapperOptions.hintA(OffsetDateTime.class))
+                        , FieldMapperOptions.hintB(String.class)
+                        , FieldMapperOptions.hintA(OffsetDateTime.class)
+                , FieldMapperOptions.converter( "timeConverter" ))
                 .and()
                 .field("uuid"
-                        , FieldMapperOptions.hintB(UUID.class)
-                        , FieldMapperOptions.hintA(UUID.class));
+                        , FieldMapperOptions.hintB(String.class)
+                        , FieldMapperOptions.hintA(UUID.class)
+                        , FieldMapperOptions.converter( "uuidConverter" ));
 
         final Map<String, FieldMetaData> childEntities = metaDataProvider.getChildEntities(businessObjectType);
 
