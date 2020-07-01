@@ -23,10 +23,12 @@
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>    <packaging>pom</packaging>
+        <main.basedir>${project.parent.parent.basedir}</main.basedir>
+    </properties>
+    <packaging>pom</packaging>
 
     <modules>
-<!--        <module>spring-boot-jersey-demo</module>-->
+        <module>spring-boot-jersey-demo</module>
         <module>spring-boot-mvc-demo</module>
     </modules>
     

@@ -13,11 +13,14 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.with;
 import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = SpringJerseyApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = SpringJerseyApplication.class,
+      properties = {"bo-framework.endpoint.mvc.enable-hateoas-api=true"} )
 public class GreetingTest
 {
     @Autowired
@@ -36,8 +39,11 @@ public class GreetingTest
     public void simpleEntity() {
         Greeting greeting = new Greeting();
         greeting.setGreetingMessage( "Hello World" );
+        HashMap<String, Greeting> body = new HashMap<>();
 
-        String location = with().body( greeting )
+        body.put( "data", greeting );
+
+        String location = with().body( body )
               .when()
               .contentType( ContentType.JSON )
               .accept( ContentType.JSON )
@@ -50,13 +56,13 @@ public class GreetingTest
 
         with().get(location)
               .then()
-              .log().body()
               .contentType( ContentType.JSON )
               .statusCode( 200 )
-              .body( "greetingMessage",  is( equalTo( "Hello World" ) ));
+              .log().body()
+              .body( "data.greetingMessage",  is( equalTo( "Hello World" ) ));
 
         greeting.setGreetingMessage( "Hello World from Rest" );
-        with().body( greeting )
+        with().body( body )
               .when()
               .contentType( ContentType.JSON )
               .accept( ContentType.JSON )
@@ -69,7 +75,7 @@ public class GreetingTest
               .then()
               .contentType( ContentType.JSON )
               .statusCode( 200 )
-              .body( "greetingMessage",  is( equalTo( "Hello World from Rest" ) ));
+              .body( "data.greetingMessage",  is( equalTo( "Hello World from Rest" ) ));
 
         with().delete(location)
               .then()

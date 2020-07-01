@@ -1,13 +1,11 @@
 package org.divy.common.bo.mapper.orika.builder;
 
 import ma.glasnost.orika.MapperFacade;
-import ma.glasnost.orika.converter.builtin.PassThroughConverter;
+import ma.glasnost.orika.MappingContext;
+import ma.glasnost.orika.converter.BidirectionalConverter;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import ma.glasnost.orika.impl.UtilityResolver;
-import ma.glasnost.orika.metadata.ClassMapBuilder;
-import ma.glasnost.orika.metadata.FieldMapBuilder;
-import ma.glasnost.orika.metadata.Property;
-import ma.glasnost.orika.metadata.TypeFactory;
+import ma.glasnost.orika.metadata.*;
 import ma.glasnost.orika.property.PropertyResolverStrategy;
 import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.FieldMapperContext;
@@ -44,9 +42,29 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
     }
 
     public MapperFacade buildMapperFacade() {
-        final DefaultMapperFactory mapperFactory = new DefaultMapperFactory.Builder() .build();
-        mapperFactory.getConverterFactory().registerConverter(new PassThroughConverter(OffsetDateTime .class));
-        mapperFactory.getConverterFactory().registerConverter(new PassThroughConverter(UUID.class));
+        final DefaultMapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+        mapperFactory.getConverterFactory().registerConverter("uuidConverter",new BidirectionalConverter<String, UUID>() {
+            @Override public UUID convertTo( String s, Type<UUID> type, MappingContext mappingContext )
+            {
+                return UUID.fromString( s );
+            }
+
+            @Override public String convertFrom( UUID uuid, Type<String> type, MappingContext mappingContext )
+            {
+                return uuid.toString();
+            }
+        });
+        mapperFactory.getConverterFactory().registerConverter("timeConverter",new BidirectionalConverter<String, OffsetDateTime>() {
+            @Override public OffsetDateTime convertTo( String s, Type<OffsetDateTime> type, MappingContext mappingContext )
+            {
+                return OffsetDateTime.parse( s );
+            }
+
+            @Override public String convertFrom( OffsetDateTime offsetDateTime, Type<String> type, MappingContext mappingContext )
+            {
+                return offsetDateTime.toString();
+            }
+        });
 
         new MapperFacadeBuilder(mapperFactory)
                 .registerMapping();
@@ -101,6 +119,8 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
 
             resolveOption(fieldMapperBuilderOptions, FieldExclude.class)
                     .ifPresent(option -> boFieldMapBuilder.exclude());
+
+            resolveOption( fieldMapperBuilderOptions, FieldConverterByName.class ).ifPresent( option-> boFieldMapBuilder.converter( option.getConverterName() ) );
         }
 
         private Property resolveFieldAProperty(List<MapperBuilderOption> fieldMapperBuilderOptions, String fieldName) {

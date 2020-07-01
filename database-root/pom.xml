@@ -16,7 +16,10 @@
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>    <packaging>pom</packaging>
+        <main.basedir>${project.parent.basedir}</main.basedir>
+    </properties>
+
+    <packaging>pom</packaging>
 
     <modules>
         <module>database-core</module>

@@ -22,6 +22,9 @@ public class FieldMapperOptions {
     public static MapperBuilderOption converter(Class<?> bClass) {
         return new FieldConverter(bClass);
     }
+    public static MapperBuilderOption converter(String converterName) {
+        return new FieldConverterByName(converterName);
+    }
     public static MapperBuilderOption exclude() {
         return new FieldExclude();
     }

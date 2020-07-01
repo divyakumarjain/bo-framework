@@ -12,6 +12,9 @@
     <artifactId>bo-framework-demos</artifactId>
     <name>demos</name>
     <description>Demo applications for bo framework</description>
+    <properties>
+        <main.basedir>${project.parent.basedir}</main.basedir>
+    </properties>
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-demo-root</module>

@@ -17,7 +17,9 @@
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>    <packaging>jar</packaging>
+        <main.basedir>${project.parent.parent.basedir}</main.basedir>
+    </properties>
+    <packaging>jar</packaging>
 
 
     <dependencies>
