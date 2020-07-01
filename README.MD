@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=org.divy%3Abo-framework-root&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.divy%3Abo-framework-root)
+
 Features
 ========
 
