@@ -18,7 +18,8 @@ import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.with;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = SpringMVCDemoApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = SpringMVCDemoApplication.class,
+      properties = {"bo-framework.endpoint.mvc.enable-hateoas-api=false"} )
 public class GreetingTest
 {
     @Autowired
