@@ -25,6 +25,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 public class JPACriteriaQueryBuilderTest
@@ -69,8 +70,8 @@ public class JPACriteriaQueryBuilderTest
 
     private void assertCriteriaQueryForComparisonPredicateWithNot(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
-        Assert.assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
-        Assert.assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.hasProperty("negated", Matchers.is(true))));
+        assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
+        assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.hasProperty("negated", Matchers.is(true))));
     }
 
     @Test
@@ -135,13 +136,13 @@ public class JPACriteriaQueryBuilderTest
 
     private void assertCriteriaQueryForComparisonPredicate(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
-        Assert.assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
-        Assert.assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.is(Matchers.instanceOf(ComparisonPredicate.class))));
+        assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
+        assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.is(Matchers.instanceOf(ComparisonPredicate.class))));
     }
 
     private void assertComparisonPredicate(ComparisonPredicate comparisonPredicate, Enum operator, String lhs) {
-        Assert.assertThat(comparisonPredicate.getComparisonOperator(), Matchers.is(operator));
-        Assert.assertThat(((SingularAttributePath)comparisonPredicate.getLeftHandOperand()).getAttribute().getName(), Matchers.is(lhs));
+        assertThat(comparisonPredicate.getComparisonOperator(), Matchers.is(operator));
+        assertThat(((SingularAttributePath)comparisonPredicate.getLeftHandOperand()).getAttribute().getName(), Matchers.is(lhs));
     }
 
     @Test
@@ -168,10 +169,10 @@ public class JPACriteriaQueryBuilderTest
 
     private void assertCriteriaQueryForCompoundPredicate(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
-        Assert.assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
-        Assert.assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.is(Matchers.instanceOf(CompoundPredicate.class))));
+        assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
+        assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.is(Matchers.instanceOf(CompoundPredicate.class))));
         CompoundPredicate compoundPredicate = (CompoundPredicate) actualPredicate.getExpressions().get(0);
-        Assert.assertThat(compoundPredicate.getOperator(), Matchers.is(operator));
+        assertThat(compoundPredicate.getOperator(), Matchers.is(operator));
     }
 
     @FunctionalInterface

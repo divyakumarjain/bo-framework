@@ -1,4 +1,4 @@
-package org.divy.common.bo.dynamic.testclasses;
+package org.divy.common.bo.dynamic;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

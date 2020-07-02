@@ -6,7 +6,7 @@ import org.divy.common.bo.repository.test.TestBaseDBRepository;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MockBoDatabaseTest extends TestBaseDBRepository<MockEntity,UUID> {
 
