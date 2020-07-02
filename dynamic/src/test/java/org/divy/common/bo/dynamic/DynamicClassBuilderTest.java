@@ -1,9 +1,6 @@
 package org.divy.common.bo.dynamic;
 
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
-import org.divy.common.bo.dynamic.testclasses.BaseClass;
-import org.divy.common.bo.dynamic.testclasses.NewAnnotation1;
-import org.divy.common.bo.dynamic.testclasses.NewAnnotation2;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,8 +9,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 public class DynamicClassBuilderTest {
 
     MethodHandles.Lookup prvlookup;

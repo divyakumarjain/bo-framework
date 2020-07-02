@@ -1,24 +1,19 @@
-package org.divy.common.bo.spring.jersey.rest.impl;
+package org.divy.common.bo.rest;
 
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.metadata.MetaDataProvider;
-import org.divy.common.bo.rest.AbstractHATOASMapper;
-import org.divy.common.bo.rest.LinkBuilderFactory;
-import org.divy.common.bo.spring.jersey.rest.MockEntity;
-import org.divy.common.bo.spring.jersey.rest.MockRepresentation;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.ws.rs.core.Link;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 

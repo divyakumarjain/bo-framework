@@ -19,10 +19,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.IsNull.notNullValue;
-import static org.junit.Assert.assertThat;
+
 import static org.mockito.Mockito.*;
 
 public class KeyValuePairMapperImplTest {
@@ -84,9 +85,9 @@ public class KeyValuePairMapperImplTest {
 
         assertThat(representation, notNullValue());
 
-        Assert.assertThat(representation, hasEntry(is("parentEntity"), (Matcher) hasEntry(is("name"), is("ParentEntity"))));
+        assertThat(representation, hasEntry(is("parentEntity"), (Matcher) hasEntry(is("name"), is("ParentEntity"))));
 
-        Assert.assertThat(representation, hasEntry(is("childEntities")
+        assertThat(representation, hasEntry(is("childEntities")
                         , (Matcher)contains(both(hasEntry(is("name"), is("child1")))
                                 .and(hasEntry(is("name"), is("child2"))))));
     }

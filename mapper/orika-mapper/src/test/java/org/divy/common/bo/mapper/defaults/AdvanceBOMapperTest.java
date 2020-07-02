@@ -3,21 +3,20 @@ package org.divy.common.bo.mapper.defaults;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 import ma.glasnost.orika.metadata.ClassMapBuilder;
 import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
 import org.divy.common.bo.mapper.orika.builder.OrikaMapperBuilder;
 import org.hamcrest.Matcher;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.OffsetDateTime;
 import java.util.*;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+
 
 public class AdvanceBOMapperTest {
 
@@ -67,11 +66,11 @@ public class AdvanceBOMapperTest {
 
         assertThat(representation, notNullValue());
 
-        Assert.assertThat(representation, hasEntry(is("parentEntity"), both(isA(Map.class)).and((Matcher) hasEntry(is("name"), is("ParentEntity")))));
+        assertThat(representation, hasEntry(is("parentEntity"), both(isA(Map.class)).and((Matcher) hasEntry(is("name"), is("ParentEntity")))));
 
-        Assert.assertThat(representation, hasEntry(is("childEntities")
+        assertThat(representation, hasEntry(is("childEntities")
                 , (Matcher)hasItem(hasEntry(is("name"), is("child1")))));
-        Assert.assertThat(representation, hasEntry(is("childEntities")
+        assertThat(representation, hasEntry(is("childEntities")
                 , (Matcher)hasItem(hasEntry(is("name"), is("child2")))));
     }
 
@@ -87,7 +86,7 @@ public class AdvanceBOMapperTest {
 
         assertThat(representation, notNullValue());
 
-        Assert.assertThat(representation, hasEntry(is("dob"), is(dob)));
+        assertThat(representation, hasEntry(is("dob"), is(dob)));
 
     }
 
@@ -119,7 +118,7 @@ public class AdvanceBOMapperTest {
 
         final BeanWithList destList = mapperFacade.map(srcBean, BeanWithList.class);
         
-        Assert.assertThat(destList, both(notNullValue()).and(hasProperty("destBeanList", contains(both(isA(BeanWithMap.class)).and(hasProperty("id",is("child")))))));
+        assertThat(destList, both(notNullValue()).and(hasProperty("destBeanList", contains(both(isA(BeanWithMap.class)).and(hasProperty("id",is("child")))))));
 
     }
 
@@ -155,7 +154,7 @@ public class AdvanceBOMapperTest {
 
         final BeanWithMap destList = mapperFacade.map(srcBean, BeanWithMap.class);
 
-        Assert.assertThat(destList, both(notNullValue()).and(hasProperty("destBeanList", hasEntry(is("child"), hasProperty("id",is("child"))))));
+        assertThat(destList, both(notNullValue()).and(hasProperty("destBeanList", hasEntry(is("child"), hasProperty("id",is("child"))))));
     }
 
     public static class BeanWithList {
@@ -192,6 +191,8 @@ public class AdvanceBOMapperTest {
     public static class BeanWithMap {
         Map<String, BeanWithMap> srcBeanList;
         Map<String, BeanWithMap> destBeanList;
+
+        Map<String, Object> data;
 
         String id;
         

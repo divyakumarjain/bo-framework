@@ -1,13 +1,12 @@
-package org.divy.common.bo.spring.jersey.rest;
+package org.divy.common.bo.rest;
 
 import org.divy.common.bo.repository.BusinessObject;
 
-import javax.xml.bind.annotation.XmlRootElement;
+
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@XmlRootElement
 public class MockEntity implements BusinessObject<UUID> {
 
     private OffsetDateTime createTimestamp;

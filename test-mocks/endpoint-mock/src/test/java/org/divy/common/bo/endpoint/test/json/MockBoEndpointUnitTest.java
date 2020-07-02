@@ -1,7 +1,5 @@
 package org.divy.common.bo.endpoint.test.json;
 
-import com.google.inject.TypeLiteral;
-import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.endpoint.test.BaseBOEndpointUnitTest;
 import org.divy.common.bo.endpoint.test.InMemoryBOManager;
@@ -15,9 +13,6 @@ import org.divy.common.exception.NotFoundException;
 import javax.ws.rs.core.Response;
 import java.util.UUID;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.fail;
 
 public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyEndpoint.MockEntity, UUID> {

@@ -11,7 +11,7 @@
     </parent>
 
     <properties>
-        <main.basedir>${project.parent.parent.basedir}</main.basedir>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <groupId>org.divy</groupId>
