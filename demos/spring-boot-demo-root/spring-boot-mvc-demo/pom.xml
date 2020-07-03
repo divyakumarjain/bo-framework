@@ -11,10 +11,11 @@
     </parent>
 
     <properties>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../../${spring.mvc.aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <artifactId>bo-framework-spring-boot-mvc-demo</artifactId>
+    <name>spring-boot-mvc-demo</name>
 
     <dependencies>
         <dependency>
@@ -172,7 +173,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>

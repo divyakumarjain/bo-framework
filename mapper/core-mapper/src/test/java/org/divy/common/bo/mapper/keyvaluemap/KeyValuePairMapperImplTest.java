@@ -1,13 +1,12 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
-import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.builder.FieldMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.MapperBuilder;
 import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.repository.BusinessObject;
 import org.hamcrest.Matcher;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -20,10 +19,9 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsNull.notNullValue;
-
 import static org.mockito.Mockito.*;
 
 public class KeyValuePairMapperImplTest {
@@ -52,6 +50,11 @@ public class KeyValuePairMapperImplTest {
                 , ArgumentMatchers.any(MapperBuilderOption.class)
                 , ArgumentMatchers.any()
                 , ArgumentMatchers.any());
+        doReturn(mockFieldMapperContext).when(typeMapperBuilderContext).field(anyString()
+              , ArgumentMatchers.any(MapperBuilderOption.class)
+              , ArgumentMatchers.any()
+              , ArgumentMatchers.any()
+              , ArgumentMatchers.any());
 
         doReturn(typeMapperBuilderContext).when(mockFieldMapperContext).and();
     }
