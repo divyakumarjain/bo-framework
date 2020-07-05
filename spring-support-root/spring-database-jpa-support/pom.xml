@@ -16,7 +16,7 @@
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../${spring.mvc.aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
     <packaging>jar</packaging>
 
@@ -71,6 +71,16 @@
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-spring-support-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
