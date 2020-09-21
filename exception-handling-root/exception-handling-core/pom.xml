@@ -5,7 +5,7 @@
     <parent>
         <artifactId>bo-framework-exception-handling-root</artifactId>
         <groupId>org.divy</groupId>
-        <version>0.0.11-SNAPSHOT</version>
+        <version>0.0.13-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-exception-handling-core</artifactId>

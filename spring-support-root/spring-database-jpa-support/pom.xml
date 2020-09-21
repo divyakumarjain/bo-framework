@@ -8,7 +8,8 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-support-root</artifactId>
-        <version>0.0.11-SNAPSHOT</version>
+        <version>0.0.13-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>bo-framework-spring-database-jpa-support</artifactId>

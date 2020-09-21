@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.divy</groupId>
+        <artifactId>bo-framework-microprofile-root</artifactId>
+        <version>0.0.13-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>bo-framework-microprofile-support</artifactId>
+    <name>microprofile-support</name>
+    <description>bo-framework-microprofile-support</description>
+    <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../${spring.mvc.aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
+    </properties>
+    <packaging>jar</packaging>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-database-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-dynamic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-businessapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-metadata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-database-mock</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-orika-mapper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-repository</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>2.0.SP1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+            <version>1.9.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-spring-support-core</artifactId>
+        </dependency>
+    </dependencies>
+</project>

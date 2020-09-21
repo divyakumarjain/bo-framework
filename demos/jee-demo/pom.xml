@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-demos</artifactId>
-        <version>0.0.11-SNAPSHOT</version>
+        <version>0.0.13-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
@@ -21,5 +21,14 @@
     </properties>
     <description>Demo Application for jee based Bo Framework</description>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>1.2</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
 </project>
