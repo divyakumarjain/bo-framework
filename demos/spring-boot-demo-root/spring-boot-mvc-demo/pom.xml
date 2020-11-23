@@ -49,6 +49,11 @@
             <artifactId>bo-framework-spring-support-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-orika-mapper-spring</artifactId>
         </dependency>
