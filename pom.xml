@@ -23,7 +23,6 @@
         <module>metadata</module>
         <module>repository</module>
         <module>database-root</module>
-        <module>search</module>
         <module>endpoint-root</module>
         <module>test-mocks</module>
         <module>mapper</module>
