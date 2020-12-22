@@ -2,8 +2,8 @@ package org.divy.common.bo.database.jpa.context;
 
 import org.divy.common.bo.database.context.CommandContext;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 
 public class DatabaseContext extends AbstractEntityManagerContext {
 

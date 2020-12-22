@@ -6,9 +6,9 @@ import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.UUID;
 

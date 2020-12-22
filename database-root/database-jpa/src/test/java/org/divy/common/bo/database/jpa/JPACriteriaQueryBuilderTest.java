@@ -18,12 +18,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.doReturn;
@@ -37,7 +37,7 @@ public class JPACriteriaQueryBuilderTest
     public void setupCriteriaQueryBuilder() {
         EntityManager mockEntityManager = Mockito.mock(EntityManager.class);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.divy.mock");
-        CriteriaBuilder mockCriteriaBuilder = new CriteriaBuilderImpl((SessionFactoryImpl) entityManagerFactory);
+        CriteriaBuilder mockCriteriaBuilder = Mockito.mock( CriteriaBuilder.class );
         doReturn(mockCriteriaBuilder).when(mockEntityManager).getCriteriaBuilder();
 
         criteriaQueryBuilder = new JPACriteriaQueryBuilder(mockEntityManager, MockEntity.class);

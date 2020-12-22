@@ -51,7 +51,7 @@ public class HibernateSearchCommand<E> implements SearchCommand<E> {
 
             try(FullTextSession fullTextSession = getFullTextEntityManager()) {
                 Transaction tx = fullTextSession.beginTransaction();
-                javax.persistence.Query jpaQuery = buildQuery(keywordQuery);
+                jakarta.persistence.Query jpaQuery = buildQuery(keywordQuery);
                 List resultList = jpaQuery.getResultList();
                 tx.commit();
                 return resultList;
@@ -69,7 +69,7 @@ public class HibernateSearchCommand<E> implements SearchCommand<E> {
         return new Configuration().buildSessionFactory();
     }
 
-    private javax.persistence.Query buildQuery(KeywordQuery keywordQuery) {
+    private jakarta.persistence.Query buildQuery(KeywordQuery keywordQuery) {
 
         QueryBuilder qb = getQueryBuilder();
 

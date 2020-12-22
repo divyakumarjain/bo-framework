@@ -3,8 +3,8 @@ package org.divy.common.bo.jersey.rest;
 import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.rest.LinkBuilder;
 
-import javax.ws.rs.core.Link;
-import javax.ws.rs.core.UriBuilder;
+import jakarta.ws.rs.core.Link;
+import jakarta.ws.rs.core.UriBuilder;
 import java.lang.reflect.Method;
 import java.net.URI;
 

@@ -6,10 +6,10 @@
         <class>org.divy.bo.demos.domain.cards.pages.Page</class>
         <class>org.divy.bo.demos.domain.cards.pages.Section</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:MyDB;DB_CLOSE_DELAY=-1"/>
-            <property name="javax.persistence.jdbc.user" value="sa"/>
-            <property name="javax.persistence.jdbc.password" value=""/>
-            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:hsqldb:mem:MyDB;DB_CLOSE_DELAY=-1"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
         </properties>

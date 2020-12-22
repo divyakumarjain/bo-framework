@@ -7,8 +7,9 @@ module bo.framework.endpoint.mock {
 //    requires bo.framework.endpoint.jersey;
     requires bo.framework.endpoint.core;
 
-    requires javax.servlet.api;
-    requires java.ws.rs;
+    requires jakarta.servlet;
+    requires jakarta.ws.rs;
+    requires jakarta.xml.bind;
     requires jersey.common;
     requires jersey.server;
 

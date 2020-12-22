@@ -20,7 +20,7 @@ module bo.framework.spring.mvc {
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.module.paramnames;
     requires com.fasterxml.jackson.databind;
-    requires javax.servlet.api;
+    requires jakarta.servlet;
 
     exports org.divy.common.bo.spring.mvc.rest.config;
 }

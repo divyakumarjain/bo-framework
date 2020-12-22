@@ -3,8 +3,8 @@ package org.divy.common.bo.jersey.rest;
 import org.divy.common.bo.rest.AbstractLinkBuilderFactory;
 import org.divy.common.bo.rest.LinkBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Link;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.core.Link;
 
 public class JerseyLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory<Link> {
 
