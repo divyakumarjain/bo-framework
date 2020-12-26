@@ -1,5 +1,8 @@
 package org.divy.common.bo.database.jpa;
 
+import jakarta.persistence.Tuple;
+import jakarta.persistence.criteria.*;
+import jakarta.persistence.metamodel.EntityType;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.operator.And;
 import org.divy.common.bo.query.operator.Not;
@@ -21,12 +24,20 @@ import org.mockito.Mockito;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 public class JPACriteriaQueryBuilderTest
 {
@@ -35,9 +46,9 @@ public class JPACriteriaQueryBuilderTest
 
     @Before
     public void setupCriteriaQueryBuilder() {
-        EntityManager mockEntityManager = Mockito.mock(EntityManager.class);
+        EntityManager mockEntityManager = mock(EntityManager.class);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.divy.mock");
-        CriteriaBuilder mockCriteriaBuilder = Mockito.mock( CriteriaBuilder.class );
+        CriteriaBuilder mockCriteriaBuilder = new CriteriaBuilderProxyImpl((SessionFactoryImpl) entityManagerFactory);
         doReturn(mockCriteriaBuilder).when(mockEntityManager).getCriteriaBuilder();
 
         criteriaQueryBuilder = new JPACriteriaQueryBuilder(mockEntityManager, MockEntity.class);
@@ -70,7 +81,6 @@ public class JPACriteriaQueryBuilderTest
 
     private void assertCriteriaQueryForComparisonPredicateWithNot(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
-        assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
         assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.hasProperty("negated", Matchers.is(true))));
     }
 

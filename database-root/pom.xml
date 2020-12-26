@@ -25,5 +25,6 @@
         <module>database-core</module>
         <module>database-jpa</module>
         <module>database-hibernate</module>
+        <module>database-jakarta-hibernate-bridge</module>
     </modules>
 </project>
