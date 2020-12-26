@@ -1,8 +1,5 @@
 name: automerge
 on:
-  pull_request_review:
-    types:
-      - submitted
   check_suite:
     types:
       - completed
@@ -12,8 +9,6 @@ jobs:
     steps:
       - name: automerge
         uses: "pascalgn/automerge-action@v0.13.0"
-        with:
-          args: "--trace"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: "dependencies"
