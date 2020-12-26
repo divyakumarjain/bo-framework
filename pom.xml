@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.divy</groupId>
     <artifactId>bo-framework-root</artifactId>
-    <version>0.0.11-SNAPSHOT</version>
+    <version>0.0.14-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Business Object Framework</name>
     <repositories>
@@ -156,132 +156,132 @@
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-repository</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-database-core</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-core-mapper</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-exception-handling-core</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-dozer-mapper</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-orika-mapper</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-orika-mapper-spring</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-database-jpa</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-metadata</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-jersey-endpoint-support</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-database-jpa-support</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-query</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-mock-common</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-dynamic</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-endpoint-core</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-endpoint-jersey</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-database-mock</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-businessapi</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-support-core</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-core</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-support-autoconfiguration</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>demo-domain</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-validation-core</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-jsr303-validation</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-jsr303-validation</artifactId>
-                <version>0.0.11-SNAPSHOT</version>
+                <version>0.0.14-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.google.inject.extensions</groupId>
