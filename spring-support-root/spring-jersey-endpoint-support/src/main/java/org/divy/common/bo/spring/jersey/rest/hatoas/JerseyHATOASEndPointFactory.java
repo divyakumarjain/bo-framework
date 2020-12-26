@@ -75,7 +75,7 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
     private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
         return DynamicClassBuilder.createClass( JerseyHATOASEndPointFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "HyperMediaEndPoint")
                 .subClass(DefaultHATEOASJerseyEndpoint.class)
-                    .addAnnotation(Path.class)
+                    .addAnnotation(jakarta.ws.rs.Path.class)
                         .value(configProperties.getHateoasApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase())
                         .and()
                 .proxySuperMethod("create").name("createMethod")

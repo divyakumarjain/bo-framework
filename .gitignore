@@ -33,6 +33,8 @@ local.properties
 # Java annotation processor (APT)
 .factorypath
 
+**/out/**
+
 
 # STS (Spring Tool Suite)
 .springBeans

@@ -6,12 +6,13 @@ module bo.framework.endpoint.core {
     requires bo.framework.query;
     requires bo.framework.dynamic;
     requires bo.framework.metadata;
+    requires jakarta.servlet;
     requires org.slf4j;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
+    requires commons.lang;
     requires bo.framework.mapper;
     requires jakarta.inject;
-    requires jakarta.servlet;
     exports org.divy.common.bo.endpoint;
     exports org.divy.common.bo.endpoint.hatoas;
     exports org.divy.common.bo.rest;

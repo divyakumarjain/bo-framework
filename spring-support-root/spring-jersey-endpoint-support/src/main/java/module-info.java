@@ -13,12 +13,12 @@ module bo.framework.spring.jersey.endpoint.support {
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.fasterxml.jackson.datatype.jdk8;
     requires com.fasterxml.jackson.databind;
+    requires jersey.server;
     requires jakarta.ws.rs;
     requires org.slf4j;
     requires spring.beans;
     requires spring.boot;
-    requires jersey.server;
-    requires bo.framework.mapper;
     requires jakarta.validation;
     requires jersey.common;
+    requires bo.framework.mapper;
 }

@@ -1,5 +1,8 @@
 package org.divy.common.bo.database.jpa;
 
+import jakarta.persistence.Tuple;
+import jakarta.persistence.criteria.*;
+import jakarta.persistence.metamodel.EntityType;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.operator.And;
 import org.divy.common.bo.query.operator.Not;
@@ -18,15 +21,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 public class JPACriteriaQueryBuilderTest
 {
@@ -35,9 +46,9 @@ public class JPACriteriaQueryBuilderTest
 
     @Before
     public void setupCriteriaQueryBuilder() {
-        EntityManager mockEntityManager = Mockito.mock(EntityManager.class);
+        EntityManager mockEntityManager = mock(EntityManager.class);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.divy.mock");
-        CriteriaBuilder mockCriteriaBuilder = new CriteriaBuilderImpl((SessionFactoryImpl) entityManagerFactory);
+        CriteriaBuilder mockCriteriaBuilder = new CriteriaBuilderProxyImpl((SessionFactoryImpl) entityManagerFactory);
         doReturn(mockCriteriaBuilder).when(mockEntityManager).getCriteriaBuilder();
 
         criteriaQueryBuilder = new JPACriteriaQueryBuilder(mockEntityManager, MockEntity.class);

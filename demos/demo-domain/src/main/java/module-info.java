@@ -1,6 +1,6 @@
 module bo.framework.demo.domain {
     requires bo.framework.database.jpa;
-    requires java.persistence;
+    requires jakarta.persistence;
     requires org.hibernate.orm.core;
     requires bo.framework.repository;
     requires javax.persistence;

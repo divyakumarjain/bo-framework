@@ -4,8 +4,8 @@ import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.operator.*;
 import org.divy.common.bo.query.operator.comparison.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
