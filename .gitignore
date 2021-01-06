@@ -40,7 +40,6 @@ local.properties
 .recommenders/
 
 *.class
-
 rebel.xml
-
 **/build/**
+.gradle
