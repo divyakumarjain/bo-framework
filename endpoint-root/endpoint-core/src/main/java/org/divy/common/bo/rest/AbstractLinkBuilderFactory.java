@@ -1,11 +1,11 @@
 package org.divy.common.bo.rest;
 
-import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.http.HttpRequestContext;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public abstract class AbstractLinkBuilderFactory<L> implements LinkBuilderFactory<L> {
     protected static final String HEADER_HOST = "Host";
@@ -52,17 +52,24 @@ public abstract class AbstractLinkBuilderFactory<L> implements LinkBuilderFactor
     protected String resolveOriginalPath()
     {
         String originalPath;
-        originalPath = StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_BASE),
-                request.getContextPath());
+        originalPath = defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_BASE),
+                request::getContextPath);
         return originalPath;
     }
 
     protected String resolveSchema()
     {
         String scheme;
-        scheme = StringUtils.defaultIfBlank(StringUtils.defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),
-                request.getScheme()),DEFAULT_SCHEME);
+        scheme = defaultIfBlank(defaultIfBlank(request.getHeader(HEADER_X_ORIGINAL_PROTO),
+                request::getScheme),() -> DEFAULT_SCHEME);
         return scheme;
+    }
+
+    private String defaultIfBlank( String value, Supplier<String> supplier)
+    {
+        if( value == null || "".equals( value.trim() ))
+            return supplier.get();
+        return value;
     }
 
     public HttpServletRequest getRequest() {

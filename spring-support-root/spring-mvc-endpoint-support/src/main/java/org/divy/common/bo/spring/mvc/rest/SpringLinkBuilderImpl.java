@@ -23,11 +23,11 @@ public class SpringLinkBuilderImpl implements LinkBuilder<Link> {
      * @throws IllegalArgumentException If the scheme or host is {@code null}, empty, or blank.
      */
     public SpringLinkBuilderImpl(String scheme, String host, String basePath) {
-        if (StringUtils.isBlank(scheme)) {
+        if (isBlank(scheme)) {
             throw new IllegalArgumentException("Scheme must not be null or blank");
         }
 
-        if (StringUtils.isBlank(host)) {
+        if (isBlank(host)) {
             throw new IllegalArgumentException("Host must not be null or blank");
         }
 
@@ -44,6 +44,11 @@ public class SpringLinkBuilderImpl implements LinkBuilder<Link> {
         } else if ("localhost".equals(host)) {
             uriComponentsBuilder.port(DEFAULT_LOCAL_PORT);
         }
+    }
+
+    private boolean isBlank(String value )
+    {
+        return value ==null || value.isBlank() || value.isEmpty();
     }
 
     @Override

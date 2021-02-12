@@ -1,6 +1,5 @@
 package org.divy.common.bo.jersey.rest;
 
-import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.rest.LinkBuilder;
 
 import javax.ws.rs.core.Link;
@@ -15,15 +14,15 @@ public class JerseyLinkBuilderImpl implements LinkBuilder<Link> {
     private final UriBuilder uriBuilder;
 
     public JerseyLinkBuilderImpl(String scheme, String host, String basePath) {
-        if (StringUtils.isBlank(scheme)) {
+        if (isBlank(scheme)) {
             throw new IllegalArgumentException("Scheme must not be null or blank");
         }
 
-        if (StringUtils.isBlank(host)) {
+        if (isBlank(host)) {
             throw new IllegalArgumentException("Host must not be null or blank");
         }
 
-        final String fixedBasePath = StringUtils.defaultIfBlank(basePath, StringUtils.EMPTY);
+        final String fixedBasePath = defaultIfBlank(basePath, "");
 
         uriBuilder = UriBuilder.fromPath(fixedBasePath);
 
@@ -40,6 +39,17 @@ public class JerseyLinkBuilderImpl implements LinkBuilder<Link> {
         }
     }
 
+    private boolean isBlank( String string )
+    {
+        return string ==null || string.isBlank() || string.isEmpty();
+    }
+
+    private String defaultIfBlank( String value, String defaultValue)
+    {
+        if( value == null || "".equals( value.trim() ))
+            return defaultValue;
+        return value;
+    }
 
     @Override
     public Link buildLinkFor(String rel, Class<?> resource) {
