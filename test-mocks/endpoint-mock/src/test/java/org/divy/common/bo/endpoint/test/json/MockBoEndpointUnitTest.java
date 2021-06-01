@@ -9,11 +9,10 @@ import org.divy.common.bo.jersey.rest.JerseyLinkBuilderFactoryImpl;
 import org.divy.common.bo.jersey.rest.response.JerseyResponseEntityBuilderFactory;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.exception.NotFoundException;
+import org.junit.jupiter.api.Assertions;
 
 import javax.ws.rs.core.Response;
 import java.util.UUID;
-
-import static org.junit.Assert.fail;
 
 public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyEndpoint.MockEntity, UUID> {
 
@@ -30,7 +29,7 @@ public class MockBoEndpointUnitTest extends BaseBOEndpointUnitTest<MockBoJerseyE
     protected void doAssertNotExists(UUID id) {
         try {
             super.doAssertNotExists( id );
-            fail("Expected org.divy.common.exception.NotFoundException");
+            Assertions.fail("Expected org.divy.common.exception.NotFoundException");
         } catch ( NotFoundException ex ) {
             //success
         }

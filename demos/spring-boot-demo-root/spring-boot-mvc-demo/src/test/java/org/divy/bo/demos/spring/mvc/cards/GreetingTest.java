@@ -5,19 +5,19 @@ import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.divy.bo.demos.spring.mvc.SpringMVCDemoApplication;
 import org.divy.bo.demos.domain.greetings.Greeting;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.context.WebApplicationContext;
 import static org.hamcrest.Matchers.*;
 
 import static io.restassured.RestAssured.with;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = SpringMVCDemoApplication.class,
       properties = {"bo-framework.endpoint.mvc.enable-hateoas-api=false"} )
 public class GreetingTest
@@ -25,7 +25,7 @@ public class GreetingTest
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    @Before
+    @BeforeEach
     public void initialiseRestAssuredMockMvcWebApplicationContext() {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
         RestAssured.port = port;

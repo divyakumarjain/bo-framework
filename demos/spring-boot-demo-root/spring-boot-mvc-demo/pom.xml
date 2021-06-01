@@ -11,7 +11,7 @@
     </parent>
 
     <properties>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../../${spring.mvc.aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../../coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <artifactId>bo-framework-spring-boot-mvc-demo</artifactId>
@@ -49,8 +49,8 @@
             <artifactId>bo-framework-spring-support-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -139,7 +139,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                        --add-opens java.base/java.lang=orika.core --add-opens bo.framework.spring.boot.mvc.demo/org.divy.bo.demos.spring.mvc.cards=ALL-UNNAMED
+                        --add-opens java.base/java.lang=orika.core
+                        --add-opens bo.framework.spring.boot.mvc.demo/org.divy.bo.demos.spring.mvc.cards=ALL-UNNAMED
+                        --illegal-access=warn
+                        @{argLine}
+                        ${argLine}
                     </argLine>
                 </configuration>
             </plugin>
@@ -165,19 +169,22 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>report</id>
-                        <goals>
-                            <goal>report-aggregate</goal>
-                        </goals>
-                        <phase>verify</phase>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>coverage</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

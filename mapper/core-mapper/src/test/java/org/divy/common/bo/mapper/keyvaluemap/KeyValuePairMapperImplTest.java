@@ -7,9 +7,9 @@ import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.repository.BusinessObject;
 import org.hamcrest.Matcher;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 
 import java.time.OffsetDateTime;
@@ -30,7 +30,7 @@ public class KeyValuePairMapperImplTest {
     private MapperBuilder mockMapperBuilder;
     private TypeMapperBuilderContext<MockEntity, Map> typeMapperBuilderContext;
 
-    @Before
+    @BeforeEach
     public void setup() {
         metaDataProvider = mock(MetaDataProvider.class);
         mockMapperBuilder = mock(MapperBuilder.class);
@@ -60,7 +60,7 @@ public class KeyValuePairMapperImplTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testHierarchyMappingFromEntityToMap() {
         final KeyValuePairMapper<MockEntity> keyValuePairMapper
                 = new KeyValuePairMapperImpl<>(MockEntity.class

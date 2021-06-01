@@ -13,9 +13,8 @@ import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.hibernate.query.criteria.internal.path.SingularAttributePath;
 import org.hibernate.query.criteria.internal.predicate.ComparisonPredicate;
 import org.hibernate.query.criteria.internal.predicate.CompoundPredicate;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import javax.persistence.EntityManager;
@@ -33,7 +32,7 @@ public class JPACriteriaQueryBuilderTest
 
     JPACriteriaQueryBuilder criteriaQueryBuilder;
 
-    @Before
+    @BeforeEach
     public void setupCriteriaQueryBuilder() {
         EntityManager mockEntityManager = Mockito.mock(EntityManager.class);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.divy.mock");
