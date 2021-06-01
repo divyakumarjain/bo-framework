@@ -53,7 +53,7 @@
                 <artifactId>maven-scm-plugin</artifactId>
                 <version>1.11.2</version>
                 <configuration>
-                    <tag>${project.artifactId}-0.0.11-SNAPSHOT</tag>
+                    <tag>${project.artifactId}-0.0.14-SNAPSHOT</tag>
                 </configuration>
             </plugin>
             <!-- To use the plugin goals in your POM or parent POM -->

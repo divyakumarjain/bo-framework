@@ -11,7 +11,7 @@
     </parent>
 
     <properties>
-
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../../coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <artifactId>bo-framework-spring-boot-mvc-demo</artifactId>
