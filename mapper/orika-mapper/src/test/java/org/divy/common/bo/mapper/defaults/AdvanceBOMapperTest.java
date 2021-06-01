@@ -8,8 +8,8 @@ import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.options.field.FieldMapperOptions;
 import org.divy.common.bo.mapper.orika.builder.OrikaMapperBuilder;
 import org.hamcrest.Matcher;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
 import java.util.*;
@@ -22,7 +22,7 @@ public class AdvanceBOMapperTest {
 
     BOMapper<MockEntity, Map> underTest;
 
-    @Before
+    @BeforeEach
     public void setup() {
 
         OrikaMapperBuilder builder = new OrikaMapperBuilder();

@@ -3,11 +3,12 @@ package org.divy.common.bo.test;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
-import org.junit.After;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.AfterEach;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +16,6 @@ import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.*;
 import static org.hamcrest.core.IsNull.*;
-
-import static org.junit.Assert.assertFalse;
 
 
 /**
@@ -97,7 +96,7 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
     }
  
     @Test
-    @Ignore
+    @Disabled
     //TODO: Finish Search framework
     public void testSearch() {
         E entity1 = testDataProvider.getEntityInstance();
@@ -117,18 +116,15 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
         List<E> searchedEntities = doSearchEntities(searchQuery);
 
         assertThat("Search result should not be null", searchedEntities,
-                notNullValue());
-
-        assertFalse("Search result should not be empty",
-                searchedEntities.isEmpty());
+              notNullValue());
 
         assertThat("Search result should be single", searchedEntities.size(),
-                equalTo(1));
+              equalTo(1));
 
     }
 
     /* Clean up */
-    @After
+    @AfterEach
     public void cleanup() {
         try {
             List<E> searchedEntities = doSearchEntities(new AttributeQuery());

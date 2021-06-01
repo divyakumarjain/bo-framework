@@ -11,7 +11,6 @@
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../${spring.mvc.aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
     <packaging>pom</packaging>
     <modules>
@@ -19,4 +18,20 @@
         <module>core-mapper</module>
         <module>orika-mapper-spring</module>
     </modules>
+    <profiles>
+        <profile>
+            <id>coverage</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

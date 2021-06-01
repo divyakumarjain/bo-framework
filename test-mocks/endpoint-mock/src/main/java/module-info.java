@@ -15,7 +15,7 @@ module bo.framework.endpoint.mock {
     requires jersey.test.framework.core;
     requires jersey.test.framework.provider.jetty;
 
-    requires junit;
+    requires org.junit.jupiter.api;
     requires org.hamcrest;
     requires org.mockito;
     requires com.google.guice;

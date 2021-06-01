@@ -6,7 +6,7 @@ import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestDataProvider;
 import org.divy.common.exception.NotFoundException;
 import org.hamcrest.Matchers;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
@@ -100,7 +100,7 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
         return toKey(segments[segments.length - 1]);
     }
 
-    @Before
+    @BeforeEach
     public void setup() {
 
         this.endpointInstance = createEndpointInstance();

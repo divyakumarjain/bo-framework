@@ -3,8 +3,8 @@ package org.divy.common.bo.database.jpa;
 import org.divy.common.bo.database.command.*;
 import org.divy.common.bo.database.jpa.context.DatabaseContext;
 import org.divy.common.bo.mapper.BOMapper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public class TestTypeBaseDBCommandProvider {
 
     BOMapper<MockEntity, MockEntity> updateMapper;
 
-    @Before
+    @BeforeEach
     public void before()
     {
         commandContext = new DatabaseContext("");
