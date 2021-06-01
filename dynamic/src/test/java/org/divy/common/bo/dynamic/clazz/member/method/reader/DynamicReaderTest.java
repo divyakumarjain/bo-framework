@@ -1,6 +1,6 @@
 package org.divy.common.bo.dynamic.clazz.member.method.reader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
 

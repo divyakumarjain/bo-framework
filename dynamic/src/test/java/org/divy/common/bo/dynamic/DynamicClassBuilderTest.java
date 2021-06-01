@@ -1,8 +1,8 @@
 package org.divy.common.bo.dynamic;
 
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Constructor;
@@ -15,7 +15,7 @@ public class DynamicClassBuilderTest {
 
     MethodHandles.Lookup prvlookup;
 
-    @Before
+    @BeforeEach
     public void setup() throws IllegalAccessException
     {
         MethodHandles.Lookup lookup = MethodHandles.lookup();

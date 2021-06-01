@@ -10,8 +10,8 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.jetty.JettyTestContainerFactory;
 import org.glassfish.jersey.test.spi.TestContainer;
 import org.glassfish.jersey.test.spi.TestContainerFactory;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -42,12 +42,12 @@ public abstract class BaseBOEndpointContainerTest<E extends BusinessObject<I>
         jerseyTestProxy = new RestResourceTest();
     }
 
-    @Before
+    @BeforeEach
     public void start() throws Exception {
         jerseyTestProxy.setUp();
     }
 
-    @After
+    @AfterEach
     public void stop() throws Exception {
         jerseyTestProxy.tearDown();
     }

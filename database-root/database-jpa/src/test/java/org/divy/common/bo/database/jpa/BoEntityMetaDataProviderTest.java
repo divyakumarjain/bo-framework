@@ -2,7 +2,7 @@ package org.divy.common.bo.database.jpa;
 
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.metadata.FieldMetaData;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Map;

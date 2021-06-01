@@ -3,8 +3,8 @@ package org.divy.common.bo.rest;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapperImpl;
 import org.divy.common.bo.metadata.MetaDataProvider;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +22,7 @@ public class AbstractHATEOASMapperTest {
     private final KeyValuePairMapper<MockEntity> mockKeyValuePairMapper = mock(KeyValuePairMapperImpl.class);
     private       TestHATOASMapperMock           underTest;
 
-    @Before
+    @BeforeEach
     public void setup() {
         underTest = new TestHATOASMapperMock(mockKeyValuePairMapper, mock(LinkBuilderFactory.class), mock(MetaDataProvider.class));
     }

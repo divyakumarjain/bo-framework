@@ -5,13 +5,13 @@ import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.test.TestBOCRUDBase;
 import org.divy.common.bo.test.TestDataProvider;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.core.IsNull.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> extends TestBOCRUDBase<E, I>
 {
@@ -22,11 +22,9 @@ public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> exten
         super(testDataProvider);
     }
 
-    @Before
+    @BeforeEach
     public void before() {
-
         boRepository = createRepository();
-
     }
 
     @Override
@@ -38,7 +36,7 @@ public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> exten
     protected E doAssertExists(I id) {
         var entity = doGetByKey(id);
         assertThat(entity, notNullValue());
-        assertTrue( entity.isPresent() );
+        assertThat( entity.isPresent(),  equalTo( true ));
         return entity.get();
     }
     
@@ -50,7 +48,7 @@ public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> exten
     @Override
     protected void doAssertNotExists(I id) {
         var entity = doGetByKey(id);
-        assertFalse(entity.isPresent());
+        assertThat(entity.isPresent(), equalTo( false ));
     }
 
     @Override
