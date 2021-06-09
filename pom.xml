@@ -45,6 +45,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>divyakumarjain-github</sonar.organization>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <junit-jupiter.version>5.8.0-M1</junit-jupiter.version>
     </properties>
 
     <build>
@@ -127,7 +128,7 @@
                         <dependency>
                             <groupId>org.junit.jupiter</groupId>
                             <artifactId>junit-jupiter</artifactId>
-                            <version>5.7.2</version>
+                            <version>${junit-jupiter.version}</version>
                         </dependency>
                     </dependencies>
                     <configuration>
@@ -400,7 +401,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.7.2</version>
+                <version>${junit-jupiter.version}</version>
                 <type>pom</type>
             </dependency>
         </dependencies>
