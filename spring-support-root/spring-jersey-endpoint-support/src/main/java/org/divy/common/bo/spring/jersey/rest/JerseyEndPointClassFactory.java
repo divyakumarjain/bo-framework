@@ -66,7 +66,7 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                 .forEach(config::register);
     }
 
-    private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
+    private Optional<Class<? extends BaseBOEndpoint<?,?,?>>> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
         return DynamicClassBuilder.createClass( JerseyEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
                 .subClass(BaseBOEndpoint.class)
                     .addAnnotation(javax.ws.rs.Path.class)

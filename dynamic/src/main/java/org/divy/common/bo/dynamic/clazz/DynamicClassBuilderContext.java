@@ -7,6 +7,7 @@ import org.divy.common.bo.dynamic.clazz.common.DynamicAnnotatableBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.field.DynamicClassFieldBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.method.DynamicMethodBuilderContext;
+import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +20,8 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
         extends DynamicAnnotatableBuilderContext<C, DynamicClassBuilderContext> {
 
     private String className;
-    private Set<DynamicClassConstructorBuilderContext> constructors = new HashSet<>();
-    Set<DynamicMethodBuilderContext> methods = new HashSet<>();
+    private final Set<DynamicClassConstructorBuilderContext> constructors = new HashSet<>();
+    private final Set<DynamicMethodBuilderContext> methods = new HashSet<>();
     private Set<DynamicClassFieldBuilderContext> fields = new HashSet<>();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicClassBuilderContext.class);
@@ -105,5 +106,10 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
     @Override
     public DynamicClassBuilderContext and() {
         throw new UnsupportedOperationException("And method does not support in Class Builder Context");
+    }
+
+    protected void addMethods( DynamicProxyMethodBuilderContext dynamicProxyMethodBuilderContext )
+    {
+        this.methods.add( dynamicProxyMethodBuilderContext );
     }
 }

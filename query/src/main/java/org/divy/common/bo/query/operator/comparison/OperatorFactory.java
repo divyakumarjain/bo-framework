@@ -15,26 +15,26 @@ public class OperatorFactory
         //NOOP
     }
 
-    public static <A> EqualsComparison equalsComparison(A value) {
+    public static <A> EqualsComparison<A> equalsComparison(A value) {
         return new EqualsComparisonImpl<>(value);
     }
 
-    public static <A> GreaterThanComparison greaterThanComparison(A value)
+    public static <A> GreaterThanComparison<A> greaterThanComparison(A value)
     {
         return new GreaterThanComparisonImpl<>(value);
     }
 
-    public static <A> GreaterThanEqualToComparison greaterThanEqualToComparison(A value)
+    public static <A> GreaterThanEqualToComparison<A> greaterThanEqualToComparison(A value)
     {
         return new GreaterThanEqualToComparisonImpl<>(value);
     }
 
-    public static <A> LessThanComparison lessThanComparison(A value)
+    public static <A> LessThanComparison<A> lessThanComparison(A value)
     {
         return new LessThanComparisonImpl<>(value);
     }
 
-    public static <A> LessThanEqualToComparison lessThanEqualToComparison(A value)
+    public static <A> LessThanEqualToComparison<A> lessThanEqualToComparison(A value)
     {
         return new LessThanEqualToComparisonImpl<>(value);
     }

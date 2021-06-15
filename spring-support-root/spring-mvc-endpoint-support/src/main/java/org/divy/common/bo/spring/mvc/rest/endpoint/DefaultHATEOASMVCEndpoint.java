@@ -6,21 +6,23 @@ import org.divy.common.bo.endpoint.hatoas.association.AssociationsHandler;
 import org.divy.common.bo.rest.HATOASMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.mvc.rest.hatoas.SpringMVCRepresentation;
+import org.springframework.hateoas.Link;
+import org.springframework.http.ResponseEntity;
 
 import java.util.UUID;
 
-public class DefaultHATEOASMVCEndpoint<E extends BusinessObject<UUID>>
-        extends AbstractHATOASMVCEndpoint<E, SpringMVCRepresentation, UUID>
+public class DefaultHATEOASMVCEndpoint<B extends BusinessObject<UUID>>
+        extends AbstractHATOASMVCEndpoint<B, SpringMVCRepresentation<UUID>, UUID, Link>
 {
 
 
-    private final BOManager<E, UUID>                       manager;
-    private final HATOASMapper<E, SpringMVCRepresentation> hateosMapper;
+    private final BOManager<B, UUID>                       manager;
+    private final HATOASMapper<B, SpringMVCRepresentation<UUID>> hateosMapper;
 
-    public DefaultHATEOASMVCEndpoint(BOManager<E, UUID> manager,
-                                        ResponseEntityBuilderFactory responseEntityBuilderFactory,
-                                        HATOASMapper<E, SpringMVCRepresentation> hateosMapper,
-                                        AssociationsHandler<E,UUID> associationsHandler) {
+    public DefaultHATEOASMVCEndpoint(BOManager<B, UUID> manager,
+                                        ResponseEntityBuilderFactory<SpringMVCRepresentation<UUID>, ResponseEntity<SpringMVCRepresentation<UUID>>> responseEntityBuilderFactory,
+                                        HATOASMapper<B, SpringMVCRepresentation<UUID>> hateosMapper,
+                                        AssociationsHandler<B,UUID, Link> associationsHandler) {
         super(responseEntityBuilderFactory, associationsHandler);
         this.manager = manager;
         this.hateosMapper = hateosMapper;
@@ -28,12 +30,12 @@ public class DefaultHATEOASMVCEndpoint<E extends BusinessObject<UUID>>
     }
 
     @Override
-    public BOManager<E, UUID> getManager() {
+    public BOManager<B, UUID> getManager() {
         return this.manager;
     }
 
     @Override
-    public HATOASMapper<E, SpringMVCRepresentation> getRepresentationMapper() {
+    public HATOASMapper<B, SpringMVCRepresentation<UUID>> getRepresentationMapper() {
         return hateosMapper;
     }
 }

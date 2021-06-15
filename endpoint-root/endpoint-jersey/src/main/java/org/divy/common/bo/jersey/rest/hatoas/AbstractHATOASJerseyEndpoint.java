@@ -8,6 +8,7 @@ import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Link;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
@@ -19,13 +20,13 @@ import java.io.Serializable;
  * @param <E> The HATEOAS representation of Business Object entity
  */
 public abstract class AbstractHATOASJerseyEndpoint<B extends BusinessObject<I>,
-        E extends JerseyRepresentation,
+        E extends JerseyRepresentation<I>,
         I extends Serializable>
-        extends AbstractHATOASEndpoint<B, E, I, Response>
+        extends AbstractHATOASEndpoint<B, E, I, Response, Link>
 {
 
     @Inject
-    protected AbstractHATOASJerseyEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory, AssociationsHandler<B,I> associationsHandler)
+    protected AbstractHATOASJerseyEndpoint(ResponseEntityBuilderFactory<E, Response> responseEntityBuilderFactory, AssociationsHandler<B,I, Link> associationsHandler)
     {
         super(responseEntityBuilderFactory,associationsHandler);
     }

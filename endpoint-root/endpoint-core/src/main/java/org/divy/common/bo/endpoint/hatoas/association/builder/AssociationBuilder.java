@@ -1,63 +1,50 @@
 package org.divy.common.bo.endpoint.hatoas.association.builder;
 
+import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.Builder;
 import org.divy.common.bo.dynamic.clazz.member.method.reader.ReaderBuilder;
 import org.divy.common.bo.dynamic.clazz.member.method.setter.SetterBuilder;
-import org.divy.common.bo.repository.BusinessObject;
-import org.divy.common.bo.business.BOManager;
+import org.divy.common.bo.endpoint.hatoas.Representation;
 import org.divy.common.bo.endpoint.hatoas.association.Association;
 import org.divy.common.bo.endpoint.hatoas.association.Cardinality;
 import org.divy.common.bo.endpoint.hatoas.association.PropagateSave;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.AbstractHATOASMapper;
 
 import java.util.Arrays;
+import java.util.Map;
 
-public class AssociationBuilder<T extends BusinessObject<I>, I, P extends Builder> extends Association<T, I> implements Builder<P>
+public class AssociationBuilder<T extends BusinessObject<I>, I, L> extends Association<T, I, L> implements Builder
 {
-    private P parent;
-
-    public AssociationBuilder(P parent) {
-        this.parent = parent;
+    public AssociationBuilder() {
     }
 
-    @Override
-    public P and()
-    {
-        return parent;
-    }
-
-    public AssociationBuilder<T,I, P> withMapper( AbstractHATOASMapper hatoasMapper) {
+    public AssociationBuilder<T, I, L> withMapper( AbstractHATOASMapper<T, I, Representation<I, Map<String, Object>, L >, L> hatoasMapper) {
         this.mapper = hatoasMapper;
         return this;
     }
 
-    //Builder methods
-
-
-    public AssociationBuilder() {
-    }
-
-    public AssociationBuilder<T, I, P> manager(BOManager<T, I> manager) {
+    public AssociationBuilder<T, I, L> manager(BOManager<T, I> manager) {
         this.setManager(manager);
         return this;
     }
 
-    public AssociationBuilder<T, I, P> name(String name) {
+    public AssociationBuilder<T, I, L> name(String name) {
         this.setName(name);
         return this;
     }
 
-    public AssociationBuilder<T, I, P> includeInRead() {
+    public AssociationBuilder<T, I, L> includeInRead() {
         setIncludeInReadOperation(true);
         return this;
     }
 
-    public AssociationBuilder<T, I, P> propagateSave(PropagateSave... propagateSaves) {
+    public AssociationBuilder<T, I, L> propagateSave(PropagateSave... propagateSaves) {
         setPropagateSaves(Arrays.asList(propagateSaves));
         return this;
     }
 
-    public AssociationBuilder<T, I, P> cardinality(Cardinality cardinality) {
+    public AssociationBuilder<T, I, L> cardinality(Cardinality cardinality) {
         this.setCardinality(cardinality);
         return this;
     }
@@ -77,8 +64,8 @@ public class AssociationBuilder<T extends BusinessObject<I>, I, P extends Builde
     }
 
 
-    public ReaderBuilder<AssociationBuilder> attribute(String attributeName) {
-        ReaderBuilder<AssociationBuilder> readerBuilder = new ReaderBuilder<>( this );
+    public ReaderBuilder<AssociationBuilder<T,I, L>> attribute(String attributeName) {
+        ReaderBuilder<AssociationBuilder<T,I, L>> readerBuilder = new ReaderBuilder<>( this );
         setReader(readerBuilder);
         setName(attributeName);
         readerBuilder.attribute(attributeName);

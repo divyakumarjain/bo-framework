@@ -3,15 +3,15 @@ package org.divy.common.bo.mapper.builder;
 import org.divy.common.bo.mapper.FieldMapperContextImpl;
 
 public class FieldMapperBuilderContextImpl<S, T> extends FieldMapperContextImpl implements FieldMapperBuilderContext <S, T> {
-    private final TypeMapperBuilderContext typeMapperBuilderContext;
+    private final TypeMapperBuilderContext<S,T> typeMapperBuilderContext;
 
-    public FieldMapperBuilderContextImpl(TypeMapperBuilderContext typeMapperBuilderContext) {
+    public FieldMapperBuilderContextImpl(TypeMapperBuilderContext<S,T> typeMapperBuilderContext) {
         super();
         this.typeMapperBuilderContext = typeMapperBuilderContext;
     }
 
     @Override
-    public TypeMapperBuilderContext getTypeMapperBuilderContext() {
+    public TypeMapperBuilderContext<S,T> getTypeMapperBuilderContext() {
         return this.typeMapperBuilderContext;
     }
 

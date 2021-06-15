@@ -114,7 +114,7 @@ public class JerseyEndpointConfig implements Jackson2ObjectMapperBuilderCustomiz
     @Bean
     @ConditionalOnMissingBean
     public ResponseEntityBuilderFactory<Identifiable<UUID>, Response> jerseyResponseEntityBuilderFactory(EndPointRegistry endPointRegistry) {
-        return new JerseyResponseEntityBuilderFactory(jerseyEntityURLBuilder(endPointRegistry));
+        return new JerseyResponseEntityBuilderFactory<>(jerseyEntityURLBuilder(endPointRegistry));
     }
 }
 

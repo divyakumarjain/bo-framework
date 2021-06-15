@@ -8,13 +8,13 @@ import org.divy.common.bo.rest.LinkBuilderFactory;
 
 import java.util.*;
 
-public abstract class AbstractAssociationsHandler<T extends BusinessObject<UUID>, L> implements AssociationsHandler<T, UUID>
+public abstract class AbstractAssociationsHandler<T extends BusinessObject<I>,I, L> implements AssociationsHandler<T, I, L>
 {
     protected final Class<T>                                         source;
     protected final MetaDataProvider                                 metaDataProvider;
     protected final MapperBuilder                                    mapperBuilder;
     protected final LinkBuilderFactory<L>                            linkBuilderFactory;
-    private ArrayList<Association<T, UUID>> associations = null;
+    private ArrayList<Association<T, I, L>> associations = null;
 
     protected AbstractAssociationsHandler(MetaDataProvider metaDataProvider, Class<T> source, MapperBuilder mapperBuilder, LinkBuilderFactory<L> linkBuilderFactory)
     {
@@ -25,12 +25,12 @@ public abstract class AbstractAssociationsHandler<T extends BusinessObject<UUID>
     }
 
     @Override
-    public Optional<Association<T, UUID>> getAssociation(String relation) {
+    public Optional<Association<T, I, L>> getAssociation(String relation) {
         return getAssociations().stream().filter(it->relation.equals(it.getName())).findAny();
     }
 
     @Override
-    public List<Association<T, UUID>> getAssociations() {
+    public List<Association<T, I, L>> getAssociations() {
         if(associations==null){
             associations = new ArrayList<>();
             doBuildAssociations();
@@ -40,8 +40,8 @@ public abstract class AbstractAssociationsHandler<T extends BusinessObject<UUID>
 
     protected abstract void doBuildAssociations();
 
-    protected AssociationBuilder<T, UUID, ?> association() {
-        AssociationBuilder<T, UUID, ?> association = new AssociationBuilder<>();
+    protected AssociationBuilder<T, I, L> association() {
+        var association = new AssociationBuilder<T, I, L>();
         associations.add(association);
         return association;
     }

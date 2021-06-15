@@ -1,6 +1,7 @@
 package org.divy.common.bo.spring.mvc.rest.hatoas;
 
 import org.divy.common.bo.endpoint.hatoas.AbstractRepresentation;
+import org.divy.common.bo.endpoint.hatoas.Representation;
 import org.springframework.hateoas.Link;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class SpringMVCRepresentation<I> extends AbstractRepresentation<I, Map<String, Object>, Link> {
+public class SpringMVCRepresentation<I> extends AbstractRepresentation<I, Map<String, Object>, Link> implements Representation<I, Map<String, Object>, Link>{
 
     private Set<Link> links;
 

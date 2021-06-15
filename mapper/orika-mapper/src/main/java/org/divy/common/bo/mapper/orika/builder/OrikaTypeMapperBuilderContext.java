@@ -10,6 +10,7 @@ import ma.glasnost.orika.property.PropertyResolverStrategy;
 import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.FieldMapperContext;
 import org.divy.common.bo.mapper.builder.AbstractTypeMapperBuilderContext;
+import org.divy.common.bo.mapper.builder.TypeMapperBuilderContext;
 import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
 import org.divy.common.bo.mapper.builder.options.OneWayMappingOption;
 import org.divy.common.bo.mapper.builder.options.field.*;
@@ -92,7 +93,7 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
 
         private void processTypeOptions(ClassMapBuilder<S, T> boClassMapBuilder) {
             mapperBuilderOptions
-                    .forEach( option -> configureTypeMapping(boClassMapBuilder, option));
+                    .forEach( option -> configureTypeMapping( option));
         }
 
         private void configFieldMapping(ClassMapBuilder<S, T> boClassMapBuilder) {
@@ -200,11 +201,12 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
                     .findFirst();
         }
 
-        private void configureTypeMapping(ClassMapBuilder<S, T> boClassMapBuilder, MapperBuilderOption option) {
+        private void configureTypeMapping( MapperBuilderOption option ) {
             if(option instanceof ChildTypeMapperOption) {
-                final OrikaTypeMapperBuilderContext childMapping = (OrikaTypeMapperBuilderContext) ((ChildTypeMapperOption) option)
-                        .getChildMapping();
-                childMapping.registerMapping(mapperFactory);
+                TypeMapperBuilderContext<?, ?> childMapping = ((ChildTypeMapperOption<?, ?>) option).getChildMapping();
+                if( childMapping instanceof OrikaTypeMapperBuilderContext) {
+                    ((OrikaTypeMapperBuilderContext<?, ?>) childMapping).registerMapping(mapperFactory);
+                }
             }
         }
 

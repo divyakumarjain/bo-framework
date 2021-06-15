@@ -37,7 +37,7 @@ public abstract class BaseBOEndpointContainerTest<E extends BusinessObject<I>
     /**
      * @param testDataProvider data provider for the test
      */
-    public BaseBOEndpointContainerTest(TestDataProvider<E> testDataProvider) {
+    protected BaseBOEndpointContainerTest(TestDataProvider<E> testDataProvider) {
         super(testDataProvider);
         jerseyTestProxy = new RestResourceTest();
     }

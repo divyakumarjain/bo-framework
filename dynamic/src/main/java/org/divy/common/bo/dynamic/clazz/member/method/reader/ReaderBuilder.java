@@ -1,14 +1,15 @@
 package org.divy.common.bo.dynamic.clazz.member.method.reader;
 
 import org.divy.common.bo.dynamic.clazz.Builder;
+import org.divy.common.bo.dynamic.clazz.ParentAwareBuilder;
 
 import java.util.Optional;
 
 
-public class ReaderBuilder<P extends Builder> implements Reader, Builder {
+public class ReaderBuilder<P extends Builder> implements Reader, ParentAwareBuilder<P> {
 
     protected Reader reader;
-    private P parent;
+    private final P parent;
 
     public ReaderBuilder(P parent)
     {

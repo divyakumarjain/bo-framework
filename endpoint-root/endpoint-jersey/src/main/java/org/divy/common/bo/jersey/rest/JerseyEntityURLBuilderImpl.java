@@ -14,9 +14,9 @@ import java.util.UUID;
 
 public class JerseyEntityURLBuilderImpl implements RESTEntityURLBuilder<Identifiable<UUID>>{
 
-    private LinkBuilderFactory<Link> linkBuilderFactory;
+    private final LinkBuilderFactory<Link> linkBuilderFactory;
 
-    private EndPointRegistry endPointRegistry;
+    private final EndPointRegistry endPointRegistry;
 
     @Inject
     public JerseyEntityURLBuilderImpl(LinkBuilderFactory<Link> linkBuilderFactory
@@ -25,18 +25,18 @@ public class JerseyEntityURLBuilderImpl implements RESTEntityURLBuilder<Identifi
         this.endPointRegistry = endPointRegistry;
     }
 
-    private URI buildEntityUri(Identifiable entity, LinkBuilder<Link> linkBuilder) {
+    private URI buildEntityUri(Identifiable<UUID> entity, LinkBuilder<Link> linkBuilder) {
         final Class<?> endPointClass = getEndPointClass(entity);
         return linkBuilder
                 .buildURI(endPointClass,"readMethod", entity.identity());
     }
 
     @Override
-    public URI buildEntityUri(Identifiable entity) {
+    public URI buildEntityUri(Identifiable<UUID> entity) {
         return buildEntityUri(entity, linkBuilderFactory.newBuilder());
     }
 
-    private Class<?> getEndPointClass( Identifiable entity ) {
+    private Class<?> getEndPointClass( Identifiable<UUID> entity ) {
         return endPointRegistry.getEndPointClass(entity);
     }
 }

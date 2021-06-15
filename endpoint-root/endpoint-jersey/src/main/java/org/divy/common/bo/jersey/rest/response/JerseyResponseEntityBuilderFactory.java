@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 
-public class JerseyResponseEntityBuilderFactory<T, I extends Serializable> implements ResponseEntityBuilderFactory<T, Response> {
+public class JerseyResponseEntityBuilderFactory<T> implements ResponseEntityBuilderFactory<T, Response> {
 
     private RESTEntityURLBuilder<T> entityURLBuilder;
 

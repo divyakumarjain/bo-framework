@@ -14,7 +14,7 @@ import org.divy.common.bo.rest.LinkBuilderFactory;
 import javax.ws.rs.core.Link;
 import java.util.*;
 
-public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends AbstractAssociationsHandler<T, Link>
+public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends AbstractAssociationsHandler<T, UUID, Link>
 {
 
     protected JerseyAssociationsHandler(Class<T> source
@@ -27,10 +27,10 @@ public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends A
     protected void doBuildAssociations() {
         final Map<String, FieldMetaData> childEntities = metaDataProvider.getChildEntities(source);
         childEntities.forEach((name, entityMeta) -> {
-            final AssociationBuilder association = association();
+            final AssociationBuilder<T, UUID, Link> association = association();
             association
-                  .withMapper(new JerseyHATOASMapper<>(
-                        new KeyValuePairMapperImpl<>(source, mapperBuilder, metaDataProvider), linkBuilderFactory,metaDataProvider))
+                  .withMapper( new JerseyHATOASMapper<>( new KeyValuePairMapperImpl<>( source, mapperBuilder, metaDataProvider ), linkBuilderFactory,
+                        metaDataProvider ))
                   .attribute(name);
 
             if(entityMeta.isCollection()) {

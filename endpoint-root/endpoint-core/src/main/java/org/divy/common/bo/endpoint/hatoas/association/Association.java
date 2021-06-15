@@ -9,19 +9,18 @@ import org.divy.common.bo.dynamic.clazz.member.method.reader.Reader;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public class Association<T extends BusinessObject<I>, I> {
-    protected BOMapper<T, Representation> mapper;
-    private   String                      name;
+public class Association<T extends BusinessObject<I>, I, L> {
+    protected BOMapper<T, Representation<I, Map<String, Object>, L>> mapper;
+    private   String                                                 name;
     private   Cardinality                 cardinality;
     private   List<PropagateSave>         propagateSaves;
     private   Reader                      reader;
     private   boolean                     includeInReadOperation;
     private   BOManager<T, I>             manager;
-    private   Setter                      setter;
-
-
+    private   Setter<T, ?>                setter;
 
     public Optional<Object> read(Object source, Object... argv) {
 
@@ -41,10 +40,10 @@ public class Association<T extends BusinessObject<I>, I> {
         });
     }
 
-    public Optional<Object> create( T source,  Representation target ) {
-        final var targetBo = mapper.createBO( target ) ;
+    public Optional<Object> create( T source,  Representation<I, Map<String, Object>,L> target ) {
+        final var targetBo = (T) mapper.createBO( target );
 
-        BusinessObject fromStore;
+        BusinessObject<I> fromStore;
 
         if(targetBo.identity() == null) {
             fromStore = manager.create(targetBo);

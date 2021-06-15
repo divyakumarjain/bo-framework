@@ -72,7 +72,7 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
         }
     }
 
-    private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
+    private Optional<Class<? extends DefaultHATEOASJerseyEndpoint>> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
         return DynamicClassBuilder.createClass( JerseyHATOASEndPointFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "HyperMediaEndPoint")
                 .subClass(DefaultHATEOASJerseyEndpoint.class)
                     .addAnnotation(javax.ws.rs.Path.class)
