@@ -10,7 +10,6 @@ import org.divy.common.bo.dynamic.clazz.member.method.DynamicMethodBuilderContex
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.HashSet;
 import java.util.Optional;
@@ -60,7 +59,7 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
     }
 
     public DynamicClassConstructorBuilderContext<C> addConstructor() {
-        final DynamicClassConstructorBuilderContext dynamicClassConstructorBuilderContext = new DynamicClassConstructorBuilderContext(this);
+        final var dynamicClassConstructorBuilderContext = new DynamicClassConstructorBuilderContext(this);
         this.constructors.add(dynamicClassConstructorBuilderContext);
         return dynamicClassConstructorBuilderContext;
     }

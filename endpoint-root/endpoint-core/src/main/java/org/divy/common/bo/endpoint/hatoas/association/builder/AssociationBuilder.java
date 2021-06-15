@@ -65,15 +65,15 @@ public class AssociationBuilder<T extends BusinessObject<I>, I, P extends Builde
 
 
     public <O> O readWith(Class<O> groupClass) {
-        ReaderBuilder readerBuilder = new ReaderBuilder(this);
+        var readerBuilder = new ReaderBuilder(this);
         setReader(readerBuilder);
         return (O) readerBuilder.withMethodOn(groupClass);
     }
 
     public  <O> O createWith(Class<O> groupClass) {
-        SetterBuilder createBuilder = new SetterBuilder();
+        var createBuilder = new SetterBuilder();
         setSetter(createBuilder);
-        return createBuilder.withMethodOn(groupClass);
+        return (O) createBuilder.withMethodOn(groupClass);
     }
 
 

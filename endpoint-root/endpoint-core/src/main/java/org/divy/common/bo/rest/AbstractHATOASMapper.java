@@ -24,7 +24,7 @@ public abstract class AbstractHATOASMapper<E extends BusinessObject<UUID>
     private final Class<R> representationType;
     private final BOMapper<E, Map<String, Object>> keyValuePairMapper;
 
-    public AbstractHATOASMapper(Class<R> representationType
+    protected AbstractHATOASMapper(Class<R> representationType
                                  , BOMapper<E, Map<String, Object>> keyValuePairMapper
                                  , LinkBuilderFactory<L> linkBuilderFactory
                                  , MetaDataProvider metaDataProvider) {
@@ -53,7 +53,7 @@ public abstract class AbstractHATOASMapper<E extends BusinessObject<UUID>
 
     @Override
     public E createBO(R representation) {
-        final E businessObject = this.keyValuePairMapper.createBO( representation.getData() );
+        final var businessObject = this.keyValuePairMapper.createBO( representation.getData() );
         doReadAssociations(representation, businessObject);
         doReadLinks(representation, businessObject);
         return businessObject;
@@ -66,7 +66,7 @@ public abstract class AbstractHATOASMapper<E extends BusinessObject<UUID>
 
     @Override
     public R createFromBO(E businessObject) {
-        R representation = createRepresentationInstance();
+        var representation = createRepresentationInstance();
         representation.setId(businessObject.identity());
         representation._type(businessObject._type());
         mapFromBO(businessObject, representation);

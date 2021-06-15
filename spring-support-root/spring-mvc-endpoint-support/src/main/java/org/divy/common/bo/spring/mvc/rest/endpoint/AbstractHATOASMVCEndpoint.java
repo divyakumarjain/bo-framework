@@ -7,10 +7,7 @@ import org.divy.common.bo.endpoint.hatoas.association.AssociationsHandler;
 import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 
@@ -27,7 +24,7 @@ public abstract class AbstractHATOASMVCEndpoint<E extends BusinessObject<I>,
         extends AbstractHATOASEndpoint<E, R, I, ResponseEntity>
 {
 
-    public AbstractHATOASMVCEndpoint(ResponseEntityBuilderFactory<R, ResponseEntity> responseEntityBuilderFactory, AssociationsHandler<E,I> associationsHandler) {
+    protected AbstractHATOASMVCEndpoint(ResponseEntityBuilderFactory<R, ResponseEntity> responseEntityBuilderFactory, AssociationsHandler<E,I> associationsHandler) {
         super(responseEntityBuilderFactory, associationsHandler);
     }
 
@@ -65,7 +62,7 @@ public abstract class AbstractHATOASMVCEndpoint<E extends BusinessObject<I>,
         return super.read(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value =  "/{id}/{relation}")
+    @GetMapping("/{id}/{relation}")
     @Override
     public ResponseEntity readRelation(@PathVariable("id") I id,
                                  @PathVariable("relation")String relation) {
@@ -81,7 +78,7 @@ public abstract class AbstractHATOASMVCEndpoint<E extends BusinessObject<I>,
      *
      * @return returns 201 status code for successful creation of relationship/association
      */
-    @RequestMapping(method = RequestMethod.POST ,value = "/{id}/{relation}")
+    @PostMapping("/{id}/{relation}")
     @Override
     public ResponseEntity createRelation(@PathVariable("id") I id,
                                    @PathVariable("relation")String relation,
@@ -90,14 +87,14 @@ public abstract class AbstractHATOASMVCEndpoint<E extends BusinessObject<I>,
         return super.createRelation(id, relation, representation);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/{id}/{relation}")
+    @PutMapping("/{id}/{relation}")
     @Override
     public ResponseEntity updateRelation(I id,
                                          @PathVariable("relation") String relation) {
         return super.updateRelation(id, relation);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/{relation}")
+    @DeleteMapping("/{id}/{relation}")
     @Override
     public ResponseEntity deleteRelation(I id,
           @PathVariable("relation") String relation) {

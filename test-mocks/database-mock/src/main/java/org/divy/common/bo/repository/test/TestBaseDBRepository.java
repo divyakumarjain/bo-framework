@@ -18,7 +18,7 @@ public abstract class TestBaseDBRepository<E extends BusinessObject<I>, I> exten
 
     private BORepository<E, I> boRepository;
 
-    public TestBaseDBRepository(TestDataProvider<E> testDataProvider) {
+    protected TestBaseDBRepository(TestDataProvider<E> testDataProvider) {
         super(testDataProvider);
     }
 

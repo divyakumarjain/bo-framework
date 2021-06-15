@@ -14,7 +14,7 @@ public abstract class DynamicMemberBuilderContext<C extends DynamicMemberBuilder
     private MemberVisibility methodVisibility;
     private Class<?> memberType;
 
-    public DynamicMemberBuilderContext(P builderContext) {
+    protected DynamicMemberBuilderContext(P builderContext) {
         super(builderContext);
     }
 

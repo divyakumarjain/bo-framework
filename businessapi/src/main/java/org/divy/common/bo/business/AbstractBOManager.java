@@ -15,6 +15,8 @@ import java.util.Optional;
 
 public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOManager<E,I> {
 
+    public static final String BO_VALIDATION_CODE = "BO-VALIDATION";
+
     final BORepository<E, I> repository;
     final BOValidator<E, I> validator;
 
@@ -28,8 +30,13 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
         if (results.isEmpty())
             return repository.create(businessObject);
         else {
-            throw new BOValidationException("Validation for Business object " + businessObject.identity() + " failed", "BO-VALIDATION", results);
+            throw new BOValidationException( buildFormattedMessage( businessObject ), BO_VALIDATION_CODE, results);
         }
+    }
+
+    private String buildFormattedMessage( E businessObject )
+    {
+        return String.format( "Validation for Business object %s failed", businessObject.identity() );
     }
 
     private ValidationResults doValidate(E businessObject, Class checkGroupClass) {
@@ -46,7 +53,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
             return repository.update(id, businessObject);
         }
         else {
-            throw new BOValidationException("Validation for Business object " + businessObject.identity() + " failed", "BO-VALIDATION", results);
+            throw new BOValidationException( buildFormattedMessage( businessObject ), BO_VALIDATION_CODE, results);
         }
     }
 
@@ -56,7 +63,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
             return repository.delete(businessObject);
         }
         else {
-            throw new BOValidationException("Validation for Business object " + businessObject.identity() + " failed", "BO-VALIDATION", results);
+            throw new BOValidationException( buildFormattedMessage( businessObject ), BO_VALIDATION_CODE, results);
         }
     }
 
@@ -69,13 +76,13 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
     }
 
     public E deleteById(I id) {
-        final E businessObject = get(id).orElseThrow( () -> new NotFoundException("Could not find the entity") );
+        var businessObject = get(id).orElseThrow( () -> new NotFoundException("Could not find the entity") );
         ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
         if (results.isEmpty()) {
             return repository.deleteById(id);
         }
         else {
-            throw new BOValidationException("Validation for Business object " + businessObject.identity() + " failed", "BO-VALIDATION", results);
+            throw new BOValidationException( buildFormattedMessage( businessObject ), BO_VALIDATION_CODE, results);
         }
     }
 

@@ -23,13 +23,13 @@ public class EnumArrayAnnotationParam implements DynamicAnnotationParam {
     public MemberValue doBuildAnnotationParamValue(ConstPool constPool) {
         EnumMemberValue[] memberValues = Arrays.stream(values)
                 .map(param -> {
-                    EnumMemberValue enumMemberValue = new EnumMemberValue(constPool);
+                    var enumMemberValue = new EnumMemberValue(constPool);
                     enumMemberValue.setType(param.getClass().getTypeName());
                     enumMemberValue.setValue(param.name());
                     return enumMemberValue;
                 })
                 .toArray(EnumMemberValue[]::new);
-        ArrayMemberValue arrayMemberValue = new ArrayMemberValue(constPool);
+        var arrayMemberValue = new ArrayMemberValue(constPool);
         arrayMemberValue.setValue(memberValues);
         return arrayMemberValue;
     }

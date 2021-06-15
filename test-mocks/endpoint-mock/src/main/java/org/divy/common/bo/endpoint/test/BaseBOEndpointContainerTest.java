@@ -107,7 +107,7 @@ public abstract class BaseBOEndpointContainerTest<E extends BusinessObject<I>
         }
 
         protected Client client(TestContainer tc) {
-            Client client = super.client();
+            var client = super.client();
             client.register(new LoggingFeature());
             return client;
         }

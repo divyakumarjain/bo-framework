@@ -25,7 +25,7 @@ public abstract class AbstractHATOASJerseyEndpoint<B extends BusinessObject<I>,
 {
 
     @Inject
-    public AbstractHATOASJerseyEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory, AssociationsHandler<B,I> associationsHandler)
+    protected AbstractHATOASJerseyEndpoint(ResponseEntityBuilderFactory responseEntityBuilderFactory, AssociationsHandler<B,I> associationsHandler)
     {
         super(responseEntityBuilderFactory,associationsHandler);
     }

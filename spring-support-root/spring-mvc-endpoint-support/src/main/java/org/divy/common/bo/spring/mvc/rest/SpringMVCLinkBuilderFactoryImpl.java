@@ -6,7 +6,7 @@ import org.springframework.hateoas.Link;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class SpringMVCLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory {
+public class SpringMVCLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory<Link> {
 
     public SpringMVCLinkBuilderFactoryImpl() {
         this(null);
@@ -19,7 +19,7 @@ public class SpringMVCLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory 
     @Override
     public LinkBuilder<Link> newBuilder() {
         String scheme = DEFAULT_SCHEME;
-        String originalPath = "";
+        var originalPath = "";
 
         if (request != null) {
             scheme = resolveSchema();

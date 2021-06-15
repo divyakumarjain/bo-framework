@@ -13,7 +13,7 @@ public class EnumAnnotationParam implements DynamicAnnotationParam {
 
     @Override
     public MemberValue doBuildAnnotationParamValue(ConstPool constPool) {
-        EnumMemberValue enumMemberValue = new EnumMemberValue(constPool);
+        var enumMemberValue = new EnumMemberValue(constPool);
         enumMemberValue.setType(value.getClass().getTypeName());
         enumMemberValue.setValue(value.name());
         return enumMemberValue;

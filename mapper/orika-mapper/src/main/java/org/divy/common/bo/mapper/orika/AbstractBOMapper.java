@@ -15,7 +15,7 @@ public abstract class AbstractBOMapper<S, T> implements BOMapper<S, T> {
     protected Class<T> otherObjectType;
     protected MapperFacade mapperFacade;
 
-    public AbstractBOMapper(Class<S> businessObjectType
+    protected AbstractBOMapper(Class<S> businessObjectType
                             , Class<T> otherObjectType) {
         this.businessObjectType = businessObjectType;
         this.otherObjectType = otherObjectType;

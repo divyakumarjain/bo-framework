@@ -19,7 +19,7 @@ public abstract class AbstractDatabaseDeleteCommand<E extends BusinessObject<I>,
     public E delete(E entity)
     {
 
-        I id = entity.identity();
+        var id = entity.identity();
 
         return deleteById(id);
     }
@@ -28,9 +28,9 @@ public abstract class AbstractDatabaseDeleteCommand<E extends BusinessObject<I>,
     @Override
     public E deleteById(I id)
     {
-        boolean isDeleteSuccess = false;
+        var isDeleteSuccess = false;
         try {
-            E entity = getReference(id);
+            var entity = getReference(id);
 
             transactionBegin();
             if(entity == null) {

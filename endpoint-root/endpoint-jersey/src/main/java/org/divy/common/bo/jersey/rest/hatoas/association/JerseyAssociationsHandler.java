@@ -11,9 +11,10 @@ import org.divy.common.bo.metadata.FieldMetaData;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 
+import javax.ws.rs.core.Link;
 import java.util.*;
 
-public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends AbstractAssociationsHandler<T>
+public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends AbstractAssociationsHandler<T, Link>
 {
 
     protected JerseyAssociationsHandler(Class<T> source

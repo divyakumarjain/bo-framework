@@ -13,7 +13,7 @@ public abstract class AbstractTypeMapperBuilderContext<S, T> implements TypeMapp
     protected final List<MapperBuilderOption> mapperBuilderOptions = new ArrayList<>();
     protected final Map<String, FieldMapperContext> fields;
 
-    public AbstractTypeMapperBuilderContext(MapperBuilder builder, Class<S> source, Class<T> target) {
+    protected AbstractTypeMapperBuilderContext(MapperBuilder builder, Class<S> source, Class<T> target) {
         this.builder = builder;
         this.source = source;
         this.target = target;

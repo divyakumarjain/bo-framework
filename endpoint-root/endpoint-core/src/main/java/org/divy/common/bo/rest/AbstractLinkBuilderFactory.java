@@ -17,7 +17,7 @@ public abstract class AbstractLinkBuilderFactory<L> implements LinkBuilderFactor
 
     protected HttpServletRequest request;
 
-    public AbstractLinkBuilderFactory(HttpServletRequest request)
+    protected AbstractLinkBuilderFactory(HttpServletRequest request)
     {
         this.request = request;
     }

@@ -10,7 +10,7 @@ public abstract class CreateEntityResponseBuilder<T, R> extends AbstractResponse
 
     protected RESTEntityURLBuilder<T> entityURLBuilder;
 
-    public CreateEntityResponseBuilder(RESTEntityURLBuilder<T> entityURLBuilder) {
+    protected CreateEntityResponseBuilder(RESTEntityURLBuilder<T> entityURLBuilder) {
         super();
         entity(entity);
         this.entityURLBuilder = entityURLBuilder;

@@ -11,12 +11,12 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable, R> {
 
     protected ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory;
 
-    public AbstractCRUDEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory) {
+    protected AbstractCRUDEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory) {
         this.responseEntityBuilderFactory = responseEntityBuilderFactory;
     }
 
     public  R create(@NotNull E businessObject)  {
-        E createdBo = doCreate(businessObject);
+        var createdBo = doCreate(businessObject);
 
         return responseEntityBuilderFactory.create(createdBo).build();
     }
@@ -46,7 +46,7 @@ public abstract class AbstractCRUDEndpoint<E, I extends Serializable, R> {
     }
 
     public  R read(@NotNull I id) {
-        E entity = doRead(id);
+        var entity = doRead(id);
 
         return responseEntityBuilderFactory.read(entity).build();
     }
