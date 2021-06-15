@@ -3,6 +3,7 @@ package org.divy.common.bo.spring.mvc.rest.factory;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.spring.core.factory.DynamicBeansFactory;
+import org.divy.common.bo.spring.mvc.rest.exception.GlobalControllerExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 public class SpringMVCEndpointBeansFactory implements DynamicBeansFactory<Class<? extends BusinessObject>> {
 
-    static private final Logger LOGGER = LoggerFactory.getLogger( SpringMVCEndpointBeansFactory.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( SpringMVCEndpointBeansFactory.class );
     private final EndPointRegistry endPointRegistry;
     private Set<SpringMVCEndPointClassFactory> springMVCEndPointFactories;
 
@@ -49,7 +50,7 @@ public class SpringMVCEndpointBeansFactory implements DynamicBeansFactory<Class<
                 BeanDefinitionBuilder.genericBeanDefinition( endpointClass)
                       .getBeanDefinition());
 
-                Properties mappingProperties = new Properties();
+                var mappingProperties = new Properties();
 
                 mappingProperties.put( endPointUrl, endPointBeanName );
 
@@ -66,7 +67,7 @@ public class SpringMVCEndpointBeansFactory implements DynamicBeansFactory<Class<
     @Override
     public void registerSingletons(BeanDefinitionRegistry beanDefinitionRegistry) {
         beanDefinitionRegistry.registerBeanDefinition("globalControllerExceptionHandler", BeanDefinitionBuilder.genericBeanDefinition(
-              org.divy.common.bo.spring.rest.exception.GlobalControllerExceptionHandler.class)
+              GlobalControllerExceptionHandler.class)
                 .getBeanDefinition());
     }
 }

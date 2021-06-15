@@ -38,7 +38,7 @@ public class Section extends AbstractJPABusinessObject {
             return false;
         if (!super.equals(o))
             return false;
-        Section section = (Section) o;
+        var section = (Section) o;
         return Objects.equals(getGreetings(), section.getGreetings());
     }
 

@@ -8,15 +8,15 @@ import org.divy.common.bo.rest.LinkBuilderFactory;
 
 import java.util.*;
 
-public abstract class AbstractAssociationsHandler<T extends BusinessObject<UUID>> implements AssociationsHandler<T, UUID>
+public abstract class AbstractAssociationsHandler<T extends BusinessObject<UUID>, L> implements AssociationsHandler<T, UUID>
 {
     protected final Class<T>                                         source;
     protected final MetaDataProvider                                 metaDataProvider;
     protected final MapperBuilder                                    mapperBuilder;
-    protected final LinkBuilderFactory                               linkBuilderFactory;
+    protected final LinkBuilderFactory<L>                            linkBuilderFactory;
     private ArrayList<Association<T, UUID>> associations = null;
 
-    public AbstractAssociationsHandler(MetaDataProvider metaDataProvider, Class<T> source, MapperBuilder mapperBuilder, LinkBuilderFactory linkBuilderFactory)
+    protected AbstractAssociationsHandler(MetaDataProvider metaDataProvider, Class<T> source, MapperBuilder mapperBuilder, LinkBuilderFactory<L> linkBuilderFactory)
     {
         this.metaDataProvider = metaDataProvider;
         this.source = source;

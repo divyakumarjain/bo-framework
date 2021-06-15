@@ -33,14 +33,14 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     /**
      * @param testDataProvider the test data provider
      */
-    public BaseBOEndpointUnitTest(TestDataProvider<E> testDataProvider) {
+    protected BaseBOEndpointUnitTest(TestDataProvider<E> testDataProvider) {
         super(testDataProvider);
     }
 
 
     @Override
     protected E doAssertExists(I id) {
-        Response response = endpointInstance.read(id);
+        var response = endpointInstance.read(id);
 
 
         assertThat(response,
@@ -52,24 +52,24 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
     @Override
     protected E doCreateEntity(E entity)
     {
-        Response response = endpointInstance.create(entity);
+        var response = endpointInstance.create(entity);
         assertThat(response, hasProperty(HEADERS,
                 hasKey(is(equalTo(HttpHeaders.LOCATION)))));
 
-        I key = createKeyFromURI(response.getHeaders().getFirst(HttpHeaders.LOCATION).toString());
+        var key = createKeyFromURI(response.getHeaders().getFirst(HttpHeaders.LOCATION).toString());
         return doGetByKey(key).orElseThrow( () -> new NotFoundException("Could not find the entity") );
     }
 
 
     @Override
     protected Optional<E> doGetByKey(I id) {
-        Response response = endpointInstance.read(id);
+        var response = endpointInstance.read(id);
         return Optional.ofNullable( (E)response.getEntity() );
     }
 
     @Override
     protected void doAssertNotExists(I id) {
-        Response response = endpointInstance.read(id);
+        var response = endpointInstance.read(id);
 
         assertThat(response, both(hasProperty(STATUS, is(equalTo(404)))).and(hasProperty(ENTITY, nullValue())));
 
@@ -77,20 +77,20 @@ public abstract class BaseBOEndpointUnitTest<E extends BusinessObject<I>, I exte
 
     @Override
     protected void doUpdateEntity(I id, E entity) {
-        Response response = this.endpointInstance.update(entity.identity(), entity);
+        var response = this.endpointInstance.update(entity.identity(), entity);
         assertThat(response, hasProperty(STATUS, is(equalTo(204))));
     }
 
     @Override
     protected void doDeleteEntity(E entity) {
-        Response response = this.endpointInstance.delete(entity.identity());
+        var response = this.endpointInstance.delete(entity.identity());
         assertThat(response, hasProperty(STATUS, is(equalTo(204))));
     }
 
     @Override
     @SuppressWarnings("unchecked")
     protected List<E> doSearchEntities(Query searchQuery) {
-        Response response = this.endpointInstance.search(searchQuery);
+        var response = this.endpointInstance.search(searchQuery);
         assertThat(response, hasProperty(STATUS, is( Matchers.anyOf(equalTo(200), equalTo(204)))));
         return (List<E>) response.getEntity();
     }

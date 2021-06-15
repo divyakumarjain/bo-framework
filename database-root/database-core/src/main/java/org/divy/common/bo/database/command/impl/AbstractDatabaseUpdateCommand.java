@@ -52,7 +52,7 @@ public abstract class AbstractDatabaseUpdateCommand<E extends AbstractBusinessOb
 
 
         E fromPersistence;
-        boolean isUpdateSuccess = false;
+        var isUpdateSuccess = false;
         try {
             fromPersistence = getReference(id);
 

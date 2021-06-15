@@ -39,7 +39,7 @@ public class Page extends AbstractJPABusinessObject {
             return false;
         if (!super.equals(o))
             return false;
-        Page page = (Page) o;
+        var page = (Page) o;
         return Objects.equals(getSections(), page.getSections());
     }
 

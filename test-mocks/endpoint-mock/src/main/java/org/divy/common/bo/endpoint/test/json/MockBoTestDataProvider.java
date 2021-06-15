@@ -39,7 +39,7 @@ public class MockBoTestDataProvider implements
 
         businessObject.setName("data1");
 
-        MockBoJerseyEndpoint.MockEntity childBusinessObject = new MockBoJerseyEndpoint.MockEntity();
+        var childBusinessObject = new MockBoJerseyEndpoint.MockEntity();
 
         childBusinessObject.setName("child1");
 
@@ -60,7 +60,7 @@ public class MockBoTestDataProvider implements
     public void fillTestDataSet2(MockBoJerseyEndpoint.MockEntity businessObject) {
         businessObject.setName("data2");
 
-        MockBoJerseyEndpoint.MockEntity childBusinessObject = new MockBoJerseyEndpoint.MockEntity();
+        var childBusinessObject = new MockBoJerseyEndpoint.MockEntity();
 
         childBusinessObject.setName("child2");
 
@@ -85,7 +85,7 @@ public class MockBoTestDataProvider implements
 
     @Override
     public Query createSearchQuery() {
-        AttributeQuery userQuery = new AttributeQuery();
+        var userQuery = new AttributeQuery();
 
         userQuery.put("name", OperatorFactory.equalsComparison("data1"));
 

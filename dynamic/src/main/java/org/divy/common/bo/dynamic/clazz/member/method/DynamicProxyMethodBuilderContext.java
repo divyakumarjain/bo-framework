@@ -28,7 +28,7 @@ public class DynamicProxyMethodBuilderContext
         try {
             CtClass[] parameterTypes = methodTobeProxied .getParameterTypes();
 
-            for(int paramIndex =0; paramIndex< parameterTypes.length; paramIndex++) {
+            for(var paramIndex =0; paramIndex< parameterTypes.length; paramIndex++) {
                 this.parameters.add(paramIndex, new DynamicMethodParamBuilderContext<>(this, parameterTypes[paramIndex], paramIndex));
             }
         } catch (NotFoundException e) {
@@ -75,11 +75,11 @@ public class DynamicProxyMethodBuilderContext
         if(parameterTypes.length==0) {
             return "";
         } else {
-            StringBuilder builder = new StringBuilder(parameterTypes.length*3);
+            var builder = new StringBuilder(parameterTypes.length*3);
             builder.append("(")
                     .append(parameterTypes[0].getName())
                     .append(")$1");
-            for (int i = 2; i <=parameterTypes.length; i++) {
+            for (var i = 2; i <=parameterTypes.length; i++) {
                 builder.append(",(")
                         .append(parameterTypes[i-1].getName())
                         .append(")$").append(i);

@@ -20,7 +20,7 @@ public class JerseyLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory<Lin
     @Override
     public LinkBuilder<Link> newBuilder() {
         String scheme = DEFAULT_SCHEME;
-        String originalPath = "";
+        var originalPath = "";
 
         if (request != null) {
             scheme = resolveSchema();

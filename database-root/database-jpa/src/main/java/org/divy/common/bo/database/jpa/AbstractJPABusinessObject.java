@@ -9,11 +9,11 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class AbstractJPABusinessObject extends AbstractBusinessObject {
 
-    public AbstractJPABusinessObject(UUID uuid) {
+    protected AbstractJPABusinessObject(UUID uuid) {
         super(uuid);
     }
 
-    public AbstractJPABusinessObject() {
+    protected AbstractJPABusinessObject() {
     }
 
     @Id

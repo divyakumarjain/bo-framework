@@ -23,7 +23,7 @@ public class StringArrayAnnotationParam implements DynamicAnnotationParam {
         StringMemberValue[] memberValues = Arrays.stream(values)
                 .map(param -> new StringMemberValue(param, constPool))
                 .toArray(StringMemberValue[]::new);
-        ArrayMemberValue arrayMemberValue = new ArrayMemberValue(constPool);
+        var arrayMemberValue = new ArrayMemberValue(constPool);
         arrayMemberValue.setValue(memberValues);
         return arrayMemberValue;
     }

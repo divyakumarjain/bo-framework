@@ -49,7 +49,7 @@ public class DatabaseContext extends AbstractEntityManagerContext {
     @Override
     public CommandContext createChildContext()
     {
-        DatabaseContext childContext = new DatabaseContext(getPersistenceUnitName());
+        var childContext = new DatabaseContext(getPersistenceUnitName());
 
         childContext.parentContext = this;
 

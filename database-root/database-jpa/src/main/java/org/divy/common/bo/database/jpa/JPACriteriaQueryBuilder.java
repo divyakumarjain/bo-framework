@@ -23,7 +23,7 @@ public class JPACriteriaQueryBuilder<E> {
 
     public CriteriaQuery<E> createCriteriaQuery(AttributeQuery query) {
 
-        CriteriaBuilder criteriaBuilder = this.entityManager.getCriteriaBuilder();
+        var criteriaBuilder = this.entityManager.getCriteriaBuilder();
 
         CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(entityType);
 
@@ -45,7 +45,7 @@ public class JPACriteriaQueryBuilder<E> {
     private Predicate createPredicate(Map.Entry<String, Operator> operatorEntry,
                                       CriteriaBuilder cb,Root<? extends E> root ) {
 
-        Operator operatorEntryValue = operatorEntry.getValue();
+        var operatorEntryValue = operatorEntry.getValue();
         Path<Number> path = root.get(operatorEntry.getKey());
         return createPredicates(path, cb, operatorEntryValue);
     }
@@ -71,13 +71,13 @@ public class JPACriteriaQueryBuilder<E> {
             InComparison<String> inOperator = (InComparison<String>) operatorEntryValue;
             returnPredicate = cb.in(path).in(inOperator.getValues());
         } else if (operatorEntryValue instanceof Or) {
-            Or orOperator = (Or) operatorEntryValue;
+            var orOperator = (Or) operatorEntryValue;
             returnPredicate = cb.or(createPredicates(path,cb,orOperator.getOperations()));
         } else if (operatorEntryValue instanceof And) {
-            And andOperator = (And) operatorEntryValue;
+            var andOperator = (And) operatorEntryValue;
             returnPredicate = cb.and(createPredicates(path,cb,andOperator.getOperations()));
         } else if (operatorEntryValue instanceof Not) {
-            Not notOperator = (Not) operatorEntryValue;
+            var notOperator = (Not) operatorEntryValue;
             returnPredicate = cb.not(createPredicates(path,cb,notOperator.getOperation()));
         }
         return returnPredicate;
