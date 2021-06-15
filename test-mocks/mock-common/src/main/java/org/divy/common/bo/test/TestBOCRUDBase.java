@@ -99,7 +99,7 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
     @Disabled
     //TODO: Finish Search framework
     public void testSearch() {
-        E entity1 = testDataProvider.getEntityInstance();
+        var entity1 = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet1(entity1);
 

@@ -4,9 +4,7 @@ import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.validation.AbstractBOValidator;
 import org.divy.common.bo.validation.ValidationResults;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.Collection;
 
 public class JSR303Validator<B extends BusinessObject<I>, I> extends AbstractBOValidator<B, I> {
 
@@ -25,7 +23,7 @@ public class JSR303Validator<B extends BusinessObject<I>, I> extends AbstractBOV
 
     @Override
     public ValidationResults<B, I> validate(B businessObject, Class<?> validationGroup) {
-        final var validationResults = new ValidationResults();
+        final var validationResults = new ValidationResults<B,I>();
         validationResults.addConstraintViolation(validator.validate(businessObject, validationGroup));
         return validationResults;
     }

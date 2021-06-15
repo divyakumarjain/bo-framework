@@ -23,4 +23,5 @@ module bo.framework.spring.mvc {
     requires javax.servlet.api;
 
     exports org.divy.common.bo.spring.mvc.rest.config;
+    exports org.divy.common.bo.spring.mvc.rest;
 }

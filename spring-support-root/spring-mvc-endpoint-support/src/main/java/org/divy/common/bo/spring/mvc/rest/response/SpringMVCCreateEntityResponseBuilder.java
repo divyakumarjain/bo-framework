@@ -6,7 +6,7 @@ import org.divy.common.bo.rest.response.CreateEntityResponseBuilder;
 import org.springframework.http.ResponseEntity;
 
 
-public class SpringMVCCreateEntityResponseBuilder<T> extends CreateEntityResponseBuilder<T, ResponseEntity> {
+public class SpringMVCCreateEntityResponseBuilder<T> extends CreateEntityResponseBuilder<T, ResponseEntity<T>> {
 
 
     public SpringMVCCreateEntityResponseBuilder(RESTEntityURLBuilder<T> entityURLBuilder) {
@@ -14,7 +14,7 @@ public class SpringMVCCreateEntityResponseBuilder<T> extends CreateEntityRespons
     }
 
     @Override
-    public ResponseEntity build() {
+    public ResponseEntity<T> build() {
         return ResponseEntity.created(createLocation()).build();
     }
 }

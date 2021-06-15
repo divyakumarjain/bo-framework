@@ -26,7 +26,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
     }
 
     public E create( E businessObject) {
-        ValidationResults results = doValidate(businessObject, BOCreateCheck.class);
+        ValidationResults<E, I> results = doValidate(businessObject, BOCreateCheck.class);
         if (results.isEmpty())
             return repository.create(businessObject);
         else {
@@ -39,16 +39,16 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
         return String.format( "Validation for Business object %s failed", businessObject.identity() );
     }
 
-    private ValidationResults doValidate(E businessObject, Class checkGroupClass) {
+    private ValidationResults<E,I> doValidate(E businessObject, Class<?> checkGroupClass) {
         if (validator!=null) {
             return this.validator.validate(businessObject,checkGroupClass);
         } else {
-            return new ValidationResults();
+            return new ValidationResults<>();
         }
     }
 
     public E update(I id, E businessObject) {
-        ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
+        ValidationResults<E,I> results = doValidate(businessObject, BOUpdateCheck.class);
         if (results.isEmpty()) {
             return repository.update(id, businessObject);
         }
@@ -58,7 +58,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
     }
 
     public E delete( E businessObject) {
-        ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
+        ValidationResults<E,I> results = doValidate(businessObject, BOUpdateCheck.class);
         if (results.isEmpty()) {
             return repository.delete(businessObject);
         }
@@ -77,7 +77,7 @@ public class AbstractBOManager<E extends BusinessObject<I>, I> implements BOMana
 
     public E deleteById(I id) {
         var businessObject = get(id).orElseThrow( () -> new NotFoundException("Could not find the entity") );
-        ValidationResults results = doValidate(businessObject, BOUpdateCheck.class);
+        ValidationResults<E,I> results = doValidate(businessObject, BOUpdateCheck.class);
         if (results.isEmpty()) {
             return repository.deleteById(id);
         }

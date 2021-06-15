@@ -87,13 +87,13 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
         }
 
         private void configureTypeMapping(ClassMapBuilder<S, T> boClassMapBuilder) {
-            processTypeOptions(boClassMapBuilder);
+            processTypeOptions();
             configFieldMapping(boClassMapBuilder);
         }
 
-        private void processTypeOptions(ClassMapBuilder<S, T> boClassMapBuilder) {
+        private void processTypeOptions() {
             mapperBuilderOptions
-                    .forEach( option -> configureTypeMapping( option));
+                    .forEach( this::configureTypeMapping );
         }
 
         private void configFieldMapping(ClassMapBuilder<S, T> boClassMapBuilder) {

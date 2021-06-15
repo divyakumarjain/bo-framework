@@ -10,7 +10,7 @@ import org.springframework.hateoas.Link;
 
 import java.net.URI;
 
-public class SpringMVCEntityURLBuilderImpl<T extends Identifiable> implements RESTEntityURLBuilder<T> {
+public class SpringMVCEntityURLBuilderImpl<T extends Identifiable<I>, I> implements RESTEntityURLBuilder<T> {
 
     private LinkBuilderFactory<Link> linkBuilderFactory;
     private EndPointRegistry endPointRegistry;

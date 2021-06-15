@@ -7,13 +7,13 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;
 
-class SpringMVCListEntityResponseBuilder<E> extends ListEntityResponseBuilder<Collection<E>, ResponseEntity> {
+class SpringMVCListEntityResponseBuilder<T> extends ListEntityResponseBuilder<Collection<T>, ResponseEntity<Collection<T>>> {
 
-    public SpringMVCListEntityResponseBuilder(Collection<E> list) {
+    public SpringMVCListEntityResponseBuilder(Collection<T> list) {
         super(list);
     }
     @Override
-    public ResponseEntity build() {
+    public ResponseEntity<Collection<T>> build() {
         if (entity == null || entity.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {

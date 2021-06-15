@@ -40,8 +40,8 @@ public class Association<T extends BusinessObject<I>, I, L> {
         });
     }
 
-    public Optional<Object> create( T source,  Representation<I, Map<String, Object>,L> target ) {
-        final var targetBo = (T) mapper.createBO( target );
+    public Optional<Object> create(Representation<I, Map<String, Object>,L> target ) {
+        final var targetBo = mapper.createBO( target );
 
         BusinessObject<I> fromStore;
 
@@ -55,7 +55,7 @@ public class Association<T extends BusinessObject<I>, I, L> {
         return Optional.ofNullable( fromStore );
     }
 
-    private Setter getCreator()
+    private Setter<T, ?> getCreator()
     {
         return this.setter;
     }
@@ -92,7 +92,7 @@ public class Association<T extends BusinessObject<I>, I, L> {
         this.reader = reader;
     }
 
-    protected void setSetter( Setter setter ) {
+    protected <V> void setSetter( Setter<T, V> setter ) {
         this.setter = setter;
     }
 

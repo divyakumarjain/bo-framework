@@ -81,7 +81,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
         final var association = this.getAssociationsHandler().getAssociation(relation)
                 .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
 
-        association.create(businessObject, respresentation);
+        association.create(respresentation);
 
         Optional<Object> optionalEntityRelation = association.read(businessObject);
 
