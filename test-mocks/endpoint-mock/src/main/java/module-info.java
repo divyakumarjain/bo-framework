@@ -4,7 +4,6 @@ module bo.framework.endpoint.mock {
     requires bo.framework.query;
     requires bo.framework.database.core;
     requires bo.framework.mock.common;
-//    requires bo.framework.endpoint.jersey;
     requires bo.framework.endpoint.core;
 
     requires javax.servlet.api;
