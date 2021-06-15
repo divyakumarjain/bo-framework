@@ -13,12 +13,12 @@ public abstract class AbstractRepresentation<I, D, L> implements Representation<
 
     private Map<String, Object> associations = new HashMap<>();
 
-    public AbstractRepresentation(D data)
+    protected AbstractRepresentation(D data)
     {
         this.data = data;
     }
 
-    public AbstractRepresentation()
+    protected AbstractRepresentation()
     {
     }
 

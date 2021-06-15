@@ -1,23 +1,21 @@
 package org.divy.common.bo.spring.mvc.rest.hatoas;
 
-import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.AbstractHATOASMapper;
 import org.divy.common.bo.rest.LinkBuilderFactory;
-import org.divy.common.bo.spring.mvc.rest.hatoas.SpringMVCRepresentation;
 import org.springframework.hateoas.Link;
 
 import java.util.Optional;
 import java.util.UUID;
-
 
 public class SpringMVCHATOASMapper<E extends BusinessObject<UUID>>
     extends AbstractHATOASMapper<E, SpringMVCRepresentation<UUID>, Link>
 {
 
     public SpringMVCHATOASMapper(KeyValuePairMapper<E> keyValuePairMapper
-            , LinkBuilderFactory linkBuilderFactory
+            , LinkBuilderFactory<Link> linkBuilderFactory
             , MetaDataProvider metaDataProvider) {
 
         super((Class<SpringMVCRepresentation<UUID>>) (Class)SpringMVCRepresentation.class

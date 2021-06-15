@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.rest.exception;
+package org.divy.common.bo.spring.mvc.rest.exception;
 
 import org.divy.common.exception.BadRequestException;
 import org.divy.common.exception.NotAuthorizedException;

@@ -1,7 +1,7 @@
 package org.divy.common.exception;
 
 public class CheckedException extends Exception {
-    private String errorCode;
+    private final String errorCode;
     public CheckedException(String message, String errorCode) {
         super(message);
         this.errorCode = errorCode;

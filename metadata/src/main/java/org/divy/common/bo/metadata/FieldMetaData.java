@@ -13,7 +13,7 @@ public class FieldMetaData {
 
     public FieldMetaData(PropertyDescriptor pd) {
         this.fieldName = pd.getName();
-        Type genericReturnType = pd.getReadMethod().getGenericReturnType();
+        var genericReturnType = pd.getReadMethod().getGenericReturnType();
         if(genericReturnType instanceof ParameterizedType && isCollection((ParameterizedType)genericReturnType)) {
             this.isCollection = true;
             type = resolveType(((ParameterizedType) genericReturnType).getActualTypeArguments()[0]);

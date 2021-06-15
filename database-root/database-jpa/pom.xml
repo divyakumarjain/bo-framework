@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-database-root</artifactId>
-        <version>0.0.14-SNAPSHOT</version>
+        <version>0.0.16-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 

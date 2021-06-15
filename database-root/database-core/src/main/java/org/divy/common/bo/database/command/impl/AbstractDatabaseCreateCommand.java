@@ -19,7 +19,7 @@ public abstract class AbstractDatabaseCreateCommand<E extends AbstractBusinessOb
     protected void persist(E entity)
     {
         transactionBegin();
-        boolean operationSuccess = false;
+        var operationSuccess = false;
 
         try {
             entity.refreshCreateUpdateTimestamp();

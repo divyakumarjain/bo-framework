@@ -55,8 +55,8 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
     }
 
     public void doBuild(CtClass newClassCt) {
-        ClassFile classFile = newClassCt.getClassFile();
-        ConstPool constPool = classFile.getConstPool();
+        var classFile = newClassCt.getClassFile();
+        var constPool = classFile.getConstPool();
 
         AnnotationsAttribute attribute = (AnnotationsAttribute) classFile.getAttribute(AnnotationsAttribute.visibleTag);
         if (attribute == null) {
@@ -67,7 +67,7 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
     }
 
     private void doBuildAttributeInfo(AnnotationsAttribute attribute, ConstPool constPool) {
-        Annotation annotation = new Annotation(annotationClass.getName(), constPool);
+        var annotation = new Annotation(annotationClass.getName(), constPool);
 
         doBuildAnnotationParam(annotation, constPool);
         attribute.addAnnotation(annotation);
@@ -87,16 +87,16 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
 
     public void doBuild(CtBehavior behavior, int index) {
         try {
-            final MethodInfo methodInfo = behavior.getMethodInfo();
+            final var methodInfo = behavior.getMethodInfo();
 
-            AttributeInfo paramAttributeInfo = methodInfo.getAttribute(ParameterAnnotationsAttribute.visibleTag); // or inVisibleTag
+            var paramAttributeInfo = methodInfo.getAttribute(ParameterAnnotationsAttribute.visibleTag); // or inVisibleTag
             if (paramAttributeInfo == null) {
                 paramAttributeInfo = new ParameterAnnotationsAttribute(methodInfo.getConstPool(), ParameterAnnotationsAttribute.visibleTag);
                 methodInfo.addAttribute(paramAttributeInfo);
             }
-            ConstPool parameterConstPool = paramAttributeInfo.getConstPool();
+            var parameterConstPool = paramAttributeInfo.getConstPool();
 
-            Annotation parameterAnnotation = new Annotation(getAnnotationClass().getName(), parameterConstPool);
+            var parameterAnnotation = new Annotation(getAnnotationClass().getName(), parameterConstPool);
             doBuildAnnotationParam(parameterAnnotation, parameterConstPool);
 
 
@@ -129,7 +129,7 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
             result = ensureArrayLength(paramArrays, length);
         }
 
-        for(int i=0;i<length;i++) {
+        for(var i=0;i<length;i++) {
             if(result[i] == null)
                 result[i] = new Annotation[0];
         }
@@ -144,17 +144,17 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
     }
 
     public void doBuild(CtBehavior behavior) {
-        final MethodInfo methodInfo = behavior.getMethodInfo();
+        final var methodInfo = behavior.getMethodInfo();
 
 
-        AttributeInfo paramAttributeInfo = methodInfo.getAttribute(AnnotationsAttribute.visibleTag); // or inVisibleTag
+        var paramAttributeInfo = methodInfo.getAttribute(AnnotationsAttribute.visibleTag); // or inVisibleTag
         if (paramAttributeInfo == null) {
             paramAttributeInfo = new AnnotationsAttribute(methodInfo.getConstPool(), AnnotationsAttribute.visibleTag);
             methodInfo.addAttribute(paramAttributeInfo);
         }
 
-        ConstPool parameterConstPool = paramAttributeInfo.getConstPool();
-        Annotation annotation = new Annotation(annotationClass.getName(), parameterConstPool);
+        var parameterConstPool = paramAttributeInfo.getConstPool();
+        var annotation = new Annotation(annotationClass.getName(), parameterConstPool);
 
         doBuildAnnotationParam(annotation, parameterConstPool);
         ((AnnotationsAttribute)paramAttributeInfo).addAnnotation(annotation);

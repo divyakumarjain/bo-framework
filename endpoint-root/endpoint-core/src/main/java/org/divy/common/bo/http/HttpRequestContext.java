@@ -89,7 +89,7 @@ public class HttpRequestContext {
      * Clear the ThreadLocal instance of any existing context.
      */
     public static void clearContext() {
-        LOCAL_CONTEXT.set(null);
+        LOCAL_CONTEXT.remove();
     }
 
     public HttpServletRequest getRequest() {

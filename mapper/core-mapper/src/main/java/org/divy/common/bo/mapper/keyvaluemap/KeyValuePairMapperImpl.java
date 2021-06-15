@@ -1,6 +1,5 @@
 package org.divy.common.bo.mapper.keyvaluemap;
 
-import org.divy.common.bo.mapper.builder.options.field.FieldConverter;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.mapper.builder.MapperBuilder;

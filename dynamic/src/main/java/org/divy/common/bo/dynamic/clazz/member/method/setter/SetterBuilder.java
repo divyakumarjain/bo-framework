@@ -5,7 +5,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
-public class SetterBuilder implements Setter
+public class SetterBuilder<T,E> implements Setter<T,E>
 {
     private String attributeName;
 
@@ -15,11 +15,11 @@ public class SetterBuilder implements Setter
     }
 
     @Override
-    public Optional<Object> set( Object source, Object target )
+    public Optional<Object> set( T source, E target )
     {
         try
         {
-            Optional.ofNullable( PropertyUtils.getSimpleProperty(source,attributeName));
+            return Optional.ofNullable( PropertyUtils.getSimpleProperty(source,attributeName));
         }
         catch( IllegalAccessException|InvocationTargetException|NoSuchMethodException e )
         {

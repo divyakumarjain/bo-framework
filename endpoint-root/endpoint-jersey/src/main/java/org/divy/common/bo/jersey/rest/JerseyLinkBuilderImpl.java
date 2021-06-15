@@ -23,17 +23,17 @@ public class JerseyLinkBuilderImpl implements LinkBuilder<Link> {
             throw new IllegalArgumentException("Host must not be null or blank");
         }
 
-        final String fixedBasePath = StringUtils.defaultIfBlank(basePath, StringUtils.EMPTY);
+        final var fixedBasePath = StringUtils.defaultIfBlank(basePath, StringUtils.EMPTY);
 
         uriBuilder = UriBuilder.fromPath(fixedBasePath);
 
-        int colonPosInHost = host.indexOf(':');
-        String hostWithoutPort = host.substring(0, colonPosInHost >= 0 ? colonPosInHost : host.length());
+        var colonPosInHost = host.indexOf(':');
+        var hostWithoutPort = host.substring(0, colonPosInHost >= 0 ? colonPosInHost : host.length());
 
         uriBuilder.scheme(scheme).host(hostWithoutPort);
 
         if (colonPosInHost >= 0) {
-            int port = Integer.parseInt(host.substring(colonPosInHost + 1));
+            var port = Integer.parseInt(host.substring(colonPosInHost + 1));
             uriBuilder.port(port);
         } else if ("localhost".equals(host)) {
             uriBuilder.port(DEFAULT_LOCAL_PORT);

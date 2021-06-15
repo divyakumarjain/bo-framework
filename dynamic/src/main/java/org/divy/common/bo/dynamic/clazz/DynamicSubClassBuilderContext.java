@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.security.SecureRandom;
 import java.util.Optional;
-import java.util.Random;
 
 public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<DynamicSubClassBuilderContext> {
 
@@ -62,7 +61,7 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<Dy
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(method -> {
-                    DynamicProxyMethodBuilderContext dynamicProxyMethodBuilderContext = new DynamicProxyMethodBuilderContext(this, method);
+                    var dynamicProxyMethodBuilderContext = new DynamicProxyMethodBuilderContext(this, method);
                     this.methods.add(dynamicProxyMethodBuilderContext);
                     return dynamicProxyMethodBuilderContext;
                 })

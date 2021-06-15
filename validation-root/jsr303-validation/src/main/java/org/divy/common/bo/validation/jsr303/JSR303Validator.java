@@ -19,7 +19,7 @@ public class JSR303Validator extends AbstractBOValidator {
     @Override
     public ValidationResults validate(BusinessObject businessObject) {
         final Collection<ConstraintViolation<BusinessObject>> results = validator.validate(businessObject);
-        final ValidationResults validationResults = new ValidationResults();
+        final var validationResults = new ValidationResults();
         validationResults.addConstraintViolation(results);
         return validationResults;
     }
@@ -27,7 +27,7 @@ public class JSR303Validator extends AbstractBOValidator {
     @Override
     public ValidationResults validate(BusinessObject businessObject, Class validationGroup) {
         final Collection<ConstraintViolation<BusinessObject>> results = validator.validate(businessObject, validationGroup);
-        final ValidationResults validationResults = new ValidationResults();
+        final var validationResults = new ValidationResults();
         validationResults.addConstraintViolation(results);
         return validationResults;
     }

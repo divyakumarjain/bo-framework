@@ -10,14 +10,15 @@ import org.divy.common.bo.metadata.FieldMetaData;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 import org.divy.common.bo.spring.mvc.rest.hatoas.SpringMVCHATOASMapper;
+import org.springframework.hateoas.Link;
 
 import java.util.*;
 
-public class SpringAssociationsHandler<T extends BusinessObject<UUID>> extends AbstractAssociationsHandler<T> {
+public class SpringAssociationsHandler<T extends BusinessObject<UUID>> extends AbstractAssociationsHandler<T, Link> {
 
     protected SpringAssociationsHandler(Class<T> source
             , MetaDataProvider metaDataProvider
-            , LinkBuilderFactory linkBuilderFactory
+            , LinkBuilderFactory<Link> linkBuilderFactory
             , MapperBuilder mapperBuilder){
 
         super(metaDataProvider, source, mapperBuilder, linkBuilderFactory);

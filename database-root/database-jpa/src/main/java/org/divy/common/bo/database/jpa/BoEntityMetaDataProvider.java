@@ -42,7 +42,7 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
     private Map<String, FieldMetaData> resolveMatchingChildEntities(Class<? extends BusinessObject> businessObjectType, Predicate<PropertyDescriptor> predicate) {
         HashMap<String, FieldMetaData> result = new HashMap<>();
         try {
-            BeanInfo beanInfo = Introspector.getBeanInfo(businessObjectType);
+            var beanInfo = Introspector.getBeanInfo(businessObjectType);
             PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
             result = Arrays.stream(pds)
                     .filter(predicate)
@@ -76,7 +76,7 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
     private boolean isFieldAnnotated(PropertyDescriptor pd, Class annotation) {
         Class<?> declaringClass = pd.getReadMethod().getDeclaringClass();
         try {
-            Field field = declaringClass.getField(pd.getName());
+            var field = declaringClass.getField(pd.getName());
             return field.getAnnotation(annotation) != null;
         } catch (NoSuchFieldException e) {
             LOGGER.debug("Could not find field with name {} in {}", pd.getName(), declaringClass);
@@ -85,7 +85,7 @@ public class BoEntityMetaDataProvider implements MetaDataProvider {
     }
 
     private boolean isReadMethodAnnotated(PropertyDescriptor pd, Class annotation) {
-        Method readMethod = pd.getReadMethod();
+        var readMethod = pd.getReadMethod();
         return readMethod!=null && readMethod.getAnnotation(annotation) !=null;
     }
 }

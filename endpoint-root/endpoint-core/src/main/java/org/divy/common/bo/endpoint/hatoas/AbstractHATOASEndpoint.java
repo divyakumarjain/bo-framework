@@ -19,10 +19,10 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
         , I extends Serializable
         , R>
         extends AbstractCRUDEndpoint<E, I, R> {
-
+    public static final String COULD_NOT_FIND_THE_ENTITY_MESSAGE = "Could not find the entity";
     private final AssociationsHandler<B,I> associationsHandler;
 
-    public AbstractHATOASEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory, AssociationsHandler<B,I> associationsHandler) {
+    protected AbstractHATOASEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory, AssociationsHandler<B,I> associationsHandler) {
         super(responseEntityBuilderFactory);
         this.associationsHandler = associationsHandler;
     }
@@ -39,7 +39,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
     public R readRelation(I id, String relation) {
 
-        B entity = getManager().get(id).orElseThrow( ()->new NotFoundException("Could not find the entity") );
+        B entity = getManager().get(id).orElseThrow( ()->new NotFoundException( COULD_NOT_FIND_THE_ENTITY_MESSAGE ) );
 
         final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
                 .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
@@ -71,10 +71,10 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
                             , String relation
                             , E respresentation) {
 
-        B businessObject = getManager().get(id).orElseThrow( () -> new NotFoundException("Could not find the entity") );
+        var businessObject = getManager().get(id).orElseThrow( () -> new NotFoundException( COULD_NOT_FIND_THE_ENTITY_MESSAGE ) );
 
         if (businessObject == null) {
-            throw new NotFoundException("Could not find the entity");
+            throw new NotFoundException( COULD_NOT_FIND_THE_ENTITY_MESSAGE );
         }
 
         final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
@@ -99,14 +99,14 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
     @Override
     protected E doRead(I id) {
-        var businessObject = getManager().get(id).orElseThrow( ()-> new NotFoundException("Could not find the entity") );
+        var businessObject = getManager().get(id).orElseThrow( ()-> new NotFoundException( COULD_NOT_FIND_THE_ENTITY_MESSAGE ) );
         return mapFromBO(businessObject);
     }
 
     @Override
     protected E doCreate(E representation)
     {
-        B createdBusinessObject = getManager().create(mapToBO(representation));
+        var createdBusinessObject = getManager().create(mapToBO(representation));
         return mapFromBO(createdBusinessObject);
     }
 

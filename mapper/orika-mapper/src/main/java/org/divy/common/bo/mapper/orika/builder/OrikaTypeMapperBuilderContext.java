@@ -102,8 +102,8 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
 
         private void configFieldMapping(String fieldName, FieldMapperContext context, ClassMapBuilder<S, T> boClassMapBuilder) {
 
-            final Property fieldB = resolveFieldBProperty(context.getFieldMapperBuilderOptions(), fieldName);
-            final Property fieldA = resolveFieldAProperty(context.getFieldMapperBuilderOptions(), fieldName);
+            final var fieldB = resolveFieldBProperty(context.getFieldMapperBuilderOptions(), fieldName);
+            final var fieldA = resolveFieldAProperty(context.getFieldMapperBuilderOptions(), fieldName);
             final FieldMapBuilder<S, T> boFieldMapBuilder = boClassMapBuilder.fieldMap(fieldA, fieldB, false);
             configFieldMapping(context.getFieldMapperBuilderOptions(), boFieldMapBuilder);
             boFieldMapBuilder.mapNulls(false);
@@ -139,14 +139,14 @@ public class OrikaTypeMapperBuilderContext<S, T> extends AbstractTypeMapperBuild
                 , Function<List<MapperBuilderOption> , Optional<Class<?>>> firstLevelTypeFunction
                 , Function<List<MapperBuilderOption> , Optional<Class<?>>> secondLevelTypeFunction) {
 
-            final Property.Builder builder = Property.Builder
+            final var builder = Property.Builder
                     .propertyFor(owner, fieldName);
 
             if(Map.class.isAssignableFrom(owner)) {
                 builder.getter("get(\""+fieldName+"\")")
                         .setter("put(\""+fieldName+"\", %s)");
             } else {
-                final Property property = defaultPropertyResolverStrategy.getProperty(owner, fieldName);
+                final var property = defaultPropertyResolverStrategy.getProperty(owner, fieldName);
                 builder.merge(property);
             }
 

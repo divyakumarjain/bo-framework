@@ -35,7 +35,7 @@ public class JerseyEndpointConfig implements Jackson2ObjectMapperBuilderCustomiz
 
     @Bean
     public ResourceConfig resourceConfig() {
-        final ResourceConfig resourceConfig = new ResourceConfig();
+        final var resourceConfig = new ResourceConfig();
         resourceConfig.register(notFoundExceptionMapper());
         resourceConfig.register(badRequestExceptionMapper());
         resourceConfig.register(notAuthorizedExceptionMapper());

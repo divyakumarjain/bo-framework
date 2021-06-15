@@ -40,7 +40,7 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
     @Test
     public void testCreate() {
-        E entity = testDataProvider.getEntityInstance();
+        var entity = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet1(entity);
 
@@ -56,7 +56,7 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
     @Test
     public void testUpdate() {
-        E entity = testDataProvider.getEntityInstance();
+        var entity = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet2(entity);
 
@@ -66,11 +66,11 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
         testDataProvider.modifyEntityWithTestData(entity);
 
-        I id = getIdentifier(entity);
+        var id = getIdentifier(entity);
 
         doUpdateEntity(id, entity);
 
-        E updatedEntity = doAssertExists(id);
+        var updatedEntity = doAssertExists(id);
 
         assertThat("Updated Entity should be same",updatedEntity,equalTo(entity));
 
@@ -79,8 +79,8 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
     @Test
     public void testDelete() {
-        E entity1 = testDataProvider.getEntityInstance();
-        E entity2 = testDataProvider.getEntityInstance();
+        var entity1 = testDataProvider.getEntityInstance();
+        var entity2 = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet1(entity1);
         testDataProvider.fillTestDataSet2(entity2);
@@ -105,13 +105,13 @@ public abstract class TestBOCRUDBase<E extends BusinessObject<I>, I> {
 
         doCreateEntity(entity1);
 
-        E entity2 = testDataProvider.getEntityInstance();
+        var entity2 = testDataProvider.getEntityInstance();
 
         testDataProvider.fillTestDataSet2(entity2);
 
         doCreateEntity(entity2);
 
-        Query searchQuery = testDataProvider.createSearchQuery();
+        var searchQuery = testDataProvider.createSearchQuery();
 
         List<E> searchedEntities = doSearchEntities(searchQuery);
 

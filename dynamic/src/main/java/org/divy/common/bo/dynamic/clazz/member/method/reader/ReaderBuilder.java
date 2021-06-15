@@ -29,13 +29,13 @@ public class ReaderBuilder<P extends Builder> implements Reader, Builder {
     }
 
     public <T> T withMethodOn(Class<T> groupClass) {
-        DynamicReader dynamicReader = new DynamicReader();
+        var dynamicReader = new DynamicReader();
         setReader(dynamicReader);
         return dynamicReader.withMethodOn(groupClass);
     }
 
     public AttributeReader attribute(String attributeName) {
-        AttributeReader attributeReader = new AttributeReader();
+        var attributeReader = new AttributeReader();
         setReader(attributeReader);
         attributeReader.setAttributeName(attributeName);
         setReader(attributeReader);

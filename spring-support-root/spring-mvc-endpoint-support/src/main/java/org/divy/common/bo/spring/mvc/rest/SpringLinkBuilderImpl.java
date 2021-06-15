@@ -31,15 +31,15 @@ public class SpringLinkBuilderImpl implements LinkBuilder<Link> {
             throw new IllegalArgumentException("Host must not be null or blank");
         }
 
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.newInstance();
+        var uriComponentsBuilder = UriComponentsBuilder.newInstance();
 
         int colonPosInHost = host.indexOf(':');
-        String hostWithoutPort = host.substring(0, colonPosInHost >= 0 ? colonPosInHost : host.length());
+        var hostWithoutPort = host.substring(0, colonPosInHost >= 0 ? colonPosInHost : host.length());
 
         uriComponentsBuilder.scheme(scheme).host(hostWithoutPort);
 
         if (colonPosInHost >= 0) {
-            int port = Integer.parseInt(host.substring(colonPosInHost + 1));
+            var port = Integer.parseInt(host.substring(colonPosInHost + 1));
             uriComponentsBuilder.port(port);
         } else if ("localhost".equals(host)) {
             uriComponentsBuilder.port(DEFAULT_LOCAL_PORT);
