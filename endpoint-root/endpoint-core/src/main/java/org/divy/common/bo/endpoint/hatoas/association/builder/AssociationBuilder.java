@@ -16,8 +16,6 @@ import java.util.Map;
 
 public class AssociationBuilder<T extends BusinessObject<I>, I, L> extends Association<T, I, L> implements Builder
 {
-    public AssociationBuilder() {
-    }
 
     public AssociationBuilder<T, I, L> withMapper( AbstractHATOASMapper<T, I, Representation<I, Map<String, Object>, L >, L> hatoasMapper) {
         this.mapper = hatoasMapper;
@@ -49,8 +47,6 @@ public class AssociationBuilder<T extends BusinessObject<I>, I, L> extends Assoc
         return this;
     }
 
-
-
     public <O> O readWith(Class<O> groupClass) {
         var readerBuilder = new ReaderBuilder(this);
         setReader(readerBuilder);
@@ -60,7 +56,7 @@ public class AssociationBuilder<T extends BusinessObject<I>, I, L> extends Assoc
     public  <O> O createWith(Class<O> groupClass) {
         var createBuilder = new SetterBuilder();
         setSetter(createBuilder);
-        return (O) createBuilder.withMethodOn(groupClass);
+        return (O)createBuilder.withMethodOn(groupClass);
     }
 
 

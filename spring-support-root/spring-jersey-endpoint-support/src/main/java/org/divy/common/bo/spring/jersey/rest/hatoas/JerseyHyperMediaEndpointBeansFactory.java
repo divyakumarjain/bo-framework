@@ -23,10 +23,6 @@ public class JerseyHyperMediaEndpointBeansFactory extends JerseyEndpointBeanFact
         registerAssociationsHandler(type, beanDefinitionRegistry);
     }
 
-    @Override public void registerSingletons( BeanDefinitionRegistry beanDefinitionRegistry )
-    {
-    }
-
     private void registerHyperMediaMapper(Class<? extends BusinessObject> type, BeanDefinitionRegistry beanDefinitionRegistry)
     {
         beanDefinitionRegistry.registerBeanDefinition(getNamingStrategy().calculateHATOASMapperId(type)

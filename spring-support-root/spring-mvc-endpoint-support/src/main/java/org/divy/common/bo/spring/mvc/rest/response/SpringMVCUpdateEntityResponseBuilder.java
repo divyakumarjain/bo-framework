@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;
 
-public class SpringMVCUpdateEntityResponseBuilder<T> extends UpdateEntityResponseBuilder<T, ResponseEntity> {
+public class SpringMVCUpdateEntityResponseBuilder<T> extends UpdateEntityResponseBuilder<T, ResponseEntity<T>> {
     SpringMVCUpdateEntityResponseBuilder() {
         super();
     }

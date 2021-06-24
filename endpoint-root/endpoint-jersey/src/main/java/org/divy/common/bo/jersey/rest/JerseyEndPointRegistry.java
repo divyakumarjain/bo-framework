@@ -5,7 +5,6 @@ import org.divy.common.bo.rest.EndPointRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class JerseyEndPointRegistry implements EndPointRegistry {
     private final Map<String, Class<?>> entityEndPointMap = new HashMap<>();
@@ -15,7 +14,7 @@ public class JerseyEndPointRegistry implements EndPointRegistry {
         entityEndPointMap.put(type, endpointClass);
     }
     @Override
-    public Class<?> getEndPointClass(Identifiable<UUID> entity) {
+    public <I> Class<?> getEndPointClass(Identifiable<I> entity) {
         return entityEndPointMap.get(entity._type());
     }
 }

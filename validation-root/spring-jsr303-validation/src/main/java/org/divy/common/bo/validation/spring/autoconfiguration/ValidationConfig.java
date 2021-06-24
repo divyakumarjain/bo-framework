@@ -1,5 +1,6 @@
 package org.divy.common.bo.validation.spring.autoconfiguration;
 
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.validation.BOValidator;
 import org.divy.common.bo.validation.BOValidatorChain;
 import org.divy.common.bo.validation.jsr303.JSR303Validator;
@@ -13,14 +14,14 @@ import java.util.ArrayList;
 public class ValidationConfig {
 
     @Bean
-    public JSR303Validator jsr303validator(Validator jsr303Validator) {
-        return new JSR303Validator(jsr303Validator);
+    public <B extends BusinessObject<I>,I> JSR303Validator<B,I> jsr303validator(Validator jsr303Validator) {
+        return new JSR303Validator<>(jsr303Validator);
     }
 
     @Bean
-    public BOValidatorChain<?, ?> boValidator(JSR303Validator jsr303validator) {
-        ArrayList<BOValidator> validators = new ArrayList<>();
+    public <B extends BusinessObject<I>,I> BOValidatorChain<B, I> boValidator(JSR303Validator<B,I> jsr303validator) {
+        var validators = new ArrayList<BOValidator<B,I>>();
         validators.add(jsr303validator);
-        return new BOValidatorChain(validators);
+        return new BOValidatorChain<>(validators);
     }
 }

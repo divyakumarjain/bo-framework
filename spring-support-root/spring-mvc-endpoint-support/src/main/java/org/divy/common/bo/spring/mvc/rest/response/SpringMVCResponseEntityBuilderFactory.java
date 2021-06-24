@@ -1,6 +1,7 @@
 package org.divy.common.bo.spring.mvc.rest.response;
 
 import org.divy.common.bo.rest.RESTEntityURLBuilder;
+import org.divy.common.bo.rest.response.ListEntityResponseBuilder;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.springframework.http.ResponseEntity;
 
@@ -8,7 +9,7 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 
-public class SpringMVCResponseEntityBuilderFactory<T> implements ResponseEntityBuilderFactory<T, ResponseEntity> {
+public class SpringMVCResponseEntityBuilderFactory<T> implements ResponseEntityBuilderFactory<T, ResponseEntity<T>> {
 
     private RESTEntityURLBuilder<T> entityURLBuilder;
 
@@ -52,7 +53,7 @@ public class SpringMVCResponseEntityBuilderFactory<T> implements ResponseEntityB
     }
 
     @Override
-    public SpringMVCListEntityResponseBuilder<T> list(Collection<T> list) {
-        return new SpringMVCListEntityResponseBuilder<>(list);
+    public ListEntityResponseBuilder<Collection<T>, ResponseEntity<T>> list(Collection<T> list) {
+        return (ListEntityResponseBuilder) new SpringMVCListEntityResponseBuilder<T>(list);
     }
 }

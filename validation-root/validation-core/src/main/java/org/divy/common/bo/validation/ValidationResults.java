@@ -7,25 +7,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ValidationResults<B extends BusinessObject<I>, I> implements Serializable {
-    Collection<ValidationResult> results;
+    Collection<ValidationResult<B, I>> results;
 
     public ValidationResults() {
         this.results = new HashSet<>();
     }
 
-    public Collection<ValidationResult> getResults() {
+    public Collection<ValidationResult<B,I>> getResults() {
         return results;
     }
 
-    public void addValidationResult(ValidationResult result) {
+    public void addValidationResult(ValidationResult<B,I> result) {
         this.results.add(result);
     }
 
-    public void addValidationResults(Collection<ValidationResult> results) {
+    public void addValidationResults(Collection<ValidationResult<B,I>> results) {
         this.results.addAll(results);
     }
 
@@ -36,37 +35,4 @@ public class ValidationResults<B extends BusinessObject<I>, I> implements Serial
     public boolean isEmpty() {
         return results.isEmpty();
     }
-
-    public class ValidationResult<B extends BusinessObject<I>, I> {
-
-        String message;
-
-        public ValidationResult(ConstraintViolation<B> violation)
-        {
-            this.message = violation.getMessage();
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ValidationResult that = (ValidationResult) o;
-            return Objects.equals(message, that.message);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(message);
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-    }
-
-
 }

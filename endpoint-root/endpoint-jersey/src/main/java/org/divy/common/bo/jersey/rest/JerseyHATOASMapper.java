@@ -2,17 +2,15 @@ package org.divy.common.bo.jersey.rest;
 
 import org.divy.common.bo.endpoint.hatoas.Representation;
 import org.divy.common.bo.jersey.rest.hatoas.JerseyRepresentation;
-import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.AbstractHATOASMapper;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 
 import javax.ws.rs.core.Link;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
-
 
 public class JerseyHATOASMapper<E extends BusinessObject<I>, I>
     extends AbstractHATOASMapper<E, I, Representation<I, Map<String, Object>, Link>, Link>

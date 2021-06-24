@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;
 
-public class SpringMVCDeleteEntityResponseBuilder<T> extends AbstractResponseEntityBuilder<T, ResponseEntity>
-        implements DeleteEntityResponseBuilder<ResponseEntity> {
+public class SpringMVCDeleteEntityResponseBuilder<T> extends AbstractResponseEntityBuilder<T, ResponseEntity<T>>
+        implements DeleteEntityResponseBuilder<ResponseEntity<T>> {
 
     SpringMVCDeleteEntityResponseBuilder(T entity) {
         super(entity);
@@ -19,7 +19,7 @@ public class SpringMVCDeleteEntityResponseBuilder<T> extends AbstractResponseEnt
     }
 
     @Override
-    public ResponseEntity build() {
+    public ResponseEntity<T> build() {
         if(entity==null || entity instanceof Collection && ((Collection) entity).isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } else {

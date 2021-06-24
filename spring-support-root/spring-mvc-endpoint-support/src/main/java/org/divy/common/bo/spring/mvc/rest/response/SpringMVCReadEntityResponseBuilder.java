@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;
 
-public class SpringMVCReadEntityResponseBuilder<T> extends ReadEntityResponseBuilder<T, ResponseEntity> {
+public class SpringMVCReadEntityResponseBuilder<T> extends ReadEntityResponseBuilder<T, ResponseEntity<T>> {
 
     public SpringMVCReadEntityResponseBuilder(T entity) {
         super(entity);
@@ -17,7 +17,7 @@ public class SpringMVCReadEntityResponseBuilder<T> extends ReadEntityResponseBui
     }
 
     @Override
-    public ResponseEntity build() {
+    public ResponseEntity<T> build() {
             if(entity==null || entity instanceof Collection && ((Collection) entity).isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             } else {
