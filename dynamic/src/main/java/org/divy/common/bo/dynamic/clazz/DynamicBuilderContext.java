@@ -51,7 +51,7 @@ public class DynamicBuilderContext<P extends DynamicBuilderContext> {
         return parentContext;
     }
 
-    public Optional<Class<?>> build( MethodHandles.Lookup lookup ) {
+    public <T> Optional<T> build( MethodHandles.Lookup lookup ) {
         return parentContext.build( lookup );
     }
 }

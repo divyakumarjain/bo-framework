@@ -9,7 +9,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 
-public class MapperBeansFactory implements DynamicBeansFactory<Class<? extends BusinessObject>>
+public class MapperBeansFactory implements DynamicBeansFactory
 {
     
     private final BeanNamingStrategy namingStrategy;
@@ -23,7 +23,6 @@ public class MapperBeansFactory implements DynamicBeansFactory<Class<? extends B
         beanDefinitionRegistry.registerBeanDefinition(namingStrategy.calculateMergeMapperId(type)
                 , BeanDefinitionBuilder.genericBeanDefinition(BOMergeMapper.class)
                         .addConstructorArgValue(type)
-                        .addConstructorArgReference("entityMetaDataProvider")
                         .addConstructorArgReference("mapperBuilder")
                         .getBeanDefinition());
 

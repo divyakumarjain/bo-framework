@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-public class SpringMVCEndpointBeansFactory implements DynamicBeansFactory<Class<? extends BusinessObject>> {
+public class SpringMVCEndpointBeansFactory implements DynamicBeansFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger( SpringMVCEndpointBeansFactory.class );
     private final EndPointRegistry endPointRegistry;

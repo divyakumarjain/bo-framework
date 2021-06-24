@@ -11,10 +11,10 @@ import java.util.Collection;
 public class BoFrameworkBeanRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
     private final MetaDataProvider metaDataProvider;
-    private final Collection<DynamicBeansFactory<?>> beansfactories;
+    private final Collection<DynamicBeansFactory> beansfactories;
 
     BoFrameworkBeanRegistryPostProcessor(MetaDataProvider metaDataProvider,
-                                         Collection<DynamicBeansFactory<?>> beansfactories) {
+                                         Collection<DynamicBeansFactory> beansfactories) {
         this.metaDataProvider = metaDataProvider;
         this.beansfactories = beansfactories;
     }

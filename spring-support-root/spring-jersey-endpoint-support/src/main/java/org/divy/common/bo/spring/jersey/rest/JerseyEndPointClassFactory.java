@@ -1,10 +1,10 @@
 package org.divy.common.bo.spring.jersey.rest;
 
-import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
@@ -200,7 +200,7 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                             .value("jerseyResponseEntityBuilderFactory")
                             .and()
                         .and()
-                .build(prvlookup)
+                .<Class<? extends BaseBOEndpoint<?,?,?>>>build(prvlookup)
         .map(endpointClass-> {
             endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
             return endpointClass;
