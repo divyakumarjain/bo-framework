@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.lang.invoke.MethodHandles;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -50,11 +51,17 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
     }
 
     private void initializeHATOASEndpoints(ResourceConfig config) {
-        metaDataProvider.getEntityTypes().stream()
-                .map(this::buildEndpointClass)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .forEach(config::register);
+        List<Class<? extends BusinessObject>> entityTypes = metaDataProvider.getEntityTypes();
+        for( int i = 0, entityTypesSize = entityTypes.size(); i < entityTypesSize; i++ )
+        {
+            var entityType = entityTypes.get( i );
+            var buildEndpointClass = buildHATOASEndpointClass( entityType );
+            if( buildEndpointClass.isPresent() )
+            {
+                var endpointClass = buildEndpointClass.get();
+                if( endpointClass instanceof Class ) config.register( (Class) endpointClass );
+            }
+        }
     }
 
     private static       MethodHandles.Lookup           prvlookup;
@@ -72,8 +79,10 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
         }
     }
 
-    private Optional<Class> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
-        return DynamicClassBuilder.createClass( JerseyHATOASEndPointFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "HyperMediaEndPoint")
+    private <E extends BusinessObject<UUID>> Optional<Class<? extends DefaultHATEOASJerseyEndpoint<E>>> buildHATOASEndpointClass(Class<E> typeClass) {
+        String className = JerseyHATOASEndPointFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "HyperMediaEndPoint";
+        LOGGER.debug("Building class {}", className   );
+        return DynamicClassBuilder.createClass( className )
                 .subClass(DefaultHATEOASJerseyEndpoint.class)
                     .addAnnotation(javax.ws.rs.Path.class)
                         .value(configProperties.getHateoasApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase())
@@ -214,11 +223,10 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
                     .superParam(AssociationsHandler.class)
                         .addAnnotation(Qualifier.class)
                             .value(beanNamingStrategy.calculateAssociationsHandler(typeClass))
-                        .build( prvlookup )
+                        .<Class<? extends DefaultHATEOASJerseyEndpoint<E>>>build( prvlookup )
 
         .map(endpointClass-> {
             endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
-
             return endpointClass;
         });
     }

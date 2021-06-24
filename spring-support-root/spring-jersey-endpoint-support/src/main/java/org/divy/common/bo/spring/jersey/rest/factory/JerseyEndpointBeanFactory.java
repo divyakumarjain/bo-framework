@@ -6,7 +6,7 @@ import org.divy.common.bo.spring.core.factory.DynamicBeansFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 
-public class JerseyEndpointBeanFactory implements DynamicBeansFactory<Class<? extends BusinessObject>> {
+public class JerseyEndpointBeanFactory implements DynamicBeansFactory {
     
     private final BeanNamingStrategy namingStrategy;
 

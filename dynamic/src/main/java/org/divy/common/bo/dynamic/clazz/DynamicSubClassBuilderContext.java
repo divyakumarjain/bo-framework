@@ -62,7 +62,7 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<Dy
                 .map(Optional::get)
                 .map(method -> {
                     var dynamicProxyMethodBuilderContext = new DynamicProxyMethodBuilderContext(this, method);
-                    this.methods.add(dynamicProxyMethodBuilderContext);
+                    this.addMethods(dynamicProxyMethodBuilderContext);
                     return dynamicProxyMethodBuilderContext;
                 })
                 .orElseGet(() -> new DynamicProxyMethodBuilderContext(this));

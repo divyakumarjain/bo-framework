@@ -1,20 +1,19 @@
 package org.divy.common.bo.rest;
 
-
-import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.hatoas.Representation;
 import org.divy.common.bo.mapper.BOMapper;
 import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.repository.BusinessObject;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
-public abstract class AbstractHATOASMapper<E extends BusinessObject<UUID>
-        , R extends Representation<UUID, Map<String, Object>, L>
+public abstract class AbstractHATOASMapper<E extends BusinessObject<I>
+        , I
+        , R extends Representation<I, Map<String, Object>, L>
         , L>
         implements HATOASMapper<E, R>
 {

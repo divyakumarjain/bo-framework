@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class ValidationResults implements Serializable {
+public class ValidationResults<B extends BusinessObject<I>, I> implements Serializable {
     Collection<ValidationResult> results;
 
     public ValidationResults() {
@@ -29,7 +29,7 @@ public class ValidationResults implements Serializable {
         this.results.addAll(results);
     }
 
-    public void addConstraintViolation(Collection<ConstraintViolation<BusinessObject>> results) {
+    public void addConstraintViolation(Collection<ConstraintViolation<B>> results) {
         this.results.addAll(results.stream().map(ValidationResult::new).collect(Collectors.toCollection(()-> new ArrayList<>(results.size()))));
     }
 
@@ -37,11 +37,11 @@ public class ValidationResults implements Serializable {
         return results.isEmpty();
     }
 
-    public class ValidationResult {
+    public class ValidationResult<B extends BusinessObject<I>, I> {
 
         String message;
 
-        public ValidationResult(ConstraintViolation<BusinessObject> violation)
+        public ValidationResult(ConstraintViolation<B> violation)
         {
             this.message = violation.getMessage();
         }

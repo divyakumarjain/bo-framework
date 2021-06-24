@@ -23,7 +23,7 @@ public class FieldMetaData {
         }
     }
 
-    public FieldMetaData(String fieldName, Class type, boolean isCollection) {
+    public FieldMetaData(String fieldName, Class<?> type, boolean isCollection) {
         this.fieldName = fieldName;
         this.type = type;
         this.isCollection = isCollection;

@@ -6,10 +6,7 @@ import org.divy.common.bo.metadata.MetaDataProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
@@ -77,7 +74,7 @@ public class AbstractHATEOASMapperTest {
 
 }
 
-class TestHATOASMapperMock extends AbstractHATOASMapper<MockEntity, MockRepresentation, Link>
+class TestHATOASMapperMock extends AbstractHATOASMapper<MockEntity, UUID, MockRepresentation, Link>
 {
 
     TestHATOASMapperMock(KeyValuePairMapper<MockEntity> keyValuePairMapper, LinkBuilderFactory linkBuilderFactory, MetaDataProvider metaDataProvider) {

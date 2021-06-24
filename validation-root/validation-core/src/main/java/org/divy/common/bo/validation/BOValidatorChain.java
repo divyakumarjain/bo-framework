@@ -28,7 +28,7 @@ public class BOValidatorChain<B extends BusinessObject<I>, I> extends AbstractBO
     }
 
     @Override
-    public ValidationResults validate(B businessObject, Class validationGroup)
+    public ValidationResults validate(B businessObject, Class<?> validationGroup)
     {
         return validators.stream()
                 .map(boValidator -> boValidator.validate(businessObject,validationGroup))

@@ -9,16 +9,12 @@ import org.divy.common.bo.mapper.orika.builder.OrikaTypeMapperBuilderContext;
 import org.divy.common.bo.metadata.MetaDataProvider;
 
 
-public class BOMergeMapper<B extends BusinessObject> extends AdvanceBOMapper<B, B>{
-    public BOMergeMapper(Class<B> businessObjectType
-            , MetaDataProvider metaDataProvider
-            , OrikaMapperBuilder builder) {
-        super(businessObjectType, businessObjectType, buildMapperFacade(businessObjectType, metaDataProvider, builder));
+public class BOMergeMapper<B extends BusinessObject<I>, I> extends AdvanceBOMapper<B, B>{
+    public BOMergeMapper( Class<B> businessObjectType, OrikaMapperBuilder builder ) {
+        super(businessObjectType, businessObjectType, buildMapperFacade(businessObjectType, builder));
     }
 
-    private static <B extends BusinessObject> MapperFacade buildMapperFacade(Class<B> businessObjectType
-            , MetaDataProvider metaDataProvider
-            , OrikaMapperBuilder builder) {
+    private static <B extends BusinessObject<I>, I> MapperFacade buildMapperFacade( Class<B> businessObjectType, OrikaMapperBuilder builder ) {
 
         final OrikaTypeMapperBuilderContext<B, B> mapping = builder.mapping(businessObjectType, businessObjectType);
 

@@ -14,6 +14,6 @@ public class MapperBuilderOptions {
     }
 
     public static <S, T> MapperBuilderOption childTypeMapping(TypeMapperBuilderContext<S, T> childMapping) {
-        return new ChildTypeMapperOption(childMapping);
+        return new ChildTypeMapperOption<>(childMapping);
     }
 }

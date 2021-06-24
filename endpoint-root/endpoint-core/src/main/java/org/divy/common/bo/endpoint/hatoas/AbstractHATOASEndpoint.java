@@ -15,14 +15,15 @@ import java.io.Serializable;
 import java.util.*;
 
 public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
-        , E extends Representation
+        , E extends Representation<I, Map<String, Object>, L>
         , I extends Serializable
-        , R>
+        , R
+        , L>
         extends AbstractCRUDEndpoint<E, I, R> {
     public static final String COULD_NOT_FIND_THE_ENTITY_MESSAGE = "Could not find the entity";
-    private final AssociationsHandler<B,I> associationsHandler;
+    private final AssociationsHandler<B,I, L> associationsHandler;
 
-    protected AbstractHATOASEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory, AssociationsHandler<B,I> associationsHandler) {
+    protected AbstractHATOASEndpoint(ResponseEntityBuilderFactory<E, R> responseEntityBuilderFactory, AssociationsHandler<B,I,L> associationsHandler) {
         super(responseEntityBuilderFactory);
         this.associationsHandler = associationsHandler;
     }
@@ -41,7 +42,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
         B entity = getManager().get(id).orElseThrow( ()->new NotFoundException( COULD_NOT_FIND_THE_ENTITY_MESSAGE ) );
 
-        final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
+        final Association<B, I, L> association = this.getAssociationsHandler().getAssociation(relation)
                 .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
 
         Optional<Object> optionalEntityRelation = association.read(entity);
@@ -77,7 +78,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
             throw new NotFoundException( COULD_NOT_FIND_THE_ENTITY_MESSAGE );
         }
 
-        final Association<B, I> association = this.getAssociationsHandler().getAssociation(relation)
+        final var association = this.getAssociationsHandler().getAssociation(relation)
                 .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
 
         association.create(businessObject, respresentation);
@@ -148,7 +149,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
     public abstract BOManager<B, I> getManager();
 
-    public AssociationsHandler<B,I> getAssociationsHandler() {
+    public AssociationsHandler<B,I, L> getAssociationsHandler() {
         return associationsHandler;
     }
 

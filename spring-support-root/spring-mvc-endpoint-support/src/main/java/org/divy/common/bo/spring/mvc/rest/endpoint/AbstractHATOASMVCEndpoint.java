@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * The Abstract implementation for HATEOAS based Business Object management Endpoint
@@ -19,52 +20,53 @@ import java.io.Serializable;
  *
  */
 public abstract class AbstractHATOASMVCEndpoint<E extends BusinessObject<I>,
-        R extends Representation,
-        I extends Serializable>
-        extends AbstractHATOASEndpoint<E, R, I, ResponseEntity>
+        R extends Representation <I, Map<String, Object>, L>,
+        I extends Serializable,
+        L>
+        extends AbstractHATOASEndpoint<E, R, I, ResponseEntity<R>, L>
 {
 
-    protected AbstractHATOASMVCEndpoint(ResponseEntityBuilderFactory<R, ResponseEntity> responseEntityBuilderFactory, AssociationsHandler<E,I> associationsHandler) {
+    protected AbstractHATOASMVCEndpoint(ResponseEntityBuilderFactory<R, ResponseEntity<R>> responseEntityBuilderFactory, AssociationsHandler<E,I, L> associationsHandler) {
         super(responseEntityBuilderFactory, associationsHandler);
     }
 
     @Override
-    public final ResponseEntity create(R businessObject)
+    public final ResponseEntity<R> create(R businessObject)
     {
         return super.create(businessObject);
     }
 
     @Override
-    public final ResponseEntity update(I id, R businessObject) {
+    public final ResponseEntity<R> update(I id, R businessObject) {
         return super.update(id, businessObject);
     }
 
     @Override
-    public final ResponseEntity delete(I id) {
+    public final ResponseEntity<R> delete(I id) {
 
         return super.delete(id);
 
     }
 
     @Override
-    public final ResponseEntity list() {
+    public final ResponseEntity<R> list() {
         return super.list();
 
     }
 
     @Override
-    public final ResponseEntity search(Query query) {
+    public final ResponseEntity<R> search(Query query) {
         return super.search(query);
     }
 
     @Override
-    public final ResponseEntity read(I id) {
+    public final ResponseEntity<R> read(I id) {
         return super.read(id);
     }
 
     @GetMapping("/{id}/{relation}")
     @Override
-    public ResponseEntity readRelation(@PathVariable("id") I id,
+    public ResponseEntity<R> readRelation(@PathVariable("id") I id,
                                  @PathVariable("relation")String relation) {
 
         return super.readRelation(id, relation);
@@ -80,7 +82,7 @@ public abstract class AbstractHATOASMVCEndpoint<E extends BusinessObject<I>,
      */
     @PostMapping("/{id}/{relation}")
     @Override
-    public ResponseEntity createRelation(@PathVariable("id") I id,
+    public ResponseEntity<R> createRelation(@PathVariable("id") I id,
                                    @PathVariable("relation")String relation,
                                    @RequestBody R representation) {
 
@@ -89,14 +91,14 @@ public abstract class AbstractHATOASMVCEndpoint<E extends BusinessObject<I>,
 
     @PutMapping("/{id}/{relation}")
     @Override
-    public ResponseEntity updateRelation(I id,
+    public ResponseEntity<R> updateRelation(I id,
                                          @PathVariable("relation") String relation) {
         return super.updateRelation(id, relation);
     }
 
     @DeleteMapping("/{id}/{relation}")
     @Override
-    public ResponseEntity deleteRelation(I id,
+    public ResponseEntity<R> deleteRelation(I id,
           @PathVariable("relation") String relation) {
         return super.deleteRelation(id, relation);
     }
