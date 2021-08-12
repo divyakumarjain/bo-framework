@@ -52,7 +52,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-scm-plugin</artifactId>
-                <version>1.11.2</version>
+                <version>1.11.3</version>
                 <configuration>
                     <tag>${project.artifactId}-0.0.16-SNAPSHOT</tag>
                 </configuration>
