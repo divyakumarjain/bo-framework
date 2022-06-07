@@ -2,7 +2,7 @@ package org.divy.common.bo.validation;
 
 import org.divy.common.bo.repository.BusinessObject;
 
-import javax.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolation;
 import java.util.Objects;
 
 public class ValidationResult<B extends BusinessObject<I>, I> {

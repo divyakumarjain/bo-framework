@@ -3,8 +3,8 @@ package org.divy.common.bo.jersey.rest.response;
 import org.divy.common.bo.rest.RESTEntityURLBuilder;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
-import javax.inject.Inject;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import java.io.Serializable;
 import java.util.Collection;
 

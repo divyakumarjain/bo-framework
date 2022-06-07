@@ -3,7 +3,7 @@ package org.divy.common.bo.jersey.rest.response;
 
 import org.divy.common.bo.rest.response.ListEntityResponseBuilder;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.Collection;
 
 class JerseyListEntityResponseBuilder<E> extends ListEntityResponseBuilder<Collection<E>, Response> {
