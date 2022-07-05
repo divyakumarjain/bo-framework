@@ -8,9 +8,7 @@ import org.divy.common.bo.mapper.BOMapper;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- *@deprecated Use Dependency injection instead of CommandProvider for Command Injection
  */
-@Deprecated
 public class TypeBaseDBCommandProvider<E extends BusinessObject<I>, I>
         implements CommandProvider<E, I>
 {
@@ -113,7 +111,7 @@ public class TypeBaseDBCommandProvider<E extends BusinessObject<I>, I>
 
 
         } catch (InstantiationException |IllegalAccessException | IllegalArgumentException
-        |SecurityException |InvocationTargetException |NoSuchMethodException e) {
+                 |SecurityException |InvocationTargetException |NoSuchMethodException e) {
             throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
         }
     }
@@ -127,11 +125,11 @@ public class TypeBaseDBCommandProvider<E extends BusinessObject<I>, I>
                 throw new IllegalArgumentException("Command _type not provided");
             }
             return updateCommandType.getConstructor(EntityManagerCommandContext.class
-                    , BOMapper.class)
+                            , BOMapper.class)
                     .newInstance(newContext, updateMapper);
 
         } catch (InstantiationException |IllegalAccessException | IllegalArgumentException
-                |SecurityException |InvocationTargetException |NoSuchMethodException e)
+                 |SecurityException |InvocationTargetException |NoSuchMethodException e)
         {
             throw new IllegalArgumentException(COULD_NOT_CREATE_COMMAND,e);
         }
@@ -139,8 +137,8 @@ public class TypeBaseDBCommandProvider<E extends BusinessObject<I>, I>
 
     private EntityManagerCommandContext createContext()
     {
-        if(context instanceof HierarchicalCommandContext){
-            return (EntityManagerCommandContext) ((HierarchicalCommandContext)this.context).createChildContext();
+        if(context instanceof HierarchicalCommandContext hierarchicalCommandContext){
+            return (EntityManagerCommandContext) hierarchicalCommandContext.createChildContext();
         } else
             return context;
 

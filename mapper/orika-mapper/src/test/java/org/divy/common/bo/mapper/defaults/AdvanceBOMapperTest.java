@@ -18,12 +18,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 
-public class AdvanceBOMapperTest {
+class AdvanceBOMapperTest {
 
     BOMapper<MockEntity, Map> underTest;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
 
         OrikaMapperBuilder builder = new OrikaMapperBuilder();
 
@@ -42,7 +42,7 @@ public class AdvanceBOMapperTest {
     }
 
     @Test
-    public void testMapping() {
+    void testMapping() {
 
         MockEntity businessObject = new MockEntity();
         businessObject.setName("TestEntity");
@@ -75,7 +75,7 @@ public class AdvanceBOMapperTest {
     }
 
     @Test
-    public void testOffsetDateTime () {
+    void testOffsetDateTime () {
 
         MockEntity businessObject = new MockEntity();
         businessObject.setName("TestEntity");
@@ -91,7 +91,7 @@ public class AdvanceBOMapperTest {
     }
 
     @Test
-    public void testOrikaList() {
+    void testOrikaList() {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 
         final ClassMapBuilder<BeanWithList, BeanWithList> beanMapping = mapperFactory.classMap(BeanWithList.class, BeanWithList.class);
@@ -123,7 +123,7 @@ public class AdvanceBOMapperTest {
     }
 
     @Test
-    public void testOrikaMap() {
+    void testOrikaMap() {
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder()
                 .build();
 
