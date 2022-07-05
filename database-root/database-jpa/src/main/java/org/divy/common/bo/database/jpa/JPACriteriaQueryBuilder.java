@@ -54,15 +54,15 @@ public class JPACriteriaQueryBuilder<E> {
         Predicate returnPredicate = null;
         if (operatorEntryValue instanceof EqualsComparison<?> eqOperator) {
             returnPredicate = cb.equal(path,eqOperator.getValue());
-        } else if (operatorEntryValue instanceof GreaterThanComparison gtOperator) {
-            returnPredicate = cb.gt(path, createNumber(gtOperator));
-        } else if (operatorEntryValue instanceof GreaterThanEqualToComparison gteOperator) {
-            returnPredicate = cb.ge(path, createNumber(gteOperator));
-        } else if (operatorEntryValue instanceof LessThanComparison ltOperator) {
-            returnPredicate = cb.lt(path, createNumber(ltOperator));
-        } else if (operatorEntryValue instanceof LessThanEqualToComparison leOperator) {
-            returnPredicate = cb.le(path, createNumber(leOperator));
-        } else if (operatorEntryValue instanceof InComparison inOperator) {
+        } else if (operatorEntryValue instanceof GreaterThanComparison<?> gtOperator) {
+            returnPredicate = cb.gt(path, createNumber((Comparison<Number>) gtOperator));
+        } else if (operatorEntryValue instanceof GreaterThanEqualToComparison<?> gteOperator) {
+            returnPredicate = cb.ge(path, createNumber((Comparison<Number>) gteOperator));
+        } else if (operatorEntryValue instanceof LessThanComparison<?> ltOperator) {
+            returnPredicate = cb.lt(path, createNumber((Comparison<Number>) ltOperator));
+        } else if (operatorEntryValue instanceof LessThanEqualToComparison<?> leOperator) {
+            returnPredicate = cb.le(path, createNumber((Comparison<Number>) leOperator));
+        } else if (operatorEntryValue instanceof InComparison<?> inOperator) {
             returnPredicate = cb.in(path).in(inOperator.getValues());
         } else if (operatorEntryValue instanceof Or orOperator) {
             returnPredicate = cb.or(createPredicates(path,cb,orOperator.getOperations()));
