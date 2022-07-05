@@ -30,9 +30,8 @@ public class DatabaseContext extends AbstractEntityManagerContext {
     {
         if(entityManager==null)
         {
-            if (getParentContext() instanceof AbstractEntityManagerContext)
+            if (getParentContext() instanceof AbstractEntityManagerContext emContext)
             {
-                AbstractEntityManagerContext emContext = (AbstractEntityManagerContext) getParentContext();
                 entityManager = emContext.getEntityManager();
 
                 if (entityManager != null) {

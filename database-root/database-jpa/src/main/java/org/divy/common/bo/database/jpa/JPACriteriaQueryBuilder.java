@@ -52,32 +52,23 @@ public class JPACriteriaQueryBuilder<E> {
 
     private Predicate createPredicates(Path<Number> path, CriteriaBuilder cb, Operator operatorEntryValue) {
         Predicate returnPredicate = null;
-        if (operatorEntryValue instanceof EqualsComparison<?>) {
-            EqualsComparison<String> eqOperator = (EqualsComparison<String>) operatorEntryValue;
+        if (operatorEntryValue instanceof EqualsComparison<?> eqOperator) {
             returnPredicate = cb.equal(path,eqOperator.getValue());
-        } else if (operatorEntryValue instanceof GreaterThanComparison) {
-            GreaterThanComparison<Number> gtOperator = (GreaterThanComparison<Number>) operatorEntryValue;
+        } else if (operatorEntryValue instanceof GreaterThanComparison gtOperator) {
             returnPredicate = cb.gt(path, createNumber(gtOperator));
-        } else if (operatorEntryValue instanceof GreaterThanEqualToComparison) {
-            GreaterThanEqualToComparison<Number> gteOperator = (GreaterThanEqualToComparison<Number>) operatorEntryValue;
+        } else if (operatorEntryValue instanceof GreaterThanEqualToComparison gteOperator) {
             returnPredicate = cb.ge(path, createNumber(gteOperator));
-        } else if (operatorEntryValue instanceof LessThanComparison) {
-            LessThanComparison<Number> ltOperator = (LessThanComparison<Number>) operatorEntryValue;
+        } else if (operatorEntryValue instanceof LessThanComparison ltOperator) {
             returnPredicate = cb.lt(path, createNumber(ltOperator));
-        } else if (operatorEntryValue instanceof LessThanEqualToComparison) {
-            LessThanEqualToComparison<Number> leOperator = (LessThanEqualToComparison<Number>) operatorEntryValue;
+        } else if (operatorEntryValue instanceof LessThanEqualToComparison leOperator) {
             returnPredicate = cb.le(path, createNumber(leOperator));
-        } else if (operatorEntryValue instanceof InComparison) {
-            InComparison<String> inOperator = (InComparison<String>) operatorEntryValue;
+        } else if (operatorEntryValue instanceof InComparison inOperator) {
             returnPredicate = cb.in(path).in(inOperator.getValues());
-        } else if (operatorEntryValue instanceof Or) {
-            var orOperator = (Or) operatorEntryValue;
+        } else if (operatorEntryValue instanceof Or orOperator) {
             returnPredicate = cb.or(createPredicates(path,cb,orOperator.getOperations()));
-        } else if (operatorEntryValue instanceof And) {
-            var andOperator = (And) operatorEntryValue;
+        } else if (operatorEntryValue instanceof And andOperator) {
             returnPredicate = cb.and(createPredicates(path,cb,andOperator.getOperations()));
-        } else if (operatorEntryValue instanceof Not) {
-            var notOperator = (Not) operatorEntryValue;
+        } else if (operatorEntryValue instanceof Not notOperator) {
             returnPredicate = cb.not(createPredicates(path,cb,notOperator.getOperation()));
         }
         return returnPredicate;

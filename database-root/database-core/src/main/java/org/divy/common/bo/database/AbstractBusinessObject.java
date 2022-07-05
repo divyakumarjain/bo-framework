@@ -3,6 +3,7 @@ package org.divy.common.bo.database;
 import org.divy.common.bo.repository.BusinessObject;
 
 import java.time.OffsetDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class AbstractBusinessObject implements BusinessObject<UUID>
@@ -54,13 +55,11 @@ public class AbstractBusinessObject implements BusinessObject<UUID>
         if (this == o) {
             return true;
         }
-        if (!(o instanceof AbstractBusinessObject)) {
+        if (!(o instanceof AbstractBusinessObject that)) {
             return false;
         }
 
-        AbstractBusinessObject that = (AbstractBusinessObject) o;
-
-        return uuid != null ? uuid.equals(that.uuid) : that.uuid == null;
+        return Objects.equals(uuid, that.uuid);
     }
 
     @Override

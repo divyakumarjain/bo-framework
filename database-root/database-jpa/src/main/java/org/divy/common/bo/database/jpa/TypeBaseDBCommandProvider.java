@@ -137,8 +137,8 @@ public class TypeBaseDBCommandProvider<E extends BusinessObject<I>, I>
 
     private EntityManagerCommandContext createContext()
     {
-        if(context instanceof HierarchicalCommandContext){
-            return (EntityManagerCommandContext) ((HierarchicalCommandContext)this.context).createChildContext();
+        if(context instanceof HierarchicalCommandContext hierarchicalCommandContext){
+            return (EntityManagerCommandContext) hierarchicalCommandContext.createChildContext();
         } else
             return context;
 
