@@ -3,6 +3,8 @@ on:
   check_suite:
     types:
       - completed
+  pull_request:
+    branches: [ dependencies ]
 jobs:
   automerge:
     runs-on: ubuntu-latest
