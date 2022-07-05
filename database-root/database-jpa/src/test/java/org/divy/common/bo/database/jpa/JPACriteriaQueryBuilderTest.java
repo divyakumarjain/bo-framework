@@ -27,28 +27,28 @@ import javax.persistence.criteria.Predicate;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.doReturn;
 
-public class JPACriteriaQueryBuilderTest
+class JPACriteriaQueryBuilderTest
 {
 
-    JPACriteriaQueryBuilder criteriaQueryBuilder;
+    JPACriteriaQueryBuilder<MockEntity> criteriaQueryBuilder;
 
     @BeforeEach
-    public void setupCriteriaQueryBuilder() {
+    void setupCriteriaQueryBuilder() {
         EntityManager mockEntityManager = Mockito.mock(EntityManager.class);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.divy.mock");
         CriteriaBuilder mockCriteriaBuilder = new CriteriaBuilderImpl((SessionFactoryImpl) entityManagerFactory);
         doReturn(mockCriteriaBuilder).when(mockEntityManager).getCriteriaBuilder();
 
-        criteriaQueryBuilder = new JPACriteriaQueryBuilder(mockEntityManager, MockEntity.class);
+        criteriaQueryBuilder = new JPACriteriaQueryBuilder<>(mockEntityManager, MockEntity.class);
     }
 
     @Test
-    public void equalsQuery() {
+    void equalsQuery() {
 
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", equalsComparison("1"));
 
-        CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
+        CriteriaQuery<MockEntity> criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
 
         assertCriteriaQueryForComparisonPredicate(criteriaQuery
                 , ComparisonPredicate.ComparisonOperator.EQUAL
@@ -57,29 +57,28 @@ public class JPACriteriaQueryBuilderTest
     }
 
     @Test
-    public void notQuery() {
+    void notQuery() {
         AttributeQuery query = new AttributeQuery();
         Not operator = not( greaterThanComparison(1));
         query.put("integerAttribute", operator);
-        CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
+        CriteriaQuery<MockEntity> criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForComparisonPredicateWithNot(criteriaQuery
-                , ComparisonPredicate.ComparisonOperator.GREATER_THAN
-                , "integerAttribute");
+        );
     }
 
-    private void assertCriteriaQueryForComparisonPredicateWithNot(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
+    private void assertCriteriaQueryForComparisonPredicateWithNot(CriteriaQuery<MockEntity> criteriaQuery) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
         assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
         assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.hasProperty("negated", Matchers.is(true))));
     }
 
     @Test
-    public void gtQuery() {
+    void gtQuery() {
 
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", greaterThanComparison(1));
 
-        CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
+        CriteriaQuery<MockEntity> criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
 
         assertCriteriaQueryForComparisonPredicate(criteriaQuery
                 , ComparisonPredicate.ComparisonOperator.GREATER_THAN
@@ -88,12 +87,12 @@ public class JPACriteriaQueryBuilderTest
     }
 
     @Test
-    public void geQuery() {
+    void geQuery() {
 
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", greaterThanEqualToComparison(1));
 
-        CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
+        CriteriaQuery<MockEntity> criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
 
         assertCriteriaQueryForComparisonPredicate(criteriaQuery
                 , ComparisonPredicate.ComparisonOperator.GREATER_THAN_OR_EQUAL
@@ -102,12 +101,12 @@ public class JPACriteriaQueryBuilderTest
     }
 
     @Test
-    public void ltQuery() {
+    void ltQuery() {
 
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", lessThanComparison(1));
 
-        CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
+        CriteriaQuery<MockEntity> criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
 
         assertCriteriaQueryForComparisonPredicate(criteriaQuery
                 , ComparisonPredicate.ComparisonOperator.LESS_THAN
@@ -116,57 +115,57 @@ public class JPACriteriaQueryBuilderTest
     }
 
     @Test
-    public void leQuery() {
+    void leQuery() {
         AttributeQuery query = new AttributeQuery();
         query.put("integerAttribute", lessThanEqualToComparison(1));
-        CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
+        CriteriaQuery<MockEntity> criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForComparisonPredicate(criteriaQuery
                 , ComparisonPredicate.ComparisonOperator.LESS_THAN_OR_EQUAL
                 , "integerAttribute"
                 , this::assertComparisonPredicate);
     }
 
-    private void assertCriteriaQueryForComparisonPredicate(CriteriaQuery criteriaQuery, Enum operator, String lhs,PredicateAssert<ComparisonPredicate> predicateAssert) {
-        assertCriteriaQueryForComparisonPredicate(criteriaQuery, operator, lhs);
+    private void assertCriteriaQueryForComparisonPredicate(CriteriaQuery<MockEntity> criteriaQuery, Enum<?> operator, String lhs,PredicateAssert<ComparisonPredicate> predicateAssert) {
+        assertCriteriaQueryForComparisonPredicate(criteriaQuery);
         Predicate actualPredicate = criteriaQuery.getRestriction();
         ComparisonPredicate comparisonPredicate = (ComparisonPredicate) actualPredicate.getExpressions().get(0);
         predicateAssert.assertPredicate(comparisonPredicate, operator, lhs);
     }
 
-    private void assertCriteriaQueryForComparisonPredicate(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
+    private void assertCriteriaQueryForComparisonPredicate(CriteriaQuery<MockEntity> criteriaQuery) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
         assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
         assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.is(Matchers.instanceOf(ComparisonPredicate.class))));
     }
 
-    private void assertComparisonPredicate(ComparisonPredicate comparisonPredicate, Enum operator, String lhs) {
+    private void assertComparisonPredicate(ComparisonPredicate comparisonPredicate, Enum<?> operator, String lhs) {
         assertThat(comparisonPredicate.getComparisonOperator(), Matchers.is(operator));
-        assertThat(((SingularAttributePath)comparisonPredicate.getLeftHandOperand()).getAttribute().getName(), Matchers.is(lhs));
+        assertThat(((SingularAttributePath<MockEntity>)comparisonPredicate.getLeftHandOperand()).getAttribute().getName(), Matchers.is(lhs));
     }
 
     @Test
-    public void orQuery() {
+    void orQuery() {
         AttributeQuery query = new AttributeQuery();
         Operator operator = or( equalsComparison("1"), lessThanComparison(1));
         query.put("integerAttribute", operator);
-        CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
+        CriteriaQuery<MockEntity> criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForCompoundPredicate(criteriaQuery
                 , ComparisonPredicate.BooleanOperator.OR
-                , "integerAttribute");
+        );
     }
 
     @Test
-    public void andQuery() {
+    void andQuery() {
         AttributeQuery query = new AttributeQuery();
         And operator = and( equalsComparison("1"), lessThanComparison( 1));
         query.put("integerAttribute", operator);
-        CriteriaQuery criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
+        CriteriaQuery<MockEntity> criteriaQuery = criteriaQueryBuilder.createCriteriaQuery(query);
         assertCriteriaQueryForCompoundPredicate(criteriaQuery
                 , ComparisonPredicate.BooleanOperator.AND
-                , "integerAttribute");
+        );
     }
 
-    private void assertCriteriaQueryForCompoundPredicate(CriteriaQuery criteriaQuery, Enum operator, String lhs) {
+    private void assertCriteriaQueryForCompoundPredicate(CriteriaQuery<MockEntity> criteriaQuery, Enum<?> operator) {
         Predicate actualPredicate = criteriaQuery.getRestriction();
         assertThat(actualPredicate, Matchers.is(Matchers.instanceOf(CompoundPredicate.class)));
         assertThat(actualPredicate.getExpressions(), IsIterableContainingInOrder.contains(Matchers.is(Matchers.instanceOf(CompoundPredicate.class))));

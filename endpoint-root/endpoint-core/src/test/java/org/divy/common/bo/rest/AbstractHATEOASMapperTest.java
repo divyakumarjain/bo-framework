@@ -14,18 +14,18 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
-public class AbstractHATEOASMapperTest {
+class AbstractHATEOASMapperTest {
 
     private final KeyValuePairMapper<MockEntity> mockKeyValuePairMapper = mock(KeyValuePairMapperImpl.class);
     private       TestHATOASMapperMock           underTest;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         underTest = new TestHATOASMapperMock(mockKeyValuePairMapper, mock(LinkBuilderFactory.class), mock(MetaDataProvider.class));
     }
 
     @Test
-    public void testCreateRepresentationFromBO() {
+    void testCreateRepresentationFromBO() {
         MockEntity businessObject = new MockEntity();
         MockRepresentation representationFromBO = underTest.createFromBO(businessObject);
         assertThat(representationFromBO, notNullValue());
@@ -33,7 +33,7 @@ public class AbstractHATEOASMapperTest {
 
 
     @Test
-    public void testCreateBOFromRepresentation() {
+    void testCreateBOFromRepresentation() {
 
         MockRepresentation representation = new MockRepresentation();
         representation.setData(new HashMap<>());
@@ -43,7 +43,7 @@ public class AbstractHATEOASMapperTest {
     }
 
     @Test
-    public void testCreateRepresentationFromBOList() {
+    void testCreateRepresentationFromBOList() {
         MockEntity businessObject = new MockEntity();
 
         Collection<MockEntity> businessObjectList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class AbstractHATEOASMapperTest {
 
 
     @Test
-    public void testCreateBOFromRepresentationList() {
+    void testCreateBOFromRepresentationList() {
 
         MockRepresentation representation = new MockRepresentation();
         representation.setData(new HashMap<>());

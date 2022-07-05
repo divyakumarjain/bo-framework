@@ -8,7 +8,6 @@ import org.divy.common.bo.mapper.BOMapper;
 
 import java.lang.reflect.InvocationTargetException;
 
-@Deprecated
 public class DefaultDBCommandProvider<E extends BusinessObject<I>, I>
         extends
         TypeBaseDBCommandProvider<E, I> {
@@ -16,7 +15,7 @@ public class DefaultDBCommandProvider<E extends BusinessObject<I>, I>
     private static final String COULD_NOT_CREATE_COMMAND = "Could not Create Command";
 
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({"unchecked"})
     public DefaultDBCommandProvider(EntityManagerCommandContext context,
                                     Class<E> entityClass,
                                     BOMapper<E, E> updateMapper) {

@@ -11,12 +11,12 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-public class DynamicClassBuilderTest {
+class DynamicClassBuilderTest {
 
     MethodHandles.Lookup prvlookup;
 
     @BeforeEach
-    public void setup() throws IllegalAccessException
+    void setup() throws IllegalAccessException
     {
         MethodHandles.Lookup lookup = MethodHandles.lookup();
 
@@ -26,7 +26,7 @@ public class DynamicClassBuilderTest {
     }
 
     @Test
-    public void createClass()
+    void createClass()
     {
         final Optional<Class<?>> newClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.NewClass")
                 .build(prvlookup);
@@ -35,7 +35,7 @@ public class DynamicClassBuilderTest {
     }
 
     @Test
-    public void createClassWithConstructor() throws NoSuchMethodException {
+    void createClassWithConstructor() throws NoSuchMethodException {
         final Optional<Class<?>> newClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.NewClassWithConstructor")
                 .addConstructor()
                     .param("attribute1", String.class)
@@ -59,7 +59,7 @@ public class DynamicClassBuilderTest {
     }
 
     @Test
-    public void createClassWithAnnotation() {
+    void createClassWithAnnotation() {
         final Optional<Class<?>> newClassWithAnnotation = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.NewClassWithSingleAnnotation")
                 .addAnnotation(NewAnnotation1.class)
                 .value("NewAnnotation1Value")
@@ -72,7 +72,7 @@ public class DynamicClassBuilderTest {
     }
 
     @Test
-    public void createClassWithTwoAnnotation() {
+    void createClassWithTwoAnnotation() {
         final Optional<Class<?>> newClassWithAnnotation = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.NewClassWithTwoAnnotation")
                 .addAnnotation(NewAnnotation1.class)
                     .value("NewAnnotation1Value")
@@ -95,7 +95,7 @@ public class DynamicClassBuilderTest {
     }
 
     @Test
-    public void subClass() {
+    void subClass() {
         final Optional<Class<?>> aSubClass = DynamicClassBuilder.createSubClass(BaseClass.class)
                 .name("org.divy.common.bo.dynamic.SubClass")
                 .build(prvlookup);
@@ -104,7 +104,7 @@ public class DynamicClassBuilderTest {
     }
 
     @Test
-    public void subClassWithName() {
+    void subClassWithName() {
         final Optional<Class<?>> aSubClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.SubClassWithName")
                 .subClass(BaseClass.class)
                 .build( prvlookup );
@@ -114,7 +114,7 @@ public class DynamicClassBuilderTest {
     }
 
     @Test
-    public void subClassWithBaseConstructor() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    void subClassWithBaseConstructor() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final Optional<Class<?>> optionalResult = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.SubClassWithBaseConstructor")
                 .subClass(BaseClass.class)
                     .addConstructor()
@@ -136,7 +136,7 @@ public class DynamicClassBuilderTest {
     }
 
     @Test
-    public void subClassWithConstantValueForBaseConstructor() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    void subClassWithConstantValueForBaseConstructor() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final Optional<Class<?>> aSubClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.SubClassWithConstantValueForBaseConstructor")
                 .subClass(BaseClass.class)
                     .addConstructor()

@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import static org.mockito.Mockito.mock;
 
-public class TestTypeBaseDBCommandProvider {
+class TestTypeBaseDBCommandProvider {
 
     CommandProvider<MockEntity, UUID> commandProvider;
     EntityManagerCommandContext commandContext;
@@ -21,7 +21,7 @@ public class TestTypeBaseDBCommandProvider {
     BOMapper<MockEntity, MockEntity> updateMapper;
 
     @BeforeEach
-    public void before()
+    void before()
     {
         commandContext = new DatabaseContext("");
         updateMapper = mock(BOMapper.class);
@@ -42,25 +42,25 @@ public class TestTypeBaseDBCommandProvider {
     }
 
     @Test
-    public void testGetReadCommand() {
+    void testGetReadCommand() {
         GetCommand<MockEntity, UUID> readCommand = commandProvider.getGetCommand();
         assertThat(readCommand,notNullValue());
     }
 
     @Test
-    public void testGetCreateCommand() {
+    void testGetCreateCommand() {
         CreateCommand<MockEntity> createCommand = commandProvider.getCreateCommand();
         assertThat(createCommand,notNullValue());
     }
 
     @Test
-    public void testGetDeleteCommand() {
+    void testGetDeleteCommand() {
         DeleteCommand<MockEntity, UUID> deleteCommand = commandProvider.getDeleteCommand();
         assertThat(deleteCommand,notNullValue());
     }
 
     @Test
-    public void testGetUpdateCommand() {
+    void testGetUpdateCommand() {
         UpdateCommand<MockEntity, UUID> updateCommand = commandProvider.getUpdateCommand();
         assertThat(updateCommand,notNullValue());
     }
