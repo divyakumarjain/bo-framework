@@ -20,8 +20,7 @@ public class DynamicMethodParamBuilderContext<P extends DynamicMethodBuilderCont
     DynamicMethodParamBuilderContext(P parentContext) {
         super(parentContext);
     }
-
-    DynamicMethodParamBuilderContext index(int i) {
+    DynamicMethodParamBuilderContext<P> index(int i) {
         this.index = i;
         return this;
     }
@@ -45,6 +44,7 @@ public class DynamicMethodParamBuilderContext<P extends DynamicMethodBuilderCont
         this.annotations.forEach(annotation-> annotation.doBuild(behavior, index));
     }
 
+    @Override
     public P and() {
         return getParentContext();
     }

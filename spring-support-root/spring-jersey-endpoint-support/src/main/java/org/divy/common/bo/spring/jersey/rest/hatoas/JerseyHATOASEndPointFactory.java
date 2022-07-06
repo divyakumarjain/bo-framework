@@ -68,7 +68,7 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
         }
     }
 
-    private static       MethodHandles.Lookup           prvlookup;
+    private static MethodHandles.Lookup prvlookup;
 
     static {
         MethodHandles.Lookup lookup = MethodHandles.lookup();
@@ -147,7 +147,8 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
                     .param(UUID.class)
                         .addAnnotation(NotNull.class)
                             .and()
-                        .addAnnotation(PathParam.class);
+                        .addAnnotation(PathParam.class)
+                            .value("id");
 
         DynamicProxyMethodBuilderContext searchMethod = dynamicSubClassBuilderContext.proxySuperMethod("search");
         searchMethod.name("searchMethod")

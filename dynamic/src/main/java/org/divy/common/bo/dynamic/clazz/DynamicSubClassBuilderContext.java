@@ -4,17 +4,19 @@ import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
+import org.divy.common.bo.dynamic.DynamicClassException;
 import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.SecureRandom;
+import java.util.Objects;
 import java.util.Optional;
 
 public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicSubClassBuilderContext.class);
-    private Class<?> parentClass;
+    private final Class<?> parentClass;
 
     DynamicSubClassBuilderContext(Class<?> parentClass) {
         this.parentClass = parentClass;
@@ -29,8 +31,6 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext {
         super(className, dynamicClassBuilderContext);
         this.parentClass = parentClass;
     }
-
-
     @Override
     protected void doBuild(CtClass newClass) {
         final CtClass superClass;
@@ -42,7 +42,7 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext {
         {
             LOGGER.error("Could not find parent Class" + parentClass.getName() + " for " + newClass.getName(),e);
         } catch (CannotCompileException e) {
-            throw new RuntimeException(e);
+            throw new DynamicClassException(e);
         }
         super.doBuild(newClass);
     }
@@ -50,11 +50,7 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext {
     @Override
     String getClassName() {
         String className = super.getClassName();
-        if(className==null) {
-            return parentClass.getSimpleName() + new SecureRandom().nextInt();
-        } else {
-            return className;
-        }
+        return Objects.requireNonNullElseGet(className, () -> parentClass.getSimpleName() + new SecureRandom().nextInt());
     }
 
     public DynamicProxyMethodBuilderContext proxySuperMethod(String methodName) {

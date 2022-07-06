@@ -17,8 +17,8 @@ public class DynamicClassConstructorBuilderContext<P extends DynamicClassBuilder
         extends DynamicMethodBuilderContext<P> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicClassConstructorBuilderContext.class);
-    private List<DynamicConstructorBehaviourContext<P>> superBehaviour = new ArrayList<>();
-    private List<DynamicConstructorBehaviourContext<P>> fieldBehaviour = new ArrayList<>();
+    private final List<DynamicConstructorBehaviourContext<P>> superBehaviour = new ArrayList<>();
+    private final List<DynamicConstructorBehaviourContext<P>> fieldBehaviour = new ArrayList<>();
     private String body="";
 
     public DynamicClassConstructorBuilderContext(P builderContext) {
@@ -35,11 +35,11 @@ public class DynamicClassConstructorBuilderContext<P extends DynamicClassBuilder
     }
 
 
-    public DynamicClassConstructorBuilderContext<P> superParam(Class<?> paramClass) {
+    public DynamicMethodParamBuilderContext<DynamicMethodBuilderContext<P>> superParam(Class<?> paramClass) {
         var param = super.param(paramClass);
         final var superInitializer = new DynamicConstructorSuperInitializer<P>(this, paramClass, param);
         superBehaviour.add(superInitializer);
-        return this;
+        return param;
     }
 
     public DynamicConstructorSuperInitializer<P> superValue(Object value) {
@@ -102,6 +102,7 @@ public class DynamicClassConstructorBuilderContext<P extends DynamicClassBuilder
         + ");";
     }
 
+    @Override
     public P and() {
         return getParentContext();
     }
