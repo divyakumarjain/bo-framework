@@ -45,4 +45,7 @@ public class DynamicMethodParamBuilderContext<P extends DynamicMethodBuilderCont
         this.annotations.forEach(annotation-> annotation.doBuild(behavior, index));
     }
 
+    public P and() {
+        return getParentContext();
+    }
 }

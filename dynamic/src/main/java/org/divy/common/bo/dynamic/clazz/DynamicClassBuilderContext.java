@@ -7,7 +7,6 @@ import org.divy.common.bo.dynamic.clazz.common.DynamicAnnotatableBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.field.DynamicClassFieldBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.method.DynamicMethodBuilderContext;
-import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,12 +15,12 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
-        extends DynamicAnnotatableBuilderContext<C, DynamicClassBuilderContext> {
+public class DynamicClassBuilderContext
+        extends DynamicAnnotatableBuilderContext<DynamicClassBuilderContext, DynamicClassBuilderContext> {
 
     private String className;
-    private final Set<DynamicClassConstructorBuilderContext> constructors = new HashSet<>();
-    private final Set<DynamicMethodBuilderContext> methods = new HashSet<>();
+    private final Set<DynamicClassConstructorBuilderContext<DynamicClassBuilderContext>> constructors = new HashSet<>();
+    private final Set<DynamicMethodBuilderContext<DynamicClassBuilderContext>> methods = new HashSet<>();
     private Set<DynamicClassFieldBuilderContext> fields = new HashSet<>();
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicClassBuilderContext.class);
@@ -50,7 +49,7 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
         this.className = className;
     }
 
-    public DynamicClassBuilderContext<C> name(String className) {
+    public DynamicClassBuilderContext name(String className) {
         this.className = className;
         return this;
     }
@@ -59,14 +58,14 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
         return new DynamicSubClassBuilderContext(parentClass, this.className, this);
     }
 
-    public DynamicClassConstructorBuilderContext<C> addConstructor() {
-        final var dynamicClassConstructorBuilderContext = new DynamicClassConstructorBuilderContext(this);
+    public DynamicClassConstructorBuilderContext<DynamicClassBuilderContext> addConstructor() {
+        final var dynamicClassConstructorBuilderContext = new DynamicClassConstructorBuilderContext<>(this);
         this.constructors.add(dynamicClassConstructorBuilderContext);
         return dynamicClassConstructorBuilderContext;
     }
 
-    public DynamicMethodBuilderContext<DynamicMethodBuilderContext, DynamicClassBuilderContext<C>> addMethod() {
-        final DynamicMethodBuilderContext<DynamicMethodBuilderContext, DynamicClassBuilderContext<C>> dynamicMethodBuilderContext = new DynamicMethodBuilderContext<>(this);
+    public DynamicMethodBuilderContext<DynamicClassBuilderContext> addMethod() {
+        final DynamicMethodBuilderContext<DynamicClassBuilderContext> dynamicMethodBuilderContext = new DynamicMethodBuilderContext<>(this);
         this.methods.add(dynamicMethodBuilderContext);
         return dynamicMethodBuilderContext;
     }
@@ -86,7 +85,7 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
     }
 
 
-    protected void doBuild(CtClass newClass) throws CannotCompileException {
+    protected void doBuild(CtClass newClass) {
         newClass.setModifiers(Modifier.PUBLIC);
         this.annotations.forEach(annotationBuilderContext -> annotationBuilderContext.doBuild(newClass));
         this.fields.forEach(fieldBuilderContext -> fieldBuilderContext.doBuild(newClass));
@@ -103,13 +102,8 @@ public class DynamicClassBuilderContext<C extends DynamicClassBuilderContext>
         return this;
     }
 
-    @Override
-    public DynamicClassBuilderContext and() {
-        throw new UnsupportedOperationException("And method does not support in Class Builder Context");
-    }
-
-    protected void addMethods( DynamicProxyMethodBuilderContext dynamicProxyMethodBuilderContext )
+    protected void addMethods( DynamicMethodBuilderContext<DynamicClassBuilderContext> dynamicMethodBuilderContext )
     {
-        this.methods.add( dynamicProxyMethodBuilderContext );
+        this.methods.add(dynamicMethodBuilderContext);
     }
 }

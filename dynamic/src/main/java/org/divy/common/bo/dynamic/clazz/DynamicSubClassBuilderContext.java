@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.security.SecureRandom;
 import java.util.Optional;
 
-public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<DynamicSubClassBuilderContext> {
+public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicSubClassBuilderContext.class);
     private Class<?> parentClass;
@@ -32,7 +32,7 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<Dy
 
 
     @Override
-    protected void doBuild(CtClass newClass) throws CannotCompileException {
+    protected void doBuild(CtClass newClass) {
         final CtClass superClass;
         try
         {
@@ -41,6 +41,8 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext<Dy
         } catch (NotFoundException e)
         {
             LOGGER.error("Could not find parent Class" + parentClass.getName() + " for " + newClass.getName(),e);
+        } catch (CannotCompileException e) {
+            throw new RuntimeException(e);
         }
         super.doBuild(newClass);
     }

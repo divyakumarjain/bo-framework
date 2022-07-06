@@ -17,4 +17,8 @@ public class DynamicAnnotatableBuilderContext<C extends DynamicAnnotatableBuilde
         this.annotations.add(annotationBuilderContext);
         return annotationBuilderContext;
     }
+
+    public P and() {
+        return super.getParentContext();
+    }
 }

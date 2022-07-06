@@ -1,5 +1,9 @@
 package org.divy.common.bo.spring.mvc.rest.factory;
 
+import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
+import org.divy.common.bo.dynamic.clazz.DynamicSubClassBuilderContext;
+import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
+import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderContext;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
@@ -67,89 +71,86 @@ public class SpringMVCEndPointClassFactory {
     }
 
     private Optional<Class<?>> buildClass( Class<? extends BusinessObject> typeClass, String url ) {
-        return DynamicClassBuilder.createClass( SpringMVCHATOASEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
-            .subClass( BaseBOEndpoint.class)
+        DynamicSubClassBuilderContext dynamicSubClassBuilderContext = DynamicClassBuilder.createClass(SpringMVCHATOASEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
+                .subClass(BaseBOEndpoint.class);
+
+        dynamicSubClassBuilderContext
                 .addAnnotation(RestController.class)
                     .and()
                 .addAnnotation(RequestMapping.class)
-                    .value( new StringArrayAnnotationParam(url) )
-                    .and()
-            .proxySuperMethod("create").name("createMethod")
+                    .value( new StringArrayAnnotationParam(url) );
+
+        DynamicProxyMethodBuilderContext createMethod = dynamicSubClassBuilderContext.proxySuperMethod("create");
+        createMethod.name("createMethod")
                 .addAnnotation(RequestMapping.class)
-                    .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.POST))
-                    .and()
-                .param()
+                    .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.POST));
+
+        createMethod.param()
                     .type(typeClass)
                         .addAnnotation(RequestBody.class)
                         .and()
                     .and()
-                .and()
-            .proxySuperMethod("update").name("updateMethod")
+                .and();
+
+        DynamicProxyMethodBuilderContext updateMethod = dynamicSubClassBuilderContext.proxySuperMethod("update");
+
+        updateMethod.name("updateMethod")
                 .addAnnotation(RequestMapping.class)
                     .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.PUT))
-                    .value(new StringArrayAnnotationParam(new String[]{"/{entityId}"}))
-                    .and()
-                .param(UUID.class)
+                    .value(new StringArrayAnnotationParam(new String[]{"/{entityId}"}));
+
+        updateMethod.param(UUID.class)
                     .addAnnotation(PathVariable.class)
-                        .value("entityId")
-                        .and()
-                    .and()
-                .param()
+                        .value("entityId");
+
+        updateMethod.param()
                     .type(typeClass)
-                        .addAnnotation(RequestBody.class)
-                        .and()
-                    .and()
-                .and()
-            .proxySuperMethod("delete").name("deleteMethod")
+                        .addAnnotation(RequestBody.class);
+
+        dynamicSubClassBuilderContext.proxySuperMethod("delete").name("deleteMethod")
                 .addAnnotation(RequestMapping.class)
                     .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.DELETE))
                     .value(new StringArrayAnnotationParam(new String[]{"/{id}"}))
                     .and()
                 .param(UUID.class)
                     .addAnnotation(PathVariable.class)
-                        .value("id")
-                        .and()
-                    .and()
-                .and()
-            .proxySuperMethod("search").name("searchMethod")
+                        .value("id");
+
+        dynamicSubClassBuilderContext.proxySuperMethod("search").name("searchMethod")
                 .addAnnotation(RequestMapping.class)
                     .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.POST))
                     .value(new StringArrayAnnotationParam(new String[]{"/search"}))
                     .and()
                 .param(Query.class)
-                    .addAnnotation(RequestBody.class)
-                        .and()
-                    .and()
-                .and()
-            .proxySuperMethod("list").name("listMethod")
+                    .addAnnotation(RequestBody.class);
+
+        dynamicSubClassBuilderContext.proxySuperMethod("list").name("listMethod")
                 .addAnnotation(RequestMapping.class)
-                    .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.GET))
-                    .and()
-                .and()
-            .proxySuperMethod("read").name("readMethod")
+                    .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.GET));
+
+        dynamicSubClassBuilderContext.proxySuperMethod("read").name("readMethod")
                 .addAnnotation(RequestMapping.class)
                     .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.GET))
                     .value(new StringArrayAnnotationParam(new String[]{"/{id}"}))
                     .and()
                 .param(UUID.class)
                     .addAnnotation(PathVariable.class)
-                        .value("id")
-                        .and()
-                    .and()
-                .and()
-            .addConstructor()
-                .addAnnotation(Autowired.class)
-                    .and()
-                .superParam(BOManager.class)
+                        .value("id");
+
+        DynamicClassConstructorBuilderContext<DynamicClassBuilderContext> constructorMethod = dynamicSubClassBuilderContext.addConstructor();
+        constructorMethod.addAnnotation(Autowired.class);
+
+        constructorMethod.superParam(BOManager.class)
                     .addAnnotation(Qualifier.class)
-                        .value(beanNamingStrategy.calculateManagerId(typeClass))
-                        .and()
-                    .and()
-                .superParam(ResponseEntityBuilderFactory.class)
+                        .value(beanNamingStrategy.calculateManagerId(typeClass));
+
+        constructorMethod.superParam(ResponseEntityBuilderFactory.class)
                     .addAnnotation(Qualifier.class)
                         .value("mvcResponseEntityBuilderFactory")
                         .and()
                     .and()
             .build( prvlookup );
+
+        return dynamicSubClassBuilderContext.build(prvlookup);
     }
 }

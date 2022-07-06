@@ -1,17 +1,18 @@
 package org.divy.common.bo.dynamic.clazz.member.method;
 
 import javassist.*;
+import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
 import org.divy.common.bo.dynamic.clazz.DynamicSubClassBuilderContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DynamicProxyMethodBuilderContext
-        extends DynamicMethodBuilderContext<DynamicProxyMethodBuilderContext, DynamicSubClassBuilderContext> {
+        extends DynamicMethodBuilderContext<DynamicClassBuilderContext> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicProxyMethodBuilderContext.class);
     private CtMethod methodTobeProxied;
 
-    public DynamicProxyMethodBuilderContext(DynamicSubClassBuilderContext builderContext
+    public DynamicProxyMethodBuilderContext(DynamicClassBuilderContext builderContext
             , CtMethod methodTobeProxied ) {
         super(builderContext);
         name(methodTobeProxied.getName());
@@ -88,7 +89,7 @@ public class DynamicProxyMethodBuilderContext
         }
     }
 
-    public DynamicMethodParamBuilderContext<DynamicProxyMethodBuilderContext> param() {
+    public DynamicMethodParamBuilderContext<DynamicMethodBuilderContext<DynamicClassBuilderContext>> param() {
         return super.parameters.get(paramCount++);
     }
 }

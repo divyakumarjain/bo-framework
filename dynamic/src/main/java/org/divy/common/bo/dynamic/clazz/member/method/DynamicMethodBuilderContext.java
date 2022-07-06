@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DynamicMethodBuilderContext<C extends DynamicMethodBuilderContext, P extends DynamicClassBuilderContext>
-        extends DynamicMemberBuilderContext<C, P> {
+public class DynamicMethodBuilderContext<P extends DynamicClassBuilderContext>
+        extends DynamicMemberBuilderContext<DynamicMethodBuilderContext<P>, P> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicMethodBuilderContext.class);
-    protected List<DynamicMethodParamBuilderContext<C>> parameters = new ArrayList<>();
+    protected List<DynamicMethodParamBuilderContext<DynamicMethodBuilderContext<P>>> parameters = new ArrayList<>();
     private String body="";
     int paramCount=0;
 
@@ -20,25 +20,24 @@ public class DynamicMethodBuilderContext<C extends DynamicMethodBuilderContext, 
         super(builderContext);
     }
 
-    public DynamicMethodParamBuilderContext<C> param(Class<?> paramClass) {
+    public DynamicMethodParamBuilderContext<DynamicMethodBuilderContext<P>> param(Class<?> paramClass) {
 
-        DynamicMethodParamBuilderContext paramBuilderContext;
+        DynamicMethodParamBuilderContext<DynamicMethodBuilderContext<P>> paramBuilderContext;
         if(paramCount<parameters.size()) {
             paramBuilderContext = parameters.get(paramCount);
         } else {
-            paramBuilderContext = new DynamicMethodParamBuilderContext<>((C)this);
+            paramBuilderContext = new DynamicMethodParamBuilderContext<>(this);
             parameters.add(paramBuilderContext);
             paramBuilderContext.index(paramCount);
         }
 
         paramBuilderContext.type(paramClass);
 
-
         paramCount++;
         return paramBuilderContext;
     }
 
-    public DynamicMethodBuilderContext body(String body) {
+    public DynamicMethodBuilderContext<P> body(String body) {
         this.body = body;
         return this;
     }
@@ -80,6 +79,10 @@ public class DynamicMethodBuilderContext<C extends DynamicMethodBuilderContext, 
         return parameters.stream()
                 .map(DynamicMethodParamBuilderContext::getParamCtClass)
                 .toArray(CtClass[]::new);
+    }
+
+    public P and() {
+        return getParentContext();
     }
 }
 

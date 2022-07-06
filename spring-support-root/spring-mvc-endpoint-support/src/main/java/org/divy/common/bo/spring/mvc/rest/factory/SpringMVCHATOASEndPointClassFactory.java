@@ -1,6 +1,8 @@
 package org.divy.common.bo.spring.mvc.rest.factory;
 
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
+import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
+import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderContext;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.dynamic.clazz.DynamicSubClassBuilderContext;
 import org.divy.common.bo.repository.BusinessObject;
@@ -66,111 +68,96 @@ public class SpringMVCHATOASEndPointClassFactory extends SpringMVCEndPointClassF
 
         Map<String, Class<?>> result = new HashMap<>( 1 );
 
-        buildHateOASClass( typeClass, url )
-              .ifPresent( value -> result.put( url, value ) );
+        buildHateOASClass( typeClass, url ).ifPresent( value -> result.put( url, value ) );
         return Optional.of( result );
     }
 
     private Optional<Class<?>> buildHateOASClass( Class<? extends BusinessObject> typeClass, String url ) {
-        DynamicClassBuilderContext<DynamicSubClassBuilderContext> dynamicClassBuilderContext =
+        DynamicSubClassBuilderContext dynamicSubClassBuilderContext =
                 DynamicClassBuilder.createClass( SpringMVCHATOASEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "HATOASEndPoint")
-                      .subClass( DefaultHATEOASMVCEndpoint.class);
-        dynamicClassBuilderContext
+                        .subClass( DefaultHATEOASMVCEndpoint.class);
+
+        dynamicSubClassBuilderContext
                 .addAnnotation(RestController.class)
                         .and()
                     .addAnnotation(RequestMapping.class)
-                        .value( new StringArrayAnnotationParam( url ) )
-                        .and()
-                .proxySuperMethod("create").name("createMethod")
-                    .addAnnotation(RequestMapping.class)
-                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.POST))
-                        .and()
-                    .param()
-                        .type( SpringMVCRepresentation.class)
-                            .addAnnotation(RequestBody.class)
-                            .and()
-                        .and()
-                    .and()
-                .proxySuperMethod("update").name("updateMethod")
+                        .value( new StringArrayAnnotationParam( url ) );
+
+        DynamicProxyMethodBuilderContext createMethod = dynamicSubClassBuilderContext.proxySuperMethod("create");
+        createMethod.name("createMethod");
+
+        createMethod.addAnnotation(RequestMapping.class)
+                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.POST));
+
+        createMethod.param().type( SpringMVCRepresentation.class).addAnnotation(RequestBody.class);
+
+        DynamicProxyMethodBuilderContext updateMethod = dynamicSubClassBuilderContext.proxySuperMethod("update");
+        updateMethod.name("updateMethod")
                     .addAnnotation(RequestMapping.class)
                         .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.PUT))
                             .value(new StringArrayAnnotationParam(new String[]{"/{entityId}"}))
                             .and()
                         .param(UUID.class)
                             .addAnnotation(PathVariable.class)
-                                .value("entityId")
-                                .and()
-                            .and()
-                        .param()
+                                .value("entityId");
+        updateMethod.param()
                             .type(SpringMVCRepresentation.class)
-                            .addAnnotation(RequestBody.class)
-                            .and()
-                        .and()
-                    .and()
-                .proxySuperMethod("delete").name("deleteMethod")
+                            .addAnnotation(RequestBody.class);
+
+        DynamicProxyMethodBuilderContext deleteMethod = dynamicSubClassBuilderContext.proxySuperMethod("delete");
+        deleteMethod.name("deleteMethod")
                     .addAnnotation(RequestMapping.class)
                         .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.DELETE))
                         .value(new StringArrayAnnotationParam(new String[]{"/{id}"}))
                         .and()
                     .param(UUID.class)
                         .addAnnotation(PathVariable.class)
-                            .value("id")
-                            .and()
-                        .and()
-                    .and()
-                .proxySuperMethod("search").name("searchMethod")
+                            .value("id");
+
+        DynamicProxyMethodBuilderContext searchMethod = dynamicSubClassBuilderContext.proxySuperMethod("search");
+        searchMethod.name("searchMethod")
                     .addAnnotation(RequestMapping.class)
                         .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.POST))
                         .value(new StringArrayAnnotationParam(new String[]{"/search"}))
                         .and()
                     .param(Query.class)
-                        .addAnnotation(RequestBody.class)
-                            .and()
-                        .and()
-                    .and()
-                .proxySuperMethod("list").name("listMethod")
+                        .addAnnotation(RequestBody.class);
+
+        dynamicSubClassBuilderContext.proxySuperMethod("list").name("listMethod")
                     .addAnnotation(RequestMapping.class)
-                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.GET))
-                        .and()
-                    .and()
-                .proxySuperMethod("read").name("readMethod")
+                        .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.GET));
+
+        dynamicSubClassBuilderContext.proxySuperMethod("read").name("readMethod")
                     .addAnnotation(RequestMapping.class)
                         .param(HTTP_METHOD, new EnumArrayAnnotationParam(RequestMethod.GET))
                         .value(new StringArrayAnnotationParam(new String[]{"/{id}"}))
                         .and()
                     .param(UUID.class)
                         .addAnnotation(PathVariable.class)
-                            .value("id")
-                            .and()
-                        .and()
-                    .and()
-                .addConstructor()
-                    .addAnnotation(Autowired.class)
-                        .and()
-                    .superParam(BOManager.class)
+                            .value("id");
+
+        DynamicClassConstructorBuilderContext<DynamicClassBuilderContext> constructorMethod = dynamicSubClassBuilderContext.addConstructor();
+        constructorMethod.addAnnotation(Autowired.class);
+        constructorMethod.superParam(BOManager.class)
                         .addAnnotation(Qualifier.class)
-                            .value(beanNamingStrategy.calculateManagerId(typeClass))
-                            .and()
-                        .and()
-                    .superParam(ResponseEntityBuilderFactory.class)
+                            .value(beanNamingStrategy.calculateManagerId(typeClass));
+        constructorMethod.superParam(ResponseEntityBuilderFactory.class)
                         .addAnnotation(Qualifier.class)
-                            .value("mvcResponseEntityBuilderHATOASFactory")
-                            .and()
-                        .and()
-                    .superParam( HATOASMapper.class)
+                            .value("mvcResponseEntityBuilderHATOASFactory");
+
+        constructorMethod.superParam( HATOASMapper.class)
                         .addAnnotation(Qualifier.class)
-                            .value(beanNamingStrategy.calculateHATOASMapperId(typeClass))
-                            .and()
-                        .and()
-                    .superParam(AssociationsHandler.class)
+                            .value(beanNamingStrategy.calculateHATOASMapperId(typeClass));
+
+        constructorMethod.superParam(AssociationsHandler.class)
                         .addAnnotation(Qualifier.class)
                         .value(beanNamingStrategy.calculateAssociationsHandler(typeClass));
 
-        enrichAssociationMethods(dynamicClassBuilderContext, typeClass);
+        enrichAssociationMethods(dynamicSubClassBuilderContext, typeClass);
 
-        return dynamicClassBuilderContext.build( prvlookup );
+        return dynamicSubClassBuilderContext.build( prvlookup );
     }
-    private void enrichAssociationMethods( DynamicClassBuilderContext<DynamicSubClassBuilderContext> dynamicClassBuilderContext, Class<? extends BusinessObject> typeClass) {
+    private void enrichAssociationMethods( DynamicClassBuilderContext dynamicClassBuilderContext, Class<? extends BusinessObject> typeClass) {
 //        final Map<String, FieldMetaData> childEntities = metaDataProvider.getChildEntities(typeClass);
         //        childEntities.forEach( childEntity -> {
         //

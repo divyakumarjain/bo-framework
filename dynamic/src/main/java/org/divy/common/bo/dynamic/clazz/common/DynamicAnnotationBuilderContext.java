@@ -50,7 +50,7 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
         return this.param(paramName, new StringArrayAnnotationParam(values));
     }
 
-    public DynamicAnnotationBuilderContext<P> param(String paramName, Enum value) {
+    public DynamicAnnotationBuilderContext<P> param(String paramName, Enum<?> value) {
         return this.param(paramName, new EnumAnnotationParam(value));
     }
 
@@ -158,5 +158,9 @@ public class DynamicAnnotationBuilderContext<P extends DynamicAnnotatableBuilder
 
         doBuildAnnotationParam(annotation, parameterConstPool);
         ((AnnotationsAttribute)paramAttributeInfo).addAnnotation(annotation);
+    }
+
+    public P and() {
+        return super.getParentContext();
     }
 }

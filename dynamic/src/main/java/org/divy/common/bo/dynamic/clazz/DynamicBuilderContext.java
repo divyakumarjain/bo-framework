@@ -13,7 +13,7 @@ import java.util.Optional;
 public class DynamicBuilderContext<P extends DynamicBuilderContext> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicBuilderContext.class);
     private static ClassPool pool;
-    private P parentContext;
+    private final P parentContext;
 
     public DynamicBuilderContext(P parentContext) {
         this.parentContext = parentContext;
@@ -47,11 +47,11 @@ public class DynamicBuilderContext<P extends DynamicBuilderContext> {
         return pool;
     }
 
-    public P and() {
-        return parentContext;
-    }
-
     public <T> Optional<T> build( MethodHandles.Lookup lookup ) {
         return parentContext.build( lookup );
+    }
+
+    protected P getParentContext() {
+        return this.parentContext;
     }
 }

@@ -119,7 +119,6 @@ class DynamicClassBuilderTest {
                 .subClass(BaseClass.class)
                     .addConstructor()
                         .superParam(String.class)
-                        .and()
                         .superParam(String.class)
                     .and()
                 .build( prvlookup );
@@ -141,10 +140,8 @@ class DynamicClassBuilderTest {
                 .subClass(BaseClass.class)
                     .addConstructor()
                         .superParam(String.class)
-                        .and()
                         .superValue("attribute2")
-                    .and()
-                .build( prvlookup );
+                    .build( prvlookup );
 
         assertThat(aSubClass.get(), both(typeCompatibleWith(BaseClass.class)).and(notNullValue()));
         final Constructor<?> constructor = aSubClass.get().getConstructor(String.class);
