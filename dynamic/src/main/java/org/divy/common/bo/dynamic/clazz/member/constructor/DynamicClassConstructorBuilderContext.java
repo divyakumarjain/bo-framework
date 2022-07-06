@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DynamicClassConstructorBuilderContext<P extends DynamicClassBuilderContext>
-        extends DynamicMethodBuilderContext<DynamicClassConstructorBuilderContext<P>, P> {
+        extends DynamicMethodBuilderContext<P> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynamicClassConstructorBuilderContext.class);
     private List<DynamicConstructorBehaviourContext<P>> superBehaviour = new ArrayList<>();
@@ -26,8 +26,8 @@ public class DynamicClassConstructorBuilderContext<P extends DynamicClassBuilder
         type(Void.class);
     }
 
-    public DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext<P>> param(String fieldName, Class<?> paramClass) {
-        final DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext<P>> param = super.param(paramClass);
+    public DynamicMethodParamBuilderContext<DynamicMethodBuilderContext<P>> param(String fieldName, Class<?> paramClass) {
+        final DynamicMethodParamBuilderContext<DynamicMethodBuilderContext<P>> param = super.param(paramClass);
 
         final DynamicConstructorFieldInitializer<P> paramBuilderContext = new DynamicConstructorFieldInitializer<>(this,fieldName, paramClass, param);
         superBehaviour.add(paramBuilderContext);
@@ -35,12 +35,11 @@ public class DynamicClassConstructorBuilderContext<P extends DynamicClassBuilder
     }
 
 
-    public DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext<P>> superParam(Class<?> paramClass) {
-        final DynamicMethodParamBuilderContext<DynamicClassConstructorBuilderContext<P>> param = super.param(paramClass);
-        final DynamicConstructorSuperInitializer<P> superInitializer
-                = new DynamicConstructorSuperInitializer<>(this, paramClass, param);
+    public DynamicClassConstructorBuilderContext<P> superParam(Class<?> paramClass) {
+        var param = super.param(paramClass);
+        final var superInitializer = new DynamicConstructorSuperInitializer<P>(this, paramClass, param);
         superBehaviour.add(superInitializer);
-        return param;
+        return this;
     }
 
     public DynamicConstructorSuperInitializer<P> superValue(Object value) {
@@ -101,5 +100,9 @@ public class DynamicClassConstructorBuilderContext<P extends DynamicClassBuilder
                 .map(DynamicConstructorSuperInitializer::code)
                 .collect(Collectors.joining(", "))
         + ");";
+    }
+
+    public P and() {
+        return getParentContext();
     }
 }

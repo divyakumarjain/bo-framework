@@ -2,8 +2,13 @@ package org.divy.common.bo.spring.jersey.rest;
 
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
+import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
+import org.divy.common.bo.dynamic.clazz.DynamicSubClassBuilderContext;
+import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
+import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderContext;
 import org.divy.common.bo.endpoint.BaseBOEndpoint;
 import org.divy.common.bo.metadata.MetaDataProvider;
+import org.divy.common.bo.query.Query;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
@@ -66,13 +71,15 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                 .forEach(config::register);
     }
 
-    private Optional<Class<? extends BaseBOEndpoint<?,?,?>>> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
-        return DynamicClassBuilder.createClass( JerseyEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
-                .subClass(BaseBOEndpoint.class)
+    private Optional<Class<?>> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
+        DynamicSubClassBuilderContext dynamicSubClassBuilderContext = DynamicClassBuilder.createClass(JerseyEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
+                .subClass(BaseBOEndpoint.class);
+
+        dynamicSubClassBuilderContext
                     .addAnnotation(javax.ws.rs.Path.class)
-                        .value(configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase())
-                        .and()
-                .proxySuperMethod("create").name("createMethod")
+                        .value(configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase());
+
+        dynamicSubClassBuilderContext.proxySuperMethod("create").name("createMethod")
                     .addAnnotation(POST.class)
                         .and()
                     .addAnnotation(Override.class)
@@ -84,11 +91,8 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                         .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .param(typeClass)
-                        .addAnnotation(NotNull.class)
-                            .and()
-                        .and()
-                    .and()
-                .proxySuperMethod("update").name("updateMethod")
+                        .addAnnotation(NotNull.class);
+        dynamicSubClassBuilderContext .proxySuperMethod("update").name("updateMethod")
                     .addAnnotation(PUT.class)
                         .and()
                     .addAnnotation(Path.class)
@@ -108,11 +112,9 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                             .and()
                         .and()
                     .param(typeClass)
-                        .addAnnotation(NotNull.class)
-                            .and()
-                        .and()
-                    .and()
-                .proxySuperMethod("delete").name("deleteMethod")
+                        .addAnnotation(NotNull.class);
+
+        dynamicSubClassBuilderContext.proxySuperMethod("delete").name("deleteMethod")
                     .addAnnotation(DELETE.class)
                         .and()
                     .addAnnotation(Path.class)
@@ -130,11 +132,11 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                         .addAnnotation(NotNull.class)
                             .and()
                         .addAnnotation(PathParam.class)
-                            .value("id")
-                            .and()
-                         .and()
-                    .and()
-                .proxySuperMethod("search").name("searchMethod")
+                            .value("id");
+
+        DynamicProxyMethodBuilderContext searchMethod = dynamicSubClassBuilderContext.proxySuperMethod("search");
+
+        searchMethod.name("searchMethod")
                     .addAnnotation(POST.class)
                         .and()
                     .addAnnotation(Path.class)
@@ -146,14 +148,12 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                         .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .addAnnotation(Consumes.class)
-                        .value(new String[] {MediaType.APPLICATION_JSON})
-                        .and()
-                    .param()
-                        .addAnnotation(NotNull.class)
-                            .and()
-                         .and()
-                    .and()
-                .proxySuperMethod("list").name("listMethod")
+                        .value(new String[] {MediaType.APPLICATION_JSON});
+
+        searchMethod.param(Query.class)
+                        .addAnnotation(NotNull.class);
+
+        dynamicSubClassBuilderContext.proxySuperMethod("list").name("listMethod")
                     .addAnnotation(GET.class)
                         .and()
                     .addAnnotation(Override.class)
@@ -162,10 +162,9 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                         .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
                     .addAnnotation(Consumes.class)
-                        .value(new String[] {MediaType.APPLICATION_JSON})
-                         .and()
-                    .and()
-                .proxySuperMethod("read").name("readMethod")
+                        .value(new String[] {MediaType.APPLICATION_JSON});
+
+        dynamicSubClassBuilderContext.proxySuperMethod("read").name("readMethod")
                     .addAnnotation(GET.class)
                         .and()
                     .addAnnotation(Path.class)
@@ -183,25 +182,18 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                         .addAnnotation(NotNull.class)
                             .and()
                         .addAnnotation(PathParam.class)
-                            .value("id")
-                            .and()
-                         .and()
-                    .and()
-                .addConstructor()
-                    .addAnnotation(Autowired.class)
-                        .and()
-                    .superParam(BOManager.class)
+                            .value("id");
+        DynamicClassConstructorBuilderContext<DynamicClassBuilderContext> constructorBuilderContext = dynamicSubClassBuilderContext.addConstructor();
+        constructorBuilderContext.addAnnotation(Autowired.class);
+        constructorBuilderContext.superParam(BOManager.class)
                         .addAnnotation(Qualifier.class)
-                            .value(beanNamingStrategy.calculateManagerId(typeClass))
-                            .and()
-                        .and()
-                    .superParam(ResponseEntityBuilderFactory.class)
+                            .value(beanNamingStrategy.calculateManagerId(typeClass));
+
+        constructorBuilderContext.superParam(ResponseEntityBuilderFactory.class)
                         .addAnnotation(Qualifier.class)
-                            .value("jerseyResponseEntityBuilderFactory")
-                            .and()
-                        .and()
-                .<Class<? extends BaseBOEndpoint<?,?,?>>>build(prvlookup)
-        .map(endpointClass-> {
+                            .value("jerseyResponseEntityBuilderFactory");
+
+        return dynamicSubClassBuilderContext.build(prvlookup).map(endpointClass-> {
             endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
             return endpointClass;
         });
