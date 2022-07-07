@@ -3,7 +3,6 @@ package org.divy.common.bo.spring.mvc.rest.factory;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderContext;
-import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.dynamic.clazz.DynamicSubClassBuilderContext;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
@@ -37,7 +36,6 @@ public class SpringMVCHATOASEndPointClassFactory extends SpringMVCEndPointClassF
     private static final Logger LOGGER = LoggerFactory.getLogger( SpringMVCHATOASEndPointClassFactory.class);
 
     private static MethodHandles.Lookup prvlookup;
-    private MetaDataProvider metaDataProvider;
 
     static {
         MethodHandles.Lookup lookup = MethodHandles.lookup();
@@ -53,12 +51,10 @@ public class SpringMVCHATOASEndPointClassFactory extends SpringMVCEndPointClassF
     }
 
     public SpringMVCHATOASEndPointClassFactory( BeanNamingStrategy beanNamingStrategy
-          , EndPointRegistry endPointRegistry
-          , MetaDataProvider metaDataProvider,
+          , EndPointRegistry endPointRegistry,
           SpringMVCEndpointConfigProperties configProperties ) {
 
         super(beanNamingStrategy, endPointRegistry, configProperties);
-        this.metaDataProvider = metaDataProvider;
     }
 
     @Override
@@ -153,19 +149,7 @@ public class SpringMVCHATOASEndPointClassFactory extends SpringMVCEndPointClassF
                         .addAnnotation(Qualifier.class)
                         .value(beanNamingStrategy.calculateAssociationsHandler(typeClass));
 
-        enrichAssociationMethods(dynamicSubClassBuilderContext, typeClass);
-
         return dynamicSubClassBuilderContext.build( prvlookup );
-    }
-    private void enrichAssociationMethods( DynamicClassBuilderContext dynamicClassBuilderContext, Class<? extends BusinessObject> typeClass) {
-//        final Map<String, FieldMetaData> childEntities = metaDataProvider.getChildEntities(typeClass);
-        //        childEntities.forEach( childEntity -> {
-        //
-        //            dynamicClassBuilderContext.addMethod()
-        //                    .param()
-        //
-        //                }
-        //        );
     }
 }
 

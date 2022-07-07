@@ -6,7 +6,7 @@ public class DynamicClassBuilder {
         return new DynamicSubClassBuilderContext(aClass);
     }
 
-    public static <C extends DynamicClassBuilderContext> DynamicClassBuilderContext createClass(String className) {
+    public static DynamicClassBuilderContext createClass(String className) {
         return new DynamicClassBuilderContext(className);
     }
 

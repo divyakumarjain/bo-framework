@@ -25,7 +25,6 @@ public class SpringMVCEndpointBeanFactoryConfig {
 
         return new SpringMVCHATOASEndPointClassFactory(beanNamingStrategy
                 , mvcEndPointRegistry
-                , metaDataProvider
                 , endpointConfigProperties);
     }
 

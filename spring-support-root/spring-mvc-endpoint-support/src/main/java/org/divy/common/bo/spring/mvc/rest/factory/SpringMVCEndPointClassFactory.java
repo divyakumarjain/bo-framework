@@ -146,10 +146,7 @@ public class SpringMVCEndPointClassFactory {
 
         constructorMethod.superParam(ResponseEntityBuilderFactory.class)
                     .addAnnotation(Qualifier.class)
-                        .value("mvcResponseEntityBuilderFactory")
-                        .and()
-                    .and()
-            .build( prvlookup );
+                        .value("mvcResponseEntityBuilderFactory");
 
         return dynamicSubClassBuilderContext.build(prvlookup);
     }

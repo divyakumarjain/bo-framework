@@ -81,6 +81,7 @@ public class DynamicMethodBuilderContext<P extends DynamicClassBuilderContext>
                 .toArray(CtClass[]::new);
     }
 
+    @Override
     public P and() {
         return getParentContext();
     }
