@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-boot-demo-root</artifactId>
-        <version>0.0.16-SNAPSHOT</version>
+        <version>0.0.18-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -116,7 +116,7 @@
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>demo-domain</artifactId>
-            <version>0.0.16-SNAPSHOT</version>
+            <version>0.0.18-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -141,7 +141,6 @@
                     <argLine>
                         --add-opens java.base/java.lang=orika.core
                         --add-opens bo.framework.spring.boot.mvc.demo/org.divy.bo.demos.spring.mvc.cards=ALL-UNNAMED
-                        --illegal-access=warn
                         @{argLine}
                         ${argLine}
                     </argLine>

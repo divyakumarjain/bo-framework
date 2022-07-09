@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-mapper</artifactId>
-        <version>0.0.16-SNAPSHOT</version>
+        <version>0.0.18-SNAPSHOT</version>
     </parent>
 
     <artifactId>bo-framework-orika-mapper</artifactId>
@@ -72,7 +72,6 @@
                         --add-opens java.base/java.lang=orika.core
                         --add-opens java.base/java.lang=ALL-UNNAMED
                         --add-opens bo.framework.orika.mapper/org.divy.common.bo.mapper.defaults=orika.core
-                        --illegal-access=permit
                         @{argLine}
                         ${argLine}
                     </argLine>
