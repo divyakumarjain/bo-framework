@@ -151,9 +151,6 @@
                 <version>2.7.0</version>
                 <configuration>
                     <fork>true</fork>
-                    <jvmArguments>
-                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=5005
-                    </jvmArguments>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -180,6 +177,7 @@
                         @{argLine}
                         ${argLine}
                     </argLine>
+                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
         </plugins>
