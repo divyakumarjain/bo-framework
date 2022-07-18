@@ -28,7 +28,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
-
+    @SuppressWarnings("java:S1075")
     private static final String ID_PATH = "/{id}";
     private final MetaDataProvider metaDataProvider;
     private final BeanNamingStrategy beanNamingStrategy;
@@ -64,20 +64,25 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
     }
 
     private void initializeEndpoints(ResourceConfig config) {
-        metaDataProvider.getEntityTypes().stream()
-                .map(this::buildEndpointClass)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .forEach(config::register);
+        for (Class<? extends BusinessObject> aClass : metaDataProvider.getEntityTypes()) {
+            Optional<Class<?>> optionalClass = buildEndpointClass(aClass);
+            if (optionalClass.isPresent()) {
+                var object = optionalClass.get();
+                if(object instanceof Class)
+                    config.register(object);
+            }
+        }
     }
 
-    private Optional<Class<?>> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
-        DynamicSubClassBuilderContext dynamicSubClassBuilderContext = DynamicClassBuilder.createClass(JerseyEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint")
-                .subClass(BaseBOEndpoint.class);
+    protected Optional<Class<?>> buildEndpointClass(Class<? extends BusinessObject> typeClass) {
+        String className = buildEndPointClassName(typeClass);
+
+        DynamicSubClassBuilderContext dynamicSubClassBuilderContext = DynamicClassBuilder.createClass(className)
+                .subClass(resolveEndPointBaseClass());
 
         dynamicSubClassBuilderContext
                     .addAnnotation(javax.ws.rs.Path.class)
-                        .value(configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase());
+                        .value(buildEndpointPath(typeClass));
 
         dynamicSubClassBuilderContext.proxySuperMethod("create").name("createMethod")
                     .addAnnotation(POST.class)
@@ -90,8 +95,9 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                     .addAnnotation(Consumes.class)
                         .value(new String[] {MediaType.APPLICATION_JSON})
                         .and()
-                    .param(typeClass)
+                    .param(resolveRepresentations(typeClass))
                         .addAnnotation(NotNull.class);
+
         dynamicSubClassBuilderContext .proxySuperMethod("update").name("updateMethod")
                     .addAnnotation(PUT.class)
                         .and()
@@ -111,7 +117,7 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                         .value("id")
                             .and()
                         .and()
-                    .param(typeClass)
+                    .param(resolveRepresentations(typeClass))
                         .addAnnotation(NotNull.class);
 
         dynamicSubClassBuilderContext.proxySuperMethod("delete").name("deleteMethod")
@@ -183,6 +189,24 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                             .and()
                         .addAnnotation(PathParam.class)
                             .value("id");
+
+        buildEndpointConstructorMethod(typeClass, dynamicSubClassBuilderContext);
+
+        return dynamicSubClassBuilderContext.build(getPrvlookup()).map(endpointClass-> {
+            endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
+            return endpointClass;
+        });
+    }
+
+    protected MethodHandles.Lookup getPrvlookup() {
+        return prvlookup;
+    }
+
+    protected Class<?> resolveEndPointBaseClass() {
+        return BaseBOEndpoint.class;
+    }
+
+    protected void buildEndpointConstructorMethod(Class<? extends BusinessObject> typeClass, DynamicSubClassBuilderContext dynamicSubClassBuilderContext) {
         DynamicClassConstructorBuilderContext<DynamicClassBuilderContext> constructorBuilderContext = dynamicSubClassBuilderContext.addConstructor();
         constructorBuilderContext.addAnnotation(Autowired.class);
         constructorBuilderContext.superParam(BOManager.class)
@@ -192,11 +216,18 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
         constructorBuilderContext.superParam(ResponseEntityBuilderFactory.class)
                         .addAnnotation(Qualifier.class)
                             .value("jerseyResponseEntityBuilderFactory");
+    }
 
-        return dynamicSubClassBuilderContext.build(prvlookup).map(endpointClass-> {
-            endPointRegistry.addEntityEndPointMap(typeClass.getSimpleName(), endpointClass);
-            return endpointClass;
-        });
+    protected Class<?> resolveRepresentations(Class<? extends BusinessObject> typeClass) {
+        return typeClass;
+    }
+
+    protected String buildEndpointPath(Class<? extends BusinessObject> typeClass) {
+        return configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase();
+    }
+
+    protected String buildEndPointClassName(Class<? extends BusinessObject> typeClass) {
+        return JerseyEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint";
     }
 
     @Override

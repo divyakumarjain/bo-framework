@@ -3,13 +3,16 @@ package org.divy.common.bo.dynamic;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilder;
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
 import org.divy.common.bo.dynamic.clazz.DynamicSubClassBuilderContext;
+import org.divy.common.bo.dynamic.clazz.MemberVisibility;
 import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
+import org.divy.common.bo.dynamic.clazz.member.method.DynamicProxyMethodBuilderContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -166,6 +169,87 @@ class DynamicClassBuilderTest {
         assertThat(instance, hasProperty("attribute2", is("attribute2")));
     }
 
+    @Test
+    void subClassWithProxySuperMethod() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        DynamicClassBuilderContext dynamicClass = DynamicClassBuilder.createClass("org.divy.common.bo.dynamic.SubClassWithBaseConstructorAndSuperProxy");
+
+        DynamicSubClassBuilderContext dynamicSubClassBuilderContext = dynamicClass
+                .subClass(BaseClass.class);
+
+        DynamicClassConstructorBuilderContext<DynamicClassBuilderContext> constructorMethod = dynamicSubClassBuilderContext
+                .addConstructor();
+        constructorMethod.superParam(String.class);
+        constructorMethod.superParam(String.class);
+
+        DynamicProxyMethodBuilderContext changeAttribute1MethodBuildContext = dynamicSubClassBuilderContext.proxySuperMethod("changeAttribute1");
+        changeAttribute1MethodBuildContext.visibility(MemberVisibility.PUBLIC);
+        changeAttribute1MethodBuildContext.name("subclassChangeAttribute1");
+
+        final Optional<Class<?>> optionalResult = constructorMethod.build( prvlookup );
+
+        final Class<?> subClass = optionalResult.get();
+        final Constructor<?> constructor = subClass.getConstructor(String.class, String.class);
+
+        final BaseClass instance = (BaseClass)constructor.newInstance("attribute1", "attribute2");
+
+        Method changeAttribute1Method = subClass.getMethod("subclassChangeAttribute1", String.class);
+        changeAttribute1Method.invoke(instance,"changedAttribute1");
+
+        assertThat(instance, hasProperty("attribute1", is("changedAttribute1")));
+        assertThat(instance, hasProperty("attribute2", is("attribute2")));
+    }
 
 
+    @Test
+    void doubleSubClass() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        DynamicSubClassBuilderContext dynamicSubClassBuilderContext = DynamicClassBuilder
+                .createClass("org.divy.common.bo.dynamic.FirstLevelSubClass")
+                .subClass(BaseClass.class);
+
+        DynamicClassConstructorBuilderContext<DynamicClassBuilderContext> firstLevelConstructorMethod = dynamicSubClassBuilderContext
+                .addConstructor();
+
+        firstLevelConstructorMethod.superParam(String.class);
+        firstLevelConstructorMethod.superParam(String.class);
+
+        DynamicProxyMethodBuilderContext firstLevelChangeAttribute1MethodBuildContext = dynamicSubClassBuilderContext.proxySuperMethod("changeAttribute1");
+        firstLevelChangeAttribute1MethodBuildContext.visibility(MemberVisibility.PUBLIC);
+        firstLevelChangeAttribute1MethodBuildContext.name("firstLevelChangeAttribute1");
+
+        final Optional<Class<?>> optionalResult = dynamicSubClassBuilderContext.build( prvlookup );
+
+        DynamicSubClassBuilderContext secondLevelDynamicSubClassBuilderContext = DynamicClassBuilder
+                .createClass("org.divy.common.bo.dynamic.SecondLevelSubClass")
+                .subClass(optionalResult.get());
+
+        DynamicClassConstructorBuilderContext<DynamicClassBuilderContext> secondLevelConstructorMethod = secondLevelDynamicSubClassBuilderContext
+                .addConstructor();
+
+        secondLevelConstructorMethod.superParam(String.class);
+        secondLevelConstructorMethod.superParam(String.class);
+
+        DynamicProxyMethodBuilderContext secondLevelChangeAttribute1MethodBuildContext = secondLevelDynamicSubClassBuilderContext.proxySuperMethod("firstLevelChangeAttribute1");
+        secondLevelChangeAttribute1MethodBuildContext.visibility(MemberVisibility.PUBLIC);
+        secondLevelChangeAttribute1MethodBuildContext.name("secondLevelChangeAttribute1");
+
+        DynamicProxyMethodBuilderContext secondLevelChangeAttribute2MethodBuildContext = secondLevelDynamicSubClassBuilderContext.proxySuperMethod("changeAttribute2");
+        secondLevelChangeAttribute2MethodBuildContext.visibility(MemberVisibility.PUBLIC);
+        secondLevelChangeAttribute2MethodBuildContext.name("secondLevelChangeAttribute2");
+
+        final Optional<Class<?>> secondLevelOptionalResult = secondLevelDynamicSubClassBuilderContext.build( prvlookup );
+
+        final Class<?> subClass = secondLevelOptionalResult.get();
+        final Constructor<?> constructor = subClass.getConstructor(String.class, String.class);
+
+        final BaseClass instance = (BaseClass)constructor.newInstance("attribute1", "attribute2");
+
+        Method changeAttribute1Method = subClass.getMethod("secondLevelChangeAttribute1", String.class);
+        changeAttribute1Method.invoke(instance,"changeFromSecondLevelClassAttribute1");
+
+        Method changeAttribute2Method = subClass.getMethod("secondLevelChangeAttribute2", String.class);
+        changeAttribute2Method.invoke(instance,"changeFromSecondLevelClassAttribute2");
+
+        assertThat(instance, hasProperty("attribute1", is("changeFromSecondLevelClassAttribute1")));
+        assertThat(instance, hasProperty("attribute2", is("changeFromSecondLevelClassAttribute2")));
+    }
 }

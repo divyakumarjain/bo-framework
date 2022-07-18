@@ -83,8 +83,6 @@ public class DynamicClassBuilderContext
             return Optional.empty();
         }
     }
-
-
     protected void doBuild(CtClass newClass) {
         newClass.setModifiers(Modifier.PUBLIC);
         this.annotations.forEach(annotationBuilderContext -> annotationBuilderContext.doBuild(newClass));

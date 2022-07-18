@@ -32,6 +32,7 @@
         <module>demos</module>
         <module>integration</module>
         <module>dynamic</module>
+        <module>dynamic-test</module>
         <module>exception-handling-root</module>
         <module>validation-root</module>
         <module>coverage-report</module>
@@ -45,7 +46,8 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>divyakumarjain-github</sonar.organization>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <junit-jupiter.version>5.8.2</junit-jupiter.version>
+        <junit-jupiter.version>5.9.0-RC1</junit-jupiter.version>
+        <maven.version>3.8.6</maven.version>
     </properties>
 
     <build>
@@ -54,13 +56,33 @@
                 <artifactId>maven-scm-plugin</artifactId>
                 <version>1.13.0</version>
                 <configuration>
-                    <tag>${project.artifactId}-0.0.18-SNAPSHOT</tag>
+                    <tag>${project.artifactId}-${project.version}</tag>
                 </configuration>
             </plugin>
             <!-- To use the plugin goals in your POM or parent POM -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.2.5</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <!-- To define the plugin version in your parent POM -->
@@ -141,6 +163,11 @@
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>3.0.0-M7</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.8</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -223,6 +250,12 @@
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-dynamic</artifactId>
                 <version>0.0.18-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-dynamic-test</artifactId>
+                <version>0.0.18-SNAPSHOT</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
