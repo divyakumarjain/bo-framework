@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-boot-demo-root</artifactId>
-        <version>0.0.16-SNAPSHOT</version>
+        <version>0.0.18-SNAPSHOT</version>
     </parent>
 
 
@@ -118,7 +118,7 @@
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>demo-domain</artifactId>
-            <version>0.0.16-SNAPSHOT</version>
+            <version>0.0.18-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -176,7 +176,8 @@
                 <configuration>
                     <argLine>
                         --add-opens java.base/java.lang=orika.core
-                        --illegal-access=warn
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        --add-reads com.fasterxml.jackson.module.jaxb=ALL-UNNAMED
                         @{argLine}
                         ${argLine}
                     </argLine>

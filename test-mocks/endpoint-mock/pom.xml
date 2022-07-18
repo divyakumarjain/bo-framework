@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-test-mock-common</artifactId>
-        <version>0.0.16-SNAPSHOT</version>
+        <version>0.0.18-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>bo-framework-endpoint-mock</artifactId>
@@ -166,7 +166,6 @@
                             --add-exports org.junit.platform.commons/org.junit.platform.commons.util=ALL-UNNAMED
                             --add-opens bo.framework.endpoint.mock/org.divy.common.bo.endpoint.test.json=org.junit.platform.commons
                             --add-opens bo.framework.endpoint.mock/org.divy.common.bo.endpoint.test=org.junit.platform.commons
-                            --illegal-access=warn
                             @{argLine}
                             ${argLine}
                         </argLine>

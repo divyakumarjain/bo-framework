@@ -22,11 +22,6 @@ public class DynamicSubClassBuilderContext extends DynamicClassBuilderContext {
         this.parentClass = parentClass;
     }
 
-    DynamicSubClassBuilderContext(Class<?> parentClass, String className) {
-        super(className);
-        this.parentClass = parentClass;
-    }
-
     public DynamicSubClassBuilderContext(Class<?> parentClass, String className, DynamicClassBuilderContext dynamicClassBuilderContext) {
         super(className, dynamicClassBuilderContext);
         this.parentClass = parentClass;

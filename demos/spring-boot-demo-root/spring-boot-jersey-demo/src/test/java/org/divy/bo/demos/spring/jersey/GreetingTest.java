@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = SpringJerseyApplication.class,
-      properties = {"bo-framework.endpoint.mvc.enable-hateoas-api=true"} )
+      properties = {"bo-framework.endpoint.mvc.enable-hateoas-api=false"} )
 public class GreetingTest
 {
     @Autowired
