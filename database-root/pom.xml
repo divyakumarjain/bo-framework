@@ -24,7 +24,7 @@
     <modules>
         <module>database-core</module>
         <module>database-jpa</module>
-        <module>database-hibernate</module>
+<!--        <module>database-hibernate</module>-->
     </modules>
     <profiles>
         <profile>
