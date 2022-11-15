@@ -1,2 +1,6 @@
-package org.divy.common.bo.dynamic.test;public class MockDynamicClass {
+package org.divy.common.bo.dynamic.test;
+
+public class MockDynamicClass {
+
+    public void noParameterMethod(){}
 }

@@ -1,9 +1,9 @@
-package org.divy.common.bo.spring.mvc.rest.factory;
+package org.divy.common.bo.spring.mvc.graphql.factory;
 
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.spring.core.factory.DynamicBeansFactory;
-import org.divy.common.bo.spring.mvc.rest.exception.GlobalControllerExceptionHandler;
+import org.divy.common.bo.spring.mvc.graphql.exception.GlobalControllerExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;

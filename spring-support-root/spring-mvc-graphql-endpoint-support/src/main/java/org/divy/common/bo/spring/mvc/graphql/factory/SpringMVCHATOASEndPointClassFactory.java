@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.mvc.rest.factory;
+package org.divy.common.bo.spring.mvc.graphql.factory;
 
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
 import org.divy.common.bo.dynamic.clazz.member.constructor.DynamicClassConstructorBuilderContext;
@@ -15,9 +15,9 @@ import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.HATOASMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.bo.spring.mvc.config.SpringMVCEndpointConfigProperties;
-import org.divy.common.bo.spring.mvc.rest.hatoas.SpringMVCRepresentation;
-import org.divy.common.bo.spring.mvc.rest.endpoint.DefaultHATEOASMVCEndpoint;
+import org.divy.common.bo.spring.mvc.graphql.config.SpringMVCEndpointConfigProperties;
+import org.divy.common.bo.spring.mvc.graphql.hatoas.SpringMVCRepresentation;
+import org.divy.common.bo.spring.mvc.graphql.endpoint.DefaultHATEOASMVCEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

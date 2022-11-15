@@ -1,4 +1,4 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.divy.common.bo.spring.mvc.rest.config.WebEndpointConfig,\
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.divy.common.bo.spring.mvc.graphql.config.WebEndpointConfig,\
   org.divy.common.bo.spring.repository.RepositoryConfig
 
 org.springframework.context.ApplicationContextInitializer=org.divy.common.bo.spring.core.factory.BoFrameworkSpringContextInitializer

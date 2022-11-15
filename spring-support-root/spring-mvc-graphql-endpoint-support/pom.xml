@@ -11,8 +11,8 @@
         <version>0.0.18-SNAPSHOT</version>
     </parent>
 
-    <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
-    <name>spring-mvc-endpoint-support</name>
+    <artifactId>bo-framework-spring-mvc-graphql-endpoint-support</artifactId>
+    <name>spring-mvc-graphql-endpoint-support</name>
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>

@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.mvc.rest.config;
+package org.divy.common.bo.spring.mvc.graphql.config;
 
 
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -10,7 +10,7 @@ import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.mvc.rest.SpringMVCEndPointRegistry;
 import org.divy.common.bo.spring.mvc.rest.SpringMVCEntityURLBuilderImpl;
 import org.divy.common.bo.spring.mvc.rest.SpringMVCLinkBuilderFactoryImpl;
-import org.divy.common.bo.spring.mvc.rest.response.SpringMVCResponseEntityBuilderFactory;
+import org.divy.common.bo.spring.mvc.graphql.response.SpringMVCResponseEntityBuilderFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;

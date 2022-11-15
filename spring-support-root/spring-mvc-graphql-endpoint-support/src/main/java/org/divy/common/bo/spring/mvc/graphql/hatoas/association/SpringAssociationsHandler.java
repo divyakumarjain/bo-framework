@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.mvc.rest.hatoas.association;
+package org.divy.common.bo.spring.mvc.graphql.hatoas.association;
 
 import org.divy.common.bo.endpoint.hatoas.association.AbstractAssociationsHandler;
 import org.divy.common.bo.endpoint.hatoas.association.Cardinality;
@@ -8,7 +8,7 @@ import org.divy.common.bo.metadata.FieldMetaData;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.LinkBuilderFactory;
-import org.divy.common.bo.spring.mvc.rest.hatoas.SpringMVCHATOASMapper;
+import org.divy.common.bo.spring.mvc.graphql.hatoas.SpringMVCHATOASMapper;
 import org.springframework.hateoas.Link;
 
 import java.util.Map;

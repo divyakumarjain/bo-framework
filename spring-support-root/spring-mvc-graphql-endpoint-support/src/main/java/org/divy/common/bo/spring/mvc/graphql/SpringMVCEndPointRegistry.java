@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.mvc.rest;
+package org.divy.common.bo.spring.mvc.graphql;
 
 import org.divy.common.bo.repository.Identifiable;
 import org.divy.common.bo.rest.EndPointRegistry;

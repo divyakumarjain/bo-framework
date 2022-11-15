@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.mvc.rest.hatoas;
+package org.divy.common.bo.spring.mvc.graphql.hatoas;
 
 import org.divy.common.bo.endpoint.hatoas.Representation;
 import org.divy.common.bo.mapper.keyvaluemap.KeyValuePairMapper;

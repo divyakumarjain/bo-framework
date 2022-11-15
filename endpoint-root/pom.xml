@@ -18,5 +18,6 @@
     <modules>
         <module>endpoint-core</module>
         <module>endpoint-jersey</module>
+        <module>endpoint-graphql</module>
     </modules>
 </project>

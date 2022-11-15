@@ -1,4 +1,4 @@
-module bo.framework.spring.boot.mvc.demo {
+module bo.framework.spring.boot.mvc.graphql.demo {
     requires bo.framework.database.jpa;
     requires java.persistence;
     requires java.validation;
@@ -10,5 +10,5 @@ module bo.framework.spring.boot.mvc.demo {
 
     requires com.fasterxml.jackson.databind;
 
-    opens org.divy.bo.demos.spring.mvc;
+    opens org.divy.bo.demos.spring.mvc.graphql;
 }

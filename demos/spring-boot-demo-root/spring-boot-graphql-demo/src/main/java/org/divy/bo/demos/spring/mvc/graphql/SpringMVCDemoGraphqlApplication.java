@@ -1,4 +1,4 @@
-package org.divy.bo.demos.spring.mvc;
+package org.divy.bo.demos.spring.mvc.graphql;
 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,11 +10,11 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 @PropertySource( value = {"classpath:/application.properties"})
 @ComponentScan(basePackages = {"org.divy.common.bo.validation.spring.autoconfiguration"})
-public class SpringMVCDemoApplication extends SpringBootServletInitializer {
+public class SpringMVCDemoGraphqlApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        new SpringMVCDemoApplication()
-                .configure(new SpringApplicationBuilder(SpringMVCDemoApplication.class))
+        new SpringMVCDemoGraphqlApplication()
+                .configure(new SpringApplicationBuilder(SpringMVCDemoGraphqlApplication.class))
                 .run(args);
     }
 }

@@ -1,11 +1,11 @@
-package org.divy.common.bo.spring.mvc.rest.endpoint;
+package org.divy.common.bo.spring.mvc.graphql.endpoint;
 
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.business.BOManager;
 import org.divy.common.bo.endpoint.hatoas.association.AssociationsHandler;
 import org.divy.common.bo.rest.HATOASMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
-import org.divy.common.bo.spring.mvc.rest.hatoas.SpringMVCRepresentation;
+import org.divy.common.bo.spring.mvc.graphql.hatoas.SpringMVCRepresentation;
 import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 

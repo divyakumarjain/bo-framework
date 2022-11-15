@@ -1,4 +1,4 @@
-module bo.framework.spring.mvc {
+module bo.framework.spring.mvc.graphql {
     requires bo.framework.query;
     requires bo.framework.mapper;
     requires bo.framework.dynamic;
@@ -22,6 +22,5 @@ module bo.framework.spring.mvc {
     requires com.fasterxml.jackson.databind;
     requires javax.servlet.api;
 
-    exports org.divy.common.bo.spring.mvc.rest.config;
-    exports org.divy.common.bo.spring.mvc.rest;
+    exports org.divy.common.bo.spring.mvc.graphql;
 }

@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.mvc.rest.response;
+package org.divy.common.bo.spring.mvc.graphql.response;
 
 
 import org.divy.common.bo.rest.response.ListEntityResponseBuilder;

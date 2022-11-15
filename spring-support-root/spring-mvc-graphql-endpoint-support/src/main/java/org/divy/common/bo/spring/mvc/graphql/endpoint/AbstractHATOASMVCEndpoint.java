@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.mvc.rest.endpoint;
+package org.divy.common.bo.spring.mvc.graphql.endpoint;
 
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.endpoint.hatoas.AbstractHATOASEndpoint;

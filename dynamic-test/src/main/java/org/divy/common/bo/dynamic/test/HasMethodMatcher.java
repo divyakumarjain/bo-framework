@@ -72,17 +72,24 @@ public class HasMethodMatcher extends TypeSafeDiagnosingMatcher<Class> {
         description.appendText("hasMethod(").appendValue(this.methodName)
                 .appendText(", ");
         if(this.parameterTypes !=null){
-            description.appendDescriptionOf(this.parameterTypes)
-                    .appendText(", ");
+            description.appendDescriptionOf(this.parameterTypes).appendText(", ");
         }
-        description.appendDescriptionOf(this.methodMatcher)
-                .appendText(")");
+        if(this.methodMatcher!= null){
+            description.appendDescriptionOf(this.methodMatcher);
+        }
+
+        description.appendText(")");
     }
 
     @SuppressWarnings("java:S3740")
     public static  Matcher<Class> hasMethod(String methodName, Matcher<Method> parameterTypes) {
         return new HasMethodMatcher(methodName, parameterTypes);
     }
+
+    public static  Matcher<Class> hasMethod(String methodName) {
+        return new HasMethodMatcher(methodName, null);
+    }
+
     @SuppressWarnings("java:S3740")
     public static  Matcher<Class> hasMethod(String methodName, Matcher<Method> parameterTypes, Matcher<Method> methodMatcher) {
         return new HasMethodMatcher(methodName, parameterTypes, methodMatcher);

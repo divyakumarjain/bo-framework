@@ -1,4 +1,4 @@
-package org.divy.common.bo.spring.mvc.rest.factory;
+package org.divy.common.bo.spring.mvc.graphql.factory;
 
 import org.divy.common.bo.dynamic.clazz.DynamicClassBuilderContext;
 import org.divy.common.bo.dynamic.clazz.DynamicSubClassBuilderContext;
@@ -14,7 +14,7 @@ import org.divy.common.bo.query.Query;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.bo.spring.mvc.config.SpringMVCEndpointConfigProperties;
+import org.divy.common.bo.spring.mvc.graphql.config.SpringMVCEndpointConfigProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

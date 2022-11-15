@@ -1,17 +1,17 @@
-package org.divy.common.bo.spring.mvc.rest.factory;
+package org.divy.common.bo.spring.mvc.graphql.factory;
 
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.bo.spring.mvc.rest.hatoas.SpringMVCHATOASMapper;
-import org.divy.common.bo.spring.mvc.rest.hatoas.association.SpringAssociationsHandler;
+import org.divy.common.bo.spring.mvc.graphql.hatoas.SpringMVCHATOASMapper;
+import org.divy.common.bo.spring.mvc.graphql.hatoas.association.SpringAssociationsHandler;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 
 import java.util.Set;
 
 
-public class SpringMVCHATOASEndpointBeansFactory extends org.divy.common.bo.spring.mvc.rest.factory.SpringMVCEndpointBeansFactory
+public class SpringMVCHATOASEndpointBeansFactory extends org.divy.common.bo.spring.mvc.graphql.factory.SpringMVCEndpointBeansFactory
 {
     
     private final BeanNamingStrategy namingStrategy;

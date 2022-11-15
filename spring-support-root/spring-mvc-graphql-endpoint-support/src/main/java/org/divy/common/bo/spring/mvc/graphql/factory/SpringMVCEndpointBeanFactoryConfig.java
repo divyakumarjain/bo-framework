@@ -1,9 +1,9 @@
-package org.divy.common.bo.spring.mvc.rest.factory;
+package org.divy.common.bo.spring.mvc.graphql.factory;
 
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.rest.EndPointRegistry;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
-import org.divy.common.bo.spring.mvc.config.SpringMVCEndpointConfigProperties;
+import org.divy.common.bo.spring.mvc.graphql.config.SpringMVCEndpointConfigProperties;
 import org.divy.common.bo.spring.mvc.rest.SpringMVCEndPointRegistry;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
