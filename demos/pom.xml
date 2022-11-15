@@ -15,8 +15,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-demo-root</module>
-        <module>guice-jersey</module>
-        <module>jee-demo</module>
+<!--        <module>guice-jersey</module>-->
+<!--        <module>jee-demo</module>-->
         <module>demo-domain</module>
     </modules>
 

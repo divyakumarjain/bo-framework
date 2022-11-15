@@ -22,6 +22,5 @@
         <module>spring-mvc-endpoint-support</module>
         <module>spring-database-jpa-support</module>
         <module>spring-support-core</module>
-        <module>spring-support-autoconfiguration</module>
     </modules>
 </project>

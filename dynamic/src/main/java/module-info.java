@@ -1,5 +1,5 @@
 module bo.framework.dynamic {
-    requires javassist;
+    requires org.javassist;
     requires org.slf4j;
     requires bo.framework.exception.handling;
     requires commons.beanutils;

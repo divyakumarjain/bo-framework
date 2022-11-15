@@ -82,10 +82,6 @@
             <artifactId>bo-framework-spring-jersey-endpoint-support</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-spring-support-autoconfiguration</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -173,8 +169,7 @@
                 <configuration>
                     <argLine>
                         --add-opens java.base/java.lang=orika.core
-                        --illegal-access=warn
-                        @{argLine}
+                        --add-opens java.base/java.lang=ALL-UNNAMED
                         ${argLine}
                     </argLine>
                     <useModulePath>false</useModulePath>

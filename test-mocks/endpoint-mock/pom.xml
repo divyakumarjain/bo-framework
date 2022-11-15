@@ -166,8 +166,6 @@
                             --add-exports org.junit.platform.commons/org.junit.platform.commons.util=ALL-UNNAMED
                             --add-opens bo.framework.endpoint.mock/org.divy.common.bo.endpoint.test.json=org.junit.platform.commons
                             --add-opens bo.framework.endpoint.mock/org.divy.common.bo.endpoint.test=org.junit.platform.commons
-                            --illegal-access=warn
-                            @{argLine}
                             ${argLine}
                         </argLine>
                     </configuration>

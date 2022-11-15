@@ -73,7 +73,6 @@
                         --add-opens java.base/java.lang=ALL-UNNAMED
                         --add-opens bo.framework.orika.mapper/org.divy.common.bo.mapper.defaults=orika.core
                         --illegal-access=permit
-                        @{argLine}
                         ${argLine}
                     </argLine>
                 </configuration>
