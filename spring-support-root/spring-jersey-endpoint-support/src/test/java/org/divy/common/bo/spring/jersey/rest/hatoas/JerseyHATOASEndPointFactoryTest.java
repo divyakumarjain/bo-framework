@@ -3,12 +3,17 @@ package org.divy.common.bo.spring.jersey.rest.hatoas;
 import org.divy.common.bo.metadata.MetaDataProvider;
 import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.EndPointRegistry;
+import org.divy.common.bo.rest.LinkBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategyImpl;
+import org.divy.common.bo.spring.jersey.rest.JerseyEndpointConfig;
 import org.divy.common.bo.spring.jersey.rest.JerseyEndpointConfigProperties;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.AutoConfigurations;
+import org.springframework.boot.test.context.runner.ApplicationContextRunner;
+import org.assertj.core.api.Assertions;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -35,7 +40,7 @@ class JerseyHATOASEndPointFactoryTest {
     }
 
     @Test
-    public void test() {
+    public void testResourceConfig() {
         ResourceConfig config = mock(ResourceConfig.class);
 
         when( metaDataProvider.getEntityTypes())
@@ -48,6 +53,19 @@ class JerseyHATOASEndPointFactoryTest {
         //  .register( any(Class.class) );
         verify( metaDataProvider, times( 1 ) ).getEntityTypes();
         verify( endPointRegistry, times( 1 ) ).addEntityEndPointMap( eq("MockEntity"), any());
+    }
+
+    @Test
+    public void testAutoConfig() {
+        ApplicationContextRunner contextRunner = new ApplicationContextRunner()
+                .withConfiguration(AutoConfigurations.of(JerseyEndpointConfig.class));
+
+
+        contextRunner.withUserConfiguration(JerseyEndpointConfig.class).run((context) -> {
+            Assertions.assertThat(context).hasSingleBean(LinkBuilderFactory.class);
+            Assertions.assertThat(context.getBean(LinkBuilderFactory.class))
+                    .isSameAs(context.getBean(JerseyEndpointConfig.class).linkBuilderFactory());
+        });
     }
 
     class MockEntity implements BusinessObject<UUID> {

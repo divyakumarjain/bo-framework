@@ -2,7 +2,7 @@ package org.divy.bo.demos.domain.greetings;
 
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 import java.util.UUID;
 
 @Entity
