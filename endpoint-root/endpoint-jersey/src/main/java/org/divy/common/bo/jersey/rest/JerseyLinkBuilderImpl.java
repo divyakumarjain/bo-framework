@@ -1,6 +1,5 @@
 package org.divy.common.bo.jersey.rest;
 
-import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.rest.LinkBuilder;
 
 import jakarta.ws.rs.core.Link;
@@ -15,15 +14,15 @@ public class JerseyLinkBuilderImpl implements LinkBuilder<Link> {
     private final UriBuilder uriBuilder;
 
     public JerseyLinkBuilderImpl(String scheme, String host, String basePath) {
-        if (StringUtils.isBlank(scheme)) {
+        if (isBlank(scheme)) {
             throw new IllegalArgumentException("Scheme must not be null or blank");
         }
 
-        if (StringUtils.isBlank(host)) {
+        if (isBlank(host)) {
             throw new IllegalArgumentException("Host must not be null or blank");
         }
 
-        final var fixedBasePath = StringUtils.defaultIfBlank(basePath, StringUtils.EMPTY);
+        final var fixedBasePath = defaultIfBlank(basePath, "");
 
         uriBuilder = UriBuilder.fromPath(fixedBasePath);
 
@@ -75,5 +74,21 @@ public class JerseyLinkBuilderImpl implements LinkBuilder<Link> {
         }
 
         throw new IllegalArgumentException("Could not find method with name " + methodName + " in "+ resource);
+    }
+
+    private String defaultIfBlank(String str, String defaultStr) {
+        return isBlank(str) ? defaultStr : str;
+    }
+
+    private boolean isBlank(String str) {
+        int strLen;
+        if (str != null && (strLen = str.length()) != 0) {
+            for(int i = 0; i < strLen; ++i) {
+                if (!Character.isWhitespace(str.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

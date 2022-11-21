@@ -1,5 +1,4 @@
 module bo.framework.endpoint.jersey {
-    requires commons.lang;
     requires jakarta.servlet;
     requires bo.framework.endpoint.core;
     requires bo.framework.repository;

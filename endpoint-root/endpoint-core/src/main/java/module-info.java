@@ -10,7 +10,7 @@ module bo.framework.endpoint.core {
     requires org.slf4j;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
-    requires commons.lang;
+//    requires org.apache.commons.logging;
     requires bo.framework.mapper;
     requires jakarta.inject;
     exports org.divy.common.bo.endpoint;

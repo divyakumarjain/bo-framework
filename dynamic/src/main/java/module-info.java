@@ -2,7 +2,8 @@ module bo.framework.dynamic {
     requires org.javassist;
     requires org.slf4j;
     requires bo.framework.exception.handling;
-    requires commons.beanutils;
+//    requires commons.beanutils;
+    requires org.apache.commons.beanutils;
     requires net.bytebuddy;
     exports org.divy.common.bo.dynamic.clazz;
     exports org.divy.common.bo.dynamic.clazz.member;

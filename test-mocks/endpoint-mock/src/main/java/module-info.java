@@ -9,8 +9,8 @@ module bo.framework.endpoint.mock {
     requires jakarta.servlet;
     requires jakarta.ws.rs;
     requires jakarta.xml.bind;
-    requires jersey.common;
-    requires jersey.server;
+    requires org.glassfish.jersey.core.jersey.server;
+    requires org.glassfish.jersey.core.jersey.common;
 
     requires jersey.test.framework.core;
     requires jersey.test.framework.provider.jetty;
