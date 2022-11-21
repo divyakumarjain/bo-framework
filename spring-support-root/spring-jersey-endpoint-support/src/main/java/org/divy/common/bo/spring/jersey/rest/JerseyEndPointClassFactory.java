@@ -20,9 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
 
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import java.lang.invoke.MethodHandles;
 import java.util.Optional;
 import java.util.UUID;
@@ -76,7 +76,7 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
                 .subClass(BaseBOEndpoint.class);
 
         dynamicSubClassBuilderContext
-                    .addAnnotation(javax.ws.rs.Path.class)
+                    .addAnnotation(jakarta.ws.rs.Path.class)
                         .value(configProperties.getApiEndpointPath() + "/" + typeClass.getSimpleName().toLowerCase());
 
         dynamicSubClassBuilderContext.proxySuperMethod("create").name("createMethod")

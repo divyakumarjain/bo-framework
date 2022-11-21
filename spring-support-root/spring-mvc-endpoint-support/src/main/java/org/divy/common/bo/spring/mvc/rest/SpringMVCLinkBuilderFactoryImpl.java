@@ -4,7 +4,7 @@ import org.divy.common.bo.rest.AbstractLinkBuilderFactory;
 import org.divy.common.bo.rest.LinkBuilder;
 import org.springframework.hateoas.Link;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class SpringMVCLinkBuilderFactoryImpl extends AbstractLinkBuilderFactory<Link> {
 

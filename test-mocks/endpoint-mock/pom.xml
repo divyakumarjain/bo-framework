@@ -68,10 +68,6 @@
                     <artifactId>junit</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>jakarta.servlet-api</artifactId>
-                    <groupId>jakarta.servlet</groupId>
-                </exclusion>
-                <exclusion>
                     <artifactId>jersey-container-servlet-core</artifactId>
                     <groupId>org.glassfish.jersey.containers</groupId>
                 </exclusion>
@@ -121,8 +117,8 @@
                     <groupId>com.google.code.findbugs</groupId>
                 </exclusion>
                 <exclusion>
-                    <groupId>javax.inject</groupId>
-                    <artifactId>javax.inject</artifactId>
+                    <groupId>jakarta.inject</groupId>
+                    <artifactId>jakarta.inject</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -131,8 +127,8 @@
             <artifactId>jersey-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.activation</groupId>
