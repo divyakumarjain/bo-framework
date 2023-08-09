@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-boot-demo-root</artifactId>
-        <version>0.0.18-SNAPSHOT</version>
+        <version>0.0.19-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,10 +71,6 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-spring-support-autoconfiguration</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
             <artifactId>bo-framework-spring-jsr303-validation</artifactId>
         </dependency>
         <dependency>
@@ -95,10 +91,6 @@
             <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
@@ -110,13 +102,13 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>spring-mock-mvc</artifactId>
-            <version>5.1.1</version>
+            <version>5.3.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>demo-domain</artifactId>
-            <version>0.0.18-SNAPSHOT</version>
+            <version>0.0.19-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -126,7 +118,7 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.7.1</version>
+                <version>3.1.0-M2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -142,7 +134,6 @@
                         --add-opens java.base/java.lang=orika.core
                         --add-opens bo.framework.spring.boot.mvc.demo/org.divy.bo.demos.spring.mvc.cards=ALL-UNNAMED
                         --add-opens java.base/java.lang=ALL-UNNAMED
-                        @{argLine}
                         ${argLine}
                     </argLine>
                 </configuration>
@@ -150,10 +141,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.1</version>
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
+                <version>3.2.0-M1</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.springframework</groupId>

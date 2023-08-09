@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-endpoint-root</artifactId>
-        <version>0.0.18-SNAPSHOT</version>
+        <version>0.0.19-SNAPSHOT</version>
     </parent>
 
     <artifactId>bo-framework-endpoint-jersey</artifactId>
@@ -92,8 +92,8 @@
             <artifactId>jackson-annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
