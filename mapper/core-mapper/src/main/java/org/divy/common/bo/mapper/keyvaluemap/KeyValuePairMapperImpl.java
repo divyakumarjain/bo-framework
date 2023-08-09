@@ -37,9 +37,9 @@ public class KeyValuePairMapperImpl<E extends BusinessObject> implements KeyValu
                 .buildMapper();
     }
 
-    private TypeMapperBuilderContext<E, Map<String, Object>> populateTypeMapperBuilderContext(Class<E> businessObjectType
-            , MapperBuilder mapperBuilder
-            , MetaDataProvider metaDataProvider) {
+    private TypeMapperBuilderContext<E, Map<String, Object>> populateTypeMapperBuilderContext(Class<E> businessObjectType,
+                                                                                              MapperBuilder mapperBuilder,
+                                                                                              MetaDataProvider metaDataProvider) {
 
         final TypeMapperBuilderContext<E, Map<String, Object>> typeMapperBuilderContext
                 = mapperBuilder.mapping(businessObjectType

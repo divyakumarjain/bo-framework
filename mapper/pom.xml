@@ -15,9 +15,9 @@
     </properties>
     <packaging>pom</packaging>
     <modules>
-        <module>orika-mapper</module>
+        <module>mapper-annotation</module>
         <module>core-mapper</module>
-        <module>orika-mapper-spring</module>
+        <module>mapstruct-mapper-spring</module>
     </modules>
     <profiles>
         <profile>

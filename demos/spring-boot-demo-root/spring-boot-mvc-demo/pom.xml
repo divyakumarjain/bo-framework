@@ -55,10 +55,6 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-orika-mapper-spring</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
             <artifactId>bo-framework-database-jpa</artifactId>
         </dependency>
         <dependency>
@@ -131,7 +127,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                        --add-opens java.base/java.lang=orika.core
                         --add-opens bo.framework.spring.boot.mvc.demo/org.divy.bo.demos.spring.mvc.cards=ALL-UNNAMED
                         --add-opens java.base/java.lang=ALL-UNNAMED
                         ${argLine}

@@ -57,10 +57,6 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-orika-mapper</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
             <artifactId>bo-framework-repository</artifactId>
         </dependency>
         <dependency>

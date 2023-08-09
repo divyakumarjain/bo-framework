@@ -1,8 +1,6 @@
 package org.divy.common.bo.mapper.builder.options.field;
 
-import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
-
-public class FieldFactoryOption implements MapperBuilderOption {
+public final class FieldFactoryOption implements FieldMapperBuilderOption {
     final Class<?> factoryClass;
     public FieldFactoryOption(Class<?> factoryClass) {
         this.factoryClass = factoryClass;

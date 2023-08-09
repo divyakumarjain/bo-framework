@@ -70,7 +70,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
      */
     public R createRelation(@NotNull I id
                             , String relation
-                            , E respresentation) {
+                            , E representation) {
 
         var businessObject = getManager().get(id).orElseThrow( () -> new NotFoundException( COULD_NOT_FIND_THE_ENTITY_MESSAGE ) );
 
@@ -81,7 +81,7 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
         final var association = this.getAssociationsHandler().getAssociation(relation)
                 .orElseThrow(() -> new NotFoundException("Association " + relation + " not found"));
 
-        association.create(respresentation);
+        association.create(representation);
 
         Optional<Object> optionalEntityRelation = association.read(businessObject);
 

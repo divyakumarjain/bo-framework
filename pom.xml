@@ -32,6 +32,7 @@
         <module>mapper</module>
         <module>businessapi</module>
         <module>query</module>
+        <module>api</module>
         <module>spring-support-root</module>
         <module>demos</module>
         <module>dynamic</module>
@@ -49,6 +50,7 @@
         <sonar.organization>divyakumarjain-github</sonar.organization>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <junit-jupiter.version>5.10.0</junit-jupiter.version>
+        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
     </properties>
 
     <build>
@@ -183,7 +185,7 @@
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-orika-mapper-spring</artifactId>
+                <artifactId>bo-framework-mapstruct-mapper-spring</artifactId>
                 <version>0.0.19-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -195,6 +197,11 @@
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-database-hibernate</artifactId>
                 <version>0.0.19-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
@@ -209,6 +216,11 @@
             <dependency>
                 <groupId>org.divy</groupId>
                 <artifactId>bo-framework-spring-database-jpa-support</artifactId>
+                <version>0.0.19-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.divy</groupId>
+                <artifactId>bo-framework-api</artifactId>
                 <version>0.0.19-SNAPSHOT</version>
             </dependency>
             <dependency>

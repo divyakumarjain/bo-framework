@@ -1,10 +1,13 @@
 package org.divy.common.bo.mapper.builder.options.type;
 
-import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
+public final class TypeFactoryOption implements ClassMapperBuilderOption {
+    final Factory factory;
+    public TypeFactoryOption(Factory factory) {
+        this.factory = factory;
+    }
 
-public class TypeFactoryOption implements MapperBuilderOption {
-    final Class<?> factoryClass;
-    public TypeFactoryOption(Class<?> factoryClass) {
-        this.factoryClass = factoryClass;
+    public Factory getFactory() {
+        return this.factory;
     }
 }
+

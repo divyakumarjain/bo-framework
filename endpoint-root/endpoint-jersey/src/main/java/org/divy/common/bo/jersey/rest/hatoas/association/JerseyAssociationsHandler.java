@@ -19,7 +19,7 @@ public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends A
 
     protected JerseyAssociationsHandler(Class<T> source
             , MetaDataProvider metaDataProvider
-            , LinkBuilderFactory linkBuilderFactory
+            , LinkBuilderFactory<Link> linkBuilderFactory
             , MapperBuilder mapperBuilder){
         super(metaDataProvider, source, mapperBuilder, linkBuilderFactory);
     }
@@ -29,9 +29,9 @@ public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends A
         childEntities.forEach((name, entityMeta) -> {
             final AssociationBuilder<T, UUID, Link> association = association();
             association
-                  .withMapper( new JerseyHATOASMapper<>( new KeyValuePairMapperImpl<>( source, mapperBuilder, metaDataProvider ), linkBuilderFactory,
+                    .withMapper( new JerseyHATOASMapper<>( new KeyValuePairMapperImpl<>( source, mapperBuilder, metaDataProvider ), linkBuilderFactory,
                         metaDataProvider ))
-                  .attribute(name);
+                    .attribute(name);
 
             if(entityMeta.isCollection()) {
                 association.cardinality( Cardinality.MANY);

@@ -69,9 +69,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                        --add-opens java.base/java.lang=orika.core
                         --add-opens java.base/java.lang=ALL-UNNAMED
-                        --add-opens bo.framework.orika.mapper/org.divy.common.bo.mapper.defaults=orika.core
                         --illegal-access=permit
                         ${argLine}
                     </argLine>

@@ -1,8 +1,6 @@
 package org.divy.common.bo.mapper.builder.options.field;
 
-import org.divy.common.bo.mapper.builder.options.MapperBuilderOption;
-
-public class TargetFieldName implements MapperBuilderOption {
+public final class TargetFieldName implements FieldMapperBuilderOption {
     private final String fieldName;
 
     public TargetFieldName(String fieldName) {

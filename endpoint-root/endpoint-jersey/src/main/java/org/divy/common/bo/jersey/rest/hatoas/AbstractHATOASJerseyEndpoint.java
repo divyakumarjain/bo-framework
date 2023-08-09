@@ -103,8 +103,8 @@ public abstract class AbstractHATOASJerseyEndpoint<B extends BusinessObject<I>,
     @Override
     public Response createRelation(@PathParam("id") I id
           ,@PathParam("relation") String relation
-          , E respresentation)
+          , E representation)
     {
-        return super.createRelation(id, relation, respresentation);
+        return super.createRelation(id, relation, representation);
     }
 }

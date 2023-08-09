@@ -1,6 +1,7 @@
 package org.divy.bo.demos.domain.cards;
 
 import org.divy.bo.demos.domain.cards.pages.Page;
+import org.divy.common.bo.api.BOEntity;
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
 import jakarta.persistence.CascadeType;
@@ -11,6 +12,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@BOEntity
 public class GreetingCard extends AbstractJPABusinessObject {
 
     private List<Page> pages;

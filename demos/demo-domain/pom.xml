@@ -14,7 +14,6 @@
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
-    <groupId>org.divy</groupId>
     <artifactId>demo-domain</artifactId>
     <version>0.0.19-SNAPSHOT</version>
 
@@ -26,6 +25,10 @@
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-database-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-api</artifactId>
         </dependency>
     </dependencies>
     <profiles>
@@ -44,4 +47,31 @@
             </build>
         </profile>
     </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <compilerArgs>
+                        <arg>-XDignore.symbol.file</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.divy</groupId>
+                            <artifactId>bo-framework-mapper-annotation</artifactId>
+                            <version>0.0.19-SNAPSHOT</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
