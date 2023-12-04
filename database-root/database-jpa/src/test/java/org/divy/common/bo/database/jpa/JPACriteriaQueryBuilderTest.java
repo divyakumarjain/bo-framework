@@ -13,10 +13,10 @@ import org.hibernate.query.criteria.JpaPredicate;
 import org.hibernate.query.sqm.internal.SqmCriteriaNodeBuilder;
 import org.hibernate.query.sqm.tree.domain.SqmBasicValuedSimplePath;
 import org.hibernate.query.sqm.tree.predicate.SqmComparisonPredicate;
-import org.hibernate.sql.ast.tree.predicate.ComparisonPredicate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -38,10 +38,21 @@ class JPACriteriaQueryBuilderTest
     void setupCriteriaQueryBuilder() {
         EntityManager mockEntityManager = mock(EntityManager.class);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.divy.mock");
-        CriteriaBuilder mockCriteriaBuilder = SqmCriteriaNodeBuilder.create((SessionFactoryImpl) entityManagerFactory);
+        CriteriaBuilder mockCriteriaBuilder = resolveCriteriaBuilder( (SessionFactoryImpl) entityManagerFactory );
         doReturn(mockCriteriaBuilder).when(mockEntityManager).getCriteriaBuilder();
 
         criteriaQueryBuilder = new JPACriteriaQueryBuilder<>(mockEntityManager, MockEntity.class);
+    }
+
+    private static CriteriaBuilder resolveCriteriaBuilder( SessionFactoryImpl entityManagerFactory )
+    {
+        return new SqmCriteriaNodeBuilder(
+              entityManagerFactory.getUuid(),
+              entityManagerFactory.getName(),
+              entityManagerFactory.getQueryEngine(),
+              entityManagerFactory.getSessionFactoryOptions().getJpaCompliance().isJpaQueryComplianceEnabled(),
+              entityManagerFactory.getSessionFactoryOptions().getCriteriaValueHandlingMode(),
+              () -> entityManagerFactory.getSessionFactory());
     }
 
     @Test
