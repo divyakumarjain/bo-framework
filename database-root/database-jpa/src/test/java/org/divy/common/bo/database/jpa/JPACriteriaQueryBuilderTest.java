@@ -38,21 +38,10 @@ class JPACriteriaQueryBuilderTest
     void setupCriteriaQueryBuilder() {
         EntityManager mockEntityManager = mock(EntityManager.class);
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.divy.mock");
-        CriteriaBuilder mockCriteriaBuilder = resolveCriteriaBuilder( (SessionFactoryImpl) entityManagerFactory );
+        CriteriaBuilder mockCriteriaBuilder = entityManagerFactory.getCriteriaBuilder();
         doReturn(mockCriteriaBuilder).when(mockEntityManager).getCriteriaBuilder();
 
         criteriaQueryBuilder = new JPACriteriaQueryBuilder<>(mockEntityManager, MockEntity.class);
-    }
-
-    private static CriteriaBuilder resolveCriteriaBuilder( SessionFactoryImpl entityManagerFactory )
-    {
-        return new SqmCriteriaNodeBuilder(
-              entityManagerFactory.getUuid(),
-              entityManagerFactory.getName(),
-              entityManagerFactory.getQueryEngine(),
-              entityManagerFactory.getSessionFactoryOptions().getJpaCompliance().isJpaQueryComplianceEnabled(),
-              entityManagerFactory.getSessionFactoryOptions().getCriteriaValueHandlingMode(),
-              () -> entityManagerFactory.getSessionFactory());
     }
 
     @Test

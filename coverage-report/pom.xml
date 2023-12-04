@@ -99,14 +99,6 @@
             <groupId>org.divy</groupId>
             <artifactId>demo-domain</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-spring-boot-mvc-demo</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-spring-boot-jersey-demo</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.divy</groupId>
