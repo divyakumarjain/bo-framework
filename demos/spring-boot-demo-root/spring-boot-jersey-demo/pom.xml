@@ -149,7 +149,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.2.0-RC2</version>
+                <version>3.3.0-M2</version>
                 <configuration>
                     <fork>true</fork>
                 </configuration>
