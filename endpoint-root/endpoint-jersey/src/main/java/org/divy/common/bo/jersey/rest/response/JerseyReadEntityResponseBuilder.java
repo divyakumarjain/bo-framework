@@ -2,7 +2,7 @@ package org.divy.common.bo.jersey.rest.response;
 
 import org.divy.common.bo.rest.response.ReadEntityResponseBuilder;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.Collection;
 
 public class JerseyReadEntityResponseBuilder<T> extends ReadEntityResponseBuilder<T, Response> {

@@ -10,7 +10,7 @@ import org.divy.common.bo.rest.HATOASMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.exception.NotFoundException;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 

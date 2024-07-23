@@ -2,7 +2,7 @@ package org.divy.common.bo.database.jpa;
 
 import org.divy.common.bo.database.context.CommandContext;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 public interface EntityManagerCommandContext extends CommandContext
 {

@@ -7,8 +7,8 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-root</artifactId>
-        <version>0.0.18-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <version>0.0.19-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>bo-framework-database-root</artifactId>
@@ -24,7 +24,7 @@
     <modules>
         <module>database-core</module>
         <module>database-jpa</module>
-        <module>database-hibernate</module>
+<!--        <module>database-hibernate</module>-->
     </modules>
     <profiles>
         <profile>

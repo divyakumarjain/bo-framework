@@ -4,8 +4,8 @@ import org.divy.common.bo.database.context.CommandContext;
 import org.divy.common.bo.database.context.HierarchicalCommandContext;
 import org.divy.common.bo.database.jpa.EntityManagerCommandContext;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 
 public abstract class AbstractEntityManagerContext implements EntityManagerCommandContext, HierarchicalCommandContext {

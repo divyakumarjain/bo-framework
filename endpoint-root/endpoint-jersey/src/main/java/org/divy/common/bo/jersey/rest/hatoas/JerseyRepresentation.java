@@ -2,7 +2,7 @@ package org.divy.common.bo.jersey.rest.hatoas;
 
 import org.divy.common.bo.endpoint.hatoas.AbstractRepresentation;
 
-import javax.ws.rs.core.Link;
+import jakarta.ws.rs.core.Link;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

@@ -1,12 +1,12 @@
 module bo.framework.endpoint.core {
-    requires java.validation;
+    requires jakarta.validation;
     requires bo.framework.repository;
     requires bo.framework.exception.handling;
     requires bo.framework.businessapi;
     requires bo.framework.query;
     requires bo.framework.dynamic;
     requires bo.framework.metadata;
-    requires javax.servlet.api;
+    requires jakarta.servlet;
     requires org.slf4j;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;

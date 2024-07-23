@@ -3,8 +3,8 @@ package org.divy.bo.demos.domain.cards.pages;
 import org.divy.bo.demos.domain.greetings.Greeting;
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;

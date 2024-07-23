@@ -2,8 +2,8 @@ package org.divy.common.bo.jersey.rest.response;
 
 import org.divy.common.bo.rest.response.AbstractResponseEntityBuilder;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 
 public class JerseyResponseEntityBuilder<T> extends AbstractResponseEntityBuilder<T, Response> {
     private Status statusCode;
