@@ -6,7 +6,7 @@ import org.divy.common.bo.metadata.MetaDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.beans.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

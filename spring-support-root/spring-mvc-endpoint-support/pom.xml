@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-support-root</artifactId>
-        <version>0.0.18-SNAPSHOT</version>
+        <version>0.0.19-SNAPSHOT</version>
     </parent>
 
     <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
@@ -85,9 +85,14 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>2.0.1</version>
         </dependency>
     </dependencies>
     <profiles>
