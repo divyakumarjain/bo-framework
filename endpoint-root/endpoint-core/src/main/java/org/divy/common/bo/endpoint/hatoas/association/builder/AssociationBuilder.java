@@ -16,6 +16,7 @@ import java.util.Map;
 
 public class AssociationBuilder<T extends BusinessObject<I>, I, L> extends Association<T, I, L> implements Builder
 {
+    private String targetMethodName;
 
     public AssociationBuilder<T, I, L> withMapper( AbstractHATOASMapper<T, I, Representation<I, Map<String, Object>, L >, L> hatoasMapper) {
         this.mapper = hatoasMapper;
@@ -66,5 +67,14 @@ public class AssociationBuilder<T extends BusinessObject<I>, I, L> extends Assoc
         setName(attributeName);
         readerBuilder.attribute(attributeName);
         return readerBuilder;
+    }
+
+    public String getTargetMethodName() {
+        return targetMethodName;
+    }
+
+    public AssociationBuilder<T, I, L> withTargetMethodName(String targetMethodName) {
+        this.targetMethodName = targetMethodName;
+        return this;
     }
 }

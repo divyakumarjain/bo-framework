@@ -25,11 +25,29 @@ public abstract class AbstractHATOASJerseyEndpoint<B extends BusinessObject<I>,
         extends AbstractHATOASEndpoint<B, E, I, Response, Link>
 {
 
-    @Inject
     protected AbstractHATOASJerseyEndpoint(ResponseEntityBuilderFactory<E, Response> responseEntityBuilderFactory, AssociationsHandler<B,I, Link> associationsHandler)
     {
         super(responseEntityBuilderFactory,associationsHandler);
     }
+
+    @Override
+    public HATOASMapper<B, E> getRepresentationMapper() {
+        return new JerseyHATOASMapper<>(
+                getKeyValuePairMapper(),
+                getLinkBuilderFactory(),
+                getMetaDataProvider(),
+                getAssociationsHandler());
+    }
+
+    @Override
+    protected Representation<I, Map<String, Object>, Link> createRepresentation() {
+        return new JerseyRepresentation<>();
+    }
+
+    protected abstract MetaDataProvider getMetaDataProvider();
+    protected abstract LinkBuilderFactory<Link> getLinkBuilderFactory();
+    protected abstract KeyValuePairMapper<B> getKeyValuePairMapper();
+
 
     @Override
     public final Response create(E businessObject)

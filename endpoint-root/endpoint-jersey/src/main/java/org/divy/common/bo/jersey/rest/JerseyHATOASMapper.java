@@ -18,12 +18,14 @@ public class JerseyHATOASMapper<E extends BusinessObject<I>, I>
 
     public JerseyHATOASMapper(KeyValuePairMapper<E> keyValuePairMapper
             , LinkBuilderFactory<Link> linkBuilderFactory
-            , MetaDataProvider metaDataProvider) {
+            , MetaDataProvider metaDataProvider
+            , AbstractAssociationsHandler<E, I, Link> associationsHandler) {
 
         super((Class)JerseyRepresentation.class
                 , keyValuePairMapper
                 , linkBuilderFactory
-                , metaDataProvider);
+                , metaDataProvider
+                , associationsHandler);
     }
 
     @Override
@@ -36,7 +38,18 @@ public class JerseyHATOASMapper<E extends BusinessObject<I>, I>
 
     @Override
     protected void doFillAssociations(Representation<I, Map<String, Object>, Link> representation, E businessObject) {
-        //noop
+        if (associationsHandler == null) {
+            return;
+        }
+        Collection<Association<E, I, Link>> associations = associationsHandler.getAssociations();
+        for (Association<E, I, Link> association : associations) {
+            final Link link = getLinkBuilderFactory().newBuilder()
+                    .resource(getMetaDataProvider().getEntityEndPointClass(businessObject.getClass()).get())
+                    .path(businessObject.identity().toString())
+                    .path(association.getName())
+                    .buildLink(association.getName());
+            representation.getLinks().add(link);
+        }
     }
 
     @Override

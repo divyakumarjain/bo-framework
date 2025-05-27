@@ -22,16 +22,19 @@ public abstract class AbstractHATOASMapper<E extends BusinessObject<I>
     private final LinkBuilderFactory<L> linkBuilderFactory;
     private final Class<R> representationType;
     private final BOMapper<E, Map<String, Object>> keyValuePairMapper;
+    protected AbstractAssociationsHandler<E, I, L> associationsHandler;
 
     protected AbstractHATOASMapper(Class<R> representationType
                                  , BOMapper<E, Map<String, Object>> keyValuePairMapper
                                  , LinkBuilderFactory<L> linkBuilderFactory
-                                 , MetaDataProvider metaDataProvider) {
+                                 , MetaDataProvider metaDataProvider
+                                 , AbstractAssociationsHandler<E, I, L> associationsHandler) {
 
         this.representationType = representationType;
         this.keyValuePairMapper = keyValuePairMapper;
         this.linkBuilderFactory = linkBuilderFactory;
         this.metaDataProvider = metaDataProvider;
+        this.associationsHandler = associationsHandler;
     }
 
     protected LinkBuilderFactory<L> getLinkBuilderFactory() {

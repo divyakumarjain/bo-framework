@@ -21,6 +21,7 @@ public class Association<T extends BusinessObject<I>, I, L> {
     private   boolean                     includeInReadOperation;
     private   BOManager<T, I>             manager;
     private   Setter<T, ?>                setter;
+    private   String                      targetMethodName;
 
     public Optional<Object> read(Object source, Object... argv) {
 
@@ -112,5 +113,13 @@ public class Association<T extends BusinessObject<I>, I, L> {
     public void setManager(BOManager<T, I> manager)
     {
         this.manager = manager;
+    }
+
+    public String getTargetMethodName() {
+        return targetMethodName;
+    }
+
+    public void setTargetMethodName(String targetMethodName) {
+        this.targetMethodName = targetMethodName;
     }
 }

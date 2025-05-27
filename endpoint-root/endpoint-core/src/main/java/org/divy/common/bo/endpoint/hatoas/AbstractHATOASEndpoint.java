@@ -149,9 +149,24 @@ public abstract class AbstractHATOASEndpoint<B extends BusinessObject<I>
 
     public abstract BOManager<B, I> getManager();
 
-    public AssociationsHandler<B,I, L> getAssociationsHandler() {
+    protected AssociationsHandler<B,I, L> getAssociationsHandler() {
         return associationsHandler;
     }
 
-    public abstract HATOASMapper<B, E> getRepresentationMapper();
+    public HATOASMapper<B, E> getRepresentationMapper() {
+        // This method should be implemented by subclasses to provide the correct HATOASMapper instance
+        // For now, returning null as a placeholder, but subclasses must override this.
+        // Example:
+        // return new JerseyHATOASMapper<>(
+        //         (Class<E>) getResponseEntityBuilderFactory().getRepresentationClass(),
+        //         getKeyValuePairMapper(), // Assuming this method exists or is implemented
+        //         getLinkBuilderFactory(), // Assuming this method exists or is implemented
+        //         getMetaDataProvider(),   // Assuming this method exists or is implemented
+        //         getAssociationsHandler()
+        // );
+        throw new UnsupportedOperationException("Subclasses must implement getRepresentationMapper");
+    }
+
+
+    protected abstract Representation<I, Map<String, Object>, L> createRepresentation();
 }
