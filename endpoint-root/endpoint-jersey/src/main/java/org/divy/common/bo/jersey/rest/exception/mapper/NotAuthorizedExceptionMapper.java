@@ -14,7 +14,9 @@ public class NotAuthorizedExceptionMapper implements
     @Override
     public Response toResponse(NotAuthorizedException exception)
     {
-        return Response.status(Response.Status.NOT_FOUND)
+        return Response.status(Response.Status.UNAUTHORIZED)
+                .entity(java.util.Map.of("error", "Unauthorized", "message", exception.getMessage()))
+                .type(javax.ws.rs.core.MediaType.APPLICATION_JSON)
                 .build();
     }
 }

@@ -14,7 +14,9 @@ public class BadRequestExceptionMapper implements
     @Override
     public Response toResponse(BadRequestException exception)
     {
-        return Response.status(Response.Status.NOT_FOUND)
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity(java.util.Map.of("error", "Bad Request", "message", exception.getMessage()))
+                .type(javax.ws.rs.core.MediaType.APPLICATION_JSON)
                 .build();
     }
 }

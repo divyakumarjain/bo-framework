@@ -30,8 +30,9 @@ public class JerseyAssociationsHandler<T extends BusinessObject<UUID>> extends A
             final AssociationBuilder<T, UUID, Link> association = association();
             association
                   .withMapper( new JerseyHATOASMapper<>( new KeyValuePairMapperImpl<>( source, mapperBuilder, metaDataProvider ), linkBuilderFactory,
-                        metaDataProvider ))
-                  .attribute(name);
+                        metaDataProvider, this )) //TODO: this might create circular dependency
+                  .attribute(name)
+                  .withTargetMethodName("getAssociatedEntity");
 
             if(entityMeta.isCollection()) {
                 association.cardinality( Cardinality.MANY);
