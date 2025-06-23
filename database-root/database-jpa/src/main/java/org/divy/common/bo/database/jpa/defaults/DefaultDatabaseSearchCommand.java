@@ -7,7 +7,7 @@ import org.divy.common.bo.database.jpa.JPACriteriaQueryBuilder;
 import org.divy.common.bo.query.AttributeQuery;
 import org.divy.common.bo.query.Query;
 
-import javax.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 /**

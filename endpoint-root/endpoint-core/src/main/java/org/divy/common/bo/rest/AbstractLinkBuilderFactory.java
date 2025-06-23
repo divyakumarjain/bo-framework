@@ -3,8 +3,8 @@ package org.divy.common.bo.rest;
 import org.apache.commons.lang.StringUtils;
 import org.divy.common.bo.http.HttpRequestContext;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 public abstract class AbstractLinkBuilderFactory<L> implements LinkBuilderFactory<L> {

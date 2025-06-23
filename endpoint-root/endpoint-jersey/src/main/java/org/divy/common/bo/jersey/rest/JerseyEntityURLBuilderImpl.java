@@ -7,8 +7,8 @@ import org.divy.common.bo.rest.LinkBuilder;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 import org.divy.common.bo.rest.RESTEntityURLBuilder;
 
-import javax.inject.Inject;
-import javax.ws.rs.core.Link;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Link;
 import java.net.URI;
 import java.util.UUID;
 

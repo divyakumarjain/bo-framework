@@ -5,7 +5,7 @@ import org.divy.common.bo.rest.response.ListEntityResponseBuilder;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.springframework.http.ResponseEntity;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.Collection;
 
 

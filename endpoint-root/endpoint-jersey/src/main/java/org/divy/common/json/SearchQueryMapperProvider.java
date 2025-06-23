@@ -2,8 +2,8 @@ package org.divy.common.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.ws.rs.ext.ContextResolver;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.ext.ContextResolver;
+import jakarta.ws.rs.ext.Provider;
 
 @Provider
 public class SearchQueryMapperProvider implements ContextResolver<ObjectMapper>{
@@ -13,7 +13,7 @@ public class SearchQueryMapperProvider implements ContextResolver<ObjectMapper>{
     /*
      * (non-Javadoc)
      *
-     * @see javax.ws.rs.ext.ContextResolver#getContext(java.lang.Class)
+     * @see jakarta.ws.rs.ext.ContextResolver#getContext(java.lang.Class)
      */
     @Override
     public ObjectMapper getContext(Class<?> type) {

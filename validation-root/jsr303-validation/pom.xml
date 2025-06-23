@@ -7,9 +7,9 @@
 
     <parent>
         <groupId>org.divy</groupId>
-        <version>0.0.18-SNAPSHOT</version>
+        <version>0.0.19-SNAPSHOT</version>
         <artifactId>bo-framework-validation-root</artifactId>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>bo-framework-jsr303-validation</artifactId>
@@ -31,8 +31,8 @@
             <artifactId>bo-framework-repository</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
         </dependency>
     </dependencies>
 </project>
