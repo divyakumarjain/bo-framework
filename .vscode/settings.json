@@ -1,5 +1,6 @@
 {
     "maven.view": "hierarchical",
     "maven.executable.path": "/usr/local/bin/mvnd",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
 }

@@ -9,7 +9,7 @@ module bo.framework.endpoint.jersey {
     requires bo.framework.query;
     requires com.fasterxml.jackson.databind;
     requires jakarta.inject;
-    requires java.ws.rs;
+    requires jakarta.ws.rs;
     exports org.divy.common.bo.jersey.rest;
     exports org.divy.common.bo.jersey.rest.response;
     exports org.divy.common.bo.jersey.rest.exception.mapper;
