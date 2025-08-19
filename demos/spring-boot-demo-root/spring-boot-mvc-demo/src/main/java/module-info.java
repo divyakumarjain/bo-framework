@@ -5,7 +5,6 @@ module bo.framework.spring.boot.mvc.demo {
     requires spring.boot.autoconfigure;
     requires spring.boot;
     requires spring.context;
-    requires bo.framework.orika.mapper;
     requires bo.framework.demo.domain;
 
     requires com.fasterxml.jackson.databind;
