@@ -9,7 +9,7 @@ public class JerseyEndpointConfigProperties {
     private static final String HATEOAS_ENDPOINT_PATH = "hatoas";
     private static final String ENDPOINT_PATH = "api";
 
-    private String hateoasAPIEndpointPath = HATEOAS_ENDPOINT_PATH;
+    private String hateoasApiEndpointPath = HATEOAS_ENDPOINT_PATH;
     private String apiEndpointPath = ENDPOINT_PATH;
     private boolean enableHateoasApi = false;
 
@@ -22,11 +22,11 @@ public class JerseyEndpointConfigProperties {
     }
 
     public String getHateoasApiEndpointPath() {
-        return hateoasAPIEndpointPath;
+        return hateoasApiEndpointPath;
     }
 
-    public void setHateoasApiEndpointPath(String hATEOASAPIEndpointPath) {
-        this.hateoasAPIEndpointPath = hATEOASAPIEndpointPath;
+    public void setHateoasApiEndpointPath(String hateoasApiEndpointPath) {
+        this.hateoasApiEndpointPath = hateoasApiEndpointPath;
     }
 
     public String getApiEndpointPath() {

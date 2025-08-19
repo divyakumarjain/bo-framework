@@ -22,4 +22,5 @@ module bo.framework.spring.jersey.endpoint.support {
     requires jersey.common;
     requires bo.framework.mapper;
     requires bo.framework.query;
+    requires spring.boot.jersey;
 }

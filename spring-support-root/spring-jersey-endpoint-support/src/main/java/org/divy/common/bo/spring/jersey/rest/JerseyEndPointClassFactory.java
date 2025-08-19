@@ -18,11 +18,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.springframework.boot.jersey.autoconfigure.ResourceConfigCustomizer;
+
 import java.lang.invoke.MethodHandles;
 import java.util.Optional;
 import java.util.UUID;
@@ -230,9 +230,7 @@ public class JerseyEndPointClassFactory implements ResourceConfigCustomizer {
         return JerseyEndPointClassFactory.class.getPackageName() + "." + typeClass.getSimpleName() + "EndPoint";
     }
 
-    @Override
     public void customize(ResourceConfig config) {
         initializeEndpoints(config);
     }
 }
-

@@ -19,8 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.jersey.ResourceConfigCustomizer;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -28,7 +26,7 @@ import java.lang.invoke.MethodHandles;
 import java.util.List;
 
 
-public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory implements ResourceConfigCustomizer {
+public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory {
 
     private static final Logger                         LOGGER  = LoggerFactory.getLogger( JerseyHATOASEndPointFactory.class);
 
@@ -131,4 +129,3 @@ public class JerseyHATOASEndPointFactory extends JerseyEndPointClassFactory impl
         return prvlookup;
     }
 }
-

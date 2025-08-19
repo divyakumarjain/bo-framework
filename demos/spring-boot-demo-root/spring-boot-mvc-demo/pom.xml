@@ -12,6 +12,8 @@
     </parent>
 
     <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../../coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
@@ -55,6 +57,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-orika-mapper-spring</artifactId>
         </dependency>
@@ -88,6 +95,10 @@
             <artifactId>spring-boot-actuator</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-servlet</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
         </dependency>
@@ -119,7 +130,7 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.5.0-M2</version>
+                <version>4.0.0-M1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -138,6 +149,7 @@
                         @{argLine}
                         ${argLine}
                     </argLine>
+                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
             <plugin>

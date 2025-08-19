@@ -12,6 +12,7 @@ module bo.framework.spring.boot.jersey.demo {
 
     requires com.fasterxml.classmate;
     requires com.fasterxml.jackson.databind;
+    requires org.apache.tomcat.embed.core;
 
     opens org.divy.bo.demos.spring.jersey;
 }
