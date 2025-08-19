@@ -196,14 +196,14 @@
                 <artifactId>bo-framework-exception-handling-core</artifactId>
                 <version>0.0.19-SNAPSHOT</version>
             </dependency>
-            <dependency>
+                        <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-orika-mapper</artifactId>
+                <artifactId>bo-framework-modelmapper-mapper</artifactId>
                 <version>0.0.19-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.divy</groupId>
-                <artifactId>bo-framework-orika-mapper-spring</artifactId>
+                <artifactId>bo-framework-modelmapper-spring</artifactId>
                 <version>0.0.19-SNAPSHOT</version>
             </dependency>
             <dependency>

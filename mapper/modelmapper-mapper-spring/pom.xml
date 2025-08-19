@@ -4,81 +4,66 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
     <parent>
         <groupId>org.divy</groupId>
-        <artifactId>bo-framework-spring-support-root</artifactId>
+        <artifactId>bo-framework-mapper</artifactId>
         <version>0.0.19-SNAPSHOT</version>
     </parent>
 
-    <artifactId>bo-framework-spring-database-jpa-support</artifactId>
-    <name>spring-database-jpa-support</name>
+    <artifactId>bo-framework-modelmapper-spring</artifactId>
+    <name>modelmapper-spring</name>
     <properties>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
-    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-database-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-dynamic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-businessapi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-metadata</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-database-mock</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-modelmapper-mapper</artifactId>
-            <version>0.0.19-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-repository</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>bo-framework-spring-support-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!-- Test Dependencies -->
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <!-- Note: No complex JVM arguments needed for ModelMapper! -->
+            </plugin>
+        </plugins>
+    </build>
+
     <profiles>
         <profile>
             <id>coverage</id>
@@ -108,6 +93,5 @@
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 </project>
