@@ -17,21 +17,16 @@ import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 import org.divy.common.bo.spring.core.factory.BeanNamingStrategy;
 import org.divy.common.bo.spring.jersey.rest.hatoas.JerseyHATOASEndPointFactory;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.UUID;
 
 @Configuration
-@AutoConfigureBefore(JerseyAutoConfiguration.class)
-public class JerseyEndpointConfig implements Jackson2ObjectMapperBuilderCustomizer {
+public class JerseyEndpointConfig {
 
     @Bean
     public ResourceConfig resourceConfig() {
@@ -60,12 +55,6 @@ public class JerseyEndpointConfig implements Jackson2ObjectMapperBuilderCustomiz
     @Bean
     public JerseyLinkBuilderFactoryImpl linkBuilderFactory() {
         return new JerseyLinkBuilderFactoryImpl();
-    }
-    @Override
-    public void customize(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
-        jackson2ObjectMapperBuilder.modulesToInstall(new ParameterNamesModule()
-        , new Jdk8Module()
-        , new JavaTimeModule());
     }
 
     @Bean
@@ -117,5 +106,3 @@ public class JerseyEndpointConfig implements Jackson2ObjectMapperBuilderCustomiz
         return new JerseyResponseEntityBuilderFactory<>(jerseyEntityURLBuilder(endPointRegistry));
     }
 }
-
-

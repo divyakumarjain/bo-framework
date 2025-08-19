@@ -11,28 +11,16 @@ import org.divy.common.bo.spring.mvc.rest.SpringMVCEndPointRegistry;
 import org.divy.common.bo.spring.mvc.rest.SpringMVCEntityURLBuilderImpl;
 import org.divy.common.bo.spring.mvc.rest.SpringMVCLinkBuilderFactoryImpl;
 import org.divy.common.bo.spring.mvc.rest.response.SpringMVCResponseEntityBuilderFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration
-@AutoConfigureBefore(WebMvcAutoConfiguration.class)
-public class WebEndpointConfig implements Jackson2ObjectMapperBuilderCustomizer {
-
-    @Override
-    public void customize(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
-        jackson2ObjectMapperBuilder.modulesToInstall(ParameterNamesModule.class
-        ,  Jdk8Module.class
-        , JavaTimeModule.class);
-    }
+public class WebEndpointConfig {
 
     @Bean
     @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
@@ -61,5 +49,3 @@ public class WebEndpointConfig implements Jackson2ObjectMapperBuilderCustomizer 
         return new SpringMVCResponseEntityBuilderFactory<>(mvcEntityURLBuilder);
     }
 }
-
-

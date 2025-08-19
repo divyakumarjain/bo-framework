@@ -1,7 +1,7 @@
 package org.divy.common.bo.database.jpa;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.UUID;
 

@@ -8,7 +8,7 @@ import org.divy.common.bo.endpoint.hatoas.association.AssociationsHandler;
 import org.divy.common.bo.rest.HATOASMapper;
 import org.divy.common.bo.rest.response.ResponseEntityBuilderFactory;
 
-import javax.ws.rs.core.Link;
+import jakarta.ws.rs.core.Link;
 import java.util.UUID;
 
 public class DefaultHATEOASJerseyEndpoint<E extends BusinessObject<UUID>>

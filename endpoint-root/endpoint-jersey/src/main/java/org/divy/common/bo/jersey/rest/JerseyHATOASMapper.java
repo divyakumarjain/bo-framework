@@ -8,7 +8,7 @@ import org.divy.common.bo.repository.BusinessObject;
 import org.divy.common.bo.rest.AbstractHATOASMapper;
 import org.divy.common.bo.rest.LinkBuilderFactory;
 
-import javax.ws.rs.core.Link;
+import jakarta.ws.rs.core.Link;
 import java.util.Map;
 import java.util.Optional;
 

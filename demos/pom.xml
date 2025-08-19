@@ -6,8 +6,8 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-root</artifactId>
-        <version>0.0.18-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <version>0.0.19-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>bo-framework-demos</artifactId>
     <name>demos</name>
@@ -15,8 +15,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-demo-root</module>
-        <module>guice-jersey</module>
-        <module>jee-demo</module>
+<!--        <module>guice-jersey</module>-->
+<!--        <module>jee-demo</module>-->
         <module>demo-domain</module>
     </modules>
 

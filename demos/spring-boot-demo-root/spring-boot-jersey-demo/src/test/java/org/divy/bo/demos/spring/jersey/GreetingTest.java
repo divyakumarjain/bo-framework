@@ -4,12 +4,14 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.divy.bo.demos.domain.greetings.Greeting;
+import org.divy.common.bo.spring.jersey.rest.JerseyEndpointConfig;
+import org.divy.common.bo.spring.repository.RepositoryConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -19,22 +21,21 @@ import static io.restassured.RestAssured.with;
 import static org.hamcrest.Matchers.*;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = SpringJerseyApplication.class,
-      properties = {"bo-framework.endpoint.mvc.enable-hateoas-api=false"} )
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {SpringJerseyApplication.class, JerseyEndpointConfig.class, RepositoryConfig.class},
+      properties = {"bo-framework.endpoint.jersey.enable-hateoas-api=true"} )
 public class GreetingTest
 {
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Value("${local.server.port}")
+    private int port;
 
     @BeforeEach
     public void initialiseRestAssuredMockMvcWebApplicationContext() {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
         RestAssured.port = port;
     }
-
-    @LocalServerPort
-    int port;
-
     @Test
     public void simpleEntity() {
         Greeting greeting = new Greeting();
@@ -84,6 +85,5 @@ public class GreetingTest
         with().get(location)
               .then()
               .statusCode( 404 );
-
     }
 }

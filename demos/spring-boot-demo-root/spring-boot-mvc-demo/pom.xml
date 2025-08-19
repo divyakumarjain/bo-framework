@@ -7,10 +7,13 @@
     <parent>
         <groupId>org.divy</groupId>
         <artifactId>bo-framework-spring-boot-demo-root</artifactId>
-        <version>0.0.18-SNAPSHOT</version>
+        <version>0.0.19-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../../../coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
@@ -38,7 +41,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,6 +54,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -71,10 +79,6 @@
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
-            <artifactId>bo-framework-spring-support-autoconfiguration</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.divy</groupId>
             <artifactId>bo-framework-spring-jsr303-validation</artifactId>
         </dependency>
         <dependency>
@@ -91,12 +95,12 @@
             <artifactId>spring-boot-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.divy</groupId>
-            <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-servlet</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
+            <groupId>org.divy</groupId>
+            <artifactId>bo-framework-spring-mvc-endpoint-support</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -110,13 +114,13 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>spring-mock-mvc</artifactId>
-            <version>5.1.1</version>
+            <version>5.5.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.divy</groupId>
             <artifactId>demo-domain</artifactId>
-            <version>0.0.18-SNAPSHOT</version>
+            <version>0.0.19-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -126,7 +130,7 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.7.1</version>
+                <version>4.0.0-M1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -145,15 +149,13 @@
                         @{argLine}
                         ${argLine}
                     </argLine>
+                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.1</version>
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
+                <version>4.0.0-M1</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.springframework</groupId>

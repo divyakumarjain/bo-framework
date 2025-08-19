@@ -3,9 +3,9 @@ package org.divy.bo.demos.domain.cards;
 import org.divy.bo.demos.domain.cards.pages.Page;
 import org.divy.common.bo.database.jpa.AbstractJPABusinessObject;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
