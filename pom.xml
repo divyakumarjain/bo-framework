@@ -357,7 +357,7 @@
             <dependency>
                 <groupId>org.glassfish.jersey</groupId>
                 <artifactId>jersey-bom</artifactId>
-                <version>3.1.10</version>
+                <version>3.1.11</version>
                 <type>pom</type>
             </dependency>
             <!--Hibernate/JPA-->
@@ -384,7 +384,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.17.6</version>
+                <version>1.17.7</version>
             </dependency>
             <dependency>
                 <groupId>commons-beanutils</groupId>
@@ -400,7 +400,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>5.18.0</version>
+                <version>5.19.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
